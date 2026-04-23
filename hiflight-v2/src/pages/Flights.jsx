@@ -103,32 +103,36 @@ export default function Flights() {
             <div className="fp-opts">
               <button type="button" className={`fp-opt${tripType==='round'?' on':''}`} onClick={()=>setTripType('round')}>Aller-retour</button>
               <button type="button" className={`fp-opt${tripType==='one'?' on':''}`} onClick={()=>setTripType('one')}>Aller simple</button>
-              <select className="fp-sel" value={adults} onChange={e=>setAdults(Number(e.target.value))}>
-                {[1,2,3,4,5,6].map(n=><option key={n} value={n}>{n} adulte{n>1?'s':''}</option>)}
-              </select>
             </div>
-            <div className="fp-fields">
-              <div className="fp-field">
-                <label className="fp-lbl">Départ</label>
-                <LocationInput placeholder="Ville ou aéroport" value={origin} onChange={setOrigin} icon="✈️" />
+            <div className="fp-row">
+              <div className="fp-cell fp-cell--origin">
+                <LocationInput placeholder="Ville, aéroport" value={origin} onChange={setOrigin} icon={null} />
+              </div>
+              <div className="fp-vsep"/>
+              <div className="fp-cell fp-cell--dest">
+                <LocationInput placeholder="Arrivée" value={dest} onChange={setDest} icon={null} />
               </div>
               <button type="button" className="fp-swap" onClick={()=>{const t=origin;setOrigin(dest);setDest(t);}}>⇄</button>
-              <div className="fp-field">
-                <label className="fp-lbl">Arrivée</label>
-                <LocationInput placeholder="Ville ou aéroport" value={dest} onChange={setDest} icon="📍" />
+              <div className="fp-vsep"/>
+              <div className="fp-cell fp-cell--date">
+                <input type="date" className="fp-date" value={departure} min={today} onChange={e=>setDeparture(e.target.value)}/>
               </div>
-              <div className="fp-field fp-field--sm">
-                <label className="fp-lbl">Aller</label>
-                <input type="date" className="fp-date" value={departure} min={today} onChange={e=>setDeparture(e.target.value)} />
-              </div>
-              {tripType==='round' && (
-                <div className="fp-field fp-field--sm">
-                  <label className="fp-lbl">Retour</label>
-                  <input type="date" className="fp-date" value={returnDate} min={departure} onChange={e=>setReturnDate(e.target.value)} />
+              {tripType==='round' && <>
+                <div className="fp-vsep"/>
+                <div className="fp-cell fp-cell--date">
+                  <input type="date" className="fp-date" value={returnDate} min={departure} onChange={e=>setReturnDate(e.target.value)}/>
                 </div>
-              )}
+              </>}
+              <div className="fp-vsep"/>
+              <div className="fp-cell fp-cell--pax" onClick={()=>{}}>
+                <span className="fp-pax-count">{adults} passager{adults>1?'s':''}</span>
+                <span className="fp-pax-sub">économie</span>
+                <select className="fp-pax-overlay" value={adults} onChange={e=>setAdults(Number(e.target.value))}>
+                  {[1,2,3,4,5,6].map(n=><option key={n} value={n}>{n} passager{n>1?'s':''}</option>)}
+                </select>
+              </div>
               <button type="submit" className="fp-submit" disabled={loading}>
-                {loading ? <span className="fp-spin"/> : '🔍 Recherche de vols'}
+                {loading ? <span className="fp-spin"/> : 'Recherche de vols'}
               </button>
             </div>
           </form>
