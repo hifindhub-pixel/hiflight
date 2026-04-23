@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --coral: #FF6B6B; --coral-h: #FF5252;
+  --bg: #f8fafc; --bg2: #ffffff; --bg3: #f1f5f9;
+  --text: #0f172a; --sub: #64748b; --dim: #94a3b8;
+  --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+  --shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+[data-theme="dark"] {
+  --bg: #0f172a; --bg2: #1e293b; --bg3: #334155;
+  --text: #f1f5f9; --sub: #94a3b8; --dim: #64748b;
+  --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; transition: background .2s, color .2s; }
+a { color: var(--coral); text-decoration: none; }
+button { cursor: pointer; font-family: 'Inter', sans-serif; }
+input, select { font-family: 'Inter', sans-serif; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
