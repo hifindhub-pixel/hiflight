@@ -1,0 +1,135 @@
+const AIRPORTS = [
+  // France
+  {iataCode:'CDG',cityName:'Paris',name:'Paris Charles de Gaulle',countryName:'France',type:'AIRPORT'},
+  {iataCode:'ORY',cityName:'Paris',name:'Paris Orly',countryName:'France',type:'AIRPORT'},
+  {iataCode:'BVA',cityName:'Paris',name:'Paris Beauvais',countryName:'France',type:'AIRPORT'},
+  {iataCode:'NCE',cityName:'Nice',name:'Nice Côte d\'Azur',countryName:'France',type:'AIRPORT'},
+  {iataCode:'MRS',cityName:'Marseille',name:'Marseille Provence',countryName:'France',type:'AIRPORT'},
+  {iataCode:'LYS',cityName:'Lyon',name:'Lyon Saint-Exupéry',countryName:'France',type:'AIRPORT'},
+  {iataCode:'TLS',cityName:'Toulouse',name:'Toulouse Blagnac',countryName:'France',type:'AIRPORT'},
+  {iataCode:'BOD',cityName:'Bordeaux',name:'Bordeaux Mérignac',countryName:'France',type:'AIRPORT'},
+  {iataCode:'NTE',cityName:'Nantes',name:'Nantes Atlantique',countryName:'France',type:'AIRPORT'},
+  {iataCode:'LIL',cityName:'Lille',name:'Lille Lesquin',countryName:'France',type:'AIRPORT'},
+  {iataCode:'SXB',cityName:'Strasbourg',name:'Strasbourg',countryName:'France',type:'AIRPORT'},
+  {iataCode:'MPL',cityName:'Montpellier',name:'Montpellier Méditerranée',countryName:'France',type:'AIRPORT'},
+  {iataCode:'RNS',cityName:'Rennes',name:'Rennes Saint-Jacques',countryName:'France',type:'AIRPORT'},
+  // UK
+  {iataCode:'LHR',cityName:'Londres',name:'Londres Heathrow',countryName:'Royaume-Uni',type:'AIRPORT'},
+  {iataCode:'LGW',cityName:'Londres',name:'Londres Gatwick',countryName:'Royaume-Uni',type:'AIRPORT'},
+  {iataCode:'STN',cityName:'Londres',name:'Londres Stansted',countryName:'Royaume-Uni',type:'AIRPORT'},
+  {iataCode:'LTN',cityName:'Londres',name:'Londres Luton',countryName:'Royaume-Uni',type:'AIRPORT'},
+  {iataCode:'MAN',cityName:'Manchester',name:'Manchester',countryName:'Royaume-Uni',type:'AIRPORT'},
+  {iataCode:'EDI',cityName:'Edimbourg',name:'Edimbourg',countryName:'Royaume-Uni',type:'AIRPORT'},
+  // Espagne
+  {iataCode:'BCN',cityName:'Barcelone',name:'Barcelone El Prat',countryName:'Espagne',type:'AIRPORT'},
+  {iataCode:'MAD',cityName:'Madrid',name:'Madrid Barajas',countryName:'Espagne',type:'AIRPORT'},
+  {iataCode:'AGP',cityName:'Malaga',name:'Malaga',countryName:'Espagne',type:'AIRPORT'},
+  {iataCode:'PMI',cityName:'Palma de Mallorca',name:'Palma de Mallorca',countryName:'Espagne',type:'AIRPORT'},
+  {iataCode:'VLC',cityName:'Valence',name:'Valence',countryName:'Espagne',type:'AIRPORT'},
+  {iataCode:'SVQ',cityName:'Séville',name:'Séville',countryName:'Espagne',type:'AIRPORT'},
+  {iataCode:'IBZ',cityName:'Ibiza',name:'Ibiza',countryName:'Espagne',type:'AIRPORT'},
+  // Italie
+  {iataCode:'FCO',cityName:'Rome',name:'Rome Fiumicino',countryName:'Italie',type:'AIRPORT'},
+  {iataCode:'CIA',cityName:'Rome',name:'Rome Ciampino',countryName:'Italie',type:'AIRPORT'},
+  {iataCode:'MXP',cityName:'Milan',name:'Milan Malpensa',countryName:'Italie',type:'AIRPORT'},
+  {iataCode:'LIN',cityName:'Milan',name:'Milan Linate',countryName:'Italie',type:'AIRPORT'},
+  {iataCode:'BGY',cityName:'Milan',name:'Milan Bergame',countryName:'Italie',type:'AIRPORT'},
+  {iataCode:'VCE',cityName:'Venise',name:'Venise Marco Polo',countryName:'Italie',type:'AIRPORT'},
+  {iataCode:'NAP',cityName:'Naples',name:'Naples',countryName:'Italie',type:'AIRPORT'},
+  {iataCode:'CTA',cityName:'Catane',name:'Catane Sicile',countryName:'Italie',type:'AIRPORT'},
+  // Autres Europe
+  {iataCode:'AMS',cityName:'Amsterdam',name:'Amsterdam Schiphol',countryName:'Pays-Bas',type:'AIRPORT'},
+  {iataCode:'LIS',cityName:'Lisbonne',name:'Lisbonne Humberto Delgado',countryName:'Portugal',type:'AIRPORT'},
+  {iataCode:'OPO',cityName:'Porto',name:'Porto',countryName:'Portugal',type:'AIRPORT'},
+  {iataCode:'FAO',cityName:'Faro',name:'Faro Algarve',countryName:'Portugal',type:'AIRPORT'},
+  {iataCode:'ATH',cityName:'Athènes',name:'Athènes Eleftherios Venizelos',countryName:'Grèce',type:'AIRPORT'},
+  {iataCode:'SKG',cityName:'Thessalonique',name:'Thessalonique',countryName:'Grèce',type:'AIRPORT'},
+  {iataCode:'HER',cityName:'Héraklion',name:'Héraklion Crète',countryName:'Grèce',type:'AIRPORT'},
+  {iataCode:'VIE',cityName:'Vienne',name:'Vienne Schwechat',countryName:'Autriche',type:'AIRPORT'},
+  {iataCode:'BER',cityName:'Berlin',name:'Berlin Brandenburg',countryName:'Allemagne',type:'AIRPORT'},
+  {iataCode:'FRA',cityName:'Francfort',name:'Francfort',countryName:'Allemagne',type:'AIRPORT'},
+  {iataCode:'MUC',cityName:'Munich',name:'Munich',countryName:'Allemagne',type:'AIRPORT'},
+  {iataCode:'HAM',cityName:'Hambourg',name:'Hambourg',countryName:'Allemagne',type:'AIRPORT'},
+  {iataCode:'DUS',cityName:'Düsseldorf',name:'Düsseldorf',countryName:'Allemagne',type:'AIRPORT'},
+  {iataCode:'BRU',cityName:'Bruxelles',name:'Bruxelles Zaventem',countryName:'Belgique',type:'AIRPORT'},
+  {iataCode:'ZRH',cityName:'Zurich',name:'Zurich',countryName:'Suisse',type:'AIRPORT'},
+  {iataCode:'GVA',cityName:'Genève',name:'Genève',countryName:'Suisse',type:'AIRPORT'},
+  {iataCode:'PRG',cityName:'Prague',name:'Prague Václav Havel',countryName:'Tchéquie',type:'AIRPORT'},
+  {iataCode:'WAW',cityName:'Varsovie',name:'Varsovie Chopin',countryName:'Pologne',type:'AIRPORT'},
+  {iataCode:'BUD',cityName:'Budapest',name:'Budapest Liszt Ferenc',countryName:'Hongrie',type:'AIRPORT'},
+  {iataCode:'BEG',cityName:'Belgrade',name:'Belgrade',countryName:'Serbie',type:'AIRPORT'},
+  {iataCode:'TGD',cityName:'Podgorica',name:'Podgorica',countryName:'Monténégro',type:'AIRPORT'},
+  {iataCode:'DBV',cityName:'Dubrovnik',name:'Dubrovnik',countryName:'Croatie',type:'AIRPORT'},
+  {iataCode:'SPU',cityName:'Split',name:'Split',countryName:'Croatie',type:'AIRPORT'},
+  {iataCode:'ZAG',cityName:'Zagreb',name:'Zagreb',countryName:'Croatie',type:'AIRPORT'},
+  {iataCode:'SOF',cityName:'Sofia',name:'Sofia',countryName:'Bulgarie',type:'AIRPORT'},
+  {iataCode:'OTP',cityName:'Bucarest',name:'Bucarest Henri Coanda',countryName:'Roumanie',type:'AIRPORT'},
+  {iataCode:'KIV',cityName:'Chisinau',name:'Chisinau',countryName:'Moldavie',type:'AIRPORT'},
+  {iataCode:'TIA',cityName:'Tirana',name:'Tirana Nënë Tereza',countryName:'Albanie',type:'AIRPORT'},
+  {iataCode:'SKP',cityName:'Skopje',name:'Skopje',countryName:'Macédoine',type:'AIRPORT'},
+  {iataCode:'REK',cityName:'Reykjavik',name:'Reykjavik Keflavik',countryName:'Islande',type:'AIRPORT'},
+  {iataCode:'CPH',cityName:'Copenhague',name:'Copenhague',countryName:'Danemark',type:'AIRPORT'},
+  {iataCode:'ARN',cityName:'Stockholm',name:'Stockholm Arlanda',countryName:'Suède',type:'AIRPORT'},
+  {iataCode:'OSL',cityName:'Oslo',name:'Oslo Gardermoen',countryName:'Norvège',type:'AIRPORT'},
+  {iataCode:'HEL',cityName:'Helsinki',name:'Helsinki Vantaa',countryName:'Finlande',type:'AIRPORT'},
+  {iataCode:'DUB',cityName:'Dublin',name:'Dublin',countryName:'Irlande',type:'AIRPORT'},
+  // Afrique du Nord
+  {iataCode:'CMN',cityName:'Casablanca',name:'Casablanca Mohammed V',countryName:'Maroc',type:'AIRPORT'},
+  {iataCode:'RAK',cityName:'Marrakech',name:'Marrakech Menara',countryName:'Maroc',type:'AIRPORT'},
+  {iataCode:'AGA',cityName:'Agadir',name:'Agadir Al Massira',countryName:'Maroc',type:'AIRPORT'},
+  {iataCode:'FEZ',cityName:'Fès',name:'Fès Saïss',countryName:'Maroc',type:'AIRPORT'},
+  {iataCode:'TNG',cityName:'Tanger',name:'Tanger Ibn Batouta',countryName:'Maroc',type:'AIRPORT'},
+  {iataCode:'TUN',cityName:'Tunis',name:'Tunis Carthage',countryName:'Tunisie',type:'AIRPORT'},
+  {iataCode:'MIR',cityName:'Monastir',name:'Monastir',countryName:'Tunisie',type:'AIRPORT'},
+  {iataCode:'DJE',cityName:'Djerba',name:'Djerba Zarzis',countryName:'Tunisie',type:'AIRPORT'},
+  {iataCode:'ALG',cityName:'Alger',name:'Alger Houari Boumediene',countryName:'Algérie',type:'AIRPORT'},
+  {iataCode:'ORN',cityName:'Oran',name:'Oran Es-Sénia',countryName:'Algérie',type:'AIRPORT'},
+  {iataCode:'CZL',cityName:'Constantine',name:'Constantine Mohamed Boudiaf',countryName:'Algérie',type:'AIRPORT'},
+  {iataCode:'CAI',cityName:'Le Caire',name:'Le Caire',countryName:'Égypte',type:'AIRPORT'},
+  {iataCode:'HRG',cityName:'Hurghada',name:'Hurghada',countryName:'Égypte',type:'AIRPORT'},
+  {iataCode:'SSH',cityName:'Sharm el-Sheikh',name:'Sharm el-Sheikh',countryName:'Égypte',type:'AIRPORT'},
+  // Moyen-Orient
+  {iataCode:'DXB',cityName:'Dubaï',name:'Dubaï International',countryName:'Émirats Arabes Unis',type:'AIRPORT'},
+  {iataCode:'AUH',cityName:'Abu Dhabi',name:'Abu Dhabi',countryName:'Émirats Arabes Unis',type:'AIRPORT'},
+  {iataCode:'DOH',cityName:'Doha',name:'Doha Hamad',countryName:'Qatar',type:'AIRPORT'},
+  {iataCode:'IST',cityName:'Istanbul',name:'Istanbul',countryName:'Turquie',type:'AIRPORT'},
+  {iataCode:'SAW',cityName:'Istanbul',name:'Istanbul Sabiha Gökçen',countryName:'Turquie',type:'AIRPORT'},
+  {iataCode:'AYT',cityName:'Antalya',name:'Antalya',countryName:'Turquie',type:'AIRPORT'},
+  // Asie
+  {iataCode:'BKK',cityName:'Bangkok',name:'Bangkok Suvarnabhumi',countryName:'Thaïlande',type:'AIRPORT'},
+  {iataCode:'DMK',cityName:'Bangkok',name:'Bangkok Don Mueang',countryName:'Thaïlande',type:'AIRPORT'},
+  {iataCode:'KUL',cityName:'Kuala Lumpur',name:'Kuala Lumpur',countryName:'Malaisie',type:'AIRPORT'},
+  {iataCode:'SIN',cityName:'Singapour',name:'Singapour Changi',countryName:'Singapour',type:'AIRPORT'},
+  {iataCode:'HKG',cityName:'Hong Kong',name:'Hong Kong',countryName:'Hong Kong',type:'AIRPORT'},
+  {iataCode:'NRT',cityName:'Tokyo',name:'Tokyo Narita',countryName:'Japon',type:'AIRPORT'},
+  {iataCode:'HND',cityName:'Tokyo',name:'Tokyo Haneda',countryName:'Japon',type:'AIRPORT'},
+  {iataCode:'DPS',cityName:'Bali',name:'Bali Ngurah Rai',countryName:'Indonésie',type:'AIRPORT'},
+  // Amérique
+  {iataCode:'JFK',cityName:'New York',name:'New York JFK',countryName:'États-Unis',type:'AIRPORT'},
+  {iataCode:'EWR',cityName:'New York',name:'New York Newark',countryName:'États-Unis',type:'AIRPORT'},
+  {iataCode:'LAX',cityName:'Los Angeles',name:'Los Angeles',countryName:'États-Unis',type:'AIRPORT'},
+  {iataCode:'MIA',cityName:'Miami',name:'Miami',countryName:'États-Unis',type:'AIRPORT'},
+  {iataCode:'ORD',cityName:'Chicago',name:'Chicago O\'Hare',countryName:'États-Unis',type:'AIRPORT'},
+  {iataCode:'YUL',cityName:'Montréal',name:'Montréal Trudeau',countryName:'Canada',type:'AIRPORT'},
+  {iataCode:'YYZ',cityName:'Toronto',name:'Toronto Pearson',countryName:'Canada',type:'AIRPORT'},
+  {iataCode:'CUN',cityName:'Cancún',name:'Cancún',countryName:'Mexique',type:'AIRPORT'},
+  {iataCode:'MEX',cityName:'Mexico',name:'Mexico Ciudad de México',countryName:'Mexique',type:'AIRPORT'},
+  {iataCode:'GRU',cityName:'São Paulo',name:'São Paulo Guarulhos',countryName:'Brésil',type:'AIRPORT'},
+  // Afrique
+  {iataCode:'CPT',cityName:'Le Cap',name:'Le Cap',countryName:'Afrique du Sud',type:'AIRPORT'},
+  {iataCode:'JNB',cityName:'Johannesburg',name:'Johannesburg OR Tambo',countryName:'Afrique du Sud',type:'AIRPORT'},
+];
+
+module.exports = (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  const { q } = req.query;
+  if (!q || q.length < 2) return res.status(400).json({ error: 'q requis' });
+  const s = q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const results = AIRPORTS.filter(a => {
+    const city = a.cityName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const name = a.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const code = a.iataCode.toLowerCase();
+    return city.startsWith(s) || name.includes(s) || code.startsWith(s);
+  }).slice(0, 10);
+  res.json({ data: results });
+};
