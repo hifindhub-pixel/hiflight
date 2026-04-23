@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
         duration: o.duration ? 'PT' + o.duration + 'M' : null,
         segments: [{
           departure: { iataCode: o.origin || originCode.toUpperCase(), at: o.departure_at || departureDate },
-          arrival: { iataCode: o.destination || destinationCode.toUpperCase(), at: o.return_at || '' },
+          arrival: { iataCode: o.destination || destinationCode.toUpperCase(), at: o.departure_at || departureDate },
           carrierCode: o.airline || '',
           flightNumber: String(o.flight_number || o.number || ''),
           stops: o.transfers || 0,
