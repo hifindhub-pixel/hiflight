@@ -31,7 +31,8 @@
 
 /* Ligne principale */
 .fp-row {
-  display: flex; align-items: stretch; min-height: 64px;
+  display: flex; flex-direction: row; align-items: stretch; min-height: 64px;
+  flex-wrap: nowrap;
 }
 .fp-cell {
   display: flex; flex-direction: column; justify-content: center;
