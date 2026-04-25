@@ -126,3 +126,34 @@
   .fp-pop-grid{grid-template-columns:1fr;}
   .fp-hero{padding:3rem 1rem;min-height:auto;}
 }
+
+/* TP WHITE LABEL INTEGRATION */
+.fp-tp-search {
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  padding: 1rem 2rem;
+}
+[data-theme="dark"] .fp-tp-search { background: var(--bg2); }
+
+.fp-tp-tickets {
+  min-height: 100px;
+  background: #f8fafc;
+}
+[data-theme="dark"] .fp-tp-tickets { background: var(--bg); }
+
+/* Override TP styles pour matcher notre design */
+:root {
+  --tpwl-font-family: 'Inter';
+  --tpwl-headline-text: #0f172a;
+  --tpwl-links: #FF6B6B;
+  --tpwl-main-text: #0f172a;
+  --tpwl-search-form-background: #ffffff;
+  --tpwl-search-result-background: #f8fafc;
+}
+
+/* Cacher le logo TP */
+[class*="powered"], [class*="tpwl-logo__"] { display: none !important; }
+
+/* Largeur full */
+.tpwl__content { max-width: 1280px !important; width: 100% !important; margin: 0 auto !important; }
+.tpwl-search__wrapper, .tpwl-tickets__wrapper { max-width: 100% !important; padding: 0 !important; }
