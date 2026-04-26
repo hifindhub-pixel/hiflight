@@ -1,51 +1,15 @@
-.navbar {
-  position: sticky; top: 0; z-index: 200;
+.hf-nav {
   background: rgba(255,255,255,0.97);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  height: 56px;
-  display: flex; align-items: center;
-  padding: 0 2rem;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  position: sticky; top: 0; z-index: 9999;
+  height: 64px; display: flex; align-items: center; padding: 0 2rem;
   transition: box-shadow .2s;
 }
-[data-theme="dark"] .navbar { background: rgba(15,23,42,0.97); }
-.navbar.scrolled { box-shadow: 0 2px 12px rgba(0,0,0,.08); }
-
-.navbar-inner {
-  max-width: 1280px; width: 100%; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-}
-
-.navbar-brand {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.55rem; font-weight: 900;
-  color: var(--coral); text-decoration: none;
-  margin-left: 1rem;
-}
-.navbar-brand span { color: var(--text); }
-
-.navbar-right {
-  display: flex; align-items: center; gap: .5rem;
-  margin-right: 1rem;
-}
-
-.navbar-monde {
-  background: none; border: none; cursor: pointer;
-  font-size: .82rem; color: var(--sub);
-  font-family: 'Inter', sans-serif;
-  display: flex; align-items: center; gap: .3rem;
-  padding: .35rem .7rem; border-radius: 100px;
-  transition: color .2s; white-space: nowrap;
-}
-.navbar-monde:hover { color: var(--text); }
-
-.navbar-theme {
-  width: 28px; height: 28px; border-radius: 50%;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--dim);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all .2s;
-  padding: 0;
-}
-.navbar-theme:hover { border-color: var(--coral); color: var(--coral); }
+.hf-nav.scrolled { box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.hf-nav-inner { max-width: 1280px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.hf-brand { font-family: 'Outfit', sans-serif; font-size: 1.7rem; font-weight: 900; color: #FF6B6B; text-decoration: none; }
+.hf-brand span { color: #0f172a; }
+.hf-nav-right { display: flex; align-items: center; }
+.hf-monde-btn { background: none; border: none; cursor: pointer; font-size: .82rem; color: #64748b; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: .3rem; }
+.hf-monde-btn:hover { color: #0f172a; }
