@@ -45,11 +45,8 @@ const DOMAIN = 'hiflight.vercel.app';
 
 export default function Flights() {
   const [openFaq, setOpenFaq] = useState(null);
-  const [searching, setSearching] = useState(false);
 
-  // Injecter le script Travelpayouts White Label
   useEffect(() => {
-    // Inject TP config
     window.TPWL_EXTRA = {
       currency: 'EUR',
       marker: MARKER,
@@ -59,9 +56,14 @@ export default function Flights() {
       link_color: 'FF6B6B',
     };
 
-    // Inject TP script
-    const existing = document.getElementById('tp-wl-script');
-    if (!existing) {
+    window.TPWL_CONFIGURATION = {
+      version: 'v2',
+      ab_flag: '',
+      ab_variant: '',
+      ab_evaluation_id: '',
+    };
+
+    if (!document.getElementById('tp-wl-script')) {
       const script = document.createElement('script');
       script.id = 'tp-wl-script';
       script.async = true;
@@ -69,38 +71,10 @@ export default function Flights() {
       script.src = 'https://tpwdg.com/wl_web/main.js?wl_id=15789';
       document.head.appendChild(script);
     }
-
-    // Inject weedle scripts for popular destinations
-    const injectWeedles = () => {
-      const container = document.getElementById('tpwl-widget-weedles');
-      if (!container || !window.TPWL_EXTRA) return;
-      container.querySelectorAll('div[is="weedle"]').forEach(el => {
-        if (el.querySelector('script')) return;
-        const dest = el.getAttribute('data-destination');
-        const s = document.createElement('script');
-        s.async = true;
-        s.src = `https://tpwdg.com/content?currency=eur&trs=${TRS}&shmarker=${MARKER}&destination=${dest}&target_host=${DOMAIN}&locale=FR&limit=6&powered_by=false&primary=%23FF6B6B&promo_id=4044&campaign_id=100`;
-        el.appendChild(s);
-      });
-    };
-
-    const timer = setTimeout(injectWeedles, 2000);
-    return () => clearTimeout(timer);
   }, []);
 
   const handleOriginClick = (destCode, fromCode, fromName) => {
-    // Pré-remplir la recherche TP via URL
-    const today = new Date();
-    const dep = new Date(today.setDate(today.getDate() + 30)).toISOString().split('T')[0];
-    const ret = new Date(new Date().setDate(new Date().getDate() + 37)).toISOString().split('T')[0];
-    
-    // Scroll vers le moteur et simuler une recherche
-    const searchEl = document.getElementById('tpwl-search');
-    if (searchEl) {
-      searchEl.scrollIntoView({ behavior: 'smooth' });
-    }
-    setSearching(true);
-    setTimeout(() => setSearching(false), 500);
+    document.getElementById('tpwl-search')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -120,25 +94,29 @@ export default function Flights() {
         <span><b>100%</b> gratuit</span>
       </div>
 
-      {/* MOTEUR TRAVELPAYOUTS WHITE LABEL */}
-      <div className="fp-tp-search">
-        <div id="tpwl-search" />
+      {/* MOTEUR TP — wrapper qui force la largeur */}
+      <div className="fp-tp-wrap">
+        <div className="fp-tp-container">
+          <div id="tpwl-search" />
+        </div>
       </div>
 
       {/* RÉSULTATS TP */}
-      <div className="fp-tp-tickets">
-        <div id="tpwl-tickets" />
+      <div className="fp-tp-results">
+        <div className="fp-tp-container">
+          <div id="tpwl-tickets" />
+        </div>
       </div>
 
       {/* DESTINATIONS POPULAIRES */}
       <div className="fp-pop-section" id="fp-popular">
         <div className="fp-pop-inner">
           <h2 className="fp-pop-title">Destinations populaires depuis la France</h2>
-          <div className="fp-pop-grid" id="tpwl-widget-weedles">
+          <div className="fp-pop-grid">
             {POPULAR_PRICES.map(p => {
               const info = DEST_INFO[p.code];
               return (
-                <div key={p.code} className="fp-pop-card" is="weedle" data-destination={p.code}>
+                <div key={p.code} className="fp-pop-card">
                   <div className="fp-pop-img">
                     <img src={info.photo} alt={info.city} loading="lazy" />
                     <div className="fp-pop-overlay" />
