@@ -1,0 +1,15 @@
+.hf-footer { background: #fff; border-top: 1px solid rgba(0,0,0,.08); padding: 2rem; text-align: center; }
+.hf-footer-brand { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 900; color: #FF6B6B; margin-bottom: .4rem; }
+.hf-footer-brand span { color: #0f172a; }
+.hf-footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: .6rem; }
+.hf-footer-links button { font-size: .76rem; color: #64748b; background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: color .15s; }
+.hf-footer-links button:hover { color: #FF6B6B; }
+.hf-footer-copy { font-size: .71rem; color: #94a3b8; }
+.hf-legal-overlay { display: flex; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 9999; align-items: center; justify-content: center; padding: 2rem; }
+.hf-legal-panel { background: #fff; border-radius: 18px; width: 100%; max-width: 700px; max-height: 85vh; overflow-y: auto; }
+.hf-legal-head { padding: 1.1rem 1.4rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,.08); position: sticky; top: 0; background: #fff; }
+.hf-legal-title { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700; }
+.hf-legal-close { width: 30px; height: 30px; border-radius: 50%; border: none; background: transparent; color: #64748b; font-size: 1rem; cursor: pointer; }
+.hf-legal-body { padding: 1.3rem; font-size: .83rem; color: #64748b; line-height: 1.8; }
+.hf-legal-body h3 { font-size: .95rem; font-weight: 700; color: #0f172a; margin: 1rem 0 .3rem; }
+.hf-legal-body p { margin-bottom: .7rem; }
