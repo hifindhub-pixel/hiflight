@@ -1,139 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import './Flights.css';
+/* HERO */
+.fp-hero{background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 50%,#f0fdf4 100%);padding:4rem 2rem 3.5rem;text-align:center;display:flex;align-items:center;justify-content:center;}
+[data-theme="dark"] .fp-hero{background:linear-gradient(135deg,#0c1a2e 0%,#0f172a 100%);}
+.fp-hero-inner{max-width:820px;margin:0 auto;}
+.fp-hero-title{font-family:'Outfit',sans-serif;font-size:clamp(2.2rem,5vw,4.5rem);font-weight:900;line-height:1.06;letter-spacing:-.03em;margin-bottom:.8rem;color:var(--text);}
+.fp-coral{color:#FF6B6B;}
+.fp-hero-sub{color:#64748b;font-size:1rem;max-width:560px;margin:0 auto;}
 
-const DEST_INFO = {
-  BCN:{city:'Barcelone',country:'Espagne',photo:'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80'},
-  RAK:{city:'Marrakech',country:'Maroc',photo:'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80'},
-  FCO:{city:'Rome',country:'Italie',photo:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80'},
-  DXB:{city:'Dubaï',country:'Émirats arabes unis',photo:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80'},
-  BKK:{city:'Bangkok',country:'Thaïlande',photo:'https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600&q=80'},
-  KUL:{city:'Kuala Lumpur',country:'Malaisie',photo:'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80'},
-  JFK:{city:'New York',country:'États-Unis',photo:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80'},
-  CUN:{city:'Cancún',country:'Mexique',photo:'https://images.unsplash.com/photo-1552074284-5e88ef1aef18?w=600&q=80'},
-  TIA:{city:'Tirana',country:'Albanie',photo:'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=600&q=80'},
-  REK:{city:'Reykjavik',country:'Islande',photo:'https://images.unsplash.com/photo-1504512485720-7d83a16ee930?w=600&q=80'},
-  MAD:{city:'Madrid',country:'Espagne',photo:'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&q=80'},
-  LIS:{city:'Lisbonne',country:'Portugal',photo:'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=80'},
-};
+/* TRUST */
+.fp-trust{background:#fff;border-bottom:1px solid rgba(0,0,0,.08);padding:.5rem 2rem;display:flex;align-items:center;justify-content:center;gap:2rem;font-size:.8rem;color:#64748b;}
+[data-theme="dark"] .fp-trust{background:var(--bg2);}
+.fp-trust b{font-family:'Outfit',sans-serif;color:#FF6B6B;font-size:.92rem;}
 
-const POPULAR_PRICES = [
-  {code:'BCN',origins:[{from:'Marseille',fromCode:'MRS',price:'€ 20'},{from:'Paris',fromCode:'CDG',price:'€ 21'},{from:'Lyon',fromCode:'LYS',price:'€ 35'}]},
-  {code:'RAK',origins:[{from:'Marseille',fromCode:'MRS',price:'€ 68'},{from:'Paris',fromCode:'CDG',price:'€ 44'},{from:'Nantes',fromCode:'NTE',price:'€ 74'}]},
-  {code:'FCO',origins:[{from:'Marseille',fromCode:'MRS',price:'€ 22'},{from:'Paris',fromCode:'CDG',price:'€ 26'},{from:'Lyon',fromCode:'LYS',price:'€ 28'}]},
-  {code:'DXB',origins:[{from:'Paris',fromCode:'CDG',price:'€ 199'},{from:'Lyon',fromCode:'LYS',price:'€ 215'},{from:'Marseille',fromCode:'MRS',price:'€ 220'}]},
-  {code:'BKK',origins:[{from:'Paris',fromCode:'CDG',price:'€ 349'},{from:'Lyon',fromCode:'LYS',price:'€ 369'},{from:'Bordeaux',fromCode:'BOD',price:'€ 389'}]},
-  {code:'KUL',origins:[{from:'Paris',fromCode:'CDG',price:'€ 389'},{from:'Lyon',fromCode:'LYS',price:'€ 409'},{from:'Marseille',fromCode:'MRS',price:'€ 420'}]},
-  {code:'JFK',origins:[{from:'Paris',fromCode:'CDG',price:'€ 327'},{from:'Lyon',fromCode:'LYS',price:'€ 355'},{from:'Marseille',fromCode:'MRS',price:'€ 360'}]},
-  {code:'CUN',origins:[{from:'Paris',fromCode:'CDG',price:'€ 363'},{from:'Lyon',fromCode:'LYS',price:'€ 389'},{from:'Bordeaux',fromCode:'BOD',price:'€ 399'}]},
-  {code:'TIA',origins:[{from:'Marseille',fromCode:'MRS',price:'€ 50'},{from:'Paris',fromCode:'CDG',price:'€ 65'},{from:'Lyon',fromCode:'LYS',price:'€ 71'}]},
-  {code:'REK',origins:[{from:'Paris',fromCode:'CDG',price:'€ 79'},{from:'Lyon',fromCode:'LYS',price:'€ 95'},{from:'Bordeaux',fromCode:'BOD',price:'€ 110'}]},
-  {code:'MAD',origins:[{from:'Marseille',fromCode:'MRS',price:'€ 16'},{from:'Paris',fromCode:'CDG',price:'€ 22'},{from:'Bordeaux',fromCode:'BOD',price:'€ 18'}]},
-  {code:'LIS',origins:[{from:'Marseille',fromCode:'MRS',price:'€ 29'},{from:'Paris',fromCode:'CDG',price:'€ 35'},{from:'Bordeaux',fromCode:'BOD',price:'€ 32'}]},
-];
+/* TP OVERRIDES — contraindre la largeur */
+:root{
+  --tpwl-font-family:'Inter';
+  --tpwl-headline-text:#0f172a;
+  --tpwl-links:#FF6B6B;
+  --tpwl-main-text:#0f172a;
+  --tpwl-search-form-background:#ffffff;
+  --tpwl-search-result-background:#f8fafc;
+}
+[class*="powered"],[class*="tpwl-logo__"]{display:none!important;}
 
-const FAQ = [
-  ['Comment HiFlight trouve-t-il les meilleurs prix ?','HiFlight compare en temps réel les tarifs de plus de 700 compagnies aériennes. Notre moteur analyse des millions de combinaisons pour vous présenter les meilleures offres en quelques secondes.'],
-  ['HiFlight est-il vraiment gratuit ?',"Oui, entièrement gratuit. Nous nous rémunérons via des commissions d'affiliation versées par les agences et compagnies partenaires — sans aucun surcoût pour vous."],
-  ['Puis-je réserver directement sur HiFlight ?',"HiFlight est un comparateur — nous vous montrons les meilleures offres et vous redirigeons vers le site de la compagnie ou de l'agence pour finaliser la réservation."],
-  ['Pourquoi les prix changent-ils aussi vite ?',"Les prix des vols varient en fonction de la demande, du délai avant le départ et de la saison. En général, réserver 6 à 8 semaines à l'avance offre les meilleurs tarifs."],
-  ['Comment HiFlight protège-t-il mes données ?','HiFlight respecte le RGPD. Nous ne vendons aucune donnée personnelle à des tiers.'],
-];
+/* Wrapper global TP */
+[class*="tpwl-search__wrapper"],
+[class*="tpwl-tickets__wrapper"]{
+  padding-left:2rem!important;
+  padding-right:2rem!important;
+}
+[class*="tpwl__content"]{
+  max-width:1280px!important;
+  min-width:unset!important;
+  width:100%!important;
+  margin:0 auto!important;
+  box-sizing:border-box!important;
+}
 
-export default function Flights() {
-  const [openFaq, setOpenFaq] = useState(null);
+/* POPULAR */
+.fp-pop-section{background:#fff;border-top:1px solid rgba(0,0,0,.08);padding:2.5rem 2rem;}
+[data-theme="dark"] .fp-pop-section{background:var(--bg2);}
+.fp-pop-inner{max-width:1280px;margin:0 auto;}
+.fp-pop-title{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:1.5rem;color:var(--text);text-align:center;}
+.fp-pop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+.fp-pop-card{border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,.08);background:#fff;transition:box-shadow .2s;}
+[data-theme="dark"] .fp-pop-card{background:var(--bg2);}
+.fp-pop-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.1);}
+.fp-pop-img{position:relative;height:160px;overflow:hidden;}
+.fp-pop-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.fp-pop-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(0,0,0,.6));}
+.fp-pop-labels{position:absolute;bottom:.75rem;left:.9rem;color:#fff;}
+.fp-pop-city{display:block;font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:800;}
+.fp-pop-country{display:block;font-size:.75rem;opacity:.85;}
+.fp-pop-origins{padding:.65rem .9rem;}
+.fp-pop-origins-hdr{display:flex;justify-content:space-between;font-size:.7rem;color:#94a3b8;margin-bottom:.3rem;padding-bottom:.3rem;border-bottom:1px solid rgba(0,0,0,.07);}
+.fp-pop-row{display:flex;justify-content:space-between;align-items:center;padding:.3rem .4rem;font-size:.82rem;color:var(--text);width:100%;background:none;border:none;text-align:left;cursor:pointer;border-radius:6px;transition:background .15s;}
+.fp-pop-row:hover{background:rgba(255,107,107,.08);}
+.fp-pop-price{color:#FF6B6B;font-weight:700;font-family:'Outfit',sans-serif;}
 
-  useEffect(() => {
-    window.TPWL_EXTRA = {
-      currency:'EUR', marker:'714763', trs:'514265',
-      domain:'hiflight.vercel.app', locale:'FR', link_color:'FF6B6B',
-    };
-    window.TPWL_CONFIGURATION = { version:'v2', ab_flag:'', ab_variant:'', ab_evaluation_id:'' };
+/* FAQ */
+.fp-faq{padding:3.5rem 2rem;background:#f8fafc;}
+[data-theme="dark"] .fp-faq{background:var(--bg);}
+.fp-faq-inner{max-width:820px;margin:0 auto;}
+.fp-faq-title{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:800;text-align:center;margin-bottom:.3rem;color:var(--text);}
+.fp-faq-sub{text-align:center;color:#64748b;font-size:.85rem;margin-bottom:2rem;}
+.fp-faq-item{border:1px solid rgba(0,0,0,.08);border-radius:12px;margin-bottom:.6rem;overflow:hidden;cursor:pointer;}
+.fp-faq-q{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;font-weight:600;font-size:.92rem;background:#fff;color:var(--text);user-select:none;}
+[data-theme="dark"] .fp-faq-q{background:var(--bg2);}
+.fp-faq-q:hover{background:#f8fafc;}
+.fp-faq-chev{color:#FF6B6B;transition:transform .25s;}
+.fp-faq-item.open .fp-faq-chev{transform:rotate(180deg);}
+.fp-faq-a{max-height:0;overflow:hidden;padding:0 1.3rem;font-size:.85rem;color:#64748b;line-height:1.7;background:#fff;transition:max-height .3s,padding .3s;}
+[data-theme="dark"] .fp-faq-a{background:var(--bg2);}
+.fp-faq-item.open .fp-faq-a{max-height:200px;padding:.9rem 1.3rem 1.1rem;}
 
-    if (!document.getElementById('tp-wl-script')) {
-      const s = document.createElement('script');
-      s.id = 'tp-wl-script'; s.async = true; s.type = 'module';
-      s.src = 'https://tpwdg.com/wl_web/main.js?wl_id=15789';
-      document.head.appendChild(s);
-    }
-
-    // Observer pour corriger la largeur dès que TP injecte ses éléments
-    const observer = new MutationObserver(() => {
-      const wrappers = document.querySelectorAll('[class*="tpwl__content"],[class*="tpwl-search__wrapper"],[class*="tpwl-tickets__wrapper"]');
-      wrappers.forEach(el => {
-        el.style.setProperty('max-width', '1280px', 'important');
-        el.style.setProperty('min-width', 'unset', 'important');
-        el.style.setProperty('margin', '0 auto', 'important');
-        el.style.setProperty('padding-left', '2rem', 'important');
-        el.style.setProperty('padding-right', '2rem', 'important');
-        el.style.setProperty('box-sizing', 'border-box', 'important');
-      });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div className="fp">
-      <div className="fp-hero">
-        <div className="fp-hero-inner">
-          <h1 className="fp-hero-title">Des millions de vols.<br /><span className="fp-coral">Un seul endroit.</span></h1>
-          <p className="fp-hero-sub">Comparez des centaines de compagnies aériennes en temps réel. Gratuit, sans inscription.</p>
-        </div>
-      </div>
-
-      <div className="fp-trust">
-        <span><b>728</b> compagnies</span>
-        <span><b>100%</b> gratuit</span>
-      </div>
-
-      <div id="tpwl-search" />
-      <div id="tpwl-tickets" />
-
-      <div className="fp-pop-section" id="fp-popular">
-        <div className="fp-pop-inner">
-          <h2 className="fp-pop-title">Destinations populaires depuis la France</h2>
-          <div className="fp-pop-grid">
-            {POPULAR_PRICES.map(p => {
-              const info = DEST_INFO[p.code];
-              return (
-                <div key={p.code} className="fp-pop-card">
-                  <div className="fp-pop-img">
-                    <img src={info.photo} alt={info.city} loading="lazy" />
-                    <div className="fp-pop-overlay" />
-                    <div className="fp-pop-labels">
-                      <span className="fp-pop-city">{info.city}</span>
-                      <span className="fp-pop-country">{info.country}</span>
-                    </div>
-                  </div>
-                  <div className="fp-pop-origins">
-                    <div className="fp-pop-origins-hdr"><span>Origine</span><span>↩ à partir de</span></div>
-                    {p.origins.map((o,i) => (
-                      <button key={i} className="fp-pop-row"
-                        onClick={() => document.getElementById('tpwl-search')?.scrollIntoView({behavior:'smooth'})}>
-                        <span>{o.from}</span>
-                        <span className="fp-pop-price">{o.price}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      <section className="fp-faq">
-        <div className="fp-faq-inner">
-          <h2 className="fp-faq-title">Questions fréquentes</h2>
-          <p className="fp-faq-sub">Tout ce que vous devez savoir avant de réserver</p>
-          {FAQ.map(([q,a],i) => (
-            <div key={i} className={`fp-faq-item${openFaq===i?' open':''}`} onClick={() => setOpenFaq(openFaq===i?null:i)}>
-              <div className="fp-faq-q">{q}<span className="fp-faq-chev">▾</span></div>
-              <div className="fp-faq-a">{a}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
+@media(max-width:1024px){.fp-pop-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){
+  .fp-pop-grid{grid-template-columns:1fr;}
+  .fp-hero{padding:2.5rem 1rem;}
+  [class*="tpwl-search__wrapper"],[class*="tpwl-tickets__wrapper"]{padding-left:1rem!important;padding-right:1rem!important;}
 }
