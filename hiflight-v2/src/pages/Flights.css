@@ -11,11 +11,19 @@
 [data-theme="dark"] .fp-trust{background:var(--bg2);}
 .fp-trust b{font-family:'Outfit',sans-serif;color:#FF6B6B;font-size:.9rem;}
 
-/* TP SEARCH SECTION */
-.fp-tp-search{background:#fff;border-bottom:1px solid rgba(0,0,0,.08);}
-[data-theme="dark"] .fp-tp-search{background:var(--bg2);}
-.fp-tp-tickets{background:#f8fafc;min-height:50px;}
-[data-theme="dark"] .fp-tp-tickets{background:var(--bg);}
+/* TP WRAPPER — force la largeur */
+.fp-tp-wrap{background:#fff;border-bottom:1px solid rgba(0,0,0,.08);padding:1rem 0;}
+[data-theme="dark"] .fp-tp-wrap{background:var(--bg2);}
+.fp-tp-results{background:#f8fafc;}
+[data-theme="dark"] .fp-tp-results{background:var(--bg);}
+
+/* Container centré — même largeur que WL */
+.fp-tp-container{
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 2rem;
+  box-sizing:border-box;
+}
 
 /* POPULAR */
 .fp-pop-section{background:#fff;border-top:1px solid rgba(0,0,0,.08);padding:2.5rem 2rem;}
@@ -55,7 +63,7 @@
 .fp-faq-item.open .fp-faq-a{max-height:200px;padding:.9rem 1.3rem 1.1rem;}
 
 /* ── TP WHITE LABEL OVERRIDES ── */
-:root {
+:root{
   --tpwl-font-family:'Inter';
   --tpwl-headline-text:#0f172a;
   --tpwl-links:#FF6B6B;
@@ -65,34 +73,22 @@
 }
 [class*="powered"],[class*="tpwl-logo__"]{display:none!important;}
 
-/* Container centré avec marges comme WL */
-.tpwl__content{
-  max-width:1280px!important;
-  width:100%!important;
-  margin:0 auto!important;
-  padding:0 2rem!important;
-  box-sizing:border-box!important;
-}
-.tpwl-search__wrapper{
+/* Forcer le contenu TP à respecter notre container */
+.fp-tp-container .tpwl__content,
+.fp-tp-container [class*="tpwl__content"]{
   max-width:100%!important;
-  padding:1rem 0!important;
-  background:#fff!important;
+  min-width:unset!important;
+  padding:0!important;
 }
-[data-theme="dark"] .tpwl-search__wrapper{background:var(--bg2)!important;}
-.tpwl-tickets__wrapper{
+.fp-tp-container [class*="tpwl-search__wrapper"],
+.fp-tp-container [class*="tpwl-tickets__wrapper"]{
   max-width:100%!important;
-  padding:1.5rem 0!important;
-}
-/* Bordure search comme WL */
-#tpwl-search{
-  border-radius:14px!important;
-  border:1.5px solid rgba(255,107,107,.2)!important;
-  box-shadow:0 2px 16px rgba(0,0,0,.05)!important;
-  overflow:hidden!important;
+  padding:0!important;
 }
 
 @media(max-width:1024px){.fp-pop-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:768px){
   .fp-pop-grid{grid-template-columns:1fr;}
   .fp-hero{padding:2rem 1rem;}
+  .fp-tp-container{padding:0 1rem;}
 }
