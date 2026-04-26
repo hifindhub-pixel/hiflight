@@ -92,6 +92,17 @@
       padding: 1rem 2rem !important;
       position: static !important;
     }
+    #tpwl-search {
+      border: 1.5px solid rgba(255,107,107,0.35) !important;
+      border-radius: 14px !important;
+      box-shadow: 0 2px 12px rgba(255,107,107,0.08) !important;
+      overflow: hidden !important;
+      transition: border-color .2s, box-shadow .2s !important;
+    }
+    #tpwl-search:focus-within {
+      border-color: rgba(255,107,107,0.6) !important;
+      box-shadow: 0 4px 20px rgba(255,107,107,0.15) !important;
+    }
     .tpwl__content {
       max-width: 1280px !important;
       min-width: unset !important;
@@ -185,6 +196,11 @@
     }
     window.tpwlCurrencyChange = function(v) { setCookie('tpwl_currency', v); };
     window.tpwlLocaleChange = function(v) { setCookie('tpwl_locale', v); window.location.reload(); };
+    // Lire le cookie locale au chargement
+    (function() {
+      var match = document.cookie.match(/tpwl_locale=([^;]+)/);
+      if (match) window.TPWL_EXTRA.locale = match[1].toUpperCase();
+    })();
   </script>
   <script async type="module" src="https://tpwdg.com/wl_web/main.js?wl_id=15789"></script>
 </head>
