@@ -6,9 +6,11 @@ export default function Header() {
       <div className="nav-wrap">
         <Link className="brand" href="/" aria-label="Accueil HIFLIGHT"><span>Hi</span>Flight</Link>
         <nav aria-label="Navigation principale">
-          <Link href="/#destinations">Destinations</Link>
-          <Link href="/guides/bagage-cabine">Guides</Link>
-          <a className="nav-cta" href="#recherche">Comparer un vol</a>
+          <Link href="/#services">Voyager</Link>
+          <Link href="/hotels">Hôtels</Link>
+          <Link href="/voitures">Voitures</Link>
+          <Link href="/#destinations">Explorer</Link>
+          <a className="nav-cta" href="/#recherche">Comparer</a>
         </nav>
       </div>
     </header>
