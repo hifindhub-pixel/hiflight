@@ -1,21 +1,18 @@
 import Link from "next/link";
-import { BedDouble, CarFront, Plane, TrainFront } from "lucide-react";
 
 type Props = { active: "flights" | "hotels" | "cars" | "ground" };
 
 const services = [
-  { id: "flights", label: "Vols", href: "/#recherche", icon: Plane },
-  { id: "hotels", label: "Hôtels", href: "/hotels", icon: BedDouble },
-  { id: "cars", label: "Voitures", href: "/voitures", icon: CarFront },
-  { id: "ground", label: "Trains & bus", href: "/trains-bus", icon: TrainFront },
+  { id: "flights", label: "Vols", href: "/#recherche", icon: "/icons/service-flight.png" },
+  { id: "hotels", label: "Hôtels", href: "/hotels", icon: "/icons/service-hotel.svg" },
+  { id: "cars", label: "Voitures", href: "/voitures", icon: "/icons/service-car.png" },
+  { id: "ground", label: "Trains & bus", href: "/trains-bus", icon: "/icons/service-train.svg" },
 ] as const;
 
 export default function ServiceTabs({ active }: Props) {
   return (
     <div className="service-tabs" aria-label="Services de voyage">
       {services.map((service) => {
-        const Icon = service.icon;
-
         return (
           <Link
             key={service.id}
@@ -23,7 +20,11 @@ export default function ServiceTabs({ active }: Props) {
             href={service.href}
             aria-current={active === service.id ? "page" : undefined}
           >
-            <Icon className="service-tab-icon" aria-hidden="true" strokeWidth={2} />
+            <span
+              className={`service-tab-icon service-tab-icon-${service.id}`}
+              style={{ "--service-icon": `url(${service.icon})` } as React.CSSProperties}
+              aria-hidden="true"
+            />
             <span>{service.label}</span>
           </Link>
         );
