@@ -95,7 +95,8 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .service-tabs a { display:flex; min-width:0; min-height:50px; align-items:center; justify-content:center; gap:9px; padding:0 17px; border:1px solid rgba(255,255,255,.32); border-radius:999px; color:#fff; background:rgba(7,22,47,.5); font-size:14px; font-weight:750; letter-spacing:-.01em; white-space:nowrap; backdrop-filter:blur(10px); transition:transform .18s ease,border-color .18s ease,background .18s ease,color .18s ease; }
 .service-tabs a:hover { transform:translateY(-2px); border-color:rgba(255,255,255,.72); background:rgba(13,34,71,.82); }
 .service-tabs a.active { border-color:var(--coral); color:var(--navy); background:var(--coral); }
-.service-tab-icon { --service-icon:none; flex:0 0 23px; width:23px; height:23px; background:currentColor; -webkit-mask:var(--service-icon) center/contain no-repeat; mask:var(--service-icon) center/contain no-repeat; }
+.service-tab-icon { --service-icon:none; flex:0 0 23px; width:23px; height:23px; background:var(--coral); -webkit-mask:var(--service-icon) center/contain no-repeat; mask:var(--service-icon) center/contain no-repeat; }
+.service-tabs a.active .service-tab-icon { background:var(--navy); }
 .service-tab-icon-cars { flex-basis:26px; width:26px; }
 .service-tab-icon-ground { flex-basis:25px; width:25px; }
 .trust-line { display:flex; gap:28px; margin-top:20px; font-size:13px; color:rgba(255,255,255,.82); }
