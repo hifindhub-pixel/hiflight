@@ -5,6 +5,29 @@ export type ProviderOffer = {
   href: string;
 };
 
+export type MarketplaceSearch = Record<string, string | number | undefined>;
+
+export function partnerHref(href: string, search: MarketplaceSearch) {
+  const entries = Object.entries(search).filter(([, value]) => value !== undefined && value !== "");
+  let target = href;
+  for (const [key, value] of entries) target = target.replaceAll(`{${key}}`, encodeURIComponent(String(value)));
+  try {
+    const url = new URL(target, "https://www.hiflight.fr");
+    if (url.hostname !== "www.hiflight.fr") {
+      url.searchParams.set("utm_source", "hiflight");
+      url.searchParams.set("utm_medium", "comparison");
+      url.searchParams.set("utm_campaign", "partner_click");
+    } else {
+      for (const [key, value] of entries) url.searchParams.set(key, String(value));
+    }
+    return url.hostname === "www.hiflight.fr" ? `${url.pathname}${url.search}` : url.toString();
+  } catch {
+    return href;
+  }
+}
+
+export function isPartnerConnected(href: string) { return /^https?:\/\//.test(href); }
+
 export type HotelResult = {
   id: string;
   name: string;

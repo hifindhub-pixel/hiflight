@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { hotelResults, stay22Aid } from "@/lib/travel-marketplace";
+import { useEffect, useMemo, useState } from "react";
+import { hotelResults, isPartnerConnected, partnerHref, stay22Aid } from "@/lib/travel-marketplace";
+import { track } from "./Analytics";
+import ProviderBadge from "./ProviderBadge";
 
 type View = "split" | "list" | "map";
 
@@ -9,7 +11,17 @@ export default function HotelExplorer() {
   const [view, setView] = useState<View>("split");
   const [sort, setSort] = useState("recommended");
   const [selected, setSelected] = useState(hotelResults[0].id);
-  const [destination, setDestination] = useState("Paris");
+  const [search, setSearch] = useState({ destination: "Paris", checkin: "", checkout: "", guests: "2" });
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setSearch({
+      destination: params.get("destination") || "Paris",
+      checkin: params.get("checkin") || "",
+      checkout: params.get("checkout") || "",
+      guests: params.get("guests") || "2",
+    });
+  }, []);
 
   const results = useMemo(() => {
     const copy = [...hotelResults];
@@ -19,13 +31,16 @@ export default function HotelExplorer() {
   }, [sort]);
 
   const stay22Url = stay22Aid
-    ? `https://www.stay22.com/embed/gm?aid=${encodeURIComponent(stay22Aid)}&address=${encodeURIComponent(destination)}`
+    ? `https://www.stay22.com/embed/gm?aid=${encodeURIComponent(stay22Aid)}&address=${encodeURIComponent(search.destination)}`
     : "";
+
+  const providers = Array.from(new Map(hotelResults.flatMap((hotel) => hotel.offers).map((offer) => [offer.provider, offer])).values());
+  const clickPartner = (provider: string, hotelId: string) => track("partner_click", { provider, category: "hotel", result_id: hotelId, destination: search.destination });
 
   return (
     <div className="results-shell">
       <div className="results-toolbar">
-        <div><strong>{results.length} établissements comparés</strong><span>Prix total pour 2 nuits · 2 voyageurs</span></div>
+        <div><strong>{results.length} établissements comparés à {search.destination}</strong><span>Prix indicatifs · {search.guests} voyageur{search.guests === "1" ? "" : "s"}</span></div>
         <label> Trier par
           <select value={sort} onChange={(event) => setSort(event.target.value)}>
             <option value="recommended">Recommandés</option>
@@ -38,6 +53,11 @@ export default function HotelExplorer() {
           <button className={view === "split" ? "active" : ""} onClick={() => setView("split")}>Liste + carte</button>
           <button className={view === "map" ? "active" : ""} onClick={() => setView("map")}>Carte</button>
         </div>
+      </div>
+
+      <div className="provider-strip" aria-label="Vendeurs d’hôtels comparés">
+        <span>Vendeurs comparés</span>
+        {providers.map((offer) => <div key={offer.provider}><ProviderBadge provider={offer.provider} /><b>{offer.provider}</b><small className={isPartnerConnected(offer.href) ? "connected" : "preview"}>{isPartnerConnected(offer.href) ? "Connecté" : "Aperçu"}</small></div>)}
       </div>
 
       <div className={`results-layout view-${view}`}>
@@ -57,11 +77,11 @@ export default function HotelExplorer() {
                     <details>
                       <summary>Comparer {hotel.offers.length} vendeurs</summary>
                       <div className="provider-list">
-                        {hotel.offers.map((offer) => <a key={offer.provider} href={offer.href}><span>{offer.provider}<small>{offer.label}</small></span><strong>{offer.price} €</strong></a>)}
+                        {hotel.offers.map((offer) => <a key={offer.provider} href={partnerHref(offer.href, search)} target={isPartnerConnected(offer.href) ? "_blank" : undefined} rel={isPartnerConnected(offer.href) ? "sponsored noreferrer" : undefined} onClick={() => clickPartner(offer.provider, hotel.id)}><ProviderBadge provider={offer.provider} /><span>{offer.provider}<small>{offer.label || (isPartnerConnected(offer.href) ? "Offre partenaire" : "Lien à configurer")}</small></span><strong>{offer.price} €</strong></a>)}
                       </div>
                     </details>
                   </div>
-                  <div className="best-price"><small>Meilleur prix</small><strong>{best.price} €</strong><span>soit {Math.round(best.price / 2)} €/nuit</span><a href={best.href}>Voir l’offre</a></div>
+                  <div className="best-price"><small>Meilleur prix</small><strong>{best.price} €</strong><span>soit {Math.round(best.price / 2)} €/nuit</span><a href={partnerHref(best.href, search)} target={isPartnerConnected(best.href) ? "_blank" : undefined} rel={isPartnerConnected(best.href) ? "sponsored noreferrer" : undefined} onClick={() => clickPartner(best.provider, hotel.id)}>Voir chez {best.provider}</a></div>
                 </article>
               );
             })}
