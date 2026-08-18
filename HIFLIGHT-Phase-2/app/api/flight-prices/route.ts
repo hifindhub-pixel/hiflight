@@ -24,6 +24,10 @@ export async function GET(request: NextRequest) {
   url.searchParams.set("one_way", String(oneWay));
   url.searchParams.set("show_to_affiliates", "true");
   url.searchParams.set("limit", "31");
+  // Travelpayouts accepts the token either in the header or as a query
+  // parameter. Sending both keeps the Vercel server request compatible with
+  // both documented authentication paths.
+  url.searchParams.set("token", token);
 
   try {
     const response = await fetch(url, { headers: { "X-Access-Token": token, Accept: "application/json" }, next: { revalidate: 3600 } });
