@@ -31,7 +31,10 @@ export async function GET(request: NextRequest) {
 
   try {
     const response = await fetch(url, { headers: { "X-Access-Token": token, Accept: "application/json" }, next: { revalidate: 3600 } });
-    if (!response.ok) return NextResponse.json({ prices: {}, available: false, message: "Tarifs momentanément indisponibles." }, { status: 502 });
+    if (!response.ok) {
+      const upstream = (await response.json().catch(() => null)) as { error?: string } | null;
+      return NextResponse.json({ prices: {}, available: false, message: "Tarifs momentanément indisponibles.", upstreamStatus: response.status, upstreamError: upstream?.error || undefined }, { status: 502 });
+    }
     const payload = (await response.json()) as { data?: TravelpayoutsPrice[] };
     const prices: Record<string, number> = {};
     for (const offer of payload.data || []) {
