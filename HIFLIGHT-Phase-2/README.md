@@ -22,6 +22,8 @@ Cette séparation évite de casser le moteur actuel et permet à Google d’inde
    - `NEXT_PUBLIC_SITE_URL` = `https://www.hiflight.fr`
    - `NEXT_PUBLIC_SEARCH_URL` = `https://vols.hiflight.fr`
    - `NEXT_PUBLIC_GA_ID` = votre identifiant GA4, ou laissez vide au départ.
+   - `TP_TOKEN` = votre jeton serveur Travelpayouts Data API pour afficher les tarifs indicatifs du calendrier (`TRAVELPAYOUTS_TOKEN` reste accepté comme alias).
+   - `TP_MARKER` = votre identifiant partenaire Travelpayouts, automatiquement rattaché au White Label.
    - `NEXT_PUBLIC_STAY22_AID` = votre identifiant affilié Stay22 pour activer la carte hôtelière réelle.
    - les URL affiliées listées dans `.env.example` = liens profonds provenant de Stay22, Awin, CJ ou Effinity.
 5. Dans Travelpayouts, faites fonctionner le white-label sur `vols.hiflight.fr` avant de déplacer le domaine principal.

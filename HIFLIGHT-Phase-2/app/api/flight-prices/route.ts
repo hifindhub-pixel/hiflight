@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 type TravelpayoutsPrice = { depart_date?: string; value?: number };
 
 export async function GET(request: NextRequest) {
-  const token = process.env.TRAVELPAYOUTS_TOKEN;
+  // TP_TOKEN is the name already configured on Vercel. Keep the former name
+  // as a fallback so existing local environments continue to work.
+  const token = process.env.TP_TOKEN || process.env.TRAVELPAYOUTS_TOKEN;
   if (!token) return NextResponse.json({ prices: {}, available: false, message: "Le calendrier tarifaire doit être activé." }, { status: 503 });
 
   const params = request.nextUrl.searchParams;
