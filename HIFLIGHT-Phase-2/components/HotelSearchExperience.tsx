@@ -15,6 +15,9 @@ type CitySuggestion = {
   longitude?: number;
 };
 
+type DateMode = "arrival" | "departure";
+const weekDays = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+
 const initialSearch: HotelSearch = { destination: "Paris, France", checkin: "", checkout: "", guests: "2" };
 
 export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string }) {
@@ -104,15 +107,6 @@ export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string
     if (event.key === "Escape") setSuggestionsOpen(false);
   }
 
-  function updateCheckin(checkin: string) {
-    setDraft((current) => ({
-      ...current,
-      checkin,
-      checkout: current.checkout && current.checkout <= checkin ? nextDay(checkin) : current.checkout,
-    }));
-    setError("");
-  }
-
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (draft.destination.trim().length < 2) { setError("Sélectionnez une destination."); return; }
@@ -158,20 +152,114 @@ export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string
                     </button>
                   ))}
                   {!suggestionsLoading && !suggestions.length && <span className="hotel-city-status">Aucune ville trouvée. Essayez avec le pays.</span>}
-                  <footer>Données de destinations Travelpayouts</footer>
+                  <footer>Destinations HiFlight dans le monde</footer>
                 </div>
               )}
             </div>
-            <label>Arrivée<input type="date" value={draft.checkin} min={todayIso()} onChange={(event) => updateCheckin(event.target.value)} required /></label>
-            <label>Départ<input type="date" value={draft.checkout} min={draft.checkin ? nextDay(draft.checkin) : todayIso()} onChange={(event) => { setDraft((current) => ({ ...current, checkout: event.target.value })); setError(""); }} required /></label>
+            <HotelDatePicker checkin={draft.checkin} checkout={draft.checkout} onChange={(checkin, checkout) => { setDraft((current) => ({ ...current, checkin, checkout })); setError(""); }} />
             <label>Voyageurs<select value={draft.guests} onChange={(event) => setDraft((current) => ({ ...current, guests: event.target.value }))}><option value="1">1 voyageur</option><option value="2">2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="5">5 voyageurs</option><option value="6">6 voyageurs</option></select></label>
             <button type="submit">Comparer</button>
           </form>
-          <p className={`hero-disclaimer ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "La destination, les dates et les voyageurs actualisent directement les offres Stay22 ci-dessous."}</p>
+          <p className={`hero-disclaimer ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "La destination, les dates et les voyageurs actualisent immédiatement les offres disponibles."}</p>
         </div>
       </section>
       <div id="hotel-results"><HotelExplorer stay22Aid={stay22Aid} search={search} /></div>
     </>
+  );
+}
+
+function HotelDatePicker({ checkin, checkout, onChange }: { checkin: string; checkout: string; onChange: (checkin: string, checkout: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<DateMode>("arrival");
+  const [month, setMonth] = useState(() => startOfMonth(new Date()));
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const nights = checkin && checkout ? Math.round((new Date(`${checkout}T12:00:00`).getTime() - new Date(`${checkin}T12:00:00`).getTime()) / 86400000) : 0;
+
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: MouseEvent) => { if (!wrapRef.current?.contains(event.target as Node)) setOpen(false); };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [open]);
+
+  function show(nextMode: DateMode) {
+    setMode(nextMode);
+    const value = nextMode === "arrival" ? checkin : checkout;
+    if (value) setMonth(startOfMonth(new Date(`${value}T12:00:00`)));
+    setOpen(true);
+  }
+
+  function choose(date: string) {
+    if (mode === "arrival" || !checkin || (checkin && checkout)) {
+      onChange(date, checkout && checkout > date ? checkout : "");
+      setMode("departure");
+      return;
+    }
+    if (date <= checkin) {
+      onChange(date, "");
+      setMode("departure");
+      return;
+    }
+    onChange(checkin, date);
+  }
+
+  return (
+    <div className="hotel-date-picker" ref={wrapRef}>
+      <div className="hotel-date-triggers">
+        <button type="button" className={open && mode === "arrival" ? "active" : ""} onClick={() => show("arrival")}><small>Arrivée</small><strong>{formatHotelDate(checkin, "Choisir")}</strong></button>
+        <span aria-hidden="true">→</span>
+        <button type="button" className={open && mode === "departure" ? "active" : ""} onClick={() => show("departure")}><small>Départ</small><strong>{formatHotelDate(checkout, "Choisir")}</strong></button>
+      </div>
+      {open && (
+        <div className="hotel-calendar" role="dialog" aria-label="Choisir les dates du séjour">
+          <header>
+            <div><strong>Quand souhaitez-vous partir ?</strong><span>Sélectionnez votre arrivée puis votre départ</span></div>
+            <button type="button" aria-label="Fermer le calendrier" onClick={() => setOpen(false)}>×</button>
+          </header>
+          <div className="hotel-calendar-selection">
+            <button type="button" className={mode === "arrival" ? "active" : ""} onClick={() => setMode("arrival")}><small>Arrivée</small><strong>{formatHotelDate(checkin, "Ajouter une date")}</strong></button>
+            <button type="button" className={mode === "departure" ? "active" : ""} onClick={() => setMode("departure")}><small>Départ</small><strong>{formatHotelDate(checkout, "Ajouter une date")}</strong></button>
+          </div>
+          <div className="hotel-calendar-nav">
+            <button type="button" aria-label="Mois précédent" disabled={monthKey(month) <= monthKey(new Date())} onClick={() => setMonth((current) => addMonths(current, -1))}>‹</button>
+            <button type="button" aria-label="Mois suivant" onClick={() => setMonth((current) => addMonths(current, 1))}>›</button>
+          </div>
+          <div className="hotel-calendar-months">
+            <HotelMonth month={month} checkin={checkin} checkout={checkout} onChoose={choose} />
+            <HotelMonth month={addMonths(month, 1)} checkin={checkin} checkout={checkout} onChoose={choose} />
+          </div>
+          <footer>
+            <button type="button" className="hotel-calendar-clear" onClick={() => { onChange("", ""); setMode("arrival"); }}>Effacer</button>
+            <span>{nights ? `${nights} nuit${nights > 1 ? "s" : ""}` : "Sélectionnez vos dates"}</span>
+            <button type="button" className="hotel-calendar-apply" disabled={!checkin || !checkout} onClick={() => setOpen(false)}>Appliquer</button>
+          </footer>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function HotelMonth({ month, checkin, checkout, onChoose }: { month: Date; checkin: string; checkout: string; onChoose: (date: string) => void }) {
+  const first = new Date(month.getFullYear(), month.getMonth(), 1);
+  const offset = (first.getDay() + 6) % 7;
+  const count = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
+  const cells: Array<number | null> = [...Array(offset).fill(null), ...Array.from({ length: count }, (_, index) => index + 1)];
+  while (cells.length % 7) cells.push(null);
+
+  return (
+    <section className="hotel-calendar-month">
+      <h3>{new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(month)}</h3>
+      <div className="hotel-calendar-week">{weekDays.map((day) => <span key={day}>{day}</span>)}</div>
+      <div className="hotel-calendar-days">
+        {cells.map((day, index) => {
+          if (!day) return <span key={`empty-${index}`} />;
+          const date = localIso(new Date(month.getFullYear(), month.getMonth(), day));
+          const selected = date === checkin || date === checkout;
+          const between = Boolean(checkin && checkout && date > checkin && date < checkout);
+          return <button key={date} type="button" disabled={date < todayIso()} className={`${selected ? "selected" : ""} ${between ? "between" : ""}`} onClick={() => onChoose(date)}><span>{day}</span></button>;
+        })}
+      </div>
+    </section>
   );
 }
 
@@ -181,8 +269,17 @@ function todayIso() {
   return new Date(date.getTime() - offset * 60000).toISOString().slice(0, 10);
 }
 
-function nextDay(value: string) {
-  const date = new Date(`${value}T12:00:00`);
-  date.setDate(date.getDate() + 1);
-  return date.toISOString().slice(0, 10);
+function localIso(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function startOfMonth(date: Date) { return new Date(date.getFullYear(), date.getMonth(), 1); }
+function addMonths(date: Date, amount: number) { return new Date(date.getFullYear(), date.getMonth() + amount, 1); }
+function monthKey(date: Date) { return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`; }
+function formatHotelDate(value: string, placeholder: string) {
+  if (!value) return placeholder;
+  return new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short" }).format(new Date(`${value}T12:00:00`));
 }
