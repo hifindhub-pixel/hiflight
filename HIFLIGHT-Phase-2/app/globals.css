@@ -263,6 +263,8 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .car-results-action { display:flex; flex-direction:column; gap:7px; padding:24px; border-radius:18px; background:#f1f5f9; }
 .car-results-action>span { color:#64748b; font-size:11px; line-height:1.5; }
 .car-results-action>a { margin-top:8px; padding:14px 16px; border-radius:11px; color:var(--navy); background:var(--coral); font-size:12px; font-weight:900; text-align:center; }
+.car-alternative-links { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.car-alternative-links a { padding:9px 6px; border:1px solid #d7e0ea; border-radius:9px; color:#344256; background:#fff; font-size:9px; font-weight:850; text-align:center; }
 .car-results-action>small { color:#8290a2; font-size:9px; text-align:center; }
 #hotel-results { scroll-margin-top:16px; }
 .results-shell { width:min(1460px,100%); margin:auto; padding:24px; }
