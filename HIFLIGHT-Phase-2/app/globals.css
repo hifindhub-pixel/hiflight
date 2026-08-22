@@ -179,6 +179,7 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .market-hero h1 { margin:0 0 32px; font-size:clamp(2.8rem,5vw,5.2rem); }
 .market-hero h1 span { color:var(--coral); }
 .market-search { display:grid; grid-template-columns:1.45fr 1fr 1fr 1fr auto; gap:8px; padding:12px; color:var(--ink); background:#fff; border-radius:17px; box-shadow:0 24px 70px rgba(0,0,0,.22); }
+.hotel-search { grid-template-columns:1.45fr 2fr 1fr auto; }
 .market-search label { display:flex; flex-direction:column; gap:4px; color:#64748b; font-size:11px; font-weight:800; }
 .market-search input,.market-search select { height:46px; min-width:0; padding:0 12px; color:var(--ink); background:#f8fafc; border:1px solid var(--line); border-radius:9px; }
 .market-search button { align-self:end; height:46px; padding:0 24px; border:0; border-radius:9px; background:var(--coral); color:var(--navy); font-weight:900; cursor:pointer; }
@@ -198,6 +199,44 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .hotel-suggestion-pin { display:grid; width:32px; height:32px; place-items:center; border-radius:9px; color:#ff5d64; background:#ffe7e8; font-size:17px; }
 .hotel-city-status { display:block; padding:18px 10px; color:#64748b; font-size:11px; font-weight:650; text-align:center; }
 .hotel-city-suggestions footer { margin:6px 6px 0; padding:8px 5px 2px; border-top:1px solid #edf1f5; color:#94a3b8; font-size:8px; font-weight:650; }
+.hotel-date-picker { position:relative; min-width:0; align-self:end; }
+.hotel-date-triggers { display:grid; height:46px; grid-template-columns:1fr 18px 1fr; align-items:center; overflow:hidden; border:1px solid var(--line); border-radius:9px; background:#f8fafc; }
+.hotel-date-triggers>span { color:#94a3b8; font-size:12px; text-align:center; }
+.hotel-date-triggers>button { display:flex; height:44px; min-width:0; flex-direction:column; align-items:flex-start; justify-content:center; gap:1px; padding:4px 10px; border:0; border-radius:8px; color:var(--ink); background:transparent; text-align:left; }
+.hotel-date-triggers>button.active { background:#fff0f0; box-shadow:inset 0 0 0 2px #ff7b7f; }
+.hotel-date-triggers small { color:#64748b; font-size:8px; font-weight:900; letter-spacing:.07em; text-transform:uppercase; }
+.hotel-date-triggers strong { max-width:100%; overflow:hidden; font-size:12px; text-overflow:ellipsis; white-space:nowrap; }
+.hotel-calendar { position:absolute; z-index:90; top:57px; left:50%; width:min(800px,calc(100vw - 40px)); padding:18px; border:1px solid #d9e1ea; border-radius:20px; color:var(--ink); background:#fff; box-shadow:0 30px 90px rgba(3,12,29,.35); transform:translateX(-50%); }
+.hotel-calendar>header { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; padding:2px 2px 14px; }
+.hotel-calendar>header>div { display:flex; flex-direction:column; }
+.hotel-calendar>header strong { font:800 18px Outfit,sans-serif; }
+.hotel-calendar>header span { color:#64748b; font-size:10px; font-weight:600; }
+.hotel-calendar>header>button { width:32px; height:32px; padding:0; border:0; border-radius:50%; color:#526071; background:#f1f5f9; font-size:21px; line-height:1; }
+.hotel-calendar-selection { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; padding:6px; border-radius:13px; background:#f1f5f9; }
+.hotel-calendar-selection>button { display:flex; height:50px; flex-direction:column; align-items:flex-start; justify-content:center; gap:2px; padding:7px 12px; border:1px solid transparent; border-radius:9px; color:var(--ink); background:transparent; }
+.hotel-calendar-selection>button.active { border-color:#ff9b9e; background:#fff; box-shadow:0 4px 14px rgba(15,23,42,.08); }
+.hotel-calendar-selection small { color:#718096; font-size:8px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.hotel-calendar-selection strong { font-size:12px; }
+.hotel-calendar-nav { position:absolute; z-index:2; top:132px; right:18px; left:18px; display:flex; justify-content:space-between; pointer-events:none; }
+.hotel-calendar-nav>button { width:34px; height:34px; padding:0; border:1px solid #dce3ea; border-radius:50%; color:var(--navy); background:#fff; font-size:22px; line-height:1; box-shadow:0 3px 10px rgba(15,23,42,.08); pointer-events:auto; }
+.hotel-calendar-nav>button:disabled { opacity:.3; cursor:not-allowed; }
+.hotel-calendar-months { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.hotel-calendar-month { min-width:0; padding:0 5px; }
+.hotel-calendar-month h3 { margin:6px 0 14px; text-align:center; font:800 14px Outfit,sans-serif; text-transform:capitalize; }
+.hotel-calendar-week,.hotel-calendar-days { display:grid; grid-template-columns:repeat(7,1fr); }
+.hotel-calendar-week span { padding:4px 0 8px; color:#8995a5; font-size:8px; font-weight:900; text-align:center; text-transform:uppercase; }
+.hotel-calendar-days>button,.hotel-calendar-days>span { display:grid; width:100%; height:41px; place-items:center; padding:0; border:0; border-radius:0; color:var(--ink); background:#fff; font-size:11px; font-weight:750; }
+.hotel-calendar-days>button:hover:not(:disabled) { border-radius:50%; background:#ffe6e7; }
+.hotel-calendar-days>button.between { background:#fff0f0; }
+.hotel-calendar-days>button.selected { background:#fff0f0; }
+.hotel-calendar-days>button.selected span { display:grid; width:36px; height:36px; place-items:center; border-radius:50%; color:var(--navy); background:var(--coral); box-shadow:0 4px 12px rgba(255,107,107,.35); }
+.hotel-calendar-days>button:disabled { color:#c2cad4; background:#fff; cursor:not-allowed; }
+.hotel-calendar>footer { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; margin-top:14px; padding:14px 2px 0; border-top:1px solid #e7ecf1; }
+.hotel-calendar>footer>span { color:#526071; font-size:11px; font-weight:800; text-align:center; }
+.hotel-calendar>footer>button { height:38px; padding:0 15px; border-radius:9px; font-size:10px; font-weight:900; }
+.hotel-calendar-clear { justify-self:start; color:#526071!important; background:#f1f5f9!important; }
+.hotel-calendar-apply { justify-self:end; color:var(--navy)!important; background:var(--coral)!important; }
+.hotel-calendar-apply:disabled { opacity:.45; cursor:not-allowed; }
 .hero-disclaimer { margin:14px 4px 0; color:#b9c6d8; font-size:11px; }
 .hero-disclaimer.error { color:#ffb6b6; font-weight:800; }
 #hotel-results { scroll-margin-top:16px; }
@@ -216,7 +255,7 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .provider-strip small.preview { color:#7b5d1d; background:#fff3cf; }
 .provider-strip em { flex:0 0 auto; margin-left:auto; padding:0 7px; color:#64748b; font-size:10px; font-style:normal; }
 .provider-logo { display:grid!important; flex:0 0 27px; width:27px; height:27px; place-items:center; border-radius:8px; color:#fff!important; font:900 12px/1 Inter,sans-serif!important; box-shadow:inset 0 0 0 1px rgba(255,255,255,.2); }
-.provider-logo-booking { background:#003b95; }.provider-logo-expedia { background:#f8c923; color:#132968!important; }.provider-logo-hotels { background:#d71920; }.provider-logo-trip { background:#287dfa; }.provider-logo-rentalcars { background:#0b7b56; }.provider-logo-discovercars { background:#ff6b35; }.provider-logo-vipcars { background:#123b62; }.provider-logo-flixbus { background:#73d700; color:#173400!important; }.provider-logo-budgetair { background:#e93b36; }.provider-logo-default { background:#64748b; }
+.provider-logo-booking { background:#003b95; }.provider-logo-expedia { background:#f8c923; color:#132968!important; }.provider-logo-hotels { background:#d71920; }.provider-logo-trip { background:#287dfa; }.provider-logo-rentalcars { background:#0b7b56; }.provider-logo-discovercars { background:#ff6b35; }.provider-logo-vipcars { background:#123b62; }.provider-logo-flixbus { background:#73d700; color:#173400!important; }.provider-logo-default { background:#64748b; }
 .view-switch { display:flex; padding:4px; border:1px solid var(--line); border-radius:10px; background:#fff; }
 .view-switch button { padding:7px 11px; border:0; border-radius:7px; color:#526071; background:transparent; font-size:12px; font-weight:800; cursor:pointer; }
 .view-switch button.active { color:#fff; background:var(--navy); }
@@ -287,6 +326,8 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .coming-section p { color:var(--muted); font-size:18px; }
 @media (max-width:1120px) { .results-layout.view-split{grid-template-columns:1fr}.map-panel{position:relative;top:auto;height:600px;order:-1}.service-grid{grid-template-columns:1fr 1fr}.service-grid a:nth-child(2){border-right:0}.service-grid a:nth-child(-n+2){border-bottom:1px solid var(--line)} }
 @media (max-width:980px) { nav>a:not(.nav-cta){display:none}.search-fields{grid-template-columns:1fr 36px 1fr}.date-field-wrap{grid-column:1/3}.flight-search-v2 .search-button{grid-column:3}.form-note{grid-column:1/-1}.editorial{grid-template-columns:1fr 1fr}.editorial>h2{grid-column:1/-1}.airport-links{grid-template-columns:1fr}.intro{grid-template-columns:1fr;gap:20px}.hero h1{font-size:clamp(3.1rem,10vw,5.2rem)}.market-search{grid-template-columns:1fr 1fr}.market-search button{grid-column:2}.journey-cards{grid-template-columns:1fr}.result-card{grid-template-columns:170px 1fr 130px} }
+@media (max-width:980px) { .hotel-date-picker{grid-column:1/-1}.hotel-date-picker button{grid-column:auto} }
 @media (max-width:650px) { .nav-wrap{width:calc(100% - 28px);height:78px}.brand{font-size:26px}.nav-cta{padding:8px 12px}.hero,.hero-inner{min-height:1040px}.hero-inner{width:calc(100% - 28px);padding-top:118px}.hero-copy p{font-size:15px}.service-tabs{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:9px;margin-bottom:22px}.service-tabs a{min-height:48px;padding:0 11px;font-size:12px}.service-tab-icon{flex-basis:21px;width:21px;height:21px}.service-tab-icon-cars{flex-basis:24px;width:24px}.service-tab-icon-ground{flex-basis:23px;width:23px}.search-form,.search-form.compact{margin-top:30px;padding:10px}.search-options{overflow:auto}.search-options select{flex:0 0 auto}.search-fields{display:grid;grid-template-columns:1fr;gap:7px}.search-fields>.city-field,.search-fields>.date-field-wrap,.flight-search-v2 .search-button{grid-column:auto}.search-fields>.swap{position:absolute;z-index:15;top:154px;right:20px;display:grid;transform:rotate(90deg)}.date-buttons{min-height:62px}.city-suggestions{position:fixed;top:auto;right:14px;bottom:14px;left:14px;width:auto;max-height:70vh;overflow:auto}.fare-calendar{position:fixed;z-index:60;top:auto;right:10px;bottom:10px;left:10px;width:auto;max-height:82vh;overflow:auto;padding:13px}.calendar-grid{grid-template-columns:1fr}.calendar-grid .calendar-month:nth-child(2){display:none}.calendar-nav{top:70px}.direct-toggle{margin-top:11px}.trust-line{gap:9px;flex-wrap:wrap}.section{width:calc(100% - 32px);padding:72px 0}.service-grid{grid-template-columns:1fr}.service-grid a{min-height:230px;border-right:0!important;border-bottom:1px solid var(--line)!important}.service-grid a:last-child{border-bottom:0!important}.service-grid h3{margin-top:28px}.route-list a{grid-template-columns:46px 24px 46px}.route-list strong{grid-column:1/-1}.editorial{grid-template-columns:1fr}.airport-links a{min-height:0}.cookie{left:10px;right:10px;bottom:10px;width:calc(100% - 20px);padding:12px;gap:9px;flex-direction:column;align-items:stretch;border-radius:12px}.cookie strong{font-size:14px}.cookie p{font-size:11px;line-height:1.35}.cookie-actions{display:grid;grid-template-columns:1fr 1fr}.cookie .button{height:38px;padding:0 10px;font-size:12px}.page-hero{padding-top:130px}.footer-grid{grid-template-columns:1fr;gap:35px}.market-hero{min-height:680px;padding:105px 14px 28px;background-position:63% center}.market-hero.hotels{background-position:68% center}.market-hero::before{background:linear-gradient(180deg,rgba(3,12,29,.45),rgba(3,12,29,.88) 58%,rgba(3,12,29,.98))}.market-hero h1{font-size:2.6rem}.market-search{grid-template-columns:1fr}.market-search button{grid-column:auto}.results-shell{padding:12px}.results-toolbar{align-items:flex-start;flex-direction:column;gap:11px}.provider-strip{margin-bottom:12px}.view-switch{width:100%;overflow:auto}.view-switch button{flex:1;white-space:nowrap}.result-card{grid-template-columns:1fr;min-height:0}.result-visual{min-height:140px}.hotel-visual::after{transform:none;right:10px;bottom:3px}.car-visual{min-height:190px}.best-price{align-items:flex-start;border-top:1px solid var(--line);border-left:0;text-align:left}.best-price a{width:100%;text-align:center}.map-panel{height:470px;min-height:470px}.journey-cards{margin-top:35px} }
 @media (max-width:650px) { .hotel-live-shell .provider-strip em{display:none}.hotel-live-frame,.hotel-live-frame.view-list{height:640px;border-radius:14px}.hotel-live-footer{align-items:stretch;flex-direction:column}.hotel-live-footer a{text-align:center} }
 @media (max-width:650px) { .hotel-city-suggestions{position:fixed;top:auto;right:10px;bottom:10px;left:10px;width:auto;max-height:66vh;border-radius:17px}.hotel-city-suggestions button{min-height:60px}.hotel-search{overflow:visible} }
+@media (max-width:650px) { .hotel-date-picker{grid-column:auto}.hotel-calendar{position:fixed;top:auto;right:10px;bottom:10px;left:10px;width:auto;max-height:86vh;overflow:auto;padding:15px;border-radius:18px;transform:none}.hotel-calendar-months{grid-template-columns:1fr}.hotel-calendar-month:nth-child(2){display:none}.hotel-calendar-nav{top:129px;right:15px;left:15px}.hotel-calendar>footer{position:sticky;bottom:-15px;margin-right:-15px;margin-left:-15px;padding:12px 15px;background:#fff}.hotel-calendar-selection{margin-bottom:10px} }
