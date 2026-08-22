@@ -35,7 +35,7 @@ export default function CookieBanner() {
     <aside className="cookie" aria-label="Choix des cookies">
       <div>
         <strong>Votre confidentialité compte</strong>
-        <p>Nous utilisons des traceurs de mesure uniquement avec votre accord. Le comparateur reste accessible si vous refusez.</p>
+        <p>Nous utilisons des traceurs de mesure et d’affiliation uniquement avec votre accord. Le comparateur reste accessible si vous refusez.</p>
       </div>
       <div className="cookie-actions">
         <button className="button secondary" onClick={() => choose(false)}>Tout refuser</button>
