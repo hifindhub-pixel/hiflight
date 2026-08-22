@@ -185,5 +185,3 @@ export const vehicleResults: VehicleResult[] = [
     ],
   },
 ];
-
-export const stay22Aid = process.env.NEXT_PUBLIC_STAY22_AID || "";
