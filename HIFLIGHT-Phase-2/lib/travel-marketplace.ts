@@ -44,28 +44,10 @@ export type HotelResult = {
   offers: ProviderOffer[];
 };
 
-export type VehicleResult = {
-  id: string;
-  name: string;
-  category: string;
-  seats: number;
-  bags: number;
-  transmission: "Automatique" | "Manuelle";
-  pickup: string;
-  badge: string;
-  x: number;
-  y: number;
-  offers: ProviderOffer[];
-};
-
 const hotelLinks = {
   // CJ Deep Link Automation converts this dynamic Booking search URL after consent.
   booking: process.env.NEXT_PUBLIC_BOOKING_AFFILIATE_URL || "https://www.booking.com/searchresults.fr.html?ss={destination}&checkin={checkin}&checkout={checkout}&group_adults={guests}&no_rooms=1&group_children=0",
   trip: process.env.NEXT_PUBLIC_TRIP_AFFILIATE_URL || "https://track.effiliation.com/servlet/effi.redir?id_compteur=23298697&url=https%3A%2F%2Ffr.trip.com%2F%3Flocale%3Dfr-fr",
-};
-
-const carLinks = {
-  vipcars: process.env.NEXT_PUBLIC_VIPCARS_AFFILIATE_URL || "https://www.awin1.com/cread.php?awinmid=58019&awinaffid=2855063",
 };
 
 export const flixBusLink = process.env.NEXT_PUBLIC_FLIXBUS_AFFILIATE_URL || "https://www.awin1.com/cread.php?awinmid=110874&awinaffid=2855063";
@@ -133,54 +115,6 @@ export const hotelResults: HotelResult[] = [
     offers: [
       { provider: "Trip.com", price: 246, label: "Meilleur prix", href: hotelLinks.trip },
       { provider: "Booking.com", price: 255, href: hotelLinks.booking },
-    ],
-  },
-];
-
-export const vehicleResults: VehicleResult[] = [
-  {
-    id: "citadine-auto",
-    name: "Peugeot 208 ou similaire",
-    category: "Citadine",
-    seats: 5,
-    bags: 2,
-    transmission: "Automatique",
-    pickup: "Aéroport Paris-Orly",
-    badge: "Le plus économique",
-    x: 63,
-    y: 68,
-    offers: [
-      { provider: "VIPCars", price: 34, label: "Kilométrage selon l’offre", href: carLinks.vipcars },
-    ],
-  },
-  {
-    id: "compacte",
-    name: "Renault Captur ou similaire",
-    category: "SUV compact",
-    seats: 5,
-    bags: 3,
-    transmission: "Manuelle",
-    pickup: "Paris Gare de Lyon",
-    badge: "Choix populaire",
-    x: 57,
-    y: 43,
-    offers: [
-      { provider: "VIPCars", price: 46, label: "Offre partenaire", href: carLinks.vipcars },
-    ],
-  },
-  {
-    id: "familiale",
-    name: "Peugeot 3008 ou similaire",
-    category: "SUV familial",
-    seats: 5,
-    bags: 4,
-    transmission: "Automatique",
-    pickup: "Aéroport Paris-CDG",
-    badge: "Idéal en famille",
-    x: 76,
-    y: 20,
-    offers: [
-      { provider: "VIPCars", price: 61, label: "Annulation selon l’offre", href: carLinks.vipcars },
     ],
   },
 ];
