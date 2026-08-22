@@ -3,6 +3,7 @@ import HotelExplorer from "@/components/HotelExplorer";
 import ServiceTabs from "@/components/ServiceTabs";
 
 export const metadata: Metadata = { title: "Comparer les hôtels", description: "Comparez les prix des hôtels en liste ou directement sur la carte HiFlight." };
+export const dynamic = "force-dynamic";
 
 export default function HotelsPage() {
   const stay22Aid = process.env.STAY22_AID || process.env.NEXT_PUBLIC_STAY22_AID || "";
