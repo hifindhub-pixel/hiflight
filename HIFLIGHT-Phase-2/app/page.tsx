@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
+import ServiceTabs from "@/components/ServiceTabs";
 import { airports, flightRoutes } from "@/lib/content";
 
 export default function Home() {
@@ -7,11 +8,24 @@ export default function Home() {
     <main>
       <section className="hero">
         <div className="hero-inner">
+          <ServiceTabs active="flights" />
           <div className="hero-copy"><h1>Comparez les vols.<br /><span>Voyagez moins cher.</span></h1><p>Des centaines de compagnies et agences comparées gratuitement, sans inscription.</p></div>
           <SearchForm />
           <div className="trust-line"><span>Gratuit</span><span>Sans inscription</span><span>Réservation chez le partenaire</span></div>
         </div>
       </section>
+
+      <section className="section services-section" id="services">
+        <div className="section-head"><p className="eyebrow">Tout le voyage, au même endroit</p><h2>Un seul départ.<br />Quatre façons de voyager.</h2><p>HiFlight vous aide à comparer chaque étape, puis vous redirige vers le partenaire choisi pour finaliser la réservation.</p></div>
+        <div className="service-grid">
+          <Link href="/#recherche"><span>01</span><h3>Vols</h3><p>Comparez les compagnies et agences sur notre moteur dédié.</p><strong>Rechercher un vol →</strong></Link>
+          <Link href="/hotels"><span>02</span><h3>Hôtels</h3><p>Comparez les établissements, les vendeurs et les prix sur la carte.</p><strong>Voir les hôtels →</strong></Link>
+          <Link href="/voitures"><span>03</span><h3>Voitures</h3><p>Comparez les catégories, les loueurs et les points de retrait.</p><strong>Louer une voiture →</strong></Link>
+          <Link href="/trains-bus"><span>04</span><h3>Trains & bus</h3><p>Préparez vos trajets terrestres et comparez les alternatives.</p><strong>Explorer les trajets →</strong></Link>
+        </div>
+      </section>
+
+      <section className="journey-section"><div className="section"><p className="eyebrow">L’expérience qui continue après la réservation</p><h2>Explorez. Voyagez.<br /><span>Collectionnez le monde.</span></h2><div className="journey-cards"><div><b>Globe</b><p>Visualisez vos pays visités et ceux que vous voulez découvrir.</p></div><div><b>Passeport</b><p>Conservez vos tampons, dates, dessins et souvenirs de voyage.</p></div><div><b>Statistiques</b><p>Suivez le nombre de pays, continents et kilomètres parcourus.</p></div></div></div></section>
 
       <section className="section intro"><div><h2>Le prix du billet ne raconte pas toute l’histoire.</h2></div><p>HIFLIGHT vous aide à comparer les offres puis à vérifier les éléments qui changent réellement le coût du voyage : bagages, escales, aéroport de départ et conditions du partenaire.</p></section>
 
