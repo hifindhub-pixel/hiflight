@@ -41,8 +41,6 @@ const initialSearch: CarSearch = {
   driverAge: "30",
 };
 
-const affiliateUrl = process.env.NEXT_PUBLIC_VIPCARS_AFFILIATE_URL || "https://www.awin1.com/cread.php?awinmid=58019&awinaffid=2855063";
-
 export default function CarSearchExperience() {
   const [draft, setDraft] = useState<CarSearch>(initialSearch);
   const [search, setSearch] = useState<CarSearch>(initialSearch);
@@ -86,9 +84,8 @@ export default function CarSearchExperience() {
     window.setTimeout(() => document.getElementById("car-results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   }
 
-  const clickref = `hf-car-${search.pickupDate.replaceAll("-", "")}-${search.returnDate.replaceAll("-", "")}`.slice(0, 50);
-  const outbound = new URL(affiliateUrl);
-  if (outbound.hostname.endsWith("awin1.com")) outbound.searchParams.set("clickref", clickref);
+  const affiliateSearch = encodeURIComponent(`${search.pickup}|${search.dropoff}|${search.pickupDate}|${search.returnDate}`);
+  const outbound = (offer: "global" | "local" | "bike") => `/go/voitures?offre=${offer}&recherche=${affiliateSearch}`;
 
   return (
     <>
@@ -131,7 +128,8 @@ export default function CarSearchExperience() {
           <div className="car-results-action">
             <strong>Comparez avant de réserver</strong>
             <span>Prix, kilométrage, assurance et politique carburant.</span>
-            <a href={searched ? outbound.toString() : "#car-pickup"} target={searched ? "_blank" : undefined} rel={searched ? "sponsored noreferrer" : undefined} onClick={() => searched && track("partner_click", { category: "car", pickup: search.pickup, pickup_date: search.pickupDate })}>{searched ? "Voir les voitures disponibles" : "Commencer la recherche"}</a>
+            <a href={searched ? outbound("global") : "#car-pickup"} target={searched ? "_blank" : undefined} rel={searched ? "sponsored noreferrer" : undefined} onClick={() => searched && track("partner_click", { category: "car", offer_type: "global", pickup: search.pickup, pickup_date: search.pickupDate })}>{searched ? "Voir les voitures disponibles" : "Commencer la recherche"}</a>
+            {searched && <div className="car-alternative-links"><a href={outbound("local")} target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "local", pickup: search.pickup })}>Agences locales</a><a href={outbound("bike")} target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "bike", pickup: search.pickup })}>Scooters et motos</a></div>}
             <small>Vous accéderez à l’inventaire de nos partenaires.</small>
           </div>
         </div>
