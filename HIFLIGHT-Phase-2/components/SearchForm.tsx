@@ -3,7 +3,6 @@
 import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import { airportCities, AirportCity, findAirportCity } from "@/lib/airports";
 import { searchUrl } from "@/lib/content";
-import { budgetAirLink, partnerHref } from "@/lib/travel-marketplace";
 import { track } from "./Analytics";
 
 type Props = { origin?: string; destination?: string; originCode?: string; destinationCode?: string; compact?: boolean };
@@ -220,7 +219,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
         <button className="search-button" type="submit"><span>Rechercher</span><b>→</b></button>
       </div>
       <label className="direct-toggle"><input type="checkbox" checked={direct} onChange={(event) => setDirect(event.target.checked)} /><span /> Vols directs uniquement</label>
-      <p className={`form-note ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || <>Vous poursuivrez sur le moteur HiFlight pour comparer les offres disponibles. <a className="inline-partner-link" href={partnerHref(budgetAirLink, { clickref: "hiflight_flights" })} target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { provider: "BudgetAir", category: "flight" })}>Voir aussi BudgetAir ↗</a></>}</p>
+      <p className={`form-note ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "HiFlight recherche et compare les offres disponibles selon vos critères."}</p>
     </form>
   );
 }
