@@ -1,17 +1,23 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { hotelResults, isPartnerConnected, partnerHref, stay22Aid } from "@/lib/travel-marketplace";
 import { track } from "./Analytics";
 import ProviderBadge from "./ProviderBadge";
 
 type View = "split" | "list" | "map";
 
-export default function HotelExplorer() {
+type HotelSearch = {
+  destination: string;
+  checkin: string;
+  checkout: string;
+  guests: string;
+};
+
+const providers = ["Booking.com", "Expedia", "Hotels.com", "Vrbo"];
+
+export default function HotelExplorer({ stay22Aid }: { stay22Aid: string }) {
   const [view, setView] = useState<View>("split");
-  const [sort, setSort] = useState("recommended");
-  const [selected, setSelected] = useState(hotelResults[0].id);
-  const [search, setSearch] = useState({ destination: "Paris", checkin: "", checkout: "", guests: "2" });
+  const [search, setSearch] = useState<HotelSearch>({ destination: "Paris", checkin: "", checkout: "", guests: "2" });
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -23,31 +29,55 @@ export default function HotelExplorer() {
     });
   }, []);
 
-  const results = useMemo(() => {
-    const copy = [...hotelResults];
-    if (sort === "price") copy.sort((a, b) => a.offers[0].price - b.offers[0].price);
-    if (sort === "rating") copy.sort((a, b) => b.rating - a.rating);
-    return copy;
-  }, [sort]);
+  const stay22Url = useMemo(() => {
+    if (!stay22Aid) return "";
+    const params = new URLSearchParams({
+      aid: stay22Aid,
+      address: search.destination,
+      adults: search.guests,
+      rooms: "1",
+      campaign: "hiflight_hotels_results",
+      currency: "EUR",
+      supportedcurrencies: "EUR",
+      supportedlang: "fr",
+      unitsystem: "metric",
+      maincolor: "ff6b6b",
+      hotelscolor: "ff6b6b",
+      hotelsfontcolor: "07152f",
+      loadingbarcolor: "ff6b6b",
+      priceper: "total",
+      showhotels: "true",
+      invmode: "accommodation",
+      listviewexpand: view === "split" ? "true" : "false",
+      viewmode: view === "list" ? "listview" : view === "map" ? "map" : "all",
+    });
+    if (search.checkin) params.set("checkin", search.checkin);
+    if (search.checkout) params.set("checkout", search.checkout);
+    return `https://www.stay22.com/embed/gm?${params.toString()}`;
+  }, [search, stay22Aid, view]);
 
-  const stay22Url = stay22Aid
-    ? `https://www.stay22.com/embed/gm?aid=${encodeURIComponent(stay22Aid)}&address=${encodeURIComponent(search.destination)}`
-    : "";
+  const allOffersUrl = useMemo(() => {
+    if (!stay22Aid) return "";
+    const params = new URLSearchParams({
+      aid: stay22Aid,
+      address: search.destination,
+      adults: search.guests,
+      campaign: "hiflight_hotels_searchbar",
+    });
+    if (search.checkin) params.set("checkin", search.checkin);
+    if (search.checkout) params.set("checkout", search.checkout);
+    return `https://www.stay22.com/allez/searchbar?${params.toString()}`;
+  }, [search, stay22Aid]);
 
-  const providers = Array.from(new Map(hotelResults.flatMap((hotel) => hotel.offers).map((offer) => [offer.provider, offer])).values());
-  const clickPartner = (provider: string, hotelId: string) => track("partner_click", { provider, category: "hotel", result_id: hotelId, destination: search.destination });
+  const hasDates = Boolean(search.checkin && search.checkout);
 
   return (
-    <div className="results-shell">
-      <div className="results-toolbar">
-        <div><strong>{results.length} établissements en aperçu à {search.destination}</strong><span>Tarifs de démonstration · {search.guests} voyageur{search.guests === "1" ? "" : "s"}</span></div>
-        <label> Trier par
-          <select value={sort} onChange={(event) => setSort(event.target.value)}>
-            <option value="recommended">Recommandés</option>
-            <option value="price">Prix croissant</option>
-            <option value="rating">Mieux notés</option>
-          </select>
-        </label>
+    <div className="results-shell hotel-live-shell">
+      <div className="results-toolbar hotel-live-toolbar">
+        <div>
+          <strong>Hébergements disponibles à {search.destination}</strong>
+          <span>{hasDates ? `Prix du ${formatDate(search.checkin)} au ${formatDate(search.checkout)} · ${search.guests} voyageur${search.guests === "1" ? "" : "s"}` : "Ajoutez vos dates pour afficher les prix et disponibilités en direct."}</span>
+        </div>
         <div className="view-switch" aria-label="Mode d’affichage">
           <button className={view === "list" ? "active" : ""} onClick={() => setView("list")}>Liste</button>
           <button className={view === "split" ? "active" : ""} onClick={() => setView("split")}>Liste + carte</button>
@@ -55,56 +85,48 @@ export default function HotelExplorer() {
         </div>
       </div>
 
-      <div className="provider-strip" aria-label="Vendeurs d’hôtels comparés">
-        <span>Vendeurs comparés</span>
-        {providers.map((offer) => <div key={offer.provider}><ProviderBadge provider={offer.provider} /><b>{offer.provider}</b><small className={isPartnerConnected(offer.href) ? "connected" : "preview"}>{isPartnerConnected(offer.href) ? "Connecté" : "Aperçu"}</small></div>)}
-      </div>
-
-      <div className={`results-layout view-${view}`}>
-        {view !== "map" && (
-          <div className="result-list">
-            {results.map((hotel) => {
-              const best = [...hotel.offers].sort((a, b) => a.price - b.price)[0];
-              return (
-                <article key={hotel.id} className={`result-card ${selected === hotel.id ? "selected" : ""}`} onMouseEnter={() => setSelected(hotel.id)}>
-                  <div className="result-visual hotel-visual"><span>{hotel.category} étoiles</span></div>
-                  <div className="result-main">
-                    <p className="result-location">{hotel.area}</p>
-                    <h2>{hotel.name}</h2>
-                    <div className="rating-line"><b>{hotel.rating}</b><span>Excellent · {hotel.reviews.toLocaleString("fr-FR")} avis</span></div>
-                    <p>{hotel.description}</p>
-                    <div className="perk-line">{hotel.perks.map((perk) => <span key={perk}>{perk}</span>)}</div>
-                    <details>
-                      <summary>Comparer {hotel.offers.length} vendeurs</summary>
-                      <div className="provider-list">
-                        {hotel.offers.map((offer) => <a key={offer.provider} href={partnerHref(offer.href, search)} target={isPartnerConnected(offer.href) ? "_blank" : undefined} rel={isPartnerConnected(offer.href) ? "sponsored noreferrer" : undefined} onClick={() => clickPartner(offer.provider, hotel.id)}><ProviderBadge provider={offer.provider} /><span>{offer.provider}<small>{offer.label || (isPartnerConnected(offer.href) ? "Offre partenaire" : "Lien à configurer")}</small></span><strong>{offer.price} €</strong></a>)}
-                      </div>
-                    </details>
-                  </div>
-                  <div className="best-price"><small>Meilleur prix</small><strong>{best.price} €</strong><span>soit {Math.round(best.price / 2)} €/nuit</span><a href={partnerHref(best.href, search)} target={isPartnerConnected(best.href) ? "_blank" : undefined} rel={isPartnerConnected(best.href) ? "sponsored noreferrer" : undefined} onClick={() => clickPartner(best.provider, hotel.id)}>Voir chez {best.provider}</a></div>
-                </article>
-              );
-            })}
+      <div className="provider-strip" aria-label="Vendeurs d’hôtels accessibles">
+        <span>Offres accessibles</span>
+        {providers.map((provider) => (
+          <div key={provider}>
+            <ProviderBadge provider={provider} />
+            <b>{provider}</b>
+            <small className="connected">Live</small>
           </div>
-        )}
-
-        {view !== "list" && (
-          <aside className="map-panel" aria-label="Carte des hôtels">
-            {stay22Url ? (
-              <iframe title="Carte des hôtels" src={stay22Url} loading="lazy" />
-            ) : (
-              <div className="prototype-map">
-                <div className="map-water" /><div className="map-road road-one" /><div className="map-road road-two" />
-                {results.map((hotel) => {
-                  const price = Math.min(...hotel.offers.map((offer) => offer.price));
-                  return <button key={hotel.id} className={`price-marker ${selected === hotel.id ? "active" : ""}`} style={{ left: `${hotel.x}%`, top: `${hotel.y}%` }} onClick={() => setSelected(hotel.id)}>{price} €</button>;
-                })}
-                <div className="map-brand"><strong>HiFlight Map</strong><span>Ajoutez l’identifiant Stay22 pour afficher les offres en direct.</span></div>
-              </div>
-            )}
-          </aside>
-        )}
+        ))}
+        <em>Comparaison et redirection sécurisée par Stay22</em>
       </div>
+
+      {!hasDates && (
+        <div className="hotel-live-notice">
+          <span aria-hidden="true">i</span>
+          <p><strong>Les prix varient selon les dates.</strong> Utilisez la recherche ci-dessus pour obtenir des tarifs correspondant exactement à votre séjour.</p>
+        </div>
+      )}
+
+      {stay22Url ? (
+        <section className={`hotel-live-frame view-${view}`} aria-label="Résultats d’hôtels Stay22">
+          <iframe key={stay22Url} title={`Hôtels disponibles à ${search.destination}`} src={stay22Url} loading="lazy" allow="geolocation" />
+        </section>
+      ) : (
+        <section className="hotel-live-missing">
+          <strong>Connexion Stay22 en attente</strong>
+          <p>L’identifiant affilié doit être disponible dans l’environnement de ce déploiement.</p>
+        </section>
+      )}
+
+      {allOffersUrl && (
+        <div className="hotel-live-footer">
+          <div><strong>Vous préférez poursuivre chez un vendeur ?</strong><span>Stay22 sélectionne la page partenaire la plus pertinente pour votre recherche.</span></div>
+          <a href={allOffersUrl} target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { provider: "Stay22", category: "hotel", destination: search.destination })}>Voir toutes les offres</a>
+        </div>
+      )}
     </div>
   );
+}
+
+function formatDate(value: string) {
+  const [year, month, day] = value.split("-").map(Number);
+  if (!year || !month || !day) return value;
+  return new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "short" }).format(new Date(year, month - 1, day));
 }
