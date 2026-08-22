@@ -1,39 +1,29 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { track } from "./Analytics";
 import ProviderBadge from "./ProviderBadge";
 
 type View = "split" | "list" | "map";
 
-type HotelSearch = {
+export type HotelSearch = {
   destination: string;
   checkin: string;
   checkout: string;
   guests: string;
+  latitude?: number;
+  longitude?: number;
 };
 
 const providers = ["Booking.com", "Expedia", "Hotels.com", "Vrbo"];
 
-export default function HotelExplorer({ stay22Aid }: { stay22Aid: string }) {
+export default function HotelExplorer({ stay22Aid, search }: { stay22Aid: string; search: HotelSearch }) {
   const [view, setView] = useState<View>("split");
-  const [search, setSearch] = useState<HotelSearch>({ destination: "Paris", checkin: "", checkout: "", guests: "2" });
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setSearch({
-      destination: params.get("destination") || "Paris",
-      checkin: params.get("checkin") || "",
-      checkout: params.get("checkout") || "",
-      guests: params.get("guests") || "2",
-    });
-  }, []);
 
   const stay22Url = useMemo(() => {
     if (!stay22Aid) return "";
     const params = new URLSearchParams({
       aid: stay22Aid,
-      address: search.destination,
       adults: search.guests,
       rooms: "1",
       campaign: "hiflight_hotels_results",
@@ -51,6 +41,12 @@ export default function HotelExplorer({ stay22Aid }: { stay22Aid: string }) {
       listviewexpand: view === "split" ? "true" : "false",
       viewmode: view === "list" ? "listview" : view === "map" ? "map" : "all",
     });
+    if (search.latitude !== undefined && search.longitude !== undefined) {
+      params.set("lat", String(search.latitude));
+      params.set("lng", String(search.longitude));
+    } else {
+      params.set("address", search.destination);
+    }
     if (search.checkin) params.set("checkin", search.checkin);
     if (search.checkout) params.set("checkout", search.checkout);
     return `https://www.stay22.com/embed/gm?${params.toString()}`;
