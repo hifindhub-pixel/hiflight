@@ -7,7 +7,6 @@ const providerStyle: Record<string, { short: string; tone: string }> = {
   DiscoverCars: { short: "D", tone: "discovercars" },
   VIPCars: { short: "V", tone: "vipcars" },
   FlixBus: { short: "F", tone: "flixbus" },
-  BudgetAir: { short: "B", tone: "budgetair" },
 };
 
 export default function ProviderBadge({ provider }: { provider: string }) {
