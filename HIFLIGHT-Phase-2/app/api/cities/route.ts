@@ -13,10 +13,12 @@ type TravelpayoutsPlace = {
 
 export async function GET(request: NextRequest) {
   const query = request.nextUrl.searchParams.get("q")?.trim() || "";
+  const includeAirports = request.nextUrl.searchParams.get("mode") === "car";
   if (query.length < 2 || query.length > 80) return NextResponse.json({ cities: [] });
 
   const params = new URLSearchParams({ term: query, locale: "fr" });
   params.append("types[]", "city");
+  if (includeAirports) params.append("types[]", "airport");
 
   try {
     const response = await fetch(`https://autocomplete.travelpayouts.com/places2?${params}`, {
@@ -29,7 +31,7 @@ export async function GET(request: NextRequest) {
     const places = (await response.json()) as TravelpayoutsPlace[];
     const seen = new Set<string>();
     const cities = places
-      .filter((place) => place.type === "city" && place.name && place.country_name)
+      .filter((place) => (place.type === "city" || (includeAirports && place.type === "airport")) && place.name && place.country_name)
       .filter((place) => {
         const key = `${place.name}-${place.country_code}-${place.state_code || ""}`;
         if (seen.has(key)) return false;
@@ -39,6 +41,7 @@ export async function GET(request: NextRequest) {
       .slice(0, 10)
       .map((place) => ({
         id: place.id || `${place.name}-${place.country_code}`,
+        type: place.type || "city",
         name: place.name!,
         countryName: place.country_name!,
         countryCode: place.country_code || "",
