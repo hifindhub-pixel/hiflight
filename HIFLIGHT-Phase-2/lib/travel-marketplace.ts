@@ -69,7 +69,6 @@ const carLinks = {
 };
 
 export const flixBusLink = process.env.NEXT_PUBLIC_FLIXBUS_AFFILIATE_URL || "https://www.awin1.com/cread.php?awinmid=110874&awinaffid=2855063";
-export const budgetAirLink = process.env.NEXT_PUBLIC_BUDGETAIR_AFFILIATE_URL || "https://www.awin1.com/cread.php?awinmid=63490&awinaffid=2855063";
 
 export const hotelResults: HotelResult[] = [
   {
