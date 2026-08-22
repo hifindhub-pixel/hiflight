@@ -23,7 +23,7 @@ export default function VehicleExplorer() {
   return (
     <div className="results-shell">
       <div className="results-toolbar">
-        <div><strong>{results.length} catégories disponibles à {search.pickup}</strong><span>Prix indicatifs par jour · conducteur {search.driverAge} ans</span></div>
+        <div><strong>{results.length} catégories en aperçu à {search.pickup}</strong><span>Tarifs de démonstration · conducteur {search.driverAge} ans</span></div>
         <label className="check-filter"><input type="checkbox" checked={automatic} onChange={(event) => setAutomatic(event.target.checked)} /> Automatique uniquement</label>
         <div className="view-switch"><button className={!showMap ? "active" : ""} onClick={() => setShowMap(false)}>Liste</button><button className={showMap ? "active" : ""} onClick={() => setShowMap(true)}>Liste + carte</button></div>
       </div>

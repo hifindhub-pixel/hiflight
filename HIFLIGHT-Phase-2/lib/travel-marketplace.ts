@@ -14,6 +14,8 @@ export function partnerHref(href: string, search: MarketplaceSearch) {
   try {
     const url = new URL(target, "https://www.hiflight.fr");
     if (url.hostname !== "www.hiflight.fr") {
+      const clickref = search.clickref;
+      if (clickref && url.hostname.endsWith("awin1.com")) url.searchParams.set("clickref", String(clickref));
       url.searchParams.set("utm_source", "hiflight");
       url.searchParams.set("utm_medium", "comparison");
       url.searchParams.set("utm_campaign", "partner_click");
@@ -57,17 +59,17 @@ export type VehicleResult = {
 };
 
 const hotelLinks = {
-  booking: process.env.NEXT_PUBLIC_BOOKING_AFFILIATE_URL || "/hotels",
-  expedia: process.env.NEXT_PUBLIC_EXPEDIA_AFFILIATE_URL || "/hotels",
-  trip: process.env.NEXT_PUBLIC_TRIP_AFFILIATE_URL || "/hotels",
-  hotels: process.env.NEXT_PUBLIC_HOTELS_AFFILIATE_URL || "/hotels",
+  // CJ Deep Link Automation converts this dynamic Booking search URL after consent.
+  booking: process.env.NEXT_PUBLIC_BOOKING_AFFILIATE_URL || "https://www.booking.com/searchresults.fr.html?ss={destination}&checkin={checkin}&checkout={checkout}&group_adults={guests}&no_rooms=1&group_children=0",
+  trip: process.env.NEXT_PUBLIC_TRIP_AFFILIATE_URL || "https://track.effiliation.com/servlet/effi.redir?id_compteur=23298697&url=https%3A%2F%2Ffr.trip.com%2F%3Flocale%3Dfr-fr",
 };
 
 const carLinks = {
-  rentalcars: process.env.NEXT_PUBLIC_RENTALCARS_AFFILIATE_URL || "/voitures",
-  discover: process.env.NEXT_PUBLIC_DISCOVERCARS_AFFILIATE_URL || "/voitures",
-  expedia: process.env.NEXT_PUBLIC_EXPEDIA_CARS_AFFILIATE_URL || "/voitures",
+  vipcars: process.env.NEXT_PUBLIC_VIPCARS_AFFILIATE_URL || "https://www.awin1.com/cread.php?awinmid=58019&awinaffid=2855063",
 };
+
+export const flixBusLink = process.env.NEXT_PUBLIC_FLIXBUS_AFFILIATE_URL || "https://www.awin1.com/cread.php?awinmid=110874&awinaffid=2855063";
+export const budgetAirLink = process.env.NEXT_PUBLIC_BUDGETAIR_AFFILIATE_URL || "https://www.awin1.com/cread.php?awinmid=63490&awinaffid=2855063";
 
 export const hotelResults: HotelResult[] = [
   {
@@ -83,8 +85,7 @@ export const hotelResults: HotelResult[] = [
     y: 36,
     offers: [
       { provider: "Booking.com", price: 184, label: "Annulation gratuite", href: hotelLinks.booking },
-      { provider: "Expedia", price: 191, href: hotelLinks.expedia },
-      { provider: "Hotels.com", price: 197, href: hotelLinks.hotels },
+      { provider: "Trip.com", price: 191, href: hotelLinks.trip },
     ],
   },
   {
@@ -101,7 +102,6 @@ export const hotelResults: HotelResult[] = [
     offers: [
       { provider: "Trip.com", price: 169, label: "Meilleur prix", href: hotelLinks.trip },
       { provider: "Booking.com", price: 176, href: hotelLinks.booking },
-      { provider: "Expedia", price: 181, href: hotelLinks.expedia },
     ],
   },
   {
@@ -116,8 +116,7 @@ export const hotelResults: HotelResult[] = [
     x: 49,
     y: 12,
     offers: [
-      { provider: "Hotels.com", price: 138, label: "Meilleur prix", href: hotelLinks.hotels },
-      { provider: "Expedia", price: 142, href: hotelLinks.expedia },
+      { provider: "Booking.com", price: 138, label: "Meilleur prix", href: hotelLinks.booking },
       { provider: "Trip.com", price: 149, href: hotelLinks.trip },
     ],
   },
@@ -133,9 +132,8 @@ export const hotelResults: HotelResult[] = [
     x: 51,
     y: 53,
     offers: [
-      { provider: "Expedia", price: 246, label: "Meilleur prix", href: hotelLinks.expedia },
+      { provider: "Trip.com", price: 246, label: "Meilleur prix", href: hotelLinks.trip },
       { provider: "Booking.com", price: 255, href: hotelLinks.booking },
-      { provider: "Hotels.com", price: 261, href: hotelLinks.hotels },
     ],
   },
 ];
@@ -153,9 +151,7 @@ export const vehicleResults: VehicleResult[] = [
     x: 63,
     y: 68,
     offers: [
-      { provider: "Rentalcars", price: 34, label: "Kilométrage inclus", href: carLinks.rentalcars },
-      { provider: "DiscoverCars", price: 37, href: carLinks.discover },
-      { provider: "Expedia", price: 42, href: carLinks.expedia },
+      { provider: "VIPCars", price: 34, label: "Kilométrage selon l’offre", href: carLinks.vipcars },
     ],
   },
   {
@@ -170,9 +166,7 @@ export const vehicleResults: VehicleResult[] = [
     x: 57,
     y: 43,
     offers: [
-      { provider: "DiscoverCars", price: 46, label: "Meilleur prix", href: carLinks.discover },
-      { provider: "Rentalcars", price: 49, href: carLinks.rentalcars },
-      { provider: "Expedia", price: 55, href: carLinks.expedia },
+      { provider: "VIPCars", price: 46, label: "Offre partenaire", href: carLinks.vipcars },
     ],
   },
   {
@@ -187,9 +181,7 @@ export const vehicleResults: VehicleResult[] = [
     x: 76,
     y: 20,
     offers: [
-      { provider: "Expedia", price: 61, label: "Annulation gratuite", href: carLinks.expedia },
-      { provider: "Rentalcars", price: 65, href: carLinks.rentalcars },
-      { provider: "DiscoverCars", price: 68, href: carLinks.discover },
+      { provider: "VIPCars", price: 61, label: "Annulation selon l’offre", href: carLinks.vipcars },
     ],
   },
 ];

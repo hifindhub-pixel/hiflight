@@ -40,7 +40,7 @@ export default function HotelExplorer() {
   return (
     <div className="results-shell">
       <div className="results-toolbar">
-        <div><strong>{results.length} établissements comparés à {search.destination}</strong><span>Prix indicatifs · {search.guests} voyageur{search.guests === "1" ? "" : "s"}</span></div>
+        <div><strong>{results.length} établissements en aperçu à {search.destination}</strong><span>Tarifs de démonstration · {search.guests} voyageur{search.guests === "1" ? "" : "s"}</span></div>
         <label> Trier par
           <select value={sort} onChange={(event) => setSort(event.target.value)}>
             <option value="recommended">Recommandés</option>

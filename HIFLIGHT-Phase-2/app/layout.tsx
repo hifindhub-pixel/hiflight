@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import Analytics from "@/components/Analytics";
+import AffiliateScripts from "@/components/AffiliateScripts";
 import { siteUrl } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -16,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="fr"><body><Analytics /><Header />{children}<Footer /><CookieBanner /></body></html>;
+  return <html lang="fr"><body><Analytics /><AffiliateScripts /><Header />{children}<Footer /><CookieBanner /></body></html>;
 }

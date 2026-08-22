@@ -20,6 +20,7 @@ export default function CookieBanner() {
 
   function choose(accepted: boolean) {
     localStorage.setItem(KEY, accepted ? "accepted" : "refused");
+    window.dispatchEvent(new CustomEvent("hiflight-consent", { detail: { accepted } }));
     window.gtag?.("consent", "update", {
       analytics_storage: accepted ? "granted" : "denied",
       ad_storage: accepted ? "granted" : "denied",
