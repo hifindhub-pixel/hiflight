@@ -85,6 +85,10 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .date-field-wrap { position:relative; min-width:0; }
 .date-buttons { display:grid; grid-template-columns:1fr 1fr; min-height:72px; overflow:hidden; border:1px solid #d9e1ea; border-radius:14px; background:#fff; }
 .date-buttons>button { display:flex; min-width:0; flex-direction:column; justify-content:center; padding:7px 13px; border:0; border-right:1px solid var(--line); color:var(--ink); background:#fff; text-align:left; cursor:pointer; }
+.date-buttons>button.oneway-disabled { position:relative; color:#738096; background:linear-gradient(135deg,#f7f9fb,#eef2f6); cursor:default; opacity:1; }
+.date-buttons>button.oneway-disabled::after { content:''; position:absolute; top:12px; right:12px; width:18px; height:1px; background:#a9b4c2; transform:rotate(-38deg); }
+.date-buttons>button.oneway-disabled strong { color:#6f7d90; }
+.date-buttons>button.oneway-disabled>span { margin-top:2px; color:#9aa5b4; font-size:8px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
 .date-buttons>button:last-child { border-right:0; }
 .date-buttons>button:hover,.date-buttons>button.active { background:#fff3f3; }
 .date-buttons small { color:#64748b; font-size:10px; font-weight:800; }
