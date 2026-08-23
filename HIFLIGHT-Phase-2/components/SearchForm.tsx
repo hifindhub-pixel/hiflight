@@ -29,6 +29,18 @@ function formatShortDate(value: string, placeholder: string) {
 }
 function airportLabel(item: FlightPlace) { return `${item.city} (${item.code})`; }
 
+function fareLevel(price: number | undefined, monthlyPrices: number[]) {
+  if (!price || !monthlyPrices.length) return "";
+  const sorted = [...monthlyPrices].sort((left, right) => left - right);
+  if (sorted[0] === sorted[sorted.length - 1]) return "fare-medium";
+  const first = sorted.indexOf(price);
+  const last = sorted.lastIndexOf(price);
+  const percentile = ((first + last) / 2) / (sorted.length - 1);
+  if (percentile <= 0.33) return "fare-low";
+  if (percentile >= 0.67) return "fare-high";
+  return "fare-medium";
+}
+
 function CityField({ label, value, selectedCode, onChange, onSelect }: {
   label: string; value: string; selectedCode: string; onChange: (value: string) => void; onSelect: (item: FlightPlace) => void;
 }) {
@@ -109,7 +121,6 @@ function MonthView({ month, prices, mode, departure, returnDate, onChoose }: {
   const cells: Array<number | null> = [...Array(offset).fill(null), ...Array.from({ length: daysInMonth }, (_, index) => index + 1)];
   while (cells.length % 7) cells.push(null);
   const monthlyPrices = Object.entries(prices).filter(([date]) => date.startsWith(monthKey(month))).map(([, price]) => price);
-  const cheapest = monthlyPrices.length ? Math.min(...monthlyPrices) : 0;
 
   return (
     <div className="calendar-month">
@@ -123,7 +134,7 @@ function MonthView({ month, prices, mode, departure, returnDate, onChoose }: {
           const selected = date === departure || date === returnDate;
           const between = Boolean(departure && returnDate && date > departure && date < returnDate);
           const price = prices[date];
-          return <button key={date} type="button" disabled={disabled} className={`${selected ? "selected" : ""} ${between ? "between" : ""} ${price && price === cheapest ? "cheapest" : ""}`} onClick={() => onChoose(date)}><span>{day}</span>{price ? <small>{Math.round(price)} €</small> : <small>&nbsp;</small>}</button>;
+          return <button key={date} type="button" disabled={disabled} className={`${selected ? "selected" : ""} ${between ? "between" : ""} ${fareLevel(price, monthlyPrices)}`} onClick={() => onChoose(date)}><span>{day}</span>{price ? <small>{Math.round(price)} €</small> : <small>&nbsp;</small>}</button>;
         })}
       </div>
     </div>
