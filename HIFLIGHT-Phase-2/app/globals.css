@@ -92,7 +92,8 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .days-grid button.selected { border-radius:8px; color:#fff; background:var(--navy); }
 .days-grid button.selected small { color:#ffb1b1; }
 .calendar-status { min-height:24px; margin-top:9px; padding:8px 10px 0; border-top:1px solid #edf1f5; color:#718096; font-size:9px; text-align:center; }
-.service-tabs { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); width:min(820px,100%); gap:10px; margin-bottom:30px; }
+.service-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); width:min(660px,100%); gap:10px; margin-bottom:30px; }
+.service-tabs.with-esim { grid-template-columns:repeat(5,minmax(0,1fr)); width:min(820px,100%); }
 .service-tabs a { display:flex; min-width:0; min-height:50px; align-items:center; justify-content:center; gap:9px; padding:0 17px; border:1px solid rgba(255,255,255,.32); border-radius:999px; color:#fff; background:rgba(7,22,47,.5); font-size:14px; font-weight:750; letter-spacing:-.01em; white-space:nowrap; backdrop-filter:blur(10px); transition:transform .18s ease,border-color .18s ease,background .18s ease,color .18s ease; }
 .service-tabs a:hover { transform:translateY(-2px); border-color:rgba(255,255,255,.72); background:rgba(13,34,71,.82); }
 .service-tabs a.active { border-color:var(--coral); color:var(--navy); background:var(--coral); }
