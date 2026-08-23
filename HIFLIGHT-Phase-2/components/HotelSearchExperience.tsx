@@ -134,7 +134,6 @@ export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string
           <p className="eyebrow">Hôtels</p>
           <h1>Trouvez le bon hôtel,<br /><span>au bon endroit.</span></h1>
           <form className="market-search hotel-search hotel-search-premium" onSubmit={submit}>
-            <div className="hotel-search-head"><div><span aria-hidden="true">H</span><p><strong>Votre prochain séjour</strong><small>Destination, dates et voyageurs</small></p></div><b>Hôtels dans le monde</b></div>
             <div className="hotel-city-field" ref={cityRef}>
               <label htmlFor="hotel-destination">Destination</label>
               <div className="hotel-city-input">
