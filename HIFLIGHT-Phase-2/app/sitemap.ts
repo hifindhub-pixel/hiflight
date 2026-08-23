@@ -4,7 +4,7 @@ import { airports, flightRoutes, siteUrl } from "@/lib/content";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/hotels", "/voitures", "/trains-bus", "/guides/bagage-cabine", "/mentions-legales", "/confidentialite"];
+  const staticPages = ["", "/hotels", "/voitures", "/trains-bus", "/esim", "/guides/bagage-cabine", "/mentions-legales", "/confidentialite"];
   return [
     ...staticPages.map((path) => ({ url: `${siteUrl}${path}`, lastModified: new Date(), changeFrequency: path ? "monthly" as const : "weekly" as const, priority: path ? .6 : 1 })),
     ...flightRoutes.map(({ slug }) => ({ url: `${siteUrl}/vols/${slug}`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: .8 })),
