@@ -221,7 +221,20 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     target.searchParams.set("trip_class", travelClass);
     if (direct) target.searchParams.set("direct", "true");
     target.searchParams.set("utm_source", "hiflight"); target.searchParams.set("utm_medium", "hub"); target.searchParams.set("utm_campaign", "flight_search");
-    window.location.assign(target.toString());
+    const hotelTarget = new URL("/hotels", window.location.origin);
+    hotelTarget.searchParams.set("destination", to.replace(/\s*\([^)]*\)\s*$/, "").trim());
+    hotelTarget.searchParams.set("checkin", departure);
+    if (returnDate) hotelTarget.searchParams.set("checkout", returnDate);
+    hotelTarget.searchParams.set("guests", adults);
+    hotelTarget.hash = "hotel-results";
+
+    const flightTab = window.open(target.toString(), "_blank");
+    if (!flightTab) {
+      setError("Autorisez l’ouverture des nouveaux onglets pour afficher simultanément les vols et les hébergements.");
+      return;
+    }
+    flightTab.opener = null;
+    window.location.assign(hotelTarget.toString());
   }
 
   return (
