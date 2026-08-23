@@ -3,7 +3,7 @@ import Link from "next/link";
 type Props = { active: "flights" | "hotels" | "cars" | "ground" };
 
 const services = [
-  { id: "flights", label: "Vols", href: "/#recherche", icon: "/icons/service-flight.png" },
+  { id: "flights", label: "Vols", href: "/", icon: "/icons/service-flight.png" },
   { id: "hotels", label: "Hôtels", href: "/hotels", icon: "/icons/service-hotel.svg" },
   { id: "cars", label: "Voitures", href: "/voitures", icon: "/icons/service-car.png" },
   { id: "ground", label: "Trains & bus", href: "/trains-bus", icon: "/icons/service-train.svg" },
