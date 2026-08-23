@@ -29,7 +29,7 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .form-note { grid-column:1/-1; margin:2px 3px 0; color:#718096; font-size:11px; }
 .flight-search-v2 { position:relative; display:block; max-width:1240px; margin-top:38px; padding:16px; border:1px solid rgba(255,255,255,.5); border-radius:24px; background:#f8fafc; box-shadow:0 28px 80px rgba(3,12,29,.38); }
 .flight-search-v2::after { content:''; position:absolute; right:28px; bottom:-1px; left:28px; height:3px; border-radius:99px; background:linear-gradient(90deg,transparent,var(--coral),transparent); }
-.flight-search-head { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:12px; padding:0 2px; }
+.flight-search-head { display:flex; align-items:center; justify-content:flex-end; gap:24px; margin-bottom:12px; padding:0 2px; }
 .flight-search-head>div:first-child { display:flex; align-items:center; gap:9px; }
 .flight-search-head i { display:grid; width:30px; height:30px; place-items:center; border-radius:9px; color:#fff; background:var(--navy); font-size:9px; font-style:normal; font-weight:900; }
 .flight-search-head span { display:flex; flex-direction:column; gap:0; }
