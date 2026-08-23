@@ -13,7 +13,8 @@ type TravelpayoutsPlace = {
 
 export async function GET(request: NextRequest) {
   const query = request.nextUrl.searchParams.get("q")?.trim() || "";
-  const includeAirports = request.nextUrl.searchParams.get("mode") === "car";
+  const mode = request.nextUrl.searchParams.get("mode");
+  const includeAirports = mode === "car" || mode === "flight";
   if (query.length < 2 || query.length > 80) return NextResponse.json({ cities: [] });
 
   const params = new URLSearchParams({ term: query, locale: "fr" });
