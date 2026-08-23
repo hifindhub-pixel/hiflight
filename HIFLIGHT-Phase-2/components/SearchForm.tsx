@@ -1,12 +1,14 @@
 "use client";
 
-import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { airportCities, AirportCity, findAirportCity } from "@/lib/airports";
 import { searchUrl } from "@/lib/content";
 import { track } from "./Analytics";
 
 type Props = { origin?: string; destination?: string; originCode?: string; destinationCode?: string; compact?: boolean };
 type DateMode = "departure" | "return";
+type FlightPlace = AirportCity & { id?: string; type?: "city" | "airport" };
+type ApiPlace = { id: string; type?: "city" | "airport"; name: string; countryName: string; code: string };
 
 const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 const weekDays = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
@@ -25,20 +27,16 @@ function formatShortDate(value: string, placeholder: string) {
   if (!value) return placeholder;
   return new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short" }).format(new Date(`${value}T12:00:00`));
 }
-function airportLabel(item: AirportCity) { return `${item.city} (${item.code})`; }
-function normalize(value: string) { return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("fr-FR"); }
+function airportLabel(item: FlightPlace) { return `${item.city} (${item.code})`; }
 
 function CityField({ label, value, selectedCode, onChange, onSelect }: {
-  label: string; value: string; selectedCode: string; onChange: (value: string) => void; onSelect: (item: AirportCity) => void;
+  label: string; value: string; selectedCode: string; onChange: (value: string) => void; onSelect: (item: FlightPlace) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
+  const [matches, setMatches] = useState<FlightPlace[]>(airportCities.slice(0, 8));
+  const [loading, setLoading] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
-  const matches = useMemo(() => {
-    const query = normalize(value.replace(/\([^)]*\)/g, "").trim());
-    const source = query ? airportCities.filter((item) => normalize(`${item.city} ${item.country} ${item.code} ${item.airports || ""}`).includes(query)) : airportCities.slice(0, 8);
-    return source.slice(0, 8);
-  }, [value]);
 
   useEffect(() => {
     const close = (event: MouseEvent) => { if (!wrapRef.current?.contains(event.target as Node)) setOpen(false); };
@@ -46,7 +44,30 @@ function CityField({ label, value, selectedCode, onChange, onSelect }: {
     return () => document.removeEventListener("mousedown", close);
   }, []);
 
-  function choose(item: AirportCity) { onSelect(item); setOpen(false); setActive(0); }
+  useEffect(() => {
+    if (!open) return;
+    const query = value.replace(/\([^)]*\)/g, "").trim();
+    if (query.length < 2) { setMatches(airportCities.slice(0, 8)); setLoading(false); return; }
+    const controller = new AbortController();
+    const timer = window.setTimeout(async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/cities?mode=flight&q=${encodeURIComponent(query)}`, { signal: controller.signal });
+        if (!response.ok) throw new Error("flight-places-unavailable");
+        const payload = (await response.json()) as { cities: ApiPlace[] };
+        const places = payload.cities.filter((place) => place.code).map((place) => ({ id: place.id, type: place.type, city: place.name, country: place.countryName, code: place.code, airports: place.type === "airport" ? "Aéroport" : undefined }));
+        setMatches(places);
+        setActive(0);
+      } catch (reason) {
+        if (reason instanceof DOMException && reason.name === "AbortError") return;
+        const normalized = query.toLocaleLowerCase("fr-FR");
+        setMatches(airportCities.filter((item) => `${item.city} ${item.country} ${item.code}`.toLocaleLowerCase("fr-FR").includes(normalized)).slice(0, 8));
+      } finally { if (!controller.signal.aborted) setLoading(false); }
+    }, 220);
+    return () => { window.clearTimeout(timer); controller.abort(); };
+  }, [open, value]);
+
+  function choose(item: FlightPlace) { onSelect(item); setOpen(false); setActive(0); }
   function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (!open && event.key === "ArrowDown") setOpen(true);
     if (event.key === "ArrowDown") { event.preventDefault(); setActive((current) => Math.min(current + 1, matches.length - 1)); }
@@ -66,11 +87,12 @@ function CityField({ label, value, selectedCode, onChange, onSelect }: {
       {open && (
         <div className="city-suggestions" role="listbox">
           <p>{value ? "Villes et aéroports" : "Départs populaires"}</p>
-          {matches.length ? matches.map((item, index) => (
-            <button key={item.code} type="button" className={index === active ? "active" : ""} onMouseDown={(event) => event.preventDefault()} onClick={() => choose(item)}>
-              <span className="suggestion-icon">✈</span><span><strong>{item.city}</strong><small>{item.country}{item.airports ? ` · ${item.airports}` : ""}</small></span><b>{item.code}</b>
+          {loading && <span className="no-suggestion">Recherche dans le monde…</span>}
+          {!loading && matches.length ? matches.map((item, index) => (
+            <button key={`${item.id || item.code}-${index}`} type="button" className={index === active ? "active" : ""} onMouseDown={(event) => event.preventDefault()} onClick={() => choose(item)}>
+              <span className="suggestion-icon">{item.type === "city" ? "⌖" : "✈"}</span><span><strong>{item.city}</strong><small>{item.country}{item.airports ? ` · ${item.airports}` : ""}</small></span><b>{item.code}</b>
             </button>
-          )) : <span className="no-suggestion">Aucune ville trouvée. Essayez un code IATA.</span>}
+          )) : !loading && <span className="no-suggestion">Aucune ville trouvée. Essayez un code IATA.</span>}
         </div>
       )}
     </div>
@@ -156,7 +178,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     if (kind === "from") { setFrom(value); setFromCode(code); } else { setTo(value); setToCode(code); }
     setError("");
   }
-  function selectCity(kind: "from" | "to", item: AirportCity) {
+  function selectCity(kind: "from" | "to", item: FlightPlace) {
     if (kind === "from") { setFrom(airportLabel(item)); setFromCode(item.code); } else { setTo(airportLabel(item)); setToCode(item.code); }
     setError("");
   }
