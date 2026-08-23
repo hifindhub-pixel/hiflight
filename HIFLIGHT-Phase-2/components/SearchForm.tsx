@@ -7,8 +7,8 @@ import { track } from "./Analytics";
 
 type Props = { origin?: string; destination?: string; originCode?: string; destinationCode?: string; compact?: boolean };
 type DateMode = "departure" | "return";
-type FlightPlace = AirportCity & { id?: string; type?: "city" | "airport" };
-type ApiPlace = { id: string; type?: "city" | "airport"; name: string; countryName: string; code: string };
+type FlightPlace = AirportCity & { id?: string; type?: "city" | "airport"; distanceKm?: number; referenceCity?: string };
+type ApiPlace = { id: string; type?: "city" | "airport"; name: string; countryName: string; code: string; distanceKm?: number; referenceCity?: string };
 
 const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 const weekDays = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
@@ -55,7 +55,7 @@ function CityField({ label, value, selectedCode, onChange, onSelect }: {
         const response = await fetch(`/api/cities?mode=flight&q=${encodeURIComponent(query)}`, { signal: controller.signal });
         if (!response.ok) throw new Error("flight-places-unavailable");
         const payload = (await response.json()) as { cities: ApiPlace[] };
-        const places = payload.cities.filter((place) => place.code).map((place) => ({ id: place.id, type: place.type, city: place.name, country: place.countryName, code: place.code, airports: place.type === "airport" ? "Aéroport" : undefined }));
+        const places = payload.cities.filter((place) => place.code).map((place) => ({ id: place.id, type: place.type, city: place.name, country: place.countryName, code: place.code, airports: place.type === "airport" ? "Aéroport" : undefined, distanceKm: place.distanceKm, referenceCity: place.referenceCity }));
         setMatches(places);
         setActive(0);
       } catch (reason) {
@@ -90,7 +90,7 @@ function CityField({ label, value, selectedCode, onChange, onSelect }: {
           {loading && <span className="no-suggestion">Recherche dans le monde…</span>}
           {!loading && matches.length ? matches.map((item, index) => (
             <button key={`${item.id || item.code}-${index}`} type="button" className={index === active ? "active" : ""} onMouseDown={(event) => event.preventDefault()} onClick={() => choose(item)}>
-              <span className="suggestion-icon">{item.type === "city" ? "⌖" : "✈"}</span><span><strong>{item.city}</strong><small>{item.country}{item.airports ? ` · ${item.airports}` : ""}</small></span><b>{item.code}</b>
+              <span className="suggestion-icon">{item.type === "city" ? "⌖" : "✈"}</span><span><strong>{item.city}</strong><small>{item.type === "airport" && item.distanceKm !== undefined && item.referenceCity ? `Aéroport · ${item.distanceKm} km de ${item.referenceCity}` : item.country}</small></span><b>{item.code}</b>
             </button>
           )) : !loading && <span className="no-suggestion">Aucune ville trouvée. Essayez un code IATA.</span>}
         </div>
