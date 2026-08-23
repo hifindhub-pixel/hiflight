@@ -96,7 +96,6 @@ export default function CarSearchExperience() {
           <h1>Prenez la route,<br /><span>en toute liberté.</span></h1>
           <form className={`car-search-premium ${differentDropoff ? "has-dropoff" : ""}`} onSubmit={submit}>
             <div className="car-search-topline">
-              <div className="car-search-kicker"><span aria-hidden="true">◆</span><div><strong>Votre itinéraire</strong><small>Recherche dans les villes et aéroports du monde</small></div></div>
               <div className="car-return-mode" role="group" aria-label="Lieu de restitution">
                 <button type="button" className={!differentDropoff ? "active" : ""} aria-pressed={!differentDropoff} onClick={() => { setDifferentDropoff(false); setDraft((current) => ({ ...current, dropoff: current.pickup })); }}>Même lieu</button>
                 <button type="button" className={differentDropoff ? "active" : ""} aria-pressed={differentDropoff} onClick={() => setDifferentDropoff(true)}>Autre lieu</button>
