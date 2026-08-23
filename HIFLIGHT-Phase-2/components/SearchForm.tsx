@@ -295,7 +295,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
         <div className="date-field-wrap" ref={calendarRef}>
           <div className="date-buttons">
             <button type="button" className={calendarOpen && dateMode === "departure" ? "active" : ""} onClick={() => openCalendar("departure")}><small>Aller</small><strong>{formatShortDate(departure, "Choisir")}</strong></button>
-            {tripType === "roundtrip" && <button type="button" className={calendarOpen && dateMode === "return" ? "active" : ""} onClick={() => openCalendar("return")}><small>Retour</small><strong>{formatShortDate(returnDate, "Choisir")}</strong></button>}
+            <button type="button" disabled={tripType === "oneway"} className={`${calendarOpen && dateMode === "return" ? "active" : ""} ${tripType === "oneway" ? "oneway-disabled" : ""}`} onClick={() => openCalendar("return")}><small>Retour</small><strong>{tripType === "oneway" ? "Non requis" : formatShortDate(returnDate, "Choisir")}</strong>{tripType === "oneway" && <span>Aller simple</span>}</button>
           </div>
           {calendarOpen && (
             <div className="fare-calendar" role="dialog" aria-label="Choisir les dates">
