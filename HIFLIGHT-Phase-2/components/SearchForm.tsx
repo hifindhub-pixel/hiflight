@@ -90,19 +90,17 @@ function CityField({ label, value, selectedCode, onChange, onSelect }: {
 
   return (
     <div className="city-field" ref={wrapRef}>
-      <label>{label}</label>
       <div className="city-input-wrap">
-        <span className="field-icon" aria-hidden="true">{label === "Départ" ? "↗" : "⌖"}</span>
-        <input value={value} onFocus={() => setOpen(true)} onChange={(event) => { onChange(event.target.value); setOpen(true); setActive(0); }} onKeyDown={onKeyDown} placeholder={label === "Départ" ? "D’où partez-vous ?" : "Où allez-vous ?"} role="combobox" aria-expanded={open} aria-autocomplete="list" autoComplete="off" />
+        <input aria-label={label} value={value} onFocus={() => setOpen(true)} onChange={(event) => { onChange(event.target.value); setOpen(true); setActive(0); }} onKeyDown={onKeyDown} placeholder={label === "Départ" ? "Ville ou aéroport de départ" : "Ville ou aéroport d’arrivée"} role="combobox" aria-expanded={open} aria-autocomplete="list" autoComplete="off" />
         {selectedCode && <b className="iata-chip">{selectedCode}</b>}
       </div>
       {open && (
         <div className="city-suggestions" role="listbox">
-          <p>{value ? "Villes et aéroports" : "Départs populaires"}</p>
-          {loading && <span className="no-suggestion">Recherche dans le monde…</span>}
+          {!value && <p>Destinations populaires</p>}
+          {loading && <span className="no-suggestion">Recherche en cours…</span>}
           {!loading && matches.length ? matches.map((item, index) => (
             <button key={`${item.id || item.code}-${index}`} type="button" className={index === active ? "active" : ""} onMouseDown={(event) => event.preventDefault()} onClick={() => choose(item)}>
-              <span className="suggestion-icon">{item.type === "city" ? "⌖" : "✈"}</span><span><strong>{item.city}</strong><small>{item.type === "airport" && item.distanceKm !== undefined && item.referenceCity ? `Aéroport · ${item.distanceKm} km de ${item.referenceCity}` : item.country}</small></span><b>{item.code}</b>
+              <span className="suggestion-copy"><small>{item.type === "airport" ? "Aéroport" : "Ville"}</small><strong>{item.city}</strong><em>{item.type === "airport" && item.distanceKm !== undefined && item.referenceCity ? `${item.distanceKm} km de ${item.referenceCity}` : item.country}</em></span><b>{item.code}</b>
             </button>
           )) : !loading && <span className="no-suggestion">Aucune ville trouvée. Essayez un code IATA.</span>}
         </div>
@@ -248,9 +246,11 @@ export default function SearchForm({ origin = "", destination = "", originCode =
         </div>
       </div>
       <div className="search-fields">
-        <CityField label="Départ" value={from} selectedCode={fromCode} onChange={(value) => updateCity("from", value)} onSelect={(item) => selectCity("from", item)} />
-        <button className="swap" type="button" aria-label="Inverser le trajet" onClick={swapRoute}>⇄</button>
-        <CityField label="Destination" value={to} selectedCode={toCode} onChange={(value) => updateCity("to", value)} onSelect={(item) => selectCity("to", item)} />
+        <div className="route-fields">
+          <CityField label="Départ" value={from} selectedCode={fromCode} onChange={(value) => updateCity("from", value)} onSelect={(item) => selectCity("from", item)} />
+          <button className="swap" type="button" aria-label="Inverser le trajet" onClick={swapRoute}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3" /></svg></button>
+          <CityField label="Destination" value={to} selectedCode={toCode} onChange={(value) => updateCity("to", value)} onSelect={(item) => selectCity("to", item)} />
+        </div>
         <div className="date-field-wrap" ref={calendarRef}>
           <div className="date-buttons">
             <button type="button" className={calendarOpen && dateMode === "departure" ? "active" : ""} onClick={() => openCalendar("departure")}><small>Aller</small><strong>{formatShortDate(departure, "Choisir")}</strong></button>
@@ -265,7 +265,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
             </div>
           )}
         </div>
-        <button className="search-button" type="submit"><span>Comparer les vols</span><b>→</b></button>
+        <button className="search-button" type="submit"><span>Comparer les vols</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" /></svg></b></button>
       </div>
       <label className="direct-toggle"><input type="checkbox" checked={direct} onChange={(event) => setDirect(event.target.checked)} /><span /> Vols directs uniquement</label>
       <p className={`form-note ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "HiFlight recherche et compare les offres disponibles selon vos critères."}</p>
