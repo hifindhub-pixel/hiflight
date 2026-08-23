@@ -1,18 +1,23 @@
 import Link from "next/link";
 
-type Props = { active: "flights" | "hotels" | "cars" | "ground" | "esim" };
+type Props = {
+  active: "flights" | "hotels" | "cars" | "ground" | "esim";
+  includeEsim?: boolean;
+};
 
-const services = [
+const coreServices = [
   { id: "flights", label: "Vols", href: "/#recherche", icon: "/icons/service-flight.png" },
   { id: "hotels", label: "Hôtels", href: "/hotels", icon: "/icons/service-hotel.svg" },
   { id: "cars", label: "Voitures", href: "/voitures", icon: "/icons/service-car.png" },
   { id: "ground", label: "Trains & bus", href: "/trains-bus", icon: "/icons/service-train.svg" },
-  { id: "esim", label: "eSIM", href: "/esim", icon: "/icons/service-esim.svg" },
 ] as const;
 
-export default function ServiceTabs({ active }: Props) {
+const esimService = { id: "esim", label: "eSIM", href: "/esim", icon: "/icons/service-esim.svg" } as const;
+
+export default function ServiceTabs({ active, includeEsim = false }: Props) {
+  const services = includeEsim ? [...coreServices, esimService] : coreServices;
   return (
-    <div className="service-tabs" aria-label="Services de voyage">
+    <div className={`service-tabs${includeEsim ? " with-esim" : ""}`} aria-label="Services de voyage">
       {services.map((service) => {
         return (
           <Link
