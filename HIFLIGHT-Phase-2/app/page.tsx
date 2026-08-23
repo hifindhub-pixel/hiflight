@@ -9,7 +9,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-inner">
           <ServiceTabs active="flights" />
-          <div className="hero-copy"><h1>Comparez les vols.<br /><span>Voyagez moins cher.</span></h1><p>Des centaines de compagnies et agences comparées gratuitement, sans inscription.</p></div>
+          <div className="hero-copy"><h1>Des millions de vols,<br /><span>un seul endroit.</span></h1><p>Des centaines de compagnies et agences comparées gratuitement, sans inscription.</p></div>
           <SearchForm />
           <div className="trust-line"><span>Gratuit</span><span>Sans inscription</span><span>Réservation chez le partenaire</span></div>
         </div>
