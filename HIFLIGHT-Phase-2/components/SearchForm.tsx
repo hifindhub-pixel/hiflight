@@ -7,6 +7,8 @@ import { track } from "./Analytics";
 
 type Props = { origin?: string; destination?: string; originCode?: string; destinationCode?: string; compact?: boolean };
 type DateMode = "departure" | "return";
+type TripType = "roundtrip" | "oneway" | "multicity";
+type MultiLeg = { from: string; fromCode: string; to: string; toCode: string; date: string };
 type FlightPlace = AirportCity & { id?: string; type?: "city" | "airport"; distanceKm?: number; referenceCity?: string };
 type ApiPlace = { id: string; type?: "city" | "airport"; name: string; countryName: string; code: string; distanceKm?: number; referenceCity?: string };
 
@@ -28,6 +30,12 @@ function formatShortDate(value: string, placeholder: string) {
   return new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short" }).format(new Date(`${value}T12:00:00`));
 }
 function airportLabel(item: FlightPlace) { return `${item.city} (${item.code})`; }
+function passengerSuffix(travelClass: string, adults: number, children: number, infants: number) {
+  const classCode = travelClass === "business" ? "c" : travelClass === "first" ? "f" : "";
+  if (infants) return `${classCode}${adults}${children}${infants}`;
+  if (children) return `${classCode}${adults}${children}`;
+  return `${classCode}${adults}`;
+}
 
 function PassengerSelector({ adults, children, infants, onChange }: {
   adults: number; children: number; infants: number;
@@ -182,7 +190,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   const [to, setTo] = useState(destinationCode ? `${destination} (${destinationCode})` : destination);
   const [fromCode, setFromCode] = useState(originCode);
   const [toCode, setToCode] = useState(destinationCode);
-  const [tripType, setTripType] = useState<"roundtrip" | "oneway">("roundtrip");
+  const [tripType, setTripType] = useState<TripType>("roundtrip");
   const [departure, setDeparture] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [dateMode, setDateMode] = useState<DateMode>("departure");
@@ -195,6 +203,10 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   const [infants, setInfants] = useState(0);
   const [travelClass, setTravelClass] = useState("economy");
   const [direct, setDirect] = useState(false);
+  const [multiLegs, setMultiLegs] = useState<MultiLeg[]>([
+    { from: "", fromCode: "", to: "", toCode: "", date: "" },
+    { from: "", fromCode: "", to: "", toCode: "", date: "" },
+  ]);
   const [error, setError] = useState("");
   const calendarRef = useRef<HTMLDivElement>(null);
 
@@ -232,6 +244,19 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     setError("");
   }
   function swapRoute() { setFrom(to); setFromCode(toCode); setTo(from); setToCode(fromCode); setPrices({}); setError(""); }
+  function updateMultiLeg(index: number, patch: Partial<MultiLeg>) {
+    setMultiLegs((current) => current.map((leg, legIndex) => legIndex === index ? { ...leg, ...patch } : leg));
+    setError("");
+  }
+  function selectMultiCity(index: number, side: "from" | "to", item: FlightPlace) {
+    const label = airportLabel(item);
+    setMultiLegs((current) => current.map((leg, legIndex) => {
+      if (legIndex === index) return { ...leg, [side]: label, [`${side}Code`]: item.code } as MultiLeg;
+      if (side === "to" && legIndex === index + 1 && !leg.fromCode) return { ...leg, from: label, fromCode: item.code };
+      return leg;
+    }));
+    setError("");
+  }
   function openCalendar(mode: DateMode) {
     setDateMode(mode);
     const value = mode === "departure" ? departure : returnDate;
@@ -247,24 +272,36 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   }
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!fromCode || !toCode) { setError("Sélectionnez une ville dans la liste pour le départ et la destination."); return; }
-    if (fromCode === toCode) { setError("Le départ et la destination doivent être différents."); return; }
-    if (!departure) { setError("Sélectionnez une date de départ."); return; }
-    if (tripType === "roundtrip" && !returnDate) { setError("Sélectionnez une date de retour, ou choisissez Aller simple."); return; }
-    const route = tripType === "roundtrip" ? `${fromCode}${formatTravelpayoutsDate(departure)}${toCode}${formatTravelpayoutsDate(returnDate)}1` : `${fromCode}${formatTravelpayoutsDate(departure)}${toCode}00`;
-    track("search_started", { origin: fromCode, destination: toCode, source: window.location.pathname });
+    let route = "";
+    let hotelDestination = to.replace(/\s*\([^)]*\)\s*$/, "").trim();
+    let hotelCheckin = departure;
+    let hotelCheckout = returnDate;
+    if (tripType === "multicity") {
+      if (multiLegs.some((leg) => !leg.fromCode || !leg.toCode || !leg.date)) { setError("Complétez chaque étape avec une ville et une date."); return; }
+      if (multiLegs.some((leg) => leg.fromCode === leg.toCode)) { setError("Le départ et la destination d’une étape doivent être différents."); return; }
+      if (multiLegs.some((leg, index) => index > 0 && leg.date < multiLegs[index - 1].date)) { setError("Les dates des étapes doivent être dans l’ordre."); return; }
+      route = multiLegs.map((leg, index) => `${index === 0 ? leg.fromCode : ""}${formatTravelpayoutsDate(leg.date)}${leg.toCode}`).join("");
+      const lastLeg = multiLegs[multiLegs.length - 1];
+      hotelDestination = lastLeg.to.replace(/\s*\([^)]*\)\s*$/, "").trim();
+      hotelCheckin = lastLeg.date;
+      hotelCheckout = "";
+    } else {
+      if (!fromCode || !toCode) { setError("Sélectionnez une ville dans la liste pour le départ et la destination."); return; }
+      if (fromCode === toCode) { setError("Le départ et la destination doivent être différents."); return; }
+      if (!departure) { setError("Sélectionnez une date de départ."); return; }
+      if (tripType === "roundtrip" && !returnDate) { setError("Sélectionnez une date de retour, ou choisissez Aller simple."); return; }
+      route = `${fromCode}${formatTravelpayoutsDate(departure)}${toCode}${tripType === "roundtrip" ? formatTravelpayoutsDate(returnDate) : ""}`;
+    }
+    route += passengerSuffix(travelClass, adults, children, infants);
+    track("search_started", { origin: tripType === "multicity" ? multiLegs[0].fromCode : fromCode, destination: tripType === "multicity" ? multiLegs.at(-1)?.toCode || "" : toCode, source: window.location.pathname });
     const target = new URL(searchUrl); target.pathname = "/"; target.search = "";
     target.searchParams.set("flightSearch", route);
-    target.searchParams.set("adults", String(adults));
-    if (children) target.searchParams.set("children", String(children));
-    if (infants) target.searchParams.set("infants", String(infants));
-    target.searchParams.set("trip_class", travelClass);
     if (direct) target.searchParams.set("direct", "true");
     target.searchParams.set("utm_source", "hiflight"); target.searchParams.set("utm_medium", "hub"); target.searchParams.set("utm_campaign", "flight_search");
     const hotelTarget = new URL("/hotels", window.location.origin);
-    hotelTarget.searchParams.set("destination", to.replace(/\s*\([^)]*\)\s*$/, "").trim());
-    hotelTarget.searchParams.set("checkin", departure);
-    if (returnDate) hotelTarget.searchParams.set("checkout", returnDate);
+    hotelTarget.searchParams.set("destination", hotelDestination);
+    hotelTarget.searchParams.set("checkin", hotelCheckin);
+    if (hotelCheckout) hotelTarget.searchParams.set("checkout", hotelCheckout);
     hotelTarget.searchParams.set("guests", String(adults + children));
     hotelTarget.hash = "hotel-results";
 
@@ -281,12 +318,21 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     <form id="recherche" className={`search-form flight-search-v2 ${compact ? "compact" : ""}`} onSubmit={submit}>
       <div className="flight-search-head">
         <div className="search-options">
-          <select aria-label="Type de voyage" value={tripType} onChange={(event) => { const value = event.target.value as "roundtrip" | "oneway"; setTripType(value); if (value === "oneway") setReturnDate(""); }}><option value="roundtrip">Aller-retour</option><option value="oneway">Aller simple</option></select>
+          <select aria-label="Type de voyage" value={tripType} onChange={(event) => { const value = event.target.value as TripType; setTripType(value); if (value === "oneway") setReturnDate(""); if (value === "multicity") setMultiLegs((current) => current.map((leg, index) => index === 0 && !leg.fromCode && fromCode ? { ...leg, from, fromCode, to, toCode, date: departure } : index === 1 && !leg.fromCode && toCode ? { ...leg, from: to, fromCode: toCode } : leg)); }}><option value="roundtrip">Aller-retour</option><option value="oneway">Aller simple</option><option value="multicity">Multi-destinations</option></select>
           <PassengerSelector adults={adults} children={children} infants={infants} onChange={(kind, value) => { if (kind === "adults") { setAdults(value); setInfants((current) => Math.min(current, value)); } else if (kind === "children") setChildren(value); else setInfants(value); }} />
           <select aria-label="Classe de voyage" value={travelClass} onChange={(event) => setTravelClass(event.target.value)}><option value="economy">Économique</option><option value="business">Affaires</option><option value="first">Première</option></select>
         </div>
       </div>
-      <div className="search-fields">
+      {tripType === "multicity" ? <div className="multicity-builder">
+        {multiLegs.map((leg, index) => <div className="multicity-leg" key={index}>
+          <span className="leg-number">{String(index + 1).padStart(2, "0")}</span>
+          <CityField label="Départ" value={leg.from} selectedCode={leg.fromCode} onChange={(value) => updateMultiLeg(index, { from: value, fromCode: "" })} onSelect={(item) => selectMultiCity(index, "from", item)} />
+          <CityField label="Destination" value={leg.to} selectedCode={leg.toCode} onChange={(value) => updateMultiLeg(index, { to: value, toCode: "" })} onSelect={(item) => selectMultiCity(index, "to", item)} />
+          <label className="multicity-date"><small>Date du vol</small><input type="date" value={leg.date} min={index ? multiLegs[index - 1].date || localIso(new Date()) : localIso(new Date())} onChange={(event) => updateMultiLeg(index, { date: event.target.value })} /></label>
+          {multiLegs.length > 2 && <button type="button" className="remove-leg" aria-label={`Supprimer l’étape ${index + 1}`} onClick={() => setMultiLegs((current) => current.filter((_, legIndex) => legIndex !== index))}>×</button>}
+        </div>)}
+        <div className="multicity-actions"><button type="button" disabled={multiLegs.length >= 4} onClick={() => setMultiLegs((current) => [...current, { from: current.at(-1)?.to || "", fromCode: current.at(-1)?.toCode || "", to: "", toCode: "", date: "" }])}>+ Ajouter une étape</button><button className="search-button" type="submit"><span>Comparer cet itinéraire</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" /></svg></b></button></div>
+      </div> : <div className="search-fields">
         <div className="route-fields">
           <CityField label="Départ" value={from} selectedCode={fromCode} onChange={(value) => updateCity("from", value)} onSelect={(item) => selectCity("from", item)} />
           <button className="swap" type="button" aria-label="Inverser le trajet" onClick={swapRoute}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3" /></svg></button>
@@ -307,7 +353,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
           )}
         </div>
         <button className="search-button" type="submit"><span>Comparer les vols</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" /></svg></b></button>
-      </div>
+      </div>}
       <label className="direct-toggle"><input type="checkbox" checked={direct} onChange={(event) => setDirect(event.target.checked)} /><span /> Vols directs uniquement</label>
       <p className={`form-note ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "HiFlight recherche et compare les offres disponibles selon vos critères."}</p>
     </form>
