@@ -29,7 +29,7 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .form-note { grid-column:1/-1; margin:2px 3px 0; color:#718096; font-size:11px; }
 .flight-search-v2 { position:relative; display:block; max-width:1240px; margin-top:38px; padding:16px; border:1px solid rgba(255,255,255,.5); border-radius:24px; background:#f8fafc; box-shadow:0 28px 80px rgba(3,12,29,.38); }
 .flight-search-v2::after { content:''; position:absolute; right:28px; bottom:-1px; left:28px; height:3px; border-radius:99px; background:linear-gradient(90deg,transparent,var(--coral),transparent); }
-.flight-search-head { display:flex; align-items:center; justify-content:flex-end; gap:24px; margin-bottom:12px; padding:0 2px; }
+.flight-search-head { display:flex; align-items:center; justify-content:flex-start; gap:24px; margin-bottom:12px; padding:0 2px; }
 .flight-search-head>div:first-child { display:flex; align-items:center; gap:9px; }
 .flight-search-head i { display:grid; width:30px; height:30px; place-items:center; border-radius:9px; color:#fff; background:var(--navy); font-size:9px; font-style:normal; font-weight:900; }
 .flight-search-head span { display:flex; flex-direction:column; gap:0; }
@@ -38,6 +38,28 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .search-options { display:flex; align-items:center; gap:6px; margin:0; padding:0; }
 .search-options select { width:auto; height:34px; padding:0 28px 0 10px; border:1px solid #d9e1ea; border-radius:999px; color:#344256; background-color:#fff; font-size:10px; font-weight:800; cursor:pointer; }
 .search-options select:hover { border-color:#aebac9; background:#fff; }
+.passenger-selector { position:relative; }
+.passenger-selector>button { display:flex; min-width:150px; height:34px; align-items:center; justify-content:space-between; gap:14px; padding:0 10px 0 12px; border:1px solid #d9e1ea; border-radius:999px; color:#344256; background:#fff; text-align:left; cursor:pointer; }
+.passenger-selector>button.active { border-color:var(--coral); box-shadow:0 0 0 2px rgba(255,107,107,.12); }
+.passenger-selector>button span { display:flex; min-width:0; flex-direction:column; }
+.passenger-selector>button strong { font:800 10px Inter,sans-serif; }
+.passenger-selector>button small { overflow:hidden; max-width:120px; color:#8290a2; font:600 8px Inter,sans-serif; text-overflow:ellipsis; white-space:nowrap; }
+.passenger-selector>button svg { width:15px; flex:0 0 15px; fill:none; stroke:currentColor; stroke-width:1.8; transition:transform .18s; }
+.passenger-selector>button.active svg { transform:rotate(180deg); }
+.passenger-popover { position:absolute; z-index:70; top:42px; left:0; width:330px; padding:18px; border:1px solid #dce3eb; border-radius:17px; color:var(--navy); background:#fff; box-shadow:0 24px 65px rgba(7,22,47,.24); }
+.passenger-popover header { display:flex; flex-direction:column; padding:0 2px 12px; border-bottom:1px solid #e8edf2; }
+.passenger-popover header strong { font:800 15px Outfit,sans-serif; }
+.passenger-popover header span { margin-top:2px; color:#8491a3; font-size:9px; }
+.passenger-row { display:flex; min-height:70px; align-items:center; justify-content:space-between; border-bottom:1px solid #e8edf2; }
+.passenger-row>span { display:flex; flex-direction:column; }
+.passenger-row>span strong { font:750 13px Inter,sans-serif; }
+.passenger-row>span small { margin-top:3px; color:#8a97a8; font-size:10px; }
+.passenger-row>div { display:flex; align-items:center; gap:12px; }
+.passenger-row>div button { display:grid; width:31px; height:31px; place-items:center; padding:0; border:1px solid #ccd6e1; border-radius:50%; color:var(--navy); background:#fff; font-size:20px; line-height:1; cursor:pointer; }
+.passenger-row>div button:last-child { color:#fff; border-color:var(--coral); background:var(--coral); }
+.passenger-row>div button:disabled { color:#aeb8c5; border-color:#e3e8ee; background:#f1f4f7; cursor:not-allowed; }
+.passenger-row>div b { min-width:12px; font-size:12px; text-align:center; }
+.passenger-done { width:100%; height:38px; margin-top:14px; border:0; border-radius:10px; color:var(--navy); background:var(--coral); font-weight:800; cursor:pointer; }
 .search-fields { display:grid; grid-template-columns:minmax(420px,2.25fr) minmax(280px,1.18fr) auto; gap:7px; align-items:center; }
 .route-fields { position:relative; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px; min-width:0; }
 .city-field { position:relative; min-width:0; height:72px; padding:8px 12px; border:1px solid #d9e1ea; border-radius:14px; background:#fff; transition:border-color .18s,box-shadow .18s,transform .18s; }
