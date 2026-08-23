@@ -29,6 +29,44 @@ function formatShortDate(value: string, placeholder: string) {
 }
 function airportLabel(item: FlightPlace) { return `${item.city} (${item.code})`; }
 
+function PassengerSelector({ adults, children, infants, onChange }: {
+  adults: number; children: number; infants: number;
+  onChange: (kind: "adults" | "children" | "infants", value: number) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const total = adults + children + infants;
+
+  useEffect(() => {
+    const close = (event: MouseEvent) => { if (!wrapRef.current?.contains(event.target as Node)) setOpen(false); };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
+
+  const rows: Array<{ kind: "adults" | "children" | "infants"; title: string; detail: string; value: number; minimum: number; maximum: number }> = [
+    { kind: "adults", title: "Adultes", detail: "12 ans et plus", value: adults, minimum: 1, maximum: 9 },
+    { kind: "children", title: "Enfants", detail: "2 à 11 ans", value: children, minimum: 0, maximum: 8 },
+    { kind: "infants", title: "Bébés", detail: "Moins de 2 ans", value: infants, minimum: 0, maximum: adults },
+  ];
+
+  return (
+    <div className="passenger-selector" ref={wrapRef}>
+      <button type="button" className={open ? "active" : ""} aria-expanded={open} onClick={() => setOpen((current) => !current)}>
+        <span><strong>{total} voyageur{total > 1 ? "s" : ""}</strong><small>{children || infants ? `${adults} adulte${adults > 1 ? "s" : ""}, ${children} enfant${children > 1 ? "s" : ""}, ${infants} bébé${infants > 1 ? "s" : ""}` : `${adults} adulte${adults > 1 ? "s" : ""}`}</small></span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+      </button>
+      {open && <div className="passenger-popover">
+        <header><strong>Nombre de passagers</strong><span>9 voyageurs maximum</span></header>
+        {rows.map((row) => <div className="passenger-row" key={row.kind}>
+          <span><strong>{row.title}</strong><small>{row.detail}</small></span>
+          <div><button type="button" aria-label={`Retirer un ${row.title.toLowerCase()}`} disabled={row.value <= row.minimum} onClick={() => onChange(row.kind, row.value - 1)}>−</button><b>{row.value}</b><button type="button" aria-label={`Ajouter un ${row.title.toLowerCase()}`} disabled={total >= 9 || row.value >= row.maximum} onClick={() => onChange(row.kind, row.value + 1)}>+</button></div>
+        </div>)}
+        <button className="passenger-done" type="button" onClick={() => setOpen(false)}>Terminé</button>
+      </div>}
+    </div>
+  );
+}
+
 function fareLevel(price: number | undefined, monthlyPrices: number[]) {
   if (!price || !monthlyPrices.length) return "";
   const sorted = [...monthlyPrices].sort((left, right) => left - right);
@@ -152,7 +190,9 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   const [calendarMonth, setCalendarMonth] = useState(() => new Date(new Date().getFullYear(), new Date().getMonth(), 1));
   const [prices, setPrices] = useState<Record<string, number>>({});
   const [priceStatus, setPriceStatus] = useState<"idle" | "loading" | "ready" | "unavailable">("idle");
-  const [adults, setAdults] = useState("1");
+  const [adults, setAdults] = useState(1);
+  const [children, setChildren] = useState(0);
+  const [infants, setInfants] = useState(0);
   const [travelClass, setTravelClass] = useState("economy");
   const [direct, setDirect] = useState(false);
   const [error, setError] = useState("");
@@ -215,7 +255,9 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     track("search_started", { origin: fromCode, destination: toCode, source: window.location.pathname });
     const target = new URL(searchUrl); target.pathname = "/"; target.search = "";
     target.searchParams.set("flightSearch", route);
-    if (adults !== "1") target.searchParams.set("adults", adults);
+    target.searchParams.set("adults", String(adults));
+    if (children) target.searchParams.set("children", String(children));
+    if (infants) target.searchParams.set("infants", String(infants));
     target.searchParams.set("trip_class", travelClass);
     if (direct) target.searchParams.set("direct", "true");
     target.searchParams.set("utm_source", "hiflight"); target.searchParams.set("utm_medium", "hub"); target.searchParams.set("utm_campaign", "flight_search");
@@ -223,7 +265,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     hotelTarget.searchParams.set("destination", to.replace(/\s*\([^)]*\)\s*$/, "").trim());
     hotelTarget.searchParams.set("checkin", departure);
     if (returnDate) hotelTarget.searchParams.set("checkout", returnDate);
-    hotelTarget.searchParams.set("guests", adults);
+    hotelTarget.searchParams.set("guests", String(adults + children));
     hotelTarget.hash = "hotel-results";
 
     const flightTab = window.open(target.toString(), "_blank");
@@ -240,7 +282,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
       <div className="flight-search-head">
         <div className="search-options">
           <select aria-label="Type de voyage" value={tripType} onChange={(event) => { const value = event.target.value as "roundtrip" | "oneway"; setTripType(value); if (value === "oneway") setReturnDate(""); }}><option value="roundtrip">Aller-retour</option><option value="oneway">Aller simple</option></select>
-          <select aria-label="Nombre de voyageurs" value={adults} onChange={(event) => setAdults(event.target.value)}><option value="1">1 voyageur</option><option value="2">2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="5">5 voyageurs</option><option value="6">6 voyageurs</option></select>
+          <PassengerSelector adults={adults} children={children} infants={infants} onChange={(kind, value) => { if (kind === "adults") { setAdults(value); setInfants((current) => Math.min(current, value)); } else if (kind === "children") setChildren(value); else setInfants(value); }} />
           <select aria-label="Classe de voyage" value={travelClass} onChange={(event) => setTravelClass(event.target.value)}><option value="economy">Économique</option><option value="business">Affaires</option><option value="first">Première</option></select>
         </div>
       </div>
