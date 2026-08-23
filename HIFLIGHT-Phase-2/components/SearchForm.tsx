@@ -193,10 +193,13 @@ export default function SearchForm({ origin = "", destination = "", originCode =
 
   return (
     <form id="recherche" className={`search-form flight-search-v2 ${compact ? "compact" : ""}`} onSubmit={submit}>
-      <div className="search-options">
-        <select aria-label="Type de voyage" value={tripType} onChange={(event) => { const value = event.target.value as "roundtrip" | "oneway"; setTripType(value); if (value === "oneway") setReturnDate(""); }}><option value="roundtrip">Aller-retour</option><option value="oneway">Aller simple</option></select>
-        <select aria-label="Nombre de voyageurs" value={adults} onChange={(event) => setAdults(event.target.value)}><option value="1">1 voyageur</option><option value="2">2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="5">5 voyageurs</option><option value="6">6 voyageurs</option></select>
-        <select aria-label="Classe de voyage" value={travelClass} onChange={(event) => setTravelClass(event.target.value)}><option value="economy">Économique</option><option value="business">Affaires</option><option value="first">Première</option></select>
+      <div className="flight-search-head">
+        <div><i aria-hidden="true">01</i><span><strong>Construisez votre voyage</strong><small>Comparez les itinéraires disponibles</small></span></div>
+        <div className="search-options">
+          <select aria-label="Type de voyage" value={tripType} onChange={(event) => { const value = event.target.value as "roundtrip" | "oneway"; setTripType(value); if (value === "oneway") setReturnDate(""); }}><option value="roundtrip">Aller-retour</option><option value="oneway">Aller simple</option></select>
+          <select aria-label="Nombre de voyageurs" value={adults} onChange={(event) => setAdults(event.target.value)}><option value="1">1 voyageur</option><option value="2">2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="5">5 voyageurs</option><option value="6">6 voyageurs</option></select>
+          <select aria-label="Classe de voyage" value={travelClass} onChange={(event) => setTravelClass(event.target.value)}><option value="economy">Économique</option><option value="business">Affaires</option><option value="first">Première</option></select>
+        </div>
       </div>
       <div className="search-fields">
         <CityField label="Départ" value={from} selectedCode={fromCode} onChange={(value) => updateCity("from", value)} onSelect={(item) => selectCity("from", item)} />
@@ -216,7 +219,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
             </div>
           )}
         </div>
-        <button className="search-button" type="submit"><span>Rechercher</span><b>→</b></button>
+        <button className="search-button" type="submit"><span>Comparer les vols</span><b>→</b></button>
       </div>
       <label className="direct-toggle"><input type="checkbox" checked={direct} onChange={(event) => setDirect(event.target.checked)} /><span /> Vols directs uniquement</label>
       <p className={`form-note ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "HiFlight recherche et compare les offres disponibles selon vos critères."}</p>
