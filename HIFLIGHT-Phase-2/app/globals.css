@@ -95,7 +95,9 @@ h1,h2,h3 { font-family:Outfit,Inter,sans-serif; line-height:1.08; letter-spacing
 .days-grid button:disabled { color:#c5ccd5; cursor:not-allowed; }
 .days-grid button span { font-size:12px; font-weight:700; }
 .days-grid button small { color:#64748b; font-size:8px; white-space:nowrap; }
-.days-grid button.cheapest small { color:#16815e; font-weight:900; }
+.days-grid button.fare-low small { color:#0b8f61; font-weight:900; }
+.days-grid button.fare-medium small { color:#64748b; font-weight:700; }
+.days-grid button.fare-high small { color:#d44747; font-weight:800; }
 .days-grid button.between { border-radius:0; background:#fff0f0; }
 .days-grid button.selected { border-radius:8px; color:#fff; background:var(--navy); }
 .days-grid button.selected small { color:#ffb1b1; }
