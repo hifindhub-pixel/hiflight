@@ -238,7 +238,6 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   return (
     <form id="recherche" className={`search-form flight-search-v2 ${compact ? "compact" : ""}`} onSubmit={submit}>
       <div className="flight-search-head">
-        <div><i aria-hidden="true">01</i><span><strong>Construisez votre voyage</strong><small>Comparez les itinéraires disponibles</small></span></div>
         <div className="search-options">
           <select aria-label="Type de voyage" value={tripType} onChange={(event) => { const value = event.target.value as "roundtrip" | "oneway"; setTripType(value); if (value === "oneway") setReturnDate(""); }}><option value="roundtrip">Aller-retour</option><option value="oneway">Aller simple</option></select>
           <select aria-label="Nombre de voyageurs" value={adults} onChange={(event) => setAdults(event.target.value)}><option value="1">1 voyageur</option><option value="2">2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="5">5 voyageurs</option><option value="6">6 voyageurs</option></select>
