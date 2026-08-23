@@ -22,6 +22,12 @@ type TravelpayoutsAirport = {
   coordinates?: { lat?: number; lon?: number };
 };
 
+type TravelpayoutsCity = {
+  code?: string;
+  name?: string;
+  name_translations?: { fr?: string; en?: string };
+};
+
 function normalize(value = "") {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("fr-FR").trim();
 }
@@ -56,14 +62,19 @@ export async function GET(request: NextRequest) {
   if (includeAirports) params.append("types[]", "airport");
 
   try {
-    const airportDataPromise: Promise<TravelpayoutsAirport[]> = mode === "flight"
-      ? fetch("https://api.travelpayouts.com/data/fr/airports.json", {
-        next: { revalidate: 604800 },
-        signal: AbortSignal.timeout(8000),
-        headers: { Accept: "application/json" },
-      }).then((airportResponse) => airportResponse.ok ? airportResponse.json() as Promise<TravelpayoutsAirport[]> : [])
-        .catch(() => [])
-      : Promise.resolve([]);
+    const locationDataPromise: Promise<{ airports: TravelpayoutsAirport[]; cityNames: Map<string, string> }> = mode === "flight"
+      ? Promise.all([
+        fetch("https://api.travelpayouts.com/data/fr/airports.json", {
+          next: { revalidate: 604800 }, signal: AbortSignal.timeout(8000), headers: { Accept: "application/json" },
+        }).then((airportResponse) => airportResponse.ok ? airportResponse.json() as Promise<TravelpayoutsAirport[]> : []).catch(() => []),
+        fetch("https://api.travelpayouts.com/data/fr/cities.json", {
+          next: { revalidate: 604800 }, signal: AbortSignal.timeout(8000), headers: { Accept: "application/json" },
+        }).then((cityResponse) => cityResponse.ok ? cityResponse.json() as Promise<TravelpayoutsCity[]> : []).catch(() => []),
+      ]).then(([airports, cities]) => ({
+        airports,
+        cityNames: new Map(cities.filter((city) => city.code && city.name).map((city) => [city.code!, city.name_translations?.fr || city.name || city.name_translations?.en || city.code!])),
+      }))
+      : Promise.resolve({ airports: [], cityNames: new Map<string, string>() });
     const response = await fetch(`https://autocomplete.travelpayouts.com/places2?${params}`, {
       next: { revalidate: 86400 },
       signal: AbortSignal.timeout(6000),
@@ -84,7 +95,7 @@ export async function GET(request: NextRequest) {
         let nearbyAirports: Array<Record<string, unknown>> = [];
 
         if (typeof latitude === "number" && typeof longitude === "number") {
-          const airports = await airportDataPromise;
+          const { airports, cityNames } = await locationDataPromise;
           if (airports.length) {
             nearbyAirports = airports
               .filter((airport) => airport.iata_type === "airport" && airport.flightable && airport.code && typeof airport.coordinates?.lat === "number" && typeof airport.coordinates?.lon === "number")
@@ -95,19 +106,24 @@ export async function GET(request: NextRequest) {
               .filter(({ distance }) => distance <= 120)
               .sort((left, right) => left.distance - right.distance)
               .slice(0, 6)
-              .map(({ airport, distance }) => ({
-                id: `airport-${airport.code}`,
-                type: "airport",
-                name: airport.name_translations?.fr || airport.name_translations?.en || airport.name || airport.code,
-                countryName: airport.country_code === primaryCity.country_code ? primaryCity.country_name : airport.country_code,
-                countryCode: airport.country_code || "",
-                stateCode: "",
-                code: airport.code,
-                latitude: airport.coordinates?.lat,
-                longitude: airport.coordinates?.lon,
-                distanceKm: Math.round(distance),
-                referenceCity: primaryCity.name,
-              }));
+              .map(({ airport, distance }) => {
+                const cityName = cityNames.get(airport.city_code || "");
+                const airportName = airport.name_translations?.fr || airport.name || airport.name_translations?.en || airport.code;
+                const displayName = cityName && !normalize(airportName).includes(normalize(cityName)) ? `${cityName} — ${airportName}` : airportName;
+                return {
+                  id: `airport-${airport.code}`,
+                  type: "airport",
+                  name: displayName,
+                  countryName: airport.country_code === primaryCity.country_code ? primaryCity.country_name : airport.country_code,
+                  countryCode: airport.country_code || "",
+                  stateCode: "",
+                  code: airport.code,
+                  latitude: airport.coordinates?.lat,
+                  longitude: airport.coordinates?.lon,
+                  distanceKm: Math.round(distance),
+                  referenceCity: primaryCity.name,
+                };
+              });
           }
         }
 
