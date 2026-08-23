@@ -35,7 +35,7 @@ export default function EsimExplorer() {
 
   return (
     <>
-      <section className="market-hero esim"><div><ServiceTabs active="esim" /><p className="eyebrow">eSIM de voyage</p><h1>Le monde dans votre poche,<br /><span>dès l’atterrissage.</span></h1><p className="esim-hero-copy">Comparez les forfaits de plusieurs spécialistes et gardez votre numéro tout en voyageant connecté.</p><form className="esim-search" onSubmit={submit}>
+      <section className="market-hero esim"><div><ServiceTabs active="esim" includeEsim /><p className="eyebrow">eSIM de voyage</p><h1>Le monde dans votre poche,<br /><span>dès l’atterrissage.</span></h1><p className="esim-hero-copy">Comparez les forfaits de plusieurs spécialistes et gardez votre numéro tout en voyageant connecté.</p><form className="esim-search" onSubmit={submit}>
         <label><span>Destination</span><select value={destination} onChange={(event) => setDestination(event.target.value)}>{destinations.map((item) => <option key={item}>{item}</option>)}</select></label>
         <label><span>Durée du voyage</span><select value={duration} onChange={(event) => setDuration(event.target.value)}><option value="3">3 jours</option><option value="7">7 jours</option><option value="15">15 jours</option><option value="30">30 jours</option><option value="60">60 jours</option></select></label>
         <label><span>Besoin de données</span><select defaultValue="standard"><option value="light">Essentiel · messages</option><option value="standard">Confort · navigation</option><option value="heavy">Intensif · vidéo</option></select></label>
