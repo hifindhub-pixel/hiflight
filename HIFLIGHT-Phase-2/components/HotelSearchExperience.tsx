@@ -133,7 +133,8 @@ export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string
           <ServiceTabs active="hotels" />
           <p className="eyebrow">Hôtels</p>
           <h1>Trouvez le bon hôtel,<br /><span>au bon endroit.</span></h1>
-          <form className="market-search hotel-search" onSubmit={submit}>
+          <form className="market-search hotel-search hotel-search-premium" onSubmit={submit}>
+            <div className="hotel-search-head"><div><span aria-hidden="true">H</span><p><strong>Votre prochain séjour</strong><small>Destination, dates et voyageurs</small></p></div><b>Hôtels dans le monde</b></div>
             <div className="hotel-city-field" ref={cityRef}>
               <label htmlFor="hotel-destination">Destination</label>
               <div className="hotel-city-input">
@@ -157,8 +158,8 @@ export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string
               )}
             </div>
             <HotelDatePicker checkin={draft.checkin} checkout={draft.checkout} onChange={(checkin, checkout) => { setDraft((current) => ({ ...current, checkin, checkout })); setError(""); }} />
-            <label>Voyageurs<select value={draft.guests} onChange={(event) => setDraft((current) => ({ ...current, guests: event.target.value }))}><option value="1">1 voyageur</option><option value="2">2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="5">5 voyageurs</option><option value="6">6 voyageurs</option></select></label>
-            <button type="submit">Comparer</button>
+            <label className="hotel-guests-field">Voyageurs<select value={draft.guests} onChange={(event) => setDraft((current) => ({ ...current, guests: event.target.value }))}><option value="1">1 voyageur</option><option value="2">2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="5">5 voyageurs</option><option value="6">6 voyageurs</option></select></label>
+            <button className="hotel-search-submit" type="submit"><span>Voir les séjours</span><b>→</b></button>
           </form>
           <p className={`hero-disclaimer ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "La destination, les dates et les voyageurs actualisent immédiatement les offres disponibles."}</p>
         </div>
