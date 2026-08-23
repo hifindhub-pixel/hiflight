@@ -9,6 +9,7 @@ export default function Header() {
           <Link href="/#services">Voyager</Link>
           <Link href="/hotels">Hôtels</Link>
           <Link href="/voitures">Voitures</Link>
+          <Link href="/esim">eSIM</Link>
           <Link href="/#destinations">Explorer</Link>
           <a className="nav-cta" href="/#recherche">Comparer</a>
         </nav>
