@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const OMIO_STYLES_ID = "hiflight-omio-widget-styles";
 const OMIO_SCRIPT_ID = "hiflight-omio-widget-script";
@@ -10,26 +10,37 @@ const OMIO_REDIRECT = "https://omio.sjv.io/c/7530270/3963000/7385?u=";
 
 export default function GroundSearch() {
   const [failed, setFailed] = useState(false);
+  const [ready, setReady] = useState(false);
+  const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.getElementById(OMIO_STYLES_ID)?.remove();
     document.getElementById(OMIO_SCRIPT_ID)?.remove();
 
-    const styles = document.createElement("link");
-    styles.id = OMIO_STYLES_ID;
-    styles.rel = "stylesheet";
-    styles.href = `${OMIO_STYLES}?v=${Date.now()}`;
-    document.head.appendChild(styles);
+    let styles = document.getElementById(OMIO_STYLES_ID) as HTMLLinkElement | null;
+    if (!styles) {
+      styles = document.createElement("link");
+      styles.id = OMIO_STYLES_ID;
+      styles.rel = "stylesheet";
+      styles.href = OMIO_STYLES;
+      document.head.appendChild(styles);
+    }
+
+    const reveal = () => {
+      if (mountRef.current?.children.length) setReady(true);
+    };
+    const observer = new MutationObserver(reveal);
+    if (mountRef.current) observer.observe(mountRef.current, { childList: true, subtree: true });
 
     const script = document.createElement("script");
     script.id = OMIO_SCRIPT_ID;
-    script.src = `${OMIO_SCRIPT}?v=${Date.now()}`;
+    script.src = OMIO_SCRIPT;
     script.async = true;
+    script.onload = reveal;
     script.onerror = () => setFailed(true);
     document.body.appendChild(script);
 
     return () => {
-      styles.remove();
+      observer.disconnect();
       script.remove();
     };
   }, []);
@@ -42,15 +53,19 @@ export default function GroundSearch() {
           <a href={OMIO_REDIRECT} target="_blank" rel="noopener noreferrer sponsored">Rechercher sur Omio →</a>
         </div>
       ) : (
-        <div
-          className="omio-widget-mount"
-          data-omio-widget="true"
-          data-partner-id="omiolps"
-          data-redirect={OMIO_REDIRECT}
-          data-layout="fluid"
-          data-new-tab="true"
-          style={{ width: "100%" }}
-        />
+        <div className={`omio-widget-stage ${ready ? "ready" : "loading"}`}>
+          {!ready && <div className="omio-widget-loader" aria-live="polite"><span /><span /><span /><span /></div>}
+          <div
+            ref={mountRef}
+            className="omio-widget-mount"
+            data-omio-widget="true"
+            data-partner-id="omiolps"
+            data-redirect={OMIO_REDIRECT}
+            data-layout="fluid"
+            data-new-tab="true"
+            style={{ width: "100%" }}
+          />
+        </div>
       )}
     </section>
   );
