@@ -9,7 +9,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-inner">
           <ServiceTabs active="flights" />
-          <div className="hero-copy"><h1>Des millions de vols,<br /><span>un seul endroit.</span></h1><p>Des centaines de compagnies et agences comparées gratuitement, sans inscription.</p></div>
+          <div className="hero-copy"><h1>Des millions de vols,<br /><span>un seul endroit.</span></h1></div>
           <SearchForm />
           <div className="trust-line"><span>Gratuit</span><span>Sans inscription</span><span>Réservation chez le partenaire</span></div>
         </div>
@@ -18,10 +18,10 @@ export default function Home() {
       <section className="section services-section" id="services">
         <div className="section-head"><p className="eyebrow">Tout le voyage, au même endroit</p><h2>Un seul départ.<br />Quatre façons de voyager.</h2><p>HiFlight vous aide à comparer chaque étape, puis vous redirige vers le partenaire choisi pour finaliser la réservation.</p></div>
         <div className="service-grid">
-          <Link href="/#recherche"><span>01</span><h3>Vols</h3><p>Comparez les compagnies et agences sur notre moteur dédié.</p><strong>Rechercher un vol →</strong></Link>
-          <Link href="/hotels"><span>02</span><h3>Hôtels</h3><p>Comparez les établissements, les vendeurs et les prix sur la carte.</p><strong>Voir les hôtels →</strong></Link>
-          <Link href="/voitures"><span>03</span><h3>Voitures</h3><p>Comparez les catégories, les loueurs et les points de retrait.</p><strong>Louer une voiture →</strong></Link>
-          <Link href="/trains-bus"><span>04</span><h3>Trains & bus</h3><p>Préparez vos trajets terrestres et comparez les alternatives.</p><strong>Explorer les trajets →</strong></Link>
+          <Link href="/#recherche"><h3>Vols</h3><p>Comparez les compagnies et agences sur notre moteur dédié.</p><strong>Rechercher un vol →</strong></Link>
+          <Link href="/hotels"><h3>Hôtels</h3><p>Comparez les établissements, les vendeurs et les prix sur la carte.</p><strong>Voir les hôtels →</strong></Link>
+          <Link href="/voitures"><h3>Voitures</h3><p>Comparez les catégories, les loueurs et les points de retrait.</p><strong>Louer une voiture →</strong></Link>
+          <Link href="/trains-bus"><h3>Trains & bus</h3><p>Préparez vos trajets terrestres et comparez les alternatives.</p><strong>Explorer les trajets →</strong></Link>
         </div>
       </section>
 
