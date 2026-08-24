@@ -56,6 +56,7 @@ export default function GroundSearch() {
           data-partner-id="omiolps"
           data-redirect={OMIO_REDIRECT}
           data-layout="fluid"
+          data-new-tab="true"
           style={{ width: "100%" }}
         />
       )}
