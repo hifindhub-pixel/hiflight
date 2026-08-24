@@ -186,8 +186,8 @@ function CityField({ label, value, selectedCode, onChange, onSelect }: {
   );
 }
 
-function MonthView({ month, prices, mode, departure, returnDate, onChoose }: {
-  month: Date; prices: Record<string, number>; mode: DateMode; departure: string; returnDate: string; onChoose: (date: string) => void;
+function MonthView({ month, prices, mode, departure, returnDate, minimumDate = "", onChoose }: {
+  month: Date; prices: Record<string, number>; mode: DateMode; departure: string; returnDate: string; minimumDate?: string; onChoose: (date: string) => void;
 }) {
   const today = localIso(new Date());
   const firstDay = new Date(month.getFullYear(), month.getMonth(), 1);
@@ -205,7 +205,7 @@ function MonthView({ month, prices, mode, departure, returnDate, onChoose }: {
         {cells.map((day, index) => {
           if (!day) return <span className="empty-day" key={`empty-${index}`} />;
           const date = localIso(new Date(month.getFullYear(), month.getMonth(), day));
-          const disabled = date < today || (mode === "return" && Boolean(departure) && date < departure);
+          const disabled = date < today || Boolean(minimumDate && date < minimumDate) || (mode === "return" && Boolean(departure) && date < departure);
           const selected = date === departure || date === returnDate;
           const between = Boolean(departure && returnDate && date > departure && date < returnDate);
           const price = prices[date];
@@ -238,8 +238,12 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     { from: "", fromCode: "", to: "", toCode: "", date: "" },
     { from: "", fromCode: "", to: "", toCode: "", date: "" },
   ]);
+  const [multiDateIndex, setMultiDateIndex] = useState<number | null>(null);
   const [error, setError] = useState("");
   const calendarRef = useRef<HTMLDivElement>(null);
+  const activeMultiLeg = multiDateIndex === null ? undefined : multiLegs[multiDateIndex];
+  const calendarFromCode = tripType === "multicity" ? activeMultiLeg?.fromCode || "" : fromCode;
+  const calendarToCode = tripType === "multicity" ? activeMultiLeg?.toCode || "" : toCode;
 
   useEffect(() => {
     if (!calendarOpen) return;
@@ -249,11 +253,11 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   }, [calendarOpen]);
 
   useEffect(() => {
-    if (!calendarOpen || !fromCode || !toCode) { setPriceStatus("idle"); return; }
+    if (!calendarOpen || !calendarFromCode || !calendarToCode) { setPriceStatus("idle"); return; }
     const controller = new AbortController();
     setPriceStatus("loading");
     Promise.all([calendarMonth, addMonths(calendarMonth, 1)].map(async (month) => {
-      const query = new URLSearchParams({ origin: fromCode, destination: toCode, month: monthKey(month), oneWay: String(tripType === "oneway") });
+      const query = new URLSearchParams({ origin: calendarFromCode, destination: calendarToCode, month: monthKey(month), oneWay: String(tripType !== "roundtrip") });
       const response = await fetch(`/api/flight-prices?${query}`, { signal: controller.signal });
       if (!response.ok) throw new Error("prices-unavailable");
       return response.json() as Promise<{ prices: Record<string, number> }>;
@@ -262,7 +266,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
       setPrices({}); setPriceStatus("unavailable");
     });
     return () => controller.abort();
-  }, [calendarOpen, calendarMonth, fromCode, toCode, tripType]);
+  }, [calendarOpen, calendarMonth, calendarFromCode, calendarToCode, tripType]);
 
   function updateCity(kind: "from" | "to", value: string) {
     const match = findAirportCity(value);
@@ -289,12 +293,28 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     setError("");
   }
   function openCalendar(mode: DateMode) {
+    setMultiDateIndex(null);
     setDateMode(mode);
     const value = mode === "departure" ? departure : returnDate;
     if (value) { const date = new Date(`${value}T12:00:00`); setCalendarMonth(new Date(date.getFullYear(), date.getMonth(), 1)); }
     setCalendarOpen(true);
   }
+  function openMultiCalendar(index: number) {
+    setMultiDateIndex(index);
+    setDateMode("departure");
+    const value = multiLegs[index].date;
+    if (value) { const date = new Date(`${value}T12:00:00`); setCalendarMonth(new Date(date.getFullYear(), date.getMonth(), 1)); }
+    setCalendarOpen(true);
+  }
   function chooseDate(date: string) {
+    if (tripType === "multicity" && multiDateIndex !== null) {
+      const minimum = multiDateIndex ? multiLegs[multiDateIndex - 1].date : "";
+      if (minimum && date < minimum) { setError("Choisissez une date postérieure à l’étape précédente."); return; }
+      updateMultiLeg(multiDateIndex, { date });
+      setCalendarOpen(false);
+      setMultiDateIndex(null);
+      return;
+    }
     if (dateMode === "departure") {
       setDeparture(date); if (returnDate && returnDate < date) setReturnDate("");
       if (tripType === "oneway") setCalendarOpen(false); else setDateMode("return");
@@ -354,12 +374,20 @@ export default function SearchForm({ origin = "", destination = "", originCode =
           <SearchSelect<TravelClass> label="Classe de voyage" value={travelClass} className="class-select" options={[{ value: "economy", label: "Économique", detail: "Le tarif standard" }, { value: "business", label: "Affaires", detail: "Plus d’espace et de confort" }, { value: "first", label: "Première", detail: "Le service le plus complet" }]} onChange={setTravelClass} />
         </div>
       </div>
-      {tripType === "multicity" ? <div className="multicity-builder">
+      {tripType === "multicity" ? <div className="multicity-builder" ref={calendarRef}>
         {multiLegs.map((leg, index) => <div className="multicity-leg" key={index}>
           <span className="leg-number">{String(index + 1).padStart(2, "0")}</span>
           <CityField label="Départ" value={leg.from} selectedCode={leg.fromCode} onChange={(value) => updateMultiLeg(index, { from: value, fromCode: "" })} onSelect={(item) => selectMultiCity(index, "from", item)} />
           <CityField label="Destination" value={leg.to} selectedCode={leg.toCode} onChange={(value) => updateMultiLeg(index, { to: value, toCode: "" })} onSelect={(item) => selectMultiCity(index, "to", item)} />
-          <label className="multicity-date"><small>Date du vol</small><input type="date" value={leg.date} min={index ? multiLegs[index - 1].date || localIso(new Date()) : localIso(new Date())} onChange={(event) => updateMultiLeg(index, { date: event.target.value })} /></label>
+          <div className="multicity-date-wrap">
+            <button type="button" className={`multicity-date ${calendarOpen && multiDateIndex === index ? "active" : ""}`} onClick={() => openMultiCalendar(index)}><small>Date</small><strong>{formatShortDate(leg.date, "Choisir")}</strong></button>
+            {calendarOpen && multiDateIndex === index && <div className="fare-calendar multicity-calendar" role="dialog" aria-label={`Choisir la date de l’étape ${index + 1}`}>
+              <div className="calendar-top"><div><strong>Choisissez la date</strong><span>La date doit suivre l’étape précédente.</span></div><button type="button" aria-label="Fermer" onClick={() => { setCalendarOpen(false); setMultiDateIndex(null); }}>×</button></div>
+              <div className="calendar-nav"><button type="button" aria-label="Mois précédent" onClick={() => setCalendarMonth((month) => addMonths(month, -1))} disabled={monthKey(calendarMonth) <= monthKey(new Date())}>‹</button><button type="button" aria-label="Mois suivant" onClick={() => setCalendarMonth((month) => addMonths(month, 1))}>›</button></div>
+              <div className="calendar-grid"><MonthView month={calendarMonth} prices={prices} mode="departure" departure={leg.date} returnDate="" minimumDate={index ? multiLegs[index - 1].date : ""} onChoose={chooseDate} /><MonthView month={addMonths(calendarMonth, 1)} prices={prices} mode="departure" departure={leg.date} returnDate="" minimumDate={index ? multiLegs[index - 1].date : ""} onChoose={chooseDate} /></div>
+              <div className="calendar-status">{!leg.fromCode || !leg.toCode ? "Sélectionnez les villes de cette étape pour voir les prix." : priceStatus === "loading" ? "Chargement des meilleurs prix…" : priceStatus === "unavailable" ? "Dates disponibles — les prix seront confirmés lors de la recherche." : priceStatus === "ready" && !Object.keys(prices).length ? "Aucun tarif en cache pour ces dates." : priceStatus === "ready" ? "Prix indicatifs issus du cache Travelpayouts." : ""}</div>
+            </div>}
+          </div>
           {multiLegs.length > 2 && <button type="button" className="remove-leg" aria-label={`Supprimer l’étape ${index + 1}`} onClick={() => setMultiLegs((current) => current.filter((_, legIndex) => legIndex !== index))}>×</button>}
         </div>)}
         <div className="multicity-actions"><button type="button" disabled={multiLegs.length >= 4} onClick={() => setMultiLegs((current) => [...current, { from: current.at(-1)?.to || "", fromCode: current.at(-1)?.toCode || "", to: "", toCode: "", date: "" }])}>+ Ajouter une étape</button><button className="search-button" type="submit"><span>Rechercher</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4" /></svg></b></button></div>
