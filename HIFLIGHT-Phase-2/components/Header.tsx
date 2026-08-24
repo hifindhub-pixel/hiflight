@@ -6,7 +6,7 @@ export default function Header() {
       <div className="nav-wrap">
         <Link className="brand brand-logo" href="/" aria-label="Accueil HiFlight">
           <img src="/hiflight-favicon.svg" alt="" width="42" height="42" />
-          <span className="brand-wordmark"><b>Hi</b>Flight</span>
+          <span className="brand-wordmark">Flight</span>
         </Link>
         <nav aria-label="Navigation principale">
           <Link href="/esim">eSIM</Link>
