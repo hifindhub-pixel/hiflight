@@ -8,6 +8,7 @@ import { track } from "./Analytics";
 type Props = { origin?: string; destination?: string; originCode?: string; destinationCode?: string; compact?: boolean };
 type DateMode = "departure" | "return";
 type TripType = "roundtrip" | "oneway" | "multicity";
+type TravelClass = "economy" | "business" | "first";
 type MultiLeg = { from: string; fromCode: string; to: string; toCode: string; date: string };
 type FlightPlace = AirportCity & { id?: string; type?: "city" | "airport"; distanceKm?: number; referenceCity?: string };
 type ApiPlace = { id: string; type?: "city" | "airport"; name: string; countryName: string; code: string; distanceKm?: number; referenceCity?: string };
@@ -35,6 +36,35 @@ function passengerSuffix(travelClass: string, adults: number, children: number, 
   if (infants) return `${classCode}${adults}${children}${infants}`;
   if (children) return `${classCode}${adults}${children}`;
   return `${classCode}${adults}`;
+}
+
+type SearchSelectOption<T extends string> = { value: T; label: string; detail: string };
+
+function SearchSelect<T extends string>({ label, value, options, onChange, className = "" }: {
+  label: string; value: T; options: SearchSelectOption<T>[]; onChange: (value: T) => void; className?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const selected = options.find((option) => option.value === value) || options[0];
+
+  useEffect(() => {
+    const close = (event: MouseEvent) => { if (!wrapRef.current?.contains(event.target as Node)) setOpen(false); };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
+
+  return <div className={`search-select ${className}`} ref={wrapRef}>
+    <button type="button" className={open ? "active" : ""} aria-expanded={open} onClick={() => setOpen((current) => !current)}>
+      <span><strong>{selected.label}</strong></span>
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+    </button>
+    {open && <div className="search-select-popover" role="listbox" aria-label={label}>
+      <header><strong>{label}</strong></header>
+      <div className="search-select-list">{options.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === value} className={option.value === value ? "selected" : ""} onClick={() => { onChange(option.value); setOpen(false); }}>
+        <span><strong>{option.label}</strong><small>{option.detail}</small></span><i aria-hidden="true" />
+      </button>)}</div>
+    </div>}
+  </div>;
 }
 
 function PassengerSelector({ adults, children, infants, onChange }: {
@@ -202,7 +232,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [infants, setInfants] = useState(0);
-  const [travelClass, setTravelClass] = useState("economy");
+  const [travelClass, setTravelClass] = useState<TravelClass>("economy");
   const [direct, setDirect] = useState(false);
   const [multiLegs, setMultiLegs] = useState<MultiLeg[]>([
     { from: "", fromCode: "", to: "", toCode: "", date: "" },
@@ -319,9 +349,9 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     <form id="recherche" className={`search-form flight-search-v2 ${compact ? "compact" : ""}`} onSubmit={submit}>
       <div className="flight-search-head">
         <div className="search-options">
-          <select aria-label="Type de voyage" value={tripType} onChange={(event) => { const value = event.target.value as TripType; setTripType(value); if (value === "oneway") setReturnDate(""); if (value === "multicity") setMultiLegs((current) => current.map((leg, index) => index === 0 && !leg.fromCode && fromCode ? { ...leg, from, fromCode, to, toCode, date: departure } : index === 1 && !leg.fromCode && toCode ? { ...leg, from: to, fromCode: toCode } : leg)); }}><option value="roundtrip">Aller-retour</option><option value="oneway">Aller simple</option><option value="multicity">Multi-destinations</option></select>
+          <SearchSelect<TripType> label="Votre trajet" value={tripType} className="trip-select" options={[{ value: "roundtrip", label: "Aller-retour", detail: "Un vol aller et un vol retour" }, { value: "oneway", label: "Aller simple", detail: "Un seul trajet" }, { value: "multicity", label: "Multi-destinations", detail: "Plusieurs étapes dans le même voyage" }]} onChange={(value) => { setTripType(value); if (value === "oneway") setReturnDate(""); if (value === "multicity") setMultiLegs((current) => current.map((leg, index) => index === 0 && !leg.fromCode && fromCode ? { ...leg, from, fromCode, to, toCode, date: departure } : index === 1 && !leg.fromCode && toCode ? { ...leg, from: to, fromCode: toCode } : leg)); }} />
           <PassengerSelector adults={adults} children={children} infants={infants} onChange={(kind, value) => { if (kind === "adults") { setAdults(value); setInfants((current) => Math.min(current, value)); } else if (kind === "children") setChildren(value); else setInfants(value); }} />
-          <select aria-label="Classe de voyage" value={travelClass} onChange={(event) => setTravelClass(event.target.value)}><option value="economy">Économique</option><option value="business">Affaires</option><option value="first">Première</option></select>
+          <SearchSelect<TravelClass> label="Classe de voyage" value={travelClass} className="class-select" options={[{ value: "economy", label: "Économique", detail: "Le tarif standard" }, { value: "business", label: "Affaires", detail: "Plus d’espace et de confort" }, { value: "first", label: "Première", detail: "Le service le plus complet" }]} onChange={setTravelClass} />
         </div>
       </div>
       {tripType === "multicity" ? <div className="multicity-builder">
