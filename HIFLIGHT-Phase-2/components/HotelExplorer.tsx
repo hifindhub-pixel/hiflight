@@ -66,12 +66,6 @@ export default function HotelExplorer({ stay22Aid, search }: { stay22Aid: string
         </div>
       </div>
 
-      {!hasDates && (
-        <div className="hotel-live-notice">
-          <span aria-hidden="true">i</span>
-          <p><strong>Les prix varient selon les dates.</strong> Utilisez la recherche ci-dessus pour obtenir des tarifs correspondant exactement à votre séjour.</p>
-        </div>
-      )}
 
       {stay22Url ? (
         <section className={`hotel-live-frame view-${view}`} aria-label="Résultats d’hôtels HiFlight">
