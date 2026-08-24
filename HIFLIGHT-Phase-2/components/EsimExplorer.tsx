@@ -32,13 +32,15 @@ export default function EsimExplorer() {
     };
     const observer = new MutationObserver(localizeWidget);
     observer.observe(widgetRef.current, { childList: true, subtree: true });
+    const localizationTimer = window.setInterval(localizeWidget, 500);
+    const localizationStop = window.setTimeout(() => window.clearInterval(localizationTimer), 12000);
     const script = document.createElement("script");
     script.async = true;
     script.src = "https://tpwdg.com/content?trs=514265&shmarker=714763&locale=fr&powered_by=false&color_button=%23f2685f&color_focused=%23f2685f&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=12&plain=false&no_labels=true&promo_id=8588&campaign_id=541";
     script.charset = "utf-8";
     script.onerror = () => setFailed(true);
     widgetRef.current.appendChild(script);
-    return () => observer.disconnect();
+    return () => { observer.disconnect(); window.clearInterval(localizationTimer); window.clearTimeout(localizationStop); };
   }, []);
 
   return (
