@@ -20,6 +20,12 @@ export default function EsimExplorer() {
       if (!root) return;
       const component = root.querySelector<HTMLElement>("tp-cascoon");
       const scope: ParentNode = component?.shadowRoot || root;
+      if (component?.shadowRoot && !component.shadowRoot.querySelector("#hiflight-airalo-layer-fix")) {
+        const style = document.createElement("style");
+        style.id = "hiflight-airalo-layer-fix";
+        style.textContent = ':host{display:block!important;min-height:320px!important;overflow:visible!important}[class*="search"],[class*="input"],[class*="content"]{overflow:visible!important}[role="listbox"],[class*="dropdown"],[class*="suggest"],[class*="options"],[class*="menu"]{position:absolute!important;z-index:2147483000!important;max-height:330px!important;overflow-y:auto!important}';
+        component.shadowRoot.appendChild(style);
+      }
       const replacements: Record<string, string> = {
         "Local, regional and global eSIMs for travellers": "Des eSIM locales, régionales et mondiales",
         "Stay connected, wherever you travel, at affordable rates": "Restez connecté partout, avec un forfait adapté à votre voyage",
@@ -48,22 +54,19 @@ export default function EsimExplorer() {
   return (
     <>
       <section className="market-hero esim"><div>
-        <p className="eyebrow">eSIM de voyage</p>
         <h1>Le monde dans votre poche,<br /><span>dès l’atterrissage.</span></h1>
         <p className="esim-hero-copy">Choisissez votre destination, consultez les forfaits disponibles et partez connecté sans changer de carte SIM physique.</p>
         <section className="esim-airalo-shell" aria-label="Recherche de forfaits eSIM Airalo">
-          <header><div><span className="esim-airalo-mark">A</span><p><strong>Forfaits Airalo</strong><small>Recherche par destination</small></p></div><b>Offres actualisées</b></header>
           {failed ? <div className="esim-widget-fallback"><p>Le widget est momentanément indisponible.</p><a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener">Voir les forfaits Airalo →</a></div> : <div className="esim-widget" ref={widgetRef}><noscript><a href={AIRALO_LINK}>Voir les forfaits Airalo</a></noscript></div>}
         </section>
         <p className="hero-disclaimer">Les prix, volumes de données et durées sont confirmés sur le site du partenaire.</p>
       </div></section>
 
       <section className="esim-results section">
-        <div className="esim-results-head"><div><p className="eyebrow">Plus de choix</p><h2>Deux alternatives,<br />une connexion partout.</h2></div><p>Comparez aussi les conditions et la couverture proposées par d’autres spécialistes avant de choisir votre forfait.</p></div>
+        <div className="esim-results-head"><div><h2>Deux alternatives,<br />une connexion partout.</h2></div><p>Comparez aussi les conditions et la couverture proposées par d’autres spécialistes avant de choisir votre forfait.</p></div>
         <div className="esim-alternatives">
           {alternatives.map((provider) => <article className="esim-provider" key={provider.name}>
             <div className={`esim-provider-mark ${provider.tone}`}>{provider.mark}</div>
-            <div className="esim-provider-rank">Alternative</div>
             <h3>{provider.name}</h3><p>{provider.description}</p>
             <ul><li>Activation 100 % numérique</li><li>Forfaits selon la destination</li><li>Votre SIM principale reste en place</li></ul>
             <a href={provider.href} target="_blank" rel="nofollow sponsored noopener">Découvrir les forfaits <span aria-hidden="true">→</span></a>
@@ -71,7 +74,7 @@ export default function EsimExplorer() {
           <article className="esim-photo-card"><div><span>Prêt avant le décollage</span><h3>Installez aujourd’hui.<br />Activez à l’arrivée.</h3></div></article>
         </div>
 
-        <div className="esim-how"><p className="eyebrow">En trois étapes</p><h2>Connecté dès l’atterrissage.</h2><div><article><b>01</b><h3>Choisissez</h3><p>Sélectionnez le pays, le volume de données et la durée adaptés.</p></article><article><b>02</b><h3>Installez</h3><p>Scannez le QR code reçu après votre achat, avant le départ.</p></article><article><b>03</b><h3>Activez</h3><p>Activez l’eSIM à l’arrivée et gardez votre numéro principal.</p></article></div></div>
+        <div className="esim-how"><h2>Connecté dès l’atterrissage.</h2><div><article><h3>Choisissez votre forfait</h3><p>Sélectionnez le pays, le volume de données et la durée adaptés.</p></article><article><h3>Installez-le avant de partir</h3><p>Scannez le QR code reçu après votre achat, avant le départ.</p></article><article><h3>Activez-le à l’arrivée</h3><p>Activez l’eSIM à l’arrivée et gardez votre numéro principal.</p></article></div></div>
         <p className="affiliate-disclosure">HiFlight peut percevoir une commission si vous réservez via ces liens, sans coût supplémentaire pour vous. Les prix et conditions sont ceux affichés par chaque partenaire.</p>
       </section>
     </>
