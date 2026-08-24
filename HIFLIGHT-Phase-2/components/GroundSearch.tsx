@@ -36,14 +36,6 @@ export default function GroundSearch() {
 
   return (
     <section className="omio-search-shell" aria-label="Recherche de trains et de bus avec Omio">
-      <div className="omio-search-heading">
-        <div>
-          <span aria-hidden="true">H</span>
-          <p><strong>Comparez trains et bus</strong><small>Recherche assurée par Omio</small></p>
-        </div>
-        <b>Réservation partenaire</b>
-      </div>
-
       {failed ? (
         <div className="omio-search-fallback" role="alert">
           <p>Le moteur de recherche est momentanément indisponible.</p>
