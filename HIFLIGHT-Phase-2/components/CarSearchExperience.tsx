@@ -92,7 +92,6 @@ export default function CarSearchExperience() {
       <section className="market-hero cars">
         <div>
           <ServiceTabs active="cars" />
-          <p className="eyebrow">Location de voiture</p>
           <h1>Prenez la route,<br /><span>en toute liberté.</span></h1>
           <form className={`car-search-premium ${differentDropoff ? "has-dropoff" : ""}`} onSubmit={submit}>
             <div className="car-search-topline">
