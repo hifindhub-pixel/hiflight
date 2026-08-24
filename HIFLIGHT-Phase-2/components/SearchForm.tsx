@@ -136,6 +136,7 @@ function CityField({ label, value, selectedCode, onChange, onSelect }: {
 
   return (
     <div className="city-field" ref={wrapRef}>
+      <span className="city-field-label">{label}</span>
       <div className="city-input-wrap">
         <input aria-label={label} value={value} onFocus={() => setOpen(true)} onChange={(event) => { onChange(event.target.value); setOpen(true); setActive(0); }} onKeyDown={onKeyDown} placeholder={label === "Départ" ? "Ville ou aéroport de départ" : "Ville ou aéroport d’arrivée"} role="combobox" aria-expanded={open} aria-autocomplete="list" autoComplete="off" />
         {selectedCode && <b className="iata-chip">{selectedCode}</b>}
@@ -331,7 +332,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
           <label className="multicity-date"><small>Date du vol</small><input type="date" value={leg.date} min={index ? multiLegs[index - 1].date || localIso(new Date()) : localIso(new Date())} onChange={(event) => updateMultiLeg(index, { date: event.target.value })} /></label>
           {multiLegs.length > 2 && <button type="button" className="remove-leg" aria-label={`Supprimer l’étape ${index + 1}`} onClick={() => setMultiLegs((current) => current.filter((_, legIndex) => legIndex !== index))}>×</button>}
         </div>)}
-        <div className="multicity-actions"><button type="button" disabled={multiLegs.length >= 4} onClick={() => setMultiLegs((current) => [...current, { from: current.at(-1)?.to || "", fromCode: current.at(-1)?.toCode || "", to: "", toCode: "", date: "" }])}>+ Ajouter une étape</button><button className="search-button" type="submit"><span>Comparer cet itinéraire</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" /></svg></b></button></div>
+        <div className="multicity-actions"><button type="button" disabled={multiLegs.length >= 4} onClick={() => setMultiLegs((current) => [...current, { from: current.at(-1)?.to || "", fromCode: current.at(-1)?.toCode || "", to: "", toCode: "", date: "" }])}>+ Ajouter une étape</button><button className="search-button" type="submit"><span>Rechercher</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4" /></svg></b></button></div>
       </div> : <div className="search-fields">
         <div className="route-fields">
           <CityField label="Départ" value={from} selectedCode={fromCode} onChange={(value) => updateCity("from", value)} onSelect={(item) => selectCity("from", item)} />
@@ -352,7 +353,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
             </div>
           )}
         </div>
-        <button className="search-button" type="submit"><span>Comparer les vols</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" /></svg></b></button>
+        <button className="search-button" type="submit"><span>Rechercher</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4" /></svg></b></button>
       </div>}
       <label className="direct-toggle"><input type="checkbox" checked={direct} onChange={(event) => setDirect(event.target.checked)} /><span /> Vols directs uniquement</label>
       <p className={`form-note ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "HiFlight recherche et compare les offres disponibles selon vos critères."}</p>
