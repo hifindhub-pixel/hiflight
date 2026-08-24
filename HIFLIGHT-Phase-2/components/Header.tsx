@@ -4,7 +4,10 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="nav-wrap">
-        <Link className="brand" href="/" aria-label="Accueil HIFLIGHT"><span>Hi</span>Flight</Link>
+        <Link className="brand brand-logo" href="/" aria-label="Accueil HiFlight">
+          <img src="/hiflight-favicon.svg" alt="" width="42" height="42" />
+          <span className="brand-wordmark"><b>Hi</b>Flight</span>
+        </Link>
         <nav aria-label="Navigation principale">
           <Link href="/esim">eSIM</Link>
           <Link className="nav-cta nav-worldmap" href="/world-map">World Map</Link>
