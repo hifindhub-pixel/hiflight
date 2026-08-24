@@ -11,7 +11,7 @@ export default function Home() {
           <ServiceTabs active="flights" />
           <div className="hero-copy"><h1>Des millions de vols,<br /><span>un seul endroit.</span></h1></div>
           <SearchForm />
-          <div className="trust-line"><span>Gratuit</span><span>Sans inscription</span><span>Réservation chez le partenaire</span></div>
+          <div className="trust-line"><span>Gratuit</span><span>Sans inscription</span></div>
         </div>
       </section>
 
