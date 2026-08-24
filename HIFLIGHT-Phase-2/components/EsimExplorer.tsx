@@ -18,16 +18,18 @@ export default function EsimExplorer() {
     const localizeWidget = () => {
       const root = widgetRef.current;
       if (!root) return;
+      const component = root.querySelector<HTMLElement>("tp-cascoon");
+      const scope: ParentNode = component?.shadowRoot || root;
       const replacements: Record<string, string> = {
         "Local, regional and global eSIMs for travellers": "Des eSIM locales, régionales et mondiales",
         "Stay connected, wherever you travel, at affordable rates": "Restez connecté partout, avec un forfait adapté à votre voyage",
         "Search": "Rechercher",
       };
-      root.querySelectorAll<HTMLElement>("h1,h2,h3,p,span,button").forEach((element) => {
+      scope.querySelectorAll<HTMLElement>("h1,h2,h3,p,span,button").forEach((element) => {
         const value = element.textContent?.trim();
         if (value && replacements[value] && element.children.length === 0) element.textContent = replacements[value];
       });
-      const input = root.querySelector<HTMLInputElement>('input[placeholder*="Search data packs"]');
+      const input = scope.querySelector<HTMLInputElement>('input[placeholder*="Search data packs"]');
       if (input) input.placeholder = "Rechercher parmi plus de 200 pays et régions";
     };
     const observer = new MutationObserver(localizeWidget);
