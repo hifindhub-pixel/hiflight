@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "HiFlight — Le hub de tous vos voyages", template: "%s | HiFlight" },
   description: "Comparez vols, hôtels, voitures, trains et bus, puis retrouvez vos voyages sur votre globe et votre passeport HiFlight.",
-  icons: { icon: [{ url: "/hiflight-favicon.svg", type: "image/svg+xml" }, { url: "/hiflight-favicon.png", type: "image/png" }], shortcut: "/hiflight-favicon.png" },
   alternates: { canonical: "/" },
   openGraph: { type: "website", locale: "fr_FR", siteName: "HIFLIGHT", images: [{ url: "/hiflight-hero.jpg", width: 1600, height: 900, alt: "Voyage en avion au coucher du soleil" }] },
   twitter: { card: "summary_large_image", images: ["/hiflight-hero.jpg"] }
