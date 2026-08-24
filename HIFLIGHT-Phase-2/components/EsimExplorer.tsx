@@ -15,12 +15,30 @@ export default function EsimExplorer() {
   useEffect(() => {
     if (!widgetRef.current || widgetRef.current.dataset.loaded) return;
     widgetRef.current.dataset.loaded = "true";
+    const localizeWidget = () => {
+      const root = widgetRef.current;
+      if (!root) return;
+      const replacements: Record<string, string> = {
+        "Local, regional and global eSIMs for travellers": "Des eSIM locales, régionales et mondiales",
+        "Stay connected, wherever you travel, at affordable rates": "Restez connecté partout, avec un forfait adapté à votre voyage",
+        "Search": "Rechercher",
+      };
+      root.querySelectorAll<HTMLElement>("h1,h2,h3,p,span,button").forEach((element) => {
+        const value = element.textContent?.trim();
+        if (value && replacements[value] && element.children.length === 0) element.textContent = replacements[value];
+      });
+      const input = root.querySelector<HTMLInputElement>('input[placeholder*="Search data packs"]');
+      if (input) input.placeholder = "Rechercher parmi plus de 200 pays et régions";
+    };
+    const observer = new MutationObserver(localizeWidget);
+    observer.observe(widgetRef.current, { childList: true, subtree: true });
     const script = document.createElement("script");
     script.async = true;
     script.src = "https://tpwdg.com/content?trs=514265&shmarker=714763&locale=fr&powered_by=false&color_button=%23f2685f&color_focused=%23f2685f&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=12&plain=false&no_labels=true&promo_id=8588&campaign_id=541";
     script.charset = "utf-8";
     script.onerror = () => setFailed(true);
     widgetRef.current.appendChild(script);
+    return () => observer.disconnect();
   }, []);
 
   return (
