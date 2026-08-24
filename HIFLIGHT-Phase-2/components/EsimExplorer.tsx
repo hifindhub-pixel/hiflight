@@ -15,11 +15,17 @@ export default function EsimExplorer() {
   useEffect(() => {
     if (!widgetRef.current || widgetRef.current.dataset.loaded) return;
     widgetRef.current.dataset.loaded = "true";
+    let shadowObserver: MutationObserver | null = null;
     const localizeWidget = () => {
       const root = widgetRef.current;
       if (!root) return;
       const component = root.querySelector<HTMLElement>("tp-cascoon");
       const scope: ParentNode = component?.shadowRoot || root;
+      if (component) component.setAttribute("lang", "fr");
+      if (component?.shadowRoot && !shadowObserver) {
+        shadowObserver = new MutationObserver(localizeWidget);
+        shadowObserver.observe(component.shadowRoot, { childList: true, subtree: true, characterData: true, attributes: true });
+      }
       if (component?.shadowRoot && !component.shadowRoot.querySelector("#hiflight-airalo-layer-fix")) {
         const style = document.createElement("style");
         style.id = "hiflight-airalo-layer-fix";
@@ -31,24 +37,24 @@ export default function EsimExplorer() {
         "Stay connected, wherever you travel, at affordable rates": "Restez connecté partout, avec un forfait adapté à votre voyage",
         "Search": "Rechercher",
       };
-      scope.querySelectorAll<HTMLElement>("h1,h2,h3,p,span,button").forEach((element) => {
+      scope.querySelectorAll<HTMLElement>("*").forEach((element) => {
         const value = element.textContent?.trim();
         if (value && replacements[value] && element.children.length === 0) element.textContent = replacements[value];
       });
-      const input = scope.querySelector<HTMLInputElement>('input[placeholder*="Search data packs"]');
-      if (input) input.placeholder = "Rechercher parmi plus de 200 pays et régions";
+      scope.querySelectorAll<HTMLInputElement>("input").forEach((input) => {
+        if (input.placeholder.toLowerCase().includes("search data packs")) input.placeholder = "Rechercher parmi plus de 200 pays et régions";
+      });
     };
     const observer = new MutationObserver(localizeWidget);
     observer.observe(widgetRef.current, { childList: true, subtree: true });
     const localizationTimer = window.setInterval(localizeWidget, 500);
-    const localizationStop = window.setTimeout(() => window.clearInterval(localizationTimer), 12000);
     const script = document.createElement("script");
     script.async = true;
     script.src = "https://tpwdg.com/content?trs=514265&shmarker=714763&locale=fr&powered_by=false&color_button=%23f2685f&color_focused=%23f2685f&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=12&plain=false&no_labels=true&promo_id=8588&campaign_id=541";
     script.charset = "utf-8";
     script.onerror = () => setFailed(true);
     widgetRef.current.appendChild(script);
-    return () => { observer.disconnect(); window.clearInterval(localizationTimer); window.clearTimeout(localizationStop); };
+    return () => { observer.disconnect(); shadowObserver?.disconnect(); window.clearInterval(localizationTimer); };
   }, []);
 
   return (
