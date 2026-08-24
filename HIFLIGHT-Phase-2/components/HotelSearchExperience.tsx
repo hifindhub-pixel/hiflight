@@ -131,7 +131,6 @@ export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string
       <section className="market-hero hotels">
         <div>
           <ServiceTabs active="hotels" />
-          <p className="eyebrow">Hôtels</p>
           <h1>Trouvez le bon hôtel,<br /><span>au bon endroit.</span></h1>
           <form className="market-search hotel-search hotel-search-premium" onSubmit={submit}>
             <div className="hotel-city-field" ref={cityRef}>
