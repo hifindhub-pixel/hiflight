@@ -5,7 +5,7 @@ export default function Header() {
     <header className="site-header">
       <div className="nav-wrap">
         <Link className="brand brand-logo" href="/" aria-label="Accueil HiFlight">
-          <img src="/hiflight-logo.svg" alt="HiFlight" width="161" height="51" />
+          <img src="/hiflight-logo.png" alt="HiFlight" width="1027" height="328" />
         </Link>
         <nav aria-label="Navigation principale">
           <Link href="/esim">eSIM</Link>
