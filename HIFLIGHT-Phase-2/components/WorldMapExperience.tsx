@@ -1,137 +1,316 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { BookOpen, Check, ChevronLeft, ChevronRight, Globe2, List, Plane, Search, Share2, Star, X } from "lucide-react";
 import { useAuth } from "./AuthProvider";
-import { WORLD_COUNTRIES } from "@/lib/worldCountries";
+import HiflightGlobe, { GlobeMode } from "./HiflightGlobe";
+import { GLOBE_COUNTRIES } from "@/lib/world-map/globeCountries";
+import { VECTOR_FLAGS } from "@/lib/world-map/vectorFlags";
 import styles from "./WorldMapExperience.module.css";
+import motionStyles from "./PassportPageTurn.module.css";
 
-type CountryState = { country_code: string; visited: boolean; wishlist: boolean; visited_at?: string | null; note?: string | null; photo_url?: string | null };
-type States = Record<string, CountryState>;
-type Mode = "visited" | "wishlist" | "passport";
+type CountryState = {
+  country_code: string;
+  visited: boolean;
+  wishlist: boolean;
+  visited_at?: string | null;
+  note?: string | null;
+  photo_url?: string | null;
+};
+type StateMap = Record<string, CountryState>;
+type PrimarySection = "globe" | "passport";
+type ViewMode = "map" | "list";
+type Country = { code: string; code2: string | null; name: string };
 
-function flagEmoji(code2: string | null) {
-  if (!code2) return "•";
-  return String.fromCodePoint(...code2.toUpperCase().split("").map((letter) => 127397 + letter.charCodeAt(0)));
+const HIDDEN_FLAG_CODE2 = new Set(["IL"]);
+const NON_COUNTRY_TERRITORY_CODES = new Set(["ATF", "FLK", "GRL", "NCL", "PRI"]);
+const COUNTRY_CATALOG_ADDITIONS: Country[] = [
+  { code: "ATG", code2: "AG", name: "Antigua-et-Barbuda" }, { code: "BRB", code2: "BB", name: "Barbade" },
+  { code: "CPV", code2: "CV", name: "Cap-Vert" }, { code: "COM", code2: "KM", name: "Comores" },
+  { code: "DMA", code2: "DM", name: "Dominique" }, { code: "FSM", code2: "FM", name: "Micronésie" },
+  { code: "GRD", code2: "GD", name: "Grenade" }, { code: "KIR", code2: "KI", name: "Kiribati" },
+  { code: "MHL", code2: "MH", name: "Îles Marshall" }, { code: "MUS", code2: "MU", name: "Maurice" },
+  { code: "MDV", code2: "MV", name: "Maldives" }, { code: "NRU", code2: "NR", name: "Nauru" },
+  { code: "PLW", code2: "PW", name: "Palaos" }, { code: "KNA", code2: "KN", name: "Saint-Christophe-et-Niévès" },
+  { code: "LCA", code2: "LC", name: "Sainte-Lucie" }, { code: "VCT", code2: "VC", name: "Saint-Vincent-et-les-Grenadines" },
+  { code: "WSM", code2: "WS", name: "Samoa" }, { code: "STP", code2: "ST", name: "São Tomé-et-Príncipe" },
+  { code: "SYC", code2: "SC", name: "Seychelles" }, { code: "TON", code2: "TO", name: "Tonga" },
+  { code: "TUV", code2: "TV", name: "Tuvalu" },
+];
+
+const COUNTRIES: Country[] = Array.from(
+  [...GLOBE_COUNTRIES, ...COUNTRY_CATALOG_ADDITIONS].reduce((catalog, country) => {
+    if (country.code !== "ESH" && !NON_COUNTRY_TERRITORY_CODES.has(country.code) && !catalog.has(country.code)) {
+      catalog.set(country.code, { code: country.code, code2: country.code2, name: country.name });
+    }
+    return catalog;
+  }, new Map<string, Country>()),
+).map(([, country]) => country);
+
+const COUNTRY_BY_CODE = new Map(COUNTRIES.map((country) => [country.code, country]));
+const PLURAL_COUNTRY_CODES = new Set(["ARE", "BHS", "COM", "USA", "FJI", "MHL", "MDV", "NLD", "PHL", "SLB", "SYC"]);
+const NO_ARTICLE_COUNTRY_CODES = new Set(["CYP", "CUB", "DJI", "HTI", "ISR", "MDG", "MLT", "MUS", "OMN", "QAT", "SGP"]);
+const MASCULINE_ENDING_E_COUNTRY_CODES = new Set(["BLZ", "KHM", "MEX", "MOZ", "ZWE"]);
+const VOWEL_SOUND = /^[AEIOUYÉÈÊËÀÂÄÎÏÔÖÙÛÜ]/i;
+
+function countryWithArticle(country: Country | undefined) {
+  if (!country) return "ce pays";
+  if (NO_ARTICLE_COUNTRY_CODES.has(country.code)) return country.name;
+  if (PLURAL_COUNTRY_CODES.has(country.code)) return `les ${country.name}`;
+  if (VOWEL_SOUND.test(country.name)) return `l’${country.name}`;
+  const feminine = country.name.endsWith("e") && !MASCULINE_ENDING_E_COUNTRY_CODES.has(country.code);
+  return `${feminine ? "la" : "le"} ${country.name}`;
+}
+
+function normalizeSearch(value: string) {
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("fr").trim();
+}
+
+function flagSource(code2: string | null) {
+  if (!code2 || HIDDEN_FLAG_CODE2.has(code2.toUpperCase())) return null;
+  const vector = VECTOR_FLAGS[code2.toLowerCase()];
+  return vector ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(vector)}` : null;
 }
 
 function formatStampDate(value?: string | null) {
   if (!value) return "PAYS VISITÉ";
-  return new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(`${value}T12:00:00`)).toUpperCase();
+  const date = new Date(`${value}T12:00:00`);
+  if (Number.isNaN(date.getTime())) return "PAYS VISITÉ";
+  return new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "short", year: "numeric" }).format(date).toUpperCase();
+}
+
+function PassportPage({ country, state, side, onPress, interactive = true }: { country?: Country; state?: CountryState; side: "left" | "right"; onPress: (code: string) => void; interactive?: boolean }) {
+  const pageClassName = `${styles.bookPage} ${styles[side]} ${motionStyles.bookPage} ${motionStyles[side]}`;
+  if (!country) return <div className={pageClassName}><Plane className={styles.nextStopIcon} aria-hidden="true" /><strong>PROCHAINE ESCALE</strong><p>Une nouvelle page reste à écrire.</p></div>;
+  const flag = flagSource(country.code2);
+  const content = (
+    <>
+      <div className={styles.bookPageTopline}><span>{flag ? <img src={flag} alt="" /> : null}{country.name}</span><b>{country.code}</b></div>
+      {flag ? <img className={styles.bookFlagWatermark} src={flag} alt="" /> : null}
+      <div className={styles.passportStamp}><small>HIFLIGHT</small><strong>{formatStampDate(state?.visited_at)}</strong><span>{country.name}</span></div>
+      <p className={styles.bookNote}>Une page de plus dans votre histoire.</p>
+    </>
+  );
+  if (!interactive) return <div className={pageClassName}>{content}</div>;
+  return <button className={pageClassName} onClick={() => onPress(country.code)}>{content}</button>;
 }
 
 export default function WorldMapExperience() {
   const { user, loading: authLoading } = useAuth();
-  const [mode, setMode] = useState<Mode>("visited");
-  const [states, setStates] = useState<States>({});
-  const [selectedCode, setSelectedCode] = useState<string | null>(null);
+  const [states, setStates] = useState<StateMap>({});
+  const [primarySection, setPrimarySection] = useState<PrimarySection>("globe");
+  const [mode, setMode] = useState<GlobeMode>("visited");
+  const [viewMode, setViewMode] = useState<ViewMode>("map");
   const [search, setSearch] = useState("");
+  const [pendingCode, setPendingCode] = useState<string | null>(null);
+  const [passportOpen, setPassportOpen] = useState(false);
+  const [spreadIndex, setSpreadIndex] = useState(0);
+  const [turnDirection, setTurnDirection] = useState<"next" | "previous" | null>(null);
+  const [turnTarget, setTurnTarget] = useState<number | null>(null);
+  const pageTurnTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [shareMessage, setShareMessage] = useState("");
+  const [demoMode, setDemoMode] = useState(false);
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get("view") === "passport") setMode("passport");
+    const parameters = new URLSearchParams(window.location.search);
+    if (parameters.get("view") === "passport") setPrimarySection("passport");
+    const localPreview = ["localhost", "127.0.0.1", "terminal.local"].includes(window.location.hostname);
+    if ((process.env.NODE_ENV === "development" || localPreview) && parameters.get("demo") === "1") setDemoMode(true);
   }, []);
 
   useEffect(() => {
     if (authLoading) return;
+    if (demoMode) {
+      const demoCountries = ["FRA", "ESP", "MAR", "DZA", "ITA", "USA", "JPN", "BRA"];
+      setStates(Object.fromEntries(demoCountries.map((code, index) => [code, { country_code: code, visited: true, wishlist: false, visited_at: `202${Math.min(index, 6)}-0${(index % 8) + 1}-12` }])))
+      setLoading(false);
+      return;
+    }
     if (!user) { setLoading(false); return; }
     setLoading(true);
     fetch("/api/user/countries", { cache: "no-store" })
       .then(async (response) => {
         const payload = await response.json();
         if (!response.ok) throw new Error(payload.error || "Impossible de charger votre carte.");
-        const next: States = {};
+        const next: StateMap = {};
         (payload.countries as CountryState[]).forEach((country) => { next[country.country_code] = country; });
         setStates(next);
       })
-      .catch((reason) => setError(reason.message))
+      .catch((reason) => setError(reason instanceof Error ? reason.message : "Impossible de charger votre carte."))
       .finally(() => setLoading(false));
-  }, [user, authLoading]);
+  }, [user, authLoading, demoMode]);
 
-  const selectedCountry = WORLD_COUNTRIES.find((country) => country.code === selectedCode) || null;
-  const selectedState = selectedCode ? states[selectedCode] : undefined;
-  const visitedCountries = useMemo(() => WORLD_COUNTRIES.filter((country) => states[country.code]?.visited).sort((a, b) => a.name.localeCompare(b.name, "fr")), [states]);
-  const wishlistCountries = useMemo(() => WORLD_COUNTRIES.filter((country) => states[country.code]?.wishlist).sort((a, b) => a.name.localeCompare(b.name, "fr")), [states]);
-  const searchResults = useMemo(() => {
-    const query = search.trim().toLocaleLowerCase("fr");
-    if (!query) return [];
-    return WORLD_COUNTRIES.filter((country) => country.name.toLocaleLowerCase("fr").includes(query) || country.code.toLowerCase().includes(query)).slice(0, 8);
-  }, [search]);
+  const visitedCountries = useMemo(() => COUNTRIES.filter((country) => states[country.code]?.visited).sort((a, b) => a.name.localeCompare(b.name, "fr")), [states]);
+  const wishlistCountries = useMemo(() => COUNTRIES.filter((country) => states[country.code]?.wishlist).sort((a, b) => a.name.localeCompare(b.name, "fr")), [states]);
+  const activeCountries = mode === "visited" ? visitedCountries : wishlistCountries;
+  const filteredCountries = useMemo(() => {
+    const query = normalizeSearch(search);
+    const source = query ? COUNTRIES : activeCountries;
+    return source.filter((country) => !query || normalizeSearch(`${country.name} ${country.code}`).includes(query));
+  }, [activeCountries, search]);
+  const pendingCountry = pendingCode ? COUNTRY_BY_CODE.get(pendingCode) : undefined;
+  const pendingState = pendingCode ? states[pendingCode] : undefined;
+  const pendingIsActive = mode === "visited" ? pendingState?.visited : pendingState?.wishlist;
+  const spreadCount = Math.max(1, Math.ceil(visitedCountries.length / 2));
+  const leftCountry = visitedCountries[spreadIndex * 2];
+  const rightCountry = visitedCountries[spreadIndex * 2 + 1];
+  const targetSpreadIndex = turnTarget ?? spreadIndex;
+  const targetLeftCountry = visitedCountries[targetSpreadIndex * 2];
+  const targetRightCountry = visitedCountries[targetSpreadIndex * 2 + 1];
+  const baseLeftCountry = turnDirection === "previous" ? targetLeftCountry : leftCountry;
+  const baseRightCountry = turnDirection === "next" ? targetRightCountry : rightCountry;
 
-  async function updateCountry(target: "visited" | "wishlist") {
-    if (!selectedCountry || saving) return;
-    const current = states[selectedCountry.code] || { country_code: selectedCountry.code, visited: false, wishlist: false };
-    const nextActive = !current[target];
+  useEffect(() => { setSpreadIndex((current) => Math.min(current, Math.max(0, spreadCount - 1))); }, [spreadCount]);
+  useEffect(() => () => { if (pageTurnTimer.current) clearTimeout(pageTurnTimer.current); }, []);
+
+  function turnPassportPage(delta: -1 | 1) {
+    if (turnDirection) return;
+    const nextIndex = spreadIndex + delta;
+    if (nextIndex < 0 || nextIndex >= spreadCount) return;
+    setTurnTarget(nextIndex);
+    setTurnDirection(delta === 1 ? "next" : "previous");
+    pageTurnTimer.current = setTimeout(() => {
+      setSpreadIndex(nextIndex);
+      setTurnDirection(null);
+      setTurnTarget(null);
+      pageTurnTimer.current = null;
+    }, 840);
+  }
+
+  const updateCountry = useCallback(async (code: string, target: GlobeMode) => {
+    if (saving) return;
+    const current = states[code] || { country_code: code, visited: false, wishlist: false };
+    const active = !current[target];
     const next: CountryState = {
       ...current,
-      country_code: selectedCountry.code,
-      visited: target === "visited" ? nextActive : false,
-      wishlist: target === "wishlist" ? nextActive : false,
-      visited_at: target === "visited" && nextActive ? current.visited_at || new Date().toISOString().slice(0, 10) : null,
+      country_code: code,
+      visited: target === "visited" ? active : false,
+      wishlist: target === "wishlist" ? active : false,
+      visited_at: target === "visited" && active ? current.visited_at || new Date().toISOString().slice(0, 10) : null,
     };
-    setStates((previous) => ({ ...previous, [selectedCountry.code]: next }));
+    setStates((previous) => ({ ...previous, [code]: next }));
+    if (demoMode) {
+      setPendingCode(null);
+      return;
+    }
     setSaving(true);
     setError("");
     try {
-      const response = await fetch("/api/user/countries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ countryCode: next.country_code, visited: next.visited, wishlist: next.wishlist, visitedAt: next.visited_at }) });
+      const response = await fetch("/api/user/countries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ countryCode: code, visited: next.visited, wishlist: next.wishlist, visitedAt: next.visited_at }) });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Sauvegarde impossible.");
-      setStates((previous) => ({ ...previous, [selectedCountry.code]: payload.country }));
+      setStates((previous) => ({ ...previous, [code]: payload.country }));
+      setPendingCode(null);
     } catch (reason) {
-      setStates((previous) => ({ ...previous, [selectedCountry.code]: current }));
+      setStates((previous) => ({ ...previous, [code]: current }));
       setError(reason instanceof Error ? reason.message : "Sauvegarde impossible.");
-    } finally {
-      setSaving(false);
-    }
+    } finally { setSaving(false); }
+  }, [demoMode, saving, states]);
+
+  async function sharePassport() {
+    const url = `${window.location.origin}/world-map?view=passport`;
+    const shareData = { title: "Mon passeport HiFlight", text: `J’ai déjà visité ${visitedCountries.length} pays avec HiFlight.`, url };
+    try {
+      if (navigator.share) await navigator.share(shareData);
+      else { await navigator.clipboard.writeText(url); setShareMessage("Lien copié !"); }
+    } catch { setShareMessage(""); }
   }
 
-  if (authLoading || loading) return <main className={styles.loading}><div className={styles.loader} /><p>Ouverture de votre carte…</p></main>;
-
-  if (!user) return <main className={styles.guest}><section><span>World Map HiFlight</span><h1>Votre monde vous attend.</h1><p>Connectez-vous pour colorer les pays visités, préparer vos prochaines destinations et ouvrir votre passeport personnel.</p><div><Link href="/connexion">Se connecter</Link><Link href="/connexion">Créer un compte</Link></div></section></main>;
+  if (authLoading || loading) return <main className={styles.loading}><div className={styles.loader} /><p>Préparation de votre globe…</p></main>;
+  if (!user && !demoMode) return <main className={styles.guest}><section><span>World Map HiFlight</span><h1>Votre monde vous attend.</h1><p>Connectez-vous pour colorer les pays avec leurs vrais drapeaux et remplir votre passeport personnel.</p><div><Link href="/connexion">Se connecter</Link><Link href="/connexion">Créer un compte</Link></div></section></main>;
 
   return (
     <main className={styles.page}>
       <header className={styles.hero}>
-        <div><span>Votre espace voyage</span><h1>Mes voyages</h1><p>{visitedCountries.length ? `${visitedCountries.length} pays déjà ajoutés à votre passeport.` : "Commencez par sélectionner votre premier pays."}</p></div>
-        <div className={styles.stats}><div><strong>{visitedCountries.length}</strong><span>visités</span></div><div><strong>{wishlistCountries.length}</strong><span>à découvrir</span></div><div><strong>{Math.round((visitedCountries.length / WORLD_COUNTRIES.length) * 100)}%</strong><span>du monde</span></div></div>
+        <div><span>VOTRE ESPACE VOYAGE</span><h1>Mes voyages</h1><p>{visitedCountries.length ? `${visitedCountries.length} pays ajoutés à votre passeport.` : "Tournez le globe et marquez votre premier pays."}</p></div>
+        <div className={styles.stats}><div><strong>{visitedCountries.length}</strong><span>visités</span></div><div><strong>{wishlistCountries.length}</strong><span>à visiter</span></div><div><strong>{Math.round((visitedCountries.length / COUNTRIES.length) * 100)}%</strong><span>du monde</span></div></div>
       </header>
 
-      <nav className={styles.tabs} aria-label="World Map et passeport">
-        <button className={mode === "visited" ? styles.active : ""} onClick={() => setMode("visited")}><span>Carte</span>Pays visités</button>
-        <button className={mode === "wishlist" ? styles.active : ""} onClick={() => setMode("wishlist")}><span>Projets</span>À visiter</button>
-        <button className={mode === "passport" ? styles.active : ""} onClick={() => setMode("passport")}><span>Collection</span>Mon passeport</button>
+      <nav className={styles.primaryTabs} aria-label="Globe et passeport">
+        <button className={primarySection === "globe" ? styles.activePrimary : ""} onClick={() => setPrimarySection("globe")}><Globe2 size={19} />Globe</button>
+        <button className={primarySection === "passport" ? styles.activePrimary : ""} onClick={() => setPrimarySection("passport")}><BookOpen size={19} />Passeport</button>
       </nav>
 
-      {mode === "passport" ? (
-        <section className={styles.passportSection}>
-          <div className={styles.passportCover}><div className={styles.passportGlobe} aria-hidden="true">✦</div><span>HIFLIGHT</span><h2>PASSEPORT</h2><p>{user.email}</p></div>
-          <div className={styles.passportContent}>
-            <div className={styles.passportHeading}><div><span>Collection personnelle</span><h2>Les pages de votre voyage</h2></div><p>Chaque pays marqué comme visité reçoit automatiquement sa page et son tampon.</p></div>
-            {!visitedCountries.length ? <div className={styles.emptyPassport}><h3>Votre passeport attend son premier tampon.</h3><p>Ouvrez la carte et ajoutez un pays visité.</p><button onClick={() => setMode("visited")}>Ouvrir ma carte</button></div> : <div className={styles.passportGrid}>{visitedCountries.map((country, index) => {
-              const state = states[country.code];
-              return <article className={styles.passportPage} key={country.code}><div className={styles.pageTop}><span>{flagEmoji(country.code2)} {country.name}</span><b>{String(index + 1).padStart(2, "0")}</b></div><div className={styles.watermark}>{country.code}</div><div className={styles.stamp}><small>HIFLIGHT</small><strong>{formatStampDate(state.visited_at)}</strong><span>{country.name}</span></div><p>Une page de plus dans votre histoire.</p></article>;
-            })}</div>}
-          </div>
+      {primarySection === "passport" ? (
+        <section className={styles.passportHome}>
+          {!visitedCountries.length ? (
+            <div className={styles.emptyPassport}><img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" /><h2>Votre passeport vous attend</h2><p>Tournez le globe et marquez votre premier pays visité pour recevoir votre premier tampon.</p><button onClick={() => setPrimarySection("globe")}><Globe2 size={20} />Ouvrir mon globe</button></div>
+          ) : !passportOpen ? (
+            <div className={styles.closedPassport}><button onClick={() => setPassportOpen(true)} aria-label="Ouvrir le passeport"><img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" /><span><BookOpen size={18} />Ouvrir le passeport</span></button></div>
+          ) : (
+            <div className={styles.openPassportWrap}>
+              <div className={`${styles.openBook} ${motionStyles.openBook}`}>
+                <img className={motionStyles.openBookBackground} src="/world-map/hiflight-passport-open.png" alt="" aria-hidden="true" />
+                <div className={motionStyles.bookPages}>
+                  <PassportPage country={baseLeftCountry} state={baseLeftCountry ? states[baseLeftCountry.code] : undefined} side="left" onPress={(code) => { setMode("visited"); setPendingCode(code); }} />
+                  <PassportPage country={baseRightCountry} state={baseRightCountry ? states[baseRightCountry.code] : undefined} side="right" onPress={(code) => { setMode("visited"); setPendingCode(code); }} />
+                </div>
+                {turnDirection ? (
+                  <div className={`${motionStyles.turnPage} ${turnDirection === "next" ? motionStyles.turnNext : motionStyles.turnPrevious}`} aria-hidden="true">
+                    <div className={`${motionStyles.turnFace} ${motionStyles.turnFront}`}>
+                      <PassportPage
+                        country={turnDirection === "next" ? rightCountry : leftCountry}
+                        state={states[(turnDirection === "next" ? rightCountry : leftCountry)?.code || ""]}
+                        side={turnDirection === "next" ? "right" : "left"}
+                        onPress={() => undefined}
+                        interactive={false}
+                      />
+                    </div>
+                    <div className={`${motionStyles.turnFace} ${motionStyles.turnBack}`}>
+                      <PassportPage
+                        country={turnDirection === "next" ? targetLeftCountry : targetRightCountry}
+                        state={states[(turnDirection === "next" ? targetLeftCountry : targetRightCountry)?.code || ""]}
+                        side={turnDirection === "next" ? "left" : "right"}
+                        onPress={() => undefined}
+                        interactive={false}
+                      />
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+              <div className={styles.bookNavigation}><button aria-label="Pages précédentes" disabled={spreadIndex === 0 || Boolean(turnDirection)} onClick={() => turnPassportPage(-1)}><ChevronLeft /></button><div aria-live="polite"><strong>Pages {spreadIndex * 2 + 1}–{Math.min(spreadIndex * 2 + 2, visitedCountries.length)}</strong><span>Utilisez les flèches pour tourner les pages</span></div><button aria-label="Pages suivantes" disabled={spreadIndex === spreadCount - 1 || Boolean(turnDirection)} onClick={() => turnPassportPage(1)}><ChevronRight /></button></div>
+              <button className={styles.closePassport} onClick={() => setPassportOpen(false)}><BookOpen size={16} />Fermer le passeport</button>
+            </div>
+          )}
+          {visitedCountries.length ? <button className={styles.sharePassport} onClick={sharePassport}><Share2 size={20} />{shareMessage || "Partager mon passeport"}</button> : null}
         </section>
       ) : (
-        <section className={styles.workspace}>
-          <div className={styles.mapCard}>
-            <div className={styles.mapToolbar}><div><strong>{mode === "visited" ? "Les pays que vous avez explorés" : "Les pays que vous voulez découvrir"}</strong><span>Cliquez directement sur la carte</span></div><div className={styles.legend}><i className={mode === "visited" ? styles.coral : styles.blue} />{mode === "visited" ? "Visité" : "À visiter"}</div></div>
-            <div className={styles.mapScroller}><svg className={styles.map} viewBox="0 0 1000 500" role="img" aria-label="Carte interactive du monde">{WORLD_COUNTRIES.map((country) => {
-              const active = mode === "visited" ? states[country.code]?.visited : states[country.code]?.wishlist;
-              return <path key={country.code} d={country.d} className={`${active ? styles.mapActive : ""} ${selectedCode === country.code ? styles.mapSelected : ""}`} data-mode={mode} onClick={() => setSelectedCode(country.code)}><title>{country.name}</title></path>;
-            })}</svg></div>
+        <section className={styles.globeWorkspace}>
+          <div className={styles.controlRow}>
+            <div className={styles.segment}><button className={mode === "visited" ? styles.segmentActive : ""} onClick={() => setMode("visited")}><Check size={16} />Visités</button><button className={mode === "wishlist" ? styles.segmentActive : ""} onClick={() => setMode("wishlist")}><Star size={16} />À visiter</button></div>
+            <div className={styles.segment}><button className={viewMode === "map" ? styles.viewActive : ""} onClick={() => setViewMode("map")}><Globe2 size={16} />Carte</button><button className={viewMode === "list" ? styles.viewActive : ""} onClick={() => setViewMode("list")}><List size={16} />Liste</button></div>
           </div>
-
-          <aside className={styles.sidePanel}>
-            <div className={styles.search}><label htmlFor="country-search">Rechercher un pays</label><input id="country-search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="France, Japon, Brésil…" />{searchResults.length > 0 && <div>{searchResults.map((country) => <button key={country.code} onClick={() => { setSelectedCode(country.code); setSearch(""); }}><span>{flagEmoji(country.code2)}</span>{country.name}<b>{country.code}</b></button>)}</div>}</div>
-            {selectedCountry ? <div className={styles.countryDetail}><div className={styles.flag}>{flagEmoji(selectedCountry.code2)}</div><span>{selectedCountry.code}</span><h2>{selectedCountry.name}</h2><p>{selectedState?.visited ? "Ce pays fait partie de votre passeport." : selectedState?.wishlist ? "Cette destination est dans vos projets." : "Ajoutez ce pays à votre histoire HiFlight."}</p><button className={selectedState?.visited ? styles.selectedAction : ""} disabled={saving} onClick={() => updateCountry("visited")}>{selectedState?.visited ? "Retirer des pays visités" : "J’y suis allé"}</button><button className={selectedState?.wishlist ? styles.selectedWish : ""} disabled={saving} onClick={() => updateCountry("wishlist")}>{selectedState?.wishlist ? "Retirer de mes projets" : "Je veux y aller"}</button></div> : <div className={styles.selectPrompt}><div>⌖</div><h2>Choisissez un pays</h2><p>Sélectionnez-le sur la carte ou utilisez la recherche.</p></div>}
-            {error && <p className={styles.error} role="alert">{error}</p>}
-          </aside>
+          {viewMode === "map" ? <HiflightGlobe states={states} mode={mode} onCountryPress={setPendingCode} /> : (
+            <div className={styles.listPanel}>
+              <label className={styles.listSearch}><Search size={19} /><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Rechercher un pays" /></label>
+              <div className={styles.countryList}>{filteredCountries.length ? filteredCountries.map((country) => {
+                const flag = flagSource(country.code2); const state = states[country.code]; const active = mode === "visited" ? state?.visited : state?.wishlist;
+                return <button key={country.code} onClick={() => setPendingCode(country.code)}><span className={styles.listFlag}>{flag ? <img src={flag} alt="" /> : <Globe2 size={20} />}</span><span><strong>{country.name}</strong><small>{state?.visited ? "Pays visité" : state?.wishlist ? "À visiter" : "Non ajouté"}</small></span><b className={active ? styles.countryActive : ""}>{active ? <Check size={17} /> : "+"}</b></button>;
+              }) : <div className={styles.emptyList}>Aucun pays dans cette liste.</div>}</div>
+            </div>
+          )}
+          <p className={styles.globeSummary}>{mode === "visited" ? `${visitedCountries.length} pays visités` : `${wishlistCountries.length} destinations à découvrir`} · {COUNTRIES.length} pays disponibles</p>
         </section>
       )}
+
+      {error ? <p className={styles.error} role="alert">{error}</p> : null}
+      {pendingCountry ? (
+        <div className={styles.modalBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setPendingCode(null); }}>
+          <section className={styles.countryModal} role="dialog" aria-modal="true" aria-labelledby="country-modal-title">
+            <button className={styles.modalClose} onClick={() => setPendingCode(null)} aria-label="Fermer"><X /></button>
+            <div className={styles.modalFlag}>{flagSource(pendingCountry.code2) ? <img src={flagSource(pendingCountry.code2)!} alt={`Drapeau ${pendingCountry.name}`} /> : <Globe2 size={46} />}</div>
+            <span>{pendingCountry.code}</span>
+            <h2 id="country-modal-title">{pendingIsActive ? `Retirer ${countryWithArticle(pendingCountry)} ?` : mode === "visited" ? `Passer ${countryWithArticle(pendingCountry)} en visité ?` : `Ajouter ${countryWithArticle(pendingCountry)} à vos envies ?`}</h2>
+            <p>{pendingIsActive ? "Cette action peut être annulée à tout moment." : mode === "visited" ? "Le pays apparaîtra avec son vrai drapeau sur le globe et recevra son tampon dans votre passeport." : "Cette destination apparaîtra dans votre liste À visiter."}</p>
+            <button className={styles.confirmCountry} disabled={saving} onClick={() => updateCountry(pendingCountry.code, mode)}>{saving ? "Enregistrement…" : pendingIsActive ? "Confirmer le retrait" : mode === "visited" ? "Oui, j’y suis allé" : "Ajouter à ma liste"}</button>
+            <button className={styles.cancelCountry} onClick={() => setPendingCode(null)}>Annuler</button>
+          </section>
+        </div>
+      ) : null}
     </main>
   );
 }

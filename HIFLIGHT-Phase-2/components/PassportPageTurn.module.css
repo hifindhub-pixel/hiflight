@@ -1,0 +1,161 @@
+.openBook {
+  position: relative !important;
+  display: block !important;
+  width: 100%;
+  min-height: 0 !important;
+  aspect-ratio: 1024 / 683;
+  overflow: visible;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  perspective: 2200px;
+  isolation: isolate;
+}
+
+.openBook::after {
+  display: none !important;
+}
+
+.openBookBackground {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.bookPages {
+  position: absolute;
+  z-index: 1;
+  inset: 4.1% 7.8% 5.6%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.bookPage.bookPage {
+  min-width: 0;
+  padding: clamp(10px, 2.35vw, 24px);
+  background: transparent;
+}
+
+.bookPage.left {
+  border-radius: 17% 1% 1% 11%;
+  box-shadow: inset -15px 0 24px #76634a12;
+}
+
+.bookPage.right {
+  border-radius: 1% 17% 11% 1%;
+  box-shadow: inset 15px 0 24px #76634a12;
+}
+
+.turnPage {
+  position: absolute;
+  z-index: 5;
+  top: 4.1%;
+  bottom: 5.6%;
+  width: 42.2%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  will-change: transform, filter;
+}
+
+.turnFace {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(90deg, #f2eadb 0%, #eee5d5 86%, #c7b89f 100%);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.turnFace .bookPage {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.turnFront {
+  z-index: 2;
+}
+
+.turnBack {
+  transform: rotateY(180deg);
+  background: linear-gradient(90deg, #c7b89f 0%, #eee5d5 14%, #f2eadb 100%);
+}
+
+.turnNext {
+  left: 50%;
+  transform-origin: left center;
+  animation: turnPassportNext 840ms cubic-bezier(0.42, 0.02, 0.18, 1) both;
+}
+
+.turnPrevious {
+  left: 7.8%;
+  transform-origin: right center;
+  animation: turnPassportPrevious 840ms cubic-bezier(0.42, 0.02, 0.18, 1) both;
+}
+
+@keyframes turnPassportNext {
+  0% {
+    transform: rotateY(0deg) translateZ(0);
+    filter: drop-shadow(0 0 0 #0000);
+  }
+  46% {
+    transform: rotateY(-82deg) translateZ(10px) skewY(-1deg);
+    filter: drop-shadow(-18px 14px 16px #24170655);
+  }
+  55% {
+    transform: rotateY(-101deg) translateZ(12px) skewY(1deg);
+    filter: drop-shadow(17px 14px 16px #2417064d);
+  }
+  100% {
+    transform: rotateY(-180deg) translateZ(0);
+    filter: drop-shadow(0 0 0 #0000);
+  }
+}
+
+@keyframes turnPassportPrevious {
+  0% {
+    transform: rotateY(0deg) translateZ(0);
+    filter: drop-shadow(0 0 0 #0000);
+  }
+  46% {
+    transform: rotateY(82deg) translateZ(10px) skewY(1deg);
+    filter: drop-shadow(18px 14px 16px #24170655);
+  }
+  55% {
+    transform: rotateY(101deg) translateZ(12px) skewY(-1deg);
+    filter: drop-shadow(-17px 14px 16px #2417064d);
+  }
+  100% {
+    transform: rotateY(180deg) translateZ(0);
+    filter: drop-shadow(0 0 0 #0000);
+  }
+}
+
+@media (max-width: 760px) {
+  .bookPages {
+    inset: 4.3% 7.8% 5.8%;
+  }
+
+  .bookPage.bookPage {
+    padding: 9px;
+  }
+
+  .turnPage {
+    top: 4.3%;
+    bottom: 5.8%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .turnNext,
+  .turnPrevious {
+    animation-duration: 1ms;
+  }
+}
