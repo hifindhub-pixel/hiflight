@@ -81,7 +81,6 @@ export default function EsimExplorer() {
         </div>
 
         <div className="esim-how"><h2>Connecté dès l’atterrissage.</h2><div><article><h3>Choisissez votre forfait</h3><p>Sélectionnez le pays, le volume de données et la durée adaptés.</p></article><article><h3>Installez-le avant de partir</h3><p>Scannez le QR code reçu après votre achat, avant le départ.</p></article><article><h3>Activez-le à l’arrivée</h3><p>Activez l’eSIM à l’arrivée et gardez votre numéro principal.</p></article></div></div>
-        <p className="affiliate-disclosure">HiFlight peut percevoir une commission si vous réservez via ces liens, sans coût supplémentaire pour vous. Les prix et conditions sont ceux affichés par chaque partenaire.</p>
       </section>
     </>
   );
