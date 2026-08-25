@@ -1,14 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, MouseEvent, useCallback, useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { BookOpenCheck, MapPinned, ShieldCheck, X } from "lucide-react";
 import { useAuth } from "./AuthProvider";
 import styles from "./AuthExperience.module.css";
 
 type Mode = "signin" | "signup" | "forgot" | "reset";
 
-export default function AuthExperience() {
+type AuthExperienceProps = {
+  onClose?: () => void;
+};
+
+export default function AuthExperience({ onClose }: AuthExperienceProps) {
   const router = useRouter();
   const { user, loading: authLoading, refresh } = useAuth();
   const [mode, setMode] = useState<Mode>("signin");
@@ -19,6 +25,41 @@ export default function AuthExperience() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const titleId = useId();
+  const subtitleId = useId();
+  const emailInput = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+
+  const close = useCallback(() => {
+    if (onClose) onClose();
+    else router.push("/");
+  }, [onClose, router]);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") close();
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const controls = dialogRef.current.querySelectorAll<HTMLElement>("button:not([disabled]), a[href], input:not([disabled])");
+      const first = controls.item(0);
+      const last = controls.item(controls.length - 1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    const focusTimer = window.setTimeout(() => emailInput.current?.focus(), 80);
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [close]);
 
   useEffect(() => {
     const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
@@ -56,6 +97,11 @@ export default function AuthExperience() {
     setMessage("");
     setPassword("");
     setConfirmPassword("");
+    window.setTimeout(() => emailInput.current?.focus(), 0);
+  }
+
+  function closeFromBackdrop(event: MouseEvent<HTMLDivElement>) {
+    if (event.target === event.currentTarget) close();
   }
 
   async function submit(event: FormEvent) {
@@ -84,9 +130,7 @@ export default function AuthExperience() {
         setMessage("Votre compte est créé. Confirmez votre adresse depuis l’e-mail reçu, puis connectez-vous.");
         return;
       }
-      if (mode === "reset") {
-        setMessage("Votre mot de passe a été modifié.");
-      }
+      if (mode === "reset") setMessage("Votre mot de passe a été modifié.");
       await refresh();
       router.push("/world-map");
     } catch (reason) {
@@ -96,46 +140,58 @@ export default function AuthExperience() {
     }
   }
 
-  const title = mode === "signin" ? "Bon retour parmi nous." : mode === "signup" ? "Votre voyage commence ici." : mode === "forgot" ? "Retrouvez votre compte." : "Nouveau mot de passe.";
-  const subtitle = mode === "signin" ? "Connectez-vous pour retrouver votre carte et votre passeport." : mode === "signup" ? "Un seul compte pour le site et l’application HiFlight." : mode === "forgot" ? "Nous vous enverrons un lien sécurisé par e-mail." : "Choisissez un mot de passe que vous n’utilisez pas ailleurs.";
+  const title = mode === "signin" ? "Votre prochain voyage commence ici." : mode === "signup" ? "Créez votre espace voyage." : mode === "forgot" ? "Retrouvez votre compte." : "Choisissez un nouveau mot de passe.";
+  const subtitle = mode === "signin" ? "Connectez-vous pour retrouver votre World Map, votre passeport et vos projets de voyage." : mode === "signup" ? "Un seul compte pour HiFlight sur le web et dans l’application." : mode === "forgot" ? "Nous vous enverrons un lien sécurisé par e-mail." : "Utilisez un mot de passe que vous n’employez pas ailleurs.";
 
   return (
-    <main className={styles.page}>
-      <section className={styles.visual}>
-        <Link className={styles.back} href="/">← Retour à HiFlight</Link>
-        <div className={styles.visualCopy}>
-          <span>Votre espace voyage</span>
-          <h1>Le monde que vous avez vu.<br />Celui qu’il vous reste à découvrir.</h1>
-          <div className={styles.preview}>
-            <div className={styles.globe} aria-hidden="true"><span /><i /><b /></div>
-            <div><strong>World Map & Passeport</strong><p>Vos pays et vos souvenirs, sur tous vos appareils.</p></div>
+    <div className={styles.backdrop} onMouseDown={closeFromBackdrop}>
+      <section ref={dialogRef} className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={subtitleId}>
+        <button className={styles.close} type="button" onClick={close} aria-label="Fermer la fenêtre de connexion"><X aria-hidden="true" /></button>
+
+        <div className={styles.content}>
+          <div className={styles.logoWrap}>
+            <Image className={styles.logo} src="/hiflight-logo.svg" alt="HiFlight" width={330} height={110} priority />
           </div>
-        </div>
-      </section>
+          <h1 id={titleId}>{title}</h1>
+          <p className={styles.subtitle} id={subtitleId}>{subtitle}</p>
 
-      <section className={styles.panel}>
-        <div className={styles.formWrap}>
-          <div className={styles.brand}>Hi<span>Flight</span></div>
-          <h2>{title}</h2>
-          <p className={styles.subtitle}>{subtitle}</p>
-
-          {(mode === "signin" || mode === "signup") && <div className={styles.tabs}><button type="button" className={mode === "signin" ? styles.active : ""} onClick={() => switchMode("signin")}>Connexion</button><button type="button" className={mode === "signup" ? styles.active : ""} onClick={() => switchMode("signup")}>Créer un compte</button></div>}
+          {(mode === "signin" || mode === "signup") ? (
+            <div className={styles.tabs} aria-label="Choisir le type d’accès">
+              <button type="button" className={mode === "signin" ? styles.active : ""} onClick={() => switchMode("signin")}>Connexion</button>
+              <button type="button" className={mode === "signup" ? styles.active : ""} onClick={() => switchMode("signup")}>Créer un compte</button>
+            </div>
+          ) : null}
 
           <form onSubmit={submit}>
-            {mode === "signup" && <label>Nom complet<input autoComplete="name" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Votre nom" required /></label>}
-            {mode !== "reset" && <label>Adresse e-mail<input type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="vous@exemple.fr" required /></label>}
-            {(mode === "signin" || mode === "signup" || mode === "reset") && <label>Mot de passe<input type="password" autoComplete={mode === "signin" ? "current-password" : "new-password"} value={password} onChange={(event) => setPassword(event.target.value)} placeholder="8 caractères minimum" minLength={8} required /></label>}
-            {(mode === "signup" || mode === "reset") && <label>Confirmer le mot de passe<input type="password" autoComplete="new-password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Saisissez-le à nouveau" minLength={8} required /></label>}
-            {error && <p className={styles.error} role="alert">{error}</p>}
-            {message && <p className={styles.success} role="status">{message}</p>}
+            {mode === "signup" ? <label>Nom complet<input autoComplete="name" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Votre nom" required /></label> : null}
+            {mode !== "reset" ? <label>Adresse e-mail<input ref={emailInput} type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="vous@exemple.fr" required /></label> : null}
+            {(mode === "signin" || mode === "signup" || mode === "reset") ? <label>Mot de passe<input type="password" autoComplete={mode === "signin" ? "current-password" : "new-password"} value={password} onChange={(event) => setPassword(event.target.value)} placeholder="8 caractères minimum" minLength={8} required /></label> : null}
+            {(mode === "signup" || mode === "reset") ? <label>Confirmer le mot de passe<input type="password" autoComplete="new-password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Saisissez-le à nouveau" minLength={8} required /></label> : null}
+            {error ? <p className={styles.error} role="alert">{error}</p> : null}
+            {message ? <p className={styles.success} role="status">{message}</p> : null}
             <button className={styles.submit} disabled={loading || authLoading}>{loading ? "Un instant…" : mode === "signin" ? "Se connecter" : mode === "signup" ? "Créer mon compte" : mode === "forgot" ? "Recevoir le lien" : "Enregistrer le mot de passe"}</button>
           </form>
 
-          {mode === "signin" && <button className={styles.textButton} type="button" onClick={() => switchMode("forgot")}>Mot de passe oublié ?</button>}
-          {(mode === "forgot" || mode === "reset") && <button className={styles.textButton} type="button" onClick={() => switchMode("signin")}>Revenir à la connexion</button>}
-          <p className={styles.privacy}>Vos données de voyage restent privées et ne sont jamais visibles par les autres utilisateurs.</p>
+          {mode === "signin" ? <button className={styles.textButton} type="button" onClick={() => switchMode("forgot")}>Mot de passe oublié ?</button> : null}
+          {(mode === "forgot" || mode === "reset") ? <button className={styles.textButton} type="button" onClick={() => switchMode("signin")}>Revenir à la connexion</button> : null}
+
+          <p className={styles.legal}>En continuant, vous acceptez nos <Link href="/mentions-legales">conditions d’utilisation</Link> et notre <Link href="/confidentialite">politique de confidentialité</Link>.</p>
         </div>
+
+        <aside className={styles.visual} aria-label="L’espace voyage HiFlight">
+          <Image src="/hiflight-hero.jpg" alt="Aile d’avion au-dessus des nuages au coucher du soleil" fill sizes="(max-width: 900px) 0px, 44vw" priority />
+          <div className={styles.visualShade} />
+          <div className={styles.visualCopy}>
+            <span className={styles.visualEyebrow}>Votre espace voyage</span>
+            <h2>Gardez le monde que vous explorez à portée de main.</h2>
+            <div className={styles.benefits}>
+              <div><MapPinned aria-hidden="true" /><span><strong>World Map</strong><small>Vos pays visités et ceux à découvrir</small></span></div>
+              <div><BookOpenCheck aria-hidden="true" /><span><strong>Passeport</strong><small>Vos tampons et souvenirs réunis</small></span></div>
+            </div>
+            <p className={styles.private}><ShieldCheck aria-hidden="true" /> Vos données de voyage restent privées.</p>
+          </div>
+        </aside>
       </section>
-    </main>
+    </div>
   );
 }
