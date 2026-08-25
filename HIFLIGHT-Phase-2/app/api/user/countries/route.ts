@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   if (!auth) return NextResponse.json({ error: "Connexion requise." }, { status: 401 });
   const { url } = getSupabaseConfig();
   const query = new URLSearchParams({
-    select: "country_code,visited,wishlist,visited_at,note,photo_url",
+    select: "country_code,visited,wishlist,visited_at",
     user_id: `eq.${auth.user.id}`,
     order: "country_code.asc",
   });
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const auth = await authenticateRequest(request);
   if (!auth) return NextResponse.json({ error: "Connexion requise." }, { status: 401 });
-  const body = await request.json() as { countryCode?: string; visited?: boolean; wishlist?: boolean; visitedAt?: string | null; note?: string | null };
+  const body = await request.json() as { countryCode?: string; visited?: boolean; wishlist?: boolean; visitedAt?: string | null };
   const countryCode = body.countryCode?.trim().toUpperCase();
   if (!countryCode || !/^[A-Z]{3}$/.test(countryCode)) return NextResponse.json({ error: "Code pays invalide." }, { status: 400 });
   const { url } = getSupabaseConfig();
@@ -29,7 +29,6 @@ export async function POST(request: NextRequest) {
     visited: Boolean(body.visited),
     wishlist: Boolean(body.wishlist),
     visited_at: body.visited ? body.visitedAt || new Date().toISOString().slice(0, 10) : null,
-    note: body.note || null,
   };
   const result = await fetch(`${url}/rest/v1/visited_countries?on_conflict=user_id,country_code`, {
     method: "POST",

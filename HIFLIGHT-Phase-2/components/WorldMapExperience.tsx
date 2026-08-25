@@ -2,21 +2,21 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { BookOpen, Check, ChevronLeft, ChevronRight, Globe2, List, Plane, Search, Share2, Star, X } from "lucide-react";
+import { BookOpen, Check, ChevronLeft, ChevronRight, Globe2, List, Plane, Search, Share2, Star } from "lucide-react";
 import { useAuth } from "./AuthProvider";
 import HiflightGlobe, { GlobeMode } from "./HiflightGlobe";
 import { GLOBE_COUNTRIES } from "@/lib/world-map/globeCountries";
 import { VECTOR_FLAGS } from "@/lib/world-map/vectorFlags";
 import styles from "./WorldMapExperience.module.css";
 import motionStyles from "./PassportPageTurn.module.css";
+import flagModalStyles from "./CountryFlagModal.module.css";
+import WavingFlag from "./WavingFlag";
 
 type CountryState = {
   country_code: string;
   visited: boolean;
   wishlist: boolean;
   visited_at?: string | null;
-  note?: string | null;
-  photo_url?: string | null;
 };
 type StateMap = Record<string, CountryState>;
 type PrimarySection = "globe" | "passport";
@@ -300,14 +300,18 @@ export default function WorldMapExperience() {
       {error ? <p className={styles.error} role="alert">{error}</p> : null}
       {pendingCountry ? (
         <div className={styles.modalBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setPendingCode(null); }}>
-          <section className={styles.countryModal} role="dialog" aria-modal="true" aria-labelledby="country-modal-title">
-            <button className={styles.modalClose} onClick={() => setPendingCode(null)} aria-label="Fermer"><X /></button>
-            <div className={styles.modalFlag}>{flagSource(pendingCountry.code2) ? <img src={flagSource(pendingCountry.code2)!} alt={`Drapeau ${pendingCountry.name}`} /> : <Globe2 size={46} />}</div>
-            <span>{pendingCountry.code}</span>
-            <h2 id="country-modal-title">{pendingIsActive ? `Retirer ${countryWithArticle(pendingCountry)} ?` : mode === "visited" ? `Passer ${countryWithArticle(pendingCountry)} en visité ?` : `Ajouter ${countryWithArticle(pendingCountry)} à vos envies ?`}</h2>
-            <p>{pendingIsActive ? "Cette action peut être annulée à tout moment." : mode === "visited" ? "Le pays apparaîtra avec son vrai drapeau sur le globe et recevra son tampon dans votre passeport." : "Cette destination apparaîtra dans votre liste À visiter."}</p>
-            <button className={styles.confirmCountry} disabled={saving} onClick={() => updateCountry(pendingCountry.code, mode)}>{saving ? "Enregistrement…" : pendingIsActive ? "Confirmer le retrait" : mode === "visited" ? "Oui, j’y suis allé" : "Ajouter à ma liste"}</button>
-            <button className={styles.cancelCountry} onClick={() => setPendingCode(null)}>Annuler</button>
+          <section className={`${styles.countryModal} ${flagModalStyles.countryModal}`} role="dialog" aria-modal="true" aria-labelledby="country-modal-title">
+            {flagSource(pendingCountry.code2) ? <WavingFlag src={flagSource(pendingCountry.code2)!} /> : <div className={flagModalStyles.flagFallback}><Globe2 size={78} /></div>}
+            <div className={flagModalStyles.flagShade} aria-hidden="true" />
+            <div className={flagModalStyles.modalContent}>
+              <div className={flagModalStyles.statusIcon} aria-hidden="true">{mode === "visited" ? <Check size={28} strokeWidth={3.5} /> : <Star size={27} strokeWidth={3} />}</div>
+              <h2 id="country-modal-title">{pendingIsActive ? mode === "visited" ? `Retirer ${countryWithArticle(pendingCountry)} des pays visités ?` : `Retirer ${countryWithArticle(pendingCountry)} de la liste À visiter ?` : mode === "visited" ? `Passer ${countryWithArticle(pendingCountry)} en pays visité ?` : `Ajouter ${countryWithArticle(pendingCountry)} à la liste À visiter ?`}</h2>
+              <p>{pendingIsActive ? "Ce pays ne sera plus comptabilisé dans cette liste." : mode === "visited" ? "Son drapeau apparaîtra sur ta carte du monde." : "Tu le retrouveras parmi tes prochaines destinations."}</p>
+              <div className={flagModalStyles.modalActions}>
+                <button className={`${styles.cancelCountry} ${flagModalStyles.cancelCountry}`} onClick={() => setPendingCode(null)}>Annuler</button>
+                <button className={`${styles.confirmCountry} ${flagModalStyles.confirmCountry}`} disabled={saving} onClick={() => updateCountry(pendingCountry.code, mode)}>{saving ? "Enregistrement…" : pendingIsActive ? "Retirer" : mode === "visited" ? "Oui, visité" : "Ajouter"}</button>
+              </div>
+            </div>
           </section>
         </div>
       ) : null}

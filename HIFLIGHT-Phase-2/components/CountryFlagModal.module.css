@@ -1,0 +1,197 @@
+.countryModal.countryModal {
+  position: relative;
+  width: min(420px, 100%);
+  height: min(440px, calc(100dvh - 40px));
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #ffffff38;
+  border-radius: 28px;
+  background: #071226;
+  color: #fff;
+  box-shadow: 0 30px 80px #000a;
+}
+
+.waveSurface,
+.flagFallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.waveCanvas,
+.waveFallback {
+  position: absolute;
+  inset: -2.5%;
+  display: block;
+  width: 105%;
+  height: 105%;
+  transition: opacity 180ms ease-out;
+}
+
+.waveFallback {
+  object-fit: fill;
+  transform-origin: left center;
+  animation: flagFallbackWave 4.8s ease-in-out infinite;
+}
+
+.waveCanvas {
+  opacity: 0;
+}
+
+.flagFallback {
+  display: grid;
+  place-items: center;
+  background: #10203a;
+  color: #d8ecff;
+}
+
+.flagShade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(180deg, #01071210 0%, #0107121f 30%, #0107124a 57%, #010712c9 100%);
+  pointer-events: none;
+}
+
+.modalContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 100%;
+  padding: 27px 22px 22px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.statusIcon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 22px;
+  border: 1px solid #ffffff55;
+  border-radius: 50%;
+  background: #071226c7;
+  color: #fff;
+  box-shadow: 0 8px 24px #ff6b6b50;
+}
+
+.countryModal.countryModal h2 {
+  max-width: 390px;
+  margin: 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+  text-shadow: 0 2px 10px #000f;
+}
+
+.countryModal.countryModal p {
+  max-width: 350px;
+  margin: 10px auto 22px;
+  color: #ffffffe3;
+  font-size: 14px;
+  line-height: 1.5;
+  text-shadow: 0 2px 9px #000f;
+}
+
+.modalActions {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cancelCountry.cancelCountry,
+.confirmCountry.confirmCountry {
+  height: 52px;
+  margin: 0;
+  border: 0;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  backdrop-filter: blur(12px);
+}
+
+@keyframes flagFallbackWave {
+  0%,
+  100% {
+    transform: perspective(900px) rotateY(0deg) skewY(0deg) scale3d(1.02, 1.02, 1);
+    filter: brightness(0.94);
+  }
+  24% {
+    transform: perspective(900px) rotateY(-4deg) skewY(1.5deg) scale3d(1.055, 1.025, 1);
+    filter: brightness(1.04);
+  }
+  52% {
+    transform: perspective(900px) rotateY(3deg) skewY(-1.1deg) scale3d(1.035, 1.055, 1);
+    filter: brightness(0.88);
+  }
+  76% {
+    transform: perspective(900px) rotateY(-2deg) skewY(0.8deg) scale3d(1.065, 1.035, 1);
+    filter: brightness(1.02);
+  }
+}
+
+.cancelCountry.cancelCountry {
+  background: #030a19bd;
+}
+
+.confirmCountry.confirmCountry {
+  background: #ff6b6b;
+  box-shadow: 0 12px 25px #ff6b6b40;
+}
+
+.cancelCountry.cancelCountry:hover,
+.confirmCountry.confirmCountry:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 520px) {
+  .countryModal.countryModal {
+    width: min(380px, 100%);
+    height: min(410px, calc(100dvh - 28px));
+  }
+
+  .modalContent {
+    padding: 22px 18px 18px;
+  }
+
+  .statusIcon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 18px;
+  }
+
+  .countryModal.countryModal h2 {
+    max-width: 350px;
+    font-size: 19px;
+  }
+
+  .countryModal.countryModal p {
+    margin-bottom: 18px;
+    font-size: 13px;
+  }
+
+  .modalActions {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waveFallback {
+    animation: none;
+    transform: scale(1.02);
+  }
+
+  .cancelCountry.cancelCountry:hover,
+  .confirmCountry.confirmCountry:hover {
+    transform: none;
+  }
+}
