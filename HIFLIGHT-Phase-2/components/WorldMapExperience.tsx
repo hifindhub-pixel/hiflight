@@ -200,10 +200,10 @@ export default function WorldMapExperience() {
     setSaving(true);
     setError("");
     try {
-      const response = await fetch("/api/user/countries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ countryCode: code, visited: next.visited, wishlist: next.wishlist, visitedAt: next.visited_at }) });
+      const response = await fetch("/api/user/countries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ countryCode: code, visited: next.visited, wishlist: next.wishlist }) });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Sauvegarde impossible.");
-      setStates((previous) => ({ ...previous, [code]: payload.country }));
+      setStates((previous) => ({ ...previous, [code]: { ...next, ...payload.country } }));
       setPendingCode(null);
     } catch (reason) {
       setStates((previous) => ({ ...previous, [code]: current }));

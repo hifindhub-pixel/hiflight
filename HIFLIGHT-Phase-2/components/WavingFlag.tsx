@@ -164,7 +164,7 @@ export default function WavingFlag({ src }: WavingFlagProps) {
       gl.viewport(0, 0, width, height);
     };
 
-    const draw = (now: number) => {
+    const renderFrame = (now: number) => {
       if (disposed) return;
       resize();
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -172,19 +172,53 @@ export default function WavingFlag({ src }: WavingFlagProps) {
       gl.uniform1f(timeLocation, elapsed);
       gl.uniform1f(motionLocation, reducedMotion ? 0.24 : 1);
       gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-      if (!reducedMotion) frame = requestAnimationFrame(draw);
+    };
+
+    const animate = (now: number) => {
+      renderFrame(now);
+      if (!disposed) frame = requestAnimationFrame(animate);
+    };
+
+    const hasVisibleFrame = () => {
+      const sample = new Uint8Array(4);
+      const points = [0.2, 0.5, 0.8];
+      for (const x of points) {
+        for (const y of points) {
+          gl.readPixels(
+            Math.min(canvas.width - 1, Math.round(canvas.width * x)),
+            Math.min(canvas.height - 1, Math.round(canvas.height * y)),
+            1,
+            1,
+            gl.RGBA,
+            gl.UNSIGNED_BYTE,
+            sample,
+          );
+          if (sample[3] > 24 && Math.max(sample[0], sample[1], sample[2]) > 20) return true;
+        }
+      }
+      return false;
     };
 
     const image = new Image();
     image.decoding = "async";
     image.onload = () => {
       if (disposed) return;
+      const raster = document.createElement("canvas");
+      raster.width = image.naturalWidth || 640;
+      raster.height = image.naturalHeight || 480;
+      const context = raster.getContext("2d");
+      if (!context) return;
+      context.drawImage(image, 0, 0, raster.width, raster.height);
       gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, raster);
+      if (gl.getError() !== gl.NO_ERROR) return;
       startedAt = performance.now();
-      draw(startedAt);
+      renderFrame(startedAt);
+      if (!hasVisibleFrame()) return;
       canvas.style.opacity = "1";
       fallback.style.opacity = "0";
+      if (!reducedMotion) frame = requestAnimationFrame(animate);
     };
     image.src = src;
 
