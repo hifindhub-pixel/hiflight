@@ -156,7 +156,7 @@ export default function AuthExperience({ onClose }: AuthExperienceProps) {
         <button className={styles.close} type="button" onClick={close} aria-label="Fermer la fenêtre de connexion"><X aria-hidden="true" /></button>
 
         <div className={styles.content}>
-          <Image className={styles.logo} src="/hiflight-logo.png" alt="HiFlight" width={1027} height={328} priority />
+          <Image className={styles.logo} src="/hiflight-logo.svg" alt="HiFlight" width={330} height={110} priority />
           <h1 id={titleId}>{title}</h1>
           <p className={styles.subtitle} id={subtitleId}>{subtitle}</p>
 
