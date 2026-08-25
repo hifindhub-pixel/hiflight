@@ -63,6 +63,13 @@ export default function AuthExperience({ onClose }: AuthExperienceProps) {
 
   useEffect(() => {
     const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const query = new URLSearchParams(window.location.search);
+    const oauthError = hash.get("error_description") || hash.get("error") || query.get("oauth_error");
+    if (oauthError) {
+      setError(oauthError);
+      window.history.replaceState({}, "", window.location.pathname);
+      return;
+    }
     const accessToken = hash.get("access_token");
     const refreshToken = hash.get("refresh_token");
     const type = hash.get("type");
@@ -149,9 +156,7 @@ export default function AuthExperience({ onClose }: AuthExperienceProps) {
         <button className={styles.close} type="button" onClick={close} aria-label="Fermer la fenêtre de connexion"><X aria-hidden="true" /></button>
 
         <div className={styles.content}>
-          <div className={styles.logoWrap}>
-            <Image className={styles.logo} src="/hiflight-logo.svg" alt="HiFlight" width={330} height={110} priority />
-          </div>
+          <Image className={styles.logo} src="/hiflight-logo.png" alt="HiFlight" width={1027} height={328} priority />
           <h1 id={titleId}>{title}</h1>
           <p className={styles.subtitle} id={subtitleId}>{subtitle}</p>
 
@@ -160,6 +165,16 @@ export default function AuthExperience({ onClose }: AuthExperienceProps) {
               <button type="button" className={mode === "signin" ? styles.active : ""} onClick={() => switchMode("signin")}>Connexion</button>
               <button type="button" className={mode === "signup" ? styles.active : ""} onClick={() => switchMode("signup")}>Créer un compte</button>
             </div>
+          ) : null}
+
+          {(mode === "signin" || mode === "signup") ? (
+            <>
+              <div className={styles.oauthButtons}>
+                <a href="/api/auth/oauth?provider=google">Continuer avec Google</a>
+                <a href="/api/auth/oauth?provider=apple">Continuer avec Apple</a>
+              </div>
+              <div className={styles.divider}><span>ou avec votre adresse e-mail</span></div>
+            </>
           ) : null}
 
           <form onSubmit={submit}>
