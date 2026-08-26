@@ -66,6 +66,14 @@ export default function AuthExperience() {
     setConfirmPassword("");
   }
 
+  function startOAuth(provider: "google" | "apple") {
+    const redirectTo = `${window.location.origin}/connexion`;
+    const authorizeUrl = new URL("https://lncqhtxvnwcmhyollpkm.supabase.co/auth/v1/authorize");
+    authorizeUrl.searchParams.set("provider", provider);
+    authorizeUrl.searchParams.set("redirect_to", redirectTo);
+    window.location.assign(authorizeUrl.toString());
+  }
+
   async function submit(event: FormEvent) {
     event.preventDefault();
     setError("");
@@ -132,7 +140,7 @@ export default function AuthExperience() {
 
           {(mode === "signin" || mode === "signup") && <div className={styles.tabs}><button type="button" className={mode === "signin" ? styles.active : ""} onClick={() => switchMode("signin")}>Connexion</button><button type="button" className={mode === "signup" ? styles.active : ""} onClick={() => switchMode("signup")}>Créer un compte</button></div>}
 
-          {(mode === "signin" || mode === "signup") && <><div className={styles.socialButtons}><a href="/api/auth/oauth?provider=google"><GoogleLogo /><span>Continuer avec Google</span></a><a href="/api/auth/oauth?provider=apple"><AppleLogo /><span>Continuer avec Apple</span></a></div><div className={styles.divider}><span>ou avec votre e-mail</span></div></>}
+          {(mode === "signin" || mode === "signup") && <><div className={styles.socialButtons}><button type="button" onClick={() => startOAuth("google")}><GoogleLogo /><span>Continuer avec Google</span></button><button type="button" onClick={() => startOAuth("apple")}><AppleLogo /><span>Continuer avec Apple</span></button></div><div className={styles.divider}><span>ou avec votre e-mail</span></div></>}
 
           <form onSubmit={submit}>
             {mode === "signup" && <label>Nom complet<input autoComplete="name" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Votre nom" required /></label>}
