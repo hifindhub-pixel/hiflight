@@ -7,6 +7,7 @@ import { useAuth } from "./AuthProvider";
 import HiflightGlobe, { GlobeMode } from "./HiflightGlobe";
 import { GLOBE_COUNTRIES } from "@/lib/world-map/globeCountries";
 import { VECTOR_FLAGS } from "@/lib/world-map/vectorFlags";
+import { PASSPORT_PAGE_IMAGES } from "@/lib/passportPageImages";
 import styles from "./WorldMapExperience.module.css";
 import motionStyles from "./PassportPageTurn.module.css";
 import flagModalStyles from "./CountryFlagModal.module.css";
@@ -73,25 +74,14 @@ function flagSource(code2: string | null) {
   return vector ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(vector)}` : null;
 }
 
-function formatStampDate(value?: string | null) {
-  if (!value) return "PAYS VISITÉ";
-  const date = new Date(`${value}T12:00:00`);
-  if (Number.isNaN(date.getTime())) return "PAYS VISITÉ";
-  return new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "short", year: "numeric" }).format(date).toUpperCase();
+function passportPageSource(code: string) {
+  return PASSPORT_PAGE_IMAGES[code];
 }
 
-function PassportPage({ country, state, side, onPress, interactive = true }: { country?: Country; state?: CountryState; side: "left" | "right"; onPress: (code: string) => void; interactive?: boolean }) {
-  const pageClassName = `${styles.bookPage} ${styles[side]} ${motionStyles.bookPage} ${motionStyles[side]}`;
+function PassportPage({ country, side, onPress, interactive = true }: { country?: Country; side: "left" | "right"; onPress: (code: string) => void; interactive?: boolean }) {
+  const pageClassName = `${styles.bookPage} ${country ? motionStyles.passportCountryPage : ""} ${styles[side]} ${motionStyles.bookPage} ${motionStyles[side]}`;
   if (!country) return <div className={pageClassName}><Plane className={styles.nextStopIcon} aria-hidden="true" /><strong>PROCHAINE ESCALE</strong><p>Une nouvelle page reste à écrire.</p></div>;
-  const flag = flagSource(country.code2);
-  const content = (
-    <>
-      <div className={styles.bookPageTopline}><span>{flag ? <img src={flag} alt="" /> : null}{country.name}</span><b>{country.code}</b></div>
-      {flag ? <img className={styles.bookFlagWatermark} src={flag} alt="" /> : null}
-      <div className={styles.passportStamp}><small>HIFLIGHT</small><strong>{formatStampDate(state?.visited_at)}</strong><span>{country.name}</span></div>
-      <p className={styles.bookNote}>Une page de plus dans votre histoire.</p>
-    </>
-  );
+  const content = <img className={motionStyles.passportCountryArtwork} src={passportPageSource(country.code)} alt={`Page du passeport HiFlight pour ${country.name}`} draggable={false} decoding="async" fetchPriority="high" />;
   if (!interactive) return <div className={pageClassName}>{content}</div>;
   return <button className={pageClassName} onClick={() => onPress(country.code)}>{content}</button>;
 }
@@ -125,7 +115,7 @@ export default function WorldMapExperience() {
   useEffect(() => {
     if (authLoading) return;
     if (demoMode) {
-      const demoCountries = ["FRA", "ESP", "MAR", "DZA", "ITA", "USA", "JPN", "BRA"];
+      const demoCountries = ["FRA", "ESP", "MAR", "DZA", "ITA", "USA", "JPN", "ARG"];
       setStates(Object.fromEntries(demoCountries.map((code, index) => [code, { country_code: code, visited: true, wishlist: false, visited_at: `202${Math.min(index, 6)}-0${(index % 8) + 1}-12` }])))
       setLoading(false);
       return;
@@ -166,6 +156,19 @@ export default function WorldMapExperience() {
 
   useEffect(() => { setSpreadIndex((current) => Math.min(current, Math.max(0, spreadCount - 1))); }, [spreadCount]);
   useEffect(() => () => { if (pageTurnTimer.current) clearTimeout(pageTurnTimer.current); }, []);
+  useEffect(() => {
+    if (primarySection !== "passport") return;
+    const indexes = passportOpen ? [spreadIndex - 1, spreadIndex, spreadIndex + 1] : [0, 1];
+    indexes.forEach((index) => {
+      if (index < 0 || index >= spreadCount) return;
+      visitedCountries.slice(index * 2, index * 2 + 2).forEach((country) => {
+        const image = new Image();
+        image.decoding = "async";
+        image.fetchPriority = index === spreadIndex ? "high" : "low";
+        image.src = passportPageSource(country.code);
+      });
+    });
+  }, [passportOpen, primarySection, spreadCount, spreadIndex, visitedCountries]);
 
   function turnPassportPage(delta: -1 | 1) {
     if (turnDirection) return;
@@ -246,15 +249,14 @@ export default function WorldMapExperience() {
               <div className={`${styles.openBook} ${motionStyles.openBook}`}>
                 <img className={motionStyles.openBookBackground} src="/world-map/hiflight-passport-open.png" alt="" aria-hidden="true" />
                 <div className={motionStyles.bookPages}>
-                  <PassportPage country={baseLeftCountry} state={baseLeftCountry ? states[baseLeftCountry.code] : undefined} side="left" onPress={(code) => { setMode("visited"); setPendingCode(code); }} />
-                  <PassportPage country={baseRightCountry} state={baseRightCountry ? states[baseRightCountry.code] : undefined} side="right" onPress={(code) => { setMode("visited"); setPendingCode(code); }} />
+                  <PassportPage country={baseLeftCountry} side="left" onPress={(code) => { setMode("visited"); setPendingCode(code); }} />
+                  <PassportPage country={baseRightCountry} side="right" onPress={(code) => { setMode("visited"); setPendingCode(code); }} />
                 </div>
                 {turnDirection ? (
                   <div className={`${motionStyles.turnPage} ${turnDirection === "next" ? motionStyles.turnNext : motionStyles.turnPrevious}`} aria-hidden="true">
                     <div className={`${motionStyles.turnFace} ${motionStyles.turnFront}`}>
                       <PassportPage
                         country={turnDirection === "next" ? rightCountry : leftCountry}
-                        state={states[(turnDirection === "next" ? rightCountry : leftCountry)?.code || ""]}
                         side={turnDirection === "next" ? "right" : "left"}
                         onPress={() => undefined}
                         interactive={false}
@@ -263,7 +265,6 @@ export default function WorldMapExperience() {
                     <div className={`${motionStyles.turnFace} ${motionStyles.turnBack}`}>
                       <PassportPage
                         country={turnDirection === "next" ? targetLeftCountry : targetRightCountry}
-                        state={states[(turnDirection === "next" ? targetLeftCountry : targetRightCountry)?.code || ""]}
                         side={turnDirection === "next" ? "left" : "right"}
                         onPress={() => undefined}
                         interactive={false}

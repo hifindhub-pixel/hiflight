@@ -88,6 +88,27 @@
   background: linear-gradient(90deg, #c7b89f 0%, #eee5d5 14%, #f2eadb 100%);
 }
 
+.passportCountryPage.passportCountryPage {
+  padding: 0;
+  background: transparent;
+}
+
+.passportCountryPage:focus-visible {
+  outline: 3px solid #ff6b6b;
+  outline-offset: -4px;
+}
+
+.passportCountryArtwork {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: #fffdf7;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
 .turnNext {
   left: 50%;
   transform-origin: left center;
@@ -145,6 +166,10 @@
 
   .bookPage.bookPage {
     padding: 9px;
+  }
+
+  .passportCountryPage.passportCountryPage {
+    padding: 0;
   }
 
   .turnPage {
