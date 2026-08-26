@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, BookOpen, Check, ChevronRight, CircleHelp, FileText, Globe2, History, LogOut, Mail, ShieldCheck, Trash2, UserRound, X } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, ChevronRight, CircleHelp, FileText, History, LogOut, Mail, MessageSquareText, ShieldCheck, Trash2, UserRound, X } from "lucide-react";
 import { useAuth } from "./AuthProvider";
 import styles from "./AccountExperience.module.css";
+
+type SettingPanel = "login" | "history" | "account";
 
 export default function AccountExperience() {
   const router = useRouter();
@@ -13,6 +15,7 @@ export default function AccountExperience() {
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [openSetting, setOpenSetting] = useState<SettingPanel | null>(null);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -41,12 +44,16 @@ export default function AccountExperience() {
       const response = await fetch("/api/user/account", { method: "DELETE" });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Suppression impossible.");
-      router.push("/");
-      router.refresh();
+      router.push("/"); router.refresh();
     } catch (reason) {
       setDeleteOpen(false);
       setError(reason instanceof Error ? reason.message : "Suppression impossible.");
     } finally { setDeleting(false); }
+  }
+
+  function toggleSetting(panel: SettingPanel) {
+    setOpenSetting((current) => current === panel ? null : panel);
+    setNotice("");
   }
 
   if (loading || !user) return <main className={styles.loading}><span />Ouverture de votre espace…</main>;
@@ -56,45 +63,53 @@ export default function AccountExperience() {
   return (
     <main className={styles.page}>
       <div className={styles.shell}>
-        <header className={styles.heading}><h1>Profil</h1><p>Votre voyage, simplement organisé.</p></header>
+        <header className={styles.heading}><h1>Profil</h1></header>
 
         <section className={styles.accountHero}>
-          <img src="/hiflight-hero.jpg" alt="Vue aérienne depuis un avion" />
+          <img src="/account-airport.webp" alt="Avion devant les baies vitrées d’un aéroport" />
           <div className={styles.heroShade} />
           <div className={styles.heroContent}>
-            <div className={styles.person}><span>{initial}</span><div><small>COMPTE HIFLIGHT</small><strong>{displayName}</strong><p>{user.email}</p></div></div>
+            <div className={styles.person}><span>{initial}</span><div><strong>{displayName}</strong><p>{user.email}</p></div></div>
             <div className={styles.heroCopy}><h2>Tout votre voyage,<br />au même endroit.</h2><p>Retrouvez vos préférences et votre espace personnel sur tous vos appareils.</p></div>
           </div>
         </section>
 
-        <section className={styles.manageCard}>
-          <div className={styles.manageLead}><span><UserRound size={20} /></span><div><p>GÉRER MON COMPTE</p><h2>Votre compte, en toute simplicité.</h2></div></div>
-          <div className={styles.manageRows}>
-            <div className={styles.manageRow}><span className={styles.rowIcon}><Mail size={20} /></span><div><small>INFORMATIONS DE CONNEXION</small><strong>{user.email}</strong><p>Adresse utilisée pour accéder à votre compte HiFlight.</p></div><ShieldCheck size={20} className={styles.safeIcon} /></div>
-            <div className={styles.manageRow}><span className={styles.rowIcon}><History size={20} /></span><div><small>GESTION DU COMPTE</small><strong>Historique de recherche</strong><p>Supprimez les recherches enregistrées sur cet appareil.</p></div><button className={styles.secondaryAction} onClick={clearSearchHistory}>Effacer</button></div>
-            <div className={styles.manageRow}><span className={`${styles.rowIcon} ${styles.dangerIcon}`}><Trash2 size={20} /></span><div><small>GESTION DU COMPTE</small><strong>Supprimer mon compte</strong><p>Efface définitivement le profil, la World Map et le passeport.</p></div><button className={styles.dangerAction} onClick={() => setDeleteOpen(true)}>Supprimer</button></div>
+        <section className={styles.settings}>
+          <div className={styles.settingsHeading}><h2>Gérer mon compte</h2><p>Vos accès, vos données et vos préférences de compte.</p></div>
+          <div className={styles.settingsList}>
+            <article className={styles.settingItem}>
+              <button className={styles.settingButton} onClick={() => toggleSetting("login")} aria-expanded={openSetting === "login"}><Mail size={21} /><span><strong>Informations de connexion</strong><small>Adresse e-mail et méthode de connexion</small></span><ChevronDown size={19} /></button>
+              {openSetting === "login" ? <div className={styles.settingPanel}><span>Adresse e-mail</span><strong>{user.email}</strong><p>Cette adresse est utilisée pour vous connecter et sécuriser votre compte.</p></div> : null}
+            </article>
+            <article className={styles.settingItem}>
+              <button className={styles.settingButton} onClick={() => toggleSetting("history")} aria-expanded={openSetting === "history"}><History size={21} /><span><strong>Historique de recherche</strong><small>Gérer les recherches enregistrées sur cet appareil</small></span><ChevronDown size={19} /></button>
+              {openSetting === "history" ? <div className={styles.settingPanel}><p>Efface les recherches mémorisées sur cet appareil sans modifier votre World Map ni votre passeport.</p><button className={styles.neutralAction} onClick={clearSearchHistory}>Effacer l’historique</button></div> : null}
+            </article>
+            <article className={styles.settingItem}>
+              <button className={styles.settingButton} onClick={() => toggleSetting("account")} aria-expanded={openSetting === "account"}><UserRound size={21} /><span><strong>Gestion du compte</strong><small>Déconnexion et suppression du compte</small></span><ChevronDown size={19} /></button>
+              {openSetting === "account" ? <div className={`${styles.settingPanel} ${styles.accountActions}`}><button onClick={logout}><LogOut size={17} />Se déconnecter</button><button onClick={() => setDeleteOpen(true)}><Trash2 size={17} />Supprimer mon compte</button></div> : null}
+            </article>
           </div>
           {notice ? <p className={styles.notice}><Check size={16} />{notice}</p> : null}
           {error ? <p className={styles.error} role="alert">{error}</p> : null}
-          <button className={styles.logoutButton} onClick={logout}><LogOut size={18} />Se déconnecter</button>
         </section>
 
         <section className={styles.journeyCard}>
-          <div className={styles.journeyIntro}><p>VOTRE CARNET DE VOYAGE</p><h2>Le monde que vous avez vu.<br />Celui qui vous attend.</h2><span>Votre carte et votre passeport se complètent automatiquement, sur tous vos appareils.</span></div>
+          <div className={styles.journeyIntro}><h2>Le monde que vous avez vu.<br />Celui qui vous attend.</h2><p>Votre carte et votre passeport se complètent automatiquement, sur tous vos appareils.</p></div>
           <div className={styles.journeyLinks}>
-            <Link href="/world-map"><span><Globe2 size={27} /></span><div><small>WORLD MAP</small><strong>Explorer ma carte</strong><p>Mes pays visités et mes prochaines destinations.</p></div><ArrowRight size={21} /></Link>
-            <Link href="/world-map?view=passport"><span><BookOpen size={27} /></span><div><small>PASSEPORT</small><strong>Ouvrir mon passeport</strong><p>Feuilleter les pages de tous mes voyages.</p></div><ArrowRight size={21} /></Link>
+            <Link href="/world-map" className={styles.worldLink}><img src="/account-earth.webp" alt="Planète Terre" /><div><span>World Map</span><strong>Explorer ma carte</strong><p>Retrouvez vos pays visités et vos prochaines destinations.</p></div><ArrowRight size={20} /></Link>
+            <Link href="/world-map?view=passport" className={styles.passportLink}><img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" /><div><span>Passeport</span><strong>Ouvrir mon passeport</strong><p>Feuilletez les pages de vos voyages.</p></div><ArrowRight size={20} /></Link>
           </div>
         </section>
 
-        <nav className={styles.resourceGrid} aria-label="Aide et informations">
-          <a href="mailto:contact@hiflight.fr"><CircleHelp size={22} /><span><strong>Obtenir de l’aide</strong><small>Contacter HiFlight</small></span><ChevronRight size={18} /></a>
-          <a href="mailto:contact@hiflight.fr?subject=Mon%20avis%20sur%20HiFlight"><Mail size={22} /><span><strong>Donner mon avis</strong><small>Partager une idée</small></span><ChevronRight size={18} /></a>
-          <Link href="/confidentialite"><ShieldCheck size={22} /><span><strong>Confidentialité</strong><small>Données et droits</small></span><ChevronRight size={18} /></Link>
-          <Link href="/mentions-legales"><FileText size={22} /><span><strong>Mentions légales</strong><small>À propos de HiFlight</small></span><ChevronRight size={18} /></Link>
+        <nav className={styles.resources} aria-label="Aide et informations">
+          <a href="mailto:contact@hiflight.fr"><CircleHelp size={21} /><span><strong>Obtenir de l’aide</strong><small>Contacter HiFlight</small></span><ChevronRight size={18} /></a>
+          <a href="mailto:contact@hiflight.fr?subject=Mon%20avis%20sur%20HiFlight"><MessageSquareText size={21} /><span><strong>Donner mon avis</strong><small>Partager une suggestion</small></span><ChevronRight size={18} /></a>
+          <Link href="/confidentialite"><ShieldCheck size={21} /><span><strong>Confidentialité</strong><small>Vos données et vos droits</small></span><ChevronRight size={18} /></Link>
+          <Link href="/mentions-legales"><FileText size={21} /><span><strong>Mentions légales</strong><small>Informations sur HiFlight</small></span><ChevronRight size={18} /></Link>
         </nav>
 
-        <section className={styles.inspirationCard}><img src="/account-landscape.webp" alt="Lac de montagne lumineux" /><div><span>VOYAGER AUTREMENT</span><h2>De belles découvertes,<br />avec plus de sens.</h2><p>Conseils, inspirations et nouvelles façons d’imaginer vos prochains départs.</p></div></section>
+        <section className={styles.inspirationCard}><img src="/account-landscape.webp" alt="Lac et montagnes baignés de lumière" /><div><span>VOYAGER AUTREMENT</span><h2>De belles découvertes,<br />avec plus de sens.</h2><p>Conseils, inspirations et nouvelles façons d’imaginer vos prochains départs.</p></div></section>
       </div>
 
       {deleteOpen ? <div className={styles.modalBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setDeleteOpen(false); }}><section className={styles.deleteModal} role="dialog" aria-modal="true" aria-labelledby="delete-account-title"><button className={styles.modalClose} aria-label="Fermer" onClick={() => setDeleteOpen(false)}><X size={20} /></button><span><Trash2 size={24} /></span><h2 id="delete-account-title">Supprimer définitivement votre compte ?</h2><p>Votre profil, vos pays visités, vos destinations et votre passeport seront effacés. Cette action est irréversible.</p><div><button onClick={() => setDeleteOpen(false)}>Annuler</button><button disabled={deleting} onClick={deleteAccount}>{deleting ? "Suppression…" : "Supprimer mon compte"}</button></div></section></div> : null}
