@@ -21,6 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="fr">
       <head>
+        <meta name="trustpilot-one-time-domain-verification-id" content="6f1432d9-72ab-4ce7-9eb4-5b1f935fb211" />
         <script type="text/javascript" dangerouslySetInnerHTML={{ __html: impactTrackingScript }} />
       </head>
       <body>
