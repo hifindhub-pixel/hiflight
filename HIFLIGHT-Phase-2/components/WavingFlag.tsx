@@ -210,7 +210,9 @@ export default function WavingFlag({ src }: WavingFlagProps) {
       if (!context) return;
       context.drawImage(image, 0, 0, raster.width, raster.height);
       gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+      // La géométrie utilise déjà un axe Y orienté comme l’image HTML.
+      // Une seconde inversion retournait donc visuellement tous les drapeaux.
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, raster);
       if (gl.getError() !== gl.NO_ERROR) return;
       startedAt = performance.now();

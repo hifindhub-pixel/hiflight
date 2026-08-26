@@ -7,6 +7,7 @@ import { useAuth } from "./AuthProvider";
 import HiflightGlobe, { GlobeMode } from "./HiflightGlobe";
 import { GLOBE_COUNTRIES } from "@/lib/world-map/globeCountries";
 import { VECTOR_FLAGS } from "@/lib/world-map/vectorFlags";
+import { MISSING_VECTOR_FLAGS } from "@/lib/world-map/missingVectorFlags";
 import { PASSPORT_PAGE_IMAGES } from "@/lib/passportPageImages";
 import styles from "./WorldMapExperience.module.css";
 import motionStyles from "./PassportPageTurn.module.css";
@@ -24,7 +25,6 @@ type PrimarySection = "globe" | "passport";
 type ViewMode = "map" | "list";
 type Country = { code: string; code2: string | null; name: string };
 
-const HIDDEN_FLAG_CODE2 = new Set(["IL"]);
 const NON_COUNTRY_TERRITORY_CODES = new Set(["ATF", "FLK", "GRL", "NCL", "PRI"]);
 const COUNTRY_CATALOG_ADDITIONS: Country[] = [
   { code: "ATG", code2: "AG", name: "Antigua-et-Barbuda" }, { code: "BRB", code2: "BB", name: "Barbade" },
@@ -69,8 +69,9 @@ function normalizeSearch(value: string) {
 }
 
 function flagSource(code2: string | null) {
-  if (!code2 || HIDDEN_FLAG_CODE2.has(code2.toUpperCase())) return null;
-  const vector = VECTOR_FLAGS[code2.toLowerCase()];
+  if (!code2) return null;
+  const key = code2.toLowerCase();
+  const vector = VECTOR_FLAGS[key] || MISSING_VECTOR_FLAGS[key];
   return vector ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(vector)}` : null;
 }
 
@@ -176,12 +177,15 @@ export default function WorldMapExperience() {
     if (nextIndex < 0 || nextIndex >= spreadCount) return;
     setTurnTarget(nextIndex);
     setTurnDirection(delta === 1 ? "next" : "previous");
-    pageTurnTimer.current = setTimeout(() => {
-      setSpreadIndex(nextIndex);
-      setTurnDirection(null);
-      setTurnTarget(null);
-      pageTurnTimer.current = null;
-    }, 840);
+    pageTurnTimer.current = setTimeout(() => finishPassportTurn(nextIndex), 760);
+  }
+
+  function finishPassportTurn(nextIndex: number) {
+    if (pageTurnTimer.current) clearTimeout(pageTurnTimer.current);
+    setSpreadIndex(nextIndex);
+    setTurnDirection(null);
+    setTurnTarget(null);
+    pageTurnTimer.current = null;
   }
 
   const updateCountry = useCallback(async (code: string, target: GlobeMode) => {
@@ -253,7 +257,7 @@ export default function WorldMapExperience() {
                   <PassportPage country={baseRightCountry} side="right" onPress={(code) => { setMode("visited"); setPendingCode(code); }} />
                 </div>
                 {turnDirection ? (
-                  <div className={`${motionStyles.turnPage} ${turnDirection === "next" ? motionStyles.turnNext : motionStyles.turnPrevious}`} aria-hidden="true">
+                  <div className={`${motionStyles.turnPage} ${turnDirection === "next" ? motionStyles.turnNext : motionStyles.turnPrevious}`} aria-hidden="true" onAnimationEnd={() => { if (turnTarget !== null) finishPassportTurn(turnTarget); }}>
                     <div className={`${motionStyles.turnFace} ${motionStyles.turnFront}`}>
                       <PassportPage
                         country={turnDirection === "next" ? rightCountry : leftCountry}
