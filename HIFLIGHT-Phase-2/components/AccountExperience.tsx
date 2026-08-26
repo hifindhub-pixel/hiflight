@@ -73,20 +73,30 @@ export default function AccountExperience() {
         </section>
 
         <section className={styles.settings}>
-          <div className={styles.settingsHeading}><h2>Gérer mon compte</h2><p>Vos accès, vos données et vos préférences de compte.</p></div>
-          <div className={styles.settingsList}>
-            <article className={styles.settingItem}>
-              <button className={styles.settingButton} onClick={() => toggleSetting("login")} aria-expanded={openSetting === "login"}><Mail size={21} /><span><strong>Informations de connexion</strong><small>Adresse e-mail et méthode de connexion</small></span><ChevronDown size={19} /></button>
-              {openSetting === "login" ? <div className={styles.settingPanel}><span>Adresse e-mail</span><strong>{user.email}</strong><p>Cette adresse est utilisée pour vous connecter et sécuriser votre compte.</p></div> : null}
-            </article>
-            <article className={styles.settingItem}>
-              <button className={styles.settingButton} onClick={() => toggleSetting("history")} aria-expanded={openSetting === "history"}><History size={21} /><span><strong>Historique de recherche</strong><small>Gérer les recherches enregistrées sur cet appareil</small></span><ChevronDown size={19} /></button>
-              {openSetting === "history" ? <div className={styles.settingPanel}><p>Efface les recherches mémorisées sur cet appareil sans modifier votre World Map ni votre passeport.</p><button className={styles.neutralAction} onClick={clearSearchHistory}>Effacer l’historique</button></div> : null}
-            </article>
-            <article className={styles.settingItem}>
-              <button className={styles.settingButton} onClick={() => toggleSetting("account")} aria-expanded={openSetting === "account"}><UserRound size={21} /><span><strong>Gestion du compte</strong><small>Déconnexion et suppression du compte</small></span><ChevronDown size={19} /></button>
-              {openSetting === "account" ? <div className={`${styles.settingPanel} ${styles.accountActions}`}><button onClick={logout}><LogOut size={17} />Se déconnecter</button><button onClick={() => setDeleteOpen(true)}><Trash2 size={17} />Supprimer mon compte</button></div> : null}
-            </article>
+          <div className={styles.settingsHeading}><h2>Gérer mon compte</h2></div>
+          <div className={styles.settingsColumns}>
+            <div className={styles.settingsGroup}>
+              <h3>Accès et activité</h3>
+              <div className={styles.settingsList}>
+                <article className={styles.settingItem}>
+                  <button className={styles.settingButton} onClick={() => toggleSetting("login")} aria-expanded={openSetting === "login"}><Mail size={21} /><span><strong>Informations de connexion</strong><small>Adresse e-mail et méthode de connexion</small></span><ChevronDown size={19} /></button>
+                  {openSetting === "login" ? <div className={styles.settingPanel}><span>Adresse e-mail</span><strong>{user.email}</strong><p>Cette adresse est utilisée pour vous connecter et sécuriser votre compte.</p></div> : null}
+                </article>
+                <article className={styles.settingItem}>
+                  <button className={styles.settingButton} onClick={() => toggleSetting("history")} aria-expanded={openSetting === "history"}><History size={21} /><span><strong>Historique de recherche</strong><small>Recherches enregistrées sur cet appareil</small></span><ChevronDown size={19} /></button>
+                  {openSetting === "history" ? <div className={styles.settingPanel}><p>Efface les recherches mémorisées sur cet appareil sans modifier votre World Map ni votre passeport.</p><button className={styles.neutralAction} onClick={clearSearchHistory}>Effacer l’historique</button></div> : null}
+                </article>
+              </div>
+            </div>
+            <div className={styles.settingsGroup}>
+              <h3>Compte</h3>
+              <div className={styles.settingsList}>
+                <article className={styles.settingItem}>
+                  <button className={styles.settingButton} onClick={() => toggleSetting("account")} aria-expanded={openSetting === "account"}><UserRound size={21} /><span><strong>Gestion du compte</strong><small>Déconnexion et suppression du compte</small></span><ChevronDown size={19} /></button>
+                  {openSetting === "account" ? <div className={`${styles.settingPanel} ${styles.accountActions}`}><button onClick={logout}><LogOut size={17} />Se déconnecter</button><button onClick={() => setDeleteOpen(true)}><Trash2 size={17} />Supprimer mon compte</button></div> : null}
+                </article>
+              </div>
+            </div>
           </div>
           {notice ? <p className={styles.notice}><Check size={16} />{notice}</p> : null}
           {error ? <p className={styles.error} role="alert">{error}</p> : null}
