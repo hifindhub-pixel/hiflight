@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   if (!auth) return NextResponse.json({ error: "Connexion requise." }, { status: 401 });
   return jsonWithAuth({ profile: {
     id: auth.user.id,
-    full_name: auth.user.user_metadata?.full_name || auth.user.user_metadata?.name || "",
+    full_name: auth.user.user_metadata?.full_name || "",
     avatar_url: auth.user.user_metadata?.avatar_url || "",
     preferred_language: "fr",
     preferred_currency: "EUR",
