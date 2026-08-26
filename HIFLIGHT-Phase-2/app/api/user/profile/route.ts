@@ -5,12 +5,13 @@ import { authenticateRequest, jsonWithAuth, readSupabaseError } from "@/lib/supa
 export async function GET(request: NextRequest) {
   const auth = await authenticateRequest(request);
   if (!auth) return NextResponse.json({ error: "Connexion requise." }, { status: 401 });
-  const { url } = getSupabaseConfig();
-  const query = new URLSearchParams({ select: "id,full_name,avatar_url,preferred_language,preferred_currency", id: `eq.${auth.user.id}`, limit: "1" });
-  const result = await fetch(`${url}/rest/v1/profiles?${query}`, { headers: supabaseHeaders(auth.accessToken), cache: "no-store" });
-  if (!result.ok) return jsonWithAuth({ error: await readSupabaseError(result, "Profil indisponible.") }, result.status, auth);
-  const rows = await result.json() as unknown[];
-  return jsonWithAuth({ profile: rows[0] || { id: auth.user.id, full_name: auth.user.user_metadata?.full_name || "", preferred_language: "fr", preferred_currency: "EUR" } }, 200, auth);
+  return jsonWithAuth({ profile: {
+    id: auth.user.id,
+    full_name: auth.user.user_metadata?.full_name || auth.user.user_metadata?.name || "",
+    avatar_url: auth.user.user_metadata?.avatar_url || "",
+    preferred_language: "fr",
+    preferred_currency: "EUR",
+  } }, 200, auth);
 }
 
 export async function PATCH(request: NextRequest) {
