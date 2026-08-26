@@ -8,14 +8,6 @@ import styles from "./AuthExperience.module.css";
 
 type Mode = "signin" | "signup" | "forgot" | "reset";
 
-function GoogleLogo() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.39-.18-2.05H12v3.87h5.38a4.6 4.6 0 0 1-2 3.02v2.51h3.24c1.9-1.75 2.98-4.32 2.98-7.35Z"/><path fill="#34A853" d="M12 22c2.7 0 4.97-.9 6.62-2.42l-3.24-2.51c-.9.6-2.05.96-3.38.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.59A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.39 13.9A6.02 6.02 0 0 1 6.08 12c0-.66.11-1.3.31-1.9V7.51H3.04A10 10 0 0 0 2 12c0 1.61.38 3.14 1.04 4.49l3.35-2.59Z"/><path fill="#EA4335" d="M12 5.97c1.47 0 2.78.5 3.82 1.49l2.87-2.87A9.62 9.62 0 0 0 12 2a10 10 0 0 0-8.96 5.51l3.35 2.59C7.18 7.73 9.39 5.97 12 5.97Z"/></svg>;
-}
-
-function AppleLogo() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.05 12.54c-.03-3.02 2.46-4.49 2.57-4.56a5.5 5.5 0 0 0-4.32-2.34c-1.82-.19-3.58 1.09-4.5 1.09-.94 0-2.36-1.07-3.9-1.04a5.72 5.72 0 0 0-4.82 2.94c-2.1 3.63-.53 8.96 1.48 11.9 1 1.44 2.17 3.05 3.71 3 1.51-.06 2.08-.96 3.9-.96 1.8 0 2.34.96 3.91.92 1.62-.03 2.64-1.44 3.6-2.9a11.9 11.9 0 0 0 1.65-3.36 5.21 5.21 0 0 1-3.28-4.69ZM14.11 3.71A5.3 5.3 0 0 0 15.33 0a5.42 5.42 0 0 0-3.5 1.77 5.03 5.03 0 0 0-1.25 3.57 4.47 4.47 0 0 0 3.53-1.63Z"/></svg>;
-}
-
 export default function AuthExperience() {
   const router = useRouter();
   const { user, loading: authLoading, refresh } = useAuth();
@@ -140,7 +132,7 @@ export default function AuthExperience() {
 
           {(mode === "signin" || mode === "signup") && <div className={styles.tabs}><button type="button" className={mode === "signin" ? styles.active : ""} onClick={() => switchMode("signin")}>Connexion</button><button type="button" className={mode === "signup" ? styles.active : ""} onClick={() => switchMode("signup")}>Créer un compte</button></div>}
 
-          {(mode === "signin" || mode === "signup") && <><div className={styles.socialButtons}><button type="button" onClick={() => startOAuth("google")}><GoogleLogo /><span>Continuer avec Google</span></button><button type="button" onClick={() => startOAuth("apple")}><AppleLogo /><span>Continuer avec Apple</span></button></div><div className={styles.divider}><span>ou avec votre e-mail</span></div></>}
+          {(mode === "signin" || mode === "signup") && <><div className={styles.socialButtons}><button type="button" onClick={() => startOAuth("google")}><img src="/google-logo.svg" alt="" /><span>Continuer avec Google</span></button><button type="button" onClick={() => startOAuth("apple")}><img src="/apple-logo.svg" alt="" /><span>Continuer avec Apple</span></button></div><div className={styles.divider}><span>ou avec votre e-mail</span></div></>}
 
           <form onSubmit={submit}>
             {mode === "signup" && <label>Nom complet<input autoComplete="name" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Votre nom" required /></label>}
