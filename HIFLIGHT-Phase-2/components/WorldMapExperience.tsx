@@ -79,6 +79,21 @@ function passportPageSource(code: string) {
   return PASSPORT_PAGE_IMAGES[code];
 }
 
+function WorldMapIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg className={styles.worldMapIcon} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="9.25" />
+      <path d="M4.1 8.2 7 7l1.35-2.45 2.1-.75.9 1.25-.85 1.2 1.45 1.3-.35 2.15-1.65.65-.55 1.8-1.45.25-.75-1.55-2.25-.5Z" />
+      <path d="m13.1 4.05 2.4.55 1.15 1.55 2.15.45.95 2.05-1.15 1.05-1.7-.55-1.25.9-1.2-.45-.55-1.65-1.25-.85-.15-1.05Z" />
+      <path d="m13.6 11.2 2.05-.65 1.3 1 1.9.25.4 1.65-1.35.9-.5 2.6-1.9 2.1-1.1-.65.3-2.1-1.35-1.3.25-1.55-1.05-.75Z" />
+    </svg>
+  );
+}
+
+function VisitedStampIcon() {
+  return <span className={styles.visitedTabStamp} aria-hidden="true"><b>VISITÉ</b><Plane size={11} /></span>;
+}
+
 function PassportPage({ country, side, onPress, interactive = true }: { country?: Country; side: "left" | "right"; onPress: (code: string) => void; interactive?: boolean }) {
   const pageClassName = `${styles.bookPage} ${country ? motionStyles.passportCountryPage : ""} ${styles[side]} ${motionStyles.bookPage} ${motionStyles[side]}`;
   if (!country) return <div className={pageClassName}><Plane className={styles.nextStopIcon} aria-hidden="true" /><strong>PROCHAINE ESCALE</strong><p>Une nouvelle page reste à écrire.</p></div>;
@@ -224,20 +239,20 @@ export default function WorldMapExperience() {
     <main className={styles.page}>
       <header className={styles.hero}>
         <div className={styles.heroInner}>
-          <div className={styles.heroIntro}><h1>Mes voyages</h1><p>{visitedCountries.length ? `${visitedCountries.length} pays ajoutés à votre passeport.` : "Tournez le globe et marquez votre premier pays."}</p></div>
-          <div className={styles.stats}><div><strong>{visitedCountries.length}</strong><span>visités</span></div><div><strong>{wishlistCountries.length}</strong><span>à visiter</span></div><div><strong>{Math.round((visitedCountries.length / COUNTRIES.length) * 100)}%</strong><span>du monde</span></div></div>
+          <div className={styles.heroIntro}><h1>Mes voyages</h1>{visitedCountries.length ? <p>{visitedCountries.length} pays ajoutés à votre passeport.</p> : null}</div>
+          <div className={styles.stats}><div><strong>{visitedCountries.length}</strong><span>visités</span></div><div><strong>{wishlistCountries.length}</strong><span>à visiter</span></div></div>
         </div>
       </header>
 
       <nav className={styles.primaryTabs} aria-label="Globe et passeport">
-        <button className={primarySection === "globe" ? styles.activePrimary : ""} onClick={() => setPrimarySection("globe")}><Globe2 size={19} />Globe</button>
+        <button className={primarySection === "globe" ? styles.activePrimary : ""} onClick={() => setPrimarySection("globe")}><WorldMapIcon size={19} />Globe</button>
         <button className={primarySection === "passport" ? styles.activePrimary : ""} onClick={() => setPrimarySection("passport")}><BookOpen size={19} />Passeport</button>
       </nav>
 
       {primarySection === "passport" ? (
         <section className={styles.passportHome}>
           {!visitedCountries.length ? (
-            <div className={styles.emptyPassport}><img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" /><h2>Votre passeport vous attend</h2><p>Tournez le globe et marquez votre premier pays visité pour recevoir votre premier tampon.</p><button onClick={() => setPrimarySection("globe")}><Globe2 size={20} />Ouvrir mon globe</button></div>
+            <div className={styles.emptyPassport}><img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" /><h2>Votre passeport vous attend</h2><p>Ajoutez un pays visité pour recevoir votre premier tampon.</p><button onClick={() => setPrimarySection("globe")}><WorldMapIcon size={20} />Ouvrir mon globe</button></div>
           ) : !passportOpen ? (
             <div className={styles.closedPassport}><button onClick={() => setPassportOpen(true)} aria-label="Ouvrir le passeport"><img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" /><span><BookOpen size={18} />Ouvrir le passeport</span></button></div>
           ) : (
@@ -277,8 +292,8 @@ export default function WorldMapExperience() {
       ) : (
         <section className={styles.globeWorkspace}>
           <div className={styles.controlRow}>
-            <div className={styles.segment}><button className={mode === "visited" ? styles.segmentActive : ""} onClick={() => setMode("visited")}><Check size={16} />Visités</button><button className={mode === "wishlist" ? styles.segmentActive : ""} onClick={() => setMode("wishlist")}><Star size={16} />À visiter</button></div>
-            <div className={styles.segment}><button className={viewMode === "map" ? styles.viewActive : ""} onClick={() => setViewMode("map")}><Globe2 size={16} />Carte</button><button className={viewMode === "list" ? styles.viewActive : ""} onClick={() => setViewMode("list")}><List size={16} />Liste</button></div>
+            <div className={styles.segment}><button className={mode === "visited" ? styles.segmentActive : ""} onClick={() => setMode("visited")}><VisitedStampIcon />Visités</button><button className={mode === "wishlist" ? styles.segmentActive : ""} onClick={() => setMode("wishlist")}><Star size={16} />À visiter</button></div>
+            <div className={styles.segment}><button className={viewMode === "map" ? styles.viewActive : ""} onClick={() => setViewMode("map")}><WorldMapIcon size={16} />Carte</button><button className={viewMode === "list" ? styles.viewActive : ""} onClick={() => setViewMode("list")}><List size={16} />Liste</button></div>
           </div>
           {viewMode === "map" ? <HiflightGlobe states={states} mode={mode} onCountryPress={setPendingCode} /> : (
             <div className={styles.listPanel}>
@@ -292,7 +307,7 @@ export default function WorldMapExperience() {
                     <span className={styles.boardingStub} aria-hidden="true"><span className={styles.visitedStamp}><strong>VISITÉ</strong><Plane size={17} /><i>• • •</i></span></span>
                   </button>;
                 }
-                return <button key={country.code} onClick={() => setPendingCode(country.code)}><span className={styles.listFlag}>{flag ? <img src={flag} alt="" /> : <Globe2 size={20} />}</span><span><strong>{country.name}</strong><small>{state?.visited ? "Pays visité" : state?.wishlist ? "À visiter" : "Non ajouté"}</small></span><b className={active ? styles.countryActive : ""}>{active ? <Check size={17} /> : "+"}</b></button>;
+                return <button key={country.code} onClick={() => setPendingCode(country.code)}><span className={styles.listFlag}>{flag ? <img src={flag} alt="" /> : <Globe2 size={20} />}</span><span><strong>{country.name}</strong><small>{state?.visited ? "Pays visité" : state?.wishlist ? "À visiter" : "Non ajouté"}</small></span><b className={active && mode === "wishlist" ? styles.wishlistActive : active ? styles.countryActive : ""}>{active ? mode === "wishlist" ? <Star size={17} fill="currentColor" /> : <Check size={17} /> : "+"}</b></button>;
               }) : <div className={styles.emptyList}>Aucun pays dans cette liste.</div>}</div>
             </div>
           )}

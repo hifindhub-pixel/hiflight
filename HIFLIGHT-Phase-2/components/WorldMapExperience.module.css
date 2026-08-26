@@ -207,9 +207,65 @@
 }
 
 .stats {
-  width: 124px;
-  flex: 0 0 124px;
+  width: 228px;
+  flex: 0 0 228px;
   justify-content: center;
+}
+
+.worldMapIcon {
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+.worldMapIcon circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.35;
+}
+
+.worldMapIcon path {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: .35;
+  stroke-linejoin: round;
+}
+
+.visitedTabStamp {
+  position: relative;
+  display: grid;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  place-items: center;
+  border: 1.4px solid currentColor;
+  border-radius: 50%;
+  color: #ff6b6b;
+  transform: rotate(-8deg);
+  box-shadow: inset 0 0 0 2px transparent, inset 0 0 0 3px currentColor;
+}
+
+.segmentActive .visitedTabStamp { color: #fff; }
+
+.visitedTabStamp::before,
+.visitedTabStamp::after {
+  content: "";
+  position: absolute;
+  right: 5px;
+  left: 5px;
+  height: 1px;
+  background: currentColor;
+  opacity: .7;
+}
+
+.visitedTabStamp::before { top: 8px; }
+.visitedTabStamp::after { bottom: 7px; }
+.visitedTabStamp b { position: absolute; top: 3px; font-size: 3.7px; font-weight: 950; letter-spacing: .08em; }
+.visitedTabStamp svg { transform: rotate(-6deg); stroke-width: 1.7; }
+
+.countryList .wishlistActive {
+  background: #eaf2ff;
+  color: #2563c9;
+  box-shadow: inset 0 0 0 1px #bcd3ff;
 }
 
 @media(max-width:760px) {
