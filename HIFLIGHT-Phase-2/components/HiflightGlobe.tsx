@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GLOBE_COUNTRIES } from "@/lib/world-map/globeCountries";
 import { VECTOR_FLAGS } from "@/lib/world-map/vectorFlags";
 import { MISSING_VECTOR_FLAGS } from "@/lib/world-map/missingVectorFlags";
@@ -234,6 +234,7 @@ function appendVisibleRing(ring: PreparedRing) {
 export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const flagCanvasRef = useRef<HTMLCanvasElement>(null);
+  const [showHint, setShowHint] = useState(false);
   const statesRef = useRef(states);
   const modeRef = useRef(mode);
   const pressRef = useRef(onCountryPress);
@@ -245,6 +246,19 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
   statesRef.current = states;
   modeRef.current = mode;
   pressRef.current = onCountryPress;
+
+  useEffect(() => {
+    const storageKey = "hiflight-globe-gesture-hint-seen";
+    try {
+      if (window.sessionStorage.getItem(storageKey)) return;
+      window.sessionStorage.setItem(storageKey, "1");
+    } catch {
+      // The hint still works when session storage is unavailable.
+    }
+    setShowHint(true);
+    const timer = window.setTimeout(() => setShowHint(false), 4200);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const canvasElement = canvasRef.current;
@@ -630,7 +644,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
     <div className={styles.globeStage}>
       <canvas ref={canvasRef} className={styles.globeCanvas} aria-label="Globe interactif HiFlight" />
       <canvas ref={flagCanvasRef} className={`${styles.globeCanvas} ${styles.globeFlagCanvas}`} aria-hidden="true" />
-      <p className={styles.globeHint}>Tournez dans toutes les directions · pincez ou utilisez la molette</p>
+      {showHint ? <p className={styles.globeHint}>Tournez dans toutes les directions · pincez ou utilisez la molette</p> : null}
     </div>
   );
 }

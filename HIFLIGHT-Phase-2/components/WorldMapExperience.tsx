@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { BookOpen, Check, ChevronLeft, ChevronRight, Globe2, List, Plane, Search, Share2, Star } from "lucide-react";
+import { BookOpen, Check, ChevronLeft, ChevronRight, Globe2, List, Plane, Search, Star } from "lucide-react";
 import { useAuth } from "./AuthProvider";
 import HiflightGlobe, { GlobeMode } from "./HiflightGlobe";
 import { GLOBE_COUNTRIES } from "@/lib/world-map/globeCountries";
@@ -103,7 +103,6 @@ export default function WorldMapExperience() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [shareMessage, setShareMessage] = useState("");
   const [demoMode, setDemoMode] = useState(false);
 
   useEffect(() => {
@@ -218,23 +217,16 @@ export default function WorldMapExperience() {
     } finally { setSaving(false); }
   }, [demoMode, saving, states]);
 
-  async function sharePassport() {
-    const url = `${window.location.origin}/world-map?view=passport`;
-    const shareData = { title: "Mon passeport HiFlight", text: `J’ai déjà visité ${visitedCountries.length} pays avec HiFlight.`, url };
-    try {
-      if (navigator.share) await navigator.share(shareData);
-      else { await navigator.clipboard.writeText(url); setShareMessage("Lien copié !"); }
-    } catch { setShareMessage(""); }
-  }
-
   if (authLoading || loading) return <main className={styles.loading}><div className={styles.loader} /><p>Préparation de votre globe…</p></main>;
   if (!user && !demoMode) return <main className={styles.guest}><section><span>World Map HiFlight</span><h1>Votre monde vous attend.</h1><p>Connectez-vous pour colorer les pays avec leurs vrais drapeaux et remplir votre passeport personnel.</p><div><Link href="/connexion">Se connecter</Link><Link href="/connexion">Créer un compte</Link></div></section></main>;
 
   return (
     <main className={styles.page}>
       <header className={styles.hero}>
-        <div><span>VOTRE ESPACE VOYAGE</span><h1>Mes voyages</h1><p>{visitedCountries.length ? `${visitedCountries.length} pays ajoutés à votre passeport.` : "Tournez le globe et marquez votre premier pays."}</p></div>
-        <div className={styles.stats}><div><strong>{visitedCountries.length}</strong><span>visités</span></div><div><strong>{wishlistCountries.length}</strong><span>à visiter</span></div><div><strong>{Math.round((visitedCountries.length / COUNTRIES.length) * 100)}%</strong><span>du monde</span></div></div>
+        <div className={styles.heroInner}>
+          <div className={styles.heroIntro}><h1>Mes voyages</h1><p>{visitedCountries.length ? `${visitedCountries.length} pays ajoutés à votre passeport.` : "Tournez le globe et marquez votre premier pays."}</p></div>
+          <div className={styles.stats}><div><strong>{visitedCountries.length}</strong><span>visités</span></div><div><strong>{wishlistCountries.length}</strong><span>à visiter</span></div><div><strong>{Math.round((visitedCountries.length / COUNTRIES.length) * 100)}%</strong><span>du monde</span></div></div>
+        </div>
       </header>
 
       <nav className={styles.primaryTabs} aria-label="Globe et passeport">
@@ -281,7 +273,6 @@ export default function WorldMapExperience() {
               <button className={styles.closePassport} onClick={() => setPassportOpen(false)}><BookOpen size={16} />Fermer le passeport</button>
             </div>
           )}
-          {visitedCountries.length ? <button className={styles.sharePassport} onClick={sharePassport}><Share2 size={20} />{shareMessage || "Partager mon passeport"}</button> : null}
         </section>
       ) : (
         <section className={styles.globeWorkspace}>
@@ -305,7 +296,6 @@ export default function WorldMapExperience() {
               }) : <div className={styles.emptyList}>Aucun pays dans cette liste.</div>}</div>
             </div>
           )}
-          <p className={styles.globeSummary}>{mode === "visited" ? `${visitedCountries.length} pays visités` : `${wishlistCountries.length} destinations à découvrir`} · {COUNTRIES.length} pays disponibles</p>
         </section>
       )}
 

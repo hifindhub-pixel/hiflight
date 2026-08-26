@@ -173,4 +173,78 @@
 
 .globeHint {
   z-index: 3;
+  animation: globeHintOnce 4.2s ease both;
+}
+
+@keyframes globeHintOnce {
+  0% { opacity: 0; transform: translate(-50%, 7px); }
+  10%, 78% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 4px); }
+}
+
+/* Alignement du contenu sous les éléments correspondants de la navigation. */
+.hero {
+  display: block;
+  padding: 0;
+}
+
+.heroInner {
+  display: flex;
+  width: min(1240px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 118px 0 38px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.heroIntro {
+  width: 161px;
+  flex: 0 0 161px;
+  text-align: center;
+}
+
+.heroIntro h1 {
+  margin: 0 0 6px;
+  white-space: nowrap;
+}
+
+.heroIntro p {
+  position: relative;
+  left: 50%;
+  width: 390px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.stats {
+  width: 124px;
+  flex: 0 0 124px;
+  justify-content: center;
+}
+
+@media(max-width:760px) {
+  .heroInner {
+    display: block;
+    padding: 110px 0 29px;
+  }
+
+  .heroIntro {
+    width: 100%;
+    text-align: center;
+  }
+
+  .heroIntro h1,
+  .heroIntro p {
+    position: static;
+    width: auto;
+    transform: none;
+    white-space: normal;
+  }
+
+  .stats {
+    width: 100%;
+    margin-top: 25px;
+    justify-content: center;
+  }
 }
