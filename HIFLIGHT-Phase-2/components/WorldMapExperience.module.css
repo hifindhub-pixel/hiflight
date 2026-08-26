@@ -2,3 +2,129 @@
 
 @media(max-width:760px){.hero{display:block;padding:38px 20px 29px}.stats{margin-top:25px;overflow:auto}.stats div{min-width:98px;padding:13px 15px}.primaryTabs{margin:17px auto}.controlRow{grid-template-columns:1fr;gap:8px}.globeStage{aspect-ratio:1/1;min-height:0;border-radius:24px}.globeHint{bottom:10px;font-size:9.5px}.countryList{grid-template-columns:1fr}.openPassportWrap{padding:14px 8px}.openBook{min-height:330px;border-width:5px}.bookPage{padding:15px}.bookPageTopline{font-size:8.5px;letter-spacing:.02em}.bookPageTopline img{display:none}.passportStamp{right:6%;top:30%;width:105px;padding:6px;border-width:2px}.passportStamp small{font-size:7px}.passportStamp strong{font-size:9px}.passportStamp span{font-size:7px}.bookNote{left:13px;bottom:13px;font-size:9px}.openBook:after{width:9px}.emptyPassport>img,.closedPassport>button{border-radius:22px}.closedPassport span{bottom:15px}.guest section>div{display:grid}.modalBackdrop{padding:12px}.countryModal{padding:23px 19px}.modalFlag{width:140px;height:92px}}
 @media(max-width:440px){.stats{gap:6px}.stats div{min-width:91px}.stats strong{font-size:21px}.globeWorkspace,.passportHome{width:calc(100% - 20px)}.segment button{font-size:12px}.bookNavigation{gap:10px}.bookNavigation span{display:none}}
+
+/* Pays visités — cartes d'embarquement HiFlight */
+.countryList > .boardingPass.boardingPass {
+  position: relative;
+  grid-template-columns: 76px minmax(0, 1fr) 56px;
+  min-height: 92px;
+  gap: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid #183453;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #0a203c, #061226 72%);
+  color: #fff;
+  box-shadow: 0 10px 24px #07152d16;
+}
+
+.countryList > .boardingPass.boardingPass:hover {
+  border-color: #ff6b6b;
+  background: linear-gradient(135deg, #102b4d, #07152d 72%);
+  transform: translateY(-1px);
+}
+
+.boardingFlag {
+  display: grid;
+  width: 76px;
+  height: 100%;
+  min-height: 92px;
+  place-items: center;
+  overflow: hidden;
+  background: #e8edf3;
+  color: #52647c;
+}
+
+.boardingFlag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.boardingIdentity {
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  padding: 13px 14px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.boardingIdentity > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+
+.boardingIdentity > span strong {
+  font: 900 25px/1 Outfit, Inter, sans-serif;
+  letter-spacing: .04em;
+}
+
+.boardingIdentity > span svg {
+  color: #ff6b6b;
+}
+
+.boardingIdentity > b {
+  display: block;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  margin-top: 6px;
+  border-radius: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.boardingIdentity > small {
+  margin-top: 4px;
+  color: #91a6bf;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .18em;
+}
+
+.boardingStub {
+  position: relative;
+  display: grid;
+  align-self: stretch;
+  place-items: center;
+  border-left: 1px dashed #ffffff42;
+}
+
+.boardingStub::before,
+.boardingStub::after {
+  content: "";
+  position: absolute;
+  left: -7px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.boardingStub::before { top: -7px; }
+.boardingStub::after { bottom: -7px; }
+
+.countryList .boardingStub > b {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid #ff8d88;
+  border-radius: 50%;
+  background: #ff6b6b;
+  color: #fff;
+}
+
+@media(max-width:440px) {
+  .countryList > .boardingPass.boardingPass { grid-template-columns: 68px minmax(0, 1fr) 50px; }
+  .boardingFlag { width: 68px; }
+  .boardingIdentity { padding-right: 10px; padding-left: 11px; }
+  .boardingIdentity > span strong { font-size: 22px; }
+}

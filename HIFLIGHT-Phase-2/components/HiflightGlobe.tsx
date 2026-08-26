@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { GLOBE_COUNTRIES } from "@/lib/world-map/globeCountries";
 import { VECTOR_FLAGS } from "@/lib/world-map/vectorFlags";
+import { MISSING_VECTOR_FLAGS } from "@/lib/world-map/missingVectorFlags";
 import { FLAG_COLORS } from "@/lib/world-map/flagColors";
 import styles from "./WorldMapExperience.module.css";
 
@@ -45,7 +46,6 @@ type CountryHit = {
 };
 
 const RAD = Math.PI / 180;
-const HIDDEN_FLAG_CODE2 = new Set(["IL"]);
 const MOROCCO_UNIFIED_GLOBE_RING: Array<[number, number]> = [
   [-17.092, 20.878], [-16.964, 21.33], [-13.016, 21.333], [-13.153, 22.821],
   [-12.616, 23.275], [-12.023, 23.469], [-12.016, 25.994], [-8.683, 25.995],
@@ -138,7 +138,7 @@ const PREPARED_COUNTRIES: PreparedCountry[] = GLOBE_COUNTRIES
       code2: country.code2,
       centerPoint: makePoint(country.center),
       drawRings: prepareRings(3),
-      fastRings: prepareRings(8),
+      fastRings: prepareRings(14),
       hitX: -1000,
       hitY: -1000,
       hitDepth: -1,
@@ -147,7 +147,7 @@ const PREPARED_COUNTRIES: PreparedCountry[] = GLOBE_COUNTRIES
   });
 
 function flagIsVisible(code2: string | null) {
-  return Boolean(code2 && !HIDDEN_FLAG_CODE2.has(code2.toUpperCase()));
+  return Boolean(code2);
 }
 
 function updateBounds(bounds: [number, number, number, number], x: number, y: number) {
@@ -351,10 +351,14 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
         let image = active ? imagesRef.current.get(country.code) : undefined;
         const code2 = country.code2?.toLowerCase();
         if (active && !image && code2 && flagIsVisible(country.code2)) {
-          const vector = VECTOR_FLAGS[code2];
+          const vector = VECTOR_FLAGS[code2] || MISSING_VECTOR_FLAGS[code2];
           if (vector) {
             image = new Image();
-            image.onload = () => scheduleDraw(true);
+            image.onload = () => {
+              scheduleDraw(false);
+              if (settleTimer) clearTimeout(settleTimer);
+              settleTimer = setTimeout(() => scheduleDraw(true), 60);
+            };
             image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(vector)}`;
             imagesRef.current.set(country.code, image);
           }
@@ -377,16 +381,18 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
           const width = bounds[2] - bounds[0];
           const height = bounds[3] - bounds[1];
           largestSpan = Math.max(largestSpan, width, height);
-          if (image?.complete && image.naturalWidth && width > 0 && height > 0) {
+          if (fullQuality && image?.complete && image.naturalWidth && width > 0 && height > 0) {
             context.save();
             context.clip(path, "evenodd");
             context.drawImage(image, bounds[0], bounds[1], width, height);
             context.restore();
           }
-          context.strokeStyle = "rgba(15,35,54,0.96)";
-          context.lineWidth = 0.62;
-          context.lineJoin = "round";
-          context.stroke(path);
+          if (fullQuality) {
+            context.strokeStyle = "rgba(15,35,54,0.96)";
+            context.lineWidth = 0.62;
+            context.lineJoin = "round";
+            context.stroke(path);
+          }
         }
 
         if (paths.length && largestSpan < 2.6 && country.hitDepth > 0.02) {
