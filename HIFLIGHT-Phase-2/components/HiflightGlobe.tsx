@@ -28,6 +28,7 @@ type PreparedCountry = {
   code2: string | null;
   centerPoint: [number, number, number, number];
   drawRings: PreparedRing[];
+  interactionRings: PreparedRing[];
   hitX: number;
   hitY: number;
   hitDepth: number;
@@ -137,6 +138,7 @@ const PREPARED_COUNTRIES: PreparedCountry[] = GLOBE_COUNTRIES
       code2: country.code2,
       centerPoint: makePoint(country.center),
       drawRings: prepareRings(3),
+      interactionRings: prepareRings(8),
       hitX: -1000,
       hitY: -1000,
       hitDepth: -1,
@@ -382,9 +384,10 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
         country.touchRadius = 0;
         projectCenter(country, sinCenterLat, cosCenterLat, sinCenterLon, cosCenterLon, centerX, centerY, radius);
 
-        // Keep the exact coastline geometry while dragging. The interaction
-        // remains light because hit areas are only rebuilt on the final frame.
-        const rings = country.drawRings;
+        // During a gesture, use a lighter version of the same coastline data.
+        // Flags stay clipped to the countries; the precise paths and hit areas
+        // are restored immediately on the final frame.
+        const rings = fullQuality ? country.drawRings : country.interactionRings;
         for (const ring of rings) {
           depth = Math.max(depth, projectRing(ring, sinCenterLat, cosCenterLat, sinCenterLon, cosCenterLon, centerX, centerY, radius));
           const visible = appendVisibleRing(ring);
@@ -451,7 +454,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       const rectangle = canvas.getBoundingClientRect();
       cssWidth = Math.max(1, rectangle.width);
       cssHeight = Math.max(1, rectangle.height);
-      const pixelRatioLimit = window.innerWidth < 768 ? 1.35 : 1.6;
+      const pixelRatioLimit = window.innerWidth < 768 ? 1.2 : 1.4;
       const pixelRatio = Math.min(window.devicePixelRatio || 1, pixelRatioLimit);
       canvas.width = Math.max(1, Math.round(cssWidth * pixelRatio));
       canvas.height = Math.max(1, Math.round(cssHeight * pixelRatio));

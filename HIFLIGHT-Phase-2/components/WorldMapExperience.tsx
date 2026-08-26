@@ -90,10 +90,6 @@ function WorldMapIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-function VisitedStampIcon() {
-  return <span className={styles.visitedTabStamp} aria-hidden="true"><b>VISITÉ</b><Plane size={11} /></span>;
-}
-
 function PassportPage({ country, side, onPress, interactive = true }: { country?: Country; side: "left" | "right"; onPress: (code: string) => void; interactive?: boolean }) {
   const pageClassName = `${styles.bookPage} ${country ? motionStyles.passportCountryPage : ""} ${styles[side]} ${motionStyles.bookPage} ${motionStyles[side]}`;
   if (!country) return <div className={pageClassName}><Plane className={styles.nextStopIcon} aria-hidden="true" /><strong>PROCHAINE ESCALE</strong><p>Une nouvelle page reste à écrire.</p></div>;
@@ -239,7 +235,7 @@ export default function WorldMapExperience() {
     <main className={styles.page}>
       <header className={styles.hero}>
         <div className={styles.heroInner}>
-          <div className={styles.heroIntro}><h1>Mes voyages</h1>{visitedCountries.length ? <p>{visitedCountries.length} pays ajoutés à votre passeport.</p> : null}</div>
+          <div className={styles.heroIntro}><h1>Mes voyages</h1></div>
           <div className={styles.stats}><div><strong>{visitedCountries.length}</strong><span>visités</span></div><div><strong>{wishlistCountries.length}</strong><span>à visiter</span></div></div>
         </div>
       </header>
@@ -292,7 +288,7 @@ export default function WorldMapExperience() {
       ) : (
         <section className={styles.globeWorkspace}>
           <div className={styles.controlRow}>
-            <div className={styles.segment}><button className={mode === "visited" ? styles.segmentActive : ""} onClick={() => setMode("visited")}><VisitedStampIcon />Visités</button><button className={mode === "wishlist" ? styles.segmentActive : ""} onClick={() => setMode("wishlist")}><Star size={16} />À visiter</button></div>
+            <div className={styles.segment}><button className={mode === "visited" ? styles.segmentActive : ""} onClick={() => setMode("visited")}><Check size={16} />Visités</button><button className={mode === "wishlist" ? styles.segmentActive : ""} onClick={() => setMode("wishlist")}><Star size={16} />À visiter</button></div>
             <div className={styles.segment}><button className={viewMode === "map" ? styles.viewActive : ""} onClick={() => setViewMode("map")}><WorldMapIcon size={16} />Carte</button><button className={viewMode === "list" ? styles.viewActive : ""} onClick={() => setViewMode("list")}><List size={16} />Liste</button></div>
           </div>
           {viewMode === "map" ? <HiflightGlobe states={states} mode={mode} onCountryPress={setPendingCode} /> : (
