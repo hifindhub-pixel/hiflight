@@ -89,13 +89,13 @@ export default function AuthExperience({ onClose }: AuthExperienceProps) {
         await refresh();
       } else {
         await refresh();
-        router.replace("/world-map");
+        router.replace("/");
       }
     }).catch((reason) => setError(reason.message)).finally(() => setLoading(false));
   }, [refresh, router]);
 
   useEffect(() => {
-    if (user && !authLoading && mode !== "reset") router.replace("/world-map");
+    if (user && !authLoading && mode !== "reset") router.replace("/");
   }, [user, authLoading, mode, router]);
 
   function switchMode(nextMode: Mode) {
@@ -139,7 +139,7 @@ export default function AuthExperience({ onClose }: AuthExperienceProps) {
       }
       if (mode === "reset") setMessage("Votre mot de passe a été modifié.");
       await refresh();
-      router.push("/world-map");
+      router.push("/");
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "Une erreur est survenue.");
     } finally {
@@ -170,8 +170,8 @@ export default function AuthExperience({ onClose }: AuthExperienceProps) {
           {(mode === "signin" || mode === "signup") ? (
             <>
               <div className={styles.oauthButtons}>
-                <a href="/api/auth/oauth?provider=google">Continuer avec Google</a>
-                <a href="/api/auth/oauth?provider=apple">Continuer avec Apple</a>
+                <a href="/api/auth/oauth?provider=google"><img src="/google-logo.svg" alt="" />Continuer avec Google</a>
+                <a href="/api/auth/oauth?provider=apple"><img src="/apple-logo.svg" alt="" />Continuer avec Apple</a>
               </div>
               <div className={styles.divider}><span>ou avec votre adresse e-mail</span></div>
             </>
