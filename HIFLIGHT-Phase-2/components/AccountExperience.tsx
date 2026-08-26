@@ -111,7 +111,7 @@ export default function AccountExperience() {
         </section>
 
         <section className={styles.resources} aria-label="Aide et informations">
-          <div className={styles.resourceGroup}><h2>Assistance</h2><div><a href="mailto:contact@hiflight.fr"><CircleHelp size={20} /><span><strong>Obtenir de l’aide</strong><small>Écrire à l’équipe HiFlight</small></span><ChevronRight size={18} /></a><a href="mailto:contact@hiflight.fr?subject=Mon%20avis%20sur%20HiFlight"><MessageSquareText size={20} /><span><strong>Donner mon avis</strong><small>Une suggestion ou un retour</small></span><ChevronRight size={18} /></a></div></div>
+          <div className={styles.resourceGroup}><h2>Assistance</h2><div><a href="https://blog.hiflight.fr/faq"><CircleHelp size={20} /><span><strong>Obtenir de l’aide</strong><small>Consulter la FAQ HiFlight</small></span><ChevronRight size={18} /></a><a href="https://apps.apple.com/app/id6766213610?action=write-review"><MessageSquareText size={20} /><span><strong>Donner mon avis</strong><small>Noter HiFlight sur l’App Store</small></span><ChevronRight size={18} /></a></div></div>
           <div className={styles.resourceGroup}><h2>Informations</h2><div><Link href="/confidentialite"><ShieldCheck size={20} /><span><strong>Politique de confidentialité</strong><small>Protection de vos données</small></span><ChevronRight size={18} /></Link><Link href="/mentions-legales"><FileText size={20} /><span><strong>Mentions légales</strong><small>Informations sur HiFlight</small></span><ChevronRight size={18} /></Link></div></div>
         </section>
 
