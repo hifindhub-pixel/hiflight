@@ -458,6 +458,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
         flagLight.addColorStop(0.43, "rgba(125,218,255,0.015)");
         flagLight.addColorStop(0.79, "rgba(0,12,28,0.09)");
         flagLight.addColorStop(1, "rgba(0,2,10,0.62)");
+        flagContext.globalCompositeOperation = "source-atop";
         flagContext.fillStyle = flagLight;
         flagContext.fillRect(0, 0, cssWidth, cssHeight);
         flagContext.restore();
