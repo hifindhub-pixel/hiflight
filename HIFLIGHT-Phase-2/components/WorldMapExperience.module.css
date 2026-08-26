@@ -160,19 +160,8 @@
   .boardingIdentity > span strong { font-size: 22px; }
 }
 
-/* Le globe et ses drapeaux sont rendus sur deux couches indépendantes. */
-.globeCanvas {
-  position: absolute;
-  inset: 0;
-}
-
-.globeFlagCanvas {
-  z-index: 2;
-  pointer-events: none;
-}
-
 .globeHint {
-  z-index: 3;
+  z-index: 2;
   animation: globeHintOnce 4.2s ease both;
 }
 

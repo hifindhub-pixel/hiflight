@@ -233,7 +233,6 @@ function appendVisibleRing(ring: PreparedRing) {
 
 export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const flagCanvasRef = useRef<HTMLCanvasElement>(null);
   const [showHint, setShowHint] = useState(false);
   const statesRef = useRef(states);
   const modeRef = useRef(mode);
@@ -262,30 +261,25 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
 
   useEffect(() => {
     const canvasElement = canvasRef.current;
-    const flagCanvasElement = flagCanvasRef.current;
-    if (!canvasElement || !flagCanvasElement) return;
+    if (!canvasElement) return;
     const renderingContext = canvasElement.getContext("2d", { alpha: true, desynchronized: true });
-    const flagRenderingContext = flagCanvasElement.getContext("2d", { alpha: true, desynchronized: true });
-    if (!renderingContext || !flagRenderingContext) return;
+    if (!renderingContext) return;
     const canvas: HTMLCanvasElement = canvasElement;
-    const flagCanvas: HTMLCanvasElement = flagCanvasElement;
     const context: CanvasRenderingContext2D = renderingContext;
-    const flagContext: CanvasRenderingContext2D = flagRenderingContext;
     let cssWidth = 1;
     let cssHeight = 1;
     let frame = 0;
     let fullDrawPending = false;
-    let lastFlagDraw = -Infinity;
     let settleTimer: ReturnType<typeof setTimeout> | null = null;
 
     function scheduleDraw(fullQuality = true) {
       fullDrawPending = fullDrawPending || fullQuality;
       if (frame) return;
-      frame = requestAnimationFrame((timestamp) => {
+      frame = requestAnimationFrame(() => {
         frame = 0;
         const useFullQuality = fullDrawPending;
         fullDrawPending = false;
-        draw(useFullQuality, timestamp);
+        draw(useFullQuality);
       });
     }
 
@@ -334,7 +328,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       country.hitDepth = sinCenterLat * point[0] + cosCenterLat * point[1] * cosDelta;
     }
 
-    function draw(fullQuality: boolean, timestamp: number) {
+    function draw(fullQuality: boolean) {
       if (cssWidth <= 1 || cssHeight <= 1) return;
       const { longitude, latitude, zoom } = cameraRef.current;
       const centerLongitude = longitude * RAD;
@@ -346,15 +340,6 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       const radius = Math.min(cssWidth, cssHeight) * 0.468 * zoom;
       const centerX = cssWidth / 2;
       const centerY = cssHeight / 2;
-      const drawFlagLayer = fullQuality || timestamp - lastFlagDraw >= 32;
-      if (drawFlagLayer) {
-        lastFlagDraw = timestamp;
-        flagContext.clearRect(0, 0, cssWidth, cssHeight);
-        flagContext.save();
-        flagContext.beginPath();
-        flagContext.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        flagContext.clip();
-      }
       context.clearRect(0, 0, cssWidth, cssHeight);
 
       const ocean = context.createRadialGradient(centerX - radius * 0.31, centerY - radius * 0.28, radius * 0.04, centerX, centerY, radius * 1.08);
@@ -412,11 +397,11 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
           const width = bounds[2] - bounds[0];
           const height = bounds[3] - bounds[1];
           largestSpan = Math.max(largestSpan, width, height);
-          if (drawFlagLayer && image?.complete && image.naturalWidth && width > 0 && height > 0) {
-            flagContext.save();
-            flagContext.clip(path, "evenodd");
-            flagContext.drawImage(image, bounds[0], bounds[1], width, height);
-            flagContext.restore();
+          if (image?.complete && image.naturalWidth && width > 0 && height > 0) {
+            context.save();
+            context.clip(path, "evenodd");
+            context.drawImage(image, bounds[0], bounds[1], width, height);
+            context.restore();
           }
           context.strokeStyle = "rgba(15,35,54,0.96)";
           context.lineWidth = 0.62;
@@ -452,17 +437,6 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       context.fillStyle = light;
       context.fillRect(0, 0, cssWidth, cssHeight);
       context.restore();
-      if (drawFlagLayer) {
-        const flagLight = flagContext.createRadialGradient(centerX - radius * 0.34, centerY - radius * 0.31, radius * 0.03, centerX, centerY, radius * 1.15);
-        flagLight.addColorStop(0, "rgba(225,248,255,0.15)");
-        flagLight.addColorStop(0.43, "rgba(125,218,255,0.015)");
-        flagLight.addColorStop(0.79, "rgba(0,12,28,0.09)");
-        flagLight.addColorStop(1, "rgba(0,2,10,0.62)");
-        flagContext.globalCompositeOperation = "source-atop";
-        flagContext.fillStyle = flagLight;
-        flagContext.fillRect(0, 0, cssWidth, cssHeight);
-        flagContext.restore();
-      }
       context.beginPath();
       context.arc(centerX, centerY, radius, 0, Math.PI * 2);
       context.strokeStyle = "rgba(112,201,239,0.76)";
@@ -481,10 +455,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       const pixelRatio = Math.min(window.devicePixelRatio || 1, pixelRatioLimit);
       canvas.width = Math.max(1, Math.round(cssWidth * pixelRatio));
       canvas.height = Math.max(1, Math.round(cssHeight * pixelRatio));
-      flagCanvas.width = canvas.width;
-      flagCanvas.height = canvas.height;
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-      flagContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       scheduleDraw(true);
     }
 
@@ -644,7 +615,6 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
   return (
     <div className={styles.globeStage}>
       <canvas ref={canvasRef} className={styles.globeCanvas} aria-label="Globe interactif HiFlight" />
-      <canvas ref={flagCanvasRef} className={`${styles.globeCanvas} ${styles.globeFlagCanvas}`} aria-hidden="true" />
       {showHint ? <p className={styles.globeHint}>Tournez dans toutes les directions · pincez ou utilisez la molette</p> : null}
     </div>
   );
