@@ -369,7 +369,9 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
         country.touchRadius = 0;
         projectCenter(country, sinCenterLat, cosCenterLat, sinCenterLon, cosCenterLon, centerX, centerY, radius);
 
-        const rings = fullQuality ? country.drawRings : country.fastRings;
+        // Keep the exact coastline geometry while dragging. The interaction
+        // remains light because hit areas are only rebuilt on the final frame.
+        const rings = country.drawRings;
         for (const ring of rings) {
           depth = Math.max(depth, projectRing(ring, sinCenterLat, cosCenterLat, sinCenterLon, cosCenterLon, centerX, centerY, radius));
           const visible = appendVisibleRing(ring);
@@ -381,18 +383,16 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
           const width = bounds[2] - bounds[0];
           const height = bounds[3] - bounds[1];
           largestSpan = Math.max(largestSpan, width, height);
-          if (fullQuality && image?.complete && image.naturalWidth && width > 0 && height > 0) {
+          if (image?.complete && image.naturalWidth && width > 0 && height > 0) {
             context.save();
             context.clip(path, "evenodd");
             context.drawImage(image, bounds[0], bounds[1], width, height);
             context.restore();
           }
-          if (fullQuality) {
-            context.strokeStyle = "rgba(15,35,54,0.96)";
-            context.lineWidth = 0.62;
-            context.lineJoin = "round";
-            context.stroke(path);
-          }
+          context.strokeStyle = "rgba(15,35,54,0.96)";
+          context.lineWidth = 0.62;
+          context.lineJoin = "round";
+          context.stroke(path);
         }
 
         if (paths.length && largestSpan < 2.6 && country.hitDepth > 0.02) {

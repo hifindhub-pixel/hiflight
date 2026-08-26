@@ -297,8 +297,8 @@ export default function WorldMapExperience() {
                 if (mode === "visited" && state?.visited) {
                   return <button className={styles.boardingPass} key={country.code} aria-label={`Ouvrir ${country.name}`} onClick={() => setPendingCode(country.code)}>
                     <span className={styles.boardingFlag}>{flag ? <img src={flag} alt="" /> : <Globe2 size={24} />}</span>
-                    <span className={styles.boardingIdentity}><span><strong>{country.code}</strong><Plane size={15} aria-hidden="true" /></span><b>{country.name}</b><small>HIFLIGHT</small></span>
-                    <span className={styles.boardingStub}><b className={styles.countryActive}><Check size={17} /></b></span>
+                    <span className={styles.boardingIdentity}><span><strong>{country.code}</strong><Plane size={15} aria-hidden="true" /></span><b>{country.name}</b></span>
+                    <span className={styles.boardingStub} aria-hidden="true"><span className={styles.visitedStamp}><strong>VISITÉ</strong><Plane size={17} /><i>• • •</i></span></span>
                   </button>;
                 }
                 return <button key={country.code} onClick={() => setPendingCode(country.code)}><span className={styles.listFlag}>{flag ? <img src={flag} alt="" /> : <Globe2 size={20} />}</span><span><strong>{country.name}</strong><small>{state?.visited ? "Pays visité" : state?.wishlist ? "À visiter" : "Non ajouté"}</small></span><b className={active ? styles.countryActive : ""}>{active ? <Check size={17} /> : "+"}</b></button>;
