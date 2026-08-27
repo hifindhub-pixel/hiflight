@@ -2,30 +2,33 @@ import { NextRequest, NextResponse } from "next/server";
 import { CarAffiliateGroup, carAffiliateLinks, selectCarAffiliate } from "@/lib/affiliate-links";
 
 const allowedGroups = new Set<CarAffiliateGroup>(["global", "local", "bike"]);
-const economyBookingsTrackingUrl = carAffiliateLinks.global.find((link) => link.id === "economybookings-tp")?.url
-  || "https://economybookings.tpk.lu/6lja1RKL";
+const expediaTrackingUrl = carAffiliateLinks.global.find((link) => link.id === "expedia-cj")?.url
+  || "https://www.kqzyfj.com/click-101723457-13854905";
+const expediaFallbackAffiliateId = "fr.network.cj.101723457.13854905.";
 
-function safeValue(request: NextRequest, name: string, maxLength = 100) {
+function safeValue(request: NextRequest, name: string, maxLength = 120) {
   return request.nextUrl.searchParams.get(name)?.trim().slice(0, maxLength) || "";
 }
 
-function addDate(destination: URL, prefix: "p" | "d", value: string) {
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
-  if (!match) return;
-  destination.searchParams.set(`${prefix}y`, match[1]);
-  destination.searchParams.set(`${prefix}m`, match[2]);
-  destination.searchParams.set(`${prefix}d`, match[3]);
+function isAllowedTrackingHost(hostname: string) {
+  return [
+    "kqzyfj.com",
+    "anrdoezrs.net",
+    "dpbolvw.net",
+    "jdoqocy.com",
+    "tkqlhce.com",
+    "emjcd.com",
+    "cj.com",
+    "expedia.fr",
+    "expedia.com",
+  ].some((domain) => hostname === domain || hostname.endsWith("." + domain));
 }
 
-function addTime(destination: URL, name: "pt" | "dt", value: string) {
-  if (/^\d{2}:\d{2}$/.test(value)) destination.searchParams.set(name, value.replace(":", ""));
-}
-
-async function resolveEconomyBookingsTracking() {
-  let current = new URL(economyBookingsTrackingUrl);
+async function resolveExpediaTracking() {
+  let current = new URL(expediaTrackingUrl);
 
   try {
-    for (let hop = 0; hop < 4; hop += 1) {
+    for (let hop = 0; hop < 7; hop += 1) {
       const response = await fetch(current, {
         redirect: "manual",
         cache: "no-store",
@@ -36,11 +39,13 @@ async function resolveEconomyBookingsTracking() {
       if (!location) break;
 
       const next = new URL(location, current);
-      const allowed = next.hostname.endsWith("tpk.lu") || next.hostname.endsWith("economybookings.com");
-      if (!allowed) break;
+      if (!isAllowedTrackingHost(next.hostname)) break;
       current = next;
 
-      if (current.hostname.endsWith("economybookings.com") && current.searchParams.get("tpo_uid")) {
+      if (
+        (current.hostname === "www.expedia.fr" || current.hostname.endsWith(".expedia.fr"))
+        && (current.searchParams.get("cjevent") || current.searchParams.get("affcid"))
+      ) {
         return current;
       }
     }
@@ -51,33 +56,42 @@ async function resolveEconomyBookingsTracking() {
   return null;
 }
 
-async function economyBookingsDestination(request: NextRequest) {
-  const tracked = await resolveEconomyBookingsTracking();
-  if (!tracked) return new URL(economyBookingsTrackingUrl);
+function addExpediaDate(destination: URL, compactName: "d1" | "d2", displayName: "date1" | "date2", value: string) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) return;
+  destination.searchParams.set(compactName, match[1] + "-" + Number(match[2]) + "-" + Number(match[3]));
+  destination.searchParams.set(displayName, match[3] + "/" + match[2] + "/" + match[1]);
+}
 
-  const destination = new URL("https://www.economybookings.com/fr/cars/results");
-  for (const [key, value] of tracked.searchParams) destination.searchParams.set(key, value);
+function expediaTime(value: string) {
+  const match = /^(\d{2}):(\d{2})$/.exec(value);
+  if (!match) return "";
+  const hours = Number(match[1]);
+  const period = hours >= 12 ? "PM" : "AM";
+  const displayHours = hours % 12 || 12;
+  return String(displayHours).padStart(2, "0") + match[2] + period;
+}
 
-  destination.searchParams.set("crcy", "EUR");
-  destination.searchParams.set("lang", "fr");
-  destination.searchParams.set("reload", "1");
+async function expediaDestination(request: NextRequest) {
+  const destination = new URL("https://www.expedia.fr/carsearch");
+  const tracked = await resolveExpediaTracking();
 
-  const pickup = safeValue(request, "pickup");
-  const pickupCode = safeValue(request, "pickupCode", 8).toUpperCase();
-  const pickupType = safeValue(request, "pickupType", 20);
-  if (pickupType === "airport" && /^[A-Z]{3}$/.test(pickupCode)) {
-    destination.searchParams.set("idpickval", pickupCode);
-  } else if (pickup) {
-    destination.searchParams.set("idpick", pickup.split(",")[0]);
+  destination.searchParams.set("affcid", tracked?.searchParams.get("affcid") || expediaFallbackAffiliateId);
+  for (const key of ["cjevent", "button_referral_source"]) {
+    const value = tracked?.searchParams.get(key);
+    if (value) destination.searchParams.set(key, value);
   }
 
-  addDate(destination, "p", safeValue(request, "pickupDate", 10));
-  addDate(destination, "d", safeValue(request, "returnDate", 10));
-  addTime(destination, "pt", safeValue(request, "pickupTime", 5));
-  addTime(destination, "dt", safeValue(request, "returnTime", 5));
+  const pickup = safeValue(request, "pickup");
+  if (pickup) destination.searchParams.set("locn", pickup);
 
-  const driverAge = Number.parseInt(safeValue(request, "driverAge", 3), 10);
-  if (driverAge >= 18 && driverAge <= 99) destination.searchParams.set("age", String(driverAge));
+  addExpediaDate(destination, "d1", "date1", safeValue(request, "pickupDate", 10));
+  addExpediaDate(destination, "d2", "date2", safeValue(request, "returnDate", 10));
+
+  const pickupTime = expediaTime(safeValue(request, "pickupTime", 5));
+  const returnTime = expediaTime(safeValue(request, "returnTime", 5));
+  if (pickupTime) destination.searchParams.set("time1", pickupTime);
+  if (returnTime) destination.searchParams.set("time2", returnTime);
 
   return destination;
 }
@@ -88,9 +102,9 @@ export async function GET(request: NextRequest) {
 
   let destination: URL;
   if (group === "global") {
-    destination = await economyBookingsDestination(request);
+    destination = await expediaDestination(request);
   } else {
-    const seed = safeValue(request, "pickup") || `${Date.now()}`;
+    const seed = safeValue(request, "pickup") || String(Date.now());
     const partner = selectCarAffiliate(group, seed);
     try {
       destination = new URL(partner.url);
@@ -99,7 +113,7 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  if (destination.hostname.endsWith("awin1.com")) destination.searchParams.set("clickref", `hf-${group}`);
+  if (destination.hostname.endsWith("awin1.com")) destination.searchParams.set("clickref", "hf-" + group);
   const response = NextResponse.redirect(destination, 307);
   response.headers.set("Cache-Control", "private, no-store, max-age=0");
   response.headers.set("X-Robots-Tag", "noindex, nofollow");
