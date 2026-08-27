@@ -223,17 +223,16 @@ export default function CarSearchExperience() {
 
       <section className="car-partners-showcase">
         <header>
-          <p>Choisissez votre route</p>
-          <h2>Quatre roues ou deux roues.<br />Le voyage commence ici.</h2>
+          <h2>À vous la route.</h2>
         </header>
         <div className="car-partners-grid">
           <a className="car-expedia-card" href="#recherche-voitures">
             <span>Location de voitures</span>
-            <div><h3>Prenez la route<br />en toute sérénité.</h3><p>Choisissez votre voiture, vos dates et votre destination. HiFlight prépare votre départ en quelques instants.</p><strong>Trouver ma voiture <b>↑</b></strong></div>
+            <div><h3>Prenez la route<br />en toute sérénité.</h3><p>Choisissez votre voiture, vos dates et votre destination. HiFlight prépare votre départ en quelques instants.</p><strong>Trouver ma voiture</strong></div>
           </a>
           <a className="car-bike-card car-bike-card-new" href="/go/voitures?offre=bike" target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "bike" })}>
             <span>Location de motos et scooters</span>
-            <div><h3>Prenez la route autrement.</h3><p>Explorez les motos et scooters proposés par BikesBooking.</p><strong>Découvrir BikesBooking <b>→</b></strong></div>
+            <div><h3>Prenez la route autrement.</h3><p>Explorez les motos et scooters proposés par BikesBooking.</p><strong>Découvrir BikesBooking</strong></div>
           </a>
         </div>
       </section>
