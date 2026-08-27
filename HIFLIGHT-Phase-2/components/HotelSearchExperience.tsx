@@ -172,7 +172,6 @@ function HotelDatePicker({ checkin, checkout, onChange }: { checkin: string; che
   const [mode, setMode] = useState<DateMode>("arrival");
   const [month, setMonth] = useState(() => startOfMonth(new Date()));
   const wrapRef = useRef<HTMLDivElement>(null);
-  const nights = checkin && checkout ? Math.round((new Date(`${checkout}T12:00:00`).getTime() - new Date(`${checkin}T12:00:00`).getTime()) / 86400000) : 0;
 
   useEffect(() => {
     if (!open) return;
@@ -184,7 +183,7 @@ function HotelDatePicker({ checkin, checkout, onChange }: { checkin: string; che
   function show(nextMode: DateMode) {
     setMode(nextMode);
     const value = nextMode === "arrival" ? checkin : checkout;
-    if (value) setMonth(startOfMonth(new Date(`${value}T12:00:00`)));
+    if (value) setMonth(startOfMonth(new Date(value + "T12:00:00")));
     setOpen(true);
   }
 
@@ -200,38 +199,21 @@ function HotelDatePicker({ checkin, checkout, onChange }: { checkin: string; che
       return;
     }
     onChange(checkin, date);
+    setOpen(false);
   }
 
   return (
-    <div className="hotel-date-picker" ref={wrapRef}>
+    <div className="hotel-date-picker flight-style-range" ref={wrapRef}>
       <div className="hotel-date-triggers">
         <button type="button" className={open && mode === "arrival" ? "active" : ""} onClick={() => show("arrival")}><small>Arrivée</small><strong>{formatHotelDate(checkin, "Choisir")}</strong></button>
         <span aria-hidden="true">→</span>
         <button type="button" className={open && mode === "departure" ? "active" : ""} onClick={() => show("departure")}><small>Départ</small><strong>{formatHotelDate(checkout, "Choisir")}</strong></button>
       </div>
       {open && (
-        <div className="hotel-calendar" role="dialog" aria-label="Choisir les dates du séjour">
-          <header>
-            <div><strong>Quand souhaitez-vous partir ?</strong><span>Sélectionnez votre arrivée puis votre départ</span></div>
-            <button type="button" aria-label="Fermer le calendrier" onClick={() => setOpen(false)}>×</button>
-          </header>
-          <div className="hotel-calendar-selection">
-            <button type="button" className={mode === "arrival" ? "active" : ""} onClick={() => setMode("arrival")}><small>Arrivée</small><strong>{formatHotelDate(checkin, "Ajouter une date")}</strong></button>
-            <button type="button" className={mode === "departure" ? "active" : ""} onClick={() => setMode("departure")}><small>Départ</small><strong>{formatHotelDate(checkout, "Ajouter une date")}</strong></button>
-          </div>
-          <div className="hotel-calendar-nav">
-            <button type="button" aria-label="Mois précédent" disabled={monthKey(month) <= monthKey(new Date())} onClick={() => setMonth((current) => addMonths(current, -1))}>‹</button>
-            <button type="button" aria-label="Mois suivant" onClick={() => setMonth((current) => addMonths(current, 1))}>›</button>
-          </div>
-          <div className="hotel-calendar-months">
-            <HotelMonth month={month} checkin={checkin} checkout={checkout} onChoose={choose} />
-            <HotelMonth month={addMonths(month, 1)} checkin={checkin} checkout={checkout} onChoose={choose} />
-          </div>
-          <footer>
-            <button type="button" className="hotel-calendar-clear" onClick={() => { onChange("", ""); setMode("arrival"); }}>Effacer</button>
-            <span>{nights ? `${nights} nuit${nights > 1 ? "s" : ""}` : "Sélectionnez vos dates"}</span>
-            <button type="button" className="hotel-calendar-apply" disabled={!checkin || !checkout} onClick={() => setOpen(false)}>Appliquer</button>
-          </footer>
+        <div className="fare-calendar hotel-flight-calendar" role="dialog" aria-label="Choisir les dates du séjour">
+          <div className="calendar-top"><div><strong>{mode === "arrival" ? "Choisissez votre arrivée" : "Choisissez votre départ"}</strong><span>Le calendrier se ferme après la date de départ.</span></div><button type="button" aria-label="Fermer" onClick={() => setOpen(false)}>×</button></div>
+          <div className="calendar-nav"><button type="button" aria-label="Mois précédent" disabled={monthKey(month) <= monthKey(new Date())} onClick={() => setMonth((current) => addMonths(current, -1))}>‹</button><button type="button" aria-label="Mois suivant" onClick={() => setMonth((current) => addMonths(current, 1))}>›</button></div>
+          <div className="calendar-grid"><HotelMonth month={month} checkin={checkin} checkout={checkout} onChoose={choose} /><HotelMonth month={addMonths(month, 1)} checkin={checkin} checkout={checkout} onChoose={choose} /></div>
         </div>
       )}
     </div>
@@ -246,19 +228,19 @@ function HotelMonth({ month, checkin, checkout, onChoose }: { month: Date; check
   while (cells.length % 7) cells.push(null);
 
   return (
-    <section className="hotel-calendar-month">
+    <div className="calendar-month">
       <h3>{new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(month)}</h3>
-      <div className="hotel-calendar-week">{weekDays.map((day) => <span key={day}>{day}</span>)}</div>
-      <div className="hotel-calendar-days">
+      <div className="week-row">{weekDays.map((day) => <span key={day}>{day}</span>)}</div>
+      <div className="days-grid">
         {cells.map((day, index) => {
-          if (!day) return <span key={`empty-${index}`} />;
+          if (!day) return <span className="empty-day" key={"empty-" + index} />;
           const date = localIso(new Date(month.getFullYear(), month.getMonth(), day));
           const selected = date === checkin || date === checkout;
           const between = Boolean(checkin && checkout && date > checkin && date < checkout);
-          return <button key={date} type="button" disabled={date < todayIso()} className={`${selected ? "selected" : ""} ${between ? "between" : ""}`} onClick={() => onChoose(date)}><span>{day}</span></button>;
+          return <button key={date} type="button" disabled={date < todayIso()} className={(selected ? "selected " : "") + (between ? "between" : "")} onClick={() => onChoose(date)}><span>{day}</span><small>&nbsp;</small></button>;
         })}
       </div>
-    </section>
+    </div>
   );
 }
 
