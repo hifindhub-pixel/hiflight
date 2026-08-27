@@ -1,60 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { CarAffiliateGroup, carAffiliateLinks, selectCarAffiliate } from "@/lib/affiliate-links";
+import { CarAffiliateGroup, selectCarAffiliate } from "@/lib/affiliate-links";
 
 const allowedGroups = new Set<CarAffiliateGroup>(["global", "local", "bike"]);
-const expediaTrackingUrl = carAffiliateLinks.global.find((link) => link.id === "expedia-cj")?.url
-  || "https://www.kqzyfj.com/click-101723457-13854905";
-const expediaFallbackAffiliateId = "fr.network.cj.101723457.13854905.";
-
-function safeValue(request: NextRequest, name: string, maxLength = 120) {
-  return request.nextUrl.searchParams.get(name)?.trim().slice(0, maxLength) || "";
-}
-
-function isAllowedTrackingHost(hostname: string) {
-  return [
-    "kqzyfj.com",
-    "anrdoezrs.net",
-    "dpbolvw.net",
-    "jdoqocy.com",
-    "tkqlhce.com",
-    "emjcd.com",
-    "cj.com",
-    "expedia.fr",
-    "expedia.com",
-  ].some((domain) => hostname === domain || hostname.endsWith("." + domain));
-}
-
-async function resolveExpediaTracking() {
-  let current = new URL(expediaTrackingUrl);
-
-  try {
-    for (let hop = 0; hop < 7; hop += 1) {
-      const response = await fetch(current, {
-        redirect: "manual",
-        cache: "no-store",
-        signal: AbortSignal.timeout(5000),
-        headers: { Accept: "text/html", "User-Agent": "HiFlight/1.0" },
-      });
-      const location = response.headers.get("location");
-      if (!location) break;
-
-      const next = new URL(location, current);
-      if (!isAllowedTrackingHost(next.hostname)) break;
-      current = next;
-
-      if (
-        (current.hostname === "www.expedia.fr" || current.hostname.endsWith(".expedia.fr"))
-        && (current.searchParams.get("cjevent") || current.searchParams.get("affcid"))
-      ) {
-        return current;
-      }
-    }
-  } catch {
-    return null;
-  }
-
-  return null;
-}
+const expediaAffiliateId = "fr.network.cj.101723457.13854905.";
 
 function addExpediaDate(destination: URL, compactName: "d1" | "d2", displayName: "date1" | "date2", value: string) {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
@@ -74,13 +22,7 @@ function expediaTime(value: string) {
 
 async function expediaDestination(request: NextRequest) {
   const destination = new URL("https://www.expedia.fr/carsearch");
-  const tracked = await resolveExpediaTracking();
-
-  destination.searchParams.set("affcid", tracked?.searchParams.get("affcid") || expediaFallbackAffiliateId);
-  for (const key of ["cjevent", "button_referral_source"]) {
-    const value = tracked?.searchParams.get(key);
-    if (value) destination.searchParams.set(key, value);
-  }
+  destination.searchParams.set("affcid", expediaAffiliateId);
 
   const pickup = safeValue(request, "pickup");
   if (pickup) destination.searchParams.set("locn", pickup);
