@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import HotelSearchExperience from "@/components/HotelSearchExperience";
 
-export const metadata: Metadata = { title: "Comparer les hôtels", description: "Comparez les prix des hôtels en liste ou directement sur la carte HiFlight." };
+export const metadata: Metadata = { title: "Comparer les hôtels", description: "Comparez les prix des hôtels en liste ou directement sur la carte HiFlight.", alternates: { canonical: "/hotels" } };
 export const dynamic = "force-dynamic";
 
 export default function HotelsPage() {
