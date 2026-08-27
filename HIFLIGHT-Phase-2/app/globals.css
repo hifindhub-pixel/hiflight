@@ -773,3 +773,93 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .car-direct-submit{grid-column:1/-1}
 .car-direct-form .hotel-calendar{position:fixed;top:auto;right:10px;bottom:10px;left:10px}
 }
+
+
+/* Cars — premium search-first rebuild */
+.car-clean-hero{min-height:720px;padding:116px 20px 58px;background-position:center 58%}
+.car-clean-hero::before{background:linear-gradient(90deg,rgba(3,12,29,.96) 0%,rgba(3,12,29,.86) 52%,rgba(3,12,29,.42) 100%),linear-gradient(0deg,rgba(3,12,29,.82),transparent 68%)}
+.car-clean-hero .service-tabs{margin-bottom:30px}
+.car-clean-heading{max-width:860px}
+.car-clean-heading>p:first-child{margin:0 0 8px;color:#ff9a9a;font-size:10px;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+.car-clean-heading h1{margin:0;color:#fff;font-size:clamp(3rem,5.2vw,5.6rem);letter-spacing:-.055em}
+.car-clean-heading>p:last-child{max-width:660px;margin:16px 0 26px;color:rgba(255,255,255,.78);font-size:14px}
+.car-clean-search{position:relative;width:min(1160px,100%);padding:14px;border:1px solid rgba(255,255,255,.54);border-radius:20px;color:#10203a;background:#fff;box-shadow:0 26px 70px rgba(3,12,29,.3)}
+.car-clean-primary{display:grid;grid-template-columns:1.08fr 1fr;gap:8px}
+.car-clean-location,.car-clean-dates{position:relative;min-height:80px;border:1px solid #dce3eb;border-radius:13px;background:#fff}
+.car-clean-location:focus-within,.car-clean-dates:focus-within{border-color:var(--coral);box-shadow:0 0 0 3px rgba(255,107,107,.12)}
+.car-clean-location>label{display:block;padding:12px 15px 0;color:#69778a;font-size:9px;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+.car-clean-location>input{width:100%;padding:5px 15px 14px;border:0;outline:0;color:#10203a;background:transparent;font:750 15px Outfit,sans-serif}
+.car-clean-dates .date-buttons{display:grid;height:100%;grid-template-columns:1fr 1fr}
+.car-clean-dates .date-buttons button{position:relative;padding:12px 16px;border:0;text-align:left;background:transparent;cursor:pointer}
+.car-clean-dates .date-buttons button+button{border-left:1px solid #e5eaf0}
+.car-clean-dates .date-buttons button.active{background:#fff3f3}
+.car-clean-dates .date-buttons small{display:block;margin-bottom:5px;color:#69778a;font-size:9px;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+.car-clean-dates .date-buttons strong{color:#10203a;font:750 14px Outfit,sans-serif}
+.car-clean-secondary{display:grid;grid-template-columns:repeat(3,minmax(120px,.55fr)) minmax(220px,1fr);gap:8px;margin-top:8px}
+.car-clean-secondary>label{display:flex;min-height:62px;flex-direction:column;justify-content:center;padding:8px 13px;border:1px solid #dfe5ec;border-radius:12px;background:#f8fafc}
+.car-clean-secondary>label span{color:#748195;font-size:8px;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+.car-clean-secondary select{width:100%;margin-top:2px;border:0;outline:0;color:#10203a;background:transparent;font:750 12px Outfit,sans-serif}
+.car-clean-secondary>button{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 17px;border:0;border-radius:12px;color:#07162f;background:var(--coral);font:800 13px Outfit,sans-serif;cursor:pointer;transition:background .18s,transform .18s}
+.car-clean-secondary>button:hover{transform:translateY(-1px);background:#ff8585}
+.car-clean-secondary>button:disabled{opacity:.68;cursor:wait;transform:none}
+.car-clean-secondary>button span{font-size:18px}
+.car-clean-note{margin:9px 3px 0;color:#6f7b8d;font-size:9px;font-weight:650}
+.car-clean-note.error{color:#b4232d}
+.car-clean-suggestions{position:absolute;z-index:45;top:calc(100% + 8px);left:0;width:100%;min-width:390px;max-height:390px;overflow:auto;padding:8px;border:1px solid #dce3eb;border-radius:15px;background:#fff;box-shadow:0 25px 65px rgba(7,22,47,.25)}
+.car-clean-suggestions>p{margin:4px 7px 7px;color:#8490a0;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+.car-clean-suggestions>span{display:block;padding:16px;color:#6e7a8a;font-size:11px}
+.car-clean-suggestions>button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:18px;padding:10px;border:0;border-radius:10px;text-align:left;background:#fff;cursor:pointer}
+.car-clean-suggestions>button:hover,.car-clean-suggestions>button.active{background:#f3f6fa}
+.car-clean-suggestions>button>span{display:flex;min-width:0;flex-direction:column}
+.car-clean-suggestions strong{color:#12213a;font:750 12px Outfit,sans-serif}
+.car-clean-suggestions small{color:#7e8a9a;font-size:9px}
+.car-clean-suggestions b{color:#5e6d80;font-size:10px}
+.car-clean-calendar{top:calc(100% + 8px);right:0}
+.car-clean-content{width:min(1160px,calc(100% - 40px));margin:auto;padding:94px 0 104px}
+.car-clean-intro{display:grid;grid-template-columns:.55fr 1.45fr;align-items:end;gap:48px;padding-bottom:35px;border-bottom:1px solid #dce3eb}
+.car-clean-intro>p{margin:0;color:#c9383f;font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.car-clean-intro h2{max-width:720px;margin:0;color:#0d1c34;font-size:clamp(2.4rem,4.6vw,4.7rem);letter-spacing:-.055em}
+.car-clean-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.car-clean-columns article{padding:35px 34px 18px 0}
+.car-clean-columns article+article{padding-left:34px;border-left:1px solid #e1e6ed}
+.car-clean-columns span{color:#ff6b6b;font:800 10px Outfit,sans-serif}
+.car-clean-columns h3{margin:17px 0 9px;color:#13213a;font-size:18px}
+.car-clean-columns p{margin:0;color:#697588;font-size:12px;line-height:1.7}
+.car-clean-footer{display:flex;width:min(1160px,calc(100% - 40px));align-items:center;justify-content:space-between;gap:45px;margin:0 auto 95px;padding:34px 38px;border:1px solid #dce3eb;border-radius:20px;background:#f7f9fc}
+.car-clean-footer p{margin:0;color:#c9383f;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+.car-clean-footer h2{margin:4px 0 0;color:#12213a;font-size:25px}
+.car-clean-footer nav{display:flex;gap:8px}
+.car-clean-footer a{display:flex;min-width:170px;align-items:center;justify-content:space-between;gap:18px;padding:12px 14px;border:1px solid #d9e0e8;border-radius:11px;color:#14223a;background:#fff;font-size:10px;font-weight:800}
+.car-clean-footer a span{color:#ff6b6b}
+.flight-style-range{position:relative}
+.hotel-flight-calendar{top:calc(100% + 10px);right:0}
+@media(max-width:980px){
+.car-clean-hero{min-height:780px}
+.car-clean-primary{grid-template-columns:1fr}
+.car-clean-secondary{grid-template-columns:repeat(3,1fr)}
+.car-clean-secondary>button{grid-column:1/-1;min-height:58px}
+.car-clean-intro{grid-template-columns:1fr;gap:12px}
+.car-clean-columns{grid-template-columns:1fr}
+.car-clean-columns article,.car-clean-columns article+article{padding:25px 0;border-left:0;border-bottom:1px solid #e1e6ed}
+.car-clean-footer{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:650px){
+.car-clean-hero{min-height:830px;padding:104px 12px 44px}
+.car-clean-hero .service-tabs{margin-bottom:24px}
+.car-clean-heading h1{font-size:clamp(2.85rem,15vw,4.25rem)}
+.car-clean-heading>p:last-child{font-size:12px}
+.car-clean-search{padding:9px;border-radius:16px}
+.car-clean-location,.car-clean-dates{min-height:72px}
+.car-clean-secondary{grid-template-columns:1fr 1fr}
+.car-clean-secondary>label:nth-child(3){grid-column:1/-1}
+.car-clean-secondary>button{grid-column:1/-1;min-height:56px}
+.car-clean-suggestions{position:fixed;top:auto;right:10px;bottom:10px;left:10px;width:auto;min-width:0;max-height:65vh}
+.car-clean-calendar,.hotel-flight-calendar{position:fixed;top:auto;right:10px;bottom:10px;left:10px;width:auto;max-height:86vh;overflow:auto}
+.car-clean-calendar .calendar-grid,.hotel-flight-calendar .calendar-grid{grid-template-columns:1fr}
+.car-clean-calendar .calendar-month:nth-child(2),.hotel-flight-calendar .calendar-month:nth-child(2){display:none}
+.car-clean-content{width:calc(100% - 28px);padding:70px 0}
+.car-clean-intro h2{font-size:2.6rem}
+.car-clean-footer{width:calc(100% - 28px);margin-bottom:70px;padding:25px 20px}
+.car-clean-footer nav{width:100%;flex-direction:column}
+.car-clean-footer a{width:100%}
+}
