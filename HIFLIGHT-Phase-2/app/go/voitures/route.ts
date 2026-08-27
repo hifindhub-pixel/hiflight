@@ -4,6 +4,10 @@ import { CarAffiliateGroup, selectCarAffiliate } from "@/lib/affiliate-links";
 const allowedGroups = new Set<CarAffiliateGroup>(["global", "local", "bike"]);
 const expediaAffiliateId = "fr.network.cj.101723457.13854905.";
 
+function safeValue(request: NextRequest, name: string, maxLength = 120) {
+  return request.nextUrl.searchParams.get(name)?.trim().slice(0, maxLength) || "";
+}
+
 function addExpediaDate(destination: URL, compactName: "d1" | "d2", displayName: "date1" | "date2", value: string) {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
   if (!match) return;
