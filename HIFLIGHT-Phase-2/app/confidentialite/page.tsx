@@ -1,1 +1,37 @@
-export default function Privacy() { return <main><section className="page-hero small"><div><h1>Confidentialité et cookies</h1></div></section><article className="article legal"><h2>Responsable du traitement</h2><p>HIFLIGHT · <a href="mailto:contact@hiflight.fr">contact@hiflight.fr</a></p><h2>Compte et données de voyage</h2><p>Lorsque vous créez un compte, HIFLIGHT traite votre adresse e-mail, votre profil, vos préférences, les pays visités et les destinations que vous souhaitez découvrir. Ces informations servent uniquement à fournir et synchroniser votre espace, votre World Map et votre passeport entre vos appareils. Elles ne sont pas rendues publiques.</p><h2>Données liées à la recherche</h2><p>Lorsque vous lancez une recherche, les informations nécessaires à la comparaison, comme les villes, dates et nombre de voyageurs, sont transmises au moteur HIFLIGHT exploité avec Travelpayouts ou au partenaire sélectionné. Des données techniques peuvent également être traitées pour assurer le fonctionnement et la sécurité du service.</p><h2>Finalités et destinataires</h2><p>Ces données servent à fournir le comparateur, sécuriser le service et mesurer son utilisation lorsque la réglementation et vos choix l’autorisent. Supabase héberge les comptes et données personnelles de l’espace HiFlight. Les prestataires techniques, réseaux d’affiliation CJ, Awin et Effinity, ainsi que les partenaires de réservation reçoivent uniquement les informations nécessaires à la fourniture de leurs services.</p><h2>Choix des traceurs</h2><p>Lorsque votre accord est requis, les traceurs de mesure d’audience et d’affiliation sont activés selon vos choix. Vous pouvez refuser sans perdre l’accès au comparateur et modifier vos préférences depuis le bouton « Cookies ».</p><h2>Vos droits</h2><p>Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données, ou vous opposer à certains traitements, via contact@hiflight.fr. Vous pouvez également saisir la CNIL.</p></article></main>; }
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Confidentialité et cookies",
+  description: "Politique de confidentialité et gestion des cookies HiFlight.",
+  alternates: { canonical: "/confidentialite" },
+};
+
+export default function Privacy() {
+  return (
+    <main>
+      <section className="page-hero small"><div><h1>Confidentialité et cookies</h1></div></section>
+      <article className="article legal">
+        <p>Dernière mise à jour : 27 août 2026.</p>
+        <h2>Responsable du traitement</h2>
+        <p>HIFLIGHT · <a href="mailto:contact@hiflight.fr">contact@hiflight.fr</a>.</p>
+        <h2>Données traitées</h2>
+        <p>Lorsque vous créez un compte, HIFLIGHT traite notamment votre adresse e-mail, votre profil, vos préférences, les pays visités et les destinations enregistrées. Lors d’une recherche, les villes, dates, voyageurs et autres critères nécessaires sont transmis au moteur ou au partenaire sélectionné. Des données techniques de sécurité peuvent également être traitées.</p>
+        <h2>Finalités et bases légales</h2>
+        <p>Les données du compte sont traitées pour fournir les fonctionnalités demandées et exécuter le service. La sécurité, la prévention des abus et la maintenance reposent sur l’intérêt légitime de HIFLIGHT. Les traceurs de mesure, d’avis et d’affiliation non essentiels reposent sur votre consentement. Certaines informations peuvent être conservées pour respecter une obligation légale.</p>
+        <h2>Destinataires et partenaires</h2>
+        <p>Supabase héberge les comptes et données personnelles de l’espace HiFlight. Vercel héberge le site. Les moteurs de recherche, réseaux d’affiliation et partenaires de réservation reçoivent les critères nécessaires lorsque vous utilisez leurs services ou ouvrez leurs liens.</p>
+        <h2>Transferts internationaux</h2>
+        <p>Certains prestataires peuvent traiter des données hors de l’Espace économique européen. HIFLIGHT s’appuie alors sur les mécanismes prévus par le RGPD, notamment les décisions d’adéquation ou les clauses contractuelles types, lorsque ces garanties sont requises.</p>
+        <h2>Durées de conservation</h2>
+        <p>Les données liées au compte sont conservées pendant son utilisation, puis supprimées ou anonymisées après une demande de suppression, sous réserve des obligations légales. Les critères de recherche ne sont conservés que pendant la durée nécessaire au fonctionnement, à la sécurité et aux journaux techniques des prestataires. La preuve de votre choix concernant les cookies est renouvelée au plus tard tous les six mois.</p>
+        <h2>Cookies et traceurs</h2>
+        <p>Les traceurs de mesure d’audience, d’avis et d’affiliation sont chargés uniquement après votre accord. Vous pouvez refuser sans perdre l’accès au comparateur et rouvrir à tout moment le panneau depuis le bouton « Cookies ». Un refus après acceptation provoque le rechargement de la page afin d’arrêter les traceurs actifs.</p>
+        <h2>Vos droits</h2>
+        <p>Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données, retirer votre consentement ou vous opposer à certains traitements via <a href="mailto:contact@hiflight.fr">contact@hiflight.fr</a>. Vous pouvez également adresser une réclamation à la CNIL.</p>
+        <h2>Conditions d’utilisation</h2>
+        <p>Les règles applicables au comparateur et aux redirections partenaires figurent dans les <Link href="/conditions">conditions d’utilisation</Link>.</p>
+      </article>
+    </main>
+  );
+}
