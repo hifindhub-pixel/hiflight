@@ -16,11 +16,13 @@ export default function EsimExplorer() {
     if (!widgetRef.current || widgetRef.current.dataset.loaded) return;
     widgetRef.current.dataset.loaded = "true";
     let shadowObserver: MutationObserver | null = null;
+
     const localizeWidget = () => {
       const root = widgetRef.current;
       if (!root) return;
       const component = root.querySelector<HTMLElement>("tp-cascoon");
       const scope: ParentNode = component?.shadowRoot || root;
+
       if (component) component.setAttribute("lang", "fr");
       if (component?.shadowRoot && !shadowObserver) {
         shadowObserver = new MutationObserver(localizeWidget);
@@ -32,19 +34,45 @@ export default function EsimExplorer() {
         style.textContent = ':host{display:block!important;min-height:320px!important;overflow:visible!important}[class*="search"],[class*="input"],[class*="content"]{overflow:visible!important}[role="listbox"],[class*="dropdown"],[class*="suggest"],[class*="options"],[class*="menu"]{position:absolute!important;z-index:2147483000!important;max-height:330px!important;overflow-y:auto!important}';
         component.shadowRoot.appendChild(style);
       }
+
       const replacements: Record<string, string> = {
         "Local, regional and global eSIMs for travellers": "Des eSIM locales, régionales et mondiales",
         "Stay connected, wherever you travel, at affordable rates": "Restez connecté partout, avec un forfait adapté à votre voyage",
-        "Search": "Rechercher",
       };
       scope.querySelectorAll<HTMLElement>("*").forEach((element) => {
         const value = element.textContent?.trim();
         if (value && replacements[value] && element.children.length === 0) element.textContent = replacements[value];
       });
-      scope.querySelectorAll<HTMLInputElement>("input").forEach((input) => {
+
+      const input = scope.querySelector<HTMLInputElement>('input[data-testid="autocomplete-input-country"]');
+      const selectedValue = scope.querySelector<HTMLInputElement>('input[data-testid="autocomplete-hidden-country"]');
+      const form = scope.querySelector<HTMLFormElement>('form[data-testid="form"]');
+      const submit = scope.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const submitCopy = submit?.querySelector<HTMLElement>(".form-submit__content");
+
+      if (input) {
         if (input.placeholder.toLowerCase().includes("search data packs")) input.placeholder = "Rechercher parmi plus de 200 pays et régions";
-      });
+        input.setAttribute("aria-label", "Destination eSIM");
+      }
+      if (submit) submit.setAttribute("aria-label", "Rechercher une eSIM");
+      if (submitCopy && submitCopy.textContent !== "Rechercher") submitCopy.textContent = "Rechercher";
+
+      if (form && input && selectedValue && form.dataset.hiflightValidated !== "true") {
+        form.dataset.hiflightValidated = "true";
+        input.addEventListener("input", () => input.setCustomValidity(""));
+        form.addEventListener("submit", (event) => {
+          if (!selectedValue.value.trim()) {
+            event.preventDefault();
+            input.setCustomValidity("Sélectionnez une destination dans la liste proposée.");
+            input.reportValidity();
+            input.focus();
+            return;
+          }
+          input.setCustomValidity("");
+        }, true);
+      }
     };
+
     const observer = new MutationObserver(localizeWidget);
     observer.observe(widgetRef.current, { childList: true, subtree: true });
     const localizationTimer = window.setInterval(localizeWidget, 500);
@@ -65,7 +93,7 @@ export default function EsimExplorer() {
         <section className="esim-airalo-shell" aria-label="Recherche de forfaits eSIM Airalo">
           {failed ? <div className="esim-widget-fallback"><p>Le widget est momentanément indisponible.</p><a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener">Voir les forfaits Airalo →</a></div> : <div className="esim-widget" ref={widgetRef}><noscript><a href={AIRALO_LINK}>Voir les forfaits Airalo</a></noscript></div>}
         </section>
-        <p className="hero-disclaimer">Les prix, volumes de données et durées sont confirmés sur le site du partenaire.</p>
+        <p className="hero-disclaimer">Sélectionnez une destination dans la liste. Les prix, volumes de données et durées sont confirmés sur le site du partenaire.</p>
       </div></section>
 
       <section className="esim-results section">
