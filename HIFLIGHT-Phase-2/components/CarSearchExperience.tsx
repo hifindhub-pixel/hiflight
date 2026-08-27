@@ -276,8 +276,8 @@ function CarDatePicker({ pickupDate, returnDate, onChange }: { pickupDate: strin
   }
 
   function choose(date: string) {
-    if (mode === "pickup" || !pickupDate || (pickupDate && returnDate)) {
-      onChange(date, returnDate && returnDate > date ? returnDate : "");
+    if (mode === "pickup" || !pickupDate) {
+      onChange(date, "");
       setMode("return");
       return;
     }
