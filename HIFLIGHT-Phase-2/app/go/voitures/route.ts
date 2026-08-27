@@ -30,7 +30,9 @@ async function expediaDestination(request: NextRequest) {
   destination.searchParams.set("affcid", expediaAffiliateId);
 
   const pickup = safeValue(request, "pickup");
+  const dropoff = safeValue(request, "dropoff");
   if (pickup) destination.searchParams.set("locn", pickup);
+  if (dropoff && dropoff !== pickup) destination.searchParams.set("loc2", dropoff);
 
   addExpediaDate(destination, "d1", "date1", safeValue(request, "pickupDate", 10));
   addExpediaDate(destination, "d2", "date2", safeValue(request, "returnDate", 10));
