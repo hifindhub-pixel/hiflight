@@ -188,8 +188,8 @@ function HotelDatePicker({ checkin, checkout, onChange }: { checkin: string; che
   }
 
   function choose(date: string) {
-    if (mode === "arrival" || !checkin || (checkin && checkout)) {
-      onChange(date, checkout && checkout > date ? checkout : "");
+    if (mode === "arrival" || !checkin) {
+      onChange(date, "");
       setMode("departure");
       return;
     }
