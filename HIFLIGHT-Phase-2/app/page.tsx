@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
 import { airports, flightRoutes } from "@/lib/content";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function Home() {
   return (
