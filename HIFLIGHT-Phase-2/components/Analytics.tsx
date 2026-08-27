@@ -1,10 +1,13 @@
 "use client";
 
 import Script from "next/script";
+import { useEffect, useState } from "react";
 
 declare global {
   interface Window { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void; }
 }
+
+const CONSENT_KEY = "hiflight-consent-v1";
 
 export function track(name: string, params: Record<string, string | number> = {}) {
   if (typeof window === "undefined") return;
@@ -13,11 +16,21 @@ export function track(name: string, params: Record<string, string | number> = {}
 
 export default function Analytics() {
   const id = process.env.NEXT_PUBLIC_GA_ID;
-  if (!id) return null;
+  const [allowed, setAllowed] = useState(false);
+
+  useEffect(() => {
+    setAllowed(localStorage.getItem(CONSENT_KEY) === "accepted");
+    const update = (event: Event) => setAllowed(Boolean((event as CustomEvent<{ accepted: boolean }>).detail?.accepted));
+    window.addEventListener("hiflight-consent", update);
+    return () => window.removeEventListener("hiflight-consent", update);
+  }, []);
+
+  if (!id || !allowed) return null;
+
   return (
     <>
-      <Script id="ga-consent" strategy="beforeInteractive">
-        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});`}
+      <Script id="ga-init" strategy="afterInteractive">
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('consent','default',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});`}
       </Script>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${id}`} strategy="afterInteractive" />
       <Script id="ga-config" strategy="afterInteractive">
