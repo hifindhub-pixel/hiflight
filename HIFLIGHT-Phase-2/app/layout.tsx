@@ -23,6 +23,22 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="trustpilot-one-time-domain-verification-id" content="6f1432d9-72ab-4ce7-9eb4-5b1f935fb211" />
       </head>
       <body>
+        <span
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            width: 1,
+            height: 1,
+            padding: 0,
+            margin: -1,
+            overflow: "hidden",
+            clip: "rect(0, 0, 0, 0)",
+            whiteSpace: "nowrap",
+            border: 0,
+          }}
+        >
+          Impact-Site-Verification: 52b1d8cb-a0bb-4e31-b350-02e35cb25e61
+        </span>
         <AuthProvider>
           <Analytics />
           <AffiliateScripts />
