@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { track } from "./Analytics";
 import ServiceTabs from "./ServiceTabs";
 
@@ -150,7 +150,7 @@ function CarRoadVisual() {
   );
 }
 
-function CarCategory({ label, detail, icon }: { label: string; detail: string; icon: React.ReactNode }) {
+function CarCategory({ label, detail, icon }: { label: string; detail: string; icon: ReactNode }) {
   return (
     <article className="car-category-card">
       <div><svg viewBox="0 0 24 24" aria-hidden="true">{icon}</svg></div>
