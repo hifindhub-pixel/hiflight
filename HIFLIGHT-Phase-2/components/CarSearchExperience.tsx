@@ -81,6 +81,11 @@ export default function CarSearchExperience() {
       setError("Sélectionnez le lieu de restitution.");
       return;
     }
+    const driverAge = Number.parseInt(draft.driverAge, 10);
+    if (!Number.isInteger(driverAge) || driverAge < 18 || driverAge > 99) {
+      setError("Indiquez un âge de conducteur compris entre 18 et 99 ans.");
+      return;
+    }
     if (!draft.pickupDate || !draft.returnDate) {
       setError("Sélectionnez les dates de retrait et de retour.");
       return;
@@ -159,10 +164,8 @@ export default function CarSearchExperience() {
                   }}
                 />
                 <CarTimeSelector pickupTime={draft.pickupTime} returnTime={draft.returnTime} onChange={(pickupTime, returnTime) => setDraft((current) => ({ ...current, pickupTime, returnTime }))} />
-                <CarSelect
-                  label="Âge du conducteur"
+                <CarAgeInput
                   value={draft.driverAge}
-                  options={Array.from({ length: 58 }, (_, index) => index + 18).map((age) => ({ value: String(age), label: age + " ans", detail: "Conducteur principal" }))}
                   onChange={(driverAge) => setDraft((current) => ({ ...current, driverAge }))}
                 />
               </div>
@@ -226,7 +229,7 @@ export default function CarSearchExperience() {
         <div className="car-partners-grid">
           <a className="car-expedia-card" href="#recherche-voitures">
             <span>Location de voitures</span>
-            <div><h3>Recherchez sur HiFlight.<br />Réservez avec Expedia.</h3><p>Vos lieux, dates et horaires sont transmis directement aux résultats disponibles.</p><strong>Préparer ma recherche <b>↑</b></strong></div>
+            <div><h3>Prenez la route<br />en toute sérénité.</h3><p>Choisissez votre voiture, vos dates et votre destination. HiFlight prépare votre départ en quelques instants.</p><strong>Trouver ma voiture <b>↑</b></strong></div>
           </a>
           <a className="car-bike-card car-bike-card-new" href="/go/voitures?offre=bike" target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "bike" })}>
             <span>Location de motos et scooters</span>
@@ -262,6 +265,38 @@ function CarSelect({ label, value, options, onChange }: { label: string; value: 
         <div className="search-select-list">{options.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === value} className={option.value === value ? "selected" : ""} onClick={() => { onChange(option.value); setOpen(false); }}>
           <span><strong>{option.label}</strong><small>{option.detail}</small></span><i aria-hidden="true" />
         </button>)}</div>
+      </div>}
+    </div>
+  );
+}
+
+
+function CarAgeInput({ value, onChange }: { value: string; onChange: (value: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const age = Number.parseInt(value, 10);
+  const valid = Number.isInteger(age) && age >= 18 && age <= 99;
+
+  useEffect(() => {
+    const close = (event: MouseEvent) => { if (!wrapRef.current?.contains(event.target as Node)) setOpen(false); };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
+
+  return (
+    <div className="passenger-selector car-age-selector" ref={wrapRef}>
+      <button type="button" className={open ? "active" : ""} aria-expanded={open} onClick={() => setOpen((current) => !current)}>
+        <span><strong>{value ? value + " ans" : "Votre âge"}</strong><small>Conducteur principal</small></span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+      </button>
+      {open && <div className="passenger-popover car-age-popover">
+        <header><strong>Âge du conducteur</strong><span>Au moment de la prise en charge</span></header>
+        <label htmlFor="car-driver-age">
+          <span>Votre âge</span>
+          <div className="car-age-input"><input id="car-driver-age" type="number" inputMode="numeric" min="18" max="99" value={value} onChange={(event) => onChange(event.target.value.replace(/\D/g, "").slice(0, 2))} aria-describedby="car-age-help" autoFocus /><small>ans</small></div>
+        </label>
+        <p id="car-age-help">Saisissez un âge compris entre 18 et 99 ans.</p>
+        <button className="passenger-done" type="button" disabled={!valid} onClick={() => setOpen(false)}>Terminé</button>
       </div>}
     </div>
   );
