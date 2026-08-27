@@ -2,12 +2,12 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import { readConsent } from "@/lib/consent";
 
 declare global {
   interface Window { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void; }
 }
 
-const CONSENT_KEY = "hiflight-consent-v1";
 
 export function track(name: string, params: Record<string, string | number> = {}) {
   if (typeof window === "undefined") return;
@@ -19,7 +19,7 @@ export default function Analytics() {
   const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
-    setAllowed(localStorage.getItem(CONSENT_KEY) === "accepted");
+    setAllowed(readConsent() === "accepted");
     const update = (event: Event) => setAllowed(Boolean((event as CustomEvent<{ accepted: boolean }>).detail?.accepted));
     window.addEventListener("hiflight-consent", update);
     return () => window.removeEventListener("hiflight-consent", update);
