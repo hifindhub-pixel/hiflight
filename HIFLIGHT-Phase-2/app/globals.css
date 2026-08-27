@@ -863,3 +863,50 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .car-clean-footer nav{width:100%;flex-direction:column}
 .car-clean-footer a{width:100%}
 }
+
+
+/* Cars — refined search and editorial rides */
+.car-clean-heading>p:last-child{margin-top:13px}
+.car-clean-mode{display:flex;align-items:center;gap:4px;margin:0 0 10px;padding:3px;width:max-content;border-radius:999px;background:#edf1f5}
+.car-clean-mode button{padding:7px 13px;border:0;border-radius:999px;color:#647286;background:transparent;font-size:9px;font-weight:800;cursor:pointer}
+.car-clean-mode button.active{color:#fff;background:#07162f;box-shadow:0 5px 14px rgba(7,22,47,.16)}
+.car-clean-primary.has-dropoff{grid-template-columns:1fr 1fr 1.12fr}
+.car-clean-story .car-clean-intro{grid-template-columns:.34fr 1fr .68fr;align-items:end}
+.car-clean-lead{margin:0;color:#677487;font-size:12px;line-height:1.75}
+.car-clean-columns span{display:inline-block;color:#c9383f;font:850 9px Outfit,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.car-clean-columns h3{max-width:300px;font-size:20px;line-height:1.2}
+.car-rides{width:min(1160px,calc(100% - 40px));margin:0 auto 100px}
+.car-rides-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:45px;margin-bottom:28px}
+.car-rides-heading>p{margin:0;color:#c9383f;font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.car-rides-heading h2{max-width:690px;margin:0;color:#0d1c34;font-size:clamp(2.4rem,4.4vw,4.5rem);letter-spacing:-.055em}
+.car-rides-grid{display:grid;grid-template-columns:1.45fr .55fr;gap:14px}
+.car-bike-card,.car-local-card{position:relative;display:flex;min-height:470px;overflow:hidden;flex-direction:column;justify-content:space-between;padding:28px;border-radius:25px;color:#fff;box-shadow:0 24px 55px rgba(7,22,47,.15);transition:transform .2s,box-shadow .2s}
+.car-bike-card:hover,.car-local-card:hover{transform:translateY(-4px);box-shadow:0 30px 65px rgba(7,22,47,.22)}
+.car-bike-card{background-image:linear-gradient(0deg,rgba(4,14,31,.94) 0%,rgba(4,14,31,.35) 64%,rgba(4,14,31,.15) 100%),url('https://images.unsplash.com/photo-1598413194778-efcec5aface4?auto=format&fit=crop&w=1800&q=84');background-position:center;background-size:cover}
+.car-bike-card>span,.car-local-card>span{width:max-content;padding:7px 11px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(5,18,39,.34);font-size:8px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;backdrop-filter:blur(8px)}
+.car-bike-card h3,.car-local-card h3{margin:0;font-size:clamp(2.25rem,4vw,4.25rem);letter-spacing:-.055em}
+.car-bike-card p,.car-local-card p{max-width:470px;margin:10px 0 22px;color:rgba(255,255,255,.72);font-size:11px}
+.car-bike-card strong,.car-local-card strong{display:flex;align-items:center;justify-content:space-between;width:max-content;min-width:215px;padding:12px 14px;border-radius:10px;color:#07162f;background:#fff;font-size:9px;font-weight:850}
+.car-bike-card strong b,.car-local-card strong b{color:#ff6b6b;font-size:15px}
+.car-local-card{background:linear-gradient(145deg,#ff6b6b,#e8565d)}
+.car-local-card h3{font-size:clamp(2rem,3.1vw,3.2rem)}
+.car-local-card>span{color:#07162f;border-color:rgba(7,22,47,.16);background:rgba(255,255,255,.24)}
+.car-local-card p{color:rgba(7,22,47,.72)}
+@media(max-width:980px){
+.car-clean-primary.has-dropoff{grid-template-columns:1fr 1fr}
+.car-clean-primary.has-dropoff .car-clean-dates{grid-column:1/-1}
+.car-clean-story .car-clean-intro{grid-template-columns:1fr;gap:14px}
+.car-rides-heading{align-items:flex-start;flex-direction:column;gap:10px}
+.car-rides-grid{grid-template-columns:1fr}
+.car-local-card{min-height:350px}
+}
+@media(max-width:650px){
+.car-clean-mode{width:100%}
+.car-clean-mode button{flex:1;padding-right:7px;padding-left:7px}
+.car-clean-primary.has-dropoff{grid-template-columns:1fr}
+.car-clean-primary.has-dropoff .car-clean-dates{grid-column:auto}
+.car-rides{width:calc(100% - 28px);margin-bottom:70px}
+.car-rides-heading h2{font-size:2.7rem}
+.car-bike-card,.car-local-card{min-height:390px;padding:22px;border-radius:20px}
+.car-bike-card h3,.car-local-card h3{font-size:2.65rem}
+}
