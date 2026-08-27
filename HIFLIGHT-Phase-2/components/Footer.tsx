@@ -31,7 +31,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div><div className="brand"><span>Hi</span>Flight</div><p>Comparez gratuitement, puis réservez auprès du partenaire choisi.</p></div>
         <div><strong>Comparer</strong><Link href="/#recherche">Vols</Link><Link href="/hotels">Hôtels</Link><Link href="/voitures">Voitures</Link><Link href="/trains-bus">Trains & bus</Link></div>
-        <div><strong>Informations</strong><Link href="/blog">Conseils voyage</Link><Link href="/faq">FAQ</Link><Link href="/conditions">Conditions</Link><Link href="/mentions-legales">Mentions légales</Link><Link href="/confidentialite">Confidentialité</Link><a href="mailto:contact@hiflight.fr">Contact</a></div>
+        <div><strong>Informations</strong><Link href="/blog">Conseils voyage</Link><Link href="/guides/bagage-cabine">Bagage cabine</Link><Link href="/aeroports/paris-charles-de-gaulle">Aéroport CDG</Link><Link href="/aeroports/paris-orly">Aéroport ORY</Link><Link href="/faq">FAQ</Link><Link href="/conditions">Conditions</Link><Link href="/mentions-legales">Mentions légales</Link><Link href="/confidentialite">Confidentialité</Link><a href="mailto:contact@hiflight.fr">Contact</a></div>
       </div>
       <div className="footer-bottom">© {new Date().getFullYear()} HIFLIGHT · Les prix et disponibilités peuvent évoluer.</div>
     </footer>
