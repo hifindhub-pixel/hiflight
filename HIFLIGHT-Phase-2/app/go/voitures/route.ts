@@ -3,6 +3,7 @@ import { CarAffiliateGroup, selectCarAffiliate } from "@/lib/affiliate-links";
 
 const allowedGroups = new Set<CarAffiliateGroup>(["global", "local", "bike"]);
 const expediaAffiliateId = "fr.network.cj.101723457.13854905.";
+const expediaTrackingUrl = "https://www.kqzyfj.com/click-101723457-13854905";
 
 function safeValue(request: NextRequest, name: string, maxLength = 120) {
   return request.nextUrl.searchParams.get(name)?.trim().slice(0, maxLength) || "";
@@ -43,6 +44,13 @@ async function expediaDestination(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  if (request.nextUrl.searchParams.get("tracking") === "1") {
+    const response = NextResponse.redirect(new URL(expediaTrackingUrl), 307);
+    response.headers.set("Cache-Control", "private, no-store, max-age=0");
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    return response;
+  }
+
   const requestedGroup = request.nextUrl.searchParams.get("offre") as CarAffiliateGroup | null;
   const group = requestedGroup && allowedGroups.has(requestedGroup) ? requestedGroup : "global";
 
