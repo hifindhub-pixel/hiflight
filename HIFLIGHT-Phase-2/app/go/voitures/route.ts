@@ -42,6 +42,11 @@ async function expediaDestination(request: NextRequest) {
   if (pickupTime) destination.searchParams.set("time1", pickupTime);
   if (returnTime) destination.searchParams.set("time2", returnTime);
 
+  const driverAge = Number.parseInt(safeValue(request, "driverAge", 2), 10);
+  if (Number.isInteger(driverAge) && driverAge >= 18 && driverAge <= 99) {
+    destination.searchParams.set("age", String(driverAge));
+  }
+
   return destination;
 }
 
