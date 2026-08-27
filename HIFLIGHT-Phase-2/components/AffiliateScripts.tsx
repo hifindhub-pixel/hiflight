@@ -2,14 +2,13 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
-
-const CONSENT_KEY = "hiflight-consent-v1";
+import { readConsent } from "@/lib/consent";
 
 export default function AffiliateScripts() {
   const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
-    setAllowed(localStorage.getItem(CONSENT_KEY) === "accepted");
+    setAllowed(readConsent() === "accepted");
     const update = (event: Event) => setAllowed(Boolean((event as CustomEvent<{ accepted: boolean }>).detail?.accepted));
     window.addEventListener("hiflight-consent", update);
     return () => window.removeEventListener("hiflight-consent", update);
