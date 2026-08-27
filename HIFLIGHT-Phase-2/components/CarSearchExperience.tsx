@@ -142,39 +142,61 @@ export default function CarSearchExperience() {
             <p>Choisissez vos lieux, vos dates et vos horaires. Les résultats réels s’ouvrent ensuite directement sur Expedia.</p>
           </div>
 
-          <form className="car-clean-search" onSubmit={submit}>
-            <div className="car-clean-mode" role="group" aria-label="Lieu de restitution">
-              <button type="button" className={!differentDropoff ? "active" : ""} onClick={() => {
-                setDifferentDropoff(false);
-                setDraft((current) => ({ ...current, dropoff: current.pickup, dropoffCode: current.pickupCode, dropoffType: current.pickupType }));
-              }}>Même lieu</button>
-              <button type="button" className={differentDropoff ? "active" : ""} onClick={() => setDifferentDropoff(true)}>Restitution différente</button>
+          <form id="recherche-voitures" className="search-form flight-search-v2 car-flight-search" onSubmit={submit}>
+            <div className="flight-search-head">
+              <div className="search-options">
+                <CarSelect
+                  label="Lieu de restitution"
+                  value={differentDropoff ? "different" : "same"}
+                  options={[
+                    { value: "same", label: "Même lieu", detail: "Retour au point de départ" },
+                    { value: "different", label: "Autre lieu", detail: "Restitution dans une autre ville" },
+                  ]}
+                  onChange={(value) => {
+                    const different = value === "different";
+                    setDifferentDropoff(different);
+                    if (!different) setDraft((current) => ({ ...current, dropoff: current.pickup, dropoffCode: current.pickupCode, dropoffType: current.pickupType }));
+                  }}
+                />
+                <CarTimeSelector pickupTime={draft.pickupTime} returnTime={draft.returnTime} onChange={(pickupTime, returnTime) => setDraft((current) => ({ ...current, pickupTime, returnTime }))} />
+                <CarSelect
+                  label="Âge du conducteur"
+                  value={draft.driverAge}
+                  options={Array.from({ length: 58 }, (_, index) => index + 18).map((age) => ({ value: String(age), label: age + " ans", detail: "Conducteur principal" }))}
+                  onChange={(driverAge) => setDraft((current) => ({ ...current, driverAge }))}
+                />
+              </div>
             </div>
-            <div className={differentDropoff ? "car-clean-primary has-dropoff" : "car-clean-primary"}>
-              <LocationField
-                id="car-pickup"
-                label="Prise en charge"
-                value={draft.pickup}
-                onChange={(pickup, place) => {
-                  setDraft((current) => ({
-                    ...current,
-                    pickup,
-                    pickupCode: place?.code || "",
-                    pickupType: place?.type || "",
-                    ...(!differentDropoff ? { dropoff: pickup, dropoffCode: place?.code || "", dropoffType: place?.type || "" } : {}),
-                  }));
-                  setError("");
-                }}
-              />
-              {differentDropoff && <LocationField
-                id="car-dropoff"
-                label="Restitution"
-                value={draft.dropoff}
-                onChange={(dropoff, place) => {
-                  setDraft((current) => ({ ...current, dropoff, dropoffCode: place?.code || "", dropoffType: place?.type || "" }));
-                  setError("");
-                }}
-              />}
+
+            <div className={differentDropoff ? "search-fields car-search-fields has-dropoff" : "search-fields car-search-fields"}>
+              <div className={differentDropoff ? "route-fields car-route-fields has-dropoff" : "route-fields car-route-fields"}>
+                <LocationField
+                  id="car-pickup"
+                  label="Prise en charge"
+                  value={draft.pickup}
+                  selectedCode={draft.pickupCode}
+                  onChange={(pickup, place) => {
+                    setDraft((current) => ({
+                      ...current,
+                      pickup,
+                      pickupCode: place?.code || "",
+                      pickupType: place?.type || "",
+                      ...(!differentDropoff ? { dropoff: pickup, dropoffCode: place?.code || "", dropoffType: place?.type || "" } : {}),
+                    }));
+                    setError("");
+                  }}
+                />
+                {differentDropoff && <LocationField
+                  id="car-dropoff"
+                  label="Restitution"
+                  value={draft.dropoff}
+                  selectedCode={draft.dropoffCode}
+                  onChange={(dropoff, place) => {
+                    setDraft((current) => ({ ...current, dropoff, dropoffCode: place?.code || "", dropoffType: place?.type || "" }));
+                    setError("");
+                  }}
+                />}
+              </div>
               <CarDatePicker
                 pickupDate={draft.pickupDate}
                 returnDate={draft.returnDate}
@@ -183,48 +205,32 @@ export default function CarSearchExperience() {
                   setError("");
                 }}
               />
+              <button className="search-button" type="submit" disabled={launching}>
+                <span>{launching ? "Ouverture…" : "Rechercher"}</span>
+                <b><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" /><path d="m16 16 4 4" /></svg></b>
+              </button>
             </div>
 
-            <div className="car-clean-secondary">
-              <label><span>Retrait</span><select aria-label="Heure de retrait" value={draft.pickupTime} onChange={(event) => setDraft((current) => ({ ...current, pickupTime: event.target.value }))}>{timeOptions().map((time) => <option key={time}>{time}</option>)}</select></label>
-              <label><span>Retour</span><select aria-label="Heure de retour" value={draft.returnTime} onChange={(event) => setDraft((current) => ({ ...current, returnTime: event.target.value }))}>{timeOptions().map((time) => <option key={time}>{time}</option>)}</select></label>
-              <label><span>Conducteur</span><select aria-label="Âge du conducteur" value={draft.driverAge} onChange={(event) => setDraft((current) => ({ ...current, driverAge: event.target.value }))}>{Array.from({ length: 58 }, (_, index) => index + 18).map((age) => <option key={age} value={age}>{age} ans</option>)}</select></label>
-              <button type="submit" disabled={launching}>{launching ? "Ouverture des résultats…" : "Rechercher"}<span aria-hidden="true">→</span></button>
-            </div>
-
-            <p className={error ? "car-clean-note error" : "car-clean-note"} role={error ? "alert" : undefined}>
-              {error || (differentDropoff ? "Les deux lieux seront transmis à Expedia · Résultats dans un nouvel onglet" : "Même lieu de retrait et de retour · Résultats dans un nouvel onglet")}
+            <p className={error ? "form-note error" : "form-note"} role={error ? "alert" : undefined}>
+              {error || (differentDropoff ? "Les deux lieux seront transmis à Expedia dans un nouvel onglet." : "La recherche Expedia s’ouvrira dans un nouvel onglet.")}
             </p>
           </form>
         </div>
       </section>
 
-      <section className="car-clean-content car-clean-story">
-        <div className="car-clean-intro">
-          <p>Avant de réserver</p>
-          <h2>Choisissez en connaissant chaque détail.</h2>
-          <p className="car-clean-lead">HiFlight vous conduit vers les offres correspondant à votre recherche. Expedia affiche ensuite les véhicules disponibles, le prix total et les conditions du loueur.</p>
-        </div>
-        <div className="car-clean-columns">
-          <article><span>Résultats réels</span><h3>Le véhicule qui correspond vraiment à vos dates</h3><p>Les catégories et disponibilités proviennent directement du moteur Expedia au moment de votre recherche.</p></article>
-          <article><span>Conditions claires</span><h3>Les informations importantes avant le paiement</h3><p>Kilométrage, carburant, caution et annulation restent visibles avant de confirmer votre réservation.</p></article>
-          <article><span>Réservation sécurisée</span><h3>Un parcours finalisé chez le partenaire</h3><p>Le paiement, la confirmation et le service après-vente sont entièrement assurés par Expedia.</p></article>
-        </div>
-      </section>
-
-      <section className="car-rides">
-        <div className="car-rides-heading">
-          <p>La route autrement</p>
-          <h2>Deux roues ou loueur local<br />à vous de choisir.</h2>
-        </div>
-        <div className="car-rides-grid">
-          <a className="car-bike-card" href="/go/voitures?offre=bike" target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "bike" })}>
-            <span>Location de motos et scooters</span>
-            <div><h3>Plus libre.<br />Plus proche de la route.</h3><p>Découvrez les véhicules disponibles avec BikesBooking.</p><strong>Explorer les deux roues <b>→</b></strong></div>
+      <section className="car-partners-showcase">
+        <header>
+          <p>Choisissez votre route</p>
+          <h2>Quatre roues ou deux roues.<br />Le voyage commence ici.</h2>
+        </header>
+        <div className="car-partners-grid">
+          <a className="car-expedia-card" href="#recherche-voitures">
+            <span>Location de voitures</span>
+            <div><h3>Recherchez sur HiFlight.<br />Réservez avec Expedia.</h3><p>Vos lieux, dates et horaires sont transmis directement aux résultats disponibles.</p><strong>Préparer ma recherche <b>↑</b></strong></div>
           </a>
-          <a className="car-local-card" href="/go/voitures?offre=local" target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "local" })}>
-            <span>Agences locales</span>
-            <div><h3>Une autre façon de louer.</h3><p>Consultez les offres de partenaires spécialisés dans les locations locales.</p><strong>Voir les agences <b>→</b></strong></div>
+          <a className="car-bike-card car-bike-card-new" href="/go/voitures?offre=bike" target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "bike" })}>
+            <span>Location de motos et scooters</span>
+            <div><h3>Prenez la route autrement.</h3><p>Explorez les motos et scooters proposés par BikesBooking.</p><strong>Découvrir BikesBooking <b>→</b></strong></div>
           </a>
         </div>
       </section>
@@ -232,7 +238,62 @@ export default function CarSearchExperience() {
   );
 }
 
-function LocationField({ id, label, value, onChange }: { id: string; label: string; value: string; onChange: (value: string, place?: CitySuggestion) => void }) {
+type CarSelectOption = { value: string; label: string; detail: string };
+
+function CarSelect({ label, value, options, onChange }: { label: string; value: string; options: CarSelectOption[]; onChange: (value: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const selected = options.find((option) => option.value === value) || options[0];
+
+  useEffect(() => {
+    const close = (event: MouseEvent) => { if (!wrapRef.current?.contains(event.target as Node)) setOpen(false); };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
+
+  return (
+    <div className="search-select" ref={wrapRef}>
+      <button type="button" className={open ? "active" : ""} aria-expanded={open} onClick={() => setOpen((current) => !current)}>
+        <span><strong>{selected.label}</strong><small>{selected.detail}</small></span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+      </button>
+      {open && <div className="search-select-popover" role="listbox" aria-label={label}>
+        <header><strong>{label}</strong></header>
+        <div className="search-select-list">{options.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === value} className={option.value === value ? "selected" : ""} onClick={() => { onChange(option.value); setOpen(false); }}>
+          <span><strong>{option.label}</strong><small>{option.detail}</small></span><i aria-hidden="true" />
+        </button>)}</div>
+      </div>}
+    </div>
+  );
+}
+
+function CarTimeSelector({ pickupTime, returnTime, onChange }: { pickupTime: string; returnTime: string; onChange: (pickup: string, back: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const close = (event: MouseEvent) => { if (!wrapRef.current?.contains(event.target as Node)) setOpen(false); };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
+
+  return (
+    <div className="passenger-selector car-time-selector" ref={wrapRef}>
+      <button type="button" className={open ? "active" : ""} aria-expanded={open} onClick={() => setOpen((current) => !current)}>
+        <span><strong>{pickupTime} → {returnTime}</strong><small>Horaires de location</small></span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+      </button>
+      {open && <div className="passenger-popover car-time-popover">
+        <header><strong>Horaires</strong><span>Retrait et retour</span></header>
+        <label><span>Heure de retrait</span><select value={pickupTime} onChange={(event) => onChange(event.target.value, returnTime)}>{timeOptions().map((time) => <option key={time}>{time}</option>)}</select></label>
+        <label><span>Heure de retour</span><select value={returnTime} onChange={(event) => onChange(pickupTime, event.target.value)}>{timeOptions().map((time) => <option key={time}>{time}</option>)}</select></label>
+        <button className="passenger-done" type="button" onClick={() => setOpen(false)}>Terminé</button>
+      </div>}
+    </div>
+  );
+}
+
+function LocationField({ id, label, value, selectedCode, onChange }: { id: string; label: string; value: string; selectedCode: string; onChange: (value: string, place?: CitySuggestion) => void }) {
   const [suggestions, setSuggestions] = useState<CitySuggestion[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -283,11 +344,11 @@ function LocationField({ id, label, value, onChange }: { id: string; label: stri
   }
 
   return (
-    <div className="car-clean-location" ref={wrapRef}>
-      <label htmlFor={id}>{label}</label>
-      <input id={id} value={value} onFocus={() => setOpen(true)} onChange={(event) => { onChange(event.target.value); setOpen(true); }} onKeyDown={keyDown} placeholder="Ville ou aéroport" role="combobox" aria-expanded={open} autoComplete="off" required />
+    <div className="city-field car-city-field" ref={wrapRef}>
+      <span className="city-field-label">{label}</span>
+      <div className="city-input-wrap"><input id={id} aria-label={label} value={value} onFocus={() => setOpen(true)} onChange={(event) => { onChange(event.target.value); setOpen(true); }} onKeyDown={keyDown} placeholder="Ville ou aéroport" role="combobox" aria-expanded={open} autoComplete="off" required />{selectedCode && <b className="iata-chip">{selectedCode}</b>}</div>
       {open && value.trim().length >= 2 && (
-        <div className="car-clean-suggestions" role="listbox">
+        <div className="city-suggestions car-city-suggestions" role="listbox">
           <p>Villes et aéroports</p>
           {loading && <span>Recherche en cours…</span>}
           {!loading && suggestions.map((city, index) => (
@@ -339,7 +400,7 @@ function CarDatePicker({ pickupDate, returnDate, onChange }: { pickupDate: strin
   }
 
   return (
-    <div className="car-clean-dates" ref={wrapRef}>
+    <div className="date-field-wrap car-flight-dates" ref={wrapRef}>
       <div className="date-buttons">
         <button type="button" className={open && mode === "pickup" ? "active" : ""} onClick={() => show("pickup")}><small>Retrait</small><strong>{formatShortDate(pickupDate)}</strong></button>
         <button type="button" className={open && mode === "return" ? "active" : ""} onClick={() => show("return")}><small>Retour</small><strong>{formatShortDate(returnDate)}</strong></button>
