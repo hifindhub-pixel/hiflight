@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ServiceTabs from "@/components/ServiceTabs";
 import GroundSearch from "@/components/GroundSearch";
 
-export const metadata: Metadata = { title: "Trains et bus", description: "Comparez vos trajets en train et en bus avec HiFlight." };
+export const metadata: Metadata = { title: "Trains et bus", description: "Comparez vos trajets en train et en bus avec HiFlight.", alternates: { canonical: "/trains-bus" } };
 
 export default function GroundPage() {
   return <main className="market-page">
