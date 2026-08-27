@@ -83,9 +83,9 @@ export async function GET(request: NextRequest) {
     if (!response.ok) throw new Error(`Travelpayouts autocomplete ${response.status}`);
 
     const places = (await response.json()) as TravelpayoutsPlace[];
-    const relevantPlaces = mode === "flight"
-      ? places.filter((place) => relevance(place, query) < 99).sort((left, right) => relevance(left, query) - relevance(right, query))
-      : places;
+    const relevantPlaces = places
+      .filter((place) => relevance(place, query) < 99)
+      .sort((left, right) => relevance(left, query) - relevance(right, query));
 
     if (mode === "flight") {
       const primaryCity = relevantPlaces.find((place) => place.type === "city" && place.name && place.country_name && place.code);
