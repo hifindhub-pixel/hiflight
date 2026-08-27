@@ -116,6 +116,7 @@ export default function CarSearchExperience() {
       setError("Autorisez l’ouverture des nouveaux onglets pour afficher les résultats Expedia.");
       return;
     }
+    partnerTab.opener = null;
 
     setError("");
     setLaunching(true);
