@@ -21,6 +21,10 @@ type CarSearch = {
   pickupTime: string;
   returnTime: string;
   driverAge: string;
+  pickupCode: string;
+  pickupType: string;
+  dropoffCode: string;
+  dropoffType: string;
 };
 
 type LocationFieldProps = {
@@ -28,7 +32,7 @@ type LocationFieldProps = {
   label: string;
   value: string;
   placeholder: string;
-  onChange: (value: string) => void;
+  onChange: (value: string, place?: CitySuggestion) => void;
 };
 
 const initialSearch: CarSearch = {
@@ -39,6 +43,10 @@ const initialSearch: CarSearch = {
   pickupTime: "10:00",
   returnTime: "10:00",
   driverAge: "30",
+  pickupCode: "",
+  pickupType: "",
+  dropoffCode: "",
+  dropoffType: "",
 };
 
 export default function CarSearchExperience() {
@@ -59,6 +67,10 @@ export default function CarSearchExperience() {
       pickupTime: params.get("pickupTime") || initialSearch.pickupTime,
       returnTime: params.get("returnTime") || initialSearch.returnTime,
       driverAge: params.get("driverAge") || initialSearch.driverAge,
+      pickupCode: params.get("pickupCode") || "",
+      pickupType: params.get("pickupType") || "",
+      dropoffCode: params.get("dropoffCode") || "",
+      dropoffType: params.get("dropoffType") || "",
     };
     setDraft(fromUrl);
     setSearch(fromUrl);
@@ -84,8 +96,10 @@ export default function CarSearchExperience() {
     window.setTimeout(() => document.getElementById("car-results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   }
 
-  const affiliateSearch = encodeURIComponent(`${search.pickup}|${search.dropoff}|${search.pickupDate}|${search.returnDate}`);
-  const outbound = (offer: "global" | "local" | "bike") => `/go/voitures?offre=${offer}&recherche=${affiliateSearch}`;
+  const outbound = (offer: "global" | "local" | "bike") => {
+    const params = new URLSearchParams({ offre: offer, ...search });
+    return `/go/voitures?${params.toString()}`;
+  };
 
   return (
     <>
@@ -96,13 +110,13 @@ export default function CarSearchExperience() {
           <form className={`car-search-premium ${differentDropoff ? "has-dropoff" : ""}`} onSubmit={submit}>
             <div className="car-search-topline">
               <div className="car-return-mode" role="group" aria-label="Lieu de restitution">
-                <button type="button" className={!differentDropoff ? "active" : ""} aria-pressed={!differentDropoff} onClick={() => { setDifferentDropoff(false); setDraft((current) => ({ ...current, dropoff: current.pickup })); }}>Même lieu</button>
+                <button type="button" className={!differentDropoff ? "active" : ""} aria-pressed={!differentDropoff} onClick={() => { setDifferentDropoff(false); setDraft((current) => ({ ...current, dropoff: current.pickup, dropoffCode: current.pickupCode, dropoffType: current.pickupType })); }}>Même lieu</button>
                 <button type="button" className={differentDropoff ? "active" : ""} aria-pressed={differentDropoff} onClick={() => setDifferentDropoff(true)}>Autre lieu</button>
               </div>
             </div>
             <div className="car-search-controls">
-              <LocationField id="car-pickup" label="Prise en charge" value={draft.pickup} placeholder="Ville ou aéroport" onChange={(pickup) => { setDraft((current) => ({ ...current, pickup, ...(!differentDropoff ? { dropoff: pickup } : {}) })); setError(""); }} />
-              {differentDropoff && <LocationField id="car-dropoff" label="Restitution" value={draft.dropoff} placeholder="Ville ou aéroport" onChange={(dropoff) => { setDraft((current) => ({ ...current, dropoff })); setError(""); }} />}
+              <LocationField id="car-pickup" label="Prise en charge" value={draft.pickup} placeholder="Ville ou aéroport" onChange={(pickup, place) => { setDraft((current) => ({ ...current, pickup, pickupCode: place?.code || "", pickupType: place?.type || "", ...(!differentDropoff ? { dropoff: pickup, dropoffCode: place?.code || "", dropoffType: place?.type || "" } : {}) })); setError(""); }} />
+              {differentDropoff && <LocationField id="car-dropoff" label="Restitution" value={draft.dropoff} placeholder="Ville ou aéroport" onChange={(dropoff, place) => { setDraft((current) => ({ ...current, dropoff, dropoffCode: place?.code || "", dropoffType: place?.type || "" })); setError(""); }} />}
               <CarDatePicker pickupDate={draft.pickupDate} returnDate={draft.returnDate} onChange={(pickupDate, returnDate) => { setDraft((current) => ({ ...current, pickupDate, returnDate })); setError(""); }} />
               <label className="car-time-field premium-control"><span className="car-control-heading">Horaires</span><div><select aria-label="Heure de retrait" value={draft.pickupTime} onChange={(event) => setDraft((current) => ({ ...current, pickupTime: event.target.value }))}>{timeOptions().map((time) => <option key={time}>{time}</option>)}</select><span>→</span><select aria-label="Heure de retour" value={draft.returnTime} onChange={(event) => setDraft((current) => ({ ...current, returnTime: event.target.value }))}>{timeOptions().map((time) => <option key={time}>{time}</option>)}</select></div></label>
               <label className="car-age-field premium-control"><span className="car-control-heading">Conducteur</span><div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5.5 20c.5-4.2 2.7-6.3 6.5-6.3s6 2.1 6.5 6.3" /></svg><select value={draft.driverAge} onChange={(event) => setDraft((current) => ({ ...current, driverAge: event.target.value }))}>{Array.from({ length: 58 }, (_, index) => index + 18).map((age) => <option key={age} value={age}>{age} ans</option>)}</select></div></label>
@@ -133,11 +147,11 @@ export default function CarSearchExperience() {
             <ul><li>Catégories adaptées à chaque voyage</li><li>Conditions affichées avant réservation</li><li>Retrait en ville ou à l’aéroport</li></ul>
           </div>
           <div className="car-results-action">
-            <strong>Comparez avant de réserver</strong>
-            <span>Prix, kilométrage, assurance et politique carburant.</span>
-            <a href={searched ? outbound("global") : "#car-pickup"} target={searched ? "_blank" : undefined} rel={searched ? "sponsored noreferrer" : undefined} onClick={() => searched && track("partner_click", { category: "car", offer_type: "global", pickup: search.pickup, pickup_date: search.pickupDate })}>{searched ? "Voir les voitures disponibles" : "Commencer la recherche"}</a>
+            <strong>Vos critères sont prêts</strong>
+            <span>Lieu, dates, horaires et âge seront transmis au partenaire.</span>
+            <a href={searched ? outbound("global") : "#car-pickup"} target={searched ? "_blank" : undefined} rel={searched ? "sponsored noreferrer" : undefined} onClick={() => searched && track("partner_click", { category: "car", offer_type: "global", pickup: search.pickup, pickup_date: search.pickupDate })}>{searched ? "Comparer chez EconomyBookings" : "Commencer la recherche"}</a>
             {searched && <div className="car-alternative-links"><a href={outbound("local")} target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "local", pickup: search.pickup })}>Agences locales</a><a href={outbound("bike")} target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "bike", pickup: search.pickup })}>Scooters et motos</a></div>}
-            <small>Vous accéderez à l’inventaire de nos partenaires.</small>
+            <small>Validez le lieu proposé chez le partenaire pour afficher ses tarifs réels.</small>
           </div>
         </div>
       </section>
@@ -175,7 +189,7 @@ function LocationField({ id, label, value, placeholder, onChange }: LocationFiel
     return () => { window.clearTimeout(timer); controller.abort(); };
   }, [open, value]);
 
-  function choose(city: CitySuggestion) { onChange(`${city.name}, ${city.countryName}`); setSuggestions([]); setOpen(false); }
+  function choose(city: CitySuggestion) { onChange(`${city.name}, ${city.countryName}`, city); setSuggestions([]); setOpen(false); }
   function keyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "ArrowDown") { event.preventDefault(); setOpen(true); setActive((current) => Math.min(current + 1, suggestions.length - 1)); }
     if (event.key === "ArrowUp") { event.preventDefault(); setActive((current) => Math.max(current - 1, 0)); }
