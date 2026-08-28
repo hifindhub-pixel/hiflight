@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ServiceTabs from "@/components/ServiceTabs";
 import GroundSearch from "@/components/GroundSearch";
+import ServiceFaq from "@/components/ServiceFaq";
 
 export const metadata: Metadata = { title: "Trains et bus", description: "Comparez vos trajets en train et en bus avec HiFlight.", alternates: { canonical: "/trains-bus" } };
 
@@ -15,5 +16,6 @@ export default function GroundPage() {
         <article className="ground-feature-card navy"><h3>Votre itinéraire,<br />en un coup d’œil.</h3><p>Comparez train et bus, puis choisissez selon l’horaire, la durée et le prix.</p><div className="ground-route-line"><b>PAR</b><i>6 h 41</i><b>BCN</b></div></article>
       </div>
     </section>
+    <ServiceFaq service="ground" />
   </main>;
 }
