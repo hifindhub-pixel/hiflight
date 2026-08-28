@@ -10,12 +10,13 @@ const alternatives = [
 
 export default function EsimExplorer() {
   const widgetRef = useRef<HTMLDivElement>(null);
-  const [failed, setFailed] = useState(false);
+  const [widgetStatus, setWidgetStatus] = useState<"loading" | "ready" | "failed">("loading");
 
   useEffect(() => {
     if (!widgetRef.current || widgetRef.current.dataset.loaded) return;
     widgetRef.current.dataset.loaded = "true";
     let shadowObserver: MutationObserver | null = null;
+    let widgetReady = false;
 
     const localizeWidget = () => {
       const root = widgetRef.current;
@@ -23,7 +24,13 @@ export default function EsimExplorer() {
       const component = root.querySelector<HTMLElement>("tp-cascoon");
       const scope: ParentNode = component?.shadowRoot || root;
 
-      if (component) component.setAttribute("lang", "fr");
+      if (component) {
+        component.setAttribute("lang", "fr");
+        if (!widgetReady) {
+          widgetReady = true;
+          setWidgetStatus("ready");
+        }
+      }
       if (component?.shadowRoot && !shadowObserver) {
         shadowObserver = new MutationObserver(localizeWidget);
         shadowObserver.observe(component.shadowRoot, { childList: true, subtree: true, characterData: true, attributes: true });
@@ -80,9 +87,17 @@ export default function EsimExplorer() {
     script.async = true;
     script.src = "https://tpwdg.com/content?trs=514265&shmarker=714763&locale=fr&powered_by=false&color_button=%23f2685f&color_focused=%23f2685f&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=12&plain=false&no_labels=true&promo_id=8588&campaign_id=541";
     script.charset = "utf-8";
-    script.onerror = () => setFailed(true);
+    script.onerror = () => setWidgetStatus("failed");
     widgetRef.current.appendChild(script);
-    return () => { observer.disconnect(); shadowObserver?.disconnect(); window.clearInterval(localizationTimer); };
+    const failureTimer = window.setTimeout(() => {
+      if (!widgetReady) setWidgetStatus("failed");
+    }, 7000);
+    return () => {
+      observer.disconnect();
+      shadowObserver?.disconnect();
+      window.clearInterval(localizationTimer);
+      window.clearTimeout(failureTimer);
+    };
   }, []);
 
   return (
@@ -91,7 +106,21 @@ export default function EsimExplorer() {
         <h1>Le monde dans votre poche,<br /><span>dès l’atterrissage.</span></h1>
         <p className="esim-hero-copy">Choisissez votre destination, consultez les forfaits disponibles et partez connecté sans changer de carte SIM physique.</p>
         <section className="esim-airalo-shell" aria-label="Recherche de forfaits eSIM Airalo">
-          {failed ? <div className="esim-widget-fallback"><p>Le widget est momentanément indisponible.</p><a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener">Voir les forfaits Airalo →</a></div> : <div className="esim-widget" ref={widgetRef}><noscript><a href={AIRALO_LINK}>Voir les forfaits Airalo</a></noscript></div>}
+          {widgetStatus === "failed" ? (
+            <div className="esim-widget-fallback">
+              <div className="esim-widget-fallback-copy">
+                <span>Airalo</span>
+                <h2>Votre connexion vous attend.</h2>
+                <p>Consultez les forfaits disponibles pour votre destination et activez votre eSIM avant le départ.</p>
+              </div>
+              <a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener">Rechercher mon forfait Airalo</a>
+            </div>
+          ) : (
+            <div className="esim-widget-stage">
+              {widgetStatus === "loading" && <div className="esim-widget-loading" role="status"><span /><p>Chargement des forfaits Airalo…</p></div>}
+              <div className="esim-widget" ref={widgetRef}><noscript><a href={AIRALO_LINK}>Voir les forfaits Airalo</a></noscript></div>
+            </div>
+          )}
         </section>
         <p className="hero-disclaimer">Les prix, volumes de données, durées et compatibilités sont confirmés sur le site du partenaire.</p>
       </div></section>
