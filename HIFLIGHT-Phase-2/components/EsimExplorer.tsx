@@ -13,6 +13,14 @@ export default function EsimExplorer() {
   const [widgetStatus, setWidgetStatus] = useState<"loading" | "ready" | "failed">("loading");
 
   useEffect(() => {
+    if (widgetStatus !== "loading") return;
+    const timeout = window.setTimeout(() => {
+      setWidgetStatus((current) => current === "loading" ? "failed" : current);
+    }, 6000);
+    return () => window.clearTimeout(timeout);
+  }, [widgetStatus]);
+
+  useEffect(() => {
     if (!widgetRef.current || widgetRef.current.dataset.loaded) return;
     widgetRef.current.dataset.loaded = "true";
     let shadowObserver: MutationObserver | null = null;
@@ -92,14 +100,10 @@ export default function EsimExplorer() {
     script.charset = "utf-8";
     script.onerror = () => setWidgetStatus("failed");
     widgetRef.current.appendChild(script);
-    const failureTimer = window.setTimeout(() => {
-      if (!widgetReady) setWidgetStatus("failed");
-    }, 7000);
     return () => {
       observer.disconnect();
       shadowObserver?.disconnect();
       window.clearInterval(localizationTimer);
-      window.clearTimeout(failureTimer);
     };
   }, []);
 
