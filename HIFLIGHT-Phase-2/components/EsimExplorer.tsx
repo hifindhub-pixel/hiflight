@@ -11,24 +11,15 @@ export default function EsimExplorer() {
         <h1>Le monde dans votre poche,<br /><span>dès l’atterrissage.</span></h1>
         <p className="esim-hero-copy">Choisissez votre destination, consultez les forfaits disponibles et partez connecté sans changer de carte SIM physique.</p>
         <section className="esim-airalo-shell" aria-label="Recherche de forfaits eSIM Airalo">
-          <div className="esim-airalo-card">
-            <header>
-              <div><span className="esim-airalo-mark">A</span><p><strong>Airalo</strong><small>Partenaire eSIM HiFlight</small></p></div>
-              <b>Plus de 200 destinations</b>
-            </header>
-            <div className="esim-airalo-content">
-              <div>
-                <span className="esim-airalo-kicker">Votre connexion de voyage</span>
-                <h2>Choisissez le forfait adapté à votre destination.</h2>
-                <p>Consultez les volumes de données, les durées et les prix disponibles directement chez Airalo.</p>
-                <a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener">Voir les forfaits Airalo</a>
-              </div>
-              <ul>
-                <li><strong>Local</strong><span>Un forfait pour votre destination</span></li>
-                <li><strong>Régional</strong><span>Plusieurs pays avec une seule eSIM</span></li>
-                <li><strong>Mondial</strong><span>Une couverture pensée pour les grands voyages</span></li>
-              </ul>
-            </div>
+          <iframe
+            className="esim-widget-frame"
+            src="/airalo-widget.html"
+            title="Widget Airalo — recherche de forfaits eSIM"
+            sandbox="allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
+          />
+          <div className="esim-widget-backup">
+            <span>Le widget ne s’affiche pas ?</span>
+            <a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener">Voir directement les forfaits Airalo</a>
           </div>
         </section>
         <p className="hero-disclaimer">Les prix, volumes de données, durées et compatibilités sont confirmés sur le site du partenaire.</p>

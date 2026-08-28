@@ -10,25 +10,9 @@
 .esim-airalo-shell header strong { color:var(--navy); font:800 14px Outfit,sans-serif; }
 .esim-airalo-shell header small { color:#758398; font-size:9px; font-weight:650; }
 .esim-airalo-shell header>b { padding:7px 11px; border:1px solid #dce3eb; border-radius:999px; color:#536174; font-size:8px; letter-spacing:.07em; text-transform:uppercase; }
-.esim-airalo-card { min-height:360px; overflow:hidden; border:1px solid #e3e8ef; border-radius:16px; background:linear-gradient(135deg,#fff 0%,#f7f5ff 100%); }
-.esim-airalo-card>header { display:flex; min-height:76px; align-items:center; justify-content:space-between; gap:20px; padding:16px 22px; border-bottom:1px solid #e5e8ef; }
-.esim-airalo-card>header>div { display:flex; align-items:center; gap:12px; }
-.esim-airalo-card>header p { margin:0; }
-.esim-airalo-card>header strong,.esim-airalo-card>header small { display:block; }
-.esim-airalo-card>header strong { color:var(--navy); font:800 16px Outfit,sans-serif; }
-.esim-airalo-card>header small { color:#758398; font-size:10px; }
-.esim-airalo-card>header>b { padding:8px 12px; border:1px solid #dce3eb; border-radius:999px; color:#536174; font-size:9px; letter-spacing:.06em; text-transform:uppercase; }
-.esim-airalo-content { display:grid; grid-template-columns:1.25fr .75fr; gap:50px; align-items:center; min-height:282px; padding:34px 38px; }
-.esim-airalo-kicker { color:#6b4bd2; font-size:10px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
-.esim-airalo-content h2 { max-width:610px; margin:9px 0 12px; color:var(--navy); font-size:clamp(1.8rem,3.2vw,3rem); }
-.esim-airalo-content p { max-width:610px; margin:0 0 22px; color:#667489; font-size:13px; }
-.esim-airalo-content a { display:inline-flex; min-height:46px; align-items:center; justify-content:center; padding:0 20px; border-radius:11px; color:#fff; background:var(--navy); font-size:13px; font-weight:850; }
-.esim-airalo-content a:hover { background:#102b58; }
-.esim-airalo-content ul { display:grid; gap:10px; margin:0; padding:0; list-style:none; }
-.esim-airalo-content li { padding:13px 15px; border:1px solid #e2e5ef; border-radius:13px; background:rgba(255,255,255,.82); }
-.esim-airalo-content li strong,.esim-airalo-content li span { display:block; }
-.esim-airalo-content li strong { color:var(--navy); font:800 13px Outfit,sans-serif; }
-.esim-airalo-content li span { margin-top:2px; color:#7a8596; font-size:9px; }
+.esim-widget-frame { display:block; width:100%; min-height:360px; border:1px solid #e3e8ef; border-radius:16px; background:#fff; }
+.esim-widget-backup { display:flex; align-items:center; justify-content:flex-end; gap:9px; padding:9px 4px 0; color:#7a8596; font-size:9px; }
+.esim-widget-backup a { color:var(--navy); font-weight:850; text-decoration:underline; text-underline-offset:2px; }
 .esim-results { padding-top:90px; }
 .esim-results-head { display:flex; align-items:flex-end; justify-content:space-between; gap:70px; margin-bottom:36px; }
 .esim-results-head h2,.esim-how h2 { margin:0; font-size:clamp(2rem,4vw,3.5rem); }
@@ -52,4 +36,4 @@
 .esim-how article p { color:var(--muted); }
 .affiliate-disclosure { padding-top:28px; border-top:1px solid var(--line); color:#778395; font-size:11px; }
 @media (max-width:980px) { .esim-alternatives{grid-template-columns:1fr 1fr}.esim-photo-card{grid-column:1/-1}.esim-results-head{align-items:flex-start;flex-direction:column;gap:15px} }
-@media (max-width:650px) { .market-hero.esim{min-height:1120px}.market-hero.esim::after{display:none}.esim-hero-copy{font-size:14px}.esim-airalo-shell{min-height:0;padding:10px;border-radius:20px}.esim-airalo-card>header{align-items:flex-start;flex-direction:column}.esim-airalo-content{grid-template-columns:1fr;gap:24px;padding:26px 20px}.esim-alternatives{grid-template-columns:1fr}.esim-photo-card{grid-column:auto}.esim-provider{min-height:0;padding:22px}.esim-provider ul{min-height:0}.esim-how>div{grid-template-columns:1fr}.esim-how article{border-bottom:1px solid var(--line)} }
+@media (max-width:650px) { .market-hero.esim{min-height:1120px}.market-hero.esim::after{display:none}.esim-hero-copy{font-size:14px}.esim-airalo-shell{min-height:0;padding:10px;border-radius:20px}.esim-widget-frame{min-height:470px}.esim-widget-backup{align-items:flex-start;flex-direction:column}.esim-alternatives{grid-template-columns:1fr}.esim-photo-card{grid-column:auto}.esim-provider{min-height:0;padding:22px}.esim-provider ul{min-height:0}.esim-how>div{grid-template-columns:1fr}.esim-how article{border-bottom:1px solid var(--line)} }
