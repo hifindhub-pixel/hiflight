@@ -26,10 +26,6 @@ export default function EsimExplorer() {
 
       if (component) {
         component.setAttribute("lang", "fr");
-        if (!widgetReady) {
-          widgetReady = true;
-          setWidgetStatus("ready");
-        }
       }
       if (component?.shadowRoot && !shadowObserver) {
         shadowObserver = new MutationObserver(localizeWidget);
@@ -56,6 +52,13 @@ export default function EsimExplorer() {
       const form = scope.querySelector<HTMLFormElement>('form[data-testid="form"]');
       const submit = scope.querySelector<HTMLButtonElement>('button[type="submit"]');
       const submitCopy = submit?.querySelector<HTMLElement>(".form-submit__content");
+
+      // Travelpayouts may create an empty custom element even when its assets are
+      // blocked. Only consider the widget ready once its real search form exists.
+      if (input && form && !widgetReady) {
+        widgetReady = true;
+        setWidgetStatus("ready");
+      }
 
       if (input) {
         if (input.placeholder.toLowerCase().includes("search data packs")) input.placeholder = "Rechercher parmi plus de 200 pays et régions";
