@@ -13,17 +13,14 @@
 .esim-widget { position:relative; z-index:21; min-height:360px; overflow:visible; border:1px solid #e3e8ef; border-radius:16px; background:#fff; }
 .esim-widget tp-cascoon { display:block; min-height:330px; overflow:visible; }
 .esim-widget-stage { position:relative; min-height:390px; }
-.esim-widget-loading { position:absolute; z-index:30; inset:1px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; border-radius:15px; background:#fff; color:#66748a; pointer-events:none; }
-.esim-widget-loading span { width:34px; height:34px; border:3px solid #e3e9f1; border-top-color:var(--coral); border-radius:50%; animation:esim-widget-spin .8s linear infinite; }
-.esim-widget-loading p { margin:0; font-size:14px; font-weight:700; }
 .esim-widget { position:relative; z-index:1; }
-.esim-widget-fallback { display:flex; min-height:390px; align-items:center; justify-content:space-between; gap:42px; padding:44px; border-radius:16px; background:linear-gradient(135deg,#f8fafc 0%,#eef3f9 100%); }
+.esim-widget-probe { position:absolute; inset:0; opacity:0; pointer-events:none; }
+.esim-widget-fallback { position:relative; z-index:20; display:flex; min-height:390px; align-items:center; justify-content:space-between; gap:42px; padding:44px; border-radius:16px; background:linear-gradient(135deg,#f8fafc 0%,#eef3f9 100%); }
 .esim-widget-fallback-copy { max-width:570px; }
 .esim-widget-fallback-copy>span { display:inline-block; margin-bottom:12px; color:var(--coral); font-size:12px; font-weight:900; letter-spacing:.16em; text-transform:uppercase; }
 .esim-widget-fallback h2 { margin:0 0 12px; color:var(--navy); font-size:clamp(1.7rem,3vw,2.65rem); line-height:1.05; }
 .esim-widget-fallback p { margin:0; color:#536174; line-height:1.65; }
 .esim-widget-fallback a { flex-shrink:0; padding:15px 20px; border-radius:12px; color:#fff; background:var(--navy); font-weight:900; text-align:center; }
-@keyframes esim-widget-spin { to { transform:rotate(360deg); } }
 .esim-results { padding-top:90px; }
 .esim-results-head { display:flex; align-items:flex-end; justify-content:space-between; gap:70px; margin-bottom:36px; }
 .esim-results-head h2,.esim-how h2 { margin:0; font-size:clamp(2rem,4vw,3.5rem); }
