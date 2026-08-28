@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-
 const AIRALO_LINK = "https://airalo.tpk.lu/uQBzbNMH";
 const alternatives = [
   { name: "Saily", href: "https://saily.tpk.lu/WTzGQa9T", mark: "S", tone: "blue", description: "Une application claire pour préparer et activer sa connexion avant le départ." },
@@ -9,91 +5,33 @@ const alternatives = [
 ] as const;
 
 export default function EsimExplorer() {
-  const widgetRef = useRef<HTMLDivElement>(null);
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    if (!widgetRef.current || widgetRef.current.dataset.loaded) return;
-    widgetRef.current.dataset.loaded = "true";
-    let shadowObserver: MutationObserver | null = null;
-
-    const localizeWidget = () => {
-      const root = widgetRef.current;
-      if (!root) return;
-      const component = root.querySelector<HTMLElement>("tp-cascoon");
-      const scope: ParentNode = component?.shadowRoot || root;
-
-      if (component) component.setAttribute("lang", "fr");
-      if (component?.shadowRoot && !shadowObserver) {
-        shadowObserver = new MutationObserver(localizeWidget);
-        shadowObserver.observe(component.shadowRoot, { childList: true, subtree: true, characterData: true, attributes: true });
-      }
-      if (component?.shadowRoot && !component.shadowRoot.querySelector("#hiflight-airalo-layer-fix")) {
-        const style = document.createElement("style");
-        style.id = "hiflight-airalo-layer-fix";
-        style.textContent = ':host{display:block!important;min-height:320px!important;overflow:visible!important}[class*="search"],[class*="input"],[class*="content"]{overflow:visible!important}[role="listbox"],[class*="dropdown"],[class*="suggest"],[class*="options"],[class*="menu"]{position:absolute!important;z-index:2147483000!important;max-height:330px!important;overflow-y:auto!important}';
-        component.shadowRoot.appendChild(style);
-      }
-
-      const replacements: Record<string, string> = {
-        "Local, regional and global eSIMs for travellers": "Des eSIM locales, régionales et mondiales",
-        "Stay connected, wherever you travel, at affordable rates": "Restez connecté partout, avec un forfait adapté à votre voyage",
-      };
-      scope.querySelectorAll<HTMLElement>("*").forEach((element) => {
-        const value = element.textContent?.trim();
-        if (value && replacements[value] && element.children.length === 0) element.textContent = replacements[value];
-      });
-
-      const input = scope.querySelector<HTMLInputElement>('input[data-testid="autocomplete-input-country"]');
-      const selectedValue = scope.querySelector<HTMLInputElement>('input[data-testid="autocomplete-hidden-country"]');
-      const form = scope.querySelector<HTMLFormElement>('form[data-testid="form"]');
-      const submit = scope.querySelector<HTMLButtonElement>('button[type="submit"]');
-      const submitCopy = submit?.querySelector<HTMLElement>(".form-submit__content");
-
-      if (input) {
-        if (input.placeholder.toLowerCase().includes("search data packs")) input.placeholder = "Rechercher parmi plus de 200 pays et régions";
-        input.setAttribute("aria-label", "Destination eSIM");
-      }
-      if (submit) submit.setAttribute("aria-label", "Rechercher une eSIM");
-      if (submitCopy && submitCopy.textContent !== "Rechercher") submitCopy.textContent = "Rechercher";
-
-      if (form && input && selectedValue && form.dataset.hiflightValidated !== "true") {
-        form.dataset.hiflightValidated = "true";
-        input.addEventListener("input", () => input.setCustomValidity(""));
-        form.addEventListener("submit", (event) => {
-          if (!selectedValue.value.trim()) {
-            event.preventDefault();
-            input.setCustomValidity("Sélectionnez une destination dans la liste proposée.");
-            input.reportValidity();
-            input.focus();
-            return;
-          }
-          input.setCustomValidity("");
-        }, true);
-      }
-    };
-
-    const observer = new MutationObserver(localizeWidget);
-    observer.observe(widgetRef.current, { childList: true, subtree: true });
-    const localizationTimer = window.setInterval(localizeWidget, 500);
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = "https://tpwdg.com/content?trs=514265&shmarker=714763&locale=fr&powered_by=false&color_button=%23f2685f&color_focused=%23f2685f&secondary=%23FFFFFF&dark=%2311100f&light=%23FFFFFF&special=%23C4C4C4&border_radius=12&plain=false&no_labels=true&promo_id=8588&campaign_id=541";
-    script.charset = "utf-8";
-    script.onerror = () => setFailed(true);
-    widgetRef.current.appendChild(script);
-    return () => { observer.disconnect(); shadowObserver?.disconnect(); window.clearInterval(localizationTimer); };
-  }, []);
-
   return (
     <>
       <section className="market-hero esim"><div>
         <h1>Le monde dans votre poche,<br /><span>dès l’atterrissage.</span></h1>
         <p className="esim-hero-copy">Choisissez votre destination, consultez les forfaits disponibles et partez connecté sans changer de carte SIM physique.</p>
         <section className="esim-airalo-shell" aria-label="Recherche de forfaits eSIM Airalo">
-          {failed ? <div className="esim-widget-fallback"><p>Le widget est momentanément indisponible.</p><a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener">Voir les forfaits Airalo →</a></div> : <div className="esim-widget" ref={widgetRef}><noscript><a href={AIRALO_LINK}>Voir les forfaits Airalo</a></noscript></div>}
+          <div className="esim-airalo-card">
+            <header>
+              <div><span className="esim-airalo-mark">A</span><p><strong>Airalo</strong><small>Partenaire eSIM HiFlight</small></p></div>
+              <b>Plus de 200 destinations</b>
+            </header>
+            <div className="esim-airalo-content">
+              <div>
+                <span className="esim-airalo-kicker">Votre connexion de voyage</span>
+                <h2>Choisissez le forfait adapté à votre destination.</h2>
+                <p>Consultez les volumes de données, les durées et les prix disponibles directement chez Airalo.</p>
+                <a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener">Voir les forfaits Airalo</a>
+              </div>
+              <ul>
+                <li><strong>Local</strong><span>Un forfait pour votre destination</span></li>
+                <li><strong>Régional</strong><span>Plusieurs pays avec une seule eSIM</span></li>
+                <li><strong>Mondial</strong><span>Une couverture pensée pour les grands voyages</span></li>
+              </ul>
+            </div>
+          </div>
         </section>
-        <p className="hero-disclaimer">Sélectionnez une destination dans la liste. Les prix, volumes de données et durées sont confirmés sur le site du partenaire.</p>
+        <p className="hero-disclaimer">Les prix, volumes de données, durées et compatibilités sont confirmés sur le site du partenaire.</p>
       </div></section>
 
       <section className="esim-results section">

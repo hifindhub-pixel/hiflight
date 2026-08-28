@@ -15,6 +15,8 @@ export default function CookieBanner() {
   }, []);
 
   function choose(accepted: boolean) {
+    // Close first so a browser storage restriction can never trap the banner.
+    setVisible(false);
     const previous = readConsent();
     writeConsent(accepted ? "accepted" : "refused");
     window.dispatchEvent(new CustomEvent("hiflight-consent", { detail: { accepted } }));
@@ -24,7 +26,6 @@ export default function CookieBanner() {
       ad_user_data: accepted ? "granted" : "denied",
       ad_personalization: accepted ? "granted" : "denied"
     });
-    setVisible(false);
     if (!accepted && previous === "accepted") window.setTimeout(() => window.location.reload(), 0);
   }
 
@@ -36,8 +37,8 @@ export default function CookieBanner() {
         <p>Nous utilisons des traceurs de mesure, d’avis et d’affiliation uniquement avec votre accord. Le comparateur reste accessible si vous refusez. Votre choix est redemandé après six mois.</p>
       </div>
       <div className="cookie-actions">
-        <button className="button secondary" onClick={() => choose(false)}>Tout refuser</button>
-        <button className="button" onClick={() => choose(true)}>Tout accepter</button>
+        <button className="button secondary" type="button" onClick={() => choose(false)}>Tout refuser</button>
+        <button className="button" type="button" onClick={() => choose(true)}>Tout accepter</button>
       </div>
     </aside>
   );
