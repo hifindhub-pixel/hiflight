@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
+import ServiceFaq from "@/components/ServiceFaq";
 import { airports, flightRoutes } from "@/lib/content";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -37,6 +38,7 @@ export default function Home() {
       <section className="dark-section"><div className="section"><div className="section-head"><h2>Paris : le bon aéroport compte aussi</h2><p>Un billet moins cher peut coûter davantage une fois le transfert ajouté.</p></div><div className="airport-links">{airports.map((airport) => <Link key={airport.slug} href={`/aeroports/${airport.slug}`}><strong>{airport.code}</strong><span>{airport.name}</span><p>{airport.intro}</p></Link>)}</div></div></section>
 
       <section className="section editorial"><h2>Avant de réserver</h2><div><h3>Comparez le prix total</h3><p>Vérifiez les bagages inclus, les frais éventuels et les conditions de modification.</p></div><div><h3>Contrôlez les aéroports</h3><p>Une économie sur le billet peut être absorbée par un transfert long ou coûteux.</p></div><div><h3>Réservez chez le partenaire</h3><p>HIFLIGHT compare. Le paiement et le service après-vente sont assurés par le partenaire choisi.</p></div></section>
+      <ServiceFaq service="flights" />
     </main>
   );
 }
