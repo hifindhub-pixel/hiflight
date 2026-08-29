@@ -12,11 +12,51 @@
     <script>
       (function(){
         var announced=false;
+        var shadowObserver=null;
+        var translations={
+          'Local, regional and global eSIMs for travellers':'Des eSIM locales, régionales et mondiales',
+          'Stay connected, wherever you travel, at affordable rates':'Restez connecté partout avec un forfait adapté à votre voyage',
+          'Search data packs for 200+ countries and regions':'Rechercher parmi plus de 200 pays et régions',
+          'Search data packs':'Rechercher des forfaits',
+          'Search':'Rechercher',
+          'Select a destination':'Sélectionnez une destination',
+          'Select your destination':'Sélectionnez votre destination',
+          'Popular countries':'Pays populaires',
+          'Popular destinations':'Destinations populaires',
+          'No results found':'Aucun résultat trouvé',
+          'Try another search':'Essayez une autre recherche'
+        };
+        var translate=function(scope){
+          scope.querySelectorAll('*').forEach(function(element){
+            if(element.children.length===0){
+              var value=(element.textContent||'').trim();
+              if(translations[value]) element.textContent=translations[value];
+            }
+          });
+          scope.querySelectorAll('input').forEach(function(input){
+            var placeholder=(input.getAttribute('placeholder')||'').trim();
+            if(translations[placeholder]) input.setAttribute('placeholder',translations[placeholder]);
+            else if(/search data packs/i.test(placeholder)) input.setAttribute('placeholder','Rechercher parmi plus de 200 pays et régions');
+            if(input.getAttribute('aria-label')!=='Destination eSIM') input.setAttribute('aria-label','Destination eSIM');
+          });
+          scope.querySelectorAll('button[type="submit"]').forEach(function(button){
+            if(button.getAttribute('aria-label')!=='Rechercher une eSIM') button.setAttribute('aria-label','Rechercher une eSIM');
+            var copy=button.querySelector('.form-submit__content');
+            if(copy&&copy.textContent!=='Rechercher') copy.textContent='Rechercher';
+          });
+        };
         var check=function(){
           var component=document.querySelector('tp-cascoon');
           var scope=component&&component.shadowRoot;
           var interactive=scope&&scope.querySelector('form,input,button,select,[role="combobox"]');
           var renderedText=scope&&scope.textContent&&scope.textContent.trim().length>20;
+          if(scope){
+            translate(scope);
+            if(!shadowObserver){
+              shadowObserver=new MutationObserver(function(){translate(scope)});
+              shadowObserver.observe(scope,{childList:true,subtree:true,characterData:true,attributes:true});
+            }
+          }
           if(component&&scope&&(interactive||renderedText)&&!announced){
             announced=true;
             component.setAttribute('lang','fr');
