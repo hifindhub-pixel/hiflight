@@ -15,9 +15,9 @@
         var check=function(){
           var component=document.querySelector('tp-cascoon');
           var scope=component&&component.shadowRoot;
-          var input=scope&&scope.querySelector('input[data-testid="autocomplete-input-country"]');
-          var form=scope&&scope.querySelector('form[data-testid="form"]');
-          if(input&&form&&!announced){
+          var interactive=scope&&scope.querySelector('form,input,button,select,[role="combobox"]');
+          var renderedText=scope&&scope.textContent&&scope.textContent.trim().length>20;
+          if(component&&scope&&(interactive||renderedText)&&!announced){
             announced=true;
             component.setAttribute('lang','fr');
             window.parent.postMessage({type:'hiflight:airalo-ready'},'*');

@@ -42,7 +42,7 @@ export default function EsimExplorer() {
               className={`esim-widget-frame${widgetReady ? " is-ready" : ""}`}
               src="/airalo-widget.html"
               title="Widget Airalo — recherche de forfaits eSIM"
-              sandbox="allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
+              sandbox="allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin"
               aria-hidden={!widgetReady}
               tabIndex={widgetReady ? 0 : -1}
             />
