@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Forfaits eSIM Airalo</title>
+    <style>
+      *{box-sizing:border-box}html,body{min-height:100%;margin:0;background:#fff;font-family:Arial,sans-serif}body{padding:2px}tp-cascoon{display:block;min-height:360px;overflow:visible}
+    </style>
+  </head>
+  <body>
+    <script>
+      (function(){
+        var announced=false;
+        var check=function(){
+          var component=document.querySelector('tp-cascoon');
+          var scope=component&&component.shadowRoot;
+          var input=scope&&scope.querySelector('input[data-testid="autocomplete-input-country"]');
+          var form=scope&&scope.querySelector('form[data-testid="form"]');
+          if(input&&form&&!announced){
+            announced=true;
+            component.setAttribute('lang','fr');
+            window.parent.postMessage({type:'hiflight:airalo-ready'},'*');
+          }
+        };
+        new MutationObserver(check).observe(document.documentElement,{childList:true,subtree:true});
+        window.setInterval(check,400);
+      })();
+    </script>
+    <script async charset="utf-8" src="https://tpwdg.com/content?trs=514265&amp;shmarker=714763&amp;locale=fr&amp;powered_by=false&amp;color_button=%23f2685f&amp;color_focused=%23f2685f&amp;secondary=%23FFFFFF&amp;dark=%2311100f&amp;light=%23FFFFFF&amp;special=%23C4C4C4&amp;border_radius=12&amp;plain=false&amp;no_labels=true&amp;promo_id=8588&amp;campaign_id=541"></script>
+  </body>
+</html>
