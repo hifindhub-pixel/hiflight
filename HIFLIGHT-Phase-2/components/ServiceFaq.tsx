@@ -1,3 +1,5 @@
+import JsonLd from "@/components/JsonLd";
+
 type FaqItem = { question: string; answer: string };
 
 const serviceFaqs = {
@@ -60,19 +62,30 @@ export type ServiceFaqKey = keyof typeof serviceFaqs;
 
 export function FaqAccordion({ title, items, compact = false }: { title: string; items: readonly FaqItem[]; compact?: boolean }) {
   return (
-    <section className={compact ? "faq-section faq-section-compact" : "faq-section"}>
-      <div className="faq-shell">
-        <h2>{title}</h2>
-        <div className="faq-grid">
-          {items.map((item) => (
-            <details className="faq-item" key={item.question}>
-              <summary>{item.question}<span aria-hidden="true" /></summary>
-              <div><p>{item.answer}</p></div>
-            </details>
-          ))}
+    <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: items.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      }} />
+      <section className={compact ? "faq-section faq-section-compact" : "faq-section"}>
+        <div className="faq-shell">
+          <h2>{title}</h2>
+          <div className="faq-grid">
+            {items.map((item) => (
+              <details className="faq-item" key={item.question}>
+                <summary>{item.question}<span aria-hidden="true" /></summary>
+                <div><p>{item.answer}</p></div>
+              </details>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

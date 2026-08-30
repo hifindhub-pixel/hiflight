@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { track } from "./Analytics";
 
 const AIRALO_LINK = "https://airalo.tpk.lu/uQBzbNMH";
 const alternatives = [
@@ -16,6 +17,9 @@ export default function EsimExplorer() {
     const handleMessage = (event: MessageEvent) => {
       if (event.source === frameRef.current?.contentWindow && event.data?.type === "hiflight:airalo-ready") {
         setWidgetReady(true);
+      }
+      if (event.source === frameRef.current?.contentWindow && event.data?.type === "hiflight:airalo-click") {
+        track("partner_click", { category: "esim", provider: "airalo" });
       }
     };
     window.addEventListener("message", handleMessage);
@@ -35,7 +39,7 @@ export default function EsimExplorer() {
                 <h2>Votre connexion vous attend.</h2>
                 <p>Consultez les forfaits disponibles pour votre destination et activez votre eSIM avant le départ.</p>
               </div>
-              <a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener">Rechercher mon forfait Airalo</a>
+              <a href={AIRALO_LINK} target="_blank" rel="nofollow sponsored noopener" onClick={() => track("partner_click", { category: "esim", provider: "airalo" })}>Rechercher mon forfait Airalo</a>
             </div>}
             <iframe
               ref={frameRef}
@@ -58,7 +62,7 @@ export default function EsimExplorer() {
             <div className={`esim-provider-mark ${provider.tone}`}>{provider.mark}</div>
             <h3>{provider.name}</h3><p>{provider.description}</p>
             <ul><li>Activation 100 % numérique</li><li>Forfaits selon la destination</li><li>Votre SIM principale reste en place</li></ul>
-            <a href={provider.href} target="_blank" rel="nofollow sponsored noopener">Découvrir les forfaits <span aria-hidden="true">→</span></a>
+            <a href={provider.href} target="_blank" rel="nofollow sponsored noopener" onClick={() => track("partner_click", { category: "esim", provider: provider.name.toLowerCase() })}>Découvrir les forfaits <span aria-hidden="true">→</span></a>
           </article>)}
           <article className="esim-photo-card"><div><span>Prêt avant le décollage</span><h3>Installez aujourd’hui.<br />Activez à l’arrivée.</h3></div></article>
         </div>

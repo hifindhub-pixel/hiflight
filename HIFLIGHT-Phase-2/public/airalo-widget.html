@@ -13,6 +13,7 @@
       (function(){
         var announced=false;
         var shadowObserver=null;
+        var clickTracked=false;
         var translations={
           'Local, regional and global eSIMs for travellers':'Des eSIM locales, régionales et mondiales',
           'Stay connected, wherever you travel, at affordable rates':'Restez connecté partout avec un forfait adapté à votre voyage',
@@ -52,6 +53,14 @@
           var renderedText=scope&&scope.textContent&&scope.textContent.trim().length>20;
           if(scope){
             translate(scope);
+            if(!clickTracked){
+              clickTracked=true;
+              scope.addEventListener('click',function(event){
+                if(event.target&&event.target.closest&&event.target.closest('button,a,[role="button"]')){
+                  window.parent.postMessage({type:'hiflight:airalo-click'},'*');
+                }
+              });
+            }
             if(!shadowObserver){
               shadowObserver=new MutationObserver(function(){translate(scope)});
               shadowObserver.observe(scope,{childList:true,subtree:true,characterData:true,attributes:true});

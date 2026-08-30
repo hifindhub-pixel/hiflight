@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { track } from "./Analytics";
 
 const OMIO_STYLES_ID = "hiflight-omio-widget-styles";
 const OMIO_SCRIPT_ID = "hiflight-omio-widget-script";
@@ -50,7 +51,7 @@ export default function GroundSearch() {
       {failed ? (
         <div className="omio-search-fallback" role="alert">
           <p>Le moteur de recherche est momentanément indisponible.</p>
-          <a href={OMIO_REDIRECT} target="_blank" rel="noopener noreferrer sponsored">Rechercher sur Omio →</a>
+          <a href={OMIO_REDIRECT} target="_blank" rel="noopener noreferrer sponsored" onClick={() => track("partner_click", { category: "ground", provider: "omio" })}>Rechercher sur Omio →</a>
         </div>
       ) : (
         <div className={`omio-widget-stage ${ready ? "ready" : "loading"}`}>

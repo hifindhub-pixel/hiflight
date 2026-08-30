@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { readConsent, writeConsent } from "@/lib/consent";
 
 declare global {
@@ -34,7 +35,7 @@ export default function CookieBanner() {
     <aside className="cookie" aria-label="Choix des cookies">
       <div>
         <strong>Votre confidentialité compte</strong>
-        <p>Nous utilisons des traceurs de mesure, d’avis et d’affiliation uniquement avec votre accord. Le comparateur reste accessible si vous refusez. Votre choix est redemandé après six mois.</p>
+        <p>Avec votre accord, nous utilisons des traceurs pour mesurer l’audience, afficher des avis, analyser les performances d’affiliation et mesurer les campagnes Google et Meta. Vous pouvez tout refuser sans perdre l’accès au comparateur. <Link href="/politique-cookies">En savoir plus</Link>.</p>
       </div>
       <div className="cookie-actions">
         <button className="button secondary" type="button" onClick={() => choose(false)}>Tout refuser</button>

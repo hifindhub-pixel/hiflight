@@ -7,6 +7,7 @@ import Analytics from "@/components/Analytics";
 import AffiliateScripts from "@/components/AffiliateScripts";
 import { siteUrl } from "@/lib/content";
 import AuthProvider from "@/components/AuthProvider";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -29,6 +30,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="trustpilot-one-time-domain-verification-id" content="6f1432d9-72ab-4ce7-9eb4-5b1f935fb211" />
       </head>
       <body>
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "HiFlight",
+          url: siteUrl,
+          inLanguage: "fr-FR",
+          description: "Comparateur de vols, hôtels, voitures, trains, bus et eSIM.",
+        }} />
         <span
           aria-hidden="true"
           style={{
