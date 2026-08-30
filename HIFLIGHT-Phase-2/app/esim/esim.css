@@ -1,4 +1,4 @@
-.market-hero.esim { min-height:1020px; overflow:visible; background-image:radial-gradient(circle at 82% 33%,rgba(255,107,107,.22),transparent 24%),linear-gradient(120deg,#07162f 0%,#0b2852 58%,#07162f 100%); }
+.market-hero.esim { min-height:1020px; overflow:hidden; background-image:radial-gradient(circle at 82% 33%,rgba(255,107,107,.22),transparent 24%),linear-gradient(120deg,#07162f 0%,#0b2852 58%,#07162f 100%); }
 .market-hero.esim::after { content:''; position:absolute; width:440px; height:440px; right:-90px; top:170px; border:1px solid rgba(255,255,255,.12); border-radius:50%; box-shadow:0 0 0 60px rgba(255,255,255,.025),0 0 0 120px rgba(255,255,255,.018); pointer-events:none; }
 .market-hero.esim::before { background:linear-gradient(90deg,rgba(3,12,29,.42),transparent 72%); }
 .esim-hero-copy { max-width:690px; margin:18px 0 28px; color:#c6d2e2; font-size:17px; }
