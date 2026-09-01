@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { track } from "./Analytics";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
+import { trackPartnerClick, trackSearch } from "./Analytics";
 
 const OMIO_STYLES_ID = "hiflight-omio-widget-styles";
 const OMIO_SCRIPT_ID = "hiflight-omio-widget-script";
@@ -13,6 +13,13 @@ export default function GroundSearch() {
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
   const mountRef = useRef<HTMLDivElement>(null);
+
+  function trackWidgetAction(event: MouseEvent<HTMLDivElement>) {
+    const action = (event.target as HTMLElement).closest("button, a");
+    if (!action || !/rechercher|search|voir les/i.test(action.textContent || "")) return;
+    trackSearch("ground", { provider: "omio" });
+    trackPartnerClick("ground", { provider: "omio" });
+  }
 
   useEffect(() => {
     document.getElementById(OMIO_SCRIPT_ID)?.remove();
@@ -51,13 +58,14 @@ export default function GroundSearch() {
       {failed ? (
         <div className="omio-search-fallback" role="alert">
           <p>Le moteur de recherche est momentanément indisponible.</p>
-          <a href={OMIO_REDIRECT} target="_blank" rel="noopener noreferrer sponsored" onClick={() => track("partner_click", { category: "ground", provider: "omio" })}>Rechercher sur Omio →</a>
+          <a href={OMIO_REDIRECT} target="_blank" rel="noopener noreferrer sponsored" onClick={() => { trackSearch("ground", { provider: "omio" }); trackPartnerClick("ground", { provider: "omio" }); }}>Rechercher sur Omio →</a>
         </div>
       ) : (
         <div className={`omio-widget-stage ${ready ? "ready" : "loading"}`}>
           {!ready && <div className="omio-widget-loader" aria-live="polite"><span /><span /><span /><span /></div>}
           <div
             ref={mountRef}
+            onClickCapture={trackWidgetAction}
             className="omio-widget-mount"
             data-omio-widget="true"
             data-partner-id="omiolps"

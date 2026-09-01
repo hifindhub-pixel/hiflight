@@ -3,7 +3,7 @@
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { airportCities, AirportCity, findAirportCity } from "@/lib/airports";
 import { searchUrl } from "@/lib/content";
-import { track } from "./Analytics";
+import { trackPartnerClick, trackSearch } from "./Analytics";
 
 type Props = { origin?: string; destination?: string; originCode?: string; destinationCode?: string; compact?: boolean };
 type DateMode = "departure" | "return";
@@ -344,7 +344,13 @@ export default function SearchForm({ origin = "", destination = "", originCode =
       route = `${fromCode}${formatTravelpayoutsDate(departure)}${toCode}${tripType === "roundtrip" ? formatTravelpayoutsDate(returnDate) : ""}`;
     }
     route += passengerSuffix(travelClass, adults, children, infants);
-    track("search_started", { origin: tripType === "multicity" ? multiLegs[0].fromCode : fromCode, destination: tripType === "multicity" ? multiLegs.at(-1)?.toCode || "" : toCode, source: window.location.pathname });
+    const analyticsParams = {
+      origin: tripType === "multicity" ? multiLegs[0].fromCode : fromCode,
+      destination: tripType === "multicity" ? multiLegs.at(-1)?.toCode || "" : toCode,
+      trip_type: tripType,
+      source: window.location.pathname,
+    };
+    trackSearch("flight", analyticsParams);
     const target = new URL(searchUrl); target.pathname = "/"; target.search = "";
     target.searchParams.set("flightSearch", route);
     if (direct) target.searchParams.set("direct", "true");
@@ -362,6 +368,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
       return;
     }
     flightTab.opener = null;
+    trackPartnerClick("flight", { ...analyticsParams, provider: "travelpayouts" });
     window.location.assign(hotelTarget.toString());
   }
 

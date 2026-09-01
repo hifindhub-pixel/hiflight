@@ -15,9 +15,29 @@ declare global {
 
 
 export function track(name: string, params: Record<string, string | number> = {}) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || readConsent() !== "accepted") return;
   window.gtag?.("event", name, params);
   window.fbq?.("trackCustom", name, params);
+}
+
+type TravelCategory = "flight" | "hotel" | "car" | "ground" | "esim";
+
+const eventCategoryNames: Record<TravelCategory, string> = {
+  flight: "flight",
+  hotel: "hotel",
+  car: "car",
+  ground: "train_bus",
+  esim: "esim",
+};
+
+export function trackSearch(category: TravelCategory, params: Record<string, string | number> = {}) {
+  track("search_started", { category, ...params });
+  track(`${eventCategoryNames[category]}_search`, params);
+}
+
+export function trackPartnerClick(category: TravelCategory, params: Record<string, string | number> = {}) {
+  track("partner_click", { category, ...params });
+  track(`${eventCategoryNames[category]}_partner_click`, params);
 }
 
 export default function Analytics() {

@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
-import { track } from "./Analytics";
+import { trackPartnerClick } from "./Analytics";
 import ServiceTabs from "./ServiceTabs";
 
 type CitySuggestion = {
@@ -120,10 +120,9 @@ export default function CarSearchExperience() {
 
     setError("");
     setLaunching(true);
-    track("partner_click", {
-      category: "car",
-      partner: "expedia",
-      pickup: draft.pickup,
+    trackPartnerClick("car", {
+      provider: "expedia",
+      pickup_code: draft.pickupCode,
       pickup_date: draft.pickupDate,
       return_date: draft.returnDate,
     });
@@ -231,7 +230,7 @@ export default function CarSearchExperience() {
             <span>Location de voitures</span>
             <div><h3>Prenez la route<br />en toute sérénité.</h3><p>Choisissez votre voiture, vos dates et votre destination. HiFlight prépare votre départ en quelques instants.</p><strong>Trouver ma voiture</strong></div>
           </a>
-          <a className="car-bike-card car-bike-card-new" href="/go/voitures?offre=bike" target="_blank" rel="sponsored noreferrer" onClick={() => track("partner_click", { category: "car", offer_type: "bike" })}>
+          <a className="car-bike-card car-bike-card-new" href="/go/voitures?offre=bike" target="_blank" rel="sponsored noreferrer" onClick={() => trackPartnerClick("car", { provider: "bikesbooking", offer_type: "bike" })}>
             <span>Location de motos et scooters</span>
             <div><h3>Prenez la route autrement.</h3><p>Explorez les motos et scooters proposés par BikesBooking.</p><strong>Découvrir BikesBooking</strong></div>
           </a>

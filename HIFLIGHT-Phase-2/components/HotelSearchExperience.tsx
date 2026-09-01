@@ -3,7 +3,7 @@
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import HotelExplorer, { HotelSearch } from "./HotelExplorer";
 import ServiceTabs from "./ServiceTabs";
-import { track } from "./Analytics";
+import { trackSearch } from "./Analytics";
 
 type CitySuggestion = {
   id: string;
@@ -124,7 +124,7 @@ export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string
       guests: nextSearch.guests,
     });
     window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
-    track("search_started", { category: "hotel", destination: nextSearch.destination });
+    trackSearch("hotel", { destination: nextSearch.destination, guests: Number(nextSearch.guests) });
     window.setTimeout(() => document.getElementById("hotel-results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   }
 
