@@ -17,7 +17,7 @@ export default function CookiePolicy() {
         <h2>Traceur essentiel</h2>
         <p><strong>hiflight-consent-v1</strong> mémorise uniquement votre choix de confidentialité. Il est nécessaire au fonctionnement du panneau et expire au plus tard après six mois.</p>
         <h2>Mesure d’audience et publicité</h2>
-        <p>Google Analytics peut mesurer les pages consultées et les interactions afin d’améliorer le site. Les outils de mesure publicitaire Google et Meta ne sont activés que lorsqu’ils sont configurés et après votre accord. Les signaux de consentement publicitaire sont refusés par défaut.</p>
+        <p>Google Tag Manager permet de piloter les balises de mesure. Google Analytics peut mesurer les pages consultées et les interactions afin d’améliorer le site. Les outils de mesure publicitaire Google et Meta ne sont activés que lorsqu’ils sont configurés et après votre accord. Les signaux de consentement publicitaire sont refusés par défaut.</p>
         <h2>Avis et affiliation</h2>
         <p>Après votre accord, Trustpilot peut afficher et mesurer le widget d’avis, tandis que les scripts automatiques Impact et CJ peuvent mesurer les performances d’affiliation. Lorsque vous choisissez volontairement un lien partenaire, le site externe peut aussi attribuer ce clic selon sa propre politique. HiFlight peut recevoir une commission lorsqu’une réservation éligible est finalisée, sans surcoût ajouté par HiFlight.</p>
         <h2>Services de comparaison intégrés</h2>

@@ -21,16 +21,29 @@ export function track(name: string, params: Record<string, string | number> = {}
 }
 
 export default function Analytics() {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-NN5ZTFT2";
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
   const metaId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   const [allowed, setAllowed] = useState(false);
+  const validGtmId = /^GTM-[A-Z0-9]+$/i.test(gtmId) ? gtmId : "";
   const validGaId = gaId && /^G-[A-Z0-9]+$/i.test(gaId) ? gaId : "";
   const validAdsId = adsId && /^AW-[0-9]+$/i.test(adsId) ? adsId : "";
   const validMetaId = metaId && /^[0-9]+$/.test(metaId) ? metaId : "";
-  const loaderId = validGaId || validAdsId;
+  // When GTM is configured, Google tags must be managed from the container.
+  // The direct gtag loader remains as a safe fallback for deployments without GTM.
+  const directLoaderId = validGtmId ? "" : validGaId || validAdsId;
 
   useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag(...args: unknown[]) { window.dataLayer?.push(args); };
+    window.gtag("consent", "default", {
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      wait_for_update: 500,
+    });
     setAllowed(readConsent() === "accepted");
     const update = (event: Event) => setAllowed(Boolean((event as CustomEvent<{ accepted: boolean }>).detail?.accepted));
     window.addEventListener("hiflight-consent", update);
@@ -39,12 +52,14 @@ export default function Analytics() {
 
   return (
     <>
-      <Script id="consent-mode-default" strategy="beforeInteractive">
-        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});`}
-      </Script>
-      {loaderId && allowed ? (
+      {validGtmId && allowed ? (
+        <Script id="gtm-after-consent" strategy="afterInteractive">
+          {`window.gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});if(!document.querySelector('script[data-hiflight-gtm]')){var h=document.createElement('script');h.async=true;h.dataset.hiflightGtm='true';h.src='https://www.googletagmanager.com/gtm.js?id=${validGtmId}';document.head.appendChild(h);}`}
+        </Script>
+      ) : null}
+      {directLoaderId && allowed ? (
         <>
-          <Script src={`https://www.googletagmanager.com/gtag/js?id=${loaderId}`} strategy="afterInteractive" />
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${directLoaderId}`} strategy="afterInteractive" />
           <Script id="ga-config" strategy="afterInteractive">
             {`window.gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});window.gtag('js',new Date());${validGaId ? `window.gtag('config','${validGaId}',{anonymize_ip:true});` : ""}${validAdsId ? `window.gtag('config','${validAdsId}');` : ""}`}
           </Script>
