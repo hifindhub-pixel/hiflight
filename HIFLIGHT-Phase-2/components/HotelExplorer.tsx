@@ -1,9 +1,5 @@
 "use client";
 
-import { useMemo, useState } from "react";
-
-type View = "split" | "list" | "map";
-
 export type HotelSearch = {
   destination: string;
   checkin: string;
@@ -13,72 +9,53 @@ export type HotelSearch = {
   longitude?: number;
 };
 
-export default function HotelExplorer({ stay22Aid, search }: { stay22Aid: string; search: HotelSearch }) {
-  const [view, setView] = useState<View>("split");
+type Partner = { name: string; description: string; href: string };
 
-  const stay22Url = useMemo(() => {
-    if (!stay22Aid) return "";
-    const params = new URLSearchParams({
-      aid: stay22Aid,
-      adults: search.guests,
-      rooms: "1",
-      campaign: "hiflight_hotels_results",
-      currency: "EUR",
-      supportedcurrencies: "EUR",
-      supportedlang: "fr",
-      unitsystem: "metric",
-      maincolor: "ff6b6b",
-      hotelscolor: "ff6b6b",
-      hotelsfontcolor: "07152f",
-      loadingbarcolor: "ff6b6b",
-      priceper: "total",
-      showhotels: "true",
-      invmode: "accommodation",
-      hidebrandlogo: "true",
-      hidefooter: "true",
-      listviewexpand: view === "split" ? "true" : "false",
-      viewmode: view === "list" ? "listview" : view === "map" ? "map" : "all",
-    });
-    if (search.latitude !== undefined && search.longitude !== undefined) {
-      params.set("lat", String(search.latitude));
-      params.set("lng", String(search.longitude));
-    } else {
-      params.set("address", search.destination);
-    }
-    if (search.checkin) params.set("checkin", search.checkin);
-    if (search.checkout) params.set("checkout", search.checkout);
-    return `https://www.stay22.com/embed/gm?${params.toString()}`;
-  }, [search, stay22Aid, view]);
+function bookingSearch(search: HotelSearch) {
+  const url = new URL("https://www.booking.com/searchresults.fr.html");
+  url.searchParams.set("ss", search.destination);
+  if (search.checkin) url.searchParams.set("checkin", search.checkin);
+  if (search.checkout) url.searchParams.set("checkout", search.checkout);
+  url.searchParams.set("group_adults", search.guests);
+  url.searchParams.set("no_rooms", "1");
+  return url.toString();
+}
 
+function partners(search: HotelSearch): Partner[] {
+  const results: Partner[] = [{
+    name: "Booking.com",
+    description: "Consulter les hébergements et tarifs sur Booking.com",
+    href: bookingSearch(search),
+  }];
+  // Afficher uniquement les autres marchands dont la destination a été configurée.
+  // Ne pas attribuer de prix à un partenaire sans accès à son inventaire en direct.
+  return results;
+}
+
+export default function HotelExplorer({ search }: { search: HotelSearch }) {
+  const results = partners(search);
   const hasDates = Boolean(search.checkin && search.checkout);
-
   return (
-    <div className="results-shell hotel-live-shell">
+    <section className="results-shell hotel-live-shell" id="hotel-offers" aria-label="Recherche d'hôtels">
       <div className="results-toolbar hotel-live-toolbar">
         <div>
-          <strong>Hébergements disponibles à {search.destination}</strong>
-          <span>{hasDates ? `Prix du ${formatDate(search.checkin)} au ${formatDate(search.checkout)} · ${search.guests} voyageur${search.guests === "1" ? "" : "s"}` : "Ajoutez vos dates pour afficher les prix et disponibilités en direct."}</span>
-        </div>
-        <div className="view-switch" aria-label="Mode d’affichage">
-          <button className={view === "list" ? "active" : ""} onClick={() => setView("list")}>Liste</button>
-          <button className={view === "split" ? "active" : ""} onClick={() => setView("split")}>Liste + carte</button>
-          <button className={view === "map" ? "active" : ""} onClick={() => setView("map")}>Carte</button>
+          <strong>Rechercher un hébergement à {search.destination}</strong>
+          <span>{hasDates
+            ? `Séjour du ${formatDate(search.checkin)} au ${formatDate(search.checkout)} · ${search.guests} voyageur${search.guests === "1" ? "" : "s"}`
+            : "Sélectionnez vos dates pour affiner la recherche."}</span>
         </div>
       </div>
-
-
-      {stay22Url ? (
-        <section className={`hotel-live-frame view-${view}`} aria-label="Résultats d’hôtels HiFlight">
-          <iframe key={stay22Url} title={`Hôtels disponibles à ${search.destination}`} src={stay22Url} loading="lazy" allow="geolocation" />
-        </section>
-      ) : (
-        <section className="hotel-live-missing">
-          <strong>Offres momentanément indisponibles</strong>
-          <p>Veuillez réessayer dans quelques instants.</p>
-        </section>
-      )}
-
-    </div>
+      <div style={{ padding: "24px", display: "grid", gap: "16px" }}>
+        <h2 style={{ margin: 0, fontSize: "1.25rem" }}>Voir les disponibilités chez nos partenaires</h2>
+        <p style={{ margin: 0, opacity: .78 }}>Les tarifs et disponibilités sont vérifiés directement chez le partenaire. HiFlight n'affiche pas de prix non vérifiés.</p>
+        {results.map((partner) => (
+          <article key={partner.name} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", border: "1px solid #e2e8f0", borderRadius: 16, padding: 20 }}>
+            <div><strong>{partner.name}</strong><p style={{ margin: "6px 0 0", opacity: .75 }}>{partner.description}</p></div>
+            <a href={partner.href} target="_blank" rel="noopener noreferrer sponsored" style={{ display: "inline-block", background: "#0F172A", color: "#fff", borderRadius: 12, padding: "12px 18px", fontWeight: 600, textDecoration: "none" }}>Voir les offres ↗</a>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
