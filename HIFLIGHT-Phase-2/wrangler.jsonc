@@ -12,5 +12,16 @@
   "observability": {
     "enabled": true
   },
-  "previews": {}
+  "previews": {},
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "hiflight.fr",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.hiflight.fr",
+      "custom_domain": true
+    }
+  ]
 }
