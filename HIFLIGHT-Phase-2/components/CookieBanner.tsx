@@ -30,7 +30,7 @@ export default function CookieBanner() {
     if (!accepted && previous === "accepted") window.setTimeout(() => window.location.reload(), 0);
   }
 
-  if (!visible) return <button className="cookie-manage" type="button" onClick={() => setVisible(true)}>Cookies</button>;
+  if (!visible) return null;
   return (
     <aside className="cookie" aria-label="Choix des cookies">
       <div>

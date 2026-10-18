@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import HotelSearchExperience from "@/components/HotelSearchExperience";
 import ServiceFaq from "@/components/ServiceFaq";
 
-export const metadata: Metadata = { title: "Comparer les hôtels", description: "Comparez les prix des hôtels en liste ou directement sur la carte HiFlight.", alternates: { canonical: "/hotels" } };
-export const dynamic = "force-dynamic";
+export const metadata: Metadata = { title: "Rechercher des hôtels", description: "Recherchez des hôtels par destination et dates avec HiFlight.", alternates: { canonical: "/hotels" } };
 
 export default function HotelsPage() {
-  const stay22Aid = (process.env.NEXT_PUBLIC_STAY22_AID || process.env.STAY22_AID || "").trim();
-  return <main className="market-page"><HotelSearchExperience stay22Aid={stay22Aid} /><ServiceFaq service="hotels" /></main>;
+  return <main className="market-page"><HotelSearchExperience /><ServiceFaq service="hotels" /></main>;
 }
