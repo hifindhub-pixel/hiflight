@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap');
-
 :root { --navy:#07162f; --navy-2:#0d2247; --coral:#ff6b6b; --coral-text:#c9383f; --ink:#0f172a; --muted:#5f6b7a; --line:#dbe2ea; --soft:#f4f7fb; --white:#fff; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -1434,3 +1432,26 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .route-group { margin-bottom:48px; }
 .route-group h2 { margin:0 0 12px; font-size:clamp(1.6rem,3vw,2.2rem); }
 .route-list small { margin-left:10px; color:var(--muted); font-weight:500; font-size:14px; }
+
+/* ---- SEO premium : prix, statistiques, pages pays ---- */
+.hero-price { margin:18px 0 0!important; color:#fff!important; font-size:18px; }
+.hero-price strong { color:var(--coral); font:800 28px Outfit,Inter,sans-serif; }
+.stat-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1px; margin:20px 0 8px; background:var(--line); border:1px solid var(--line); }
+.stat-cards div { padding:16px 18px; background:#fff; }
+.stat-cards dt { color:var(--muted); font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.stat-cards dd { margin:6px 0 0; font:800 26px/1.1 Outfit,Inter,sans-serif; color:var(--ink); text-transform:capitalize; }
+.stat-cards dd small { display:block; margin-top:4px; color:var(--muted); font:500 13px Inter,sans-serif; text-transform:none; }
+.price-bars { margin:12px 0 4px; padding:0; list-style:none; }
+.price-bars li { display:grid; grid-template-columns:130px 1fr 175px; gap:12px; align-items:center; padding:7px 0; }
+.price-bars-label { color:var(--ink); font-weight:600; font-size:14px; text-transform:capitalize; }
+.price-bars-track { display:block; height:12px; border-radius:6px; background:var(--soft); overflow:hidden; }
+.price-bars-track span { display:block; height:100%; border-radius:6px; background:var(--navy-2); }
+.price-bars li.is-low .price-bars-track span { background:var(--coral); }
+.price-bars-value { font-size:14px; font-weight:700; color:var(--ink); }
+.price-bars li.is-low .price-bars-value { color:var(--coral-text); }
+.reverse-link { margin:28px 0 0; }
+.reverse-link a { display:inline-block; padding:12px 18px; border:1px solid var(--line); border-radius:12px; font-weight:700; color:var(--ink); transition:.2s; }
+.reverse-link a:hover { border-color:var(--coral-text); color:var(--coral-text); }
+.method-note { margin-top:36px; }
+.country-chips { margin:0 0 28px; }
+@media (max-width:650px) { .price-bars li { grid-template-columns:1fr 110px; } .price-bars-track { grid-column:1/-1; grid-row:2; } }

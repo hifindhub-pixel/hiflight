@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { defaultOgImage, flightRoutes, routeRegions, siteUrl } from "@/lib/content";
+import { countryPages, defaultOgImage, flightRoutes, routeRegions, siteUrl } from "@/lib/content";
 
 const description = "Tous les itinéraires comparés par HiFlight : Algérie, Maroc, Tunisie, Europe et long-courrier. Durée, compagnies, prix par mois et conseils pour chaque trajet.";
 
@@ -39,6 +39,9 @@ export default function FlightsHubPage() {
         </div>
       </section>
       <section className="section">
+        <ul className="chips country-chips">
+          {countryPages.map((country) => <li key={country.slug}><Link href={`/destinations/${country.slug}`}>Vols {country.toward}</Link></li>)}
+        </ul>
         {routeRegions.map((region) => {
           const routes = flightRoutes.filter((route) => route.region === region);
           if (!routes.length) return null;

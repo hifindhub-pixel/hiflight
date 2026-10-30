@@ -6,7 +6,8 @@
     "dev": "node scripts/dev.mjs",
     "build": "next build",
     "start": "next start",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "test": "node --experimental-strip-types scripts/test-route-stats.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
