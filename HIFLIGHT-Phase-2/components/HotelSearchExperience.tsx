@@ -2,11 +2,15 @@
 
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import HotelExplorer, { HotelSearch } from "./HotelExplorer";
+import AgodaHotelExplorer from "./AgodaHotelExplorer";
+import { resolveAgodaDestination } from "@/lib/agoda/resolve-destination";
 import ServiceTabs from "./ServiceTabs";
 import { trackSearch } from "./Analytics";
 
 type CitySuggestion = {
   id: string;
+  agodaCityId?: number;
+  label?: string;
   name: string;
   countryName: string;
   countryCode: string;
@@ -21,27 +25,31 @@ const weekDays = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
 
 const initialSearch: HotelSearch = { destination: "Paris, France", checkin: "", checkout: "", guests: "2" };
 
-export default function HotelSearchExperience() {
-  const [draft, setDraft] = useState<HotelSearch>(initialSearch);
-  const [search, setSearch] = useState<HotelSearch>(initialSearch);
+export default function HotelSearchExperience({ provider = "stay22" }: { provider?: "stay22" | "agoda" }) {
+  const [draft, setDraft] = useState<HotelSearch>(provider === "agoda" ? { ...initialSearch, agodaCityId: 15470 } : initialSearch);
+  const [search, setSearch] = useState<HotelSearch>(provider === "agoda" ? { ...initialSearch, agodaCityId: 15470 } : initialSearch);
   const [suggestions, setSuggestions] = useState<CitySuggestion[]>([]);
   const [suggestionsOpen, setSuggestionsOpen] = useState(false);
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const cityRef = useRef<HTMLDivElement>(null);
+  const latestDraft = useRef(draft);
+  latestDraft.current = draft;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const fromUrl = {
+    const fromUrl: HotelSearch = {
       destination: params.get("destination") || initialSearch.destination,
-      checkin: params.get("checkin") || "",
-      checkout: params.get("checkout") || "",
-      guests: params.get("guests") || "2",
+      checkin: validHotelDate(params.get("checkin")) ? params.get("checkin")! : "",
+      checkout: validHotelDate(params.get("checkout")) ? params.get("checkout")! : "",
+      guests: /^[1-6]$/.test(params.get("guests") || "") ? params.get("guests")! : "2",
+      agodaCityId: provider === "agoda" ? (Number(params.get("cityId")) > 0 ? Number(params.get("cityId")) : !params.get("destination") ? 15470 : undefined) : undefined,
     };
     setDraft(fromUrl);
     setSearch(fromUrl);
-  }, []);
+  }, [provider]);
 
   useEffect(() => {
     const close = (event: MouseEvent) => {
@@ -53,20 +61,23 @@ export default function HotelSearchExperience() {
 
   useEffect(() => {
     const query = draft.destination.trim();
-    if (!suggestionsOpen || query.length < 2 || draft.latitude !== undefined) {
+    if (!suggestionsOpen || query.length < 2 || (provider !== "agoda" && draft.latitude !== undefined)) {
       setSuggestionsLoading(false);
       if (query.length < 2) setSuggestions([]);
       return;
     }
 
     const controller = new AbortController();
+    setSuggestions([]);
+    setSuggestionsLoading(true);
     const timer = window.setTimeout(async () => {
       setSuggestionsLoading(true);
       try {
-        const response = await fetch(`/api/cities?q=${encodeURIComponent(query)}`, { signal: controller.signal });
+        const response = await fetch(`${provider === "agoda" ? "/api/agoda-destinations/" : "/api/cities"}?q=${encodeURIComponent(query)}`, { signal: controller.signal });
         if (!response.ok) throw new Error("cities-unavailable");
-        const payload = (await response.json()) as { cities: CitySuggestion[] };
-        setSuggestions(payload.cities);
+        const payload = await response.json();
+        if (controller.signal.aborted) return;
+        setSuggestions(provider === "agoda" ? payload.results.map((city: {id:number;name:string;country:string;label:string}) => ({id:String(city.id),agodaCityId:city.id,name:city.name,countryName:city.label.slice(city.name.length+2),countryCode:"",stateCode:"",code:"",label:city.label})) : payload.cities);
         setActiveSuggestion(0);
       } catch (reason) {
         if (!(reason instanceof DOMException && reason.name === "AbortError")) setSuggestions([]);
@@ -76,12 +87,13 @@ export default function HotelSearchExperience() {
     }, 220);
 
     return () => { window.clearTimeout(timer); controller.abort(); };
-  }, [draft.destination, draft.latitude, suggestionsOpen]);
+  }, [draft.destination, draft.latitude, suggestionsOpen, provider]);
 
   function chooseCity(city: CitySuggestion) {
     setDraft((current) => ({
       ...current,
-      destination: `${city.name}, ${city.countryName}`,
+      destination: city.label || `${city.name}, ${city.countryName}`,
+      agodaCityId: city.agodaCityId,
       latitude: city.latitude,
       longitude: city.longitude,
     }));
@@ -95,7 +107,7 @@ export default function HotelSearchExperience() {
     if (event.key === "ArrowDown") {
       event.preventDefault();
       setSuggestionsOpen(true);
-      setActiveSuggestion((current) => Math.min(current + 1, suggestions.length - 1));
+      setActiveSuggestion((current) => Math.max(0, Math.min(current + 1, suggestions.length - 1)));
     }
     if (event.key === "ArrowUp") {
       event.preventDefault();
@@ -108,13 +120,24 @@ export default function HotelSearchExperience() {
     if (event.key === "Escape") setSuggestionsOpen(false);
   }
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (draft.destination.trim().length < 2) { setError("Sélectionnez une destination."); return; }
-    if (!draft.checkin || !draft.checkout) { setError("Sélectionnez les dates d’arrivée et de départ."); return; }
+    if (!validHotelDate(draft.checkin) || !validHotelDate(draft.checkout)) { setError("Sélectionnez les dates d’arrivée et de départ."); return; }
     if (draft.checkout <= draft.checkin) { setError("La date de départ doit être postérieure à l’arrivée."); return; }
 
+    if (submitting) return;
+    if (provider === "agoda" && (draft.checkin < todayIso() || (Date.parse(draft.checkout)-Date.parse(draft.checkin))/86400000 > 30)) { setError("Choisissez un séjour à venir de 30 nuits maximum."); return; }
+    const submittedDraft = draft;
     const nextSearch = { ...draft, destination: draft.destination.trim() };
+    if (provider === "agoda" && !nextSearch.agodaCityId) {
+      setSubmitting(true);
+      try { nextSearch.agodaCityId = await resolveAgodaDestination(nextSearch.destination); }
+      catch (reason) { if (latestDraft.current === submittedDraft) setError(reason instanceof Error ? reason.message : "Choisissez une destination dans la liste."); return; }
+      finally { setSubmitting(false); }
+    }
+    if (latestDraft.current !== submittedDraft) return;
+    setDraft(nextSearch);
     setSearch(nextSearch);
     setError("");
     const params = new URLSearchParams({
@@ -123,6 +146,7 @@ export default function HotelSearchExperience() {
       checkout: nextSearch.checkout,
       guests: nextSearch.guests,
     });
+    if (provider === "agoda" && nextSearch.agodaCityId) params.set("cityId", String(nextSearch.agodaCityId));
     window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
     trackSearch("hotel", { destination: nextSearch.destination, guests: Number(nextSearch.guests) });
     window.setTimeout(() => document.getElementById("hotel-results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
@@ -139,7 +163,7 @@ export default function HotelSearchExperience() {
               <label htmlFor="hotel-destination">Destination</label>
               <div className="hotel-city-input">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-12A7 7 0 1 0 5 9c0 5.9 7 12 7 12Z" /><circle cx="12" cy="9" r="2.5" /></svg>
-                <input id="hotel-destination" value={draft.destination} onFocus={() => setSuggestionsOpen(true)} onChange={(event) => { setDraft((current) => ({ ...current, destination: event.target.value, latitude: undefined, longitude: undefined })); setSuggestionsOpen(true); setActiveSuggestion(0); setError(""); }} onKeyDown={onCityKeyDown} placeholder="Ville ou région" role="combobox" aria-expanded={suggestionsOpen} aria-controls="hotel-city-suggestions" aria-autocomplete="list" autoComplete="off" required />
+                <input id="hotel-destination" value={draft.destination} onFocus={() => setSuggestionsOpen(true)} onChange={(event) => { setDraft((current) => ({ ...current, destination: event.target.value, latitude: undefined, longitude: undefined, agodaCityId: undefined })); setSuggestionsOpen(true); setActiveSuggestion(0); setError(""); }} onKeyDown={onCityKeyDown} placeholder="Ville ou région" role="combobox" aria-expanded={suggestionsOpen} aria-controls="hotel-city-suggestions" aria-autocomplete="list" autoComplete="off" required />
               </div>
               {suggestionsOpen && draft.destination.trim().length >= 2 && (
                 <div className="hotel-city-suggestions" id="hotel-city-suggestions" role="listbox">
@@ -159,12 +183,12 @@ export default function HotelSearchExperience() {
             </div>
             <HotelDatePicker checkin={draft.checkin} checkout={draft.checkout} onChange={(checkin, checkout) => { setDraft((current) => ({ ...current, checkin, checkout })); setError(""); }} />
             <label className="hotel-guests-field">Voyageurs<select value={draft.guests} onChange={(event) => setDraft((current) => ({ ...current, guests: event.target.value }))}><option value="1">1 voyageur</option><option value="2">2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="5">5 voyageurs</option><option value="6">6 voyageurs</option></select></label>
-            <button className="hotel-search-submit" type="submit"><span>Voir les séjours</span><b>→</b></button>
+            <button className="hotel-search-submit" type="submit" disabled={submitting}><span>{submitting ? "Recherche…" : "Voir les séjours"}</span><b>→</b></button>
           </form>
-          <p className={`hero-disclaimer ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "La destination, les dates et les voyageurs actualisent immédiatement les offres disponibles."}</p>
+          <p className={`hero-disclaimer ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || (provider === "agoda" ? "Choisissez votre destination, vos dates et vos voyageurs, puis consultez les offres Agoda · 1 chambre · adultes uniquement." : "La destination, les dates et les voyageurs actualisent immédiatement les offres disponibles.")}</p>
         </div>
       </section>
-      <div id="hotel-results"><HotelExplorer search={search} /></div>
+      <div id="hotel-results">{provider === "agoda" ? <AgodaHotelExplorer search={search} /> : <HotelExplorer search={search} />}</div>
     </>
   );
 }
@@ -244,6 +268,10 @@ function HotelMonth({ month, checkin, checkout, onChoose }: { month: Date; check
       </div>
     </div>
   );
+}
+
+function validHotelDate(value: string | null): value is string {
+  return Boolean(value && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value);
 }
 
 function todayIso() {

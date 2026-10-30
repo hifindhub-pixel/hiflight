@@ -7,6 +7,7 @@ export type HotelSearch = {
   checkin: string;
   checkout: string;
   guests: string;
+  agodaCityId?: number;
   latitude?: number;
   longitude?: number;
 };
@@ -34,7 +35,7 @@ function stay22Search(search: HotelSearch) {
   return url.toString();
 }
 
-function bookingSearch(search: HotelSearch) {
+export function bookingSearch(search: HotelSearch) {
   const url = new URL("https://www.booking.com/searchresults.fr.html");
   url.searchParams.set("ss", search.destination);
   if (search.checkin) url.searchParams.set("checkin", search.checkin);

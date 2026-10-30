@@ -1,0 +1,16 @@
+{
+  "destinationCount": 73909,
+  "countryCount": 221,
+  "hotelRecords": 2879445,
+  "skippedRecords": 0,
+  "excludedCountryConflicts": [
+    12565,
+    106084,
+    513464
+  ],
+  "resolvedUsingVerifiedDestinations": [
+    9395
+  ],
+  "importedAt": "2026-10-22T17:07:15.296001+00:00",
+  "source": "Agoda hotel data FR (complete ZIP, CRC verified)"
+}

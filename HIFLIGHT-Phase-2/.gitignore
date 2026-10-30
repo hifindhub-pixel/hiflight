@@ -6,3 +6,12 @@ out/
 .env.local
 .env.*.local
 !.env.example
+
+# Cloudflare build output and local secrets
+.open-next/
+.wrangler/
+.dev.vars
+.dev.vars.*
+
+# Local catalogue; preview uses the private R2 bucket
+lib/agoda/destinations-full.json

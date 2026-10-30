@@ -1,0 +1,366 @@
+[
+  {
+    "id": 10475,
+    "name": "Agadir",
+    "country": "Maroc",
+    "countryCode": "MA",
+    "countryId": 2
+  },
+  {
+    "id": 13868,
+    "name": "Amsterdam",
+    "country": "Pays-Bas",
+    "countryCode": "NL",
+    "countryId": 149
+  },
+  {
+    "id": 16571,
+    "name": "Athènes",
+    "country": "Grèce",
+    "countryCode": "GR",
+    "countryId": 197
+  },
+  {
+    "id": 6632,
+    "name": "Avignon",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 17193,
+    "name": "Bali",
+    "country": "Indonésie",
+    "countryCode": "ID",
+    "countryId": 192
+  },
+  {
+    "id": 9395,
+    "name": "Bangkok",
+    "country": "Thaïlande",
+    "countryCode": "TH",
+    "countryId": 106
+  },
+  {
+    "id": 2002,
+    "name": "Barcelone",
+    "country": "Espagne",
+    "countryCode": "ES",
+    "countryId": 167
+  },
+  {
+    "id": 2366,
+    "name": "Berlin",
+    "country": "Allemagne",
+    "countryCode": "DE",
+    "countryId": 101
+  },
+  {
+    "id": 12838,
+    "name": "Bordeaux",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 15904,
+    "name": "Bruxelles",
+    "country": "Belgique",
+    "countryCode": "BE",
+    "countryId": 118
+  },
+  {
+    "id": 10647,
+    "name": "Budapest",
+    "country": "Hongrie",
+    "countryCode": "HU",
+    "countryId": 37
+  },
+  {
+    "id": 14503,
+    "name": "Cannes",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 15368,
+    "name": "Casablanca",
+    "country": "Maroc",
+    "countryCode": "MA",
+    "countryId": 2
+  },
+  {
+    "id": 18371,
+    "name": "Chamonix-Mont-Blanc",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 2994,
+    "name": "Dubaï",
+    "country": "Émirats arabes unis",
+    "countryCode": "AE",
+    "countryId": 64
+  },
+  {
+    "id": 1131,
+    "name": "Dublin",
+    "country": "Irlande",
+    "countryCode": "IE",
+    "countryId": 188
+  },
+  {
+    "id": 85860,
+    "name": "Fès",
+    "country": "Maroc",
+    "countryCode": "MA",
+    "countryId": 2
+  },
+  {
+    "id": 14932,
+    "name": "Istanbul",
+    "country": "Turquie",
+    "countryCode": "TR",
+    "countryId": 45
+  },
+  {
+    "id": 8179,
+    "name": "Lille",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 16364,
+    "name": "Lisbonne",
+    "country": "Portugal",
+    "countryCode": "PT",
+    "countryId": 213
+  },
+  {
+    "id": 233,
+    "name": "Londres",
+    "country": "Royaume-Uni",
+    "countryCode": "GB",
+    "countryId": 107
+  },
+  {
+    "id": 12772,
+    "name": "Los Angeles (CA)",
+    "country": "États-Unis",
+    "countryCode": "US",
+    "countryId": 181
+  },
+  {
+    "id": 11361,
+    "name": "Lyon",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 5531,
+    "name": "Madrid",
+    "country": "Espagne",
+    "countryCode": "ES",
+    "countryId": 167
+  },
+  {
+    "id": 11825,
+    "name": "Marrakech",
+    "country": "Maroc",
+    "countryCode": "MA",
+    "countryId": 2
+  },
+  {
+    "id": 1030,
+    "name": "Marseille",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 10372,
+    "name": "Melbourne",
+    "country": "Australie",
+    "countryCode": "AU",
+    "countryId": 139
+  },
+  {
+    "id": 15289,
+    "name": "Miami (FL)",
+    "country": "États-Unis",
+    "countryCode": "US",
+    "countryId": 181
+  },
+  {
+    "id": 16585,
+    "name": "Milan",
+    "country": "Italie",
+    "countryCode": "IT",
+    "countryId": 205
+  },
+  {
+    "id": 5320,
+    "name": "Montpellier",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 9933,
+    "name": "Montréal",
+    "country": "Canada",
+    "countryCode": "CA",
+    "countryId": 100
+  },
+  {
+    "id": 87471,
+    "name": "Montréal",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 983,
+    "name": "Nantes",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 318,
+    "name": "New York",
+    "country": "États-Unis",
+    "countryCode": "US",
+    "countryId": 181
+  },
+  {
+    "id": 5277,
+    "name": "Nice",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 15470,
+    "name": "Paris",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 16056,
+    "name": "Phuket",
+    "country": "Thaïlande",
+    "countryCode": "TH",
+    "countryId": 106
+  },
+  {
+    "id": 8738,
+    "name": "Porto",
+    "country": "Portugal",
+    "countryCode": "PT",
+    "countryId": 213
+  },
+  {
+    "id": 15977,
+    "name": "Prague",
+    "country": "République tchèque",
+    "countryCode": "CZ",
+    "countryId": 13
+  },
+  {
+    "id": 16594,
+    "name": "Rome",
+    "country": "Italie",
+    "countryCode": "IT",
+    "countryId": 205
+  },
+  {
+    "id": 4064,
+    "name": "Singapour",
+    "country": "Singapour",
+    "countryCode": "SG",
+    "countryId": 114
+  },
+  {
+    "id": 7254,
+    "name": "Strasbourg",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 14370,
+    "name": "Sydney",
+    "country": "Australie",
+    "countryCode": "AU",
+    "countryId": 139
+  },
+  {
+    "id": 16577,
+    "name": "Séville",
+    "country": "Espagne",
+    "countryCode": "ES",
+    "countryId": 167
+  },
+  {
+    "id": 5085,
+    "name": "Tokyo",
+    "country": "Japon",
+    "countryCode": "JP",
+    "countryId": 3
+  },
+  {
+    "id": 14562,
+    "name": "Toulouse",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 8152,
+    "name": "Tunis",
+    "country": "Tunisie",
+    "countryCode": "TN",
+    "countryId": 56
+  },
+  {
+    "id": 1623,
+    "name": "Valence",
+    "country": "Espagne",
+    "countryCode": "ES",
+    "countryId": 167
+  },
+  {
+    "id": 6478,
+    "name": "Valence",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  },
+  {
+    "id": 17164,
+    "name": "Venise",
+    "country": "Italie",
+    "countryCode": "IT",
+    "countryId": 205
+  },
+  {
+    "id": 16582,
+    "name": "Vienne",
+    "country": "Autriche",
+    "countryCode": "AT",
+    "countryId": 130
+  },
+  {
+    "id": 11582,
+    "name": "Vienne",
+    "country": "France",
+    "countryCode": "FR",
+    "countryId": 153
+  }
+]
