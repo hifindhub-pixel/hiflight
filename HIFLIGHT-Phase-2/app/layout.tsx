@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "HiFlight — Le hub de tous vos voyages", template: "%s | HiFlight" },
   description: "Comparez vols, hôtels, voitures, trains et bus, puis retrouvez vos voyages sur votre globe et votre passeport HiFlight.",
+  // Smart App Banner Safari iOS : propose l’app HiFlight (App Store id6766213610).
+  itunes: { appId: "6766213610" },
   openGraph: { type: "website", locale: "fr_FR", siteName: "HIFLIGHT", images: [{ url: "/hiflight-hero.jpg", width: 1600, height: 900, alt: "Voyage en avion au coucher du soleil" }] },
   twitter: { card: "summary_large_image", images: ["/hiflight-hero.jpg"] }
 };
@@ -37,6 +39,30 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           url: siteUrl,
           inLanguage: "fr-FR",
           description: "Comparateur de vols, hôtels, voitures, trains, bus et eSIM.",
+        }} />
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": `${siteUrl}/#organization`,
+              name: "HiFlight",
+              url: `${siteUrl}/`,
+              logo: `${siteUrl}/hiflight-logo.png`,
+              email: "contact@hiflight.fr",
+              sameAs: ["https://apps.apple.com/fr/app/id6766213610", "https://fr.trustpilot.com/review/hiflight.fr"],
+            },
+            {
+              "@type": "MobileApplication",
+              name: "HiFlight",
+              url: "https://apps.apple.com/fr/app/id6766213610",
+              operatingSystem: "iOS, Android",
+              applicationCategory: "TravelApplication",
+              inLanguage: "fr-FR",
+              offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+              publisher: { "@id": `${siteUrl}/#organization` },
+            },
+          ],
         }} />
         <span
           aria-hidden="true"

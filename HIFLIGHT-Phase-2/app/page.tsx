@@ -3,9 +3,19 @@ import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
 import ServiceFaq from "@/components/ServiceFaq";
-import { airports, flightRoutes } from "@/lib/content";
+import { airports, defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
+import { blogPosts } from "@/lib/blog";
 
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+const homeDescription = "Comparez les vols de centaines de compagnies et agences, repérez les dates les moins chères, puis réservez chez le partenaire de votre choix. Gratuit, sans inscription.";
+
+export const metadata: Metadata = {
+  title: { absolute: "Comparateur de vols pas chers | HiFlight" },
+  description: homeDescription,
+  alternates: { canonical: "/" },
+  openGraph: { type: "website", url: `${siteUrl}/`, images: [defaultOgImage], title: "Comparateur de vols pas chers | HiFlight", description: homeDescription },
+};
+
+const featuredRoutes = flightRoutes.filter((route) => ["paris-alger", "paris-marrakech", "marseille-alger", "paris-casablanca", "paris-oran", "paris-tunis", "paris-barcelone", "paris-new-york"].includes(route.slug));
 
 export default function Home() {
   return (
@@ -33,7 +43,9 @@ export default function Home() {
 
       <section className="section intro"><div><h2>Le prix du billet ne raconte pas toute l’histoire.</h2></div><p>HIFLIGHT vous aide à comparer les offres puis à vérifier les éléments qui changent réellement le coût du voyage : bagages, escales, aéroport de départ et conditions du partenaire.</p></section>
 
-      <section className="section" id="destinations"><div className="section-head"><h2>Itinéraires populaires</h2><p>Des pages utiles pour préparer le trajet avant de lancer la comparaison en temps réel.</p></div><div className="route-list">{flightRoutes.map((route) => <Link key={route.slug} href={`/vols/${route.slug}`}><span>{route.originCode}</span><b>→</b><span>{route.destinationCode}</span><strong>{route.origin} – {route.destination}</strong></Link>)}</div></section>
+      <section className="section" id="destinations"><div className="section-head"><h2>Itinéraires populaires</h2><p>Des pages utiles pour préparer le trajet avant de lancer la comparaison en temps réel.</p></div><div className="route-list">{featuredRoutes.map((route) => <Link key={route.slug} href={`/vols/${route.slug}`}><span>{route.originCode}</span><b>→</b><span>{route.destinationCode}</span><strong>{route.origin} – {route.destination}</strong></Link>)}</div><Link className="text-link" href="/vols">Voir tous les itinéraires →</Link></section>
+
+      <section className="section" id="conseils"><div className="section-head"><h2>Conseils pour réserver malin</h2><p>Quand réserver, quel aéroport choisir, quels bagages vérifier : nos guides pour comparer le prix total d’un voyage.</p></div><ul className="post-list">{blogPosts.map((post) => <li key={post.slug}><Link href={`/blog/${post.slug}`}><strong>{post.title}</strong><span>{post.description}</span></Link></li>)}</ul></section>
 
       <section className="dark-section"><div className="section"><div className="section-head"><h2>Paris : le bon aéroport compte aussi</h2><p>Un billet moins cher peut coûter davantage une fois le transfert ajouté.</p></div><div className="airport-links">{airports.map((airport) => <Link key={airport.slug} href={`/aeroports/${airport.slug}`}><strong>{airport.code}</strong><span>{airport.name}</span><p>{airport.intro}</p></Link>)}</div></div></section>
 
