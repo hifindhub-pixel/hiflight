@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "check": "tsc --noEmit",
+    "test": "node --experimental-strip-types scripts/test-route-stats.mjs",
     "preview:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "build:cloudflare": "opennextjs-cloudflare build",
     "deploy:cloudflare": "opennextjs-cloudflare deploy"

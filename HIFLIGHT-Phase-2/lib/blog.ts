@@ -64,7 +64,7 @@ export const blogPosts: BlogPost[] = [
         ]
       }
     ],
-    relatedRoutes: ["paris-alger", "paris-oran", "marseille-alger", "lyon-alger", "toulouse-alger"]
+    relatedRoutes: ["paris-alger", "alger-paris", "paris-oran", "oran-paris", "marseille-alger", "lyon-alger", "toulouse-alger"]
   },
   {
     slug: "vol-paris-marrakech-guide",
@@ -111,7 +111,7 @@ export const blogPosts: BlogPost[] = [
         ]
       }
     ],
-    relatedRoutes: ["paris-marrakech", "lyon-marrakech", "paris-casablanca"]
+    relatedRoutes: ["paris-marrakech", "marrakech-paris", "lyon-marrakech", "paris-casablanca"]
   },
   {
     slug: "orly-roissy-beauvais-quel-aeroport",
