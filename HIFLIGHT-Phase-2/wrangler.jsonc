@@ -9,5 +9,7 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  // Conserve les variables et secrets saisis dans le tableau de bord Cloudflare lors d’un déploiement.
+  "keep_vars": true,
   "observability": { "enabled": true }
 }
