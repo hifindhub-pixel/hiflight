@@ -7,19 +7,25 @@
     "build": "next build",
     "start": "next start",
     "check": "tsc --noEmit",
-    "test": "node --experimental-strip-types scripts/test-route-stats.mjs"
+    "test": "node --experimental-strip-types scripts/test-route-stats.mjs",
+    "build:cf": "opennextjs-cloudflare build",
+    "preview:cf": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy:cf": "opennextjs-cloudflare deploy",
+    "upload:cf": "opennextjs-cloudflare upload"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
-    "next": "15.5.24",
+    "next": "15.5.28",
     "react": "19.1.5",
     "react-dom": "19.1.5"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.15",
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "wrangler": "^4.156.0"
   },
   "overrides": {
     "postcss": "8.5.26",

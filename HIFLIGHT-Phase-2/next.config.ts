@@ -27,6 +27,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   trailingSlash: true,
+  // Les Workers Cloudflare n’optimisent pas les images à la volée : on sert les fichiers tels quels.
+  images: { unoptimized: true },
   poweredByHeader: false,
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
