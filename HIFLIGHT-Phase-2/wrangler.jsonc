@@ -1,5 +1,5 @@
 {
-  "name": "hiflight",
+  "name": "hiflight-agoda-preview",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-10-16",
   "compatibility_flags": [
@@ -14,14 +14,25 @@
   },
   "previews": {},
   "workers_dev": true,
-  "routes": [
+  "routes": [],
+  "vars": {
+    "AGODA_ENABLED": "true"
+  },
+  "r2_buckets": [
     {
-      "pattern": "hiflight.fr",
-      "custom_domain": true
-    },
-    {
-      "pattern": "www.hiflight.fr",
-      "custom_domain": true
+      "binding": "AGODA_CATALOGUE",
+      "bucket_name": "hiflight-agoda-preview-catalogue"
     }
-  ]
+  ],
+  "ratelimits": [
+    {
+      "name": "AGODA_RATE_LIMITER",
+      "namespace_id": "196427010",
+      "simple": {
+        "limit": 10,
+        "period": 60
+      }
+    }
+  ],
+  "account_id": "0e347c14aca97a02f4f6fb6b971d69df"
 }
