@@ -4,12 +4,11 @@ import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import JsonLd from "@/components/JsonLd";
 import RoutePrices from "@/components/RoutePrices";
-import { airports, countryPages, flightRoutes, getRoute, relatedRoutes, routeFaq, siteUrl } from "@/lib/content";
+import { airports, bookingAdvice, buildRouteDescription, countryPages, flightRoutes, getRoute, relatedRoutes, routeComparison, routeFaq, siteUrl } from "@/lib/content";
 import { getRouteStats } from "@/lib/route-data";
 import { blogPosts } from "@/lib/blog";
 
-// Les relevés de prix sont rafraîchis une fois par jour.
-export const revalidate = 86400;
+// Page entièrement préfabriquée au build : les relevés de prix sont figés jusqu’au prochain déploiement.
 
 const FORMALITIES_URL = "https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/";
 const frDate = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" });
@@ -22,9 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!route) return {};
   const stats = await getRouteStats(route);
   const title = stats ? `Vol ${route.origin} ${route.destination} dès ${stats.lowest.price} € : comparateur` : route.metaTitle;
-  const description = stats
-    ? `Vol ${route.origin} – ${route.destination} dès ${stats.lowest.price} € A/R (${route.duration}) : prix par mois, jour le moins cher, compagnies et bagages. Comparez gratuitement.`
-    : route.description;
+  const description = stats ? buildRouteDescription(`${route.origin} – ${route.destination}`, route.duration, stats.lowest.price) : route.description;
   return {
     title,
     description,
@@ -41,6 +38,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
 
   const stats = await getRouteStats(route);
   const faq = routeFaq(route, stats);
+  const comparison = routeComparison(route);
   const related = relatedRoutes(route);
   const reverse = route.reverseSlug ? getRoute(route.reverseSlug) : undefined;
   const country = countryPages.find((item) => item.slug === route.country);
@@ -107,15 +105,15 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
         <h2>Quand réserver {pair}</h2>
         <p>{route.season}</p>
         {stats ? <p>Sur les dates relevées, le départ le moins cher tombe en {stats.lowest.monthLabel}{stats.cheapestWeekday ? `, et le ${stats.cheapestWeekday.label} est en moyenne le jour de départ le moins cher` : ""}.</p> : null}
-        <p>En règle générale, comptez entre un et quatre mois avant le départ, et plus tôt encore pour l’été et les fêtes.</p>
+        <p>{bookingAdvice(route)}</p>
 
         <h2>Bien comparer ce trajet</h2>
         <p>{route.tip}</p>
-        <p>Le tarif affiché au départ n’est qu’un élément de comparaison. Avant de choisir, vérifiez les bagages inclus, les horaires, la durée totale, les escales et l’aéroport exact.</p>
+        {comparison ? <p>{comparison}</p> : null}
 
         <h2>Direct ou avec escale ?</h2>
         {route.direct ? (
-          <p>Une escale peut réduire le prix mais augmenter sensiblement le temps de voyage. Pour un vol direct de {route.duration}, comparez l’écart de prix avec la durée supplémentaire avant de choisir une correspondance.</p>
+          <p>Le vol direct dure {route.duration} ; une escale ajoute en général plusieurs heures, à justifier par un prix nettement plus bas.</p>
         ) : (
           <p>Il n’existe en général pas de vol direct {pair} : toutes les offres comportent une escale. Comparez la durée totale ({route.duration}), la ville de correspondance et la durée d’attente avant de choisir.</p>
         )}
@@ -127,9 +125,6 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
           {route.formalities ? <li><strong>Formalités d’entrée :</strong> elles dépendent de votre nationalité et de la durée du séjour. Consultez les <a href={FORMALITIES_URL} target="_blank" rel="noopener noreferrer">conseils aux voyageurs du ministère français de l’Europe et des Affaires étrangères</a> avant de réserver.</li> : null}
           {toParis ? <li><strong>À l’arrivée en France :</strong> vérifiez l’aéroport et le terminal indiqués sur votre billet avant d’organiser votre transfert.</li> : null}
         </ul>
-
-        <h2>Avant le paiement</h2>
-        <p>Contrôlez l’identité du vendeur, les conditions de modification et d’annulation ainsi que le prix final confirmé. La réservation est conclue directement avec le partenaire sélectionné.</p>
 
         <h2>Questions fréquentes</h2>
         <dl className="faq-inline">
@@ -175,7 +170,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
           </>
         ) : null}
 
-        <p className="price-note method-note">Page révisée le {frDate.format(new Date(route.updated))}. Les durées et compagnies sont des repères éditoriaux qui varient selon la saison ; les prix proviennent de relevés récents (voir la méthode ci-dessus).</p>
+        <p className="price-note method-note">Avant de payer, vérifiez les bagages inclus, l’aéroport exact et les conditions de modification : la réservation est conclue avec le partenaire. Page révisée le {frDate.format(new Date(route.updated))} ; durées et compagnies sont des repères variables selon la saison.</p>
         <Link className="text-link" href="#comparer">Lancer la comparaison {pair} ↑</Link>
       </article>
     </main>
