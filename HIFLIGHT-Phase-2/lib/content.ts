@@ -343,6 +343,26 @@ const routeSeeds: RouteSeed[] = [
   }
 ];
 
+/** Meta description 140-158 caractères : on garde la plus longue formulation qui tient. */
+export function buildRouteDescription(pair: string, duration: string, price?: number): string {
+  const candidates = price
+    ? [
+        `Vol ${pair} dès ${price} € A/R (${duration}) : prix par mois, jour de départ le moins cher, compagnies et bagages. Comparez gratuitement, réservez chez le partenaire de votre choix.`,
+        `Vol ${pair} dès ${price} € A/R (${duration}) : prix par mois, compagnies, bagages et escales. Comparez gratuitement, réservez chez le partenaire de votre choix.`,
+        `Vol ${pair} dès ${price} € A/R (${duration}) : prix par mois, compagnies, bagages et escales. Comparez gratuitement, réservez chez le partenaire.`,
+        `Vol ${pair} dès ${price} € A/R (${duration}) : prix par mois, jour le moins cher, compagnies, bagages et escales. Comparez gratuitement.`,
+        `Vol ${pair} dès ${price} € A/R (${duration}) : prix par mois, jour le moins cher, compagnies et bagages. Comparez gratuitement.`,
+        `Vol ${pair} dès ${price} € A/R : prix par mois, compagnies et bagages. Comparez gratuitement.`
+      ]
+    : [
+        `Vol ${pair} (${duration}) : comparez les prix par mois, les compagnies, les bagages et les escales, puis réservez chez le partenaire de votre choix. Gratuit.`,
+        `Vol ${pair} (${duration}) : comparez les prix par mois, les compagnies, les bagages et les escales. Réservez chez le partenaire de votre choix.`,
+        `Vol ${pair} (${duration}) : comparez les prix par mois, les compagnies, les bagages et les escales. Gratuit, sans inscription.`,
+        `Vol ${pair} (${duration}) : comparez prix, compagnies, bagages et escales. Gratuit, sans inscription.`
+      ];
+  return candidates.find((text) => text.length <= 158) ?? candidates[candidates.length - 1];
+}
+
 function slugify(value: string) {
   return value.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
@@ -368,7 +388,7 @@ function buildRoute(seed: RouteSeed, direction: "aller" | "retour"): FlightRoute
     reverseSlug: seed.back ? (back ? forwardSlug : reverseSlug) : undefined,
     title: `Vol ${origin} – ${destination}`,
     metaTitle: `Vol ${origin} ${destination} pas cher : comparateur`,
-    description: `Vol ${origin} – ${destination} (${seed.duration}) : comparez les prix mois par mois, les compagnies, les bagages et les escales. Gratuit, sans inscription.`,
+    description: buildRouteDescription(`${origin} – ${destination}`, seed.duration),
     duration: seed.duration,
     carriers: seed.carriers,
     arrivalAirports: arrival?.airports ?? destination,
@@ -434,19 +454,57 @@ export function relatedRoutes(route: FlightRoute, limit = 8): FlightRoute[] {
 
 const formatEuro = (value: number) => `${value} €`;
 
+function minutesOf(duration: string): number | null {
+  const match = /(\d+)\s*h(?:\s*(\d+))?/.exec(duration);
+  return match ? Number(match[1]) * 60 + Number(match[2] ?? 0) : null;
+}
+
+const plain = (duration: string) => duration.replace(/^environ /, "");
+
+/** Phrase de comparaison propre au trajet : durées des liaisons voisines (même départ, ou même arrivée au retour). */
+export function routeComparison(route: FlightRoute): string | null {
+  const own = minutesOf(route.duration);
+  if (own === null || !route.direct) return null;
+  const back = route.direction === "retour";
+  const siblings = flightRoutes
+    .filter((item) => item.slug !== route.slug && item.direct && item.direction === route.direction && (back ? item.destinationCode === route.destinationCode : item.originCode === route.originCode))
+    .map((item) => ({ item, minutes: minutesOf(item.duration) }))
+    .filter((entry): entry is { item: FlightRoute; minutes: number } => entry.minutes !== null)
+    .sort((a, b) => Math.abs(a.minutes - own) - Math.abs(b.minutes - own))
+    .slice(0, 3);
+  if (siblings.length < 2) return null;
+  const label = (entry: { item: FlightRoute; minutes: number }) => `${back ? entry.item.origin : entry.item.destination} (${plain(entry.item.duration)})`;
+  const rank = flightRoutes.filter((item) => item.direct && item.direction === route.direction && (back ? item.destinationCode === route.destinationCode : item.originCode === route.originCode) && (minutesOf(item.duration) ?? 0) < own).length + 1;
+  const total = flightRoutes.filter((item) => item.direct && item.direction === route.direction && (back ? item.destinationCode === route.destinationCode : item.originCode === route.originCode)).length;
+  const lead = back
+    ? `Pour rentrer à ${route.destination}, ${route.origin} se rejoint en ${plain(route.duration)}`
+    : `Au départ de ${route.origin}, ${route.destination} se rejoint en ${plain(route.duration)}`;
+  const near = siblings.map(label).join(", ");
+  return `${lead}, soit la ${rank}${rank === 1 ? "re" : "e"} liaison la plus courte sur les ${total} comparées par HiFlight. Les trajets de durée voisine : ${near}.`;
+}
+
+/** Délai de réservation conseillé, adapté à la distance du trajet. */
+export function bookingAdvice(route: FlightRoute): string {
+  const minutes = minutesOf(route.duration) ?? 0;
+  if (route.region === "Outre-mer") return "Pour l’Outre-mer, réservez plusieurs mois à l’avance : Noël et l’été partent les premiers.";
+  if (!route.direct || minutes >= 420) return "Sur un long-courrier, ouvrez la comparaison plusieurs mois avant le départ, et davantage encore pour les vacances.";
+  if (minutes >= 180) return "Comptez entre deux et quatre mois avant le départ, et plus tôt pour l’été et les fêtes.";
+  return "Sur ce trajet court, comparez entre un et trois mois avant le départ ; les week-ends partent plus vite.";
+}
+
 /** FAQ de la page : les réponses chiffrées ne s’affichent que si les relevés de prix sont disponibles. */
 export function routeFaq(route: FlightRoute, stats: RouteStats | null = null): { question: string; answer: string }[] {
   const pair = `${route.origin} – ${route.destination}`;
   const items: { question: string; answer: string }[] = [
     route.direct
-      ? { question: `Combien de temps dure un vol ${pair} ?`, answer: `Un vol direct ${pair} dure ${route.duration}. Avec une escale, comptez plus selon la durée de correspondance : comparez la durée totale avant de choisir.` }
-      : { question: `Combien de temps dure un vol ${pair} ?`, answer: `Il n’existe en général pas de vol direct ${pair} : comptez ${route.duration}. Comparez la durée de l’escale et la ville de correspondance avant de choisir.` }
+      ? { question: `Combien de temps dure un vol ${pair} ?`, answer: `Un vol direct ${pair} dure ${route.duration}. Avec une escale, prévoyez davantage.` }
+      : { question: `Combien de temps dure un vol ${pair} ?`, answer: `Il n’existe en général pas de vol direct ${pair} : comptez ${route.duration}. Comparez la durée de l’escale.` }
   ];
 
   if (route.carriers.length) {
     items.push({
       question: `Quelles compagnies assurent ${pair} ?`,
-      answer: `Parmi les compagnies fréquemment présentes : ${route.carriers.join(", ")}. L’offre varie selon la saison ; la comparaison affiche celles disponibles à vos dates.`
+      answer: `Parmi les compagnies fréquemment présentes : ${route.carriers.join(", ")}. L’offre varie selon la saison.`
     });
   }
 
@@ -465,13 +523,13 @@ export function routeFaq(route: FlightRoute, stats: RouteStats | null = null): {
   if (route.direct && stats?.directLowest) {
     items.push({
       question: `Existe-t-il des vols directs ${pair} pas chers ?`,
-      answer: `Oui : un vol direct a été relevé à partir de ${formatEuro(stats.directLowest)} l’aller-retour, contre ${formatEuro(stats.lowest.price)} pour l’offre la moins chère toutes options confondues. Les prix évoluent : vérifiez-les à vos dates.`
+      answer: `Oui : un vol direct a été relevé à partir de ${formatEuro(stats.directLowest)} l’aller-retour, contre ${formatEuro(stats.lowest.price)} pour l’offre la moins chère toutes options confondues.`
     });
   }
 
   items.push({
     question: `Quel aéroport à l’arrivée pour ${route.destination} ?`,
-    answer: `Les vols arrivent à : ${route.arrivalAirports}.${route.arrivalCenter ? ` ${route.arrivalCenter.charAt(0).toUpperCase()}${route.arrivalCenter.slice(1)}.` : ""} Vérifiez l’aéroport indiqué sur l’offre avant de réserver.`
+    answer: `Les vols arrivent à : ${route.arrivalAirports}.${route.arrivalCenter ? ` ${route.arrivalCenter.charAt(0).toUpperCase()}${route.arrivalCenter.slice(1)}.` : ""}`
   });
 
   return items;
