@@ -15,7 +15,8 @@ export const metadata: Metadata = {
   openGraph: { type: "website", url: `${siteUrl}/`, images: [defaultOgImage], title: "Comparateur de vols pas chers | HiFlight", description: homeDescription },
 };
 
-const featuredRoutes = flightRoutes.filter((route) => ["paris-alger", "alger-paris", "paris-marrakech", "marrakech-paris", "marseille-alger", "paris-casablanca", "paris-oran", "paris-tunis", "paris-barcelone", "paris-new-york"].includes(route.slug));
+const featuredSlugs = ["paris-barcelone", "paris-londres", "paris-rome", "paris-new-york", "paris-marrakech", "paris-alger", "paris-istanbul", "paris-montreal", "paris-bangkok", "paris-tokyo", "paris-dubai", "paris-pointe-a-pitre", "alger-paris", "marrakech-paris"];
+const featuredRoutes = featuredSlugs.map((slug) => flightRoutes.find((route) => route.slug === slug)).filter((route) => route !== undefined);
 
 export default function Home() {
   return (

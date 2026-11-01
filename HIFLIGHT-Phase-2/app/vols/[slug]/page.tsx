@@ -97,7 +97,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
       </section>
       <article className="article">
         <dl className="route-facts">
-          <div><dt>Durée du vol direct</dt><dd>{route.duration}</dd></div>
+          <div><dt>{route.direct ? "Durée du vol direct" : "Durée du trajet"}</dt><dd>{route.duration}</dd></div>
           <div><dt>Arrivée</dt><dd>{route.arrivalAirports}</dd></div>
           {route.carriers.length ? <div><dt>Compagnies fréquentes</dt><dd>{route.carriers.join(", ")}</dd></div> : null}
         </dl>
@@ -114,7 +114,11 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
         <p>Le tarif affiché au départ n’est qu’un élément de comparaison. Avant de choisir, vérifiez les bagages inclus, les horaires, la durée totale, les escales et l’aéroport exact.</p>
 
         <h2>Direct ou avec escale ?</h2>
-        <p>Une escale peut réduire le prix mais augmenter sensiblement le temps de voyage. Pour un vol direct de {route.duration}, comparez l’écart de prix avec la durée supplémentaire avant de choisir une correspondance.</p>
+        {route.direct ? (
+          <p>Une escale peut réduire le prix mais augmenter sensiblement le temps de voyage. Pour un vol direct de {route.duration}, comparez l’écart de prix avec la durée supplémentaire avant de choisir une correspondance.</p>
+        ) : (
+          <p>Il n’existe en général pas de vol direct {pair} : toutes les offres comportent une escale. Comparez la durée totale ({route.duration}), la ville de correspondance et la durée d’attente avant de choisir.</p>
+        )}
         {stats?.directLowest ? <p>Un vol direct a été relevé à partir de {stats.directLowest} € aller-retour, contre {stats.lowest.price} € pour l’offre la moins chère toutes options confondues.</p> : null}
 
         <h2>Informations pratiques</h2>

@@ -1455,3 +1455,6 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .method-note { margin-top:36px; }
 .country-chips { margin:0 0 28px; }
 @media (max-width:650px) { .price-bars li { grid-template-columns:1fr 110px; } .price-bars-track { grid-column:1/-1; grid-row:2; } }
+
+.stat-lead { padding:14px 18px; border-left:4px solid var(--coral); background:var(--soft); }
+.stat-lead strong { font-weight:600; color:var(--ink); }

@@ -60,6 +60,7 @@ export default async function CountryPage({ params }: { params: Promise<{ pays: 
         </div>
       </section>
       <article className="article">
+        {country.stat ? <p className="stat-lead"><strong>{country.stat}</strong></p> : null}
         {country.intro.map((text) => <p key={text}>{text}</p>)}
 
         <h2>Vols de France {country.toward}</h2>
@@ -72,19 +73,23 @@ export default async function CountryPage({ params }: { params: Promise<{ pays: 
           ))}
         </div>
 
-        <h2>Vols depuis {country.withArticle} vers la France</h2>
-        <div className="route-list">
-          {inbound.map((route) => (
-            <Link key={route.slug} href={`/vols/${route.slug}`}>
-              <span>{route.originCode}</span><b>→</b><span>{route.destinationCode}</span>
-              <strong>{route.origin} – {route.destination} <small>{route.duration}</small></strong>
-            </Link>
-          ))}
-        </div>
+        {inbound.length ? (
+          <>
+            <h2>Vols depuis {country.withArticle} vers la France</h2>
+            <div className="route-list">
+              {inbound.map((route) => (
+                <Link key={route.slug} href={`/vols/${route.slug}`}>
+                  <span>{route.originCode}</span><b>→</b><span>{route.destinationCode}</span>
+                  <strong>{route.origin} – {route.destination} <small>{route.duration}</small></strong>
+                </Link>
+              ))}
+            </div>
+          </>
+        ) : null}
 
         <h2>Aéroports desservis</h2>
         <ul>{country.airports.map((airport) => <li key={airport}>{airport}</li>)}</ul>
-        <p>Monnaie locale : {country.currency}.</p>
+        {country.currency ? <p>Monnaie locale : {country.currency}.</p> : null}
 
         <h2>Questions fréquentes</h2>
         <dl className="faq-inline">

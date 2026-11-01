@@ -1,7 +1,10 @@
 import type { RouteStats } from "./route-stats";
+import { extraPlaces, extraSeeds } from "./routes-extra";
 
-export type RouteRegion = "Algérie" | "Maroc et Tunisie" | "Europe" | "Long-courrier";
-export type CountrySlug = "algerie" | "maroc";
+export { countryPages } from "./countries";
+
+export type RouteRegion = "Europe" | "Algérie" | "Maroc et Tunisie" | "Amériques" | "Asie et Moyen-Orient" | "Outre-mer" | "Afrique et Océan Indien";
+export type CountrySlug = "espagne" | "italie" | "royaume-uni" | "etats-unis" | "maroc" | "allemagne" | "algerie" | "turquie" | "canada" | "portugal" | "asie" | "outre-mer" | "afrique" | "amerique-latine";
 
 export type FlightRoute = {
   slug: string;
@@ -14,6 +17,8 @@ export type FlightRoute = {
   country?: CountrySlug;
   /** « retour » = vers la France depuis le Maghreb. */
   direction: "aller" | "retour";
+  /** false = pas de vol direct régulier : le trajet se fait avec escale. */
+  direct: boolean;
   reverseSlug?: string;
   /** Titre affiché en H1. */
   title: string;
@@ -39,7 +44,7 @@ export type FlightRoute = {
 
 type Copy = { intro: string; season: string; tip: string };
 
-type RouteSeed = Copy & {
+export type RouteSeed = Copy & {
   origin: string;
   originCode: string;
   destination: string;
@@ -49,14 +54,16 @@ type RouteSeed = Copy & {
   duration: string;
   carriers: string[];
   formalities?: boolean;
+  /** Pas de vol direct régulier : la durée indiquée est celle d’un trajet avec escale. */
+  noDirect?: boolean;
   /** Si présent, une page « retour » (destination → origine) est générée. */
   back?: Copy;
 };
 
-type PlaceFacts = { airports: string; center?: string; currency?: string };
+export type PlaceFacts = { airports: string; center?: string; currency?: string };
 
 // Aéroports et distances au centre : ordres de grandeur stables, volontairement arrondis.
-const places: Record<string, PlaceFacts> = {
+const basePlaces: Record<string, PlaceFacts> = {
   PAR: { airports: "Paris – Charles-de-Gaulle (CDG), Orly (ORY) ou Beauvais (BVA)", center: "Roissy-CDG est à environ 25 km du centre de Paris, Orly à environ 13 km et Beauvais à plus de 80 km" },
   MRS: { airports: "Marseille-Provence (MRS)", center: "à environ 25 km du centre de Marseille" },
   LYS: { airports: "Lyon-Saint-Exupéry (LYS)", center: "à environ 25 km du centre de Lyon" },
@@ -81,6 +88,8 @@ const places: Record<string, PlaceFacts> = {
   YUL: { airports: "Montréal – Trudeau (YUL)", center: "à environ 20 km du centre de Montréal" },
   DXB: { airports: "Dubaï – International (DXB)" },
 };
+
+const places: Record<string, PlaceFacts> = { ...basePlaces, ...extraPlaces };
 
 const routesUpdated = "2026-10-30";
 
@@ -269,42 +278,42 @@ const routeSeeds: RouteSeed[] = [
   },
   // Europe
   {
-    origin: "Paris", originCode: "PAR", destination: "Barcelone", destinationCode: "BCN", region: "Europe",
+    origin: "Paris", originCode: "PAR", destination: "Barcelone", destinationCode: "BCN", region: "Europe", country: "espagne",
     duration: "environ 1 h 55", carriers: ["Vueling", "Air France", "Transavia", "easyJet"],
     intro: "Barcelone est l’une des escapades européennes les plus courues depuis Paris, avec de nombreux vols quotidiens.",
     season: "Les week-ends de printemps et d’été sont les plus demandés. En semaine, hors vacances, les billets sont souvent bien moins chers.",
     tip: "Comparez avec le train : la durée totale (centre à centre) peut rivaliser avec l’avion une fois les transferts aéroport ajoutés."
   },
   {
-    origin: "Paris", originCode: "PAR", destination: "Lisbonne", destinationCode: "LIS", region: "Europe",
+    origin: "Paris", originCode: "PAR", destination: "Lisbonne", destinationCode: "LIS", region: "Europe", country: "portugal",
     duration: "environ 2 h 30", carriers: ["TAP Air Portugal", "Air France", "Transavia", "easyJet"],
     intro: "Lisbonne attire toute l’année grâce à son climat doux. L’aéroport est proche du centre, ce qui limite le coût du transfert.",
     season: "L’été et les ponts de printemps sont les plus chers. L’automne et le début de l’hiver offrent un bon équilibre entre météo et budget.",
     tip: "L’aéroport se trouve à une courte distance du centre-ville en métro : le transfert pèse peu dans le prix total du voyage."
   },
   {
-    origin: "Paris", originCode: "PAR", destination: "Madrid", destinationCode: "MAD", region: "Europe",
+    origin: "Paris", originCode: "PAR", destination: "Madrid", destinationCode: "MAD", region: "Europe", country: "espagne",
     duration: "environ 2 h", carriers: ["Iberia", "Air France", "Vueling", "Transavia"],
     intro: "Paris – Madrid est une liaison dense, utile autant pour les week-ends que pour les déplacements professionnels.",
     season: "Les périodes de pointe sont les ponts, les vacances d’été et de Noël. Hors pointe, les prix baissent sensiblement en semaine.",
     tip: "Pour un déplacement professionnel, comparez les horaires de retour du soir : ils changent beaucoup d’une compagnie à l’autre."
   },
   {
-    origin: "Paris", originCode: "PAR", destination: "Rome", destinationCode: "ROM", region: "Europe",
+    origin: "Paris", originCode: "PAR", destination: "Rome", destinationCode: "ROM", region: "Europe", country: "italie",
     duration: "environ 2 h 10", carriers: ["ITA Airways", "Air France", "easyJet", "Vueling"],
     intro: "Rome est desservie par deux aéroports. Le tarif le plus bas n’est pas toujours le meilleur choix une fois le transfert vers le centre pris en compte.",
     season: "Printemps et début d’automne sont très demandés. Les semaines moins touristiques (novembre, février) permettent de trouver des vols plus abordables.",
     tip: "Comparez les deux aéroports de Rome : le temps et le coût du transfert vers le centre diffèrent."
   },
   {
-    origin: "Paris", originCode: "PAR", destination: "Londres", destinationCode: "LON", region: "Europe",
+    origin: "Paris", originCode: "PAR", destination: "Londres", destinationCode: "LON", region: "Europe", country: "royaume-uni",
     duration: "environ 1 h 20", carriers: ["British Airways", "Air France", "easyJet"],
     intro: "Londres compte cinq aéroports. Selon celui de l’offre, le trajet jusqu’au centre peut faire perdre plus de temps que le vol lui-même.",
     season: "Les week-ends et les vacances scolaires britanniques et françaises sont les plus chers. En semaine et hors saison, les tarifs sont plus souples.",
     tip: "Sur un si court trajet, comparez avec l’Eurostar en durée totale, bagages inclus, avant de choisir l’avion."
   },
   {
-    origin: "Paris", originCode: "PAR", destination: "Istanbul", destinationCode: "IST", region: "Europe",
+    origin: "Paris", originCode: "PAR", destination: "Istanbul", destinationCode: "IST", region: "Europe", country: "turquie",
     duration: "environ 3 h 20", carriers: ["Turkish Airlines", "Air France", "Pegasus"],
     intro: "Istanbul se rejoint depuis Paris en un peu plus de trois heures, avec deux aéroports situés de part et d’autre du Bosphore.",
     season: "Le printemps et l’automne sont agréables et très demandés. L’été et les fêtes font monter les tarifs.",
@@ -312,21 +321,21 @@ const routeSeeds: RouteSeed[] = [
   },
   // Long-courrier
   {
-    origin: "Paris", originCode: "PAR", destination: "New York", destinationCode: "NYC", region: "Long-courrier", formalities: true,
+    origin: "Paris", originCode: "PAR", destination: "New York", destinationCode: "NYC", region: "Amériques", country: "etats-unis", formalities: true,
     duration: "environ 8 h 15", carriers: ["Air France", "Delta", "United", "American Airlines", "French bee"],
     intro: "Paris – New York est une liaison transatlantique très concurrentielle : compagnies régulières, alliances et offres plus économiques s’y côtoient.",
     season: "Les prix sont les plus élevés en été et pendant les fêtes de fin d’année. Les mois d’hiver (hors vacances) et le début du printemps offrent souvent de meilleures offres.",
     tip: "Contrôlez la franchise de bagage en soute, parfois non incluse sur les tarifs les plus bas, ainsi que l’aéroport d’arrivée (JFK ou Newark)."
   },
   {
-    origin: "Paris", originCode: "PAR", destination: "Montréal", destinationCode: "YUL", region: "Long-courrier", formalities: true,
+    origin: "Paris", originCode: "PAR", destination: "Montréal", destinationCode: "YUL", region: "Amériques", country: "canada", formalities: true,
     duration: "environ 7 h 30", carriers: ["Air Canada", "Air France", "Air Transat"],
     intro: "Montréal est la porte d’entrée francophone de l’Amérique du Nord, très demandée pour les études, les séjours en famille et le tourisme.",
     season: "L’été et la période des fêtes sont les plus chers. L’automne (couleurs d’automne) attire beaucoup de visiteurs : réservez tôt.",
     tip: "Vérifiez les formalités d’entrée au Canada (autorisation de voyage électronique selon votre nationalité) avant de réserver."
   },
   {
-    origin: "Lyon", originCode: "LYS", destination: "Dubaï", destinationCode: "DXB", region: "Long-courrier", formalities: true,
+    origin: "Lyon", originCode: "LYS", destination: "Dubaï", destinationCode: "DXB", region: "Asie et Moyen-Orient", country: "asie", formalities: true,
     duration: "environ 6 h 30", carriers: [],
     intro: "Depuis Lyon, Dubaï se rejoint avec ou sans escale selon les offres. Comparer la durée totale est aussi important que comparer le prix.",
     season: "L’hiver (octobre à avril) est la saison la plus agréable sur place et la plus demandée. L’été est très chaud, avec des tarifs souvent plus bas.",
@@ -355,6 +364,7 @@ function buildRoute(seed: RouteSeed, direction: "aller" | "retour"): FlightRoute
     region: seed.region,
     country: seed.country,
     direction,
+    direct: !seed.noDirect,
     reverseSlug: seed.back ? (back ? forwardSlug : reverseSlug) : undefined,
     title: `Vol ${origin} – ${destination}`,
     metaTitle: `Vol ${origin} ${destination} pas cher : comparateur`,
@@ -372,9 +382,9 @@ function buildRoute(seed: RouteSeed, direction: "aller" | "retour"): FlightRoute
   };
 }
 
-export const flightRoutes: FlightRoute[] = routeSeeds.flatMap((seed) => (seed.back ? [buildRoute(seed, "aller"), buildRoute(seed, "retour")] : [buildRoute(seed, "aller")]));
+export const flightRoutes: FlightRoute[] = [...routeSeeds, ...extraSeeds].flatMap((seed) => (seed.back ? [buildRoute(seed, "aller"), buildRoute(seed, "retour")] : [buildRoute(seed, "aller")]));
 
-export const routeRegions: RouteRegion[] = ["Algérie", "Maroc et Tunisie", "Europe", "Long-courrier"];
+export const routeRegions: RouteRegion[] = ["Europe", "Amériques", "Algérie", "Maroc et Tunisie", "Asie et Moyen-Orient", "Outre-mer", "Afrique et Océan Indien"];
 
 export function getRoute(slug: string) {
   return flightRoutes.find((route) => route.slug === slug);
@@ -387,54 +397,15 @@ export type CountryPage = {
   withArticle: string;
   /** « vers l’Algérie », « vers le Maroc ». */
   toward: string;
-  currency: string;
+  currency?: string;
+  /** Chiffre clé sourcé, affiché en tête de page. */
+  stat?: string;
   metaTitle: string;
   description: string;
   intro: string[];
   airports: string[];
   faq: { question: string; answer: string }[];
 };
-
-export const countryPages: CountryPage[] = [
-  {
-    slug: "algerie",
-    name: "Algérie",
-    withArticle: "l’Algérie",
-    toward: "vers l’Algérie",
-    currency: "dinar algérien",
-    metaTitle: "Vol Algérie pas cher : tous les trajets",
-    description: "Comparez les vols vers l’Algérie et depuis l’Algérie : Alger, Oran, Constantine, Annaba. Prix par mois, compagnies, bagages et aéroports de départ en France.",
-    intro: [
-      "L’Algérie est l’une des destinations les plus demandées au départ de la France, pour les retrouvailles en famille comme pour les séjours. Les vols directs relient Paris, Marseille, Lyon et Toulouse à plusieurs villes algériennes.",
-      "Les prix varient fortement selon la période : l’été, les vacances scolaires et les fêtes concentrent la demande. Comparer plusieurs dates, plusieurs aéroports de départ et la franchise de bagage permet de choisir le billet le plus avantageux pour votre voyage."
-    ],
-    airports: ["Alger – Houari-Boumédiène (ALG)", "Oran – Ahmed Ben Bella (ORN)", "Constantine – Mohamed Boudiaf (CZL)", "Annaba – Rabah Bitat (AAE)"],
-    faq: [
-      { question: "Depuis quelles villes françaises peut-on partir vers l’Algérie ?", answer: "Les départs les plus courants se font depuis Paris, Marseille, Lyon et Toulouse. Les offres changent selon la saison : comparez plusieurs aéroports avant de réserver." },
-      { question: "Quel est le moment le moins cher pour voyager en Algérie ?", answer: "En dehors de l’été, des vacances scolaires et des fêtes religieuses, les tarifs sont en général plus bas. Les périodes de janvier-février et de septembre à novembre sont souvent plus abordables." },
-      { question: "Quels documents faut-il pour voyager en Algérie ?", answer: "Les formalités dépendent de votre nationalité et de la durée du séjour. Vérifiez-les sur le site du ministère français de l’Europe et des Affaires étrangères avant de réserver." }
-    ]
-  },
-  {
-    slug: "maroc",
-    name: "Maroc",
-    withArticle: "le Maroc",
-    toward: "vers le Maroc",
-    currency: "dirham marocain",
-    metaTitle: "Vol Maroc pas cher : tous les trajets",
-    description: "Comparez les vols vers le Maroc et depuis le Maroc : Marrakech, Casablanca, Tanger, Fès, Agadir. Prix par mois, compagnies, bagages et aéroports en France.",
-    intro: [
-      "Le Maroc se rejoint en trois heures environ depuis Paris, avec des vols réguliers et low cost vers Marrakech, Casablanca, Tanger, Fès et Agadir. L’offre est large, des compagnies traditionnelles aux compagnies à bas coût.",
-      "Le prix du billet n’est qu’une partie de la facture : bagage en soute, aéroport de départ (Roissy, Orly ou Beauvais) et horaires changent la comparaison. Notre comparateur affiche ces points pour chaque trajet."
-    ],
-    airports: ["Marrakech-Ménara (RAK)", "Casablanca – Mohammed V (CMN)", "Tanger – Ibn Battouta (TNG)", "Fès – Saïss (FEZ)", "Agadir – Al Massira (AGA)"],
-    faq: [
-      { question: "Quelle ville du Maroc choisir pour un premier voyage ?", answer: "Marrakech est la destination la plus visitée par les voyageurs en séjour, Casablanca est le grand centre économique, et Fès offre une médina classée à l’UNESCO. Le choix dépend de votre projet de voyage." },
-      { question: "Quel est le meilleur moment pour partir au Maroc ?", answer: "Le printemps et l’automne sont les saisons les plus agréables dans la plupart des villes, et souvent moins chères que les vacances scolaires. L’été est très chaud à l’intérieur du pays." },
-      { question: "Quels documents faut-il pour voyager au Maroc ?", answer: "Les formalités dépendent de votre nationalité et de la durée du séjour. Vérifiez-les sur le site du ministère français de l’Europe et des Affaires étrangères avant de réserver." }
-    ]
-  }
-];
 
 export const airports = [
   { slug: "paris-charles-de-gaulle", name: "Paris-Charles de Gaulle", code: "CDG", intro: "Le principal aéroport international parisien. Vérifiez toujours le terminal et le temps de transfert avant votre départ." },
@@ -452,6 +423,7 @@ export function relatedRoutes(route: FlightRoute, limit = 8): FlightRoute[] {
         (item.slug === route.reverseSlug ? 10 : 0) +
         (item.destinationCode === route.destinationCode ? 3 : 0) +
         (item.originCode === route.originCode ? 2 : 0) +
+        (item.country && item.country === route.country ? 2 : 0) +
         (item.region === route.region ? 1 : 0)
     }))
     .filter(({ score }) => score > 0)
@@ -466,7 +438,9 @@ const formatEuro = (value: number) => `${value} €`;
 export function routeFaq(route: FlightRoute, stats: RouteStats | null = null): { question: string; answer: string }[] {
   const pair = `${route.origin} – ${route.destination}`;
   const items: { question: string; answer: string }[] = [
-    { question: `Combien de temps dure un vol ${pair} ?`, answer: `Un vol direct ${pair} dure ${route.duration}. Avec une escale, comptez plus selon la durée de correspondance : comparez la durée totale avant de choisir.` }
+    route.direct
+      ? { question: `Combien de temps dure un vol ${pair} ?`, answer: `Un vol direct ${pair} dure ${route.duration}. Avec une escale, comptez plus selon la durée de correspondance : comparez la durée totale avant de choisir.` }
+      : { question: `Combien de temps dure un vol ${pair} ?`, answer: `Il n’existe en général pas de vol direct ${pair} : comptez ${route.duration}. Comparez la durée de l’escale et la ville de correspondance avant de choisir.` }
   ];
 
   if (route.carriers.length) {
@@ -488,7 +462,7 @@ export function routeFaq(route: FlightRoute, stats: RouteStats | null = null): {
     });
   }
 
-  if (stats?.directLowest) {
+  if (route.direct && stats?.directLowest) {
     items.push({
       question: `Existe-t-il des vols directs ${pair} pas chers ?`,
       answer: `Oui : un vol direct a été relevé à partir de ${formatEuro(stats.directLowest)} l’aller-retour, contre ${formatEuro(stats.lowest.price)} pour l’offre la moins chère toutes options confondues. Les prix évoluent : vérifiez-les à vos dates.`
