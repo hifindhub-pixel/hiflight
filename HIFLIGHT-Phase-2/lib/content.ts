@@ -348,6 +348,8 @@ export function buildRouteDescription(pair: string, duration: string, price?: nu
   const candidates = price
     ? [
         `Vol ${pair} dès ${price} € A/R (${duration}) : prix par mois, jour de départ le moins cher, compagnies et bagages. Comparez gratuitement, réservez chez le partenaire de votre choix.`,
+        `Vol ${pair} dès ${price} € A/R (${duration}) : prix par mois, compagnies, bagages et escales. Comparez gratuitement, réservez chez le partenaire de votre choix.`,
+        `Vol ${pair} dès ${price} € A/R (${duration}) : prix par mois, jour le moins cher, compagnies, bagages et escales. Comparez gratuitement.`,
         `Vol ${pair} dès ${price} € A/R (${duration}) : prix par mois, jour le moins cher, compagnies et bagages. Comparez gratuitement.`,
         `Vol ${pair} dès ${price} € A/R : prix par mois, compagnies et bagages. Comparez gratuitement.`
       ]
