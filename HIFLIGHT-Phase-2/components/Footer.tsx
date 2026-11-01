@@ -30,7 +30,7 @@ export default function Footer() {
       </div>
       <div className="footer-grid">
         <div><div className="brand"><span>Hi</span>Flight</div><p>Comparez gratuitement, puis réservez auprès du partenaire choisi.</p></div>
-        <div><strong>Comparer</strong><Link href="/#recherche">Vols</Link><Link href="/hotels">Hôtels</Link><Link href="/voitures">Voitures</Link><Link href="/trains-bus">Trains & bus</Link></div>
+        <div><strong>Comparer</strong><Link href="/#recherche">Vols</Link><Link href="/vols">Tous les itinéraires</Link><Link href="/vols/paris-alger">Vols Paris – Alger</Link><Link href="/vols/paris-marrakech">Vols Paris – Marrakech</Link><Link href="/vols/paris-casablanca">Vols Paris – Casablanca</Link><Link href="/destinations/algerie">Vols vers l’Algérie</Link><Link href="/destinations/maroc">Vols vers le Maroc</Link><Link href="/hotels">Hôtels</Link><Link href="/voitures">Voitures</Link><Link href="/trains-bus">Trains & bus</Link></div>
         <div><strong>Informations</strong><Link href="/blog">Conseils voyage</Link><Link href="/guides/bagage-cabine">Bagage cabine</Link><Link href="/aeroports/paris-charles-de-gaulle">Aéroport CDG</Link><Link href="/aeroports/paris-orly">Aéroport ORY</Link><Link href="/faq">FAQ</Link><Link href="/conditions-utilisations">Conditions</Link><Link href="/mentions-legales">Mentions légales</Link><Link href="/politique-de-confidentialite">Confidentialité</Link><Link href="/politique-cookies">Cookies</Link><a href="mailto:contact@hiflight.fr">Contact</a></div>
       </div>
       <div className="footer-bottom">© {new Date().getFullYear()} HIFLIGHT · Les prix et disponibilités peuvent évoluer.</div>

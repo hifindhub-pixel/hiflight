@@ -12,6 +12,8 @@
   "observability": {
     "enabled": true
   },
+  // Conserve les variables et secrets saisis dans le tableau de bord Cloudflare lors d’un déploiement.
+  "keep_vars": true,
   "previews": {},
   "workers_dev": true,
   "routes": [
