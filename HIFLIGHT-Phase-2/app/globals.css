@@ -1407,3 +1407,24 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
   .service-tabs a { padding:0 8px; font-size:11px; }
   .hero h1 { font-size:2.5rem; }
 }
+
+/* Hotel discovery: compact header and the flight calendar's neutral controls. */
+.market-hero.hotels.hotel-discovery-hero{min-height:0;padding:112px 24px 30px;background-image:none;background-color:#0b1b33}
+.hotel-discovery-hero::before{background:radial-gradient(ellipse at 85% 0%,#264253 0%,transparent 65%)}
+.hotel-discovery-hero .service-tabs{margin-bottom:24px}
+.hotel-discovery-hero h1{font-size:clamp(30px,3.3vw,46px);line-height:1.08;margin-bottom:12px;letter-spacing:-1.5px}
+.hotel-discovery-hero h1 br{display:none}.hotel-discovery-hero h1 span{color:#d9e6e9}
+.hotel-discovery-subtitle{font-size:14px;color:#bdcbd8;margin:0 0 24px;line-height:1.6}
+.hotel-discovery-hero .hotel-search-premium{background:white;border:1px solid #e2e8f0;box-shadow:0 12px 30px #0002;padding:10px;border-radius:18px}
+.hotel-discovery-hero .hotel-search-premium>.hotel-city-field,.hotel-discovery-hero .hotel-search-premium>.hotel-date-picker,.hotel-discovery-hero .hotel-search-premium>.hotel-guests-field{background:#f8fafc;border-color:#e5e9ef;box-shadow:none;border-radius:11px}
+.hotel-discovery-hero .hero-disclaimer{margin:12px 0 0;font-size:11px;color:#cbd5e1}.hotel-discovery-hero .hero-disclaimer.error{color:#fecaca}
+.hotel-search .hotel-flight-calendar button{grid-column:auto;align-self:auto;padding:2px;background:transparent;color:var(--ink);font-weight:700}
+.hotel-search .hotel-flight-calendar .days-grid button{min-height:49px;height:auto;border-radius:8px}
+.hotel-search .hotel-flight-calendar .days-grid button:hover:not(:disabled){background:#edf2f7}
+.hotel-search .hotel-flight-calendar .days-grid button.between{background:#fff0f0;border-radius:0}
+.hotel-search .hotel-flight-calendar .days-grid button.selected{background:var(--navy);color:white;border-radius:8px}
+.hotel-search .hotel-flight-calendar .days-grid button:disabled{color:#c5ccd5;background:transparent}
+.hotel-search .hotel-flight-calendar .calendar-nav button{width:32px;height:32px;border:1px solid #e2e8f0;background:#fff;border-radius:50%;font-size:22px}
+.hotel-search .hotel-flight-calendar .calendar-top>button{width:32px;height:32px;background:#f1f5f9;border-radius:50%;font-size:20px}
+.hotel-search .hotel-flight-calendar button:focus-visible{outline:2px solid #0b1b33;outline-offset:2px}
+@media(max-width:650px){.market-hero.hotels.hotel-discovery-hero{padding:100px 16px 22px}.hotel-discovery-hero h1{font-size:32px}.hotel-discovery-hero h1 br{display:block}.hotel-discovery-subtitle{font-size:13px}.hotel-discovery-hero .service-tabs{margin-bottom:18px}.hotel-discovery-hero .hotel-search-submit{min-height:52px}}

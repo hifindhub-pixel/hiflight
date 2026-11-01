@@ -7,6 +7,7 @@ import { resolveAgodaDestination } from "@/lib/agoda/resolve-destination";
 import styles from "./AgodaHotelExplorer.module.css";
 const HotelMap=dynamic(()=>import("@/app/hotels/agoda-test/HotelMap"),{ssr:false,loading:()=> <p role="status">Chargement de la carte…</p>});
 type Hotel={hotelId:number;hotelName:string;dailyRate:number;reviewScore:number;reviewCount:number;starRating:number;latitude:number;longitude:number;includeBreakfast:boolean;freeWifi:boolean;landingURL:string;imageURL:string};
+const emptyHotels: Hotel[] = [];
 const money=(amount:number)=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(amount);
 const dateLabel=(value:string)=>new Intl.DateTimeFormat('fr-FR',{day:'numeric',month:'short'}).format(new Date(value+'T12:00:00'));
 const validDate=(value:string)=>/^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString().slice(0,10)===value;
@@ -58,7 +59,7 @@ export default function AgodaHotelExplorer({search}:{search:HotelSearch}){
   <div className="results-toolbar hotel-live-toolbar"><div><strong>Rechercher un hébergement à {search.destination}</strong><span>{hasDates?`Séjour du ${dateLabel(search.checkin)} au ${dateLabel(search.checkout)} · ${search.guests} adulte${search.guests==='1'?'':'s'} · 1 chambre`:'Sélectionnez vos dates pour explorer les offres proposées.'}</span></div></div>
   <div className={styles.content}>
    <p className={styles.intro}>Explorez les hôtels proposés par Agoda sur la carte. La réservation s’effectue directement sur Agoda.</p>
-   {!hasDates&&!error&&<div className={styles.empty}><strong>Où poserez-vous vos valises ?</strong><p>Choisissez vos dates dans le formulaire ci-dessus pour découvrir les hôtels et leurs disponibilités.</p></div>}
+   {!hasDates&&!error&&<div className={styles.discovery}><div className={styles.discoveryCopy}><span className={styles.eyebrow}>LE BON ENDROIT, AVANT TOUT</span><h2>Repérez votre prochain quartier.</h2><p>Explorez la carte, puis choisissez votre destination et vos dates pour afficher les hôtels et leurs tarifs.</p><button type="button" onClick={()=>{document.getElementById("hotel-destination")?.focus();document.getElementById("hotel-destination")?.scrollIntoView({behavior:"smooth",block:"center"});}}>Préparer mon séjour <span aria-hidden="true">↗</span></button><small>Carte centrée sur Paris pour commencer.<br/>Aucun tarif affiché avant votre recherche.</small></div><aside className={`${styles.map} ${styles.discoveryMap}`}><HotelMap hotels={emptyHotels} onSelect={()=>{}} /></aside></div>}
    {loading&&<div className={styles.empty} role="status"><span className={styles.spinner}/><strong>Recherche des offres Agoda…</strong><p>Nous consultons Agoda pour vos dates et vos voyageurs.</p></div>}
    {error&&<div className={styles.error} role="alert"><p>{error}</p><button type="button" onClick={()=>setReload(n=>n+1)}>Réessayer</button></div>}
    {done&&!loading&&<>

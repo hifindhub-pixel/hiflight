@@ -9,7 +9,7 @@ export default function HotelMap({hotels,selectedId,onSelect,selectionCard}:{hot
  const container=useRef<HTMLDivElement>(null), map=useRef<Leaflet.Map|null>(null), lib=useRef<typeof Leaflet|null>(null), markers=useRef(new Map<number,Leaflet.Marker>()), callback=useRef(onSelect);
  const [ready,setReady]=useState(false),[error,setError]=useState(''); callback.current=onSelect;
  useEffect(()=>{let cancelled=false;let observer:ResizeObserver|undefined;const controller=new AbortController();
- import('leaflet').then(L=>{if(cancelled||!container.current)return;lib.current=L;const m=L.map(container.current,{scrollWheelZoom:true}).setView([48.86,2.35],11);map.current=m;
+ import('leaflet').then(L=>{if(cancelled||!container.current)return;lib.current=L;const m=L.map(container.current,{scrollWheelZoom:true,zoomControl:false}).setView([48.86,2.35],11);map.current=m;L.control.zoom({position:"topright",zoomInTitle:"Zoomer",zoomOutTitle:"Dézoomer"}).addTo(m);m.attributionControl.setPrefix(false);
  // Vector labels can be localized, unlike names baked into raster tiles.
  void (async()=>{
   try{
@@ -61,5 +61,5 @@ export default function HotelMap({hotels,selectedId,onSelect,selectionCard}:{hot
   arrange();m.on('zoomend moveend resize',arrange);
   return()=>{m.off('zoomend moveend resize',arrange);};
  },[ready,hotels,selectedId]);
- return <><div className="agoda-map-stage"><div id="agoda-map" className="agoda-leaflet-map" ref={container} role="region" aria-label="Carte des hôtels et tarifs indicatifs"/>{selectionCard}</div>{error&&<p role="status">{error}</p>}<p>Noms en français lorsqu’ils sont disponibles, sinon en caractères latins.<br/>* HT : hors taxes et frais, par nuit pour 1 chambre. Zoomez avec la roulette pour découvrir plus de prix. Les petits points représentent aussi des hôtels : cliquez pour voir leur offre.</p><button type="button" className="agoda-map-reset" onClick={()=>{const L=lib.current,m=map.current,points=[...markers.current.values()].map(x=>x.getLatLng());if(L&&m&&points.length)m.fitBounds(L.latLngBounds(points),{padding:[45,45],maxZoom:14});}}>Voir tous les hôtels sur la carte</button></>;
+ return <><div className="agoda-map-stage"><div id="agoda-map" className="agoda-leaflet-map" ref={container} role="region" aria-label="Carte interactive des hôtels, zoom avec la roulette"/>{hotels.length>0&&<button type="button" className="agoda-map-recenter" onClick={()=>{const L=lib.current,m=map.current,points=[...markers.current.values()].map(x=>x.getLatLng());if(L&&m&&points.length)m.fitBounds(L.latLngBounds(points),{padding:[45,45],maxZoom:14});}}>⌖ Recentrer</button>}{selectionCard}</div>{error&&<p role="status">{error}</p>}<div className="agoda-map-caption"><span>{hotels.length>0?'Prix par nuit · hors taxes et frais':'Explorez librement la carte'}</span><details><summary>À propos de la carte</summary><p>Noms en français lorsqu’ils sont disponibles, sinon en caractères latins. Zoomez avec la roulette. Les petits points représentent aussi des hôtels : cliquez pour voir leur offre.</p></details></div></>;
 }

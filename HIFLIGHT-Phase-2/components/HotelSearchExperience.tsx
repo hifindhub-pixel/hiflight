@@ -154,10 +154,11 @@ export default function HotelSearchExperience({ provider = "stay22" }: { provide
 
   return (
     <>
-      <section className="market-hero hotels">
+      <section className={`market-hero hotels ${provider === "agoda" ? "hotel-discovery-hero" : ""}`}>
         <div>
           <ServiceTabs active="hotels" />
           <h1>Trouvez le bon hôtel,<br /><span>au bon endroit.</span></h1>
+          {provider === "agoda" && <p className="hotel-discovery-subtitle">Un quartier à explorer. Une adresse à retenir. Votre prochain séjour commence ici.</p>}
           <form className="market-search hotel-search hotel-search-premium" onSubmit={submit}>
             <div className="hotel-city-field" ref={cityRef}>
               <label htmlFor="hotel-destination">Destination</label>
@@ -263,7 +264,7 @@ function HotelMonth({ month, checkin, checkout, onChoose }: { month: Date; check
           const date = localIso(new Date(month.getFullYear(), month.getMonth(), day));
           const selected = date === checkin || date === checkout;
           const between = Boolean(checkin && checkout && date > checkin && date < checkout);
-          return <button key={date} type="button" disabled={date < todayIso()} className={(selected ? "selected " : "") + (between ? "between" : "")} onClick={() => onChoose(date)}><span>{day}</span><small>&nbsp;</small></button>;
+          return <button key={date} type="button" disabled={date < todayIso()} aria-label={new Intl.DateTimeFormat("fr-FR", { dateStyle: "full" }).format(new Date(date + "T12:00:00"))} aria-pressed={selected} className={(selected ? "selected " : "") + (between ? "between" : "")} onClick={() => onChoose(date)}><span>{day}</span><small>&nbsp;</small></button>;
         })}
       </div>
     </div>
