@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { defaultOgImage, siteUrl } from "@/lib/content";
 import { FaqAccordion } from "@/components/ServiceFaq";
 
 export const metadata: Metadata = {
   title: "Questions fréquentes",
-  description: "Réponses aux questions fréquentes sur les recherches et réservations HiFlight.",
+  description: "Réponses aux questions fréquentes sur la comparaison de vols, hôtels et voitures avec HiFlight : fonctionnement, prix, réservation, annulation et données personnelles.",
   alternates: { canonical: "/faq" },
+  openGraph: { type: "website", url: `${siteUrl}/faq/`, images: [defaultOgImage], title: "Questions fréquentes | HiFlight", description: "Réponses aux questions fréquentes sur la comparaison de vols, hôtels et voitures avec HiFlight : fonctionnement, prix, réservation, annulation et données personnelles." },
 };
 
 const questions = [

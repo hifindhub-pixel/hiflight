@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
+import { defaultOgImage, siteUrl } from "@/lib/content";
 import ServiceTabs from "@/components/ServiceTabs";
 import GroundSearch from "@/components/GroundSearch";
 import ServiceFaq from "@/components/ServiceFaq";
 
-export const metadata: Metadata = { title: "Trains et bus", description: "Comparez vos trajets en train et en bus avec HiFlight.", alternates: { canonical: "/trains-bus" } };
+export const metadata: Metadata = {
+  title: "Comparer trains et bus : horaires et prix",
+  description: "Comparez vos trajets en train et en bus : horaires, durées et prix chez les partenaires, puis réservez auprès du partenaire de votre choix. Gratuit.",
+  alternates: { canonical: "/trains-bus" },
+  openGraph: { type: "website", url: `${siteUrl}/trains-bus/`, images: [defaultOgImage], title: "Comparer trains et bus : horaires et prix | HiFlight", description: "Comparez vos trajets en train et en bus : horaires, durées et prix chez les partenaires, puis réservez auprès du partenaire de votre choix. Gratuit." },
+};
 
 export default function GroundPage() {
   return <main className="market-page">

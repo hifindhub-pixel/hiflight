@@ -107,7 +107,7 @@ export const countryPages: CountryPage[] = [
     slug: "canada", name: "Canada", withArticle: "le Canada", toward: "vers le Canada",
     stat: `Le Canada accueille 3,5 millions de passagers au départ de France en 2024, en hausse d’environ 8,6 % au premier semestre 2025 (${SOURCE}).`,
     metaTitle: "Vol Canada pas cher : tous les trajets",
-    description: "Comparez les vols vers le Canada : Montréal, Toronto. Durée, prix par mois et conseils pour chaque trajet depuis Paris.",
+    description: "Comparez les vols vers le Canada : Montréal, Toronto. Durée, prix par mois et conseils pour chaque trajet depuis Paris, avec les formalités à vérifier avant le départ.",
     intro: ["Le Canada se rejoint en vol direct depuis Paris en sept à huit heures, vers Montréal la francophone ou Toronto l’anglophone.", "Vérifiez les formalités d’entrée (autorisation de voyage électronique selon la nationalité) bien avant le départ."],
     airports: ["Montréal – Trudeau (YUL)", "Toronto – Pearson (YYZ)"],
     faq: [
