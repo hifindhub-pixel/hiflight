@@ -8,6 +8,7 @@ import StickyCta from "@/components/StickyCta";
 import { airports, bookingAdvice, buildRouteDescription, countryPages, flightRoutes, getRoute, relatedRoutes, routeComparison, routeFaq, siteUrl } from "@/lib/content";
 import { getRouteStats } from "@/lib/route-data";
 import { blogPosts } from "@/lib/blog";
+import { departureCities } from "@/lib/cities";
 
 // Page entièrement préfabriquée au build : les relevés de prix sont figés jusqu’au prochain déploiement.
 
@@ -39,6 +40,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
 
   const stats = await getRouteStats(route);
   const faq = routeFaq(route, stats);
+  const departureCity = departureCities.find((city) => city.code === route.originCode);
   const comparison = routeComparison(route);
   const related = relatedRoutes(route);
   const reverse = route.reverseSlug ? getRoute(route.reverseSlug) : undefined;
@@ -74,7 +76,8 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Accueil", item: `${siteUrl}/` },
               { "@type": "ListItem", position: 2, name: "Vols", item: `${siteUrl}/vols/` },
-              { "@type": "ListItem", position: 3, name: pair, item: `${siteUrl}/vols/${route.slug}/` },
+              ...(departureCity ? [{ "@type": "ListItem", position: 3, name: `Vols ${departureCity.from}`, item: `${siteUrl}/vols/depuis/${departureCity.slug}/` }] : []),
+              { "@type": "ListItem", position: departureCity ? 4 : 3, name: pair, item: `${siteUrl}/vols/${route.slug}/` },
             ],
           },
           {
@@ -85,7 +88,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
       }} />
       <section className="page-hero">
         <div>
-          <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/vols">Vols</Link> / {pair}</p>
+          <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/vols">Vols</Link> / {departureCity ? <><Link href={`/vols/depuis/${departureCity.slug}`}>Vols {departureCity.from}</Link> / </> : null}{pair}</p>
           <h1>{route.title}</h1>
           <p>{route.intro}</p>
           {stats ? <p className="hero-price">À partir de <strong>{stats.lowest.price} €</strong> aller-retour · relevé récent en {stats.lowest.monthLabel}</p> : null}
