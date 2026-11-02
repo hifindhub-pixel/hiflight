@@ -4,6 +4,7 @@ import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import JsonLd from "@/components/JsonLd";
 import RoutePrices from "@/components/RoutePrices";
+import StickyCta from "@/components/StickyCta";
 import { airports, bookingAdvice, buildRouteDescription, countryPages, flightRoutes, getRoute, relatedRoutes, routeComparison, routeFaq, siteUrl } from "@/lib/content";
 import { getRouteStats } from "@/lib/route-data";
 import { blogPosts } from "@/lib/blog";
@@ -173,6 +174,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
         <p className="price-note method-note">Avant de payer, vérifiez les bagages inclus, l’aéroport exact et les conditions de modification : la réservation est conclue avec le partenaire. Page révisée le {frDate.format(new Date(route.updated))} ; durées et compagnies sont des repères variables selon la saison.</p>
         <Link className="text-link" href="#comparer">Lancer la comparaison {pair} ↑</Link>
       </article>
+      <StickyCta label={pair} price={stats?.lowest.price} route={route.slug} />
     </main>
   );
 }
