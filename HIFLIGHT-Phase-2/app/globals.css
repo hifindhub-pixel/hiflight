@@ -1490,3 +1490,8 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .sticky-cta a { flex:none; padding:12px 22px; border-radius:12px; background:var(--coral); color:#07162f; font-weight:800; }
 .sticky-cta a:hover { background:#ff8585; }
 @media (min-width:900px) { .sticky-cta { padding-left:max(20px,calc((100% - 1000px)/2)); padding-right:max(20px,calc((100% - 1000px)/2)); } }
+.key-points p { margin: 0; color: #2a3442; font-size: 17px; }
+.data-table { width: 100%; border-collapse: collapse; margin: 14px 0 6px; font-size: 15px; }
+.data-table th, .data-table td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+.data-table th { color: var(--muted); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.table-scroll { overflow-x: auto; }

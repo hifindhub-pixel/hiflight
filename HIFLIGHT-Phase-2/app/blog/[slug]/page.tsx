@@ -92,6 +92,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <h2>{section.heading}</h2>
             {section.paragraphs.map((text) => <p key={text}>{text}</p>)}
             {section.list ? <ul>{section.list.map((item) => <li key={item}>{item}</li>)}</ul> : null}
+            {section.table ? (
+              <div className="table-scroll">
+                <table className="data-table">
+                  <thead><tr>{section.table.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead>
+                  <tbody>{section.table.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}</tbody>
+                </table>
+              </div>
+            ) : null}
           </section>
         ))}
 

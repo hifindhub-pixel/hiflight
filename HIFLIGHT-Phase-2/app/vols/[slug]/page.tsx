@@ -98,6 +98,18 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
         <SearchForm compact origin={route.origin} destination={route.destination} originCode={route.originCode} destinationCode={route.destinationCode} />
       </section>
       <article className="article">
+        {stats ? (
+          <aside className="key-points quick-answer" aria-label="Réponse rapide">
+            <strong>Réponse rapide</strong>
+            <p>
+              {`Le vol ${pair} est le moins cher pour un départ en ${stats.lowest.monthLabel} : dès ${stats.lowest.price} € aller-retour. `}
+              {stats.directLowest ? `Le vol direct le moins cher relevé est à ${stats.directLowest} €. ` : ""}
+              {stats.cheapestWeekday ? `Le jour de départ le moins cher est le ${stats.cheapestWeekday.label} (environ ${stats.cheapestWeekday.avg} €). ` : ""}
+              {stats.directShare !== null ? `${stats.directShare} % des offres relevées sont des vols directs. ` : ""}
+              {`Relevé du ${new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${stats.updatedAt}T00:00:00Z`))} sur ${stats.sample} dates de départ ; prix indicatifs.`}
+            </p>
+          </aside>
+        ) : null}
         <dl className="route-facts">
           <div><dt>{route.direct ? "Durée du vol direct" : "Durée du trajet"}</dt><dd>{route.duration}</dd></div>
           <div><dt>Arrivée</dt><dd>{route.arrivalAirports}</dd></div>
