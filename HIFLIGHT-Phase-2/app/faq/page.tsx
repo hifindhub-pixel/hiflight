@@ -4,9 +4,9 @@ import { FaqAccordion } from "@/components/ServiceFaq";
 
 export const metadata: Metadata = {
   title: "Questions fréquentes",
-  description: "Réponses aux questions fréquentes sur la comparaison de vols, hôtels et voitures avec HiFlight : fonctionnement, prix, réservation, annulation et données personnelles.",
+  description: "Réponses aux questions fréquentes sur la comparaison de vols, hôtels et voitures avec HiFlight : prix, réservation, annulation et données personnelles.",
   alternates: { canonical: "/faq" },
-  openGraph: { type: "website", url: `${siteUrl}/faq/`, images: [defaultOgImage], title: "Questions fréquentes | HiFlight", description: "Réponses aux questions fréquentes sur la comparaison de vols, hôtels et voitures avec HiFlight : fonctionnement, prix, réservation, annulation et données personnelles." },
+  openGraph: { type: "website", url: `${siteUrl}/faq/`, images: [defaultOgImage], title: "Questions fréquentes | HiFlight", description: "Réponses aux questions fréquentes sur la comparaison de vols, hôtels et voitures avec HiFlight : prix, réservation, annulation et données personnelles." },
 };
 
 const questions = [

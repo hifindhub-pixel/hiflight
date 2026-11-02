@@ -579,6 +579,150 @@ export const blogPosts: BlogPost[] = [
       { heading: "Aéroports et départs", paragraphs: ["New York compte plusieurs aéroports. JFK est à environ 25 km de Manhattan. Des vols directs partent de Paris et de Nice : comparez selon vos dates."] }
     ],
     relatedRoutes: ["paris-new-york", "nice-new-york"]
+  },
+  {
+    slug: "vol-barcelone-guide-conseils",
+    metaTitle: "Vol Barcelone : quand partir et d’où partir",
+    title: "Vol pour Barcelone : d’où partir, quand réserver et comment payer moins",
+    description: "Barcelone depuis Paris, Lyon, Marseille, Nice ou Toulouse : durée du vol, meilleure période, aéroport et conseils pour payer moins cher votre billet. Comparez.",
+    heroImage: "/blog/vol-barcelone-guide-conseils.webp",
+    keyPoints: ["Le vol dure environ une heure et quart à deux heures selon la ville de départ.", "Comparez Paris et la province : de nombreux vols directs partent de huit autres villes.", "Sur un vol court, le bagage en soute pèse lourd dans le prix."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Barcelone est l’une des escapades les plus faciles depuis la France : vols courts, nombreux départs et un aéroport relié au centre. Voici comment choisir votre ville de départ, vos dates et éviter les frais inutiles.",
+    sections: [
+      { heading: "Combien de temps dure le vol ?", paragraphs: ["Depuis Marseille, Toulouse ou Bordeaux, le vol direct dure un peu plus d’une heure. Depuis Paris, Lyon ou Nice, comptez entre une heure vingt et deux heures. Ce sont des ordres de grandeur : vérifiez l’horaire de votre vol.", "L’aéroport de Barcelone – El Prat se trouve à environ 14 km du centre, ce qui rend le transfert rapide."] },
+      { heading: "D’où partir en France", paragraphs: ["Des vols directs relient Barcelone à Paris, Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille et Bâle-Mulhouse. L’offre varie selon la saison, avec plus de vols en été.", "Comparez le prix de votre ville avec une ville voisine : sur certaines dates, la différence couvre largement le trajet."] },
+      { heading: "Quand réserver et quand partir", paragraphs: ["Les week-ends de printemps, les ponts de mai et l’été sont les plus chers. En semaine et hors vacances, les billets baissent nettement.", "Pour un week-end, décaler le départ au jeudi ou le retour au lundi fait souvent baisser le prix."] },
+      { heading: "Éviter les frais cachés", paragraphs: ["Sur un vol court, un tarif sans bagage peut doubler une fois la soute ajoutée. Ajoutez le bagage avant de comparer deux billets, et vérifiez les dimensions autorisées."] }
+    ],
+    faq: [
+      { question: "Combien coûte un vol pour Barcelone ?", answer: "Le prix varie beaucoup selon la ville de départ et la date. Les pages de vols HiFlight indiquent le prix de départ mois par mois, à titre indicatif." },
+      { question: "Quel est le meilleur moment pour réserver un vol pour Barcelone ?", answer: "Comparez dès que vos dates sont connues, surtout pour les ponts et l’été. Hors vacances, les prix restent souvent stables plusieurs semaines à l’avance." },
+      { question: "Faut-il un passeport pour aller à Barcelone ?", answer: "Pour un voyage depuis la France, une carte d’identité en cours de validité suffit en général. Vérifiez les règles à jour sur le site officiel du ministère des Affaires étrangères." }
+    ],
+    relatedRoutes: ["paris-barcelone", "lyon-barcelone", "marseille-barcelone", "nice-barcelone", "toulouse-barcelone", "bordeaux-barcelone"]
+  },
+  {
+    slug: "vol-rome-guide-aeroports",
+    metaTitle: "Vol Rome : quel aéroport et quand partir",
+    title: "Vol pour Rome : Fiumicino ou Ciampino, quand partir et d’où partir",
+    description: "Rome depuis la France : choisir entre Fiumicino et Ciampino, durée du vol, meilleure période et conseils pour trouver un billet moins cher. Comparez les prix.",
+    heroImage: "/blog/vol-rome-guide-aeroports.webp",
+    keyPoints: ["Rome compte deux aéroports principaux : Fiumicino (FCO) et Ciampino (CIA).", "Fiumicino est à environ 30 km du centre de Rome.", "Pâques et l’été sont les périodes les plus chères."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Rome se rejoint en moins de deux heures depuis plusieurs villes françaises. Le choix de l’aéroport et de la période change le prix et le trajet jusqu’au centre. Voici les points à comparer avant de réserver.",
+    sections: [
+      { heading: "Fiumicino ou Ciampino", paragraphs: ["Fiumicino est le plus grand aéroport et accueille la majorité des vols réguliers. Ciampino est plus petit et utilisé par certaines compagnies à bas prix.", "Comparez le prix du billet et le coût du transfert vers votre hébergement : un billet moins cher peut revenir plus cher une fois le transport ajouté."] },
+      { heading: "D’où partir", paragraphs: ["Des vols directs relient Rome à Paris, Lyon, Marseille et Nice. Comparez ces départs selon vos dates : l’écart de prix peut être important."] },
+      { heading: "Quand partir", paragraphs: ["Pâques, les ponts de mai et l’été sont les plus demandés. L’hiver offre souvent les prix les plus bas, avec des journées plus courtes.", "Pour un week-end, partez en milieu de semaine quand c’est possible."] },
+      { heading: "Bien préparer son billet", paragraphs: ["Vérifiez les bagages inclus, l’aéroport d’arrivée et les horaires de retour. Un vol tardif peut compliquer le retour vers le centre."] }
+    ],
+    faq: [
+      { question: "Quel aéroport choisir pour Rome ?", answer: "Fiumicino est le plus pratique pour la plupart des voyageurs. Ciampino peut convenir selon la compagnie et votre hébergement : comparez le prix total avec le transfert." },
+      { question: "Combien de temps dure le vol vers Rome ?", answer: "Environ une heure vingt à une heure quarante-cinq selon la ville de départ, à titre indicatif." },
+      { question: "Quel est le moins cher : Rome en semaine ou le week-end ?", answer: "Le plus souvent le milieu de semaine. Regardez le calendrier des prix par mois avant de fixer vos dates." }
+    ],
+    relatedRoutes: ["paris-rome", "lyon-rome", "marseille-rome", "nice-rome"]
+  },
+  {
+    slug: "vol-madrid-guide-conseils",
+    metaTitle: "Vol Madrid : quand partir et d’où partir",
+    title: "Vol pour Madrid : durée, aéroport, quand partir et comment payer moins",
+    description: "Madrid depuis Paris ou la province : durée du vol, aéroport de Barajas, meilleure période et conseils pour trouver un billet pas cher. Comparez gratuitement.",
+    heroImage: "/blog/vol-madrid-guide-conseils.webp",
+    keyPoints: ["Des vols directs partent de Paris et de huit villes de province.", "L’aéroport de Madrid-Barajas est à environ 13 km du centre.", "Le printemps et l’automne sont les périodes les plus demandées."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Madrid est desservie en vol direct depuis de nombreuses villes françaises. Voici comment choisir votre départ, vos dates et ce qu’il faut savoir sur l’aéroport avant de comparer les prix.",
+    sections: [
+      { heading: "Durée du vol et aéroport", paragraphs: ["Comptez environ une heure vingt à deux heures vingt selon la ville de départ. Madrid-Barajas se trouve à environ 13 km du centre, avec des liaisons rapides vers la ville."] },
+      { heading: "D’où partir", paragraphs: ["Paris, Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes et Lille proposent des vols vers Madrid, en direct ou avec une correspondance selon les périodes. Comparez plusieurs villes : l’écart de prix compense parfois un trajet.", "Si Madrid n’est qu’une étape vers l’Amérique latine, comparez le billet complet avec deux vols séparés."] },
+      { heading: "Quand partir", paragraphs: ["Le printemps et l’automne sont agréables et très demandés. L’été est chaud, avec des prix souvent plus bas.", "Pour un week-end, les vols du vendredi soir sont les plus chers : testez un départ le jeudi."] },
+      { heading: "Réserver sans surprise", paragraphs: ["Ajoutez le bagage avant de comparer, vérifiez l’heure d’arrivée et gardez une marge pour le retour."] }
+    ],
+    faq: [
+      { question: "Quel est le meilleur moment pour partir à Madrid ?", answer: "Le printemps et l’automne offrent un climat agréable, mais sont plus demandés. L’été est plus chaud et souvent moins cher." },
+      { question: "Madrid est-elle desservie en vol direct depuis la province ?", answer: "Oui, depuis plusieurs grandes villes françaises, avec une offre qui varie selon la saison. Vérifiez les jours de desserte." },
+      { question: "Combien de temps dure le vol vers Madrid ?", answer: "Entre environ une heure vingt et deux heures vingt selon la ville de départ, à titre indicatif." }
+    ],
+    relatedRoutes: ["paris-madrid", "lyon-madrid", "marseille-madrid", "nice-madrid", "toulouse-madrid", "bordeaux-madrid"]
+  },
+  {
+    slug: "vol-dubai-quand-partir-conseils",
+    metaTitle: "Vol Dubaï : quand partir et comment payer moins",
+    title: "Vol pour Dubaï depuis la France : quand partir, durée et conseils pour payer moins",
+    description: "Dubaï depuis Paris, Nice ou Lyon : durée du vol, meilleure période, formalités à vérifier et conseils pour réserver un billet moins cher. Comparez gratuitement.",
+    heroImage: "/blog/vol-dubai-quand-partir-conseils.webp",
+    keyPoints: ["La saison la plus agréable va d’octobre à avril, et c’est aussi la plus chère.", "Des vols directs partent de Paris et de Nice ; d’autres villes proposent des escales.", "Vérifiez les formalités d’entrée selon votre nationalité avant de réserver."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Dubaï est une destination très demandée toute l’année, mais ses prix varient fortement selon la saison. Voici comment choisir la période, comparer les départs de France et préparer votre billet.",
+    sections: [
+      { heading: "Quand partir", paragraphs: ["L’hiver (octobre à avril) est la saison la plus agréable sur place et la plus demandée. L’été est très chaud, avec des tarifs souvent plus bas.", "Les vacances scolaires et la fin d’année font monter les prix : réservez tôt pour ces dates."] },
+      { heading: "Durée et départs", paragraphs: ["Le vol direct dure environ six à sept heures depuis la France. Paris et Nice proposent des vols directs ; depuis Lyon, vous trouverez des offres avec ou sans escale. Comparez la durée totale, pas seulement le prix."] },
+      { heading: "Formalités", paragraphs: ["Les conditions d’entrée dépendent de votre nationalité et de la durée du séjour. Consultez le site officiel du ministère des Affaires étrangères et vérifiez la validité de votre passeport avant de réserver."] },
+      { heading: "Payer moins cher", paragraphs: ["Comparez le mois entier plutôt qu’une seule date, testez un départ en milieu de semaine et comparez avec et sans escale."] }
+    ],
+    faq: [
+      { question: "Quelle est la meilleure période pour aller à Dubaï ?", answer: "L’hiver, d’octobre à avril, est la période la plus agréable. L’été est très chaud mais souvent moins cher." },
+      { question: "Combien de temps dure un vol France – Dubaï ?", answer: "Environ six à sept heures en vol direct, à titre indicatif." },
+      { question: "Faut-il un visa pour Dubaï ?", answer: "Cela dépend de votre nationalité. Vérifiez les conditions sur le site officiel du ministère des Affaires étrangères avant de réserver." }
+    ],
+    relatedRoutes: ["paris-dubai", "nice-dubai", "lyon-dubai"]
+  },
+  {
+    slug: "vol-marrakech-depuis-la-province",
+    metaTitle: "Vol Marrakech depuis la province : villes et prix",
+    title: "Vol pour Marrakech depuis la province : Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille",
+    description: "Marrakech sans passer par Paris : vols directs depuis Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille et Bâle-Mulhouse, prix et conseils. Comparez.",
+    heroImage: "/blog/vol-marrakech-depuis-la-province.webp",
+    keyPoints: ["Marrakech se rejoint en environ 2 h 30 à 3 h 20 depuis la province.", "Huit villes proposent des liaisons : comparez-les avant de choisir Paris.", "Le printemps et l’automne sont les plus demandés."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Marrakech est desservie depuis de nombreuses villes de province. Partir de votre région évite le trajet vers Paris et peut faire baisser le coût total. Voici comment comparer les départs.",
+    sections: [
+      { heading: "Les départs possibles", paragraphs: ["HiFlight compare les vols vers Marrakech depuis Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille et Bâle-Mulhouse, en plus de Paris. La durée va d’environ 2 h 30 depuis Marseille ou Toulouse à plus de 3 heures depuis Lille ou Nice, à titre indicatif."] },
+      { heading: "Comparer le coût total", paragraphs: ["Un billet depuis Paris peut sembler moins cher, mais le train, l’éventuelle nuit d’hôtel et le temps de trajet s’ajoutent. Comparez le coût de porte à porte."] },
+      { heading: "Quand partir", paragraphs: ["Le printemps et l’automne sont les saisons les plus agréables. L’été est très chaud, avec des prix souvent plus bas. Les vacances scolaires font monter les tarifs."] },
+      { heading: "Avant de réserver", paragraphs: ["Vérifiez les jours de desserte (certaines liaisons ne sont pas quotidiennes), les bagages inclus et les formalités d’entrée selon votre nationalité."] }
+    ],
+    faq: [
+      { question: "Quelles villes de province ont des vols vers Marrakech ?", answer: "Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille et Bâle-Mulhouse sont comparées sur HiFlight. L’offre varie selon la saison." },
+      { question: "Combien de temps dure le vol vers Marrakech ?", answer: "Environ 2 h 30 à 3 h 20 selon la ville de départ, à titre indicatif." },
+      { question: "Est-ce moins cher de partir de Paris ?", answer: "Pas toujours. Comparez le prix total, transport jusqu’à l’aéroport compris, avec un vol direct depuis votre région." }
+    ],
+    relatedRoutes: ["lyon-marrakech", "marseille-marrakech", "nice-marrakech", "toulouse-marrakech", "bordeaux-marrakech", "nantes-marrakech", "lille-marrakech", "bale-mulhouse-marrakech"]
+  },
+  {
+    slug: "vol-tunis-guide-conseils",
+    metaTitle: "Vol Tunis : quand réserver et d’où partir",
+    title: "Vol pour Tunis depuis la France : quand réserver, d’où partir et conseils",
+    description: "Tunis depuis Paris, Lyon, Marseille, Toulouse, Bordeaux ou Nantes : durée du vol, périodes chères, bagages et conseils pour réserver moins cher. Comparez.",
+    heroImage: "/blog/vol-tunis-guide-conseils.webp",
+    keyPoints: ["Tunis se rejoint en environ deux heures depuis le Sud de la France.", "L’été et les fêtes de fin d’année concentrent la demande.", "Comparez la franchise de bagages : elle varie beaucoup d’une offre à l’autre."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "La Tunisie est l’une des destinations les plus demandées depuis la France, surtout en été et pendant les fêtes. Voici comment choisir votre ville de départ, vos dates et éviter les mauvaises surprises sur les bagages.",
+    sections: [
+      { heading: "Durée et aéroport", paragraphs: ["Le vol dure environ deux heures depuis Marseille et un peu plus depuis les autres villes. L’aéroport de Tunis-Carthage est à environ 8 km du centre."] },
+      { heading: "D’où partir", paragraphs: ["Des vols relient Tunis à Paris, Lyon, Marseille, Toulouse, Bordeaux et Nantes. Comparez plusieurs villes : les écarts de prix peuvent justifier un déplacement."] },
+      { heading: "Quand réserver", paragraphs: ["Juillet, août et les fêtes de fin d’année sont les plus chers et se remplissent vite. Hors saison, les départs en milieu de semaine sont les plus économiques."] },
+      { heading: "Bagages et formalités", paragraphs: ["Vérifiez la franchise de bagages incluse avant de comparer deux billets. Les formalités d’entrée dépendent de votre nationalité : consultez le site officiel du ministère des Affaires étrangères."] }
+    ],
+    faq: [
+      { question: "Quand réserver un vol pour Tunis ?", answer: "Pour l’été et les fêtes, comparez tôt car les vols se remplissent vite. Hors saison, les prix sont plus souples." },
+      { question: "Quelle franchise de bagages pour un vol vers Tunis ?", answer: "Elle dépend de la compagnie et du tarif. Vérifiez-la avant de réserver : sur cette liaison, elle varie beaucoup." },
+      { question: "Combien de temps dure le vol France – Tunis ?", answer: "Environ deux heures depuis Marseille, un peu plus depuis les autres villes, à titre indicatif." }
+    ],
+    relatedRoutes: ["paris-tunis", "lyon-tunis", "marseille-tunis", "toulouse-tunis", "bordeaux-tunis", "nantes-tunis"]
   }
 ];
 
