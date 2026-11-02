@@ -219,7 +219,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "vol-pas-cher-depuis-province",
-    metaTitle: "Vol pas cher depuis la province : sans passer par Paris",
+    metaTitle: "Vols pas chers depuis la province",
     title: "Partir de Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes : quand c’est plus avantageux",
     description: "Partir de la province évite le trajet vers Paris. Voici quand un vol direct depuis Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes est le meilleur choix.",
     keyPoints: ["Un vol direct depuis votre ville évite le train jusqu’à Paris.", "Comparez le coût total, de porte à porte.", "L’offre change selon la saison : vérifiez les jours de desserte."],
@@ -260,7 +260,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "week-end-europe-vol-pas-cher",
-    metaTitle: "Week-end en Europe pas cher : Barcelone, Lisbonne, Londres",
+    metaTitle: "Week-end pas cher en Europe : le bon plan",
     title: "Week-end pas cher en Europe : comment choisir la destination et le vol",
     description: "Barcelone, Lisbonne, Rome, Madrid ou Londres : comment choisir un week-end court au meilleur prix, quels jours partir et quels pièges éviter sur les bagages.",
     keyPoints: ["Partez du budget : comparez au moins trois destinations aux mêmes dates.", "Décaler d’un jour fait souvent baisser le prix.", "Sur un vol court, le bagage en soute peut doubler le billet."],
@@ -399,6 +399,186 @@ export const blogPosts: BlogPost[] = [
       { question: "Les prix affichés sont-ils garantis ?", answer: "Non : ce sont des prix indicatifs relevés récemment. Le prix final est confirmé chez le partenaire au moment de la réservation." }
     ],
     relatedRoutes: ["paris-barcelone", "paris-lisbonne", "lyon-marrakech", "marseille-tunis", "paris-londres"]
+  },
+  {
+    slug: "vol-derniere-minute-astuces",
+    metaTitle: "Vol dernière minute : comment payer moins cher",
+    title: "Vol de dernière minute : comment trouver un billet pas cher (et quand éviter)",
+    description: "Partir dans les jours qui viennent : quand la dernière minute fait économiser, quand elle coûte plus cher, et comment comparer vite pour ne pas surpayer.",
+    heroImage: "/blog/vol-derniere-minute-astuces.webp",
+    keyPoints: ["La dernière minute coûte souvent plus cher sur les trajets très demandés.", "Elle peut être avantageuse hors vacances, avec des dates flexibles.", "Comparez plusieurs aéroports et plusieurs jours avant de décider."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Partir dans quelques jours peut coûter très cher ou étonnamment peu : tout dépend du trajet et de la période. Voici comment comparer rapidement et savoir quand la dernière minute est une bonne idée.",
+    sections: [
+      { heading: "Quand la dernière minute coûte plus cher", paragraphs: ["Sur les trajets très demandés (vacances, ponts, week-ends), les sièges à petit prix partent vite. À quelques jours du départ, il reste surtout des tarifs élevés.", "Si vous devez partir à une date précise, mieux vaut ne pas attendre."] },
+      { heading: "Quand elle peut être avantageuse", paragraphs: ["Hors vacances, sur un trajet peu demandé, un vol qui reste peu rempli peut voir son prix baisser. Ce n’est jamais garanti : comparez plutôt que d’attendre.", "Plus vous êtes flexible sur le jour, l’heure et la destination, plus vous avez de chances de trouver une offre."] },
+      { heading: "Comparer vite, sans se tromper", paragraphs: ["Regardez le calendrier des prix pour le mois, puis les départs en milieu de semaine. Comparez deux ou trois aéroports de départ et ajoutez le bagage.", "Vérifiez aussi que l’horaire vous convient : un vol très tôt ou très tard peut imposer un taxi coûteux."] }
+    ],
+    relatedRoutes: ["paris-barcelone", "paris-lisbonne", "paris-londres"]
+  },
+  {
+    slug: "bagage-cabine-ou-soute-que-choisir",
+    metaTitle: "Bagage cabine ou soute : que choisir ?",
+    title: "Bagage cabine ou bagage en soute : que choisir pour payer moins cher",
+    description: "Cabine ou soute : comment choisir selon la durée du séjour, la compagnie et le prix total. Les erreurs qui font payer plus cher à l’aéroport.",
+    heroImage: "/blog/bagage-cabine-ou-soute-que-choisir.webp",
+    keyPoints: ["Le prix du billet sans bagage n’est pas le prix final.", "Les règles et les dimensions changent selon la compagnie : vérifiez-les avant de réserver.", "Ajouter le bagage en ligne coûte en général moins cher qu’à l’aéroport."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Sur un vol court, le bagage peut changer le prix du billet du simple au double. Voici comment choisir entre cabine et soute, et comment éviter les frais à l’aéroport.",
+    sections: [
+      { heading: "Le vrai prix, c’est le prix avec le bagage", paragraphs: ["Beaucoup de tarifs d’appel ne comprennent qu’un petit sac. Si vous avez besoin d’un bagage en soute, ajoutez-le avant de comparer deux billets."] },
+      { heading: "Partir léger : à quelles conditions ?", paragraphs: ["Pour un week-end, un bagage cabine suffit souvent. Pensez aux liquides, aux dimensions et au poids autorisés, qui varient selon la compagnie.", "Consultez notre guide sur le bagage cabine avant le départ."] },
+      { heading: "Éviter les frais à l’aéroport", paragraphs: ["Ajouter un bagage au guichet ou à la porte d’embarquement coûte en général plus cher qu’en ligne. Vérifiez les règles de votre compagnie avant de partir."] }
+    ],
+    relatedRoutes: ["paris-marrakech", "paris-barcelone", "lyon-marrakech"]
+  },
+  {
+    slug: "vol-direct-ou-escale-que-choisir",
+    metaTitle: "Vol direct ou escale : que choisir ?",
+    title: "Vol direct ou avec escale : comment choisir selon le prix et le temps",
+    description: "Direct ou escale : ce que l’escale fait gagner et perdre, comment lire la durée de correspondance et quand le vol direct reste le meilleur choix.",
+    heroImage: "/blog/vol-direct-ou-escale-que-choisir.webp",
+    keyPoints: ["L’escale fait souvent baisser le prix, mais allonge le trajet.", "Une correspondance trop courte est un risque, trop longue une journée perdue.", "Comptez la durée totale, pas seulement le prix."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Une escale fait souvent baisser le prix, mais elle allonge le voyage et ajoute un risque. Voici comment arbitrer entre un vol direct et un vol avec escale.",
+    sections: [
+      { heading: "Ce que l’escale change", paragraphs: ["Un vol avec escale est souvent moins cher, surtout sur le long-courrier. En contrepartie, la durée totale augmente de plusieurs heures.", "Sur un trajet court, l’écart de prix est rarement suffisant pour justifier une escale."] },
+      { heading: "Lire une correspondance", paragraphs: ["Regardez la durée entre les deux vols : trop courte, elle peut faire manquer la correspondance ; trop longue, elle fait perdre une demi-journée.", "Sur un billet unique, la compagnie doit en général vous réacheminer si le premier vol est en retard. Deux billets séparés n’offrent pas cette protection."] },
+      { heading: "Quand préférer le direct", paragraphs: ["Pour un week-end, un voyage en famille ou un horaire serré, le vol direct reste le plus simple. Pour un long trajet et un budget serré, comparez les deux options."] }
+    ],
+    relatedRoutes: ["paris-new-york", "paris-dubai", "paris-tokyo"]
+  },
+  {
+    slug: "aller-simple-ou-aller-retour",
+    metaTitle: "Aller simple ou aller-retour : que choisir ?",
+    title: "Aller simple ou aller-retour : parfois deux allers simples coûtent moins cher",
+    description: "Aller-retour ou deux allers simples : quand combiner deux billets fait économiser, et les risques à connaître avant de réserver séparément.",
+    heroImage: "/blog/aller-simple-ou-aller-retour.webp",
+    keyPoints: ["Comparez toujours l’aller-retour et deux allers simples.", "Deux billets séparés n’offrent pas la même protection en cas de problème.", "Ajoutez les bagages aux deux options pour comparer à armes égales."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "On pense qu’un aller-retour est toujours plus avantageux. Ce n’est pas systématique : sur certaines liaisons, deux allers simples reviennent moins cher. Voici comment vérifier.",
+    sections: [
+      { heading: "Pourquoi les prix diffèrent", paragraphs: ["Les compagnies à bas prix vendent chaque trajet séparément, ce qui permet de mélanger deux compagnies ou deux aéroports. Les compagnies classiques proposent parfois des tarifs aller-retour avantageux."] },
+      { heading: "Comment comparer", paragraphs: ["Cherchez d’abord l’aller-retour, puis chaque aller simple. Comparez le total, bagages compris, et vérifiez les horaires.", "Pensez aux aéroports différents à l’arrivée et au départ : cela change le transfert."] },
+      { heading: "Les risques de deux billets", paragraphs: ["Si le premier vol est retardé, la compagnie du second n’a aucune obligation de vous réacheminer. Pour un voyage important, un billet unique est plus sûr."] }
+    ],
+    relatedRoutes: ["paris-lisbonne", "paris-rome", "paris-madrid"]
+  },
+  {
+    slug: "compagnies-low-cost-frais-caches",
+    metaTitle: "Low cost : les frais cachés à vérifier",
+    title: "Compagnies low cost : les frais cachés à vérifier avant de payer",
+    description: "Bagage, siège, enregistrement, paiement : la liste des options payantes sur les vols low cost et comment comparer le prix réel avant de réserver.",
+    heroImage: "/blog/compagnies-low-cost-frais-caches.webp",
+    keyPoints: ["Le prix affiché n’inclut pas toujours le bagage.", "Siège, enregistrement et paiement peuvent être facturés.", "Comparez le total final, pas le tarif d’appel."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Un billet à 20 € peut finir à 90 € une fois les options ajoutées. Voici les frais à vérifier avant de payer, pour comparer le vrai prix.",
+    sections: [
+      { heading: "Les options les plus courantes", paragraphs: ["Bagage en soute, bagage cabine volumineux, choix du siège, enregistrement à l’aéroport, priorité d’embarquement : chaque option peut ajouter plusieurs euros.", "Le détail dépend de la compagnie et change régulièrement : lisez le récapitulatif avant de payer."] },
+      { heading: "Comparer le prix réel", paragraphs: ["Ajoutez le bagage dont vous avez besoin avant de comparer. Un billet un peu plus cher mais qui comprend un bagage peut être moins cher au final."] },
+      { heading: "Réflexes simples", paragraphs: ["Enregistrez-vous en ligne, vérifiez les dimensions du bagage et gardez une copie de votre carte d’embarquement. Vérifiez aussi l’aéroport exact : certains vols partent d’aéroports éloignés de la ville."] }
+    ],
+    relatedRoutes: ["paris-barcelone", "paris-londres", "paris-lisbonne"]
+  },
+  {
+    slug: "vol-vacances-scolaires-prix",
+    metaTitle: "Vacances scolaires : réserver son vol",
+    title: "Vacances scolaires : comment réserver un vol sans exploser le budget",
+    description: "Les prix des vols montent pendant les vacances scolaires. Comment réserver à temps, décaler ses dates et comparer les aéroports de départ.",
+    heroImage: "/blog/vol-vacances-scolaires-prix.webp",
+    keyPoints: ["Les vols des vacances se remplissent vite : comparez tôt.", "Décaler le départ ou le retour de quelques jours change le tarif.", "Comparez plusieurs aéroports, dont ceux de province."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Pendant les vacances scolaires, la demande monte et les prix aussi. On ne peut pas changer le calendrier, mais on peut limiter la facture avec quelques réflexes.",
+    sections: [
+      { heading: "Pourquoi les prix montent", paragraphs: ["Tout le monde veut partir aux mêmes dates : les places à petit prix disparaissent et les compagnies ouvrent des tarifs plus élevés."] },
+      { heading: "Ce qui aide vraiment", paragraphs: ["Comparez dès que vos dates sont connues. Décalez d’un jour ou deux si possible, par exemple en partant en milieu de semaine.", "Comparez aussi les départs depuis les aéroports voisins : un vol direct depuis votre région peut coûter moins cher que Paris."] },
+      { heading: "Voyager en famille", paragraphs: ["Calculez le prix total pour tous les voyageurs, bagages inclus, et vérifiez les règles pour les enfants auprès de la compagnie."] }
+    ],
+    relatedRoutes: ["paris-marrakech", "paris-alger", "paris-tunis"]
+  },
+  {
+    slug: "vol-istanbul-guide-aeroports",
+    metaTitle: "Vol Istanbul : quel aéroport et quand partir",
+    title: "Vol pour Istanbul : quel aéroport choisir et quand réserver",
+    description: "Istanbul compte deux aéroports principaux. Comment choisir entre IST et SAW, quand partir et comment comparer les vols depuis Paris ou la province.",
+    heroImage: "/blog/vol-istanbul-guide-aeroports.webp",
+    keyPoints: ["Istanbul compte deux aéroports : IST et Sabiha Gökçen (SAW).", "Choisissez selon votre quartier, pas seulement selon le prix.", "Le printemps et l’automne sont les périodes les plus agréables."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Istanbul est desservie par deux grands aéroports, l’un côté européen, l’autre côté asiatique. Bien choisir change le prix, mais aussi le temps de trajet vers votre hôtel.",
+    sections: [
+      { heading: "IST ou Sabiha Gökçen", paragraphs: ["Les deux aéroports sont à plus de 30 km du centre historique. Regardez où se trouve votre hébergement : le transfert peut durer plus d’une heure.", "Comparez le prix du billet et le coût du transfert pour chaque aéroport."] },
+      { heading: "Quand partir", paragraphs: ["Le printemps et l’automne sont les périodes les plus agréables. L’été est chaud et plus cher ; les vacances scolaires font monter les tarifs."] },
+      { heading: "Comparer au départ de la France", paragraphs: ["Des vols directs partent de Paris et de plusieurs villes de province. Comparez Paris, Lyon, Marseille, Nice et Toulouse selon vos dates."] }
+    ],
+    relatedRoutes: ["paris-istanbul", "lyon-istanbul", "marseille-istanbul", "toulouse-istanbul"]
+  },
+  {
+    slug: "vol-lisbonne-guide-conseils",
+    metaTitle: "Vol Lisbonne : quand partir et d’où partir",
+    title: "Vol pour Lisbonne : quand partir, d’où partir et comment payer moins",
+    description: "Lisbonne en week-end ou pour une semaine : meilleure période, villes de départ en France, aéroport proche du centre et conseils pour réserver.",
+    heroImage: "/blog/vol-lisbonne-guide-conseils.webp",
+    keyPoints: ["L’aéroport de Lisbonne est proche du centre-ville.", "Le printemps et le début de l’automne sont très demandés.", "Comparez Paris et la province : des vols directs partent de plusieurs villes."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Lisbonne attire toute l’année, avec un aéroport proche du centre. Voici quand partir, d’où partir en France et comment comparer les vols.",
+    sections: [
+      { heading: "Quand partir", paragraphs: ["Le printemps et le début de l’automne sont agréables et très demandés. L’été est chaud et plus cher, surtout en août."] },
+      { heading: "D’où partir", paragraphs: ["Des vols directs relient Lisbonne à Paris et à plusieurs villes de province comme Lyon, Toulouse, Bordeaux ou Nantes. Comparez selon vos dates."] },
+      { heading: "Aéroport et transfert", paragraphs: ["L’aéroport est à une dizaine de kilomètres du centre : le transfert est rapide, ce qui rend la destination pratique pour un week-end."] }
+    ],
+    relatedRoutes: ["paris-lisbonne", "lyon-lisbonne", "bordeaux-lisbonne", "nantes-lisbonne"]
+  },
+  {
+    slug: "vol-londres-quel-aeroport",
+    metaTitle: "Vol Londres : quel aéroport choisir ?",
+    title: "Vol pour Londres : Heathrow, Gatwick, Stansted, Luton ou City ?",
+    description: "Londres compte cinq grands aéroports. Comment choisir selon le prix, le trajet vers le centre et votre hébergement, au départ de Paris ou de province.",
+    heroImage: "/blog/vol-londres-quel-aeroport.webp",
+    keyPoints: ["Heathrow, Gatwick, Stansted, Luton et London City : cinq aéroports principaux.", "Ajoutez le coût et la durée du transfert au prix du billet.", "Choisissez selon la zone où vous logez."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Londres est desservie par cinq grands aéroports, tous à une distance différente du centre. Le moins cher à l’aller n’est pas toujours le moins cher au final.",
+    sections: [
+      { heading: "Les aéroports de Londres", paragraphs: ["Heathrow et Gatwick sont les plus grands. Stansted et Luton sont souvent utilisés par les compagnies à bas prix, plus loin du centre. London City est le plus proche du centre, avec des vols plus limités."] },
+      { heading: "Le vrai coût du transfert", paragraphs: ["Un billet moins cher vers un aéroport éloigné peut coûter plus cher une fois le train ou le car ajouté. Comptez aussi le temps."] },
+      { heading: "Comparer au départ de la France", paragraphs: ["Des vols relient Londres à Paris et à plusieurs villes de province. Comparez les aéroports d’arrivée et les horaires."] }
+    ],
+    relatedRoutes: ["paris-londres", "lyon-londres", "nice-londres", "bordeaux-londres"]
+  },
+  {
+    slug: "vol-new-york-conseils-formalites",
+    metaTitle: "Vol New York : prix, formalités et conseils",
+    title: "Vol pour New York depuis la France : prix, formalités et conseils",
+    description: "New York depuis Paris, Nice ou la province : quand partir, durée du vol, autorisation de voyage à prévoir et conseils pour réserver au meilleur prix.",
+    heroImage: "/blog/vol-new-york-conseils-formalites.webp",
+    keyPoints: ["Prévoyez l’autorisation de voyage électronique avant le départ.", "Comparez plusieurs aéroports d’arrivée : JFK, Newark et LaGuardia.", "Les fêtes et l’été sont les périodes les plus chères."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "New York est l’une des destinations long-courrier les plus demandées depuis la France. Voici comment comparer les vols et ce qu’il faut prévoir avant de partir.",
+    sections: [
+      { heading: "Quand partir", paragraphs: ["Les fêtes de fin d’année et l’été sont les périodes les plus chères. Le début du printemps et l’automne offrent souvent de meilleurs prix."] },
+      { heading: "Avant de réserver", paragraphs: ["Les voyageurs français doivent en général obtenir une autorisation de voyage électronique avant d’embarquer. Vérifiez la démarche et les délais sur le site officiel du gouvernement américain, et la validité de votre passeport."] },
+      { heading: "Aéroports et départs", paragraphs: ["New York compte plusieurs aéroports. JFK est à environ 25 km de Manhattan. Des vols directs partent de Paris et de Nice : comparez selon vos dates."] }
+    ],
+    relatedRoutes: ["paris-new-york", "nice-new-york"]
   }
 ];
 

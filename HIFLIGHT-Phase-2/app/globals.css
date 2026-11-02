@@ -1480,3 +1480,13 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .deal-price { margin-top:10px; color:#4d5968; font-size:15px; }
 .deal-price strong { color:var(--ink); font:800 28px Outfit,Inter,sans-serif; }
 .deal-cta { margin-top:10px; color:var(--coral-text); font-weight:700; font-size:14px; }
+
+/* Barre de réservation fixe */
+.sticky-cta { position:fixed; z-index:40; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 20px; background:#07162f; color:#fff; box-shadow:0 -10px 30px rgba(7,22,47,.3); transform:translateY(110%); transition:transform .25s ease; }
+.sticky-cta.is-visible { transform:none; }
+.sticky-cta div { display:flex; flex-direction:column; min-width:0; }
+.sticky-cta strong { font:700 17px Outfit,Inter,sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sticky-cta span { color:#bec9d9; font-size:13px; }
+.sticky-cta a { flex:none; padding:12px 22px; border-radius:12px; background:var(--coral); color:#07162f; font-weight:800; }
+.sticky-cta a:hover { background:#ff8585; }
+@media (min-width:900px) { .sticky-cta { padding-left:max(20px,calc((100% - 1000px)/2)); padding-right:max(20px,calc((100% - 1000px)/2)); } }

@@ -1,5 +1,6 @@
 import { airports, countryPages, flightRoutes, siteUrl } from "@/lib/content";
 import { blogPosts } from "@/lib/blog";
+import { departureCities } from "@/lib/cities";
 
 export const dynamic = "force-static";
 
@@ -21,6 +22,9 @@ export function GET() {
     `- [Tous les itinéraires](${siteUrl}/vols/) : liste des vols par ville de départ`,
     `- [Questions fréquentes](${siteUrl}/faq/)`,
     `- [Conseils voyage](${siteUrl}/blog/)`,
+    "",
+    "## Vols par ville de départ",
+    ...departureCities.map((city) => `- [Vols ${city.from}](${siteUrl}/vols/depuis/${city.slug}/)`),
     "",
     "## Guides par pays",
     ...countryPages.map((country) => `- [Vols ${country.toward}](${siteUrl}/destinations/${country.slug}/)`),
