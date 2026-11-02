@@ -12,6 +12,12 @@ export type BlogPost = {
   intro: string;
   sections: BlogSection[];
   relatedRoutes: string[];
+  /** Image d’en-tête : chemin public (ex. /blog/mon-article.webp). Sans image, un visuel de repli est affiché. */
+  heroImage?: string;
+  /** Encadré « À retenir » affiché sous l’introduction. */
+  keyPoints?: string[];
+  /** FAQ affichée en fin d’article et balisée pour Google. */
+  faq?: { question: string; answer: string }[];
 };
 
 export const blogPosts: BlogPost[] = [
@@ -20,6 +26,8 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Algérie en été : quand réserver ?",
     title: "Vol pour l’Algérie en été : quand réserver et comment payer moins cher",
     description: "Alger, Oran, Constantine : à quel moment réserver un vol pour l’Algérie en été, quels pièges éviter sur les bagages et comment comparer les aéroports de départ.",
+    keyPoints: ["Les prix montent sur quelques semaines : vacances, retours en famille, fêtes.", "Décaler le départ ou le retour de quelques jours change souvent le tarif.", "Comparez plusieurs aéroports de départ et le bagage inclus avant de payer."],
+    heroImage: "/blog/vol-algerie-ete-quand-reserver.webp",
     published: "2026-10-30",
     updated: "2026-10-30",
     readingMinutes: 4,
@@ -71,6 +79,8 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Paris Marrakech : durée, aéroports, budget",
     title: "Vol Paris – Marrakech : durée, aéroports, meilleur moment et budget",
     description: "Tout savoir avant de réserver un vol Paris – Marrakech : durée, aéroports de départ, compagnies, meilleure période et conseils pour comparer le prix total.",
+    keyPoints: ["Marrakech est desservie en vol direct depuis Paris et plusieurs villes de province.", "Comparez le prix total : bagage, transfert, et pas seulement le tarif d’appel.", "Le printemps et l’automne sont les plus demandés."],
+    heroImage: "/blog/vol-paris-marrakech-guide.webp",
     published: "2026-10-30",
     updated: "2026-10-30",
     readingMinutes: 4,
@@ -118,6 +128,8 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Orly, Roissy ou Beauvais : quel aéroport ?",
     title: "Orly, Roissy-CDG ou Beauvais : quel aéroport choisir pour votre vol ?",
     description: "Orly, Roissy-Charles de Gaulle ou Beauvais : comparez accès, durée de transfert et prix total pour choisir l’aéroport parisien le plus adapté à votre départ.",
+    keyPoints: ["Les trois aéroports ne coûtent pas le même prix, ni le même temps de trajet.", "Ajoutez au billet le transport jusqu’à l’aéroport avant de comparer.", "Gardez une marge de sécurité, surtout pour un vol tôt ou tard."],
+    heroImage: "/blog/orly-roissy-beauvais-quel-aeroport.webp",
     published: "2026-10-30",
     updated: "2026-10-30",
     readingMinutes: 3,
@@ -162,6 +174,8 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Quand réserver un vol pas cher ? Les règles utiles",
     title: "Quand réserver un vol pas cher : les règles qui marchent vraiment",
     description: "Il n’existe pas de jour magique pour réserver un vol. Voici ce qui fait réellement baisser le prix : dates flexibles, jour de départ, comparaison et alertes.",
+    keyPoints: ["Ce qui compte, c’est le jour du voyage, pas l’heure de la réservation.", "Comparez un mois entier plutôt qu’une seule date.", "Ajoutez le bagage avant de comparer deux billets."],
+    heroImage: "/blog/quand-reserver-vol-pas-cher.webp",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 5,
@@ -208,6 +222,8 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol pas cher depuis la province : sans passer par Paris",
     title: "Partir de Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes : quand c’est plus avantageux",
     description: "Partir de la province évite le trajet vers Paris. Voici quand un vol direct depuis Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes est le meilleur choix.",
+    keyPoints: ["Un vol direct depuis votre ville évite le train jusqu’à Paris.", "Comparez le coût total, de porte à porte.", "L’offre change selon la saison : vérifiez les jours de desserte."],
+    heroImage: "/blog/vol-pas-cher-depuis-province.webp",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 5,
@@ -247,6 +263,8 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Week-end en Europe pas cher : Barcelone, Lisbonne, Londres",
     title: "Week-end pas cher en Europe : comment choisir la destination et le vol",
     description: "Barcelone, Lisbonne, Rome, Madrid ou Londres : comment choisir un week-end court au meilleur prix, quels jours partir et quels pièges éviter sur les bagages.",
+    keyPoints: ["Partez du budget : comparez au moins trois destinations aux mêmes dates.", "Décaler d’un jour fait souvent baisser le prix.", "Sur un vol court, le bagage en soute peut doubler le billet."],
+    heroImage: "/blog/week-end-europe-vol-pas-cher.webp",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 5,
@@ -285,6 +303,8 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Maroc et Tunisie : quand réserver et d’où partir",
     title: "Vols vers le Maroc et la Tunisie : quand réserver et d’où partir pour payer moins",
     description: "Marrakech, Casablanca, Agadir, Tunis : à quelle période réserver, quels aéroports de départ comparer et comment éviter les surprises sur les bagages.",
+    keyPoints: ["Vacances, ponts et fêtes concentrent la demande.", "Comparez plusieurs villes de départ, Paris et province.", "Le bagage en soute compte beaucoup sur ces liaisons."],
+    heroImage: "/blog/vol-maroc-tunisie-quand-reserver.webp",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 5,
@@ -324,6 +344,8 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Billet d’avion pas cher : 10 astuces utiles",
     title: "Billet d’avion pas cher : 10 astuces qui marchent vraiment (et 3 qui ne servent à rien)",
     description: "Comment payer un billet d’avion moins cher : dates flexibles, aéroport, bagages, escales, alertes de prix. 10 astuces concrètes à tester avant de réserver.",
+    keyPoints: ["Cherchez sur un mois entier, pas sur une seule date.", "Comparez plusieurs aéroports et plusieurs destinations.", "Ajoutez toujours le bagage avant de comparer.", "Il n’existe ni jour ni heure magique pour réserver."],
+    heroImage: "/blog/billet-avion-pas-cher-astuces.webp",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 7,
@@ -368,16 +390,13 @@ export const blogPosts: BlogPost[] = [
           "Ajoutez toujours le bagage avant de comparer.",
           "Gardez une marge pour les correspondances."
         ]
-      },
-      {
-        heading: "Questions fréquentes",
-        paragraphs: [
-          "Quel est le meilleur moment pour réserver ? Il n’existe pas de règle valable pour tous. Hors vacances, les prix restent souvent stables plusieurs semaines avant le départ ; pour l’été et les fêtes, il vaut mieux comparer tôt.",
-          "Quel jour est le moins cher pour voler ? Le plus souvent le milieu de semaine. La page de chaque vol indique le jour le moins cher quand les données le permettent.",
-          "Un comparateur est-il vraiment gratuit ? Oui pour l’utilisateur : HiFlight peut recevoir une commission du partenaire en cas de réservation, sans surcoût pour vous.",
-          "Les prix affichés sont-ils garantis ? Non : ce sont des prix indicatifs constatés récemment. Le prix final est confirmé chez le partenaire au moment de la réservation."
-        ]
       }
+    ],
+    faq: [
+      { question: "Quel est le meilleur moment pour réserver un vol ?", answer: "Il n’existe pas de règle valable pour tous. Hors vacances, les prix restent souvent stables plusieurs semaines avant le départ ; pour l’été et les fêtes, il vaut mieux comparer tôt." },
+      { question: "Quel jour est le moins cher pour voler ?", answer: "Le plus souvent le milieu de semaine. La page de chaque vol HiFlight indique le jour le moins cher quand les données le permettent." },
+      { question: "Un comparateur de vols est-il gratuit ?", answer: "Oui pour l’utilisateur : HiFlight peut recevoir une commission du partenaire en cas de réservation, sans surcoût pour vous." },
+      { question: "Les prix affichés sont-ils garantis ?", answer: "Non : ce sont des prix indicatifs relevés récemment. Le prix final est confirmé chez le partenaire au moment de la réservation." }
     ],
     relatedRoutes: ["paris-barcelone", "paris-lisbonne", "lyon-marrakech", "marseille-tunis", "paris-londres"]
   }
