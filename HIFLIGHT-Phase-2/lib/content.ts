@@ -268,7 +268,7 @@ const routeSeeds: RouteSeed[] = [
   },
   {
     origin: "Lyon", originCode: "LYS", destination: "Marrakech", destinationCode: "RAK", region: "Maroc et Tunisie", country: "maroc", formalities: true,
-    duration: "environ 3 h 15", carriers: ["Volotea"],
+    duration: "environ 3 h 15", carriers: ["easyJet", "Transavia"],
     intro: "Depuis Lyon-Saint-Exupéry, Marrakech se rejoint en vol direct d’un peu plus de trois heures, pour une escapade courte ou un séjour prolongé.",
     season: "Les week-ends prolongés et les vacances scolaires font monter les prix. Un départ en milieu de semaine est souvent plus abordable.",
     tip: "Les fréquences changent selon la saison : comparez plusieurs dates avant de bloquer vos congés.",
