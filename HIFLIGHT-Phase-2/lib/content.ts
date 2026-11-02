@@ -183,7 +183,7 @@ const routeSeeds: RouteSeed[] = [
   },
   {
     origin: "Toulouse", originCode: "TLS", destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", formalities: true,
-    duration: "environ 2 h", carriers: ["Air Algérie", "Transavia"],
+    duration: "environ 2 h", carriers: ["Transavia"],
     intro: "Au départ de Toulouse-Blagnac, Alger est accessible en vol direct d’environ deux heures, pratique pour l’Occitanie et le sud-ouest.",
     season: "Surveillez les vacances scolaires de la zone Toulouse et l’été : les prix y progressent nettement. Hors pointe, la liaison reste plus accessible.",
     tip: "Les fréquences sont moins nombreuses que depuis Paris : si votre date est fixe, comparez tôt pour garder le choix des horaires.",
@@ -196,7 +196,7 @@ const routeSeeds: RouteSeed[] = [
   // Maroc et Tunisie
   {
     origin: "Paris", originCode: "PAR", destination: "Marrakech", destinationCode: "RAK", region: "Maroc et Tunisie", country: "maroc", formalities: true,
-    duration: "environ 3 h 20", carriers: ["Transavia", "easyJet", "Ryanair", "Royal Air Maroc", "Air France", "Air Arabia Maroc"],
+    duration: "environ 3 h 20", carriers: ["Transavia", "easyJet", "Ryanair", "Royal Air Maroc", "Air France", "Vueling"],
     intro: "Marrakech est l’une des destinations soleil les plus demandées depuis Paris, avec des vols réguliers et low cost depuis Roissy, Orly et Beauvais.",
     season: "Le printemps et l’automne offrent un climat agréable et des prix souvent plus modérés qu’en vacances scolaires. L’été est très chaud sur place et la demande y est moins soutenue côté loisirs.",
     tip: "Les offres low cost partent parfois de Beauvais : ajoutez le coût et la durée du transfert avant de comparer avec Orly ou Roissy.",
@@ -232,7 +232,7 @@ const routeSeeds: RouteSeed[] = [
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Fès", destinationCode: "FEZ", region: "Maroc et Tunisie", country: "maroc", formalities: true,
-    duration: "environ 3 h", carriers: ["Transavia"],
+    duration: "environ 3 h", carriers: ["Royal Air Maroc", "Transavia"],
     intro: "Fès, capitale culturelle du Maroc, abrite l’une des plus grandes médinas du monde, classée à l’UNESCO. Des vols directs la relient à Paris.",
     season: "Le printemps et l’automne sont les saisons les plus agréables pour la visite. L’été est très chaud et les vacances scolaires font monter les tarifs.",
     tip: "Les fréquences sont limitées : repérez les jours où un vol direct est proposé avant de choisir vos dates.",
@@ -281,7 +281,7 @@ const routeSeeds: RouteSeed[] = [
   // Europe
   {
     origin: "Paris", originCode: "PAR", destination: "Barcelone", destinationCode: "BCN", region: "Europe", country: "espagne",
-    duration: "environ 1 h 55", carriers: ["Vueling", "Air France", "Transavia", "easyJet"],
+    duration: "environ 1 h 55", carriers: ["Vueling", "Air France", "Transavia"],
     intro: "Barcelone est l’une des escapades européennes les plus courues depuis Paris, avec de nombreux vols quotidiens.",
     season: "Les week-ends de printemps et d’été sont les plus demandés. En semaine, hors vacances, les billets sont souvent bien moins chers.",
     tip: "Comparez avec le train : la durée totale (centre à centre) peut rivaliser avec l’avion une fois les transferts aéroport ajoutés."
@@ -295,14 +295,14 @@ const routeSeeds: RouteSeed[] = [
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Madrid", destinationCode: "MAD", region: "Europe", country: "espagne",
-    duration: "environ 2 h", carriers: ["Iberia", "Air France", "Vueling", "Transavia"],
+    duration: "environ 2 h", carriers: ["Iberia", "Air France", "Transavia", "Air Europa"],
     intro: "Paris – Madrid est une liaison dense, utile autant pour les week-ends que pour les déplacements professionnels.",
     season: "Les périodes de pointe sont les ponts, les vacances d’été et de Noël. Hors pointe, les prix baissent sensiblement en semaine.",
     tip: "Pour un déplacement professionnel, comparez les horaires de retour du soir : ils changent beaucoup d’une compagnie à l’autre."
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Rome", destinationCode: "ROM", region: "Europe", country: "italie",
-    duration: "environ 2 h 10", carriers: ["ITA Airways", "Air France", "easyJet", "Vueling"],
+    duration: "environ 2 h 10", carriers: ["ITA Airways", "Air France", "Transavia", "easyJet", "Vueling"],
     intro: "Rome est desservie par deux aéroports. Le tarif le plus bas n’est pas toujours le meilleur choix une fois le transfert vers le centre pris en compte.",
     season: "Printemps et début d’automne sont très demandés. Les semaines moins touristiques (novembre, février) permettent de trouver des vols plus abordables.",
     tip: "Comparez les deux aéroports de Rome : le temps et le coût du transfert vers le centre diffèrent."
@@ -316,7 +316,7 @@ const routeSeeds: RouteSeed[] = [
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Istanbul", destinationCode: "IST", region: "Europe", country: "turquie",
-    duration: "environ 3 h 20", carriers: ["Turkish Airlines", "Air France", "Pegasus"],
+    duration: "environ 3 h 20", carriers: ["Turkish Airlines", "Air France", "Pegasus", "AJet"],
     intro: "Istanbul se rejoint depuis Paris en un peu plus de trois heures, avec deux aéroports situés de part et d’autre du Bosphore.",
     season: "Le printemps et l’automne sont agréables et très demandés. L’été et les fêtes font monter les tarifs.",
     tip: "Le second aéroport est plus éloigné du centre historique : prenez en compte le temps de transfert, surtout en cas d’arrivée tardive."
@@ -338,7 +338,7 @@ const routeSeeds: RouteSeed[] = [
   },
   {
     origin: "Lyon", originCode: "LYS", destination: "Dubaï", destinationCode: "DXB", region: "Asie et Moyen-Orient", country: "asie", formalities: true,
-    duration: "environ 6 h 30", carriers: [],
+    duration: "environ 6 h 30", carriers: ["Emirates"],
     intro: "Depuis Lyon, Dubaï se rejoint avec ou sans escale selon les offres. Comparer la durée totale est aussi important que comparer le prix.",
     season: "L’hiver (octobre à avril) est la saison la plus agréable sur place et la plus demandée. L’été est très chaud, avec des tarifs souvent plus bas.",
     tip: "Une escale peut faire baisser le prix mais allonger fortement le voyage : regardez la durée de correspondance avant de choisir."
