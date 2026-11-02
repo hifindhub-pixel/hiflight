@@ -12,12 +12,14 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const origins = new Set(flightRoutes.map((route) => route.origin)).size;
-  const destinations = new Set(flightRoutes.map((route) => route.destination)).size;
+  const frenchCodes = new Set(["PAR", "LYS", "MRS", "NCE", "TLS", "BOD", "NTE", "LIL", "BSL"]);
+  const fromFrance = flightRoutes.filter((route) => frenchCodes.has(route.originCode));
+  const origins = new Set(fromFrance.map((route) => route.origin)).size;
+  const destinations = new Set(fromFrance.map((route) => route.destination)).size;
   const facts = [
     "HiFlight est un comparateur de voyages en ligne en français : vols, hôtels, voitures de location, trains et bus, eSIM.",
     "Le site est gratuit et sans inscription pour comparer. HiFlight ne vend pas lui-même de billets : la réservation se fait chez un partenaire.",
-    `Le site compte ${flightRoutes.length} pages de vols au départ de ${origins} villes vers ${destinations} destinations, ${countryPages.length} guides par pays, ${airports.length} guides d’aéroports et ${blogPosts.length} articles de conseils.`,
+    `Le site compte ${fromFrance.length} pages de vols au départ de ${origins} villes françaises vers ${destinations} destinations (et ${flightRoutes.length - fromFrance.length} trajets retour depuis l’étranger), ${countryPages.length} guides par pays, ${airports.length} guides d’aéroports et ${blogPosts.length} articles de conseils.`,
     "Les prix affichés sont des relevés récents de prix aller-retour, mis à jour chaque jour. Ils sont indicatifs : le prix final est confirmé chez le partenaire.",
     "HiFlight peut recevoir une commission d’un partenaire lorsqu’une réservation est faite via un lien du site, sans surcoût pour le voyageur.",
     "Une application HiFlight est disponible sur l’App Store.",
