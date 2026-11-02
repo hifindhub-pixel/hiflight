@@ -11,7 +11,7 @@ export const dynamic = "force-static";
 const url = (path: string) => `${siteUrl}${path}/`;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/vols", "/hotels", "/voitures", "/trains-bus", "/esim", "/world-map", "/faq", "/guides/bagage-cabine"];
+  const staticPages = ["", "/vols", "/hotels", "/voitures", "/trains-bus", "/esim", "/world-map", "/faq", "/a-propos", "/guides/bagage-cabine"];
   const latestPost = blogPosts.map((post) => post.updated).sort().at(-1);
 
   return [

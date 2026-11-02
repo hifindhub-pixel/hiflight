@@ -53,6 +53,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               url: `${siteUrl}/`,
               logo: `${siteUrl}/hiflight-logo.png`,
               email: "contact@hiflight.fr",
+              description: "HiFlight est un comparateur de voyages en français : vols, hôtels, voitures, trains, bus et eSIM. Le service est gratuit et renvoie vers des partenaires pour réserver.",
+              disambiguatingDescription: "Comparateur de vols français, sans lien avec les compagnies aériennes Hi Fly ou Hi-Air.",
+              slogan: "Comparez, repérez le jour le moins cher, réservez chez le partenaire de votre choix.",
+              knowsAbout: ["comparateur de vols", "billets d’avion pas chers", "vols vers le Maroc, l’Algérie et la Tunisie", "vols depuis la province"],
               sameAs: ["https://apps.apple.com/fr/app/id6766213610", "https://fr.trustpilot.com/review/hiflight.fr"],
             },
             {
