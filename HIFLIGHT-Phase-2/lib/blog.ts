@@ -1,4 +1,4 @@
-export type BlogSection = { heading: string; paragraphs: string[]; list?: string[] };
+export type BlogSection = { heading: string; paragraphs: string[]; list?: string[]; table?: { headers: string[]; rows: string[][] } };
 
 export type BlogPost = {
   slug: string;
@@ -723,6 +723,31 @@ export const blogPosts: BlogPost[] = [
       { question: "Combien de temps dure le vol France – Tunis ?", answer: "Environ deux heures depuis Marseille, un peu plus depuis les autres villes, à titre indicatif." }
     ],
     relatedRoutes: ["paris-tunis", "lyon-tunis", "marseille-tunis", "toulouse-tunis", "bordeaux-tunis", "nantes-tunis"]
+  },
+  {
+    slug: "barometre-prix-vols-marrakech-barcelone",
+    metaTitle: "Prix vols Marrakech et Barcelone depuis 9 villes",
+    title: "Prix des vols Marrakech et Barcelone depuis 9 villes : relevé du 2 novembre 2026",
+    description: "Prix aller-retour les plus bas relevés vers Marrakech et Barcelone depuis Paris, Lyon, Marseille, Nice, Bordeaux et d’autres villes, méthode et limites.",
+    heroImage: "/blog/barometre-prix-marrakech-barcelone-novembre-2026.webp",
+    keyPoints: ["Marrakech : dès 43 € au départ de Paris, 55 € de Lyon, 61 € de Marseille (relevé du 2 novembre 2026).","Barcelone : dès 43 € de Paris, 47 € de Bâle-Mulhouse, 53 € de Lyon.","Ce sont des prix minimums relevés, pas des moyennes : ils changent chaque jour."],
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 4,
+    intro: "Combien coûte vraiment un vol vers Marrakech ou Barcelone selon la ville de départ ? Voici les prix aller-retour les plus bas relevés le 2 novembre 2026 pour neuf villes françaises, avec le nombre de dates analysées et la méthode, pour que vous puissiez juger de leur fiabilité.",
+    sections: [
+      { heading: "Comment lire ces chiffres", paragraphs: ["Ces tableaux reprennent les prix aller-retour les plus bas relevés le 2 novembre 2026 par le réseau de partenaires HiFlight (Travelpayouts), pour des départs dans les six prochains mois. Ce ne sont pas des prix moyens : ce sont des minimums constatés, qui peuvent ne plus être disponibles.", "La colonne « dates analysées » indique pour combien de dates de départ un prix a été relevé. Plus ce nombre est élevé, plus le chiffre est fiable ; en dessous de 6 dates, il est donné à titre d’indication seulement."] },
+      { heading: "Marrakech depuis 9 villes de départ", paragraphs: ["Au départ de Paris, 37 dates ont été analysées : c’est le relevé le plus solide, avec un prix le plus bas à 43 €. Parmi les villes de province avec au moins 8 dates analysées, les prix les plus bas vont de 55 € (Lyon) à 89 € (Bordeaux)."], table: { headers: ["Départ", "Prix le plus bas relevé (aller-retour)", "Mois du prix le plus bas", "Offres en vol direct", "Dates analysées"], rows: [["Paris", "43 €", "décembre 2026", "84 %", "37"], ["Lyon", "55 €", "janvier 2027", "27 %", "10"], ["Marseille", "61 €", "décembre 2026", "63 %", "8"], ["Nice", "67 €", "décembre 2026", "33 %", "6"], ["Toulouse", "60 €", "décembre 2026", "85 %", "8"], ["Bordeaux", "89 €", "février 2027", "36 %", "11"], ["Nantes", "65 €", "janvier 2027", "38 %", "10"], ["Lille", "156 €", "décembre 2026", "0 %", "3 (peu de relevés)"], ["Bâle-Mulhouse", "pas de relevé récent", "–", "–", "0"]] } },
+      { heading: "Barcelone depuis 9 villes de départ", paragraphs: ["Vers Barcelone, les prix les plus bas relevés vont de 43 € (Paris, 43 dates analysées) à 58 € (Nice et Marseille). Toulouse et Lille n’avaient pas de relevé récent le jour de la mesure."], table: { headers: ["Départ", "Prix le plus bas relevé (aller-retour)", "Mois du prix le plus bas", "Offres en vol direct", "Dates analysées"], rows: [["Paris", "43 €", "novembre 2026", "95 %", "43"], ["Lyon", "53 €", "janvier 2027", "67 %", "12"], ["Marseille", "58 €", "décembre 2026", "67 %", "3 (peu de relevés)"], ["Nice", "58 €", "décembre 2026", "91 %", "29"], ["Bordeaux", "49 €", "mars 2027", "40 %", "10"], ["Nantes", "57 €", "novembre 2026", "78 %", "8"], ["Bâle-Mulhouse", "47 €", "janvier 2027", "70 %", "21"], ["Toulouse", "pas de relevé récent", "–", "–", "0"], ["Lille", "pas de relevé récent", "–", "–", "0"]] } },
+      { heading: "Ce qu’on peut en retenir", paragraphs: ["Les prix les plus bas relevés tombent surtout pour des départs en décembre et en janvier, en dehors des vacances de fin d’année. Pour Marrakech, les écarts entre Lyon, Toulouse, Marseille et Nantes restent de quelques euros : le coût du trajet jusqu’à l’aéroport peut peser plus que la différence de prix.", "À l’inverse, sur Bordeaux – Marrakech, le prix le plus bas relevé est plus élevé (89 €) que dans les autres villes comparables."] },
+      { heading: "Les limites de ce relevé", paragraphs: ["Un seul relevé daté du 2 novembre 2026 ne permet pas de conclure sur une tendance. Les pages de vols de HiFlight sont recalculées chaque jour : consultez la page de votre trajet pour le relevé à jour."] }
+    ],
+    faq: [
+      { question: "Quel est le vol le moins cher vers Marrakech au départ de la France ?", answer: "Au relevé du 2 novembre 2026, le prix aller-retour le plus bas était de 43 € au départ de Paris, pour un départ en décembre 2026. Ce prix change chaque jour et n’est pas garanti." },
+      { question: "Peut-on partir de province pour moins cher ?", answer: "Parfois : au départ de Lyon, le prix le plus bas relevé vers Marrakech était de 55 €, et de 53 € vers Barcelone. Comparez le coût total, trajet jusqu’à l’aéroport compris." },
+      { question: "D’où viennent ces prix ?", answer: "Du réseau de partenaires de HiFlight (Travelpayouts), qui relève les prix aller-retour les plus bas pour les six prochains mois. Les pages de vols sont mises à jour chaque jour." }
+    ],
+    relatedRoutes: ["paris-marrakech","lyon-marrakech","marseille-marrakech","toulouse-marrakech","paris-barcelone","lyon-barcelone","nice-barcelone","bale-mulhouse-barcelone"]
   }
 ];
 
