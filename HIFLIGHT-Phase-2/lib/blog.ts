@@ -318,6 +318,68 @@ export const blogPosts: BlogPost[] = [
       }
     ],
     relatedRoutes: ["paris-marrakech", "paris-casablanca", "paris-tunis", "lyon-casablanca", "marseille-tunis", "toulouse-marrakech"]
+  },
+  {
+    slug: "billet-avion-pas-cher-astuces",
+    metaTitle: "Billet d’avion pas cher : 10 astuces utiles",
+    title: "Billet d’avion pas cher : 10 astuces qui marchent vraiment (et 3 qui ne servent à rien)",
+    description: "Comment payer un billet d’avion moins cher : dates flexibles, aéroport, bagages, escales, alertes de prix. 10 astuces concrètes à tester avant de réserver.",
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 7,
+    intro: "Le billet d’avion est souvent le premier poste de dépense d’un voyage. Il n’y a pas de formule magique, mais une méthode : savoir ce qui fait vraiment varier le prix, et le vérifier avant de payer. Voici dix astuces concrètes, puis trois idées reçues à oublier.",
+    sections: [
+      {
+        heading: "Astuces 1 à 3 : jouer sur vos dates",
+        paragraphs: [
+          "C’est le levier le plus puissant, parce que les compagnies ajustent leurs prix selon le remplissage de chaque vol.",
+          "Astuce 1 : cherchez sur tout le mois plutôt que sur une date. Un calendrier des prix par mois montre en quelques secondes les périodes où le trajet est le plus abordable. Sur chaque page de vol HiFlight, un graphique donne le prix de départ mois par mois.",
+          "Astuce 2 : choisissez le bon jour de la semaine. Un départ en milieu de semaine est souvent moins cher qu’un vendredi ou un dimanche. Quand les données sont suffisantes, la page du vol affiche le jour le moins cher.",
+          "Astuce 3 : décalez d’un jour ou deux. Les vacances scolaires, les ponts et les fêtes concentrent la demande. Partir la veille ou revenir le lendemain peut changer le tarif de façon importante."
+        ]
+      },
+      {
+        heading: "Astuces 4 à 6 : choisir son trajet",
+        paragraphs: [
+          "Astuce 4 : comparez plusieurs aéroports de départ. Au départ de Paris, Orly, Roissy et Beauvais ne proposent pas les mêmes prix. En province, un vol direct depuis Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes peut coûter moins cher qu’un billet depuis Paris une fois ajouté le train.",
+          "Astuce 5 : comparez plusieurs destinations. Si vous cherchez surtout une escapade, regardez Barcelone, Lisbonne, Madrid, Rome et Londres pour les mêmes dates : l’écart de prix peut décider de la destination.",
+          "Astuce 6 : testez avec et sans escale. Une escale fait souvent baisser le prix, mais allonge le voyage. Notez la durée totale et la durée de la correspondance avant de choisir : une correspondance trop courte est un risque, une trop longue est une journée perdue."
+        ]
+      },
+      {
+        heading: "Astuces 7 à 10 : éviter les mauvaises surprises",
+        paragraphs: [
+          "Astuce 7 : comparez le prix total, bagages compris. Un billet à 40 € sans bagage peut dépasser un billet à 70 € avec bagage en soute. Ajoutez le bagage, le siège éventuel et le transport jusqu’à l’aéroport.",
+          "Astuce 8 : vérifiez les conditions de modification et d’annulation. Un tarif très bas est souvent non modifiable. Si vos dates ne sont pas sûres, un tarif plus souple peut coûter moins cher qu’un changement de billet.",
+          "Astuce 9 : comparez plusieurs sites avant de payer. Un comparateur affiche les offres de plusieurs partenaires ; le prix final et les frais peuvent différer d’un partenaire à l’autre.",
+          "Astuce 10 : surveillez le prix avec une alerte. Si vous avez le temps, repérez le prix habituel du trajet, puis réservez quand une offre passe sous ce niveau. Sans repère, il est difficile de savoir si un prix est bon."
+        ]
+      },
+      {
+        heading: "Trois idées reçues à oublier",
+        paragraphs: [
+          "Réserver un mardi à 3 h du matin : les sources se contredisent, et rien ne prouve un effet fiable. Ce qui change le prix, c’est le trajet et la date du voyage, pas l’heure de la réservation.",
+          "Effacer ses cookies ou naviguer en mode privé : l’effet n’est pas démontré. Comparer sur plusieurs sites est plus utile.",
+          "Toujours attendre la dernière minute : pour les périodes très demandées, attendre réduit le choix et fait monter les prix. La dernière minute ne marche que si vous êtes très flexible."
+        ],
+        list: [
+          "Cherchez sur un mois entier, pas sur une seule date.",
+          "Comparez au moins deux aéroports et deux destinations.",
+          "Ajoutez toujours le bagage avant de comparer.",
+          "Gardez une marge pour les correspondances."
+        ]
+      },
+      {
+        heading: "Questions fréquentes",
+        paragraphs: [
+          "Quel est le meilleur moment pour réserver ? Il n’existe pas de règle valable pour tous. Hors vacances, les prix restent souvent stables plusieurs semaines avant le départ ; pour l’été et les fêtes, il vaut mieux comparer tôt.",
+          "Quel jour est le moins cher pour voler ? Le plus souvent le milieu de semaine. La page de chaque vol indique le jour le moins cher quand les données le permettent.",
+          "Un comparateur est-il vraiment gratuit ? Oui pour l’utilisateur : HiFlight peut recevoir une commission du partenaire en cas de réservation, sans surcoût pour vous.",
+          "Les prix affichés sont-ils garantis ? Non : ce sont des prix indicatifs constatés récemment. Le prix final est confirmé chez le partenaire au moment de la réservation."
+        ]
+      }
+    ],
+    relatedRoutes: ["paris-barcelone", "paris-lisbonne", "lyon-marrakech", "marseille-tunis", "paris-londres"]
   }
 ];
 
