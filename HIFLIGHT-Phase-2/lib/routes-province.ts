@@ -171,10 +171,10 @@ export const provinceSeeds: RouteSeed[] = [
     tip: "Regardez la durée totale, correspondance comprise : une escale peut ajouter plusieurs heures." },
   { ...toulouse, destination: "Tunis", destinationCode: "TUN", region: "Maroc et Tunisie", duration: "environ 2 h 10", carriers: [], formalities: true,
     intro: "Toulouse – Tunis relie le Sud-Ouest à la Tunisie en un peu plus de deux heures.",
-    season: "L’été et les fêtes de fin d’année sont les plus chers ; en dehors de ces périodes, les prix sont plus souples.",
+    season: "Les vols de juillet-août et de Noël sont les plus chers ; au printemps et en automne, les écarts entre deux dates se creusent.",
     tip: "Les départs de milieu de semaine sont souvent moins chers que ceux du week-end." },
   { ...toulouse, destination: "Oran", destinationCode: "ORN", region: "Algérie", country: "algerie", duration: "environ 2 h 05", carriers: [], formalities: true,
     intro: "Depuis Toulouse, Oran se rejoint directement en un peu plus de deux heures, une liaison très demandée en été.",
     season: "Juillet et août sont les mois les plus chers ; hors saison, les prix baissent nettement en semaine.",
-    tip: "Réservez tôt pour l’été : les vols directs sont peu nombreux et se remplissent vite." }
+    tip: "Pour l’été, bloquez vos dates dès que possible : peu de vols directs desservent Oran depuis Toulouse." }
 ];

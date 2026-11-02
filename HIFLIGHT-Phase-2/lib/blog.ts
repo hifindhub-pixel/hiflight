@@ -156,6 +156,168 @@ export const blogPosts: BlogPost[] = [
       }
     ],
     relatedRoutes: ["paris-marrakech", "paris-barcelone", "paris-lisbonne"]
+  },
+  {
+    slug: "quand-reserver-vol-pas-cher",
+    metaTitle: "Quand réserver un vol pas cher ? Les règles utiles",
+    title: "Quand réserver un vol pas cher : les règles qui marchent vraiment",
+    description: "Il n’existe pas de jour magique pour réserver un vol. Voici ce qui fait réellement baisser le prix : dates flexibles, jour de départ, comparaison et alertes.",
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 5,
+    intro: "On lit partout qu’il faut réserver un mardi à 3 h du matin. En pratique, ce qui compte, ce sont vos dates, votre aéroport de départ et le moment où vous comparez. Voici les règles qui servent vraiment.",
+    sections: [
+      {
+        heading: "Le jour de la réservation compte peu, le jour du voyage beaucoup",
+        paragraphs: [
+          "Les compagnies fixent leurs prix en fonction du remplissage de chaque vol. Ce qui change le prix, c’est donc surtout la date de départ : un vol en milieu de semaine est souvent moins cher qu’un vendredi ou un dimanche, et les vacances scolaires font monter les tarifs.",
+          "Sur chaque page de vol HiFlight, un tableau montre le jour de la semaine le moins cher quand les données sont suffisantes. Regardez-le avant de choisir vos dates."
+        ]
+      },
+      {
+        heading: "Comparer sur plusieurs mois, pas sur une seule date",
+        paragraphs: [
+          "Le prix d’un même trajet varie beaucoup d’un mois à l’autre. En regardant le calendrier des prix par mois, vous voyez tout de suite les périodes où le trajet est le plus abordable, puis vous réservez dans cette fenêtre.",
+          "Si vos dates sont fixes, comparez au moins la veille et le lendemain : un décalage d’un jour peut suffire à économiser."
+        ]
+      },
+      {
+        heading: "Réserver tôt ou attendre ?",
+        paragraphs: [
+          "Il n’y a pas de règle valable pour tous les trajets. Pour les périodes très demandées (été, fêtes, ponts), attendre réduit le choix et fait monter les prix. Pour une escapade hors vacances, les prix restent souvent stables plusieurs semaines à l’avance.",
+          "Le plus sûr : comparer dès que vous avez une idée de dates, repérer la fourchette de prix habituelle, puis réserver quand une offre vous semble raisonnable."
+        ]
+      },
+      {
+        heading: "Comparer le prix total, bagages compris",
+        paragraphs: [
+          "Un billet à 40 € sans bagage peut revenir plus cher qu’un billet à 70 € avec bagage en soute. Avant de réserver, ajoutez le bagage, le choix du siège et le transfert jusqu’à l’aéroport."
+        ],
+        list: [
+          "choisissez des dates en milieu de semaine quand c’est possible ;",
+          "comparez plusieurs aéroports de départ, y compris en province ;",
+          "ajoutez le bagage dont vous avez besoin avant de comparer ;",
+          "vérifiez les conditions de modification et d’annulation."
+        ]
+      }
+    ],
+    relatedRoutes: ["paris-barcelone", "paris-lisbonne", "paris-marrakech", "lyon-barcelone"]
+  },
+  {
+    slug: "vol-pas-cher-depuis-province",
+    metaTitle: "Vol pas cher depuis la province : sans passer par Paris",
+    title: "Partir de Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes : quand c’est plus avantageux",
+    description: "Partir de la province évite le trajet vers Paris. Voici quand un vol direct depuis Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes est le meilleur choix.",
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 5,
+    intro: "Beaucoup de voyageurs prennent le train jusqu’à Paris par habitude. Or les grands aéroports régionaux proposent des vols directs vers le Maghreb, l’Espagne, le Portugal ou le Royaume-Uni. Voici comment savoir si c’est plus avantageux.",
+    sections: [
+      {
+        heading: "Le vrai coût d’un départ de Paris",
+        paragraphs: [
+          "Un billet moins cher depuis Paris peut devenir plus cher une fois ajoutés le train, la nuit d’hôtel éventuelle et le temps perdu. Pour comparer honnêtement, calculez le coût total du trajet de porte à porte."
+        ]
+      },
+      {
+        heading: "Les destinations les mieux servies depuis la province",
+        paragraphs: [
+          "Les liaisons vers le Maroc, l’Algérie, la Tunisie, l’Espagne, le Portugal et Londres sont proposées depuis la plupart des grands aéroports régionaux. L’offre varie selon la saison : certaines lignes sont quotidiennes, d’autres seulement quelques fois par semaine.",
+          "Sur HiFlight, vous trouverez des pages de vol pour chaque départ, avec la durée, les prix par mois et les jours les moins chers."
+        ],
+        list: [
+          "Lyon : Barcelone, Madrid, Lisbonne, Londres, Rome, Istanbul, Tunis, Casablanca, Oran ;",
+          "Marseille : Marrakech, Casablanca, Tunis, Istanbul, Barcelone, Londres ;",
+          "Nice : Londres, Madrid, Rome, Alger, Marrakech, New York ;",
+          "Toulouse : Marrakech, Casablanca, Londres, Madrid, Barcelone ;",
+          "Bordeaux et Nantes : Alger, Marrakech, Casablanca, Tunis, Barcelone, Lisbonne."
+        ]
+      },
+      {
+        heading: "Comparer deux aéroports en deux minutes",
+        paragraphs: [
+          "Ouvrez la page du vol depuis votre ville et celle depuis la ville voisine ou depuis Paris. Notez le prix de départ, la durée et le coût du transport jusqu’à l’aéroport. Choisissez le total le plus bas, en gardant une marge de sécurité pour le trajet."
+        ]
+      }
+    ],
+    relatedRoutes: ["lyon-barcelone", "marseille-marrakech", "nice-londres", "toulouse-casablanca", "bordeaux-marrakech", "nantes-lisbonne"]
+  },
+  {
+    slug: "week-end-europe-vol-pas-cher",
+    metaTitle: "Week-end en Europe pas cher : Barcelone, Lisbonne, Londres",
+    title: "Week-end pas cher en Europe : comment choisir la destination et le vol",
+    description: "Barcelone, Lisbonne, Rome, Madrid ou Londres : comment choisir un week-end court au meilleur prix, quels jours partir et quels pièges éviter sur les bagages.",
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 5,
+    intro: "Un week-end de trois jours se décide vite, et c’est là qu’on paie le plus cher quand on ne compare pas. Voici une méthode simple pour choisir la destination et le vol.",
+    sections: [
+      {
+        heading: "Partir du budget, pas de la destination",
+        paragraphs: [
+          "Plutôt que de viser une ville précise, regardez les prix de plusieurs capitales pour les mêmes dates : Barcelone, Lisbonne, Madrid, Rome, Londres. L’écart entre deux villes peut changer le budget du week-end."
+        ]
+      },
+      {
+        heading: "Les jours qui coûtent moins cher",
+        paragraphs: [
+          "Un départ le jeudi soir ou le vendredi tôt, avec un retour le dimanche soir, est très demandé. Décaler d’un jour, en partant le jeudi matin ou en revenant le lundi, fait souvent baisser le prix.",
+          "Les pages de vol HiFlight affichent le jour de la semaine le moins cher lorsque les données le permettent."
+        ]
+      },
+      {
+        heading: "Les pièges d’un vol court",
+        paragraphs: [
+          "Sur un vol court, le bagage en soute peut doubler le prix du billet. Voyager avec un seul bagage à main permet souvent de rester sous le tarif de base ; vérifiez les dimensions autorisées avant de réserver."
+        ],
+        list: [
+          "comparez au moins trois destinations pour les mêmes dates ;",
+          "ajoutez le transfert aéroport – centre à votre budget ;",
+          "vérifiez l’heure d’arrivée et de retour pour ne pas perdre une demi-journée ;",
+          "choisissez un tarif avec modification possible si vos dates ne sont pas sûres."
+        ]
+      }
+    ],
+    relatedRoutes: ["paris-barcelone", "paris-lisbonne", "paris-londres", "paris-rome", "paris-madrid"]
+  },
+  {
+    slug: "vol-maroc-tunisie-quand-reserver",
+    metaTitle: "Vol Maroc et Tunisie : quand réserver et d’où partir",
+    title: "Vols vers le Maroc et la Tunisie : quand réserver et d’où partir pour payer moins",
+    description: "Marrakech, Casablanca, Agadir, Tunis : à quelle période réserver, quels aéroports de départ comparer et comment éviter les surprises sur les bagages.",
+    published: "2026-11-02",
+    updated: "2026-11-02",
+    readingMinutes: 5,
+    intro: "Le Maroc et la Tunisie sont parmi les destinations les plus demandées depuis la France. Les prix varient fortement selon la ville de départ, la saison et les bagages. Voici comment s’y retrouver.",
+    sections: [
+      {
+        heading: "Les périodes les plus chères",
+        paragraphs: [
+          "Les vacances scolaires, les ponts et les fêtes religieuses concentrent la demande. Les dates des fêtes religieuses changent chaque année : regardez les prix autour de ces dates avant de vous décider.",
+          "En dehors de ces périodes, un départ en semaine est souvent nettement moins cher."
+        ]
+      },
+      {
+        heading: "Comparer plusieurs villes de départ",
+        paragraphs: [
+          "Les vols vers le Maroc partent de Paris, mais aussi de Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille et Bâle-Mulhouse. Vers la Tunisie, les vols directs partent de plusieurs villes de province. L’offre change selon la saison."
+        ]
+      },
+      {
+        heading: "Bagages et franchises",
+        paragraphs: [
+          "Sur ces liaisons, beaucoup de voyageurs emportent plus qu’un bagage à main. Comparez le prix en incluant le bagage en soute : un tarif d’appel sans bagage n’est pas toujours le moins cher au final.",
+          "Pensez aussi aux formalités d’entrée : elles dépendent de votre nationalité et de la durée de séjour. Vérifiez-les sur le site officiel avant de réserver."
+        ],
+        list: [
+          "comparez au moins deux aéroports de départ ;",
+          "regardez les prix mois par mois avant de fixer vos dates ;",
+          "ajoutez le bagage dont vous avez besoin ;",
+          "gardez une marge pour le trajet jusqu’à l’aéroport."
+        ]
+      }
+    ],
+    relatedRoutes: ["paris-marrakech", "paris-casablanca", "paris-tunis", "lyon-casablanca", "marseille-tunis", "toulouse-marrakech"]
   }
 ];
 
