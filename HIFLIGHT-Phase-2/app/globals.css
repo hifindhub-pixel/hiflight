@@ -1529,3 +1529,9 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .reasons p { margin:0; color:var(--muted); font-size:15px; }
 @media (max-width:900px) { .dest-grid,.tip-grid { grid-template-columns:repeat(2,1fr); } .svc-grid,.reasons { grid-template-columns:1fr; } .home-block { padding-top:40px; } }
 .home-head .text-link { margin-top:0; }
+
+.blog-banner { display:flex; flex-direction:column; justify-content:flex-end; gap:6px; min-height:260px; padding:32px 36px; border-radius:20px; color:#fff; background-size:cover; background-position:center; transition:.2s; }
+.blog-banner:hover { transform:translateY(-3px); }
+.blog-banner span { font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; opacity:.9; }
+.blog-banner strong { font:700 clamp(1.5rem,3vw,2.2rem)/1.15 Outfit,sans-serif; max-width:560px; }
+.blog-banner em { font-style:normal; font-weight:700; }

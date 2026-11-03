@@ -4,7 +4,6 @@ import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
 import ServiceFaq from "@/components/ServiceFaq";
 import { defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
-import { blogPosts } from "@/lib/blog";
 import { departureCities } from "@/lib/cities";
 import { getRouteStats } from "@/lib/route-data";
 
@@ -18,20 +17,20 @@ export const metadata: Metadata = {
 };
 
 const destinations = [
-  ["paris-marrakech", "Marrakech", "Maroc", "/destinations/marrakech.webp"],
-  ["paris-barcelone", "Barcelone", "Espagne", "/destinations/barcelone.webp"],
-  ["paris-istanbul", "Istanbul", "Turquie", "/destinations/istanbul.webp"],
-  ["paris-new-york", "New York", "États-Unis", "/destinations/new-york.webp"],
-  ["paris-lisbonne", "Lisbonne", "Portugal", "/destinations/lisbonne.webp"],
-  ["paris-rome", "Rome", "Italie", "/destinations/rome.webp"],
-  ["paris-londres", "Londres", "Royaume-Uni", "/destinations/londres.webp"],
-  ["paris-dubai", "Dubaï", "Émirats", "/destinations/dubai.webp"],
+  ["paris-marrakech", "Marrakech", "Maroc", "https://images.unsplash.com/photo-1597212618440-806262de4f6b?auto=format&fit=crop&w=640&q=70"],
+  ["paris-barcelone", "Barcelone", "Espagne", "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=640&q=70"],
+  ["paris-lisbonne", "Lisbonne", "Portugal", "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?auto=format&fit=crop&w=640&q=70"],
+  ["paris-bangkok", "Bangkok", "Thaïlande", "https://images.unsplash.com/photo-1562602833-0f4ab2fc46e3?auto=format&fit=crop&w=640&q=70"],
+  ["paris-pointe-a-pitre", "Pointe-à-Pitre", "Guadeloupe", "https://images.unsplash.com/photo-1661381082632-87fd1727bf58?auto=format&fit=crop&w=640&q=70"],
+  ["paris-rome", "Rome", "Italie", "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=640&q=70"],
+  ["paris-londres", "Londres", "Royaume-Uni", "https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=640&q=70"],
+  ["paris-istanbul", "Istanbul", "Turquie", "https://images.unsplash.com/photo-1589561454226-796a8aa89b05?auto=format&fit=crop&w=640&q=70"],
 ] as const;
 
 const services = [
   { href: "/hotels", title: "Hôtels", text: "Comparez les prix sur la carte", img: "/hero-hotels.webp" },
   { href: "/voitures", title: "Voitures", text: "Loueurs et points de retrait", img: "/hero-cars.webp" },
-  { href: "/trains-bus", title: "Trains & bus", text: "Alternatives au sol", img: "/hero-trains.webp" },
+  { href: "/esim", title: "eSIM", text: "Internet à l’étranger, sans roaming", img: "/account-earth.webp" },
 ];
 
 const reasons = [
@@ -49,7 +48,6 @@ export default async function Home() {
     }),
   );
   const deals = cards.filter((c) => c !== null);
-  const latest = blogPosts.filter((p) => p.heroImage).slice(0, 4);
 
   return (
     <main>
@@ -93,15 +91,11 @@ export default async function Home() {
       </section>
 
       <section className="section home-block">
-        <div className="home-head"><h2>Conseils pour réserver malin</h2><Link className="text-link" href="/blog">Tous les guides →</Link></div>
-        <div className="tip-grid">
-          {latest.map((p) => (
-            <Link key={p.slug} href={`/blog/${p.slug}`} className="tip-card">
-              <img src={p.heroImage} alt="" loading="lazy" width="400" height="400" />
-              <strong>{p.title}</strong>
-            </Link>
-          ))}
-        </div>
+        <Link href="/blog" className="blog-banner" style={{ backgroundImage: "linear-gradient(90deg,rgba(7,22,47,.72),rgba(7,22,47,.05) 70%),url(/account-landscape-v2.webp)" }}>
+          <span>Voyager autrement</span>
+          <strong>Conseils et inspirations pour votre prochain départ</strong>
+          <em>Découvrir le blog →</em>
+        </Link>
       </section>
 
       <section className="section home-block home-tight">
