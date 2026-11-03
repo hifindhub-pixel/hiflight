@@ -16,10 +16,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: post.metaTitle,
     description: post.description,
     alternates: { canonical: `/blog/${slug}` },
-    openGraph: { type: "article", url: `${siteUrl}/blog/${slug}/`, images: [post.heroImage ? `${siteUrl}${post.heroImage}` : `${siteUrl}/hiflight-hero.jpg`], title: `${post.metaTitle} | HiFlight`, description: post.description, publishedTime: post.published, modifiedTime: post.updated },
+    openGraph: { type: "article", url: `${siteUrl}/blog/${slug}/`, images: [post.heroImage ? absUrl(post.heroImage) : `${siteUrl}/hiflight-hero.jpg`], title: `${post.metaTitle} | HiFlight`, description: post.description, publishedTime: post.published, modifiedTime: post.updated },
   };
 }
 
+const absUrl = (u: string) => (u.startsWith("http") ? u : `${siteUrl}${u}`);
 const dateFormat = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 
 const anchor = (text: string) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -29,9 +30,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = getPost(slug);
   if (!post) notFound();
   const related = post.relatedRoutes.map((s) => flightRoutes.find((r) => r.slug === s)).filter((r) => r !== undefined);
-  const otherPosts = blogPosts.filter((p) => p.slug !== post.slug);
+  const otherPosts = blogPosts.filter((p) => p.slug !== post.slug && p.heroImage).slice(-3).reverse();
   const cards = await Promise.all(related.map(async (route) => ({ route, stats: await getRouteStats(route) })));
-  const heroUrl = post.heroImage ? `${siteUrl}${post.heroImage}` : `${siteUrl}/hiflight-hero.jpg`;
+  const heroUrl = post.heroImage ? absUrl(post.heroImage) : `${siteUrl}/hiflight-hero.jpg`;
 
   return (
     <main>
@@ -61,32 +62,27 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           },
         ],
       }} />
-      <section className="page-hero small">
+      <section className="art-head">
         <div>
           <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/blog">Conseils voyage</Link></p>
+          <span className="art-chip">Conseils voyage</span>
           <h1>{post.title}</h1>
-          <p>{post.intro}</p>
+          <p className="art-standfirst">{post.intro}</p>
         </div>
       </section>
       {post.heroImage ? (
-        <figure className="article-hero">
-          <img src={post.heroImage} alt={post.title} width={1600} height={840} fetchPriority="high" />
+        <figure className="art-photo">
+          <img src={post.heroImage} alt={post.title} width={1600} height={700} fetchPriority="high" />
         </figure>
       ) : null}
-      <article className="article">
+      <div className="art-layout">
+      <article className="art-body">
         {post.keyPoints?.length ? (
           <aside className="key-points" aria-label="À retenir">
             <strong>À retenir</strong>
             <ul>{post.keyPoints.map((point) => <li key={point}>{point}</li>)}</ul>
           </aside>
         ) : null}
-        {post.sections.length >= 3 ? (
-          <nav className="toc" aria-label="Sommaire">
-            <strong>Sommaire</strong>
-            <ol>{post.sections.map((section) => <li key={section.heading}><a href={`#${anchor(section.heading)}`}>{section.heading}</a></li>)}</ol>
-          </nav>
-        ) : null}
-        <p className="price-note">Mis à jour le <time dateTime={post.updated}>{dateFormat.format(new Date(post.updated))}</time> · {post.readingMinutes} min de lecture</p>
         {post.sections.map((section) => (
           <section key={section.heading} id={anchor(section.heading)}>
             <h2>{section.heading}</h2>
@@ -131,17 +127,36 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </section>
         ) : null}
 
-        {otherPosts.length ? (
-          <>
-            <h2>À lire aussi</h2>
-            <ul>
-              {otherPosts.map((other) => <li key={other.slug}><Link href={`/blog/${other.slug}`}>{other.title}</Link></li>)}
-              <li><Link href="/guides/bagage-cabine">Bagage cabine : les vérifications avant le vol</Link></li>
-            </ul>
-          </>
-        ) : null}
         <Link className="text-link" href="/#recherche">Lancer une recherche de vol →</Link>
       </article>
+      <aside className="art-side" aria-label="Informations sur l’article">
+        <div className="side-meta">
+          <span className="side-avatar">Hi</span>
+          <div><strong>HiFlight</strong><span>Mis à jour le <time dateTime={post.updated}>{dateFormat.format(new Date(post.updated))}</time></span><span>{post.readingMinutes} min de lecture</span></div>
+        </div>
+        {post.sections.length >= 3 ? (
+          <nav className="side-toc" aria-label="Sommaire">
+            <strong>Dans cet article</strong>
+            <ol>{post.sections.map((section) => <li key={section.heading}><a href={`#${anchor(section.heading)}`}>{section.heading}</a></li>)}</ol>
+          </nav>
+        ) : null}
+        <Link className="side-cta" href="/#recherche"><strong>Comparer les vols</strong><span>Des centaines de compagnies, une seule recherche. Gratuit.</span><em>Rechercher →</em></Link>
+      </aside>
+      </div>
+      {otherPosts.length ? (
+        <section className="art-more">
+          <div className="home-head"><h2>À lire aussi</h2><Link className="text-link" href="/blog">Tous les guides →</Link></div>
+          <div className="more-grid">
+            {otherPosts.map((other) => (
+              <Link key={other.slug} href={`/blog/${other.slug}`} className="more-card">
+                <img src={other.heroImage} alt="" loading="lazy" width="480" height="300" />
+                <strong>{other.title}</strong>
+                <span>{other.readingMinutes} min de lecture</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }
