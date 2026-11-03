@@ -3,8 +3,10 @@ import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
 import ServiceFaq from "@/components/ServiceFaq";
-import { airports, countryPages, defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
+import { defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
 import { blogPosts } from "@/lib/blog";
+import { departureCities } from "@/lib/cities";
+import { getRouteStats } from "@/lib/route-data";
 
 const homeDescription = "Comparez les vols de centaines de compagnies et agences, repérez les dates les moins chères et réservez chez le partenaire de votre choix. Gratuit.";
 
@@ -15,10 +17,40 @@ export const metadata: Metadata = {
   openGraph: { type: "website", url: `${siteUrl}/`, images: [defaultOgImage], title: "Comparateur de vols pas chers | HiFlight", description: homeDescription },
 };
 
-const featuredSlugs = ["paris-barcelone", "paris-londres", "paris-rome", "paris-new-york", "paris-marrakech", "paris-alger", "paris-istanbul", "paris-montreal", "paris-bangkok", "paris-tokyo", "paris-dubai", "paris-pointe-a-pitre", "alger-paris", "marrakech-paris"];
-const featuredRoutes = featuredSlugs.map((slug) => flightRoutes.find((route) => route.slug === slug)).filter((route) => route !== undefined);
+const destinations = [
+  ["paris-marrakech", "Marrakech", "Maroc", "/destinations/marrakech.webp"],
+  ["paris-barcelone", "Barcelone", "Espagne", "/destinations/barcelone.webp"],
+  ["paris-istanbul", "Istanbul", "Turquie", "/destinations/istanbul.webp"],
+  ["paris-new-york", "New York", "États-Unis", "/destinations/new-york.webp"],
+  ["paris-lisbonne", "Lisbonne", "Portugal", "/destinations/lisbonne.webp"],
+  ["paris-rome", "Rome", "Italie", "/destinations/rome.webp"],
+  ["paris-londres", "Londres", "Royaume-Uni", "/destinations/londres.webp"],
+  ["paris-dubai", "Dubaï", "Émirats", "/destinations/dubai.webp"],
+] as const;
 
-export default function Home() {
+const services = [
+  { href: "/hotels", title: "Hôtels", text: "Comparez les prix sur la carte", img: "/hero-hotels.webp" },
+  { href: "/voitures", title: "Voitures", text: "Loueurs et points de retrait", img: "/hero-cars.webp" },
+  { href: "/trains-bus", title: "Trains & bus", text: "Alternatives au sol", img: "/hero-trains.webp" },
+];
+
+const reasons = [
+  ["Prix comparés", "Centaines de compagnies et d’agences, une seule recherche."],
+  ["Prix total clair", "Bagages, escales, aéroport : on vous aide à vérifier."],
+  ["Gratuit, sans compte", "Vous réservez directement chez le partenaire choisi."],
+];
+
+export default async function Home() {
+  const cards = await Promise.all(
+    destinations.map(async ([slug, city, country, img]) => {
+      const route = flightRoutes.find((r) => r.slug === slug);
+      const stats = route ? await getRouteStats(route) : null;
+      return route ? { slug, city, country, img, price: stats?.lowest.price ?? null } : null;
+    }),
+  );
+  const deals = cards.filter((c) => c !== null);
+  const latest = blogPosts.filter((p) => p.heroImage).slice(0, 4);
+
   return (
     <main>
       <section className="hero">
@@ -30,27 +62,53 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section services-section" id="services">
-        <div className="section-head"><p className="eyebrow">Tout le voyage, au même endroit</p><h2>Un seul départ.<br />Quatre façons de voyager.</h2><p>HiFlight vous aide à comparer chaque étape, puis vous redirige vers le partenaire choisi pour finaliser la réservation.</p></div>
-        <div className="service-grid">
-          <Link href="/#recherche"><h3>Vols</h3><p>Comparez les compagnies et agences sur notre moteur dédié.</p><strong>Rechercher un vol →</strong></Link>
-          <Link href="/hotels"><h3>Hôtels</h3><p>Comparez les établissements, les vendeurs et les prix sur la carte.</p><strong>Voir les hôtels →</strong></Link>
-          <Link href="/voitures"><h3>Voitures</h3><p>Comparez les catégories, les loueurs et les points de retrait.</p><strong>Louer une voiture →</strong></Link>
-          <Link href="/trains-bus"><h3>Trains & bus</h3><p>Préparez vos trajets terrestres et comparez les alternatives.</p><strong>Explorer les trajets →</strong></Link>
+      <section className="section home-block" id="destinations">
+        <div className="home-head"><h2>Où partir ? Nos destinations du moment</h2><Link className="text-link" href="/vols">Tous les itinéraires →</Link></div>
+        <div className="dest-grid">
+          {deals.map((d) => (
+            <Link key={d.slug} href={`/vols/${d.slug}`} className="dest-card">
+              <img src={d.img} alt={`Vol Paris ${d.city}`} loading="lazy" width="400" height="300" />
+              <div><strong>{d.city}</strong><span>{d.country}</span><em>{d.price ? <>dès <b>{d.price} €</b> A/R</> : "Voir les prix"}</em></div>
+            </Link>
+          ))}
         </div>
       </section>
 
-      <section className="journey-section"><div className="section"><p className="eyebrow">L’expérience qui continue après la réservation</p><h2>Explorez. Voyagez.<br /><span>Collectionnez le monde.</span></h2><div className="journey-cards"><div><b>Globe</b><p>Visualisez vos pays visités et ceux que vous voulez découvrir.</p></div><div><b>Passeport</b><p>Conservez vos tampons, dates, dessins et souvenirs de voyage.</p></div><div><b>Statistiques</b><p>Suivez le nombre de pays, continents et kilomètres parcourus.</p></div></div></div></section>
+      <section className="section home-block home-tight">
+        <div className="home-head"><h2>Partez de votre ville</h2></div>
+        <ul className="chips city-chips">
+          {departureCities.map((c) => <li key={c.slug}><Link href={`/vols/depuis/${c.slug}`}>Vols {c.from}</Link></li>)}
+        </ul>
+      </section>
 
-      <section className="section intro"><div><h2>Le prix du billet ne raconte pas toute l’histoire.</h2></div><p>HIFLIGHT vous aide à comparer les offres puis à vérifier les éléments qui changent réellement le coût du voyage : bagages, escales, aéroport de départ et conditions du partenaire.</p></section>
+      <section className="section home-block home-tight">
+        <div className="home-head"><h2>Et pour le reste du voyage</h2></div>
+        <div className="svc-grid">
+          {services.map((s) => (
+            <Link key={s.href} href={s.href} className="svc-card" style={{ backgroundImage: `linear-gradient(0deg,rgba(7,22,47,.78),rgba(7,22,47,.1) 65%),url(${s.img})` }}>
+              <strong>{s.title}</strong><span>{s.text}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
-      <section className="section" id="destinations"><div className="section-head"><h2>Itinéraires populaires</h2><p>Des pages utiles pour préparer le trajet avant de lancer la comparaison en temps réel.</p></div><div className="route-list">{featuredRoutes.map((route) => <Link key={route.slug} href={`/vols/${route.slug}`}><span>{route.originCode}</span><b>→</b><span>{route.destinationCode}</span><strong>{route.origin} – {route.destination}</strong></Link>)}</div><ul className="chips country-chips">{countryPages.map((country) => <li key={country.slug}><Link href={`/destinations/${country.slug}`}>Vols {country.toward}</Link></li>)}</ul><Link className="text-link" href="/vols">Voir tous les itinéraires →</Link></section>
+      <section className="section home-block">
+        <div className="home-head"><h2>Conseils pour réserver malin</h2><Link className="text-link" href="/blog">Tous les guides →</Link></div>
+        <div className="tip-grid">
+          {latest.map((p) => (
+            <Link key={p.slug} href={`/blog/${p.slug}`} className="tip-card">
+              <img src={p.heroImage} alt="" loading="lazy" width="400" height="400" />
+              <strong>{p.title}</strong>
+            </Link>
+          ))}
+        </div>
+      </section>
 
-      <section className="section" id="conseils"><div className="section-head"><h2>Conseils pour réserver malin</h2><p>Quand réserver, quel aéroport choisir, quels bagages vérifier : nos guides pour comparer le prix total d’un voyage.</p></div><ul className="post-list">{blogPosts.map((post) => <li key={post.slug}><Link href={`/blog/${post.slug}`}><strong>{post.title}</strong><span>{post.description}</span></Link></li>)}</ul></section>
-
-      <section className="dark-section"><div className="section"><div className="section-head"><h2>Paris : le bon aéroport compte aussi</h2><p>Un billet moins cher peut coûter davantage une fois le transfert ajouté.</p></div><div className="airport-links">{airports.map((airport) => <Link key={airport.slug} href={`/aeroports/${airport.slug}`}><strong>{airport.code}</strong><span>{airport.name}</span><p>{airport.intro}</p></Link>)}</div></div></section>
-
-      <section className="section editorial"><h2>Avant de réserver</h2><div><h3>Comparez le prix total</h3><p>Vérifiez les bagages inclus, les frais éventuels et les conditions de modification.</p></div><div><h3>Contrôlez les aéroports</h3><p>Une économie sur le billet peut être absorbée par un transfert long ou coûteux.</p></div><div><h3>Réservez chez le partenaire</h3><p>HIFLIGHT compare. Le paiement et le service après-vente sont assurés par le partenaire choisi.</p></div></section>
+      <section className="section home-block home-tight">
+        <div className="reasons">
+          {reasons.map(([t, d]) => <div key={t}><h3>{t}</h3><p>{d}</p></div>)}
+        </div>
+      </section>
       <ServiceFaq service="flights" />
     </main>
   );
