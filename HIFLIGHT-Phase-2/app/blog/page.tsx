@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 const dateFormat = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 
 export default function BlogPage() {
+  const posts = [...blogPosts].sort((a, b) => b.published.localeCompare(a.published));
   return (
     <main>
       <JsonLd data={{
@@ -24,33 +25,28 @@ export default function BlogPage() {
           { "@type": "ListItem", position: 2, name: "Conseils voyage", item: `${siteUrl}/blog/` },
         ],
       }} />
-      <section className="page-hero small">
+      <section className="art-head blog-head">
         <div>
           <p className="breadcrumb"><Link href="/">Accueil</Link> / Conseils voyage</p>
           <h1>Conseils voyage</h1>
-          <p>Réserver au bon moment, choisir le bon aéroport, éviter les frais imprévus.</p>
+          <p className="art-standfirst">Réserver au bon moment, choisir le bon aéroport, éviter les frais imprévus.</p>
         </div>
       </section>
-      <section className="article">
-        <ul className="post-list">
-          {blogPosts.map((post) => (
-            <li key={post.slug}>
-              <Link href={`/blog/${post.slug}`}>
+      <section className="blog-wrap">
+        <div className="blog-grid">
+          {posts.map((post, index) => (
+            <Link key={post.slug} href={`/blog/${post.slug}`} className={`blog-card${index === 0 ? " blog-card-featured" : ""}`}>
+              {post.heroImage ? <img src={post.heroImage} alt="" loading={index < 3 ? "eager" : "lazy"} width="800" height="500" /> : null}
+              <div>
                 <time dateTime={post.published}>{dateFormat.format(new Date(post.published))} · {post.readingMinutes} min de lecture</time>
                 <strong>{post.title}</strong>
                 <span>{post.description}</span>
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Link href="/guides/bagage-cabine">
-              <time>Guide</time>
-              <strong>Bagage cabine : les vérifications avant le vol</strong>
-              <span>Dimensions, poids et points à vérifier avant le départ.</span>
+              </div>
             </Link>
-          </li>
-        </ul>
-        <Link className="text-link" href="/vols">Voir tous les itinéraires →</Link>
+          ))}
+        </div>
+        <Link className="text-link" href="/guides/bagage-cabine">Guide : bagage cabine, les vérifications avant le vol →</Link>
+        <br /><Link className="text-link" href="/vols">Voir tous les itinéraires →</Link>
       </section>
     </main>
   );

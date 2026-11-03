@@ -27,7 +27,7 @@ export const blogPosts: BlogPost[] = [
     title: "Vol pour l’Algérie en été : quand réserver et comment payer moins cher",
     description: "Alger, Oran, Constantine : à quel moment réserver un vol pour l’Algérie en été, quels pièges éviter sur les bagages et comment comparer les aéroports de départ.",
     keyPoints: ["Les prix montent sur quelques semaines : vacances, retours en famille, fêtes.", "Décaler le départ ou le retour de quelques jours change souvent le tarif.", "Comparez plusieurs aéroports de départ et le bagage inclus avant de payer."],
-    heroImage: "/blog/vol-algerie-ete-quand-reserver.webp",
+    heroImage: "https://images.unsplash.com/photo-1706002027900-a1be40d0627e?auto=format&fit=crop&w=1600&q=75",
     published: "2026-10-30",
     updated: "2026-10-30",
     readingMinutes: 4,
@@ -80,7 +80,7 @@ export const blogPosts: BlogPost[] = [
     title: "Vol Paris – Marrakech : durée, aéroports, meilleur moment et budget",
     description: "Tout savoir avant de réserver un vol Paris – Marrakech : durée, aéroports de départ, compagnies, meilleure période et conseils pour comparer le prix total.",
     keyPoints: ["Marrakech est desservie en vol direct depuis Paris et plusieurs villes de province.", "Comparez le prix total : bagage, transfert, et pas seulement le tarif d’appel.", "Le printemps et l’automne sont les plus demandés."],
-    heroImage: "/blog/vol-paris-marrakech-guide.webp",
+    heroImage: "https://images.unsplash.com/photo-1596750320291-a082a23dcc19?auto=format&fit=crop&w=1600&q=75",
     published: "2026-10-30",
     updated: "2026-10-30",
     readingMinutes: 4,
@@ -129,7 +129,7 @@ export const blogPosts: BlogPost[] = [
     title: "Orly, Roissy-CDG ou Beauvais : quel aéroport choisir pour votre vol ?",
     description: "Orly, Roissy-Charles de Gaulle ou Beauvais : comparez accès, durée de transfert et prix total pour choisir l’aéroport parisien le plus adapté à votre départ.",
     keyPoints: ["Les trois aéroports ne coûtent pas le même prix, ni le même temps de trajet.", "Ajoutez au billet le transport jusqu’à l’aéroport avant de comparer.", "Gardez une marge de sécurité, surtout pour un vol tôt ou tard."],
-    heroImage: "/blog/orly-roissy-beauvais-quel-aeroport.webp",
+    heroImage: "https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1600&q=75",
     published: "2026-10-30",
     updated: "2026-10-30",
     readingMinutes: 3,
@@ -175,7 +175,7 @@ export const blogPosts: BlogPost[] = [
     title: "Quand réserver un vol pas cher : les règles qui marchent vraiment",
     description: "Il n’existe pas de jour magique pour réserver un vol. Voici ce qui fait réellement baisser le prix : dates flexibles, jour de départ, comparaison et alertes.",
     keyPoints: ["Ce qui compte, c’est le jour du voyage, pas l’heure de la réservation.", "Comparez un mois entier plutôt qu’une seule date.", "Ajoutez le bagage avant de comparer deux billets."],
-    heroImage: "/blog/quand-reserver-vol-pas-cher.webp",
+    heroImage: "https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?auto=format&fit=crop&w=1600&q=75",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 5,
@@ -223,7 +223,7 @@ export const blogPosts: BlogPost[] = [
     title: "Partir de Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes : quand c’est plus avantageux",
     description: "Partir de la province évite le trajet vers Paris. Voici quand un vol direct depuis Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes est le meilleur choix.",
     keyPoints: ["Un vol direct depuis votre ville évite le train jusqu’à Paris.", "Comparez le coût total, de porte à porte.", "L’offre change selon la saison : vérifiez les jours de desserte."],
-    heroImage: "/blog/vol-pas-cher-depuis-province.webp",
+    heroImage: "https://images.unsplash.com/photo-1602087594298-706ccc894bfd?auto=format&fit=crop&w=1600&q=75",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 5,
@@ -264,7 +264,7 @@ export const blogPosts: BlogPost[] = [
     title: "Week-end pas cher en Europe : comment choisir la destination et le vol",
     description: "Barcelone, Lisbonne, Rome, Madrid ou Londres : comment choisir un week-end court au meilleur prix, quels jours partir et quels pièges éviter sur les bagages.",
     keyPoints: ["Partez du budget : comparez au moins trois destinations aux mêmes dates.", "Décaler d’un jour fait souvent baisser le prix.", "Sur un vol court, le bagage en soute peut doubler le billet."],
-    heroImage: "/blog/week-end-europe-vol-pas-cher.webp",
+    heroImage: "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?auto=format&fit=crop&w=1600&q=75",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 5,
@@ -304,7 +304,7 @@ export const blogPosts: BlogPost[] = [
     title: "Vols vers le Maroc et la Tunisie : quand réserver et d’où partir pour payer moins",
     description: "Marrakech, Casablanca, Agadir, Tunis : à quelle période réserver, quels aéroports de départ comparer et comment éviter les surprises sur les bagages.",
     keyPoints: ["Vacances, ponts et fêtes concentrent la demande.", "Comparez plusieurs villes de départ, Paris et province.", "Le bagage en soute compte beaucoup sur ces liaisons."],
-    heroImage: "/blog/vol-maroc-tunisie-quand-reserver.webp",
+    heroImage: "https://images.unsplash.com/photo-1653174638637-bffdc627376d?auto=format&fit=crop&w=1600&q=75",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 5,
@@ -345,7 +345,7 @@ export const blogPosts: BlogPost[] = [
     title: "Billet d’avion pas cher : 10 astuces qui marchent vraiment (et 3 qui ne servent à rien)",
     description: "Comment payer un billet d’avion moins cher : dates flexibles, aéroport, bagages, escales, alertes de prix. 10 astuces concrètes à tester avant de réserver.",
     keyPoints: ["Cherchez sur un mois entier, pas sur une seule date.", "Comparez plusieurs aéroports et plusieurs destinations.", "Ajoutez toujours le bagage avant de comparer.", "Il n’existe ni jour ni heure magique pour réserver."],
-    heroImage: "/blog/billet-avion-pas-cher-astuces.webp",
+    heroImage: "https://images.unsplash.com/photo-1593182440709-4b7b56482c55?auto=format&fit=crop&w=1600&q=75",
     published: "2026-11-02",
     updated: "2026-11-02",
     readingMinutes: 7,
@@ -405,7 +405,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol dernière minute : comment payer moins cher",
     title: "Vol de dernière minute : comment trouver un billet pas cher (et quand éviter)",
     description: "Partir dans les jours qui viennent : quand la dernière minute fait économiser, quand elle coûte plus cher, et comment comparer vite pour ne pas surpayer.",
-    heroImage: "/blog/vol-derniere-minute-astuces.webp",
+    heroImage: "https://images.unsplash.com/photo-1490430657723-4d607c1503fc?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["La dernière minute coûte souvent plus cher sur les trajets très demandés.", "Elle peut être avantageuse hors vacances, avec des dates flexibles.", "Comparez plusieurs aéroports et plusieurs jours avant de décider."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -423,7 +423,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Bagage cabine ou soute : que choisir ?",
     title: "Bagage cabine ou bagage en soute : que choisir pour payer moins cher",
     description: "Cabine ou soute : comment choisir selon la durée du séjour, la compagnie et le prix total. Les erreurs qui font payer plus cher à l’aéroport.",
-    heroImage: "/blog/bagage-cabine-ou-soute-que-choisir.webp",
+    heroImage: "https://images.unsplash.com/photo-1670888664952-efff442ec0d2?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Le prix du billet sans bagage n’est pas le prix final.", "Les règles et les dimensions changent selon la compagnie : vérifiez-les avant de réserver.", "Ajouter le bagage en ligne coûte en général moins cher qu’à l’aéroport."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -441,7 +441,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol direct ou escale : que choisir ?",
     title: "Vol direct ou avec escale : comment choisir selon le prix et le temps",
     description: "Direct ou escale : ce que l’escale fait gagner et perdre, comment lire la durée de correspondance et quand le vol direct reste le meilleur choix.",
-    heroImage: "/blog/vol-direct-ou-escale-que-choisir.webp",
+    heroImage: "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["L’escale fait souvent baisser le prix, mais allonge le trajet.", "Une correspondance trop courte est un risque, trop longue une journée perdue.", "Comptez la durée totale, pas seulement le prix."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -459,7 +459,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Aller simple ou aller-retour : que choisir ?",
     title: "Aller simple ou aller-retour : parfois deux allers simples coûtent moins cher",
     description: "Aller-retour ou deux allers simples : quand combiner deux billets fait économiser, et les risques à connaître avant de réserver séparément.",
-    heroImage: "/blog/aller-simple-ou-aller-retour.webp",
+    heroImage: "https://images.unsplash.com/photo-1655722724447-2d2a3071e7f8?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Comparez toujours l’aller-retour et deux allers simples.", "Deux billets séparés n’offrent pas la même protection en cas de problème.", "Ajoutez les bagages aux deux options pour comparer à armes égales."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -477,7 +477,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Low cost : les frais cachés à vérifier",
     title: "Compagnies low cost : les frais cachés à vérifier avant de payer",
     description: "Bagage, siège, enregistrement, paiement : la liste des options payantes sur les vols low cost et comment comparer le prix réel avant de réserver.",
-    heroImage: "/blog/compagnies-low-cost-frais-caches.webp",
+    heroImage: "https://images.unsplash.com/photo-1529074963764-98f45c47344b?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Le prix affiché n’inclut pas toujours le bagage.", "Siège, enregistrement et paiement peuvent être facturés.", "Comparez le total final, pas le tarif d’appel."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -495,7 +495,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vacances scolaires : réserver son vol",
     title: "Vacances scolaires : comment réserver un vol sans exploser le budget",
     description: "Les prix des vols montent pendant les vacances scolaires. Comment réserver à temps, décaler ses dates et comparer les aéroports de départ.",
-    heroImage: "/blog/vol-vacances-scolaires-prix.webp",
+    heroImage: "https://images.unsplash.com/photo-1760654339407-970cede10f46?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Les vols des vacances se remplissent vite : comparez tôt.", "Décaler le départ ou le retour de quelques jours change le tarif.", "Comparez plusieurs aéroports, dont ceux de province."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -513,7 +513,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Istanbul : quel aéroport et quand partir",
     title: "Vol pour Istanbul : quel aéroport choisir et quand réserver",
     description: "Istanbul compte deux aéroports principaux. Comment choisir entre IST et SAW, quand partir et comment comparer les vols depuis Paris ou la province.",
-    heroImage: "/blog/vol-istanbul-guide-aeroports.webp",
+    heroImage: "https://images.unsplash.com/photo-1759173214279-61d177954a40?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Istanbul compte deux aéroports : IST et Sabiha Gökçen (SAW).", "Choisissez selon votre quartier, pas seulement selon le prix.", "Le printemps et l’automne sont les périodes les plus agréables."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -531,7 +531,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Lisbonne : quand partir et d’où partir",
     title: "Vol pour Lisbonne : quand partir, d’où partir et comment payer moins",
     description: "Lisbonne en week-end ou pour une semaine : meilleure période, villes de départ en France, aéroport proche du centre et conseils pour réserver.",
-    heroImage: "/blog/vol-lisbonne-guide-conseils.webp",
+    heroImage: "https://images.unsplash.com/photo-1616862890964-fd20e9dd106d?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["L’aéroport de Lisbonne est proche du centre-ville.", "Le printemps et le début de l’automne sont très demandés.", "Comparez Paris et la province : des vols directs partent de plusieurs villes."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -549,7 +549,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Londres : quel aéroport choisir ?",
     title: "Vol pour Londres : Heathrow, Gatwick, Stansted, Luton ou City ?",
     description: "Londres compte cinq grands aéroports. Comment choisir selon le prix, le trajet vers le centre et votre hébergement, au départ de Paris ou de province.",
-    heroImage: "/blog/vol-londres-quel-aeroport.webp",
+    heroImage: "https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Heathrow, Gatwick, Stansted, Luton et London City : cinq aéroports principaux.", "Ajoutez le coût et la durée du transfert au prix du billet.", "Choisissez selon la zone où vous logez."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -567,7 +567,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol New York : prix, formalités et conseils",
     title: "Vol pour New York depuis la France : prix, formalités et conseils",
     description: "New York depuis Paris, Nice ou la province : quand partir, durée du vol, autorisation de voyage à prévoir et conseils pour réserver au meilleur prix.",
-    heroImage: "/blog/vol-new-york-conseils-formalites.webp",
+    heroImage: "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Prévoyez l’autorisation de voyage électronique avant le départ.", "Comparez plusieurs aéroports d’arrivée : JFK, Newark et LaGuardia.", "Les fêtes et l’été sont les périodes les plus chères."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -585,7 +585,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Barcelone : quand partir et d’où partir",
     title: "Vol pour Barcelone : d’où partir, quand réserver et comment payer moins",
     description: "Barcelone depuis Paris, Lyon, Marseille, Nice ou Toulouse : durée du vol, meilleure période, aéroport et conseils pour payer moins cher votre billet. Comparez.",
-    heroImage: "/blog/vol-barcelone-guide-conseils.webp",
+    heroImage: "https://images.unsplash.com/photo-1630219694734-fe47ab76b15e?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Le vol dure environ une heure et quart à deux heures selon la ville de départ.", "Comparez Paris et la province : de nombreux vols directs partent de huit autres villes.", "Sur un vol court, le bagage en soute pèse lourd dans le prix."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -609,7 +609,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Rome : quel aéroport et quand partir",
     title: "Vol pour Rome : Fiumicino ou Ciampino, quand partir et d’où partir",
     description: "Rome depuis la France : choisir entre Fiumicino et Ciampino, durée du vol, meilleure période et conseils pour trouver un billet moins cher. Comparez les prix.",
-    heroImage: "/blog/vol-rome-guide-aeroports.webp",
+    heroImage: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Rome compte deux aéroports principaux : Fiumicino (FCO) et Ciampino (CIA).", "Fiumicino est à environ 30 km du centre de Rome.", "Pâques et l’été sont les périodes les plus chères."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -633,7 +633,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Madrid : quand partir et d’où partir",
     title: "Vol pour Madrid : durée, aéroport, quand partir et comment payer moins",
     description: "Madrid depuis Paris ou la province : durée du vol, aéroport de Barajas, meilleure période et conseils pour trouver un billet pas cher. Comparez gratuitement.",
-    heroImage: "/blog/vol-madrid-guide-conseils.webp",
+    heroImage: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Des vols directs partent de Paris et de huit villes de province.", "L’aéroport de Madrid-Barajas est à environ 13 km du centre.", "Le printemps et l’automne sont les périodes les plus demandées."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -657,7 +657,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Dubaï : quand partir et comment payer moins",
     title: "Vol pour Dubaï depuis la France : quand partir, durée et conseils pour payer moins",
     description: "Dubaï depuis Paris, Nice ou Lyon : durée du vol, meilleure période, formalités à vérifier et conseils pour réserver un billet moins cher. Comparez gratuitement.",
-    heroImage: "/blog/vol-dubai-quand-partir-conseils.webp",
+    heroImage: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["La saison la plus agréable va d’octobre à avril, et c’est aussi la plus chère.", "Des vols directs partent de Paris et de Nice ; d’autres villes proposent des escales.", "Vérifiez les formalités d’entrée selon votre nationalité avant de réserver."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -681,7 +681,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Marrakech depuis la province : villes et prix",
     title: "Vol pour Marrakech depuis la province : Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille",
     description: "Marrakech sans passer par Paris : vols directs depuis Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille et Bâle-Mulhouse, prix et conseils. Comparez.",
-    heroImage: "/blog/vol-marrakech-depuis-la-province.webp",
+    heroImage: "https://images.unsplash.com/photo-1570135460237-510ca82c6781?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Marrakech se rejoint en environ 2 h 30 à 3 h 20 depuis la province.", "Huit villes proposent des liaisons : comparez-les avant de choisir Paris.", "Le printemps et l’automne sont les plus demandés."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -705,7 +705,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Vol Tunis : quand réserver et d’où partir",
     title: "Vol pour Tunis depuis la France : quand réserver, d’où partir et conseils",
     description: "Tunis depuis Paris, Lyon, Marseille, Toulouse, Bordeaux ou Nantes : durée du vol, périodes chères, bagages et conseils pour réserver moins cher. Comparez.",
-    heroImage: "/blog/vol-tunis-guide-conseils.webp",
+    heroImage: "https://images.unsplash.com/photo-1607869861980-da5f9b8b4969?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Tunis se rejoint en environ deux heures depuis le Sud de la France.", "L’été et les fêtes de fin d’année concentrent la demande.", "Comparez la franchise de bagages : elle varie beaucoup d’une offre à l’autre."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -729,7 +729,7 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "Prix vols Marrakech et Barcelone depuis 9 villes",
     title: "Prix des vols Marrakech et Barcelone depuis 9 villes : relevé du 2 novembre 2026",
     description: "Prix aller-retour les plus bas relevés vers Marrakech et Barcelone depuis Paris, Lyon, Marseille, Nice, Bordeaux et d’autres villes, méthode et limites.",
-    heroImage: "/blog/barometre-prix-marrakech-barcelone-novembre-2026.webp",
+    heroImage: "https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?auto=format&fit=crop&w=1600&q=75",
     keyPoints: ["Marrakech : dès 43 € au départ de Paris, 55 € de Lyon, 61 € de Marseille (relevé du 2 novembre 2026).","Barcelone : dès 43 € de Paris, 47 € de Bâle-Mulhouse, 53 € de Lyon.","Ce sont des prix minimums relevés, pas des moyennes : ils changent chaque jour."],
     published: "2026-11-02",
     updated: "2026-11-02",
@@ -748,6 +748,135 @@ export const blogPosts: BlogPost[] = [
       { question: "D’où viennent ces prix ?", answer: "Du réseau de partenaires de HiFlight (Travelpayouts), qui relève les prix aller-retour les plus bas pour les six prochains mois. Les pages de vols sont mises à jour chaque jour." }
     ],
     relatedRoutes: ["paris-marrakech","lyon-marrakech","marseille-marrakech","toulouse-marrakech","paris-barcelone","lyon-barcelone","nice-barcelone","bale-mulhouse-barcelone"]
+  },
+  {
+    "slug": "travel-tuesday-2026-bons-plans-vols",
+    "metaTitle": "Travel Tuesday 2026 : bons plans vols",
+    "title": "Travel Tuesday 2026 (1er décembre) : comment dénicher les vrais bons plans vols",
+    "description": "Travel Tuesday 2026 tombe le mardi 1er décembre. Calendrier des offres, destinations préférées des Français, pièges à éviter et méthode pour comparer avant de réserver.",
+    "heroImage": "https://images.unsplash.com/photo-1631080801009-5b4741cf3f12?auto=format&fit=crop&w=1600&q=75",
+    "keyPoints": [
+      "Le Travel Tuesday 2026 a lieu le mardi 1er décembre, après le Black Friday (27 novembre) et le Cyber Monday (30 novembre).",
+      "Certaines plateformes ouvrent leurs offres en avance : eDreams annonce le 19 novembre dans son application et le 20 novembre partout ailleurs.",
+      "Les promotions ne concernent pas toutes les routes ni toutes les dates, et visent souvent des départs de janvier à mai.",
+      "Le bon réflexe : noter le prix de votre trajet avant, puis comparer le jour J, bagages et aéroport compris."
+    ],
+    "published": "2026-11-03",
+    "updated": "2026-11-03",
+    "readingMinutes": 5,
+    "intro": "Après le Black Friday et le Cyber Monday vient le rendez-vous des voyageurs : le Travel Tuesday. Compagnies aériennes, hôtels et agences y lancent leurs promotions de fin d’année. En 2026, il tombe le mardi 1er décembre. Voici comment s’y préparer, ce qu’on peut raisonnablement en attendre et comment vérifier qu’une offre est vraiment une bonne affaire.",
+    "sections": [
+      {
+        "heading": "C’est quoi, le Travel Tuesday ?",
+        "paragraphs": [
+          "Le Travel Tuesday est une journée de promotions entièrement consacrée au voyage : vols, hôtels, locations de voiture et séjours. Elle tombe le mardi qui suit Thanksgiving, donc juste après le Black Friday et le Cyber Monday.",
+          "Né aux États-Unis, ce rendez-vous existe depuis près d’une dizaine d’années et s’étend peu à peu en Europe, comme l’ont fait avant lui le Black Friday et le Cyber Monday. En France, de nombreuses compagnies aériennes, plateformes de réservation et agences y participent désormais."
+        ]
+      },
+      {
+        "heading": "Le calendrier 2026 à garder en tête",
+        "paragraphs": [
+          "Les offres ne tiennent pas toutes sur une seule journée. Certaines plateformes démarrent bien avant le mardi, d’autres reprennent en le prolongeant. Voici les dates à retenir cette année :"
+        ],
+        "table": {
+          "headers": [
+            "Date",
+            "Événement"
+          ],
+          "rows": [
+            [
+              "Jeudi 19 novembre",
+              "Lancement anticipé des offres Travel Tuesday dans l’application eDreams"
+            ],
+            [
+              "Vendredi 20 novembre",
+              "Ouverture des mêmes offres sur les autres supports eDreams (site et mobile)"
+            ],
+            [
+              "Vendredi 27 novembre",
+              "Black Friday"
+            ],
+            [
+              "Lundi 30 novembre",
+              "Cyber Monday"
+            ],
+            [
+              "Mardi 1er décembre",
+              "Travel Tuesday 2026"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "À quoi s’attendre vraiment",
+        "paragraphs": [
+          "Oui, on peut trouver des vols moins chers à cette période, mais pas sur toutes les routes ni à toutes les dates. Les bonnes affaires se concentrent souvent sur certaines destinations, avec des dates flexibles et un nombre de places limité.",
+          "Les offres visent généralement des départs de janvier à mai de l’année suivante, ce qui en fait un bon moment pour préparer les vacances de février, le printemps ou un week-end prolongé. Plusieurs compagnies, comme TAP Air Portugal ou Air Europa, publient d’ailleurs une page dédiée à leur campagne.",
+          "Un conseil simple : regardez aussi les offres du week-end précédent. Une promotion affichée le mardi peut déjà avoir été proposée pendant le Black Friday."
+        ]
+      },
+      {
+        "heading": "7 réflexes pour ne pas se tromper",
+        "paragraphs": [
+          "Une promotion n’est intéressante que si le prix final est bas. Avant de cliquer sur « réserver », vérifiez ces points :"
+        ],
+        "list": [
+          "Notez le prix de votre trajet une à deux semaines avant, pour savoir si la remise est réelle.",
+          "Regardez ce qui est inclus : bagage cabine, bagage en soute, choix du siège. Un tarif bas peut cacher des options payantes.",
+          "Comparez l’aller-retour avec deux allers simples, parfois avec deux compagnies différentes.",
+          "Testez les aéroports proches : à Paris, Orly, Roissy et Beauvais ne donnent pas le même prix total une fois le transfert ajouté.",
+          "Restez flexible de quelques jours : décaler un départ peut changer le prix, et la page de chaque trajet HiFlight indique le jour de la semaine le moins cher.",
+          "Lisez les conditions de modification et d’annulation : certains tarifs promotionnels sont plus restrictifs.",
+          "Inscrivez-vous aux newsletters des compagnies qui vous intéressent : elles annoncent souvent leurs ventes en avant-première."
+        ]
+      },
+      {
+        "heading": "Quelles destinations viser ?",
+        "paragraphs": [
+          "Les destinations préférées des Français donnent de bons repères pour savoir où chercher. D’après les classements publiés par eDreams, Barcelone, Marrakech et Lisbonne ont été les plus réservées par les voyageurs français en 2025. Pour 2026, le classement relayé par la presse spécialisée place Bangkok en tête, devant Marrakech et Pointe-à-Pitre.",
+          "Sur HiFlight, chaque page de trajet affiche les prix les plus bas relevés, le jour de la semaine le moins cher et la part de vols directs. C’est un bon point de départ pour savoir si une offre du Travel Tuesday est vraiment compétitive."
+        ]
+      },
+      {
+        "heading": "Comment HiFlight vous aide ce jour-là",
+        "paragraphs": [
+          "Le jour J, ne vous limitez pas à un seul site. Utilisez HiFlight pour comparer en une seule recherche les offres de centaines de compagnies et d’agences, puis réservez chez le partenaire de votre choix. C’est gratuit et sans inscription.",
+          "Pour préparer votre trajet dès maintenant, consultez les pages en bas de cet article : les prix affichés sont des relevés récents, mis à jour chaque jour."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quand a lieu le Travel Tuesday 2026 ?",
+        "answer": "Le mardi 1er décembre 2026, le mardi qui suit le Black Friday (27 novembre) et le Cyber Monday (30 novembre). Certaines plateformes lancent leurs offres plus tôt, dès le 19 ou le 20 novembre."
+      },
+      {
+        "question": "Le Travel Tuesday est-il vraiment moins cher que le reste de l’année ?",
+        "answer": "Pas toujours. Les promotions existent, mais elles ne concernent pas toutes les routes ni toutes les dates. Notez le prix de votre trajet avant le jour J et comparez le prix total, bagages compris."
+      },
+      {
+        "question": "Faut-il attendre le Travel Tuesday pour réserver ?",
+        "answer": "Si votre date est fixe et proche, attendre peut être risqué : les prix peuvent monter. Si vous êtes flexible et que vous partez de janvier à mai, c’est un bon moment pour comparer."
+      },
+      {
+        "question": "Pour quelles dates de voyage sont valables les offres ?",
+        "answer": "Elles visent le plus souvent des départs de janvier à mai de l’année suivante. Vérifiez toujours les dates exactes de chaque offre."
+      },
+      {
+        "question": "HiFlight vend-il les billets ?",
+        "answer": "Non. HiFlight compare les offres, puis vous redirige vers le partenaire choisi, qui assure la réservation, le paiement et le service après-vente."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-marrakech",
+      "paris-barcelone",
+      "paris-lisbonne",
+      "paris-bangkok",
+      "paris-pointe-a-pitre",
+      "paris-rome",
+      "paris-londres",
+      "paris-istanbul"
+    ]
   }
 ];
 
