@@ -1,4 +1,4 @@
-export type BlogSection = { heading: string; paragraphs: string[]; list?: string[]; table?: { headers: string[]; rows: string[][] } };
+export type BlogSection = { heading: string; paragraphs: string[]; list?: string[]; table?: { headers: string[]; rows: string[][] }; /** Tableau de prix HiFlight en direct pour ces trajets (slugs). */ routeTable?: string[] };
 
 export type BlogPost = {
   slug: string;
@@ -16,6 +16,8 @@ export type BlogPost = {
   heroImage?: string;
   /** Encadré « À retenir » affiché sous l’introduction. */
   keyPoints?: string[];
+  /** Compte à rebours affiché en tête d’article. */
+  countdown?: { to: string };
   /** FAQ affichée en fin d’article et balisée pour Google. */
   faq?: { question: string; answer: string }[];
 };
@@ -751,46 +753,55 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "travel-tuesday-2026-bons-plans-vols",
-    "metaTitle": "Travel Tuesday 2026 : bons plans vols",
-    "title": "Travel Tuesday 2026 (1er décembre) : comment dénicher les vrais bons plans vols",
-    "description": "Travel Tuesday 2026 tombe le mardi 1er décembre. Calendrier des offres, destinations préférées des Français, pièges à éviter et méthode pour comparer avant de réserver.",
+    "metaTitle": "Travel Tuesday 2026 : date, offres vols, bons plans",
+    "title": "Travel Tuesday 2026 (1er décembre) : date, offres de vols et méthode pour de vrais bons plans",
+    "description": "Travel Tuesday 2026 le mardi 1er décembre : calendrier des offres, quel jour réserver, chiffres 2025, prix de référence HiFlight et pièges à éviter avant d’acheter un vol.",
     "heroImage": "https://images.unsplash.com/photo-1631080801009-5b4741cf3f12?auto=format&fit=crop&w=1600&q=75",
+    "countdown": {
+      "to": "2026-12-01T00:00:00+01:00"
+    },
     "keyPoints": [
-      "Le Travel Tuesday 2026 a lieu le mardi 1er décembre, après le Black Friday (27 novembre) et le Cyber Monday (30 novembre).",
-      "Certaines plateformes ouvrent leurs offres en avance : eDreams annonce le 19 novembre dans son application et le 20 novembre partout ailleurs.",
-      "Les promotions ne concernent pas toutes les routes ni toutes les dates, et visent souvent des départs de janvier à mai.",
-      "Le bon réflexe : noter le prix de votre trajet avant, puis comparer le jour J, bagages et aéroport compris."
+      "Travel Tuesday 2026 : mardi 1er décembre, après le Black Friday (27 novembre) et le Cyber Monday (30 novembre).",
+      "Les offres démarrent avant : eDreams annonce le 19 novembre dans son application et le 20 novembre sur les autres supports ; Air France a déjà ses prix « L’Instant » jusqu’au 17 novembre.",
+      "D’après Skyscanner, le Cyber Monday 2025 était le jour le moins cher en moyenne sur les cinq jours : ne pas tout miser sur le mardi.",
+      "En 2025, Skyscanner a relevé les plus fortes baisses vers Alger (−16,5 %), Porto, Lisbonne et Barcelone.",
+      "Méthode : notez le prix de référence de votre trajet avant, puis comparez le jour J, bagages et aéroport compris."
     ],
     "published": "2026-11-03",
     "updated": "2026-11-03",
-    "readingMinutes": 5,
-    "intro": "Après le Black Friday et le Cyber Monday vient le rendez-vous des voyageurs : le Travel Tuesday. Compagnies aériennes, hôtels et agences y lancent leurs promotions de fin d’année. En 2026, il tombe le mardi 1er décembre. Voici comment s’y préparer, ce qu’on peut raisonnablement en attendre et comment vérifier qu’une offre est vraiment une bonne affaire.",
+    "readingMinutes": 8,
+    "intro": "Le Travel Tuesday est le Black Friday des voyageurs : une journée où compagnies aériennes, hôtels et plateformes dégainent leurs promotions de fin d’année. En 2026, rendez-vous le mardi 1er décembre. Voici tout ce qu’il faut savoir : les dates, les chiffres de l’an dernier, les destinations à surveiller et surtout comment vérifier qu’une offre est vraiment une bonne affaire.",
     "sections": [
       {
         "heading": "C’est quoi, le Travel Tuesday ?",
         "paragraphs": [
-          "Le Travel Tuesday est une journée de promotions entièrement consacrée au voyage : vols, hôtels, locations de voiture et séjours. Elle tombe le mardi qui suit Thanksgiving, donc juste après le Black Friday et le Cyber Monday.",
-          "Né aux États-Unis, ce rendez-vous existe depuis près d’une dizaine d’années et s’étend peu à peu en Europe, comme l’ont fait avant lui le Black Friday et le Cyber Monday. En France, de nombreuses compagnies aériennes, plateformes de réservation et agences y participent désormais."
+          "Le Travel Tuesday est une journée de promotions entièrement consacrée au voyage : vols, hôtels, locations de voiture et séjours. Il tombe le mardi qui suit Thanksgiving, donc juste après le Black Friday et le Cyber Monday.",
+          "Il est apparu en 2017 à la suite d’une observation du site d’analyse de prix Hopper, et il a pris de l’ampleur depuis. Selon le cabinet McKinsey, les recherches sur ce terme ont progressé de plus de 500 % entre 2021 et 2023. Le cabinet souligne aussi que novembre et décembre sont des mois creux pour les réservations : les promotions servent à remplir les départs des mois suivants.",
+          "Longtemps cantonné à l’Amérique du Nord, le Travel Tuesday gagne l’Europe, comme l’ont fait avant lui le Black Friday et le Cyber Monday."
         ]
       },
       {
-        "heading": "Le calendrier 2026 à garder en tête",
+        "heading": "Le calendrier 2026, date par date",
         "paragraphs": [
-          "Les offres ne tiennent pas toutes sur une seule journée. Certaines plateformes démarrent bien avant le mardi, d’autres reprennent en le prolongeant. Voici les dates à retenir cette année :"
+          "Les offres ne tiennent pas sur une seule journée. Certaines démarrent plusieurs jours avant, d’autres se prolongent après. Voici les dates à retenir :"
         ],
         "table": {
           "headers": [
             "Date",
-            "Événement"
+            "Ce qui se passe"
           ],
           "rows": [
+            [
+              "Jusqu’au 17 novembre",
+              "« L’Instant Air France » : prix promotionnels sur de nombreuses destinations long-courriers (New York, Montréal, Tokyo, Dubaï…)"
+            ],
             [
               "Jeudi 19 novembre",
               "Lancement anticipé des offres Travel Tuesday dans l’application eDreams"
             ],
             [
               "Vendredi 20 novembre",
-              "Ouverture des mêmes offres sur les autres supports eDreams (site et mobile)"
+              "Ouverture des mêmes offres sur les autres supports eDreams (site, mobile)"
             ],
             [
               "Vendredi 27 novembre",
@@ -808,11 +819,95 @@ export const blogPosts: BlogPost[] = [
         }
       },
       {
-        "heading": "À quoi s’attendre vraiment",
+        "heading": "Black Friday, Cyber Monday ou Travel Tuesday : quel jour choisir ?",
         "paragraphs": [
-          "Oui, on peut trouver des vols moins chers à cette période, mais pas sur toutes les routes ni à toutes les dates. Les bonnes affaires se concentrent souvent sur certaines destinations, avec des dates flexibles et un nombre de places limité.",
-          "Les offres visent généralement des départs de janvier à mai de l’année suivante, ce qui en fait un bon moment pour préparer les vacances de février, le printemps ou un week-end prolongé. Plusieurs compagnies, comme TAP Air Portugal ou Air Europa, publient d’ailleurs une page dédiée à leur campagne.",
-          "Un conseil simple : regardez aussi les offres du week-end précédent. Une promotion affichée le mardi peut déjà avoir été proposée pendant le Black Friday."
+          "C’est la vraie question, et la réponse surprend. Skyscanner a analysé, en 2025, le prix moyen le plus bas par siège sur les cinq jours qui vont du Black Friday au Travel Tuesday : le Cyber Monday ressortait comme le meilleur jour pour réserver un vol, même si des promotions subsistaient le lendemain.",
+          "À l’inverse, Hopper indiquait en 2023 qu’il y avait davantage d’offres le jour du Travel Tuesday que pendant le Cyber Monday ou le Black Friday. Plus d’offres ne veut pas dire de meilleurs prix sur votre trajet : tout dépend de la destination."
+        ],
+        "table": {
+          "headers": [
+            "Jour",
+            "Ce que disent les données"
+          ],
+          "rows": [
+            [
+              "Black Friday (27 nov.)",
+              "Début des promotions pour de nombreuses compagnies et plateformes, parfois avec des avant-premières"
+            ],
+            [
+              "Cyber Monday (30 nov.)",
+              "Jour le moins cher en moyenne sur les cinq jours, d’après l’analyse Skyscanner de 2025"
+            ],
+            [
+              "Travel Tuesday (1er déc.)",
+              "Le plus grand nombre d’offres, d’après Hopper (2023), avec des promotions encore possibles ce jour-là"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Ce que montrent les chiffres de 2025",
+        "paragraphs": [
+          "Skyscanner a publié les plus fortes baisses de prix constatées pendant le Travel Tuesday 2025. Elles concernent surtout des destinations moyen-courrier où de nombreuses compagnies se font concurrence."
+        ],
+        "table": {
+          "headers": [
+            "Destination",
+            "Baisse de prix constatée en 2025"
+          ],
+          "rows": [
+            [
+              "Alger",
+              "−16,5 %"
+            ],
+            [
+              "Porto",
+              "−16,0 %"
+            ],
+            [
+              "Lisbonne",
+              "−15,2 %"
+            ],
+            [
+              "Barcelone",
+              "−10,8 %"
+            ],
+            [
+              "Marrakech",
+              "−7,2 %"
+            ]
+          ]
+        },
+        "list": [
+          "Par pays, Skyscanner cite la Turquie (−18,1 %), l’Algérie (−16,9 %), le Portugal (−14,5 %), l’Allemagne (−13,9 %) et l’Espagne (−9,7 %).",
+          "Ces baisses sont des moyennes : un trajet précis, à une date précise, peut évoluer autrement. Elles servent de repère, pas de promesse."
+        ]
+      },
+      {
+        "heading": "Les prix de référence HiFlight à noter avant le 1er décembre",
+        "paragraphs": [
+          "Pour savoir si une offre est vraiment intéressante, il faut un point de comparaison. Voici, pour 12 trajets très demandés au départ de Paris, le prix aller-retour le plus bas relevé récemment, le mois le moins cher et le jour de départ le moins cher. Gardez ces chiffres : si une offre du Travel Tuesday ne passe pas sous ce plancher, ce n’est pas forcément une bonne affaire."
+        ],
+        "routeTable": [
+          "paris-marrakech",
+          "paris-barcelone",
+          "paris-lisbonne",
+          "paris-istanbul",
+          "paris-alger",
+          "paris-londres",
+          "paris-rome",
+          "paris-new-york",
+          "paris-bangkok",
+          "paris-pointe-a-pitre",
+          "paris-montreal",
+          "paris-dubai"
+        ]
+      },
+      {
+        "heading": "Qui participe en France ?",
+        "paragraphs": [
+          "Air France met déjà en avant ses plus beaux prix jusqu’au 17 novembre. TAP Air Portugal et Air Europa publient chacune une page dédiée à leur campagne Travel Tuesday. Côté plateformes, eDreams détaille son calendrier, et des agences comme Voyage Privé et lastminute.com consacrent une page à l’événement.",
+          "Pour les compagnies low cost comme Transavia, easyJet ou Vueling, nous n’avons pas relevé de calendrier officiel à ce jour. Le plus sûr est de surveiller leurs sites et leurs newsletters : les promotions sont souvent annoncées en avant-première. Pour les hôtels, de grands groupes comme Accor, Marriott, IHG ou Hilton avaient lancé des promotions au Black Friday l’an dernier, avec parfois une remise plus forte pour les membres de leur programme de fidélité."
         ]
       },
       {
@@ -821,27 +916,39 @@ export const blogPosts: BlogPost[] = [
           "Une promotion n’est intéressante que si le prix final est bas. Avant de cliquer sur « réserver », vérifiez ces points :"
         ],
         "list": [
-          "Notez le prix de votre trajet une à deux semaines avant, pour savoir si la remise est réelle.",
+          "Notez le prix de votre trajet une à deux semaines avant, pour savoir si la remise est réelle. Les prix de référence ci-dessus vous donnent déjà un repère.",
           "Regardez ce qui est inclus : bagage cabine, bagage en soute, choix du siège. Un tarif bas peut cacher des options payantes.",
           "Comparez l’aller-retour avec deux allers simples, parfois avec deux compagnies différentes.",
           "Testez les aéroports proches : à Paris, Orly, Roissy et Beauvais ne donnent pas le même prix total une fois le transfert ajouté.",
           "Restez flexible de quelques jours : décaler un départ peut changer le prix, et la page de chaque trajet HiFlight indique le jour de la semaine le moins cher.",
-          "Lisez les conditions de modification et d’annulation : certains tarifs promotionnels sont plus restrictifs.",
-          "Inscrivez-vous aux newsletters des compagnies qui vous intéressent : elles annoncent souvent leurs ventes en avant-première."
+          "Lisez les conditions de modification et d’annulation : des experts rappellent que certains tarifs promotionnels sont non remboursables ou ne se cumulent pas avec d’autres avantages.",
+          "Ne vous laissez pas presser : le nombre de places à prix promotionnel est limité, mais une offre qui disparaît en quelques minutes n’est pas toujours la meilleure du marché."
         ]
       },
       {
-        "heading": "Quelles destinations viser ?",
+        "heading": "Le plan en 5 étapes, de maintenant au 1er décembre",
         "paragraphs": [
-          "Les destinations préférées des Français donnent de bons repères pour savoir où chercher. D’après les classements publiés par eDreams, Barcelone, Marrakech et Lisbonne ont été les plus réservées par les voyageurs français en 2025. Pour 2026, le classement relayé par la presse spécialisée place Bangkok en tête, devant Marrakech et Pointe-à-Pitre.",
-          "Sur HiFlight, chaque page de trajet affiche les prix les plus bas relevés, le jour de la semaine le moins cher et la part de vols directs. C’est un bon point de départ pour savoir si une offre du Travel Tuesday est vraiment compétitive."
+          "Voici une méthode simple pour arriver prêt le jour J :"
+        ],
+        "list": [
+          "Dès maintenant : choisissez votre destination et vos dates (ou une période flexible), et notez le prix de référence de votre trajet.",
+          "Du 19 au 20 novembre : regardez les premières offres des plateformes qui ouvrent en avance et comparez-les à votre prix de référence.",
+          "Du 27 au 30 novembre : surveillez les offres du Black Friday et du Cyber Monday, qui peuvent déjà être les meilleures de la période.",
+          "Mardi 1er décembre : comparez une dernière fois, sur HiFlight et sur le site de la compagnie, puis décidez.",
+          "Avant de payer : relisez les bagages inclus, les conditions de modification et le prix total."
+        ]
+      },
+      {
+        "heading": "Au-delà des vols : hôtels, voitures et eSIM",
+        "paragraphs": [
+          "Le Travel Tuesday ne concerne pas que les billets d’avion. Pour un voyage complet, comparez aussi les hôtels, la location de voiture et une eSIM pour rester connecté sans frais de roaming. Tout se trouve au même endroit sur HiFlight."
         ]
       },
       {
         "heading": "Comment HiFlight vous aide ce jour-là",
         "paragraphs": [
           "Le jour J, ne vous limitez pas à un seul site. Utilisez HiFlight pour comparer en une seule recherche les offres de centaines de compagnies et d’agences, puis réservez chez le partenaire de votre choix. C’est gratuit et sans inscription.",
-          "Pour préparer votre trajet dès maintenant, consultez les pages en bas de cet article : les prix affichés sont des relevés récents, mis à jour chaque jour."
+          "Pour préparer votre trajet dès maintenant, consultez les cartes de prix en bas de cet article : les prix affichés sont des relevés récents, mis à jour chaque jour."
         ]
       }
     ],
@@ -851,8 +958,20 @@ export const blogPosts: BlogPost[] = [
         "answer": "Le mardi 1er décembre 2026, le mardi qui suit le Black Friday (27 novembre) et le Cyber Monday (30 novembre). Certaines plateformes lancent leurs offres plus tôt, dès le 19 ou le 20 novembre."
       },
       {
+        "question": "C’est quoi le Travel Tuesday ?",
+        "answer": "Une journée de promotions consacrée au voyage (vols, hôtels, voitures, séjours), qui suit le Black Friday et le Cyber Monday. Né aux États-Unis en 2017, il s’étend progressivement en Europe."
+      },
+      {
+        "question": "Quel est le meilleur jour pour réserver un vol : Black Friday, Cyber Monday ou Travel Tuesday ?",
+        "answer": "Il n’y a pas de jour gagnant sur tous les trajets. En 2025, Skyscanner a trouvé que le Cyber Monday était le jour le moins cher en moyenne sur les cinq jours, avec encore des promotions le mardi. Comparez sur plusieurs jours."
+      },
+      {
         "question": "Le Travel Tuesday est-il vraiment moins cher que le reste de l’année ?",
         "answer": "Pas toujours. Les promotions existent, mais elles ne concernent pas toutes les routes ni toutes les dates. Notez le prix de votre trajet avant le jour J et comparez le prix total, bagages compris."
+      },
+      {
+        "question": "Sur quelles destinations les prix baissent-ils le plus ?",
+        "answer": "En 2025, Skyscanner a relevé les plus fortes baisses vers Alger (−16,5 %), Porto (−16,0 %), Lisbonne (−15,2 %), Barcelone (−10,8 %) et Marrakech (−7,2 %). Ce sont des moyennes, pas une garantie pour votre trajet."
       },
       {
         "question": "Faut-il attendre le Travel Tuesday pour réserver ?",
@@ -861,6 +980,10 @@ export const blogPosts: BlogPost[] = [
       {
         "question": "Pour quelles dates de voyage sont valables les offres ?",
         "answer": "Elles visent le plus souvent des départs de janvier à mai de l’année suivante. Vérifiez toujours les dates exactes de chaque offre."
+      },
+      {
+        "question": "Les billets Travel Tuesday sont-ils remboursables ?",
+        "answer": "Cela dépend de l’offre. Certains tarifs promotionnels sont non remboursables ou ne se modifient pas. Lisez les conditions avant de payer."
       },
       {
         "question": "HiFlight vend-il les billets ?",

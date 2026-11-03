@@ -5,6 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import { blogPosts, getPost } from "@/lib/blog";
 import { flightRoutes, siteUrl } from "@/lib/content";
 import { getRouteStats } from "@/lib/route-data";
+import { Countdown } from "@/components/Countdown";
 
 export function generateStaticParams() { return blogPosts.map(({ slug }) => ({ slug })); }
 
@@ -32,6 +33,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const related = post.relatedRoutes.map((s) => flightRoutes.find((r) => r.slug === s)).filter((r) => r !== undefined);
   const otherPosts = blogPosts.filter((p) => p.slug !== post.slug && p.heroImage).slice(-3).reverse();
   const cards = await Promise.all(related.map(async (route) => ({ route, stats: await getRouteStats(route) })));
+  const tableSlugs = post.sections.flatMap((section) => section.routeTable ?? []);
+  const tableData = new Map(await Promise.all(tableSlugs.map(async (slug) => {
+    const route = flightRoutes.find((r) => r.slug === slug);
+    return [slug, route ? { route, stats: await getRouteStats(route) } : null] as const;
+  })));
   const heroUrl = post.heroImage ? absUrl(post.heroImage) : `${siteUrl}/hiflight-hero.jpg`;
 
   return (
@@ -66,6 +72,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <div>
           <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/blog">Conseils voyage</Link></p>
           <span className="art-chip">Conseils voyage</span>
+          {post.countdown ? <Countdown to={post.countdown.to} className="art-count" /> : null}
           <h1>{post.title}</h1>
           <p className="art-standfirst">{post.intro}</p>
         </div>
@@ -96,6 +103,30 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </table>
               </div>
             ) : null}
+            {section.routeTable ? (() => {
+              const rows = section.routeTable.map((slug) => tableData.get(slug)).filter((row) => row && row.stats);
+              if (!rows.length) return null;
+              const updated = rows[0]?.stats?.updatedAt;
+              return (
+                <>
+                  <div className="table-scroll">
+                    <table className="data-table ref-table">
+                      <thead><tr><th>Trajet</th><th>Prix le plus bas (A/R)</th><th>Mois le moins cher</th><th>Jour le moins cher</th><th>Vols directs</th></tr></thead>
+                      <tbody>{rows.map((row) => row && row.stats ? (
+                        <tr key={row.route.slug}>
+                          <td><Link href={`/vols/${row.route.slug}`}>{row.route.origin} – {row.route.destination}</Link></td>
+                          <td><strong>{row.stats.lowest.price} €</strong></td>
+                          <td>{row.stats.lowest.monthLabel}</td>
+                          <td>{row.stats.cheapestWeekday ? row.stats.cheapestWeekday.label : "—"}</td>
+                          <td>{row.stats.directShare !== null ? `${row.stats.directShare} %` : "—"}</td>
+                        </tr>
+                      ) : null)}</tbody>
+                    </table>
+                  </div>
+                  <p className="price-note">Prix aller-retour les plus bas relevés par le réseau de partenaires HiFlight (Travelpayouts) pour des départs dans les six prochains mois{updated ? `, calculés le ${dateFormat.format(new Date(updated))}` : ""}. Ce sont des planchers relevés, pas des prix garantis.</p>
+                </>
+              );
+            })() : null}
           </section>
         ))}
 
