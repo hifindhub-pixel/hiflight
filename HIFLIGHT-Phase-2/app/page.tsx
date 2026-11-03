@@ -1,3 +1,4 @@
+// Accueil : photos Unsplash (licence libre), relance de déploiement
 import type { Metadata } from "next";
 import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
