@@ -1,4 +1,4 @@
-// Accueil : photos Unsplash (licence libre), relance de déploiement
+// Accueil : photos Unsplash (licence libre), World Map et Passeport
 import type { Metadata } from "next";
 import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
