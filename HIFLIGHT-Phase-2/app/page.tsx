@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 };
 
 const destinations = [
-  ["paris-marrakech", "Marrakech", "Maroc", "/destinations/marrakech.jpg"],
-  ["paris-barcelone", "Barcelone", "Espagne", "/destinations/barcelone.jpg"],
-  ["paris-lisbonne", "Lisbonne", "Portugal", "/destinations/lisbonne.jpg"],
-  ["paris-bangkok", "Bangkok", "Thaïlande", "/destinations/bangkok.jpg"],
-  ["paris-pointe-a-pitre", "Pointe-à-Pitre", "Guadeloupe", "/destinations/pointe-a-pitre.jpg"],
-  ["paris-rome", "Rome", "Italie", "/destinations/rome.jpg"],
-  ["paris-londres", "Londres", "Royaume-Uni", "/destinations/londres.jpg"],
-  ["paris-istanbul", "Istanbul", "Turquie", "/destinations/istanbul.jpg"],
+  ["paris-marrakech", "Marrakech", "Maroc", "https://images.unsplash.com/photo-1597212618440-806262de4f6b?auto=format&fit=crop&w=640&q=70"],
+  ["paris-barcelone", "Barcelone", "Espagne", "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=640&q=70"],
+  ["paris-lisbonne", "Lisbonne", "Portugal", "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?auto=format&fit=crop&w=640&q=70"],
+  ["paris-bangkok", "Bangkok", "Thaïlande", "https://images.unsplash.com/photo-1562602833-0f4ab2fc46e3?auto=format&fit=crop&w=640&q=70"],
+  ["paris-pointe-a-pitre", "Pointe-à-Pitre", "Guadeloupe", "https://images.unsplash.com/photo-1661381082632-87fd1727bf58?auto=format&fit=crop&w=640&q=70"],
+  ["paris-rome", "Rome", "Italie", "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=640&q=70"],
+  ["paris-londres", "Londres", "Royaume-Uni", "https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=640&q=70"],
+  ["paris-istanbul", "Istanbul", "Turquie", "https://images.unsplash.com/photo-1589561454226-796a8aa89b05?auto=format&fit=crop&w=640&q=70"],
 ] as const;
 
 const services = [
