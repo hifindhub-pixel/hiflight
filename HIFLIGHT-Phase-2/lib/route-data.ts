@@ -19,7 +19,7 @@ async function fetchMonth(token: string, route: FlightRoute, key: string): Promi
   url.searchParams.set("show_to_affiliates", "true");
   url.searchParams.set("limit", "31");
   try {
-    const response = await fetch(url, { headers: { "X-Access-Token": token, Accept: "application/json" }, next: { revalidate: 86400 } });
+    const response = await fetch(url, { headers: { "X-Access-Token": token, Accept: "application/json" }, next: { revalidate: 86400 }, signal: AbortSignal.timeout(8000) });
     if (!response.ok) return [];
     const payload = (await response.json()) as { data?: Offer[] };
     return Array.isArray(payload.data) ? payload.data : [];
