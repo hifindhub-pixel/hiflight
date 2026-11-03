@@ -31,7 +31,7 @@ const destinations = [
 const services = [
   { href: "/hotels", title: "Hôtels", text: "Comparez les prix sur la carte", img: "/hero-hotels.webp" },
   { href: "/voitures", title: "Voitures", text: "Loueurs et points de retrait", img: "/hero-cars.webp" },
-  { href: "/esim", title: "eSIM", text: "Internet à l’étranger, sans roaming", img: "/account-earth.webp" },
+  { href: "/esim", title: "eSIM", text: "Internet à l’étranger, sans roaming", img: "https://images.unsplash.com/photo-1629653163521-5394bd65f28d?auto=format&fit=crop&w=800&q=70" },
 ];
 
 const reasons = [
@@ -88,6 +88,24 @@ export default async function Home() {
               <strong>{s.title}</strong><span>{s.text}</span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="section home-block">
+        <div className="wm-card">
+          <div className="wm-copy">
+            <span>World Map &amp; Passeport</span>
+            <h2>Collectionnez le monde.</h2>
+            <p>Colorez les pays que vous avez visités, notez ceux qui vous font rêver et gardez le souvenir de chaque voyage dans votre passeport HiFlight.</p>
+            <div className="wm-actions">
+              <Link href="/world-map" className="wm-btn wm-btn-main">Ouvrir ma World Map</Link>
+              <Link href="/world-map?view=passport" className="wm-btn">Voir mon passeport</Link>
+            </div>
+          </div>
+          <div className="wm-visual">
+            <img className="wm-earth" src="/account-earth.webp" alt="Globe HiFlight avec les pays visités" loading="lazy" width="360" height="360" />
+            <img className="wm-passport" src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" loading="lazy" width="320" height="240" />
+          </div>
         </div>
       </section>
 

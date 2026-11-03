@@ -1535,3 +1535,18 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .blog-banner span { font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; opacity:.9; }
 .blog-banner strong { font:700 clamp(1.5rem,3vw,2.2rem)/1.15 Outfit,sans-serif; max-width:560px; }
 .blog-banner em { font-style:normal; font-weight:700; }
+
+.wm-card { display:grid; grid-template-columns:1.1fr 1fr; align-items:center; gap:24px; padding:44px 48px; border-radius:24px; color:#fff; background:radial-gradient(circle at 85% 20%,#1b3d7a 0%,#0d2247 45%,#07162f 100%); overflow:hidden; }
+.wm-copy span { font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#ff9a9a; }
+.wm-copy h2 { margin:8px 0 12px; font-size:clamp(2rem,3.6vw,3rem); }
+.wm-copy p { color:#c5d0e0; max-width:480px; margin:0 0 24px; }
+.wm-actions { display:flex; flex-wrap:wrap; gap:12px; }
+.wm-btn { padding:13px 22px; border-radius:999px; border:1.5px solid rgba(255,255,255,.45); font-weight:700; transition:.2s; }
+.wm-btn:hover { background:rgba(255,255,255,.1); }
+.wm-btn-main { background:var(--coral); border-color:var(--coral); color:#fff; }
+.wm-btn-main:hover { background:#ff8585; }
+.wm-visual { position:relative; min-height:300px; }
+.wm-earth,.wm-passport { position:absolute; border-radius:20px; object-fit:cover; box-shadow:0 20px 40px rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.12); }
+.wm-earth { right:0; top:0; width:min(250px,56%); height:auto; aspect-ratio:1; }
+.wm-passport { left:0; bottom:0; width:min(290px,64%); height:auto; aspect-ratio:4/3; transform:rotate(-4deg); }
+@media (max-width:900px) { .wm-card { grid-template-columns:1fr; padding:30px 24px; } .wm-visual { min-height:260px; } }
