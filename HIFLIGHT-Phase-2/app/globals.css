@@ -1620,3 +1620,13 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .side-toc { display:block !important; }
 .side-toc a { display:inline !important; }
 .side-toc strong { display:block; }
+
+/* Travel Tuesday : compte à rebours, bandeau, tableau de prix */
+.art-count { display:inline-block; margin-left:10px; padding:6px 14px; border-radius:999px; background:#ffd27a; color:#3a1a00; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+.promo-strip { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px 18px; padding:14px 20px; color:#fff; background:linear-gradient(90deg,#2a0b2e,#7a1f3d 55%,#ff5a4d); font-size:15px; font-weight:700; }
+.promo-strip:hover { filter:brightness(1.08); }
+.promo-count { padding:3px 12px; border-radius:999px; background:#ffd27a; color:#3a1a00; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+.promo-strip em { font-style:normal; color:#ffe2b8; }
+.ref-table td strong { color:var(--coral-text); font-size:17px; }
+.ref-table td a { font-weight:700; color:var(--ink); }
+.ref-table td a:hover { color:var(--coral-text); }

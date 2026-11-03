@@ -4,6 +4,7 @@ import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
 import ServiceFaq from "@/components/ServiceFaq";
+import { PromoStrip } from "@/components/Countdown";
 import { defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
 import { departureCities } from "@/lib/cities";
 import { getRouteStats } from "@/lib/route-data";
@@ -60,6 +61,8 @@ export default async function Home() {
           <div className="trust-line"><span>Gratuit</span><span>Sans inscription</span></div>
         </div>
       </section>
+
+      <PromoStrip to="2026-12-01T00:00:00+01:00" href="/blog/travel-tuesday-2026-bons-plans-vols" title="Travel Tuesday · mardi 1er décembre" />
 
       <section className="section home-block" id="destinations">
         <div className="home-head"><h2>Où partir ? Nos destinations du moment</h2><Link className="text-link" href="/vols">Tous les itinéraires →</Link></div>
