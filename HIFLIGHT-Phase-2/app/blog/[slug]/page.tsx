@@ -125,13 +125,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <article className="mag-body" data-article-body>
           <p className="mag-lede">{fr(post.intro)}</p>
 
-          {post.keyPoints?.length ? (
-            <aside className="mag-essential" aria-label="L’essentiel">
-              <strong>L’essentiel en 30 secondes</strong>
-              <ol>{post.keyPoints.map((point) => <li key={point}>{fr(point)}</li>)}</ol>
-            </aside>
-          ) : null}
-
           {post.sections.length >= 3 ? (
             <details className="mag-toc-m">
               <summary>Dans cet article <span>{post.sections.length} parties</span></summary>
@@ -227,9 +220,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </section>
           ) : null}
 
-          <aside className="mag-trust">
-            <strong>Une précision avant de réserver</strong>
-            <p>Prix, horaires et conditions bougent vite : les chiffres de cet article sont ceux relevés à la date de mise à jour. HiFlight compare les vols mais n’en vend pas : la réservation et le tarif final se font chez la compagnie ou le partenaire.</p>
+          <aside className="mag-endcta">
+            <div>
+              <strong>Le prix du jour sur votre trajet</strong>
+              <p>Prix, horaires et conditions bougent vite : les chiffres de cet article datent de sa mise à jour. Une recherche HiFlight compare en quelques secondes les offres de ses partenaires.</p>
+            </div>
+            <Link href="/#recherche">Lancer une recherche →</Link>
           </aside>
         </article>
 

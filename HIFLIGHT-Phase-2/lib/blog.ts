@@ -17,8 +17,6 @@ export type BlogPost = {
   relatedRoutes: string[];
   /** Image d’en-tête : chemin public (ex. /blog/mon-article.webp). Sans image, un visuel de repli est affiché. */
   heroImage?: string;
-  /** Encadré « À retenir » affiché sous l’introduction. */
-  keyPoints?: string[];
   /** Rubrique affichée en tête d’article et utilisée par les filtres de la page Conseils voyage. */
   category?: "Bons plans" | "Destinations" | "Conseils";
   /** Compte à rebours affiché en tête d’article. */
@@ -34,11 +32,6 @@ export const blogPosts: BlogPost[] = [
     "metaTitle": "Vol Algérie en été : quand réserver ?",
     "title": "Vol pour l’Algérie en été : pourquoi c’est si cher, et comment limiter la casse",
     "description": "Alger, Oran, Constantine en juillet-août : pourquoi les prix grimpent, quand commencer à comparer, quels aéroports tester et quels frais de bagages surveiller.",
-    "keyPoints": [
-      "En juillet-août, tout le monde veut les mêmes dates, et le prix suit.",
-      "Partir en semaine ou décaler le retour de deux jours change souvent la note.",
-      "Marseille, Lyon et Toulouse ont des vols directs : à comparer avec Paris, trajet compris."
-    ],
     "heroImage": "https://images.unsplash.com/photo-1706002027900-a1be40d0627e?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-10-30",
     "updated": "2026-11-03",
@@ -125,16 +118,11 @@ export const blogPosts: BlogPost[] = [
     "metaTitle": "Vol Paris – Marrakech : guide pour bien réserver",
     "title": "Vol Paris – Marrakech : ce qu’on aimerait savoir avant de réserver",
     "description": "Paris – Marrakech en vol direct : durée, compagnies, Orly, Roissy ou Beauvais, meilleure saison et vrai prix une fois les bagages ajoutés.",
-    "keyPoints": [
-      "Environ 3 h 15 de vol direct, et plusieurs compagnies se partagent la ligne.",
-      "Beauvais est parfois moins cher, mais le transfert se paie en temps et en argent.",
-      "Comparez toujours avec le bagage en soute : le tarif d’appel n’est pas le prix du voyage."
-    ],
     "heroImage": "https://images.unsplash.com/photo-1596750320291-a082a23dcc19?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-10-30",
     "updated": "2026-11-03",
     "readingMinutes": 5,
-    "intro": "Marrakech est la destination préférée des Français depuis cinq ans, d’après le classement de Liligo pour 2025. Autant dire que la liaison avec Paris est l’une des mieux fournies d’Europe, ce qui est une bonne nouvelle pour les prix, à condition de savoir où regarder.",
+    "intro": "Marrakech est la destination préférée des Français depuis cinq ans, d’après un classement des recherches de vols publié pour 2025. Autant dire que la liaison avec Paris est l’une des mieux fournies d’Europe, ce qui est une bonne nouvelle pour les prix, à condition de savoir où regarder.",
     "sections": [
       {
         "heading": "Trois heures et quart, et beaucoup de choix",
@@ -209,11 +197,6 @@ export const blogPosts: BlogPost[] = [
     "metaTitle": "Orly, Roissy ou Beauvais : quel aéroport choisir ?",
     "title": "Orly, Roissy ou Beauvais : le billet le moins cher n’est pas toujours le bon",
     "description": "Orly, Roissy-Charles de Gaulle ou Beauvais : accès, temps de transfert et prix total pour choisir l’aéroport parisien qui vous convient vraiment.",
-    "keyPoints": [
-      "Les trois aéroports n’ont ni le même prix ni le même temps de trajet.",
-      "Un billet à bas prix peut coûter plus cher une fois le transfert ajouté.",
-      "Gardez de la marge pour un vol très tôt ou très tard."
-    ],
     "heroImage": "https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-10-30",
     "updated": "2026-11-03",
@@ -269,11 +252,6 @@ export const blogPosts: BlogPost[] = [
     "metaTitle": "Quand réserver un vol pas cher : ce qui marche",
     "title": "Quand réserver un vol pas cher ? Oubliez le mardi à 3 h du matin",
     "description": "Il n’existe pas de jour magique pour réserver un vol. Ce qui fait vraiment baisser le prix : vos dates, votre aéroport, la comparaison sur un mois entier.",
-    "keyPoints": [
-      "Ce qui compte, c’est le jour du voyage, pas l’heure de la réservation.",
-      "Regardez un mois entier plutôt qu’une seule date.",
-      "Un billet à 40 € sans bagage peut coûter plus qu’un billet à 70 € avec."
-    ],
     "heroImage": "https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
     "updated": "2026-11-03",
@@ -331,11 +309,6 @@ export const blogPosts: BlogPost[] = [
     "metaTitle": "Vol pas cher depuis la province : Lyon, Marseille, Nice…",
     "title": "Partir de Lyon, Marseille, Nice ou Toulouse : quand ça vaut mieux que Paris",
     "description": "Prendre le train jusqu’à Paris par habitude ? Voyez quand un vol direct depuis Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes vous revient moins cher.",
-    "keyPoints": [
-      "Un vol direct depuis votre ville évite le train, et parfois la nuit d’hôtel, jusqu’à Paris.",
-      "Comparez de porte à porte, pas seulement le billet.",
-      "L’offre varie selon la saison : vérifiez les jours de desserte."
-    ],
     "heroImage": "https://images.unsplash.com/photo-1602087594298-706ccc894bfd?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
     "updated": "2026-11-03",
@@ -401,11 +374,6 @@ export const blogPosts: BlogPost[] = [
     "metaTitle": "Week-end pas cher en Europe : choisir destination et vol",
     "title": "Un week-end en Europe sans se ruiner : partez du budget, pas de la ville",
     "description": "Barcelone, Lisbonne, Rome, Madrid ou Londres : comment choisir une escapade courte au meilleur prix, quels jours partir et quels pièges éviter sur les bagages.",
-    "keyPoints": [
-      "Comparez au moins trois villes aux mêmes dates avant de choisir.",
-      "Partir le jeudi ou revenir le lundi fait souvent baisser le prix.",
-      "Sur un vol court, la valise en soute peut doubler le billet."
-    ],
     "heroImage": "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
     "updated": "2026-11-03",
@@ -469,11 +437,6 @@ export const blogPosts: BlogPost[] = [
     "metaTitle": "Vols Maroc et Tunisie : quand réserver, d’où partir",
     "title": "Maroc et Tunisie : quand réserver et d’où partir pour payer moins",
     "description": "Marrakech, Casablanca, Agadir, Tunis : les périodes chères, les villes de départ à comparer et les bagages à ne pas oublier avant de réserver.",
-    "keyPoints": [
-      "Vacances, ponts et fêtes concentrent la demande.",
-      "Comparez Paris et la province : l’écart peut surprendre.",
-      "Sur ces liaisons, la valise en soute compte vraiment dans le prix."
-    ],
     "heroImage": "https://images.unsplash.com/photo-1653174638637-bffdc627376d?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
     "updated": "2026-11-03",
@@ -539,11 +502,6 @@ export const blogPosts: BlogPost[] = [
     "metaTitle": "Billet d’avion pas cher : astuces qui marchent",
     "title": "Billet d’avion pas cher : ce qui marche vraiment, et ce qui n’est que légende",
     "description": "Dates flexibles, bons aéroports, bagages, escales, alertes de prix : les astuces qui font réellement baisser un billet d’avion, et celles à oublier.",
-    "keyPoints": [
-      "Cherchez sur un mois entier, pas sur une seule date.",
-      "Ajoutez toujours le bagage avant de comparer deux billets.",
-      "Ni jour ni heure magique pour réserver : ne comptez pas là-dessus."
-    ],
     "heroImage": "https://images.unsplash.com/photo-1593182440709-4b7b56482c55?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
     "updated": "2026-11-03",
@@ -615,11 +573,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol de dernière minute : bon plan ou fausse bonne idée ?",
     "description": "Partir dans les jours qui viennent : quand la dernière minute fait économiser, quand elle coûte plus cher, et comment comparer vite pour ne pas surpayer.",
     "heroImage": "https://images.unsplash.com/photo-1490430657723-4d607c1503fc?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Sur les trajets très demandés, la dernière minute coûte souvent plus cher.",
-      "Hors vacances et avec des dates flexibles, elle peut valoir le coup.",
-      "Comparez plusieurs aéroports et plusieurs jours avant de décider."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -678,11 +631,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Cabine ou soute : le bagage qui change le prix de votre billet",
     "description": "Cabine ou soute : comment choisir selon la durée du séjour, la compagnie et le prix total, et comment éviter les frais payés trop cher à l’aéroport.",
     "heroImage": "https://images.unsplash.com/photo-1670888664952-efff442ec0d2?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Le prix du billet sans bagage n’est pas le prix final.",
-      "Dimensions et poids changent d’une compagnie à l’autre : vérifiez avant de réserver.",
-      "Ajouter un bagage en ligne revient en général moins cher qu’au guichet."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -730,11 +678,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol direct ou escale : ce que l’économie coûte vraiment en temps",
     "description": "Direct ou escale : ce que l’escale fait gagner et perdre, comment lire une correspondance et quand le vol direct reste le meilleur choix.",
     "heroImage": "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "L’escale fait souvent baisser le prix, mais elle allonge le trajet.",
-      "Correspondance trop courte : risque. Trop longue : journée perdue.",
-      "Comptez la durée totale, pas seulement le prix."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -794,11 +737,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Aller-retour ou deux allers simples : le calcul que personne ne fait",
     "description": "Aller-retour ou deux allers simples : quand combiner deux billets fait économiser, et les risques à connaître avant de réserver séparément.",
     "heroImage": "https://images.unsplash.com/photo-1655722724447-2d2a3071e7f8?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Comparez toujours l’aller-retour et deux allers simples.",
-      "Deux billets séparés n’offrent pas la même protection.",
-      "Ajoutez les bagages aux deux options pour comparer à armes égales."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 3,
@@ -842,11 +780,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Low cost : le billet à 20 € qui finit à 90 €",
     "description": "Bagage, siège, enregistrement, assurance précochée : les options payantes des vols low cost et comment comparer le vrai prix avant de réserver.",
     "heroImage": "https://images.unsplash.com/photo-1529074963764-98f45c47344b?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Le prix affiché n’inclut pas toujours le bagage.",
-      "Siège, enregistrement à l’aéroport, assurances : tout peut être facturé.",
-      "Comparez le total final, pas le tarif d’appel."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -895,11 +828,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vacances scolaires : réserver un vol sans exploser le budget",
     "description": "Les prix des vols montent pendant les vacances scolaires. Comment comparer tôt, décaler ses dates et tester les aéroports de province.",
     "heroImage": "https://images.unsplash.com/photo-1760654339407-970cede10f46?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Les vols des vacances se remplissent vite : comparez tôt.",
-      "Décaler le départ ou le retour de quelques jours change le tarif.",
-      "Testez les aéroports de province, pas seulement Paris."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -958,11 +886,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol pour Istanbul : deux aéroports, deux rives, et un choix à ne pas faire au hasard",
     "description": "Istanbul compte deux grands aéroports. Comment choisir entre IST et Sabiha Gökçen (SAW), quand partir et comment comparer les vols depuis la France.",
     "heroImage": "https://images.unsplash.com/photo-1759173214279-61d177954a40?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Istanbul a deux aéroports : IST côté européen, Sabiha Gökçen (SAW) côté asiatique.",
-      "Choisissez selon votre quartier, pas seulement selon le prix.",
-      "Printemps et automne : les périodes les plus agréables."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1024,11 +947,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol pour Lisbonne : l’aéroport est tellement près du centre que ça change tout",
     "description": "Lisbonne en week-end ou une semaine : meilleure période, villes de départ en France, aéroport proche du centre et conseils pour bien réserver.",
     "heroImage": "https://images.unsplash.com/photo-1616862890964-fd20e9dd106d?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "L’aéroport est à une dizaine de kilomètres du centre.",
-      "Printemps et début d’automne : agréables, et très demandés.",
-      "Des vols directs partent de Paris et de plusieurs villes de province."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1089,11 +1007,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol pour Londres : Heathrow, Gatwick, Stansted, Luton ou City ?",
     "description": "Londres compte cinq grands aéroports. Comment choisir selon le prix, le trajet vers le centre et l’endroit où vous logez.",
     "heroImage": "https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Cinq aéroports principaux, tous à des distances différentes du centre.",
-      "Ajoutez le prix et la durée du transfert au billet.",
-      "Choisissez selon le quartier où vous dormez."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1155,11 +1068,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol pour New York depuis la France : l’ESTA d’abord, le billet ensuite",
     "description": "New York depuis la France : quand partir, durée du vol, ESTA à prévoir, quel aéroport choisir (JFK, Newark ou LaGuardia) et comment payer moins.",
     "heroImage": "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Prévoyez l’autorisation de voyage électronique (ESTA) avant de réserver ou de partir.",
-      "JFK, Newark ou LaGuardia : comparez l’aéroport d’arrivée.",
-      "Les fêtes et l’été sont les périodes les plus chères."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1216,11 +1124,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol pour Barcelone : l’escapade la plus facile (et la plus comparée) depuis la France",
     "description": "Barcelone depuis Paris, Lyon, Marseille, Nice ou province : durée du vol, compagnies, meilleure période et pièges à éviter sur les bagages.",
     "heroImage": "https://images.unsplash.com/photo-1630219694734-fe47ab76b15e?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Entre environ 1 h 15 et 2 h de vol selon la ville de départ.",
-      "Plusieurs compagnies se font concurrence : Vueling, Air France, Transavia, Ryanair.",
-      "Sur un vol aussi court, la valise en soute pèse lourd dans le prix."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1297,11 +1200,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol pour Rome : Fiumicino ou Ciampino, et le vrai coût du trajet vers le centre",
     "description": "Rome depuis la France : choisir entre Fiumicino et Ciampino, durée du vol, compagnies, meilleure période et conseils pour trouver un billet moins cher.",
     "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Deux aéroports : Fiumicino (FCO) et Ciampino (CIA).",
-      "Environ 2 h depuis Paris, 1 h 15 à 1 h 30 depuis Nice, Lyon ou Marseille.",
-      "Pâques et l’été sont les périodes les plus chères."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1369,11 +1267,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol pour Madrid : durée, aéroport et bons réflexes avant de réserver",
     "description": "Madrid depuis Paris ou la province : durée du vol, aéroport de Barajas, compagnies, meilleure période et conseils pour trouver un billet pas cher.",
     "heroImage": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Environ 2 h de vol depuis Paris, un peu plus d’une heure depuis Toulouse.",
-      "Iberia, Air France, Transavia et Air Europa relient Paris à Madrid.",
-      "L’aéroport de Barajas est à environ 13 km du centre."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1445,11 +1338,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol pour Dubaï depuis la France : la meilleure saison est aussi la plus chère",
     "description": "Dubaï depuis Paris ou Lyon : durée du vol, vol direct Emirates depuis Lyon, meilleure période, formalités à vérifier et conseils pour payer moins.",
     "heroImage": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "La saison la plus agréable (octobre à avril) est aussi la plus chère.",
-      "Vols directs depuis Paris et, avec Emirates, depuis Lyon.",
-      "Vérifiez les formalités d’entrée selon votre nationalité avant de réserver."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1519,11 +1407,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Marrakech sans passer par Paris : qui vole depuis chez vous",
     "description": "Marrakech depuis Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille ou Bâle-Mulhouse : compagnies, durées et conseils pour comparer.",
     "heroImage": "https://images.unsplash.com/photo-1570135460237-510ca82c6781?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Huit villes de province ont des liaisons vers Marrakech d’après nos relevés.",
-      "Entre environ 2 h 30 et 3 h 20 de vol selon la ville.",
-      "Comparez de porte à porte avant de choisir Paris."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1532,7 +1415,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Qui vole depuis où",
         "paragraphs": [
-          "Le tableau ci-dessous reprend les compagnies relevées au départ des principales villes, d’après les offres affichées par Partir.com. L’offre varie selon la saison, donc vérifiez toujours les jours de desserte."
+          "Le tableau ci-dessous reprend les compagnies relevées au départ des principales villes, d’après des relevés publics d’offres. L’offre varie selon la saison, donc vérifiez toujours les jours de desserte."
         ],
         "table": {
           "headers": [
@@ -1642,11 +1525,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vol pour Tunis depuis la France : été et fêtes, les deux périodes à anticiper",
     "description": "Tunis depuis Paris, Lyon, Marseille, Nice ou Toulouse : durée du vol, compagnies, périodes chères, bagages et conseils pour réserver moins cher.",
     "heroImage": "https://images.unsplash.com/photo-1607869861980-da5f9b8b4969?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Environ deux heures de vol depuis le sud de la France.",
-      "L’été et les fêtes de fin d’année concentrent la demande.",
-      "La franchise de bagages varie beaucoup d’une offre à l’autre."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1721,11 +1599,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Marrakech et Barcelone depuis 9 villes : combien coûte vraiment le vol, relevé du 2 novembre 2026",
     "description": "Prix aller-retour les plus bas relevés vers Marrakech et Barcelone depuis Paris, Lyon, Marseille, Nice, Bordeaux et d’autres villes, avec méthode et limites.",
     "heroImage": "https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Marrakech : dès 43 € depuis Paris, 55 € depuis Lyon, 61 € depuis Marseille (relevé du 2 novembre 2026).",
-      "Barcelone : dès 43 € depuis Paris, 47 € depuis Bâle-Mulhouse, 53 € depuis Lyon.",
-      "Ce sont des minimums relevés, pas des moyennes, et ils changent chaque jour."
-    ],
     "published": "2026-11-02",
     "updated": "2026-11-03",
     "readingMinutes": 4,
@@ -1947,12 +1820,6 @@ export const blogPosts: BlogPost[] = [
     "countdown": {
       "to": "2026-12-01T00:00:00+01:00"
     },
-    "keyPoints": [
-      "Travel Tuesday 2026 : mardi 1er décembre, après le Black Friday (27 novembre) et le Cyber Monday (30 novembre).",
-      "Les offres démarrent avant : eDreams dès le 19 novembre dans son appli, Air France a déjà ses prix « L’Instant » jusqu’au 17 novembre.",
-      "D’après Skyscanner, le Cyber Monday 2025 a été le jour le moins cher en moyenne : ne misez pas tout sur le mardi.",
-      "Notez le prix de votre trajet avant, puis comparez le jour J, bagages compris."
-    ],
     "published": "2026-11-03",
     "updated": "2026-11-03",
     "readingMinutes": 7,
@@ -1978,15 +1845,15 @@ export const blogPosts: BlogPost[] = [
           "rows": [
             [
               "Jusqu’au 17 novembre",
-              "« L’Instant Air France » : prix promotionnels sur de nombreuses destinations long-courriers (New York, Montréal, Tokyo, Dubaï…)"
+              "Prix promotionnels « L’Instant » sur de nombreuses destinations long-courriers (New York, Montréal, Tokyo, Dubaï…)"
             ],
             [
               "Jeudi 19 novembre",
-              "Lancement anticipé des offres Travel Tuesday dans l’application eDreams"
+              "Lancement anticipé des offres Travel Tuesday dans les applications de certaines plateformes"
             ],
             [
               "Vendredi 20 novembre",
-              "Ouverture des mêmes offres sur les autres supports eDreams (site, mobile)"
+              "Ouverture de ces offres sur les sites et le mobile"
             ],
             [
               "Vendredi 27 novembre",
@@ -2091,8 +1958,8 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Qui participe en France",
         "paragraphs": [
-          "Air France met déjà en avant ses plus beaux prix jusqu’au 17 novembre. TAP Air Portugal et Air Europa ont chacune une page dédiée à leur campagne Travel Tuesday. Côté plateformes, eDreams détaille son calendrier, et des agences comme Voyage Privé ou lastminute.com consacrent une page à l’événement.",
-          "Pour les compagnies low cost comme Transavia, easyJet ou Vueling, on n’a pas trouvé de calendrier officiel à ce jour. Le plus sûr est de surveiller leurs sites et leurs newsletters, où les ventes sont souvent annoncées en avant-première. Pour les hôtels, Accor, Marriott, IHG ou Hilton avaient lancé des promotions au Black Friday l’an dernier, parfois avec une remise plus forte pour les membres de leur programme de fidélité."
+          "Plusieurs compagnies et plateformes préparent déjà leurs campagnes : des prix promotionnels sont visibles jusqu’au 17 novembre sur le long-courrier, et des plateformes annoncent leur calendrier dès le 19 novembre.",
+          "Pour les compagnies low cost, on n’a pas trouvé de calendrier officiel à ce jour : leurs ventes sont souvent annoncées au dernier moment. Côté hôtels, plusieurs grands groupes avaient lancé des promotions au Black Friday l’an dernier, parfois avec une remise plus forte pour les membres de leur programme de fidélité."
         ]
       },
       {
@@ -2105,7 +1972,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Un plan simple, de maintenant au 1er décembre",
         "paragraphs": [
-          "Dès maintenant, choisissez votre destination et vos dates (ou une période flexible) et notez le prix de référence de votre trajet. Les 19 et 20 novembre, regardez les premières offres des plateformes qui ouvrent en avance et comparez-les à ce prix. Du 27 au 30 novembre, surveillez le Black Friday et le Cyber Monday, qui peuvent déjà offrir les meilleures affaires de la période. Le mardi 1er décembre, comparez une dernière fois, sur HiFlight et sur le site de la compagnie, puis décidez.",
+          "Dès maintenant, choisissez votre destination et vos dates (ou une période flexible) et notez le prix de référence de votre trajet. Les 19 et 20 novembre, repérez les premières offres et comparez-les à ce prix. Du 27 au 30 novembre, surveillez le Black Friday et le Cyber Monday, qui peuvent déjà offrir les meilleures affaires de la période. Le mardi 1er décembre, comparez une dernière fois sur HiFlight, puis décidez.",
           "Et avant de payer, relisez trois choses : les bagages inclus, les conditions de modification et le prix total."
         ]
       },
@@ -2118,7 +1985,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Comment HiFlight peut servir ce jour-là",
         "paragraphs": [
-          "Le jour J, ne vous limitez pas à un seul site. HiFlight compare les offres de centaines de compagnies et d’agences en une seule recherche, puis vous redirige vers le partenaire de votre choix. C’est gratuit et sans inscription. Pour préparer votre trajet dès maintenant, les cartes de prix en bas de l’article montrent des relevés récents, mis à jour chaque jour."
+          "Le jour J, comparez en une seule recherche : HiFlight met côte à côte les offres de centaines de compagnies et d’agences, puis vous redirige vers le partenaire de votre choix. C’est gratuit et sans inscription. Pour préparer votre trajet dès maintenant, les cartes de prix en bas de l’article montrent des relevés récents, mis à jour chaque jour."
         ]
       }
     ],
@@ -2178,12 +2045,6 @@ export const blogPosts: BlogPost[] = [
     "title": "Vente flash Transavia : jusqu’à -25 %, dès 39 € l’aller, jusqu’au 10 novembre",
     "description": "Vente flash Transavia du 3 au 10 novembre 2026 : jusqu’à -25 % sur une sélection de vols, Athènes et Malaga dès 39 € l’aller. Destinations, bagages, pièges et prix de référence HiFlight.",
     "heroImage": "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "À réserver du 3 au 10 novembre 2026, jusqu’à 23 h 59.",
-      "Jusqu’à -25 % sur une sélection de vols, pour des voyages à partir du 24 novembre.",
-      "Prix annoncés : Athènes et Malaga dès 39 € l’aller, Héraklion dès 40 €.",
-      "Un prix « dès » vaut pour quelques sièges et certaines dates : regardez le total, bagage compris."
-    ],
     "published": "2026-11-04",
     "updated": "2026-11-04",
     "readingMinutes": 4,
@@ -2217,8 +2078,8 @@ export const blogPosts: BlogPost[] = [
               "De France métropolitaine"
             ],
             [
-              "Où réserver ?",
-              "Sur le site de la compagnie, page vente flash de transavia.com"
+              "Comment comparer ?",
+              "Lancez la recherche de votre trajet et de vos dates sur HiFlight, puis regardez le prix total"
             ]
           ]
         }
@@ -2261,7 +2122,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Un point à vérifier vous-même",
         "paragraphs": [
-          "Les sources ne sont pas d’accord sur la fin de la période de voyage : les mentions légales relayées sur Dealabs parlent du 31 janvier 2027, un autre site du 28 février 2027. Dans les deux cas, ça démarre le 24 novembre. Vérifiez la période exacte sur la page de l’offre au moment de réserver."
+          "Les sources ne sont pas d’accord sur la fin de la période de voyage : le 31 janvier 2027 selon des mentions légales relayées, le 28 février 2027 selon un autre site. Dans les deux cas, ça démarre le 24 novembre. Vérifiez que votre date de retour entre bien dans la période avant de vous décider."
         ]
       },
       {
@@ -2284,8 +2145,8 @@ export const blogPosts: BlogPost[] = [
         "heading": "Comment s’y prendre en trois minutes",
         "paragraphs": [],
         "list": [
-          "Choisissez vos dates avant d’ouvrir la page : la vente flash récompense ceux qui savent ce qu’ils veulent.",
-          "Cherchez le trajet sur la page de l’offre, puis comparez le total avec le prix de référence HiFlight ci-dessus.",
+          "Choisissez vos dates avant de lancer la recherche : la vente flash récompense ceux qui savent ce qu’ils veulent.",
+          "Lancez la recherche de votre trajet sur HiFlight et regardez le prix total pour vos dates, à comparer avec les prix de référence ci-dessus.",
           "Ajoutez bagage et option éventuelle, puis comparez une dernière fois avec un autre départ ou une autre date.",
           "Décidez avant mardi 23 h 59. Passé ce délai, l’offre s’éteint."
         ]
@@ -2301,8 +2162,8 @@ export const blogPosts: BlogPost[] = [
         "answer": "Jusqu’à 25 % sur une sélection de vols. La remise varie selon le trajet, la date et les places restantes."
       },
       {
-        "question": "HiFlight vend-il ces vols ?",
-        "answer": "Non. HiFlight compare les prix et vous renvoie chez le partenaire. Pour profiter de cette promotion, il faut réserver sur le site de Transavia ; HiFlight vous aide à vérifier si le prix est bon."
+        "question": "Les prix de la vente flash apparaissent-ils sur HiFlight ?",
+        "answer": "La vente flash est une offre de Transavia. HiFlight compare les prix de ses partenaires au moment de votre recherche : lancez-la pour voir les tarifs du jour sur votre trajet, ils peuvent différer des prix de la vente."
       },
       {
         "question": "Le bagage est-il compris dans les 39 € ?",
@@ -2319,22 +2180,16 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    "slug": "black-friday-voyage-2026-voyage-prive-edreams",
+    "slug": "black-friday-voyage-2026-dates-conseils",
     "category": "Bons plans",
-    "metaTitle": "Black Friday voyages 2026 : Voyage Privé, eDreams, dates",
-    "title": "Black Friday voyages 2026 : Voyage Privé, eDreams et les dates à noter",
-    "description": "Black Friday et Travel Tuesday 2026 : calendrier des offres Voyage Privé (dès 49 € par personne) et eDreams (jusqu’à -40 % sur les hôtels), et comment éviter les faux bons plans.",
+    "metaTitle": "Black Friday voyages 2026 : dates et conseils",
+    "title": "Black Friday voyages 2026 : les dates à noter et comment ne pas se faire avoir",
+    "description": "Black Friday, Cyber Monday et Travel Tuesday 2026 : le calendrier des ventes voyage, les réflexes pour juger une offre et les prix de référence des vols au départ de Paris.",
     "heroImage": "https://images.unsplash.com/photo-1561501900-3701fa6a0864?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "Voyage Privé : Black Friday du 10 novembre au 1er décembre, ventes dès 49 € par personne.",
-      "eDreams : offres dans l’appli dès le 19 novembre, sur le site dès le 20, jusqu’au 1er décembre.",
-      "Black Friday le 27 novembre, Cyber Monday le 30, Travel Tuesday le 1er décembre.",
-      "Un prix de séjour n’est presque jamais un prix de vol : ajoutez le billet avant de comparer."
-    ],
     "published": "2026-11-04",
     "updated": "2026-11-04",
     "readingMinutes": 4,
-    "intro": "Cette année, le Black Friday des voyageurs ne tient pas en une journée. Voyage Privé ouvre la sienne le 10 novembre, eDreams démarre ses offres dans l’appli le 19, et tout converge vers le Travel Tuesday du 1er décembre. Voici les dates, ce que chacun annonce, et les deux ou trois réflexes qui évitent de payer cher une « bonne affaire ».",
+    "intro": "Cette année, le Black Friday des voyageurs ne tient pas en une journée : les premières ventes démarrent le 10 novembre et tout converge vers le Travel Tuesday du 1er décembre. Voici les dates à retenir, et les deux ou trois réflexes qui évitent de payer cher une « bonne affaire ».",
     "sections": [
       {
         "heading": "Les dates à noter",
@@ -2349,15 +2204,15 @@ export const blogPosts: BlogPost[] = [
           "rows": [
             [
               "10 novembre",
-              "Début du Black Friday chez Voyage Privé (jusqu’au 1er décembre)"
+              "Premières ventes Black Friday voyages, chez certains spécialistes des ventes privées"
             ],
             [
               "19 novembre",
-              "Offres Travel Tuesday eDreams dans l’appli"
+              "Premières offres Travel Tuesday dans les applications de certaines plateformes"
             ],
             [
               "20 novembre",
-              "Offres eDreams sur le site et le mobile web"
+              "Ouverture de ces offres sur les sites"
             ],
             [
               "27 novembre",
@@ -2369,29 +2224,22 @@ export const blogPosts: BlogPost[] = [
             ],
             [
               "1er décembre",
-              "Travel Tuesday : dernier jour des offres eDreams et de Voyage Privé"
+              "Travel Tuesday : dernier jour des offres annoncées jusqu’à cette date"
             ]
           ]
         }
       },
       {
-        "heading": "Voyage Privé : des séjours à prix négociés",
+        "heading": "Ce que les ventes annoncent",
         "paragraphs": [
-          "Voyage Privé fonctionne par ventes privées : des séjours, week-ends et croisières négociés à l’avance, vendus pendant une durée limitée. Au 3 novembre, la compagnie affichait des ventes ouvertes à partir de 49 € par personne, pour une nuit dans un hôtel en Andorre. Elle annonce des remises allant jusqu’à -70 %, davantage sur certains séjours haut de gamme.",
-          "Ce que dit la page de l’offre est utile : chaque vente affiche un prix sans vol, et, quand c’est possible, un prix avec vol. Le Travel Tuesday, les prix sont affichés sur chaque vente le 1er décembre."
-        ]
-      },
-      {
-        "heading": "eDreams : jusqu’à -40 % sur les hôtels",
-        "paragraphs": [
-          "eDreams a choisi d’étirer la période. L’appli reçoit les offres en premier, le jeudi 19 novembre, le site suit le lendemain, et tout reste ouvert jusqu’au Travel Tuesday.",
-          "Côté chiffres : jusqu’à -40 % sur les hôtels et jusqu’à -20 % sur les locations de voiture. Les membres Prime ont des remises supplémentaires. Les offres sur les vols existent aussi, mais eDreams n’a pas détaillé les prix à ce stade : à vérifier le jour J."
+          "Les ventes privées proposent des séjours, week-ends et croisières négociés à l’avance, vendus pendant une durée limitée. Au 3 novembre, certaines affichaient des séjours à partir de 49 € par personne, pour une nuit dans un hôtel en Andorre, avec des remises annoncées jusqu’à -70 %. Chaque vente affiche un prix sans vol et, quand c’est possible, un prix avec vol.",
+          "Du côté des plateformes de voyage, des remises allant jusqu’à -40 % sur les hôtels et jusqu’à -20 % sur les locations de voiture ont été annoncées. Les offres sur les vols existent aussi, mais les prix n’étaient pas détaillés à ce stade : à vérifier le jour J."
         ]
       },
       {
         "heading": "Comment ne pas se faire avoir",
         "paragraphs": [
-          "Ces plateformes font vraiment des offres, mais le prix affiché n’est pas toujours le prix payé."
+          "Ces offres sont réelles, mais le prix affiché n’est pas toujours le prix payé."
         ],
         "list": [
           "Comparez ce qui est comparable : un prix « par personne et par nuit » n’est pas un prix de séjour.",
@@ -2407,7 +2255,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Le vol, côté HiFlight",
         "paragraphs": [
-          "Si une vente vous tente, regardez d’abord ce que coûte le vol. Voici le prix le plus bas relevé aujourd’hui sur HiFlight pour quelques destinations populaires au départ de Paris. Vous pourrez comparer avec ce que proposent les ventes."
+          "Si une vente vous tente, regardez d’abord ce que coûte le vol. Voici le prix le plus bas relevé aujourd’hui sur HiFlight pour quelques destinations populaires au départ de Paris : de quoi juger le prix total d’un séjour avec vol."
         ],
         "routeTable": [
           "paris-barcelone",
@@ -2421,20 +2269,20 @@ export const blogPosts: BlogPost[] = [
     ],
     "faq": [
       {
-        "question": "Quand commence le Black Friday de Voyage Privé ?",
-        "answer": "Le 10 novembre 2026, et il se termine avec le Travel Tuesday, le 1er décembre."
+        "question": "Quand commence le Black Friday des voyages en 2026 ?",
+        "answer": "Les premières ventes démarrent le 10 novembre. Le Black Friday est le 27 novembre, le Cyber Monday le 30 et le Travel Tuesday le 1er décembre 2026."
       },
       {
-        "question": "Quelles sont les dates des offres Travel Tuesday d’eDreams ?",
-        "answer": "Dans l’appli à partir du 19 novembre, sur le site à partir du 20, jusqu’au 1er décembre 2026."
+        "question": "Un prix de séjour comprend-il le vol ?",
+        "answer": "Pas toujours. Vérifiez si le prix affiché est avec ou sans vol, et s’il est « par personne » ou « par nuit » : ce n’est pas un prix de séjour."
       },
       {
-        "question": "HiFlight vend-il ces offres ?",
-        "answer": "Non. Ce sont des offres de Voyage Privé et d’eDreams, que HiFlight relève et explique. Pour y accéder, il faut passer par leurs sites."
+        "question": "Comment savoir si une remise est réelle ?",
+        "answer": "Notez le prix de votre trajet avant le 1er décembre : sans repère, impossible de juger. HiFlight affiche chaque jour les prix les plus bas relevés pour vous servir de point de comparaison."
       },
       {
-        "question": "À quelle date est le Black Friday 2026 ?",
-        "answer": "Le vendredi 27 novembre 2026. Le Cyber Monday est le 30 novembre et le Travel Tuesday le 1er décembre."
+        "question": "Les ventes privées sont-elles remboursables ?",
+        "answer": "Pas toujours : une vente privée est parfois peu ou pas remboursable. Regardez les conditions d’annulation avant de payer."
       }
     ],
     "relatedRoutes": [
@@ -2449,20 +2297,14 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "flying-blue-promo-rewards-novembre-2026",
     "category": "Bons plans",
-    "metaTitle": "Flying Blue : -25 % de miles en novembre 2026",
-    "title": "Flying Blue : -25 % de miles en novembre, de Los Angeles à Osaka",
-    "description": "Promo Rewards Flying Blue de novembre 2026 : 25 % de miles en moins sur une sélection de billets primes, Los Angeles dès 18 750 miles. Conditions, taxes et comment savoir si c’est rentable.",
+    "metaTitle": "Promo Flying Blue novembre 2026 : miles ou euros ?",
+    "title": "Promo Flying Blue de novembre : vos miles valent-ils mieux que les euros ?",
+    "description": "Promo Rewards Flying Blue de novembre 2026 : 25 % de miles en moins sur une sélection de billets, Los Angeles dès 18 750 miles. Conditions, taxes et comment comparer avec le prix en euros.",
     "heroImage": "https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?auto=format&fit=crop&w=1600&q=75",
-    "keyPoints": [
-      "À réserver du 1er au 30 novembre 2026, pour voyager jusqu’au 30 avril 2027.",
-      "-25 % de miles sur une sélection de billets primes Air France et KLM.",
-      "Exemples par personne, en aller simple : Los Angeles en économie dès 18 750 miles, New York en Business dès 45 000, Osaka en Premium Comfort dès 37 500.",
-      "Les taxes et frais se paient en euros, en plus des miles."
-    ],
     "published": "2026-11-04",
     "updated": "2026-11-04",
     "readingMinutes": 4,
-    "intro": "Chaque début de mois, Air France et KLM ouvrent une promotion sur leurs billets en miles. Celle de novembre retire 25 % des miles demandés sur une sélection de destinations. Pour qui a des miles qui dorment, c’est le moment de regarder. Pour les autres, voici comment juger si ça vaut le coup.",
+    "intro": "Chaque début de mois, Air France et KLM ouvrent une promotion sur leurs billets en miles. Celle de novembre retire 25 % des miles demandés sur une sélection de destinations. Avant de dépenser vos miles, une question simple : le même billet en euros ne coûte-t-il pas moins cher ? Voici comment le calculer.",
     "sections": [
       {
         "heading": "Les conditions",
@@ -2549,7 +2391,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Le prix en euros, pour comparer",
         "paragraphs": [
-          "Voici le prix le plus bas relevé sur HiFlight pour quelques trajets long-courriers au départ de Paris. Gardez-le en tête : si le billet en euros est bas, mieux vaut peut-être le payer et garder vos miles."
+          "Voici le prix le plus bas relevé sur HiFlight pour quelques trajets long-courriers au départ de Paris. Gardez-le en tête : si le billet en euros est bas, mieux vaut peut-être le payer et garder vos miles. Pour voir le prix du jour sur votre trajet et vos dates, lancez une recherche sur HiFlight."
         ],
         "routeTable": [
           "paris-los-angeles",
@@ -2569,8 +2411,8 @@ export const blogPosts: BlogPost[] = [
         "answer": "Non. Les miles couvrent le billet ; les taxes et frais se paient en euros en plus."
       },
       {
-        "question": "HiFlight vend-il ces billets ?",
-        "answer": "Non. Il s’agit d’une offre du programme Flying Blue. HiFlight vous donne le prix en euros pour vous aider à décider."
+        "question": "HiFlight propose-t-il les billets en miles ?",
+        "answer": "Non, les billets en miles relèvent du programme Flying Blue. HiFlight vous donne le prix en euros pour comparer : parfois, payer en euros et garder ses miles est plus malin."
       },
       {
         "question": "Faut-il être membre Flying Blue ?",

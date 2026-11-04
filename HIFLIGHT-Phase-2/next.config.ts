@@ -41,6 +41,7 @@ const nextConfig: NextConfig = {
       { source: "/politique-confidentialite", destination: "/politique-de-confidentialite", permanent: true },
       { source: "/legal", destination: "/mentions-legales", permanent: true },
       { source: "/support", destination: "/faq", permanent: true },
+      { source: "/blog/black-friday-voyage-2026-voyage-prive-edreams", destination: "/blog/black-friday-voyage-2026-dates-conseils", permanent: true },
     ];
   },
 };
