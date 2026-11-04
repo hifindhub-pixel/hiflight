@@ -1630,3 +1630,9 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .ref-table td strong { color:var(--coral-text); font-size:17px; }
 .ref-table td a { font-weight:700; color:var(--ink); }
 .ref-table td a:hover { color:var(--coral-text); }
+
+/* Article Travel Tuesday : même en-tête que l’accueil, photo en fond */
+.hero-tt h1 { margin:14px 0 0; font-size:clamp(2rem,3.8vw,3.4rem); line-height:1.08; max-width:900px; }
+.tt-badge { display:inline-block; padding:6px 14px; border-radius:999px; background:var(--coral); color:#fff; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+.tt-intro { width:min(860px,calc(100% - 40px)); margin:40px auto 0; text-align:center; }
+.tt-intro .art-standfirst { color:#334155; }
