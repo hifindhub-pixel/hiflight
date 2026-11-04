@@ -31,7 +31,7 @@ export default function Deals() {
             : <Link key={d.title} href={d.href} className="dest-card">{body}</Link>;
         })}
       </div>
-      <p className="deals-note">Offres des compagnies et sites partenaires, relevées par HiFlight : HiFlight ne les vend pas. Prix et places sous réserve de disponibilité, conditions sur le site de l’offre.</p>
+      <p className="deals-note">Offres relevées par HiFlight auprès des organisateurs, prix et places sous réserve de disponibilité. Pour le prix du jour sur votre trajet, lancez une recherche sur HiFlight.</p>
     </section>
   );
 }
