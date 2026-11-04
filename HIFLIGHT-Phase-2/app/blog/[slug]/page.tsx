@@ -8,6 +8,9 @@ import { getRouteStats } from "@/lib/route-data";
 import { Countdown } from "@/components/Countdown";
 import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
+import ArticleProgress from "@/components/ArticleProgress";
+import ArticleToc from "@/components/ArticleToc";
+import { fr } from "@/lib/typo";
 
 export function generateStaticParams() { return blogPosts.map(({ slug }) => ({ slug })); }
 
@@ -33,17 +36,32 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = getPost(slug);
   if (!post) notFound();
   const related = post.relatedRoutes.map((s) => flightRoutes.find((r) => r.slug === s)).filter((r) => r !== undefined);
-  const otherPosts = blogPosts.filter((p) => p.slug !== post.slug && p.heroImage).slice(-3).reverse();
+  const candidates = blogPosts.filter((p) => p.slug !== post.slug && p.heroImage);
+  const otherPosts = [...candidates.filter((p) => p.category === post.category), ...candidates.filter((p) => p.category !== post.category)]
+    .sort((a, b) => Number(b.category === post.category) - Number(a.category === post.category) || b.published.localeCompare(a.published))
+    .slice(0, 3);
   const cards = await Promise.all(related.map(async (route) => ({ route, stats: await getRouteStats(route) })));
   const tableSlugs = post.sections.flatMap((section) => section.routeTable ?? []);
   const tableData = new Map(await Promise.all(tableSlugs.map(async (slug) => {
     const route = flightRoutes.find((r) => r.slug === slug);
     return [slug, route ? { route, stats: await getRouteStats(route) } : null] as const;
   })));
+  const tocItems = post.sections.map((section) => ({ id: anchor(section.heading), label: section.heading }));
   const heroUrl = post.heroImage ? absUrl(post.heroImage) : `${siteUrl}/hiflight-hero.jpg`;
 
+  const meta = (
+    <p className="mag-meta">
+      <span>Rédaction HiFlight</span>
+      <span>Mis à jour le <time dateTime={post.updated}>{dateFormat.format(new Date(post.updated))}</time></span>
+      <span>{post.readingMinutes} min de lecture</span>
+    </p>
+  );
+  const lowest = (rows: ({ route: { slug: string }; stats: { lowest: { price: number } } | null } | null | undefined)[]) =>
+    Math.min(...rows.map((row) => row?.stats?.lowest.price ?? Infinity));
+
   return (
-    <main>
+    <main className="mag">
+      <ArticleProgress />
       <JsonLd data={{
         "@context": "https://schema.org",
         "@graph": [
@@ -78,135 +96,162 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <div className="hero-copy">
                 <span className="tt-badge">Travel Tuesday · mardi 1er décembre</span>
                 <Countdown to={post.countdown.to} className="art-count" />
-                <h1>{post.title}</h1>
+                <h1>{fr(post.title)}</h1>
               </div>
               <SearchForm />
               <div className="trust-line"><span>Gratuit</span><span>Sans inscription</span></div>
             </div>
           </section>
-          <section className="tt-intro">
+          <div className="mag-strip">
             <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/blog">Conseils voyage</Link></p>
-            <p className="art-standfirst">{post.intro}</p>
-          </section>
+            {meta}
+          </div>
         </>
       ) : (
-        <>
-      <section className="art-head">
-        <div>
-          <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/blog">Conseils voyage</Link></p>
-          <span className="art-chip">Conseils voyage</span>
-          <h1>{post.title}</h1>
-          <p className="art-standfirst">{post.intro}</p>
-        </div>
-      </section>
-      {post.heroImage ? (
-        <figure className="art-photo">
-          <img src={post.heroImage} alt={post.title} width={1600} height={700} fetchPriority="high" />
-        </figure>
-      ) : null}
-        </>
+        <header className="mag-hero">
+          {post.heroImage ? <img src={post.heroImage} alt="" width={1600} height={900} fetchPriority="high" /> : null}
+          <div className="mag-hero-in">
+            <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/blog">Conseils voyage</Link></p>
+            <div className="mag-hero-copy">
+              <span className="mag-cat">{post.category ?? "Conseils"}</span>
+              <h1>{fr(post.title)}</h1>
+              {meta}
+            </div>
+          </div>
+        </header>
       )}
-      <div className="art-layout">
-      <article className="art-body">
-        {post.keyPoints?.length ? (
-          <aside className="key-points" aria-label="À retenir">
-            <strong>À retenir</strong>
-            <ul>{post.keyPoints.map((point) => <li key={point}>{point}</li>)}</ul>
-          </aside>
-        ) : null}
-        {post.sections.map((section) => (
-          <section key={section.heading} id={anchor(section.heading)}>
-            <h2>{section.heading}</h2>
-            {section.paragraphs.map((text) => <p key={text}>{text}</p>)}
-            {section.list ? <ul>{section.list.map((item) => <li key={item}>{item}</li>)}</ul> : null}
-            {section.table ? (
-              <div className="table-scroll">
-                <table className="data-table">
-                  <thead><tr>{section.table.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead>
-                  <tbody>{section.table.rows.map((row) => <tr key={row[0]}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}</tbody>
-                </table>
-              </div>
-            ) : null}
-            {section.routeTable ? (() => {
-              const rows = section.routeTable.map((slug) => tableData.get(slug)).filter((row) => row && row.stats);
-              if (!rows.length) return null;
-              const updated = rows[0]?.stats?.updatedAt;
-              return (
-                <>
+
+      <div className="mag-layout">
+        <article className="mag-body" data-article-body>
+          <p className="mag-lede">{fr(post.intro)}</p>
+
+          {post.keyPoints?.length ? (
+            <aside className="mag-essential" aria-label="L’essentiel">
+              <strong>L’essentiel en 30 secondes</strong>
+              <ol>{post.keyPoints.map((point) => <li key={point}>{fr(point)}</li>)}</ol>
+            </aside>
+          ) : null}
+
+          {post.sections.length >= 3 ? (
+            <details className="mag-toc-m">
+              <summary>Dans cet article <span>{post.sections.length} parties</span></summary>
+              <ol>{tocItems.map((item, index) => <li key={item.id}><a href={`#${item.id}`}><i>{String(index + 1).padStart(2, "0")}</i>{item.label}</a></li>)}</ol>
+            </details>
+          ) : null}
+
+          {post.sections.map((section, index) => (
+            <section key={section.heading} id={anchor(section.heading)} className="mag-section">
+              <span className="mag-num">{String(index + 1).padStart(2, "0")}</span>
+              <h2>{fr(section.heading)}</h2>
+              {section.paragraphs.map((text) => <p key={text}>{fr(text)}</p>)}
+              {section.list ? <ul>{section.list.map((item) => <li key={item}>{item}</li>)}</ul> : null}
+              {section.table ? (
+                <figure className="mag-table">
                   <div className="table-scroll">
-                    <table className="data-table ref-table">
-                      <thead><tr><th>Trajet</th><th>Prix le plus bas (A/R)</th><th>Mois le moins cher</th><th>Jour le moins cher</th><th>Vols directs</th></tr></thead>
-                      <tbody>{rows.map((row) => row && row.stats ? (
-                        <tr key={row.route.slug}>
-                          <td><Link href={`/vols/${row.route.slug}`}>{row.route.origin} – {row.route.destination}</Link></td>
-                          <td><strong>{row.stats.lowest.price} €</strong></td>
-                          <td>{row.stats.lowest.monthLabel}</td>
-                          <td>{row.stats.cheapestWeekday ? row.stats.cheapestWeekday.label : "—"}</td>
-                          <td>{row.stats.directShare !== null ? `${row.stats.directShare} %` : "—"}</td>
-                        </tr>
-                      ) : null)}</tbody>
+                    <table className={`data-table${section.table.headers.length > 3 ? " wide" : ""}`}>
+                      <thead><tr>{section.table.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead>
+                      <tbody>{section.table.rows.map((row) => <tr key={row[0]}>{row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody>
                     </table>
                   </div>
-                  <p className="price-note">Prix aller-retour les plus bas relevés par le réseau de partenaires HiFlight (Travelpayouts) pour des départs dans les six prochains mois{updated ? `, calculés le ${dateFormat.format(new Date(updated))}` : ""}. Ce sont des planchers relevés, pas des prix garantis.</p>
-                </>
-              );
-            })() : null}
-          </section>
-        ))}
+                </figure>
+              ) : null}
+              {section.routeTable ? (() => {
+                const rows = section.routeTable.map((slug) => tableData.get(slug)).filter((row) => row && row.stats);
+                if (!rows.length) return null;
+                const updated = rows[0]?.stats?.updatedAt;
+                const best = lowest(rows);
+                return (
+                  <figure className="mag-table mag-prices">
+                    <figcaption><strong>Prix de référence</strong><span>Aller-retour, relevés par HiFlight{updated ? ` le ${dateFormat.format(new Date(updated))}` : ""}</span></figcaption>
+                    <div className="table-scroll">
+                      <table className="data-table ref-table wide">
+                        <thead><tr><th>Trajet</th><th>Prix le plus bas</th><th>Mois le moins cher</th><th>Jour le moins cher</th><th>Vols directs</th></tr></thead>
+                        <tbody>{rows.map((row) => row && row.stats ? (
+                          <tr key={row.route.slug}>
+                            <td><Link href={`/vols/${row.route.slug}`}>{row.route.origin} – {row.route.destination}</Link></td>
+                            <td><strong>{row.stats.lowest.price} €</strong>{rows.length > 1 && row.stats.lowest.price === best && rows.filter((r) => r?.stats?.lowest.price === best).length === 1 ? <em className="mag-best">le plus bas</em> : null}</td>
+                            <td>{row.stats.lowest.monthLabel}</td>
+                            <td>{row.stats.cheapestWeekday ? row.stats.cheapestWeekday.label : "—"}</td>
+                            <td>{row.stats.directShare !== null ? `${row.stats.directShare} %` : "—"}</td>
+                          </tr>
+                        ) : null)}</tbody>
+                      </table>
+                    </div>
+                    <p className="price-note">Ce sont des planchers relevés pour des départs dans les six prochains mois, pas des prix garantis : le tarif final se confirme chez la compagnie.</p>
+                  </figure>
+                );
+              })() : null}
+              {section.callout ? (
+                <aside className={`mag-callout mag-${section.callout.kind}`}>
+                  <b aria-hidden="true">{section.callout.kind === "piege" ? "!" : section.callout.kind === "astuce" ? "✦" : "i"}</b>
+                  <div>
+                    <strong>{section.callout.title ?? (section.callout.kind === "piege" ? "Le piège à éviter" : section.callout.kind === "astuce" ? "L’astuce" : "À savoir")}</strong>
+                    <p>{fr(section.callout.text)}</p>
+                  </div>
+                </aside>
+              ) : null}
+            </section>
+          ))}
 
-        {post.faq?.length ? (
-          <section id="questions-frequentes">
-            <h2>Questions fréquentes</h2>
-            <dl className="faq-inline">
-              {post.faq.map(({ question, answer }) => (
-                <div key={question}><dt>{question}</dt><dd>{answer}</dd></div>
-              ))}
-            </dl>
-          </section>
-        ) : null}
+          {post.faq?.length ? (
+            <section id="questions-frequentes" className="mag-section mag-faq">
+              <span className="mag-num">FAQ</span>
+              <h2>Questions fréquentes</h2>
+              <div>
+                {post.faq.map(({ question, answer }) => (
+                  <details key={question}>
+                    <summary><span>{fr(question)}</span><i aria-hidden="true" /></summary>
+                    <p>{fr(answer)}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
-        {cards.length ? (
-          <section id="comparer-les-vols">
-            <h2>Comparer les vols</h2>
-            <div className="deal-cards">
-              {cards.map(({ route, stats }) => (
-                <Link key={route.slug} className="deal-card" href={`/vols/${route.slug}`}>
-                  <span className="deal-route">{route.origin} – {route.destination}</span>
-                  <span className="deal-meta">{route.duration}</span>
-                  {stats ? <span className="deal-price">dès <strong>{stats.lowest.price} €</strong> A/R</span> : <span className="deal-price">Voir les prix</span>}
-                  <span className="deal-cta">Comparer ce vol →</span>
-                </Link>
-              ))}
-            </div>
-            {cards.some(({ stats }) => stats) ? <p className="price-note">Prix indicatifs relevés récemment, aller-retour. Le tarif final est confirmé chez le partenaire.</p> : null}
-          </section>
-        ) : null}
+          {cards.length ? (
+            <section id="comparer-les-vols" className="mag-section">
+              <span className="mag-num">Passez à l’action</span>
+              <h2>Comparer les vols</h2>
+              <div className="mag-routes">
+                {cards.map(({ route, stats }) => (
+                  <Link key={route.slug} className="mag-route" href={`/vols/${route.slug}`}>
+                    <span className="mag-route-codes"><b>{route.originCode}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h16m-5-5 5 5-5 5" /></svg><b>{route.destinationCode}</b></span>
+                    <strong>{route.origin} – {route.destination}</strong>
+                    <small>{route.duration}</small>
+                    {stats ? <span className="mag-route-price">dès <b>{stats.lowest.price} €</b> <i>A/R</i></span> : <span className="mag-route-price">Voir les prix</span>}
+                    <em>Comparer ce vol →</em>
+                  </Link>
+                ))}
+              </div>
+              {cards.some(({ stats }) => stats) ? <p className="price-note">Prix indicatifs relevés récemment, aller-retour. Le tarif final est confirmé chez le partenaire.</p> : null}
+            </section>
+          ) : null}
 
-        <Link className="text-link" href="/#recherche">Lancer une recherche de vol →</Link>
-      </article>
-      <aside className="art-side" aria-label="Informations sur l’article">
-        <div className="side-meta">
-          <span className="side-avatar">Hi</span>
-          <div><strong>HiFlight</strong><span>Mis à jour le <time dateTime={post.updated}>{dateFormat.format(new Date(post.updated))}</time></span><span>{post.readingMinutes} min de lecture</span></div>
-        </div>
-        {post.sections.length >= 3 ? (
-          <nav className="side-toc" aria-label="Sommaire">
-            <strong>Dans cet article</strong>
-            <ol>{post.sections.map((section) => <li key={section.heading}><a href={`#${anchor(section.heading)}`}>{section.heading}</a></li>)}</ol>
-          </nav>
-        ) : null}
-        <Link className="side-cta" href="/#recherche"><strong>Comparer les vols</strong><span>Des centaines de compagnies, une seule recherche. Gratuit.</span><em>Rechercher →</em></Link>
-      </aside>
+          <aside className="mag-trust">
+            <strong>Une précision avant de réserver</strong>
+            <p>Prix, horaires et conditions bougent vite : les chiffres de cet article sont ceux relevés à la date de mise à jour. HiFlight compare les vols mais n’en vend pas : la réservation et le tarif final se font chez la compagnie ou le partenaire.</p>
+          </aside>
+        </article>
+
+        <aside className="mag-side" aria-label="Informations sur l’article">
+          {post.sections.length >= 3 ? <ArticleToc items={tocItems} /> : null}
+          <Link className="mag-cta" href="/#recherche" style={post.heroImage ? { backgroundImage: `linear-gradient(180deg,rgba(7,22,47,.55),rgba(7,22,47,.92)),url(${post.heroImage})` } : undefined}>
+            <strong>Comparer les vols</strong>
+            <span>Des centaines de compagnies, une seule recherche. Gratuit, sans inscription.</span>
+            <em>Lancer une recherche →</em>
+          </Link>
+        </aside>
       </div>
+
       {otherPosts.length ? (
-        <section className="art-more">
+        <section className="mag-more">
           <div className="home-head"><h2>À lire aussi</h2><Link className="text-link" href="/blog">Tous les guides →</Link></div>
-          <div className="more-grid">
+          <div className="mag-more-grid">
             {otherPosts.map((other) => (
-              <Link key={other.slug} href={`/blog/${other.slug}`} className="more-card">
-                <img src={other.heroImage} alt="" loading="lazy" width="480" height="300" />
-                <strong>{other.title}</strong>
-                <span>{other.readingMinutes} min de lecture</span>
+              <Link key={other.slug} href={`/blog/${other.slug}`} className="mag-more-card">
+                <span className="mag-more-photo"><img src={other.heroImage} alt="" loading="lazy" width="480" height="300" /><em>{other.category ?? "Conseils"}</em></span>
+                <strong>{fr(other.title)}</strong>
+                <small>{other.readingMinutes} min de lecture</small>
               </Link>
             ))}
           </div>
