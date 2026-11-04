@@ -1829,7 +1829,7 @@ export const blogPosts: BlogPost[] = [
         "heading": "C’est quoi, au juste ?",
         "paragraphs": [
           "Une journée de promotions entièrement consacrée au voyage : vols, hôtels, locations de voiture, séjours. Elle tombe le mardi qui suit Thanksgiving, donc juste après le Black Friday et le Cyber Monday.",
-          "Le terme est apparu en 2017, après une observation du site d’analyse de prix Hopper, et il a pris de l’ampleur depuis. McKinsey relève que les recherches sur le sujet ont progressé de plus de 500 % entre 2021 et 2023, et rappelle que novembre et décembre sont des mois creux pour les réservations : les promotions servent à remplir les départs des mois suivants. Longtemps cantonné à l’Amérique du Nord, le phénomène gagne l’Europe, comme le Black Friday avant lui."
+          "Le terme est apparu en 2017, après une observation du site d’analyse de prix, et il a pris de l’ampleur depuis. McKinsey relève que les recherches sur le sujet ont progressé de plus de 500 % entre 2021 et 2023, et rappelle que novembre et décembre sont des mois creux pour les réservations : les promotions servent à remplir les départs des mois suivants. Longtemps cantonné à l’Amérique du Nord, le phénomène gagne l’Europe, comme le Black Friday avant lui."
         ]
       },
       {
@@ -1873,8 +1873,8 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Black Friday, Cyber Monday ou Travel Tuesday : lequel choisir ?",
         "paragraphs": [
-          "La réponse surprend. En 2025, Skyscanner a analysé le prix moyen le plus bas par siège sur les cinq jours entre le Black Friday et le Travel Tuesday : c’est le Cyber Monday qui sortait comme le meilleur jour pour réserver un vol, même si des promotions subsistaient le lendemain.",
-          "De son côté, Hopper indiquait en 2023 qu’il y avait davantage d’offres le jour du Travel Tuesday que pendant le Cyber Monday ou le Black Friday. Mais davantage d’offres ne veut pas dire de meilleurs prix sur votre trajet. Tout dépend de la destination."
+          "La réponse surprend. En 2025, un comparateur a analysé le prix moyen le plus bas par siège sur les cinq jours entre le Black Friday et le Travel Tuesday : c’est le Cyber Monday qui sortait comme le meilleur jour pour réserver un vol, même si des promotions subsistaient le lendemain.",
+          "De son côté, une autre analyse du secteur indiquait en 2023 qu’il y avait davantage d’offres le jour du Travel Tuesday que pendant le Cyber Monday ou le Black Friday. Mais davantage d’offres ne veut pas dire de meilleurs prix sur votre trajet. Tout dépend de la destination."
         ],
         "table": {
           "headers": [
@@ -1888,11 +1888,11 @@ export const blogPosts: BlogPost[] = [
             ],
             [
               "Cyber Monday (30 nov.)",
-              "Jour le moins cher en moyenne sur les cinq jours, d’après l’analyse Skyscanner de 2025"
+              "Jour le moins cher en moyenne sur les cinq jours, d’après une analyse du secteur de 2025"
             ],
             [
               "Travel Tuesday (1er déc.)",
-              "Le plus grand nombre d’offres, d’après Hopper (2023), avec des promotions encore possibles ce jour-là"
+              "Le plus grand nombre d’offres, d’après une analyse du secteur (2023), avec des promotions encore possibles ce jour-là"
             ]
           ]
         }
@@ -1900,7 +1900,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Ce que montrent les chiffres de 2025",
         "paragraphs": [
-          "Skyscanner a publié les plus fortes baisses de prix relevées pendant le Travel Tuesday 2025. Elles concernent surtout des destinations moyen-courrier où de nombreuses compagnies se font concurrence."
+          "Une analyse du secteur a publié les plus fortes baisses de prix relevées pendant le Travel Tuesday 2025. Elles concernent surtout des destinations moyen-courrier où de nombreuses compagnies se font concurrence."
         ],
         "table": {
           "headers": [
@@ -1931,7 +1931,7 @@ export const blogPosts: BlogPost[] = [
           ]
         },
         "list": [
-          "Par pays, Skyscanner cite la Turquie (−18,1 %), l’Algérie (−16,9 %), le Portugal (−14,5 %), l’Allemagne (−13,9 %) et l’Espagne (−9,7 %).",
+          "Par pays, la même analyse cite la Turquie (−18,1 %), l’Algérie (−16,9 %), le Portugal (−14,5 %), l’Allemagne (−13,9 %) et l’Espagne (−9,7 %).",
           "Ces baisses sont des moyennes : un trajet précis, à une date précise, peut évoluer autrement. Prenez-les comme un repère, pas comme une promesse."
         ]
       },
@@ -2000,7 +2000,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "Quel est le meilleur jour pour réserver : Black Friday, Cyber Monday ou Travel Tuesday ?",
-        "answer": "Il n’y a pas de jour gagnant sur tous les trajets. En 2025, Skyscanner a trouvé que le Cyber Monday était le jour le moins cher en moyenne sur les cinq jours, avec encore des promotions le mardi. Comparez sur plusieurs jours."
+        "answer": "Il n’y a pas de jour gagnant sur tous les trajets. En 2025, une analyse du secteur a trouvé que le Cyber Monday était le jour le moins cher en moyenne sur les cinq jours, avec encore des promotions le mardi. Comparez sur plusieurs jours."
       },
       {
         "question": "Le Travel Tuesday est-il vraiment moins cher que le reste de l’année ?",
@@ -2008,7 +2008,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "Sur quelles destinations les prix baissent-ils le plus ?",
-        "answer": "En 2025, Skyscanner a relevé les plus fortes baisses vers Alger (−16,5 %), Porto (−16,0 %), Lisbonne (−15,2 %), Barcelone (−10,8 %) et Marrakech (−7,2 %). Ce sont des moyennes, pas une garantie pour votre trajet."
+        "answer": "En 2025, une analyse du secteur a relevé les plus fortes baisses vers Alger (−16,5 %), Porto (−16,0 %), Lisbonne (−15,2 %), Barcelone (−10,8 %) et Marrakech (−7,2 %). Ce sont des moyennes, pas une garantie pour votre trajet."
       },
       {
         "question": "Faut-il attendre le Travel Tuesday pour réserver ?",
