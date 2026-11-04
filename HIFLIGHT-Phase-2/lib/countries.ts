@@ -128,13 +128,13 @@ export const countryPages: CountryPage[] = [
   },
   {
     slug: "asie", name: "Asie et Moyen-Orient", withArticle: "l’Asie et le Moyen-Orient", toward: "vers l’Asie et le Moyen-Orient",
-    stat: `Les Émirats arabes unis (2,2 millions de passagers en 2024) et la Chine (1,8 million) progressent depuis la France, tandis que Bangkok, Tokyo et Bali figurent parmi les destinations les plus recherchées par les Français (${SOURCE}, KAYAK, Liligo).`,
+    stat: `Les Émirats arabes unis (2,2 millions de passagers en 2024) et la Chine (1,8 million) progressent depuis la France, tandis que Bangkok, Tokyo et Bali figurent parmi les destinations les plus recherchées par les Français (${SOURCE}).`,
     metaTitle: "Vol Asie pas cher : Bangkok, Tokyo, Dubaï",
     description: "Comparez les vols vers l’Asie et le Moyen-Orient : Dubaï, Bangkok, Tokyo, Bali, Singapour, Séoul, Shanghai. Durée, prix par mois et conseils pour chaque trajet.",
-    intro: ["L’Asie domine les recherches de voyages lointains des Français. Selon KAYAK, neuf des dix destinations internationales les plus recherchées par les Français se situent hors d’Europe.", "Sur un long-courrier, la durée de l’escale, la franchise de bagage et le moment où vous réservez changent beaucoup le prix. Comparez-les trajet par trajet."],
+    intro: ["L’Asie domine les recherches de voyages lointains des Français. D’après des analyses de recherches publiées par le secteur, neuf des dix destinations internationales les plus recherchées par les Français se situent hors d’Europe.", "Sur un long-courrier, la durée de l’escale, la franchise de bagage et le moment où vous réservez changent beaucoup le prix. Comparez-les trajet par trajet."],
     airports: ["Dubaï (DXB)", "Bangkok – Suvarnabhumi (BKK)", "Tokyo – Haneda ou Narita", "Bali – Ngurah Rai (DPS)", "Singapour – Changi (SIN)", "Séoul – Incheon (ICN)", "Shanghai – Pudong ou Hongqiao"],
     faq: [
-      { question: "Quand réserver un vol vers l’Asie ?", answer: "Selon des données KAYAK, réserver environ 24 semaines à l’avance donne en moyenne les meilleurs tarifs vers l’Asie. Comparez plusieurs mois avant de choisir." },
+      { question: "Quand réserver un vol vers l’Asie ?", answer: "Selon des analyses du secteur, réserver environ 24 semaines à l’avance donne en moyenne les meilleurs tarifs vers l’Asie. Comparez plusieurs mois avant de choisir." },
       { question: "Quels documents faut-il pour voyager en Asie ?", answer: FORMALITIES }
     ]
   },
@@ -152,7 +152,7 @@ export const countryPages: CountryPage[] = [
   },
   {
     slug: "afrique", name: "Afrique et océan Indien", withArticle: "l’Afrique et l’océan Indien", toward: "vers l’Afrique et l’océan Indien",
-    stat: "Les recherches de vols vers l’Afrique progressent depuis la France, d’après les analyses de KAYAK sur l’été 2026.",
+    stat: "Les recherches de vols vers l’Afrique progressent depuis la France, d’après les analyses du secteur sur l’été 2026.",
     metaTitle: "Vol Afrique pas cher : Dakar, Abidjan, Le Caire",
     description: "Comparez les vols vers l’Afrique et l’océan Indien : Dakar, Abidjan, Le Caire, Île Maurice. Durée, compagnies, prix par mois et conseils depuis Paris.",
     intro: ["Dakar, Abidjan, Le Caire, l’île Maurice : ces villes sont reliées à Paris par des vols directs, assurés par des compagnies nationales et par Air France.", "L’été et les fêtes de fin d’année concentrent la demande : réservez tôt. Pensez aussi aux vaccinations et aux formalités avant de partir."],

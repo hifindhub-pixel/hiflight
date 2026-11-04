@@ -120,7 +120,7 @@ export const extraSeeds: RouteSeed[] = [
   { ...paris, destination: "Bangkok", destinationCode: "BKK", region: "Asie et Moyen-Orient", country: "asie", duration: "environ 11 h 15", carriers: [], formalities: true,
     intro: "Bangkok est la grande porte d’entrée de l’Asie du Sud-Est : marchés, temples et départ vers le reste de la Thaïlande, à plus de 11 h de Paris.",
     season: "La saison sèche, de novembre à février, est la plus demandée et la plus chère. La saison des pluies fait baisser les prix, mais pas toujours l’envie.",
-    tip: "Selon des données KAYAK, réserver environ 24 semaines à l’avance donne en moyenne les meilleurs prix vers l’Asie." },
+    tip: "Selon des analyses du secteur, réserver environ 24 semaines à l’avance donne en moyenne les meilleurs prix vers l’Asie." },
   { ...paris, destination: "Tokyo", destinationCode: "TYO", region: "Asie et Moyen-Orient", country: "asie", duration: "environ 12 h 30", carriers: [], formalities: true,
     intro: "Tokyo a deux aéroports : Haneda, proche du centre, et Narita, plus éloigné. Le plus proche n’est pas toujours le moins cher, et l’inverse non plus.",
     season: "La floraison des cerisiers, fin mars et début avril, et les couleurs de novembre sont très demandées. L’été est chaud et humide, avec des prix plus bas.",
