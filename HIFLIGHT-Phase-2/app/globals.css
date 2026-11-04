@@ -1639,21 +1639,4 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 
 /* Bons plans du moment */
 .deals-checked { color:#64748b; font-size:13px; font-weight:600; }
-.tt-banner { position:relative; min-height:300px; border-radius:22px; overflow:hidden; background-size:cover; background-position:center; color:#fff; display:flex; align-items:flex-end; margin-bottom:18px; }
-.tt-banner-copy { padding:36px; max-width:640px; }
-.tt-banner h3 { margin:14px 0 8px; font:800 clamp(1.7rem,3vw,2.5rem)/1.1 Outfit,Inter,sans-serif; letter-spacing:-.02em; }
-.tt-banner p { margin:0 0 20px; color:rgba(255,255,255,.88); font-size:16px; line-height:1.5; }
-.tt-banner .art-count { margin-left:10px; }
-.tt-banner-actions { display:flex; gap:12px; flex-wrap:wrap; }
-.deal-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
-.deal-card { display:flex; flex-direction:column; gap:8px; padding:22px; border:1px solid var(--line); border-radius:18px; background:#fff; }
-.deal-card h3 { margin:2px 0 0; font-size:1.02rem; line-height:1.3; }
-.deal-tag { align-self:flex-start; padding:4px 10px; border-radius:999px; background:#fff0e8; color:var(--coral-text); font-size:11px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
-.deal-figure { font:800 1.35rem/1.15 Outfit,Inter,sans-serif; color:#07162f; }
-.deal-card p { margin:0; color:#475569; font-size:14px; line-height:1.5; }
-.deal-dates { font-style:normal; font-weight:700; font-size:13px; color:#0f172a; }
-.deal-link { margin-top:auto; color:var(--coral-text); font-weight:800; }
-.deal-card small { color:#94a3b8; font-size:11px; }
 .deals-note { margin:16px 2px 0; color:#64748b; font-size:12px; line-height:1.5; }
-@media (max-width:1000px) { .deal-grid { grid-template-columns:repeat(2,1fr); } }
-@media (max-width:640px) { .deal-grid { grid-template-columns:1fr; } .tt-banner { min-height:340px; } .tt-banner-copy { padding:24px; } }
