@@ -100,248 +100,248 @@ const routeSeeds: RouteSeed[] = [
   {
     origin: "Paris", originCode: "PAR", destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", formalities: true,
     duration: "environ 2 h 25", carriers: ["Air Algérie", "Air France", "Transavia"],
-    intro: "Paris – Alger fait partie des liaisons les plus fréquentées entre la France et le Maghreb, avec plusieurs départs par jour depuis Roissy-Charles de Gaulle et Orly.",
-    season: "Les tarifs montent en juillet-août, pendant les vacances scolaires et autour des fêtes religieuses. Les périodes plus calmes (janvier-février, septembre-novembre) sont en général les plus abordables.",
-    tip: "Comparez Orly et Roissy : l’aéroport de départ change la compagnie, l’horaire et parfois la franchise de bagage en soute.",
+    intro: "Alger est l’une des liaisons les plus passantes entre la France et le Maghreb : Air Algérie, Air France et Transavia se partagent les départs de Roissy et d’Orly, avec plusieurs vols chaque jour.",
+    season: "Juillet et août, la Toussaint, Noël et les semaines autour de l’Aïd : c’est là que les prix s’envolent. Janvier, février et une bonne partie de septembre-novembre sont nettement plus calmes.",
+    tip: "Roissy ou Orly, ce n’est pas qu’une question de RER : la compagnie, l’horaire et le bagage en soute changent d’un aéroport à l’autre. Regardez les deux avant de trancher.",
     back: {
-      intro: "Alger – Paris est la liaison de retour la plus demandée entre l’Algérie et la France, avec des arrivées à Orly et à Roissy-Charles de Gaulle.",
-      season: "Les retours de fin août et de début septembre, ainsi que les fins de vacances scolaires, sont en général les plus chers. Un retour en semaine ou un peu avant la rentrée fait souvent baisser le prix.",
-      tip: "Avant de payer, vérifiez l’aéroport d’arrivée (Orly ou Roissy) pour organiser votre transfert, ainsi que la franchise de bagage de votre billet retour."
+      intro: "Pour rentrer d’Alger, vous atterrissez à Orly ou à Roissy selon la compagnie. C’est le sens le plus tendu de l’année dès que les vacances touchent à leur fin.",
+      season: "Fin août et début septembre, tout le monde rentre en même temps et les prix suivent. Rentrer en milieu de semaine, ou quelques jours avant la rentrée, change vraiment la facture.",
+      tip: "Notez l’aéroport d’arrivée avant de réserver : à 23 h, un retour à Orly ou à Roissy ne se gère pas pareil pour rejoindre Paris. Et vérifiez la franchise bagage du billet retour, elle n’est pas toujours celle de l’aller."
     }
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Oran", destinationCode: "ORN", region: "Algérie", country: "algerie", formalities: true,
     duration: "environ 2 h 35", carriers: ["Air Algérie", "Air France", "Transavia"],
-    intro: "Oran est l’une des grandes destinations de l’ouest algérien. La liaison depuis Paris est très demandée dès que les vacances approchent.",
-    season: "Réservez tôt pour l’été et les fêtes : les derniers sièges à prix modéré partent vite. Hors vacances, les semaines de printemps et d’automne offrent plus de choix.",
-    tip: "Vérifiez le poids de bagage en soute inclus dans le tarif : la différence entre deux offres proches peut disparaître au moment d’ajouter une valise.",
+    intro: "Oran, c’est la grande ville de l’ouest algérien, tournée vers la mer et réputée pour avoir vu naître le raï. Depuis Paris, la demande monte dès que les vacances approchent.",
+    season: "Réservez tôt pour l’été et les fêtes : les derniers sièges à petit prix partent vite. Au printemps et à l’automne, vous avez plus de choix de jours et d’horaires.",
+    tip: "Une valise en soute ajoutée au dernier moment coûte souvent plus que l’écart entre deux billets. Regardez le prix bagage compris, pas le prix affiché.",
     back: {
-      intro: "Oran – Paris relie la grande ville de l’ouest algérien à la région parisienne, avec des arrivées à Orly ou Roissy selon la compagnie.",
-      season: "Les retours de fin d’été sont très demandés : repérer tôt un jour de retour moins cher fait gagner un budget appréciable.",
-      tip: "Si vous revenez avec beaucoup de bagages, comparez la franchise incluse avant le prix : un supplément à l’aéroport coûte souvent plus cher qu’une option prise à la réservation."
+      intro: "Oran–Paris : un retour qui se joue en fin d’été, avec des arrivées à Orly ou à Roissy selon la compagnie.",
+      season: "Les retours de fin d’été sont pris d’assaut. Repérer un jour moins cher assez tôt vous fait gagner un budget que vous ne retrouverez pas en réservant au dernier moment.",
+      tip: "Vous revenez chargé ? Comparez d’abord la franchise bagage, puis le prix. Un supplément payé à l’aéroport coûte presque toujours plus qu’une option prise à la réservation."
     }
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Constantine", destinationCode: "CZL", region: "Algérie", country: "algerie", formalities: true,
     duration: "environ 2 h 40", carriers: [],
-    intro: "Constantine est l’une des grandes villes de l’est algérien. Les vols vers Constantine sont très demandés en période de vacances et pour les fêtes.",
-    season: "Comme sur les autres liaisons algériennes, l’été, les vacances scolaires et les fêtes concentrent la demande. Hors de ces périodes, les écarts de prix d’un jour à l’autre sont plus marqués.",
-    tip: "Si le vol direct est complet ou trop cher, comparez un autre aéroport de départ ou une escale, en tenant compte de la durée totale du voyage.",
+    intro: "Constantine, la ville des ponts suspendus au-dessus des gorges du Rhumel, est la grande ville de l’est algérien. Les vols depuis Paris se remplissent vite l’été et pour les fêtes.",
+    season: "Comme sur les autres lignes algériennes, l’été, les vacances scolaires et les fêtes concentrent la demande. Le reste de l’année, les prix bougent beaucoup d’un jour à l’autre : décaler d’une journée peut tout changer.",
+    tip: "Si le direct est complet ou trop cher, regardez un autre aéroport de départ ou une escale, mais en comptant la durée totale du voyage, pas seulement le prix.",
     back: {
-      intro: "Constantine – Paris est la liaison de retour vers la région parisienne depuis l’est algérien.",
-      season: "Les retours de fin d’été et de fin de vacances sont les plus chers. Décaler le retour de quelques jours peut suffire à réduire la facture.",
-      tip: "Contrôlez les horaires d’arrivée à Paris : une arrivée tardive complique le transfert depuis l’aéroport."
+      intro: "Pour rentrer de Constantine vers la région parisienne, le vol direct reste le plus simple quand il est proposé. Mieux vaut s’y prendre assez tôt.",
+      season: "Fin d’été et fin de vacances : ce sont les retours les plus chers. Décaler de quelques jours suffit parfois à alléger la facture.",
+      tip: "Regardez l’heure d’arrivée à Paris : atterrir tard le soir complique le transfert depuis l’aéroport."
     }
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Annaba", destinationCode: "AAE", region: "Algérie", country: "algerie", formalities: true,
     duration: "environ 2 h 45", carriers: [],
-    intro: "Annaba, sur la côte est de l’Algérie, se rejoint en vol direct depuis Paris selon les périodes de l’année.",
-    season: "L’été et les vacances scolaires sont les périodes les plus chères. En dehors, la liaison est moins sollicitée et les prix plus souples.",
-    tip: "La liaison est moins fréquente que Paris – Alger : comparez tôt pour garder le choix des horaires.",
+    intro: "Annaba, sur la côte est, c’est la plage, les ruines d’Hippone et la basilique Saint-Augustin sur sa colline. Un vol direct depuis Paris est proposé selon les périodes de l’année.",
+    season: "L’été et les vacances scolaires sont les périodes les plus chères. Le reste de l’année, la ligne est moins sollicitée et les prix plus souples.",
+    tip: "Il y a moins de départs qu’entre Paris et Alger : si vos dates sont fixes, cherchez tôt pour garder le choix des horaires.",
     back: {
-      intro: "Annaba – Paris relie la côte est algérienne à la région parisienne, avec des fréquences qui varient selon la saison.",
-      season: "Les retours de fin d’été sont très demandés : anticipez si vous devez revenir à une date précise.",
-      tip: "Vérifiez les jours de la semaine desservis avant de fixer votre retour : toutes les dates ne proposent pas de vol direct."
+      intro: "Annaba–Paris, avec des fréquences qui varient selon la saison : sur cette ligne, mieux vaut connaître ses dates de retour à l’avance.",
+      season: "Les retours de fin d’été sont très demandés. Si vous devez rentrer à une date précise, réservez en avance.",
+      tip: "Tous les jours de la semaine ne sont pas desservis en direct : regardez les jours avant de fixer votre retour."
     }
   },
   {
     origin: "Marseille", originCode: "MRS", destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", formalities: true,
     duration: "environ 1 h 50", carriers: ["Air Algérie", "Transavia"],
-    intro: "Depuis Marseille-Provence, Alger se rejoint en moins de deux heures : c’est l’une des traversées les plus courtes entre la France et l’Algérie.",
-    season: "Les départs du week-end et des vacances d’été sont les plus chers. En semaine et hors saison, les écarts de prix entre deux jours voisins peuvent être importants.",
-    tip: "Si vous habitez entre Marseille et Montpellier, comparez aussi un départ depuis Lyon ou Paris avant de décider.",
+    intro: "Moins de deux heures de vol entre Marseille et Alger : c’est l’une des traversées les plus courtes entre la France et l’Algérie, et la plus pratique si vous habitez dans le Sud.",
+    season: "Les départs du week-end et ceux de l’été coûtent le plus. En semaine, hors saison, l’écart de prix entre deux jours voisins peut être important.",
+    tip: "Si vous habitez entre Marseille et Montpellier, comparez aussi un départ de Lyon ou de Paris : un billet moins cher compense parfois un trajet en train.",
     back: {
-      intro: "Alger – Marseille est l’une des liaisons de retour les plus courtes entre l’Algérie et la France, pour un vol direct de moins de deux heures.",
-      season: "Les retours de fin d’été et les week-ends de rentrée sont les plus demandés. En semaine, le prix est souvent plus bas.",
-      tip: "Pensez au transport depuis l’aéroport de Marseille-Provence vers votre destination finale : il est éloigné du centre-ville."
+      intro: "Alger–Marseille : un vol direct de moins de deux heures, idéal pour rentrer dans le Sud sans repasser par Paris.",
+      season: "Fins d’été et week-ends de rentrée sont les retours les plus demandés. En semaine, le prix est souvent plus bas.",
+      tip: "L’aéroport de Marseille-Provence est à environ 25 km du centre : prévoyez le transfert, surtout si vous arrivez tard."
     }
   },
   {
     origin: "Marseille", originCode: "MRS", destination: "Oran", destinationCode: "ORN", region: "Algérie", country: "algerie", formalities: true,
     duration: "environ 1 h 50", carriers: ["Air Algérie", "Transavia"],
-    intro: "Marseille – Oran relie deux villes portuaires de la Méditerranée occidentale, pour un vol direct d’un peu moins de deux heures.",
-    season: "La demande se concentre sur l’été, les congés scolaires et les fêtes. Décaler son départ de quelques jours suffit souvent à faire baisser le prix.",
-    tip: "Contrôlez les horaires d’arrivée : un vol tardif peut compliquer le trajet jusqu’à votre destination finale.",
+    intro: "Marseille et Oran se font face de part et d’autre de la Méditerranée : un peu moins de deux heures de vol direct entre deux villes portuaires.",
+    season: "L’été, les congés scolaires et les fêtes concentrent la demande. Partir quelques jours plus tôt ou plus tard suffit souvent à faire baisser le prix.",
+    tip: "Regardez l’heure d’arrivée : un vol tardif complique le trajet jusqu’à votre destination finale.",
     back: {
-      intro: "Oran – Marseille permet de rejoindre la Provence depuis l’ouest algérien en un peu moins de deux heures de vol.",
-      season: "Les retours de fin d’été sont les plus chers. Un retour en milieu de semaine est souvent plus abordable.",
-      tip: "Comparez avec un retour vers Paris ou Lyon si votre destination finale n’est pas en Provence."
+      intro: "Oran–Marseille : le retour en Provence en un peu moins de deux heures de vol.",
+      season: "La fin d’été donne les retours les plus chers. En milieu de semaine, le billet est souvent plus abordable.",
+      tip: "Si vous ne restez pas en Provence, comparez avec un retour vers Paris ou Lyon."
     }
   },
   {
     origin: "Lyon", originCode: "LYS", destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", formalities: true,
     duration: "environ 2 h", carriers: ["Air Algérie", "Transavia"],
-    intro: "Lyon-Saint-Exupéry dessert Alger en vol direct, ce qui évite de passer par Paris pour les voyageurs de la région Auvergne-Rhône-Alpes.",
-    season: "Comme sur les autres liaisons algériennes, juillet, août et les fêtes sont les périodes les plus chères. Le printemps et l’automne offrent des tarifs plus souples.",
-    tip: "Comparez avec un départ depuis Marseille ou Paris : un billet plus bas peut compenser un trajet en train supplémentaire.",
+    intro: "Lyon-Saint-Exupéry dessert Alger en vol direct : inutile de passer par Paris quand on habite en Auvergne-Rhône-Alpes.",
+    season: "Juillet, août et les fêtes sont les périodes les plus chères, comme sur toutes les lignes algériennes. Le printemps et l’automne laissent plus de souplesse.",
+    tip: "Un billet moins cher depuis Marseille ou Paris peut compenser un trajet en train en plus. À vous de faire le calcul.",
     back: {
-      intro: "Alger – Lyon est la liaison de retour directe pour la région lyonnaise, sans passer par Paris.",
-      season: "Les retours de fin d’été et des fêtes concentrent la demande. Réserver le retour en même temps que l’aller évite les mauvaises surprises.",
-      tip: "Vérifiez les horaires d’arrivée à Lyon-Saint-Exupéry : les liaisons avec le centre-ville sont moins fréquentes tard le soir."
+      intro: "Alger–Lyon : un retour direct vers la région lyonnaise, sans escale parisienne.",
+      season: "Les retours de fin d’été et de fêtes concentrent la demande. Réserver l’aller et le retour en même temps évite les mauvaises surprises.",
+      tip: "Les liaisons entre l’aéroport et le centre de Lyon sont moins fréquentes tard le soir : regardez l’heure d’arrivée."
     }
   },
   {
     origin: "Toulouse", originCode: "TLS", destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", formalities: true,
     duration: "environ 2 h", carriers: ["Transavia"],
-    intro: "Au départ de Toulouse-Blagnac, Alger est accessible en vol direct d’environ deux heures, pratique pour l’Occitanie et le sud-ouest.",
-    season: "Surveillez les vacances scolaires de la zone Toulouse et l’été : les prix y progressent nettement. Hors pointe, la liaison reste plus accessible.",
-    tip: "Les fréquences sont moins nombreuses que depuis Paris : si votre date est fixe, comparez tôt pour garder le choix des horaires.",
+    intro: "Depuis Toulouse-Blagnac, Alger est à deux heures de vol environ : une solution pratique pour l’Occitanie et le sud-ouest.",
+    season: "Surveillez les vacances scolaires de la zone et l’été : les prix y montent nettement. Hors pointe, la ligne reste plus accessible.",
+    tip: "Il y a moins de vols qu’au départ de Paris : si votre date est fixe, cherchez tôt pour garder le choix des horaires.",
     back: {
-      intro: "Alger – Toulouse est la liaison de retour directe vers l’Occitanie et le sud-ouest, en un peu moins de deux heures.",
-      season: "Les retours de fin d’été et de fin de vacances sont les plus demandés. Hors pointe, les prix sont nettement plus bas.",
-      tip: "Les fréquences sont limitées : consultez plusieurs dates de retour avant de bloquer votre calendrier."
+      intro: "Alger–Toulouse, un peu moins de deux heures de vol direct vers l’Occitanie et le sud-ouest.",
+      season: "Fin d’été et fin de vacances : les retours les plus demandés. Hors pointe, les prix sont nettement plus bas.",
+      tip: "Peu de fréquences : regardez plusieurs dates de retour avant de bloquer votre calendrier."
     }
   },
   // Maroc et Tunisie
   {
     origin: "Paris", originCode: "PAR", destination: "Marrakech", destinationCode: "RAK", region: "Maroc et Tunisie", country: "maroc", formalities: true,
     duration: "environ 3 h 20", carriers: ["Transavia", "easyJet", "Ryanair", "Royal Air Maroc", "Air France", "Vueling"],
-    intro: "Marrakech est l’une des destinations soleil les plus demandées depuis Paris, avec des vols réguliers et low cost depuis Roissy, Orly et Beauvais.",
-    season: "Le printemps et l’automne offrent un climat agréable et des prix souvent plus modérés qu’en vacances scolaires. L’été est très chaud sur place et la demande y est moins soutenue côté loisirs.",
-    tip: "Les offres low cost partent parfois de Beauvais : ajoutez le coût et la durée du transfert avant de comparer avec Orly ou Roissy.",
+    intro: "Marrakech, c’est la médina, la place Jemaa el-Fna et du soleil presque toute l’année, à environ 3 h 20 de Paris. Les vols réguliers et low cost partent de Roissy, d’Orly et de Beauvais.",
+    season: "Printemps et automne sont les saisons les plus agréables, avec des prix raisonnables hors vacances scolaires. L’été, il fait très chaud sur place et la demande loisirs retombe.",
+    tip: "Les billets low cost partent parfois de Beauvais, à plus de 80 km de Paris. Ajoutez le transfert au prix avant de comparer avec Orly ou Roissy.",
     back: {
-      intro: "Marrakech – Paris relie la ville ocre à Orly, Roissy et Beauvais, avec de nombreuses compagnies régulières et low cost.",
-      season: "Les fins de vacances et les week-ends prolongés sont les plus chers au retour. En semaine et hors vacances, les prix baissent nettement.",
-      tip: "Un retour vers Beauvais peut être moins cher mais impose un transfert long jusqu’à Paris : comparez le prix total."
+      intro: "Marrakech–Paris : un retour vers Orly, Roissy ou Beauvais, avec des compagnies régulières et low cost.",
+      season: "Les fins de vacances et les week-ends prolongés sont les retours les plus chers. En semaine et hors vacances, les prix baissent nettement.",
+      tip: "Un retour vers Beauvais coûte parfois moins mais impose un long transfert jusqu’à Paris. Comparez le prix total, pas le prix du billet."
     }
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Casablanca", destinationCode: "CMN", region: "Maroc et Tunisie", country: "maroc", formalities: true,
     duration: "environ 3 h 10", carriers: ["Royal Air Maroc", "Transavia", "Air France", "Air Arabia Maroc"],
-    intro: "Casablanca est la porte d’entrée économique du Maroc et un point de correspondance vers l’Afrique de l’Ouest. La liaison depuis Paris compte de nombreux vols par jour.",
-    season: "Les périodes de forte demande sont l’été, les vacances scolaires et les fêtes. Le début du printemps et l’automne sont en général plus abordables.",
-    tip: "Si vous continuez vers une autre ville marocaine, comparez un billet unique avec correspondance et deux billets séparés : les conditions de bagage changent.",
+    intro: "Casablanca, c’est la capitale économique du Maroc, la mosquée Hassan II face à l’océan et un point de correspondance vers l’Afrique de l’Ouest. Depuis Paris, les vols se succèdent toute la journée.",
+    season: "Été, vacances scolaires et fêtes : la demande explose. Le début du printemps et l’automne sont en général plus abordables.",
+    tip: "Vous continuez vers une autre ville marocaine ? Un billet unique avec correspondance protège mieux vos bagages que deux billets séparés, dont les conditions diffèrent.",
     back: {
-      intro: "Casablanca – Paris est l’une des liaisons de retour les plus fréquentées du Maroc, avec de nombreux vols directs chaque jour.",
-      season: "Les retours de fin d’été et des vacances scolaires sont les plus chers. En dehors, le jour de la semaine pèse beaucoup sur le prix.",
-      tip: "Vérifiez l’aéroport d’arrivée à Paris (Orly ou Roissy) avant de prévoir votre transfert."
+      intro: "Casablanca–Paris est l’une des liaisons de retour les plus fréquentées du Maroc, avec de nombreux vols directs chaque jour.",
+      season: "Fin d’été et fin de vacances scolaires : les retours les plus chers. Le reste de l’année, le jour de la semaine pèse lourd dans le prix.",
+      tip: "Orly ou Roissy ? Notez l’aéroport d’arrivée avant de prévoir votre transfert."
     }
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Tanger", destinationCode: "TNG", region: "Maroc et Tunisie", country: "maroc", formalities: true,
     duration: "environ 2 h 55", carriers: [],
-    intro: "Tanger est la porte d’entrée du nord du Maroc, en face de l’Espagne. La liaison depuis Paris est très demandée à l’approche de l’été.",
-    season: "L’été, les vacances scolaires et les fêtes sont les périodes les plus chères. Au printemps et à l’automne, les prix sont plus souples.",
-    tip: "Les vols directs sont moins nombreux que vers Casablanca ou Marrakech : comparez tôt, et regardez aussi les escales si le prix est élevé.",
+    intro: "Tanger, face à l’Espagne, est la porte du nord du Maroc. La ligne depuis Paris est très demandée à l’approche de l’été.",
+    season: "L’été, les vacances scolaires et les fêtes sont les périodes les plus chères. Au printemps et à l’automne, les prix se détendent.",
+    tip: "Il y a moins de vols directs que vers Casablanca ou Marrakech : cherchez tôt, et regardez aussi les escales si le prix du direct est trop élevé.",
     back: {
-      intro: "Tanger – Paris relie le nord du Maroc à la région parisienne, avec des fréquences plus fortes en été.",
-      season: "Les retours de fin d’été sont les plus demandés. Un retour en semaine est souvent plus abordable.",
-      tip: "Contrôlez la franchise de bagage : sur cette liaison très empruntée en été, les écarts de tarif entre compagnies sont importants."
+      intro: "Tanger–Paris, avec des fréquences plus fortes en été.",
+      season: "La fin d’été donne les retours les plus demandés. Un retour en semaine est souvent plus abordable.",
+      tip: "L’été, les écarts de tarif entre compagnies sont importants sur cette ligne : regardez la franchise bagage avant le prix."
     }
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Fès", destinationCode: "FEZ", region: "Maroc et Tunisie", country: "maroc", formalities: true,
     duration: "environ 3 h", carriers: ["Royal Air Maroc", "Transavia"],
-    intro: "Fès, capitale culturelle du Maroc, abrite l’une des plus grandes médinas du monde, classée à l’UNESCO. Des vols directs la relient à Paris.",
-    season: "Le printemps et l’automne sont les saisons les plus agréables pour la visite. L’été est très chaud et les vacances scolaires font monter les tarifs.",
-    tip: "Les fréquences sont limitées : repérez les jours où un vol direct est proposé avant de choisir vos dates.",
+    intro: "Fès, c’est la capitale culturelle du Maroc : une médina classée à l’UNESCO parmi les plus vastes du monde, les tanneries, l’université Al Quaraouiyine fondée au IXe siècle. Des vols directs la relient à Paris.",
+    season: "Le printemps et l’automne sont les plus agréables pour visiter. L’été est très chaud et les vacances scolaires font monter les tarifs.",
+    tip: "Il y a peu de vols par semaine : repérez les jours où un direct est proposé avant de choisir vos dates.",
     back: {
-      intro: "Fès – Paris est la liaison de retour directe vers Orly depuis la capitale culturelle du Maroc.",
-      season: "Les retours de fin d’été et de fin de vacances sont les plus chers. Hors pointe, les prix baissent sensiblement.",
-      tip: "Peu de vols par semaine : si votre retour est fixe, vérifiez les jours desservis avant de réserver l’aller."
+      intro: "Fès–Paris : un retour direct vers Orly depuis la capitale culturelle du Maroc.",
+      season: "Fin d’été et fin de vacances : les retours les plus chers. Hors pointe, les prix baissent sensiblement.",
+      tip: "Peu de vols dans la semaine : si votre retour est fixe, vérifiez les jours desservis avant de réserver l’aller."
     }
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Agadir", destinationCode: "AGA", region: "Maroc et Tunisie", country: "maroc", formalities: true,
     duration: "environ 3 h 35", carriers: [],
-    intro: "Agadir est une station balnéaire de la côte atlantique du Maroc, très appréciée pour les séjours au soleil.",
-    season: "L’hiver et le printemps sont très demandés pour les séjours au soleil, tout comme les vacances scolaires. Hors de ces périodes, les prix sont plus souples.",
-    tip: "Comparez les offres avec bagage en soute : sur les séjours balnéaires, une valise est presque toujours nécessaire.",
+    intro: "Agadir, c’est la grande plage de la côte atlantique du Maroc et du soleil presque toute l’année, à moins de quatre heures de Paris.",
+    season: "L’hiver et le printemps attirent beaucoup de monde en quête de soleil, tout comme les vacances scolaires. En dehors de ces périodes, les prix sont plus souples.",
+    tip: "Pour un séjour à la plage, une valise en soute est presque toujours nécessaire : comparez les offres bagage compris.",
     back: {
-      intro: "Agadir – Paris relie la côte atlantique du Maroc à la région parisienne, avec des fréquences qui varient selon la saison.",
-      season: "Les fins de vacances et de week-ends prolongés sont les plus chères. En semaine, les tarifs sont plus bas.",
-      tip: "Vérifiez l’aéroport d’arrivée en région parisienne : les offres les moins chères atterrissent parfois loin de Paris."
+      intro: "Agadir–Paris, avec des fréquences qui varient selon la saison.",
+      season: "Les fins de vacances et de week-ends prolongés sont les retours les plus chers. En semaine, les tarifs sont plus bas.",
+      tip: "Regardez l’aéroport d’arrivée en région parisienne : les offres les moins chères atterrissent parfois loin de Paris."
     }
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Tunis", destinationCode: "TUN", region: "Maroc et Tunisie", formalities: true,
     duration: "environ 2 h 30", carriers: ["Tunisair", "Air France", "Transavia"],
-    intro: "Paris – Tunis est une liaison de proximité très utilisée pour les séjours en famille comme pour les courts voyages.",
-    season: "Comptez des tarifs plus élevés en été et pendant les vacances scolaires. Les mois de printemps et d’automne offrent un meilleur rapport prix-confort.",
-    tip: "Vérifiez les horaires de retour : certaines offres peu chères imposent un départ très tôt le matin.",
+    intro: "Tunis est à 2 h 30 de Paris : on y va en famille, pour un week-end, ou pour pousser jusqu’à Carthage et Sidi Bou Saïd.",
+    season: "Été et vacances scolaires : tarifs en hausse. Au printemps et à l’automne, le rapport prix-confort est meilleur.",
+    tip: "Contrôlez l’heure du vol retour : certaines offres peu chères imposent un décollage très tôt le matin.",
     back: {
-      intro: "Tunis – Paris est la liaison de retour la plus fréquentée entre la Tunisie et la France, avec des arrivées à Orly et à Roissy.",
-      season: "Les retours de fin d’été et des vacances sont les plus chers. En dehors, un départ en semaine est souvent plus abordable.",
-      tip: "Contrôlez le terminal et l’aéroport d’arrivée avant d’organiser votre transfert."
+      intro: "Tunis–Paris est la liaison de retour la plus fréquentée entre la Tunisie et la France, avec des arrivées à Orly et à Roissy.",
+      season: "Fin d’été et fin de vacances : les retours les plus chers. Le reste de l’année, un départ en semaine est souvent plus abordable.",
+      tip: "Notez le terminal et l’aéroport d’arrivée avant d’organiser votre transfert."
     }
   },
   {
     origin: "Lyon", originCode: "LYS", destination: "Marrakech", destinationCode: "RAK", region: "Maroc et Tunisie", country: "maroc", formalities: true,
     duration: "environ 3 h 15", carriers: ["easyJet", "Transavia"],
-    intro: "Depuis Lyon-Saint-Exupéry, Marrakech se rejoint en vol direct d’un peu plus de trois heures, pour une escapade courte ou un séjour prolongé.",
-    season: "Les week-ends prolongés et les vacances scolaires font monter les prix. Un départ en milieu de semaine est souvent plus abordable.",
-    tip: "Les fréquences changent selon la saison : comparez plusieurs dates avant de bloquer vos congés.",
+    intro: "Lyon–Marrakech en vol direct, c’est un peu plus de trois heures pour un week-end prolongé ou un séjour plus long, sans repasser par Paris.",
+    season: "Les week-ends prolongés et les vacances scolaires font monter les prix. Partir en milieu de semaine coûte souvent moins cher.",
+    tip: "Les fréquences changent selon la saison : regardez plusieurs dates avant de poser vos congés.",
     back: {
-      intro: "Marrakech – Lyon est la liaison de retour directe vers la région lyonnaise, sans passer par Paris.",
-      season: "Les retours en fin de vacances et de week-end prolongé sont les plus chers. Un retour en semaine reste plus abordable.",
-      tip: "Peu de vols par semaine selon la saison : vérifiez que le jour de retour choisi est bien desservi en direct."
+      intro: "Marrakech–Lyon : un retour direct vers la région lyonnaise.",
+      season: "Fin de vacances et week-ends prolongés : les retours les plus chers. En semaine, c’est plus abordable.",
+      tip: "Il y a peu de vols dans la semaine : vérifiez que votre jour de retour est bien desservi en direct."
     }
   },
   // Europe
   {
     origin: "Paris", originCode: "PAR", destination: "Barcelone", destinationCode: "BCN", region: "Europe", country: "espagne",
     duration: "environ 1 h 55", carriers: ["Vueling", "Air France", "Transavia"],
-    intro: "Barcelone est l’une des escapades européennes les plus courues depuis Paris, avec de nombreux vols quotidiens.",
+    intro: "Barcelone reste l’escapade européenne préférée au départ de Paris : la Sagrada Família, des plages en pleine ville et de nombreux vols chaque jour.",
     season: "Les week-ends de printemps et d’été sont les plus demandés. En semaine, hors vacances, les billets sont souvent bien moins chers.",
-    tip: "Comparez avec le train : la durée totale (centre à centre) peut rivaliser avec l’avion une fois les transferts aéroport ajoutés."
+    tip: "Le prix affiché dépend beaucoup du bagage : sur les compagnies à bas prix, la petite cabine suffit rarement pour un week-end de trois jours."
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Lisbonne", destinationCode: "LIS", region: "Europe", country: "portugal",
     duration: "environ 2 h 30", carriers: ["TAP Air Portugal", "Air France", "Transavia", "easyJet"],
-    intro: "Lisbonne attire toute l’année grâce à son climat doux. L’aéroport est proche du centre, ce qui limite le coût du transfert.",
-    season: "L’été et les ponts de printemps sont les plus chers. L’automne et le début de l’hiver offrent un bon équilibre entre météo et budget.",
-    tip: "L’aéroport se trouve à une courte distance du centre-ville en métro : le transfert pèse peu dans le prix total du voyage."
+    intro: "Lisbonne, ses collines et son tram 28 : douce toute l’année, à environ 2 h 30 de Paris, avec un aéroport tout près du centre.",
+    season: "L’été et les ponts de printemps sont les plus chers. L’automne et le début de l’hiver offrent le meilleur équilibre entre météo et budget.",
+    tip: "L’aéroport est relié au centre par le métro : le transfert pèse peu dans le budget, contrairement à beaucoup de capitales."
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Madrid", destinationCode: "MAD", region: "Europe", country: "espagne",
     duration: "environ 2 h", carriers: ["Iberia", "Air France", "Transavia", "Air Europa"],
-    intro: "Paris – Madrid est une liaison dense, utile autant pour les week-ends que pour les déplacements professionnels.",
-    season: "Les périodes de pointe sont les ponts, les vacances d’été et de Noël. Hors pointe, les prix baissent sensiblement en semaine.",
-    tip: "Pour un déplacement professionnel, comparez les horaires de retour du soir : ils changent beaucoup d’une compagnie à l’autre."
+    intro: "Paris–Madrid, deux heures de vol, tourne toute l’année : week-ends culturels, déplacements professionnels et correspondances vers l’Amérique latine.",
+    season: "Ponts, vacances d’été et Noël : les prix montent. Hors pointe, la semaine est nettement moins chère.",
+    tip: "En déplacement professionnel, regardez les horaires du vol retour du soir : ils varient beaucoup d’une compagnie à l’autre."
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Rome", destinationCode: "ROM", region: "Europe", country: "italie",
     duration: "environ 2 h 10", carriers: ["ITA Airways", "Air France", "Transavia", "easyJet", "Vueling"],
-    intro: "Rome est desservie par deux aéroports. Le tarif le plus bas n’est pas toujours le meilleur choix une fois le transfert vers le centre pris en compte.",
-    season: "Printemps et début d’automne sont très demandés. Les semaines moins touristiques (novembre, février) permettent de trouver des vols plus abordables.",
-    tip: "Comparez les deux aéroports de Rome : le temps et le coût du transfert vers le centre diffèrent."
+    intro: "Rome a deux aéroports, Fiumicino et Ciampino, et le billet le moins cher n’est pas toujours le bon choix une fois le transfert vers le centre compté.",
+    season: "Printemps et début d’automne sont très demandés. Novembre et février, moins touristiques, donnent souvent des vols plus abordables.",
+    tip: "Depuis Fiumicino, un train direct rejoint la gare Termini ; depuis Ciampino, il faut passer par un bus. Comparez le temps et le coût du transfert."
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Londres", destinationCode: "LON", region: "Europe", country: "royaume-uni",
     duration: "environ 1 h 20", carriers: ["British Airways", "Air France", "easyJet"],
-    intro: "Londres compte cinq aéroports. Selon celui de l’offre, le trajet jusqu’au centre peut faire perdre plus de temps que le vol lui-même.",
-    season: "Les week-ends et les vacances scolaires britanniques et françaises sont les plus chers. En semaine et hors saison, les tarifs sont plus souples.",
-    tip: "Sur un si court trajet, comparez avec l’Eurostar en durée totale, bagages inclus, avant de choisir l’avion."
+    intro: "Londres a cinq aéroports, et selon celui de l’offre, le trajet jusqu’au centre peut durer plus longtemps que le vol de 1 h 20.",
+    season: "Week-ends et vacances scolaires, françaises comme britanniques, font grimper les prix. En semaine et hors saison, les tarifs sont plus souples.",
+    tip: "Sur un trajet aussi court, comparez avec l’Eurostar en durée totale, bagages compris, avant de choisir l’avion."
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Istanbul", destinationCode: "IST", region: "Europe", country: "turquie",
     duration: "environ 3 h 20", carriers: ["Turkish Airlines", "Air France", "Pegasus", "AJet"],
-    intro: "Istanbul se rejoint depuis Paris en un peu plus de trois heures, avec deux aéroports situés de part et d’autre du Bosphore.",
-    season: "Le printemps et l’automne sont agréables et très demandés. L’été et les fêtes font monter les tarifs.",
-    tip: "Le second aéroport est plus éloigné du centre historique : prenez en compte le temps de transfert, surtout en cas d’arrivée tardive."
+    intro: "Istanbul est à un peu plus de trois heures de Paris, avec deux aéroports de part et d’autre du Bosphore : le grand IST côté européen, Sabiha Gökçen (SAW) côté asiatique.",
+    season: "Printemps et automne sont agréables et très demandés. L’été et les fêtes font monter les tarifs.",
+    tip: "L’aéroport change le prix, mais aussi la durée du transfert jusqu’au centre historique : comptez-la, surtout si vous arrivez tard."
   },
   // Long-courrier
   {
     origin: "Paris", originCode: "PAR", destination: "New York", destinationCode: "NYC", region: "Amériques", country: "etats-unis", formalities: true,
     duration: "environ 8 h 15", carriers: ["Air France", "Delta", "United", "American Airlines", "French bee"],
-    intro: "Paris – New York est une liaison transatlantique très concurrentielle : compagnies régulières, alliances et offres plus économiques s’y côtoient.",
-    season: "Les prix sont les plus élevés en été et pendant les fêtes de fin d’année. Les mois d’hiver (hors vacances) et le début du printemps offrent souvent de meilleures offres.",
-    tip: "Contrôlez la franchise de bagage en soute, parfois non incluse sur les tarifs les plus bas, ainsi que l’aéroport d’arrivée (JFK ou Newark)."
+    intro: "Paris–New York est l’une des lignes transatlantiques les plus disputées : compagnies régulières, alliances et offres plus économiques s’y côtoient, pour environ 8 h 15 de vol.",
+    season: "L’été et la fin d’année sont les plus chers. L’hiver, hors vacances, et le début du printemps donnent souvent de meilleures offres.",
+    tip: "Regardez ce que le tarif inclut : sur les offres les plus basses, la valise en soute est parfois en option. Et vérifiez l’aéroport d’arrivée, JFK ou Newark."
   },
   {
     origin: "Paris", originCode: "PAR", destination: "Montréal", destinationCode: "YUL", region: "Amériques", country: "canada", formalities: true,
     duration: "environ 7 h 30", carriers: ["Air Canada", "Air France", "Air Transat"],
-    intro: "Montréal est la porte d’entrée francophone de l’Amérique du Nord, très demandée pour les études, les séjours en famille et le tourisme.",
-    season: "L’été et la période des fêtes sont les plus chers. L’automne (couleurs d’automne) attire beaucoup de visiteurs : réservez tôt.",
-    tip: "Vérifiez les formalités d’entrée au Canada (autorisation de voyage électronique selon votre nationalité) avant de réserver."
+    intro: "Montréal, la porte d’entrée francophone de l’Amérique du Nord, attire étudiants, familles et voyageurs, à environ 7 h 30 de vol.",
+    season: "L’été et les fêtes sont les plus chers. À l’automne, les couleurs attirent beaucoup de monde : réservez tôt.",
+    tip: "Avant de réserver, vérifiez les formalités d’entrée au Canada (autorisation de voyage électronique selon votre nationalité)."
   },
   {
     origin: "Lyon", originCode: "LYS", destination: "Dubaï", destinationCode: "DXB", region: "Asie et Moyen-Orient", country: "asie", formalities: true,
     duration: "environ 6 h 30", carriers: ["Emirates"],
-    intro: "Depuis Lyon, Dubaï se rejoint avec ou sans escale selon les offres. Comparer la durée totale est aussi important que comparer le prix.",
-    season: "L’hiver (octobre à avril) est la saison la plus agréable sur place et la plus demandée. L’été est très chaud, avec des tarifs souvent plus bas.",
-    tip: "Une escale peut faire baisser le prix mais allonger fortement le voyage : regardez la durée de correspondance avant de choisir."
+    intro: "Depuis Lyon, Dubaï se rejoint avec ou sans escale selon les offres : la durée totale compte autant que le prix.",
+    season: "L’hiver, d’octobre à avril, est la saison la plus agréable sur place, donc la plus demandée. L’été est très chaud, avec des tarifs souvent plus bas.",
+    tip: "Une escale peut faire baisser le prix mais rallonger fortement le voyage : regardez la durée de la correspondance."
   }
 ];
 

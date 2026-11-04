@@ -4,7 +4,6 @@ import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
 import ServiceFaq from "@/components/ServiceFaq";
-import { PromoStrip } from "@/components/Countdown";
 import { defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
 import { departureCities } from "@/lib/cities";
 import { getRouteStats } from "@/lib/route-data";
@@ -31,14 +30,14 @@ const destinations = [
 
 const services = [
   { href: "/hotels", title: "Hôtels", text: "Comparez les prix sur la carte", img: "/hero-hotels.webp" },
-  { href: "/voitures", title: "Voitures", text: "Loueurs et points de retrait", img: "/hero-cars.webp" },
-  { href: "/esim", title: "eSIM", text: "Internet à l’étranger, sans roaming", img: "https://images.unsplash.com/photo-1629653163521-5394bd65f28d?auto=format&fit=crop&w=800&q=70" },
+  { href: "/voitures", title: "Voitures", text: "Comparez loueurs et prix", img: "/hero-cars.webp" },
+  { href: "/esim", title: "eSIM", text: "Internet dès l’atterrissage, sans frais de roaming", img: "https://images.unsplash.com/photo-1629653163521-5394bd65f28d?auto=format&fit=crop&w=800&q=70" },
 ];
 
 const reasons = [
-  ["Prix comparés", "Centaines de compagnies et d’agences, une seule recherche."],
-  ["Prix total clair", "Bagages, escales, aéroport : on vous aide à vérifier."],
-  ["Gratuit, sans compte", "Vous réservez directement chez le partenaire choisi."],
+  ["Les prix côte à côte", "Une seule recherche, plusieurs compagnies et agences : vous voyez tout de suite qui est le moins cher."],
+  ["Le vrai prix", "Bagages, escales, aéroport de départ : on vous aide à voir ce que le billet inclut vraiment."],
+  ["Gratuit, sans compte", "Vous réservez directement chez le partenaire que vous avez choisi."],
 ];
 
 export default async function Home() {
@@ -62,10 +61,9 @@ export default async function Home() {
         </div>
       </section>
 
-      <PromoStrip to="2026-12-01T00:00:00+01:00" href="/blog/travel-tuesday-2026-bons-plans-vols" title="Travel Tuesday · mardi 1er décembre" />
 
       <section className="section home-block" id="destinations">
-        <div className="home-head"><h2>Où partir ? Nos destinations du moment</h2><Link className="text-link" href="/vols">Tous les itinéraires →</Link></div>
+        <div className="home-head"><h2>Où partir en ce moment ?</h2><Link className="text-link" href="/vols">Tous les itinéraires →</Link></div>
         <div className="dest-grid">
           {deals.map((d) => (
             <Link key={d.slug} href={`/vols/${d.slug}`} className="dest-card">
@@ -84,7 +82,7 @@ export default async function Home() {
       </section>
 
       <section className="section home-block home-tight">
-        <div className="home-head"><h2>Et pour le reste du voyage</h2></div>
+        <div className="home-head"><h2>Pour le reste du voyage</h2></div>
         <div className="svc-grid">
           {services.map((s) => (
             <Link key={s.href} href={s.href} className="svc-card" style={{ backgroundImage: `linear-gradient(0deg,rgba(7,22,47,.78),rgba(7,22,47,.1) 65%),url(${s.img})` }}>
@@ -99,7 +97,7 @@ export default async function Home() {
           <div className="wm-copy">
             <span>World Map &amp; Passeport</span>
             <h2>Collectionnez le monde.</h2>
-            <p>Colorez les pays que vous avez visités, notez ceux qui vous font rêver et gardez le souvenir de chaque voyage dans votre passeport HiFlight.</p>
+            <p>Coloriez les pays où vous êtes allé, gardez de côté ceux dont vous rêvez, et retrouvez chaque voyage dans votre passeport HiFlight.</p>
             <div className="wm-actions">
               <Link href="/world-map" className="wm-btn wm-btn-main">Ouvrir ma World Map</Link>
               <Link href="/world-map?view=passport" className="wm-btn">Voir mon passeport</Link>
@@ -115,7 +113,7 @@ export default async function Home() {
       <section className="section home-block">
         <Link href="/blog" className="blog-banner" style={{ backgroundImage: "linear-gradient(90deg,rgba(7,22,47,.72),rgba(7,22,47,.05) 70%),url(/account-landscape-v2.webp)" }}>
           <span>Voyager autrement</span>
-          <strong>Conseils et inspirations pour votre prochain départ</strong>
+          <strong>Idées, bons plans et guides avant de réserver</strong>
           <em>Découvrir le blog →</em>
         </Link>
       </section>

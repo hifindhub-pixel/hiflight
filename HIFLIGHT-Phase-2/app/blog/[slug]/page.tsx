@@ -6,6 +6,8 @@ import { blogPosts, getPost } from "@/lib/blog";
 import { flightRoutes, siteUrl } from "@/lib/content";
 import { getRouteStats } from "@/lib/route-data";
 import { Countdown } from "@/components/Countdown";
+import SearchForm from "@/components/SearchForm";
+import ServiceTabs from "@/components/ServiceTabs";
 
 export function generateStaticParams() { return blogPosts.map(({ slug }) => ({ slug })); }
 
@@ -68,11 +70,31 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           },
         ],
       }} />
+      {post.countdown ? (
+        <>
+          <section className="hero hero-tt" style={{ backgroundImage: `linear-gradient(90deg,rgba(3,12,29,.92),rgba(3,12,29,.6) 50%,rgba(3,12,29,.2) 85%),linear-gradient(0deg,rgba(3,12,29,.72),transparent 50%),url(${post.heroImage})` }}>
+            <div className="hero-inner">
+              <ServiceTabs active="flights" />
+              <div className="hero-copy">
+                <span className="tt-badge">Travel Tuesday · mardi 1er décembre</span>
+                <Countdown to={post.countdown.to} className="art-count" />
+                <h1>{post.title}</h1>
+              </div>
+              <SearchForm />
+              <div className="trust-line"><span>Gratuit</span><span>Sans inscription</span></div>
+            </div>
+          </section>
+          <section className="tt-intro">
+            <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/blog">Conseils voyage</Link></p>
+            <p className="art-standfirst">{post.intro}</p>
+          </section>
+        </>
+      ) : (
+        <>
       <section className="art-head">
         <div>
           <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/blog">Conseils voyage</Link></p>
           <span className="art-chip">Conseils voyage</span>
-          {post.countdown ? <Countdown to={post.countdown.to} className="art-count" /> : null}
           <h1>{post.title}</h1>
           <p className="art-standfirst">{post.intro}</p>
         </div>
@@ -82,6 +104,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <img src={post.heroImage} alt={post.title} width={1600} height={700} fetchPriority="high" />
         </figure>
       ) : null}
+        </>
+      )}
       <div className="art-layout">
       <article className="art-body">
         {post.keyPoints?.length ? (
