@@ -11,8 +11,6 @@ export type HotelSearch = {
   longitude?: number;
 };
 
-type Partner = { name: string; description: string; href: string };
-
 // AID verified in the Stay22 Hub. Public affiliate identifier, not a secret.
 function stay22Search(search: HotelSearch) {
   const url = new URL("https://www.stay22.com/embed/gm");
@@ -34,29 +32,7 @@ function stay22Search(search: HotelSearch) {
   return url.toString();
 }
 
-function bookingSearch(search: HotelSearch) {
-  const url = new URL("https://www.booking.com/searchresults.fr.html");
-  url.searchParams.set("ss", search.destination);
-  if (search.checkin) url.searchParams.set("checkin", search.checkin);
-  if (search.checkout) url.searchParams.set("checkout", search.checkout);
-  url.searchParams.set("group_adults", search.guests);
-  url.searchParams.set("no_rooms", "1");
-  return url.toString();
-}
-
-function partners(search: HotelSearch): Partner[] {
-  const results: Partner[] = [{
-    name: "Booking.com",
-    description: "Consulter les hébergements et tarifs sur Booking.com",
-    href: bookingSearch(search),
-  }];
-  // Afficher uniquement les autres marchands dont la destination a été configurée.
-  // Ne pas attribuer de prix à un partenaire sans accès à son inventaire en direct.
-  return results;
-}
-
 export default function HotelExplorer({ search }: { search: HotelSearch }) {
-  const results = partners(search);
   const hasDates = Boolean(search.checkin && search.checkout);
   const mapUrl = stay22Search(search);
   const [reload, setReload] = useState(0);
@@ -76,7 +52,7 @@ export default function HotelExplorer({ search }: { search: HotelSearch }) {
         <p style={{ margin: 0, color: "#475569", fontSize: 14 }}>
           Explorez la carte et les hébergements proposés par Stay22. Les prix affichés restent à confirmer lors de la réservation.
         </p>
-        {!frameLoaded && <p role="status" style={{ margin: 0, fontSize: 14 }}>Chargement de la carte… Booking.com reste accessible ci-dessous.</p>}
+        {!frameLoaded && <p role="status" style={{ margin: 0, fontSize: 14 }}>Chargement de la carte…</p>}
         <iframe
           key={`${mapUrl}-${reload}`}
           id="stay22-widget"
@@ -91,18 +67,7 @@ export default function HotelExplorer({ search }: { search: HotelSearch }) {
         <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "12px", fontSize: 14 }}>
           <span>La carte ne s’affiche pas ?</span>
           <button type="button" onClick={() => setReload((value) => value + 1)} style={{ border: "1px solid #cbd5e1", borderRadius: 8, padding: "8px 12px", background: "white", cursor: "pointer" }}>Recharger la carte</button>
-          <a href={bookingSearch(search)} target="_blank" rel="noopener noreferrer sponsored" style={{ color: "#0F172A", fontWeight: 600 }}>Rechercher sur Booking.com ↗</a>
         </div>
-      </div>
-      <div style={{ padding: "24px", display: "grid", gap: "16px" }}>
-        <h2 style={{ margin: 0, fontSize: "1.25rem" }}>Poursuivre sur Booking.com</h2>
-        <p style={{ margin: 0, opacity: .78 }}>Retrouvez votre destination, vos dates et vos voyageurs sur Booking.com, également accessible si la carte est indisponible.</p>
-        {results.map((partner) => (
-          <article key={partner.name} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", border: "1px solid #e2e8f0", borderRadius: 16, padding: 20 }}>
-            <div><strong>{partner.name}</strong><p style={{ margin: "6px 0 0", opacity: .75 }}>{partner.description}</p></div>
-            <a href={partner.href} target="_blank" rel="noopener noreferrer sponsored" style={{ display: "inline-block", background: "#0F172A", color: "#fff", borderRadius: 12, padding: "12px 18px", fontWeight: 600, textDecoration: "none" }}>Voir les offres ↗</a>
-          </article>
-        ))}
       </div>
     </section>
   );
