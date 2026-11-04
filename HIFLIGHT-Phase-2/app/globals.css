@@ -1640,3 +1640,212 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 /* Bons plans du moment */
 .deals-checked { color:#64748b; font-size:13px; font-weight:600; }
 .deals-note { margin:16px 2px 0; color:#64748b; font-size:12px; line-height:1.5; }
+
+/* ====================================================================
+   Articles : mise en page éditoriale (préfixe mag-) et page Conseils voyage (préfixe idx-)
+   ==================================================================== */
+.mag-progress { position:fixed; top:0; left:0; right:0; height:3px; z-index:60; pointer-events:none; }
+.mag-progress span { display:block; height:100%; background:linear-gradient(90deg,var(--coral),#ffb199); transform-origin:0 50%; transform:scaleX(0); }
+
+/* En-tête : grande photo, titre dessus */
+.mag-hero { position:relative; color:#fff; background:#07162f; overflow:hidden; isolation:isolate; }
+.mag-hero>img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; }
+.mag-hero::after { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(3,12,29,.7) 0%,rgba(3,12,29,.1) 26%,rgba(3,12,29,.45) 58%,rgba(3,12,29,.93) 100%); }
+.mag-hero-in { width:min(1160px,calc(100% - 40px)); min-height:620px; margin:0 auto; padding:132px 0 56px; display:flex; flex-direction:column; justify-content:space-between; gap:60px; }
+.mag-hero .breadcrumb, .mag-hero .breadcrumb a { margin:0; color:rgba(255,255,255,.82); }
+.mag-hero .breadcrumb a:hover { color:#fff; text-decoration:underline; }
+.mag-hero-copy { max-width:900px; }
+.mag-cat { display:inline-block; padding:7px 15px; border-radius:999px; background:var(--coral); color:#fff; font:800 12px Inter,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+.mag-hero h1 { margin:20px 0 0; font:800 clamp(2.1rem,4.4vw,3.7rem)/1.06 Outfit,Inter,sans-serif; letter-spacing:-.03em; text-wrap:balance; text-shadow:0 2px 24px rgba(3,12,29,.35); }
+.mag-meta { display:flex; flex-wrap:wrap; gap:6px 0; margin:22px 0 0; font-size:14px; font-weight:500; color:rgba(255,255,255,.86); }
+.mag-meta span+span::before { content:"·"; margin:0 11px; opacity:.6; }
+.mag-strip { width:min(1160px,calc(100% - 40px)); margin:26px auto 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px 24px; }
+.mag-strip .breadcrumb { margin:0; }
+.mag-strip .mag-meta { margin:0; color:var(--muted); }
+
+/* Corps + colonne latérale */
+.mag-layout { width:min(1160px,calc(100% - 40px)); margin:0 auto; padding:58px 0 10px; display:grid; grid-template-columns:minmax(0,720px) 300px; justify-content:space-between; gap:56px; align-items:start; }
+.mag-body { min-width:0; }
+.mag-lede { margin:0 0 34px; padding-bottom:34px; border-bottom:1px solid var(--line); font:400 clamp(1.3rem,2.2vw,1.6rem)/1.5 Newsreader,Georgia,"Times New Roman",serif; color:#17233a; letter-spacing:-.005em; }
+.mag-body p, .mag-body li { font-size:18.5px; line-height:1.8; color:#2b3645; }
+.mag-body p { margin:0 0 1.15em; }
+.mag-body a:not(.mag-route):not(.mag-cta) { color:var(--coral-text); text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px; }
+
+/* L’essentiel */
+.mag-essential { position:relative; margin:0 0 8px; padding:28px 30px 26px; border:1px solid var(--line); border-radius:20px; background:#fff; box-shadow:0 14px 40px rgba(7,22,47,.07); overflow:hidden; }
+.mag-essential::before { content:""; position:absolute; inset:0 0 auto 0; height:4px; background:linear-gradient(90deg,var(--coral),#ffb199); }
+.mag-essential>strong { display:block; margin-bottom:16px; font:800 12px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--coral-text); }
+.mag-essential ol { counter-reset:pt; margin:0; padding:0; list-style:none; display:grid; gap:14px; }
+.mag-essential li { counter-increment:pt; position:relative; padding-left:44px; margin:0; font-size:17.5px; line-height:1.55; color:#1b2638; }
+.mag-essential li::before { content:counter(pt); position:absolute; left:0; top:1px; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:var(--navy); color:#fff; font:700 13px Outfit,sans-serif; }
+
+/* Sommaire (mobile) */
+.mag-toc-m { display:none; margin:22px 0 0; border:1px solid var(--line); border-radius:16px; background:#fff; }
+.mag-toc-m summary { list-style:none; display:flex; justify-content:space-between; align-items:center; padding:16px 18px; font:700 15px Inter,sans-serif; cursor:pointer; }
+.mag-toc-m summary::-webkit-details-marker { display:none; }
+.mag-toc-m summary span { color:var(--muted); font-weight:500; font-size:13px; }
+.mag-toc-m ol { margin:0; padding:0 18px 14px; list-style:none; }
+.mag-toc-m li { margin:0; }
+.mag-toc-m a { display:flex; gap:12px; padding:9px 0; border-top:1px solid var(--line); font-size:15.5px!important; line-height:1.35!important; color:var(--ink)!important; text-decoration:none!important; font-weight:600; }
+.mag-toc-m i { font:700 12px Outfit,sans-serif; font-style:normal; color:var(--coral-text); padding-top:2px; }
+
+/* Sections */
+.mag-section { margin-top:68px; scroll-margin-top:90px; }
+.mag-num { display:flex; align-items:center; gap:14px; margin-bottom:12px; font:700 13px Outfit,Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--coral-text); }
+.mag-num::after { content:""; width:54px; height:1px; background:var(--coral); opacity:.55; }
+.mag-section h2 { margin:0 0 22px; font:800 clamp(1.75rem,3vw,2.35rem)/1.12 Outfit,Inter,sans-serif; letter-spacing:-.022em; color:var(--ink); text-wrap:balance; }
+.mag-body ul { list-style:none; margin:0 0 1.3em; padding:0; display:grid; gap:10px; }
+.mag-body ul li { position:relative; margin:0; padding-left:30px; }
+.mag-body ul li::before { content:""; position:absolute; left:4px; top:.72em; width:9px; height:9px; border-radius:50%; background:var(--coral); box-shadow:0 0 0 4px #ffe3df; }
+
+/* Encadrés piège / astuce / info */
+.mag-callout { display:grid; grid-template-columns:40px 1fr; gap:16px; margin:30px 0 4px; padding:22px 24px; border-radius:18px; border:1px solid; }
+.mag-callout b { width:40px; height:40px; border-radius:12px; display:grid; place-items:center; color:#fff; font:800 18px Outfit,sans-serif; }
+.mag-callout strong { display:block; font:800 17px Outfit,Inter,sans-serif; letter-spacing:-.01em; }
+.mag-callout p { margin:5px 0 0!important; font-size:17px!important; line-height:1.65!important; color:#2b3645!important; }
+.mag-piege { background:#fff4f2; border-color:#ffd0c8; } .mag-piege b { background:var(--coral); } .mag-piege strong { color:#a62a31; }
+.mag-astuce { background:#effaf4; border-color:#b8e6cb; } .mag-astuce b { background:#1f9d63; } .mag-astuce strong { color:#14724a; }
+.mag-info { background:#eef4ff; border-color:#c7d9fb; } .mag-info b { background:#2f6bdc; } .mag-info strong { color:#1d4ba8; }
+
+/* Tableaux */
+.mag-table { margin:30px 0 8px; border:1px solid var(--line); border-radius:18px; background:#fff; overflow:hidden; box-shadow:0 10px 30px rgba(7,22,47,.06); }
+.mag-table figcaption { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px; padding:15px 20px; background:linear-gradient(135deg,#0b1f45,#16356b); color:#fff; }
+.mag-table figcaption strong { font:800 16px Outfit,Inter,sans-serif; }
+.mag-table figcaption span { font-size:13px; color:#b9c7dd; }
+.mag-table .table-scroll { overflow-x:auto; }
+.mag-table .data-table { margin:0; font-size:16px; }
+.mag-table .data-table.wide { min-width:560px; }
+.mag-table .data-table th { padding:13px 18px; background:#f1f5fa; color:#4c5b70; font-size:11.5px; font-weight:800; letter-spacing:.09em; }
+.mag-table .data-table td { padding:15px 18px; vertical-align:top; color:#2b3645; line-height:1.5; }
+.mag-table .data-table td:first-child { font-weight:700; color:var(--ink); }
+.mag-table .data-table tbody tr:nth-child(even) td { background:#fafcfe; }
+.mag-table .data-table tbody tr:last-child td { border-bottom:0; }
+.mag-prices .data-table td { vertical-align:middle; white-space:nowrap; }
+.mag-prices .ref-table td strong { font:800 20px Outfit,sans-serif; color:var(--ink); }
+.mag-body .mag-table a { color:var(--ink); text-decoration:none; }
+.mag-body .mag-table a:hover { color:var(--coral-text); }
+.mag-routes+.price-note { margin-top:14px; }
+.mag-best { margin-left:9px; padding:3px 9px; border-radius:999px; background:#e6f7ee; color:#14724a; font:800 10.5px Inter,sans-serif; font-style:normal; letter-spacing:.04em; text-transform:uppercase; vertical-align:middle; }
+.mag-table .price-note { margin:0; padding:13px 20px; background:#f8fafc; border-top:1px solid var(--line); font-size:13px!important; line-height:1.55!important; color:var(--muted)!important; }
+
+/* FAQ dépliable */
+.mag-faq>div { display:grid; gap:12px; }
+.mag-faq details { border:1px solid var(--line); border-radius:16px; background:#fff; transition:box-shadow .2s,border-color .2s; }
+.mag-faq details[open] { border-color:#f4b9b3; box-shadow:0 12px 30px rgba(7,22,47,.07); }
+.mag-faq summary { list-style:none; display:flex; justify-content:space-between; align-items:center; gap:18px; padding:20px 22px; cursor:pointer; font:700 17.5px/1.35 Outfit,Inter,sans-serif; color:var(--ink); }
+.mag-faq summary::-webkit-details-marker { display:none; }
+.mag-faq summary:hover { color:var(--coral-text); }
+.mag-faq summary i { position:relative; flex:0 0 28px; height:28px; border-radius:50%; background:#fff0ee; }
+.mag-faq summary i::before, .mag-faq summary i::after { content:""; position:absolute; left:8px; right:8px; top:13px; height:2px; border-radius:2px; background:var(--coral-text); transition:transform .2s; }
+.mag-faq summary i::after { transform:rotate(90deg); }
+.mag-faq details[open] summary i::after { transform:rotate(0); }
+.mag-faq details p { margin:0!important; padding:0 22px 22px; font-size:17px!important; line-height:1.7!important; }
+
+/* Cartes de vols */
+.mag-routes { display:grid; grid-template-columns:repeat(auto-fill,minmax(205px,1fr)); gap:14px; }
+.mag-route { display:grid; gap:5px; align-content:start; padding:20px 20px 18px; border:1px solid var(--line); border-radius:18px; background:#fff; transition:transform .2s,box-shadow .2s,border-color .2s; }
+.mag-route:hover { transform:translateY(-4px); border-color:#f4b9b3; box-shadow:0 16px 34px rgba(7,22,47,.11); }
+.mag-route-codes { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+.mag-route-codes b { font:800 23px Outfit,sans-serif; letter-spacing:.02em; color:var(--navy); }
+.mag-route-codes svg { width:22px; height:22px; fill:none; stroke:var(--coral); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.mag-route>strong { font:700 16px Inter,sans-serif; color:var(--ink); }
+.mag-route small { color:var(--muted); font-size:13px; }
+.mag-route-price { margin-top:10px; font-size:14px; color:var(--muted); }
+.mag-route-price b { font:800 30px Outfit,sans-serif; color:var(--ink); letter-spacing:-.02em; }
+.mag-route-price i { font-style:normal; font-size:13px; }
+.mag-route>em { margin-top:8px; font-style:normal; font-weight:800; font-size:14px; color:var(--coral-text); }
+
+/* Précision de fin d’article */
+.mag-trust { margin-top:60px; padding:22px 26px; border-left:4px solid var(--coral); border-radius:0 16px 16px 0; background:var(--soft); }
+.mag-trust strong { display:block; margin-bottom:6px; font:800 16px Outfit,Inter,sans-serif; color:var(--ink); }
+.mag-body .mag-trust p { margin:0; font-size:15.5px; line-height:1.65; color:#4d5968; }
+
+/* Colonne latérale */
+.mag-side { position:sticky; top:28px; display:grid; gap:22px; }
+.mag-toc { display:block; padding:4px 0; gap:0; font-size:inherit; }
+.mag-toc>strong { display:block; margin-bottom:14px; font:800 12px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.mag-toc ol { margin:0; padding:0; list-style:none; border-left:2px solid var(--line); }
+.mag-toc a { display:grid; grid-template-columns:30px 1fr; gap:4px; margin-left:-2px; padding:9px 0 9px 16px; border-left:2px solid transparent; font-size:14.5px; line-height:1.35; font-weight:600; color:#6a7788; transition:color .15s,border-color .15s; }
+.mag-toc a i { font:700 12px Outfit,sans-serif; font-style:normal; padding-top:2px; color:#a4afbd; }
+.mag-toc a:hover { color:var(--ink); }
+.mag-toc li.on a { color:var(--ink); border-left-color:var(--coral); }
+.mag-toc li.on a i { color:var(--coral-text); }
+.mag-cta { display:grid; align-content:end; gap:8px; min-height:240px; padding:26px; border-radius:20px; color:#fff; background:linear-gradient(135deg,#0d2247,#16356b) center/cover; box-shadow:0 18px 44px rgba(7,22,47,.22); transition:transform .2s; }
+.mag-cta:hover { transform:translateY(-4px); }
+.mag-cta strong { font:800 24px/1.1 Outfit,sans-serif; letter-spacing:-.02em; }
+.mag-cta span { font-size:14.5px; line-height:1.5; color:#d5deec; }
+.mag-cta em { margin-top:4px; font-style:normal; font-weight:800; color:#ffb4ac; }
+
+/* À lire aussi */
+.mag-more { width:min(1160px,calc(100% - 40px)); margin:96px auto 120px; padding-top:48px; border-top:1px solid var(--line); }
+.mag-more-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.mag-more-card { display:grid; gap:10px; align-content:start; }
+.mag-more-photo { position:relative; display:block; aspect-ratio:16/10; border-radius:18px; overflow:hidden; background:#dbe2ea; }
+.mag-more-photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s; }
+.mag-more-card:hover .mag-more-photo img { transform:scale(1.05); }
+.mag-more-photo em, .idx-photo em, .idx-lead em { position:absolute; left:14px; bottom:14px; padding:5px 12px; border-radius:999px; background:rgba(255,255,255,.95); color:var(--ink); font:800 11px Inter,sans-serif; font-style:normal; letter-spacing:.09em; text-transform:uppercase; }
+.mag-more-card strong { font:700 20px/1.28 Outfit,Inter,sans-serif; letter-spacing:-.01em; color:var(--ink); }
+.mag-more-card:hover strong { color:var(--coral-text); }
+.mag-more-card small { color:var(--muted); font-size:13.5px; }
+
+/* Page « Conseils voyage » */
+.idx-head { padding:150px 20px 64px; background:radial-gradient(900px 340px at 85% 0%,rgba(255,107,107,.22),transparent 70%),linear-gradient(160deg,#07162f,#0d2247); color:#fff; }
+.idx-head>* { width:min(1160px,100%); margin-left:auto; margin-right:auto; }
+.idx-head .breadcrumb { margin-bottom:22px; }
+.idx-head h1 { margin:0 auto; font:800 clamp(2.6rem,5.4vw,4.6rem)/1.02 Outfit,sans-serif; letter-spacing:-.035em; }
+.idx-head>p:last-child { max-width:700px; margin:22px 0 0; margin-left:max(0px,calc((100% - 1160px) / 2)); font:400 clamp(1.15rem,2vw,1.4rem)/1.5 Newsreader,Georgia,serif; color:#cfd8e6; }
+.idx-wrap { width:min(1160px,calc(100% - 40px)); margin:0 auto 110px; padding-top:38px; }
+.idx-filters { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px; }
+.idx-filters button { display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border:1px solid var(--line); border-radius:999px; background:#fff; color:#334155; font:700 14.5px Inter,sans-serif; cursor:pointer; transition:.15s; }
+.idx-filters button:hover { border-color:#b9c4d2; }
+.idx-filters button.on { background:var(--navy); border-color:var(--navy); color:#fff; }
+.idx-filters button span { font-size:12px; opacity:.6; }
+.idx-lead { position:relative; display:flex; align-items:flex-end; min-height:500px; margin-bottom:40px; border-radius:26px; overflow:hidden; color:#fff; background:#0d2247; isolation:isolate; box-shadow:0 26px 60px rgba(7,22,47,.2); }
+.idx-lead>img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; transition:transform .7s; }
+.idx-lead:hover>img { transform:scale(1.03); }
+.idx-lead::after { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(3,12,29,.05) 20%,rgba(3,12,29,.9) 100%); }
+.idx-lead-text { display:grid; gap:14px; max-width:780px; padding:44px; }
+.idx-lead em { position:static; justify-self:start; background:var(--coral); color:#fff; }
+.idx-lead-text>strong { font:800 clamp(1.8rem,3.5vw,3rem)/1.08 Outfit,sans-serif; letter-spacing:-.025em; text-wrap:balance; }
+.idx-lead-text>span { font-size:17px; line-height:1.55; color:#dbe4f1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.idx-lead-text small { font-size:14px; font-weight:600; color:#ffb4ac; }
+.idx-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:42px 28px; }
+.idx-card { display:grid; gap:16px; align-content:start; }
+.idx-photo { position:relative; display:block; aspect-ratio:16/10; border-radius:20px; overflow:hidden; background:#dbe2ea; }
+.idx-photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s; }
+.idx-card:hover .idx-photo img { transform:scale(1.05); }
+.idx-text { display:grid; gap:8px; }
+.idx-text small { font-size:13px; color:var(--muted); font-weight:500; }
+.idx-text>strong { font:700 22px/1.25 Outfit,Inter,sans-serif; letter-spacing:-.015em; color:var(--ink); text-wrap:balance; }
+.idx-card:hover .idx-text>strong { color:var(--coral-text); }
+.idx-text>span { font-size:15.5px; line-height:1.6; color:#4d5968; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.idx-more { display:flex; flex-wrap:wrap; gap:6px 34px; margin:54px 0 0; }
+
+@media (max-width:1000px) {
+  .mag-layout { grid-template-columns:minmax(0,1fr); gap:10px; padding-top:40px; }
+  .mag-side { position:static; margin-top:56px; }
+  .mag-toc { display:none; }
+  .mag-toc-m { display:block; }
+  .mag-hero-in { min-height:500px; padding:104px 0 40px; gap:40px; }
+  .mag-more-grid, .idx-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:640px) {
+  .mag-hero-in { min-height:470px; }
+  .mag-hero h1 { font-size:clamp(1.9rem,8vw,2.4rem); }
+  .mag-meta { font-size:13px; gap:4px 16px; }
+  .mag-meta span+span::before { display:none; }
+  .mag-table .data-table th, .mag-table .data-table td { padding-left:14px; padding-right:14px; }
+  .mag-body p, .mag-body li { font-size:17.5px; line-height:1.75; }
+  .mag-lede { font-size:1.3rem; }
+  .mag-section { margin-top:54px; }
+  .mag-essential { padding:24px 20px 22px; }
+  .mag-callout { grid-template-columns:1fr; gap:10px; padding:20px; }
+  .mag-routes { grid-template-columns:1fr 1fr; gap:10px; }
+  .mag-route { padding:16px 14px; }
+  .mag-route-price b { font-size:25px; }
+  .mag-more-grid, .idx-grid { grid-template-columns:1fr; }
+  .idx-head { padding:118px 20px 44px; }
+  .idx-lead { min-height:430px; border-radius:20px; }
+  .idx-lead-text { padding:26px 22px; }
+  .mag-strip { margin-top:20px; }
+}

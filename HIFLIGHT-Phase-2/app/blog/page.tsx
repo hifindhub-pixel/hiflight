@@ -3,6 +3,7 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { blogPosts } from "@/lib/blog";
 import { defaultOgImage, siteUrl } from "@/lib/content";
+import BlogIndex from "@/components/BlogIndex";
 
 export const metadata: Metadata = {
   title: "Conseils voyage : vols, aéroports, bagages",
@@ -25,28 +26,14 @@ export default function BlogPage() {
           { "@type": "ListItem", position: 2, name: "Conseils voyage", item: `${siteUrl}/blog/` },
         ],
       }} />
-      <section className="art-head blog-head">
-        <div>
-          <p className="breadcrumb"><Link href="/">Accueil</Link> / Conseils voyage</p>
-          <h1>Conseils voyage</h1>
-          <p className="art-standfirst">Réserver au bon moment, choisir le bon aéroport, éviter les frais imprévus.</p>
-        </div>
-      </section>
-      <section className="blog-wrap">
-        <div className="blog-grid">
-          {posts.map((post, index) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className={`blog-card${index === 0 ? " blog-card-featured" : ""}`}>
-              {post.heroImage ? <img src={post.heroImage} alt="" loading={index < 3 ? "eager" : "lazy"} width="800" height="500" /> : null}
-              <div>
-                <time dateTime={post.published}>{dateFormat.format(new Date(post.published))} · {post.readingMinutes} min de lecture</time>
-                <strong>{post.title}</strong>
-                <span>{post.description}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <Link className="text-link" href="/guides/bagage-cabine">Guide : bagage cabine, les vérifications avant le vol →</Link>
-        <br /><Link className="text-link" href="/vols">Voir tous les itinéraires →</Link>
+      <header className="idx-head">
+        <p className="breadcrumb"><Link href="/">Accueil</Link> / Conseils voyage</p>
+        <h1>Conseils voyage</h1>
+        <p>Réserver au bon moment, choisir le bon aéroport, éviter les frais imprévus. Des guides écrits à la main, et les bons plans du moment vérifiés avant d’être publiés.</p>
+      </header>
+      <section className="idx-wrap">
+        <BlogIndex posts={posts.map((post) => ({ slug: post.slug, title: post.title, description: post.description, heroImage: post.heroImage, category: post.category ?? "Conseils", date: dateFormat.format(new Date(post.published)), minutes: post.readingMinutes }))} />
+        <p className="idx-more"><Link className="text-link" href="/guides/bagage-cabine">Guide : bagage cabine, les vérifications avant le vol →</Link><Link className="text-link" href="/vols">Voir tous les itinéraires →</Link></p>
       </section>
     </main>
   );

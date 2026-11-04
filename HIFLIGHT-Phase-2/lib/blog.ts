@@ -1,4 +1,7 @@
-export type BlogSection = { heading: string; paragraphs: string[]; list?: string[]; table?: { headers: string[]; rows: string[][] }; /** Tableau de prix HiFlight en direct pour ces trajets (slugs). */ routeTable?: string[] };
+/** Encadré mis en avant dans une section : un piège à éviter, une astuce ou une précision utile. */
+export type BlogCallout = { kind: "piege" | "astuce" | "info"; title?: string; text: string };
+
+export type BlogSection = { heading: string; paragraphs: string[]; list?: string[]; callout?: BlogCallout; table?: { headers: string[]; rows: string[][] }; /** Tableau de prix HiFlight en direct pour ces trajets (slugs). */ routeTable?: string[] };
 
 export type BlogPost = {
   slug: string;
@@ -16,6 +19,8 @@ export type BlogPost = {
   heroImage?: string;
   /** Encadré « À retenir » affiché sous l’introduction. */
   keyPoints?: string[];
+  /** Rubrique affichée en tête d’article et utilisée par les filtres de la page Conseils voyage. */
+  category?: "Bons plans" | "Destinations" | "Conseils";
   /** Compte à rebours affiché en tête d’article. */
   countdown?: { to: string };
   /** FAQ affichée en fin d’article et balisée pour Google. */
@@ -25,6 +30,7 @@ export type BlogPost = {
 export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-algerie-ete-quand-reserver",
+    "category": "Destinations",
     "metaTitle": "Vol Algérie en été : quand réserver ?",
     "title": "Vol pour l’Algérie en été : pourquoi c’est si cher, et comment limiter la casse",
     "description": "Alger, Oran, Constantine en juillet-août : pourquoi les prix grimpent, quand commencer à comparer, quels aéroports tester et quels frais de bagages surveiller.",
@@ -115,6 +121,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-paris-marrakech-guide",
+    "category": "Destinations",
     "metaTitle": "Vol Paris – Marrakech : guide pour bien réserver",
     "title": "Vol Paris – Marrakech : ce qu’on aimerait savoir avant de réserver",
     "description": "Paris – Marrakech en vol direct : durée, compagnies, Orly, Roissy ou Beauvais, meilleure saison et vrai prix une fois les bagages ajoutés.",
@@ -198,6 +205,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "orly-roissy-beauvais-quel-aeroport",
+    "category": "Conseils",
     "metaTitle": "Orly, Roissy ou Beauvais : quel aéroport choisir ?",
     "title": "Orly, Roissy ou Beauvais : le billet le moins cher n’est pas toujours le bon",
     "description": "Orly, Roissy-Charles de Gaulle ou Beauvais : accès, temps de transfert et prix total pour choisir l’aéroport parisien qui vous convient vraiment.",
@@ -257,6 +265,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "quand-reserver-vol-pas-cher",
+    "category": "Conseils",
     "metaTitle": "Quand réserver un vol pas cher : ce qui marche",
     "title": "Quand réserver un vol pas cher ? Oubliez le mardi à 3 h du matin",
     "description": "Il n’existe pas de jour magique pour réserver un vol. Ce qui fait vraiment baisser le prix : vos dates, votre aéroport, la comparaison sur un mois entier.",
@@ -318,6 +327,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-pas-cher-depuis-province",
+    "category": "Conseils",
     "metaTitle": "Vol pas cher depuis la province : Lyon, Marseille, Nice…",
     "title": "Partir de Lyon, Marseille, Nice ou Toulouse : quand ça vaut mieux que Paris",
     "description": "Prendre le train jusqu’à Paris par habitude ? Voyez quand un vol direct depuis Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes vous revient moins cher.",
@@ -387,6 +397,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "week-end-europe-vol-pas-cher",
+    "category": "Conseils",
     "metaTitle": "Week-end pas cher en Europe : choisir destination et vol",
     "title": "Un week-end en Europe sans se ruiner : partez du budget, pas de la ville",
     "description": "Barcelone, Lisbonne, Rome, Madrid ou Londres : comment choisir une escapade courte au meilleur prix, quels jours partir et quels pièges éviter sur les bagages.",
@@ -454,6 +465,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-maroc-tunisie-quand-reserver",
+    "category": "Destinations",
     "metaTitle": "Vols Maroc et Tunisie : quand réserver, d’où partir",
     "title": "Maroc et Tunisie : quand réserver et d’où partir pour payer moins",
     "description": "Marrakech, Casablanca, Agadir, Tunis : les périodes chères, les villes de départ à comparer et les bagages à ne pas oublier avant de réserver.",
@@ -523,6 +535,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "billet-avion-pas-cher-astuces",
+    "category": "Conseils",
     "metaTitle": "Billet d’avion pas cher : astuces qui marchent",
     "title": "Billet d’avion pas cher : ce qui marche vraiment, et ce qui n’est que légende",
     "description": "Dates flexibles, bons aéroports, bagages, escales, alertes de prix : les astuces qui font réellement baisser un billet d’avion, et celles à oublier.",
@@ -597,6 +610,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-derniere-minute-astuces",
+    "category": "Conseils",
     "metaTitle": "Vol de dernière minute : bon plan ou piège ?",
     "title": "Vol de dernière minute : bon plan ou fausse bonne idée ?",
     "description": "Partir dans les jours qui viennent : quand la dernière minute fait économiser, quand elle coûte plus cher, et comment comparer vite pour ne pas surpayer.",
@@ -659,6 +673,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "bagage-cabine-ou-soute-que-choisir",
+    "category": "Conseils",
     "metaTitle": "Bagage cabine ou soute : que choisir ?",
     "title": "Cabine ou soute : le bagage qui change le prix de votre billet",
     "description": "Cabine ou soute : comment choisir selon la durée du séjour, la compagnie et le prix total, et comment éviter les frais payés trop cher à l’aéroport.",
@@ -710,6 +725,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-direct-ou-escale-que-choisir",
+    "category": "Conseils",
     "metaTitle": "Vol direct ou avec escale : comment choisir",
     "title": "Vol direct ou escale : ce que l’économie coûte vraiment en temps",
     "description": "Direct ou escale : ce que l’escale fait gagner et perdre, comment lire une correspondance et quand le vol direct reste le meilleur choix.",
@@ -773,6 +789,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "aller-simple-ou-aller-retour",
+    "category": "Conseils",
     "metaTitle": "Aller simple ou aller-retour : lequel est moins cher ?",
     "title": "Aller-retour ou deux allers simples : le calcul que personne ne fait",
     "description": "Aller-retour ou deux allers simples : quand combiner deux billets fait économiser, et les risques à connaître avant de réserver séparément.",
@@ -820,6 +837,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "compagnies-low-cost-frais-caches",
+    "category": "Conseils",
     "metaTitle": "Low cost : les frais cachés à vérifier avant de payer",
     "title": "Low cost : le billet à 20 € qui finit à 90 €",
     "description": "Bagage, siège, enregistrement, assurance précochée : les options payantes des vols low cost et comment comparer le vrai prix avant de réserver.",
@@ -872,6 +890,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-vacances-scolaires-prix",
+    "category": "Conseils",
     "metaTitle": "Vol en vacances scolaires : limiter la facture",
     "title": "Vacances scolaires : réserver un vol sans exploser le budget",
     "description": "Les prix des vols montent pendant les vacances scolaires. Comment comparer tôt, décaler ses dates et tester les aéroports de province.",
@@ -934,6 +953,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-istanbul-guide-aeroports",
+    "category": "Destinations",
     "metaTitle": "Vol pour Istanbul : IST ou Sabiha Gökçen ?",
     "title": "Vol pour Istanbul : deux aéroports, deux rives, et un choix à ne pas faire au hasard",
     "description": "Istanbul compte deux grands aéroports. Comment choisir entre IST et Sabiha Gökçen (SAW), quand partir et comment comparer les vols depuis la France.",
@@ -999,6 +1019,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-lisbonne-guide-conseils",
+    "category": "Destinations",
     "metaTitle": "Vol pour Lisbonne : quand partir, d’où partir",
     "title": "Vol pour Lisbonne : l’aéroport est tellement près du centre que ça change tout",
     "description": "Lisbonne en week-end ou une semaine : meilleure période, villes de départ en France, aéroport proche du centre et conseils pour bien réserver.",
@@ -1063,6 +1084,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-londres-quel-aeroport",
+    "category": "Destinations",
     "metaTitle": "Vol pour Londres : quel aéroport choisir ?",
     "title": "Vol pour Londres : Heathrow, Gatwick, Stansted, Luton ou City ?",
     "description": "Londres compte cinq grands aéroports. Comment choisir selon le prix, le trajet vers le centre et l’endroit où vous logez.",
@@ -1128,6 +1150,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-new-york-conseils-formalites",
+    "category": "Destinations",
     "metaTitle": "Vol pour New York : prix, ESTA et conseils",
     "title": "Vol pour New York depuis la France : l’ESTA d’abord, le billet ensuite",
     "description": "New York depuis la France : quand partir, durée du vol, ESTA à prévoir, quel aéroport choisir (JFK, Newark ou LaGuardia) et comment payer moins.",
@@ -1188,6 +1211,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-barcelone-guide-conseils",
+    "category": "Destinations",
     "metaTitle": "Vol pour Barcelone : d’où partir et quand réserver",
     "title": "Vol pour Barcelone : l’escapade la plus facile (et la plus comparée) depuis la France",
     "description": "Barcelone depuis Paris, Lyon, Marseille, Nice ou province : durée du vol, compagnies, meilleure période et pièges à éviter sur les bagages.",
@@ -1268,6 +1292,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-rome-guide-aeroports",
+    "category": "Destinations",
     "metaTitle": "Vol pour Rome : Fiumicino ou Ciampino ?",
     "title": "Vol pour Rome : Fiumicino ou Ciampino, et le vrai coût du trajet vers le centre",
     "description": "Rome depuis la France : choisir entre Fiumicino et Ciampino, durée du vol, compagnies, meilleure période et conseils pour trouver un billet moins cher.",
@@ -1339,6 +1364,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-madrid-guide-conseils",
+    "category": "Destinations",
     "metaTitle": "Vol pour Madrid : durée, aéroport, conseils",
     "title": "Vol pour Madrid : durée, aéroport et bons réflexes avant de réserver",
     "description": "Madrid depuis Paris ou la province : durée du vol, aéroport de Barajas, compagnies, meilleure période et conseils pour trouver un billet pas cher.",
@@ -1414,6 +1440,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-dubai-quand-partir-conseils",
+    "category": "Destinations",
     "metaTitle": "Vol pour Dubaï : quand partir, durée, conseils",
     "title": "Vol pour Dubaï depuis la France : la meilleure saison est aussi la plus chère",
     "description": "Dubaï depuis Paris ou Lyon : durée du vol, vol direct Emirates depuis Lyon, meilleure période, formalités à vérifier et conseils pour payer moins.",
@@ -1487,6 +1514,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-marrakech-depuis-la-province",
+    "category": "Destinations",
     "metaTitle": "Vol pour Marrakech depuis la province",
     "title": "Marrakech sans passer par Paris : qui vole depuis chez vous",
     "description": "Marrakech depuis Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille ou Bâle-Mulhouse : compagnies, durées et conseils pour comparer.",
@@ -1609,6 +1637,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-tunis-guide-conseils",
+    "category": "Destinations",
     "metaTitle": "Vol pour Tunis : quand réserver, d’où partir",
     "title": "Vol pour Tunis depuis la France : été et fêtes, les deux périodes à anticiper",
     "description": "Tunis depuis Paris, Lyon, Marseille, Nice ou Toulouse : durée du vol, compagnies, périodes chères, bagages et conseils pour réserver moins cher.",
@@ -1687,6 +1716,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "barometre-prix-vols-marrakech-barcelone",
+    "category": "Destinations",
     "metaTitle": "Prix vols Marrakech et Barcelone depuis 9 villes",
     "title": "Marrakech et Barcelone depuis 9 villes : combien coûte vraiment le vol, relevé du 2 novembre 2026",
     "description": "Prix aller-retour les plus bas relevés vers Marrakech et Barcelone depuis Paris, Lyon, Marseille, Nice, Bordeaux et d’autres villes, avec méthode et limites.",
@@ -1909,6 +1939,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "travel-tuesday-2026-bons-plans-vols",
+    "category": "Bons plans",
     "metaTitle": "Travel Tuesday 2026 : date, offres vols, bons plans",
     "title": "Travel Tuesday 2026 (1er décembre) : dates, offres et comment ne pas se faire avoir",
     "description": "Travel Tuesday 2026 le mardi 1er décembre : calendrier des offres, quel jour réserver, chiffres 2025, prix de référence HiFlight et pièges à éviter avant d’acheter un vol.",
@@ -2142,6 +2173,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vente-flash-transavia-novembre-2026",
+    "category": "Bons plans",
     "metaTitle": "Vente flash Transavia : dès 39 € l’aller (novembre 2026)",
     "title": "Vente flash Transavia : jusqu’à -25 %, dès 39 € l’aller, jusqu’au 10 novembre",
     "description": "Vente flash Transavia du 3 au 10 novembre 2026 : jusqu’à -25 % sur une sélection de vols, Athènes et Malaga dès 39 € l’aller. Destinations, bagages, pièges et prix de référence HiFlight.",
@@ -2195,8 +2227,13 @@ export const blogPosts: BlogPost[] = [
         "heading": "Les prix annoncés",
         "paragraphs": [
           "Parmi les prix mis en avant dans l’offre, Athènes et Malaga sortent dès 39 € l’aller, et Héraklion dès 40 €. Ce sont des allers simples : il faut compter le retour, qui n’est pas forcément au même tarif.",
-          "Le « dès » est un prix plancher. Il correspond à quelques sièges, sur des dates précises, et il part en premier. Si vos dates sont fixes, ne vous attendez pas à le trouver. Si elles sont souples, c’est là que la vente flash devient intéressante."
-        ]
+          "Avec des dates souples, c’est là que la vente flash devient intéressante."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Le « dès » est un prix plancher",
+          "text": "Il correspond à quelques sièges, sur des dates précises, et il part en premier. Si vos dates sont fixes, ne vous attendez pas à le trouver."
+        }
       },
       {
         "heading": "Où l’on peut partir",
@@ -2212,9 +2249,14 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Ce que ça vaut vraiment : le total, pas le « dès »",
         "paragraphs": [
-          "Avant de cliquer sur payer, additionnez. Le prix de l’aller, celui du retour, le bagage, le siège si vous y tenez. L’offre elle-même mentionne une réduction de 10 € sur le bagage cabine, par aller simple, sur certains trajets : cela montre que ce bagage est une option payante, pas un acquis. Si vous partez trois jours avec un sac plus gros qu’un sac à dos, il compte.",
+          "Avant de cliquer sur payer, additionnez. Le prix de l’aller, celui du retour, le bagage, le siège si vous y tenez.",
           "Transavia propose aussi une option Flex, payante, qui permet de changer la date ou l’heure du vol sans frais jusqu’à deux heures avant le départ (seule la différence de prix s’ajoute si le nouveau vol coûte plus cher). Pour une promo achetée en avance, ça peut valoir le coup. Ça se décide au cas par cas, selon le prix de l’option."
-        ]
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Le bagage compte",
+          "text": "L’offre elle-même mentionne une réduction de 10 € sur le bagage cabine, par aller simple, sur certains trajets : cela montre que ce bagage est une option payante, pas un acquis. Si vous partez trois jours avec un sac plus gros qu’un sac à dos, il compte."
+        }
       },
       {
         "heading": "Un point à vérifier vous-même",
@@ -2278,6 +2320,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "black-friday-voyage-2026-voyage-prive-edreams",
+    "category": "Bons plans",
     "metaTitle": "Black Friday voyages 2026 : Voyage Privé, eDreams, dates",
     "title": "Black Friday voyages 2026 : Voyage Privé, eDreams et les dates à noter",
     "description": "Black Friday et Travel Tuesday 2026 : calendrier des offres Voyage Privé (dès 49 € par personne) et eDreams (jusqu’à -40 % sur les hôtels), et comment éviter les faux bons plans.",
@@ -2353,9 +2396,13 @@ export const blogPosts: BlogPost[] = [
         "list": [
           "Comparez ce qui est comparable : un prix « par personne et par nuit » n’est pas un prix de séjour.",
           "Ajoutez le vol. Une nuit à 49 € ne dit rien de ce que coûte l’avion pour y aller.",
-          "Regardez les conditions d’annulation : une vente privée est parfois peu ou pas remboursable.",
-          "Notez un prix de référence avant le 1er décembre. Sans repère, impossible de juger une remise."
-        ]
+          "Regardez les conditions d’annulation : une vente privée est parfois peu ou pas remboursable."
+        ],
+        "callout": {
+          "kind": "astuce",
+          "title": "Le réflexe à prendre",
+          "text": "Notez un prix de référence avant le 1er décembre. Sans repère, impossible de juger une remise."
+        }
       },
       {
         "heading": "Le vol, côté HiFlight",
@@ -2401,6 +2448,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "flying-blue-promo-rewards-novembre-2026",
+    "category": "Bons plans",
     "metaTitle": "Flying Blue : -25 % de miles en novembre 2026",
     "title": "Flying Blue : -25 % de miles en novembre, de Los Angeles à Osaka",
     "description": "Promo Rewards Flying Blue de novembre 2026 : 25 % de miles en moins sur une sélection de billets primes, Los Angeles dès 18 750 miles. Conditions, taxes et comment savoir si c’est rentable.",
@@ -2483,8 +2531,13 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Attention aux fêtes",
         "paragraphs": [
-          "Voyager jusqu’au 30 avril comprend Noël et Pâques. Cela ne veut pas dire que vous trouverez des places à prix réduit ces jours-là : les dates les plus demandées partent en premier, et les sièges disponibles au prix promo sont rares sur les périodes chargées."
-        ]
+          "Voyager jusqu’au 30 avril comprend Noël et Pâques."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Les fêtes, mais pas forcément à prix promo",
+          "text": "Cela ne veut pas dire que vous trouverez des places à prix réduit ces jours-là : les dates les plus demandées partent en premier, et les sièges disponibles au prix promo sont rares sur les périodes chargées."
+        }
       },
       {
         "heading": "Est-ce rentable ? Un calcul simple",
