@@ -1636,3 +1636,7 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
 .tt-badge { display:inline-block; padding:6px 14px; border-radius:999px; background:var(--coral); color:#fff; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
 .tt-intro { width:min(860px,calc(100% - 40px)); margin:40px auto 0; text-align:center; }
 .tt-intro .art-standfirst { color:#334155; }
+
+/* Bons plans du moment */
+.deals-checked { color:#64748b; font-size:13px; font-weight:600; }
+.deals-note { margin:16px 2px 0; color:#64748b; font-size:12px; line-height:1.5; }

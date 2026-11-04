@@ -72,7 +72,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       }} />
       {post.countdown ? (
         <>
-          <section className="hero hero-tt" style={{ backgroundImage: `linear-gradient(90deg,rgba(3,12,29,.92),rgba(3,12,29,.6) 50%,rgba(3,12,29,.2) 85%),linear-gradient(0deg,rgba(3,12,29,.72),transparent 50%),url(${post.heroImage})` }}>
+          <section className="hero hero-tt" id="recherche" style={{ backgroundImage: `linear-gradient(90deg,rgba(3,12,29,.92),rgba(3,12,29,.6) 50%,rgba(3,12,29,.2) 85%),linear-gradient(0deg,rgba(3,12,29,.72),transparent 50%),url(${post.heroImage})` }}>
             <div className="hero-inner">
               <ServiceTabs active="flights" />
               <div className="hero-copy">

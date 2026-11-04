@@ -4,6 +4,7 @@ import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
 import ServiceFaq from "@/components/ServiceFaq";
+import Deals from "@/components/Deals";
 import { defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
 import { departureCities } from "@/lib/cities";
 import { getRouteStats } from "@/lib/route-data";
@@ -61,6 +62,8 @@ export default async function Home() {
         </div>
       </section>
 
+
+      <Deals />
 
       <section className="section home-block" id="destinations">
         <div className="home-head"><h2>Où partir en ce moment ?</h2><Link className="text-link" href="/vols">Tous les itinéraires →</Link></div>
