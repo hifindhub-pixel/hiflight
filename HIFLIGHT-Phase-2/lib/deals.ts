@@ -40,8 +40,8 @@ export const deals: Deal[] = [
     after: "l’aller",
     image: photo("photo-1569629743817-70d8db6c323b"),
     end: "2026-11-10T23:59:00+01:00",
-    href: "https://www.transavia.com/vente-flash",
-    external: true,
+    href: "/blog/vente-flash-transavia-novembre-2026/",
+    external: false,
     alt: "Avion de ligne en vol",
   },
   {
@@ -52,8 +52,8 @@ export const deals: Deal[] = [
     after: "par personne",
     image: photo("photo-1561501900-3701fa6a0864"),
     end: "2026-12-01T23:59:00+01:00",
-    href: "https://www.voyage-prive.com/offres/travel-tuesday",
-    external: true,
+    href: "/blog/black-friday-voyage-2026-voyage-prive-edreams/",
+    external: false,
     alt: "Hôtel face à la mer au coucher du soleil",
   },
   {
@@ -64,8 +64,8 @@ export const deals: Deal[] = [
     after: "miles",
     image: photo("photo-1594386245199-289c2fe0bd0a"),
     end: "2026-11-30T23:59:00+01:00",
-    href: "https://www.theflightclub.it/en/2026/11/air-france-klm-monthly-deals/",
-    external: true,
+    href: "/blog/flying-blue-promo-rewards-novembre-2026/",
+    external: false,
     alt: "Aile d’avion vue du hublot au coucher du soleil",
   },
 ];

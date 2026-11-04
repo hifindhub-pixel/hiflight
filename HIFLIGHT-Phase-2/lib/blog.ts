@@ -2139,6 +2139,397 @@ export const blogPosts: BlogPost[] = [
       "paris-londres",
       "paris-istanbul"
     ]
+  },
+  {
+    "slug": "vente-flash-transavia-novembre-2026",
+    "metaTitle": "Vente flash Transavia : dès 39 € l’aller (novembre 2026)",
+    "title": "Vente flash Transavia : jusqu’à -25 %, dès 39 € l’aller, jusqu’au 10 novembre",
+    "description": "Vente flash Transavia du 3 au 10 novembre 2026 : jusqu’à -25 % sur une sélection de vols, Athènes et Malaga dès 39 € l’aller. Destinations, bagages, pièges et prix de référence HiFlight.",
+    "heroImage": "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?auto=format&fit=crop&w=1600&q=75",
+    "keyPoints": [
+      "À réserver du 3 au 10 novembre 2026, jusqu’à 23 h 59.",
+      "Jusqu’à -25 % sur une sélection de vols, pour des voyages à partir du 24 novembre.",
+      "Prix annoncés : Athènes et Malaga dès 39 € l’aller, Héraklion dès 40 €.",
+      "Un prix « dès » vaut pour quelques sièges et certaines dates : regardez le total, bagage compris."
+    ],
+    "published": "2026-11-04",
+    "updated": "2026-11-04",
+    "readingMinutes": 4,
+    "intro": "Transavia a lancé le 3 novembre une vente flash qui se termine le mardi 10 novembre à 23 h 59. Jusqu’à -25 % sur une sélection de vols au départ de France, avec des allers simples annoncés à 39 €. Ça ressemble à une bonne affaire, et ça peut en être une, à condition de savoir ce qu’on achète. Voici ce qu’on sait de l’offre, ce qu’on ne sait pas encore, et comment la vérifier en trois minutes.",
+    "sections": [
+      {
+        "heading": "L’offre, en clair",
+        "paragraphs": [
+          "Transavia propose jusqu’à 25 % de réduction sur une sélection de vols. La remise ne s’applique pas à tout le catalogue : seuls certains vols, certaines dates, et un nombre limité de sièges sont concernés. L’offre part de France métropolitaine, sous réserve de disponibilité."
+        ],
+        "table": {
+          "headers": [
+            "Question",
+            "Réponse"
+          ],
+          "rows": [
+            [
+              "Quand réserver ?",
+              "Du mardi 3 au mardi 10 novembre 2026, jusqu’à 23 h 59"
+            ],
+            [
+              "Pour voyager quand ?",
+              "À partir du 24 novembre 2026"
+            ],
+            [
+              "Quelle remise ?",
+              "Jusqu’à -25 % sur une sélection de vols"
+            ],
+            [
+              "Au départ d’où ?",
+              "De France métropolitaine"
+            ],
+            [
+              "Où réserver ?",
+              "Sur le site de la compagnie, page vente flash de transavia.com"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Les prix annoncés",
+        "paragraphs": [
+          "Parmi les prix mis en avant dans l’offre, Athènes et Malaga sortent dès 39 € l’aller, et Héraklion dès 40 €. Ce sont des allers simples : il faut compter le retour, qui n’est pas forcément au même tarif.",
+          "Le « dès » est un prix plancher. Il correspond à quelques sièges, sur des dates précises, et il part en premier. Si vos dates sont fixes, ne vous attendez pas à le trouver. Si elles sont souples, c’est là que la vente flash devient intéressante."
+        ]
+      },
+      {
+        "heading": "Où l’on peut partir",
+        "paragraphs": [
+          "La sélection couvre plusieurs familles de destinations :"
+        ],
+        "list": [
+          "En Europe : Vienne, Prague, Berlin, Stockholm, Madrid, Barcelone, Rome, Dublin, Séville, Naples, Athènes et Palerme, entre autres.",
+          "Au Maroc, huit destinations dont Marrakech, Fès, Essaouira, Tanger, Dakhla, Casablanca, Rabat et Oujda.",
+          "Pour le soleil : Hurghada, Djerba, Dakar, Boa Vista et Praia au Cap-Vert."
+        ]
+      },
+      {
+        "heading": "Ce que ça vaut vraiment : le total, pas le « dès »",
+        "paragraphs": [
+          "Avant de cliquer sur payer, additionnez. Le prix de l’aller, celui du retour, le bagage, le siège si vous y tenez. L’offre elle-même mentionne une réduction de 10 € sur le bagage cabine, par aller simple, sur certains trajets : cela montre que ce bagage est une option payante, pas un acquis. Si vous partez trois jours avec un sac plus gros qu’un sac à dos, il compte.",
+          "Transavia propose aussi une option Flex, payante, qui permet de changer la date ou l’heure du vol sans frais jusqu’à deux heures avant le départ (seule la différence de prix s’ajoute si le nouveau vol coûte plus cher). Pour une promo achetée en avance, ça peut valoir le coup. Ça se décide au cas par cas, selon le prix de l’option."
+        ]
+      },
+      {
+        "heading": "Un point à vérifier vous-même",
+        "paragraphs": [
+          "Les sources ne sont pas d’accord sur la fin de la période de voyage : les mentions légales relayées sur Dealabs parlent du 31 janvier 2027, un autre site du 28 février 2027. Dans les deux cas, ça démarre le 24 novembre. Vérifiez la période exacte sur la page de l’offre au moment de réserver."
+        ]
+      },
+      {
+        "heading": "Les prix de référence HiFlight",
+        "paragraphs": [
+          "Pour savoir si un prix est bon, il faut un repère. Voici le prix le plus bas relevé sur HiFlight pour quelques trajets de la vente, au départ de Paris. Ils servent de comparaison, pas de promesse : les prix bougent tous les jours."
+        ],
+        "routeTable": [
+          "paris-marrakech",
+          "paris-casablanca",
+          "paris-athenes",
+          "paris-malaga",
+          "paris-barcelone",
+          "paris-rome",
+          "paris-madrid",
+          "paris-seville"
+        ]
+      },
+      {
+        "heading": "Comment s’y prendre en trois minutes",
+        "paragraphs": [],
+        "list": [
+          "Choisissez vos dates avant d’ouvrir la page : la vente flash récompense ceux qui savent ce qu’ils veulent.",
+          "Cherchez le trajet sur la page de l’offre, puis comparez le total avec le prix de référence HiFlight ci-dessus.",
+          "Ajoutez bagage et option éventuelle, puis comparez une dernière fois avec un autre départ ou une autre date.",
+          "Décidez avant mardi 23 h 59. Passé ce délai, l’offre s’éteint."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Jusqu’à quand dure la vente flash Transavia ?",
+        "answer": "Jusqu’au mardi 10 novembre 2026 à 23 h 59, pour des vols entre le 24 novembre 2026 et début 2027."
+      },
+      {
+        "question": "Quelle est la réduction maximale ?",
+        "answer": "Jusqu’à 25 % sur une sélection de vols. La remise varie selon le trajet, la date et les places restantes."
+      },
+      {
+        "question": "HiFlight vend-il ces vols ?",
+        "answer": "Non. HiFlight compare les prix et vous renvoie chez le partenaire. Pour profiter de cette promotion, il faut réserver sur le site de Transavia ; HiFlight vous aide à vérifier si le prix est bon."
+      },
+      {
+        "question": "Le bagage est-il compris dans les 39 € ?",
+        "answer": "Pas forcément. Les prix « dès » correspondent aux tarifs de base : vérifiez le bagage cabine et le bagage en soute avant de payer."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-marrakech",
+      "paris-casablanca",
+      "paris-athenes",
+      "paris-malaga",
+      "paris-barcelone",
+      "paris-rome"
+    ]
+  },
+  {
+    "slug": "black-friday-voyage-2026-voyage-prive-edreams",
+    "metaTitle": "Black Friday voyages 2026 : Voyage Privé, eDreams, dates",
+    "title": "Black Friday voyages 2026 : Voyage Privé, eDreams et les dates à noter",
+    "description": "Black Friday et Travel Tuesday 2026 : calendrier des offres Voyage Privé (dès 49 € par personne) et eDreams (jusqu’à -40 % sur les hôtels), et comment éviter les faux bons plans.",
+    "heroImage": "https://images.unsplash.com/photo-1561501900-3701fa6a0864?auto=format&fit=crop&w=1600&q=75",
+    "keyPoints": [
+      "Voyage Privé : Black Friday du 10 novembre au 1er décembre, ventes dès 49 € par personne.",
+      "eDreams : offres dans l’appli dès le 19 novembre, sur le site dès le 20, jusqu’au 1er décembre.",
+      "Black Friday le 27 novembre, Cyber Monday le 30, Travel Tuesday le 1er décembre.",
+      "Un prix de séjour n’est presque jamais un prix de vol : ajoutez le billet avant de comparer."
+    ],
+    "published": "2026-11-04",
+    "updated": "2026-11-04",
+    "readingMinutes": 4,
+    "intro": "Cette année, le Black Friday des voyageurs ne tient pas en une journée. Voyage Privé ouvre la sienne le 10 novembre, eDreams démarre ses offres dans l’appli le 19, et tout converge vers le Travel Tuesday du 1er décembre. Voici les dates, ce que chacun annonce, et les deux ou trois réflexes qui évitent de payer cher une « bonne affaire ».",
+    "sections": [
+      {
+        "heading": "Les dates à noter",
+        "paragraphs": [
+          "Tout s’étale sur trois semaines. Le plus utile, c’est de savoir quand regarder."
+        ],
+        "table": {
+          "headers": [
+            "Date",
+            "Ce qui se passe"
+          ],
+          "rows": [
+            [
+              "10 novembre",
+              "Début du Black Friday chez Voyage Privé (jusqu’au 1er décembre)"
+            ],
+            [
+              "19 novembre",
+              "Offres Travel Tuesday eDreams dans l’appli"
+            ],
+            [
+              "20 novembre",
+              "Offres eDreams sur le site et le mobile web"
+            ],
+            [
+              "27 novembre",
+              "Black Friday"
+            ],
+            [
+              "30 novembre",
+              "Cyber Monday"
+            ],
+            [
+              "1er décembre",
+              "Travel Tuesday : dernier jour des offres eDreams et de Voyage Privé"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Voyage Privé : des séjours à prix négociés",
+        "paragraphs": [
+          "Voyage Privé fonctionne par ventes privées : des séjours, week-ends et croisières négociés à l’avance, vendus pendant une durée limitée. Au 3 novembre, la compagnie affichait des ventes ouvertes à partir de 49 € par personne, pour une nuit dans un hôtel en Andorre. Elle annonce des remises allant jusqu’à -70 %, davantage sur certains séjours haut de gamme.",
+          "Ce que dit la page de l’offre est utile : chaque vente affiche un prix sans vol, et, quand c’est possible, un prix avec vol. Le Travel Tuesday, les prix sont affichés sur chaque vente le 1er décembre."
+        ]
+      },
+      {
+        "heading": "eDreams : jusqu’à -40 % sur les hôtels",
+        "paragraphs": [
+          "eDreams a choisi d’étirer la période. L’appli reçoit les offres en premier, le jeudi 19 novembre, le site suit le lendemain, et tout reste ouvert jusqu’au Travel Tuesday.",
+          "Côté chiffres : jusqu’à -40 % sur les hôtels et jusqu’à -20 % sur les locations de voiture. Les membres Prime ont des remises supplémentaires. Les offres sur les vols existent aussi, mais eDreams n’a pas détaillé les prix à ce stade : à vérifier le jour J."
+        ]
+      },
+      {
+        "heading": "Comment ne pas se faire avoir",
+        "paragraphs": [
+          "Ces plateformes font vraiment des offres, mais le prix affiché n’est pas toujours le prix payé."
+        ],
+        "list": [
+          "Comparez ce qui est comparable : un prix « par personne et par nuit » n’est pas un prix de séjour.",
+          "Ajoutez le vol. Une nuit à 49 € ne dit rien de ce que coûte l’avion pour y aller.",
+          "Regardez les conditions d’annulation : une vente privée est parfois peu ou pas remboursable.",
+          "Notez un prix de référence avant le 1er décembre. Sans repère, impossible de juger une remise."
+        ]
+      },
+      {
+        "heading": "Le vol, côté HiFlight",
+        "paragraphs": [
+          "Si une vente vous tente, regardez d’abord ce que coûte le vol. Voici le prix le plus bas relevé aujourd’hui sur HiFlight pour quelques destinations populaires au départ de Paris. Vous pourrez comparer avec ce que proposent les ventes."
+        ],
+        "routeTable": [
+          "paris-barcelone",
+          "paris-marrakech",
+          "paris-lisbonne",
+          "paris-rome",
+          "paris-athenes",
+          "paris-madrid"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quand commence le Black Friday de Voyage Privé ?",
+        "answer": "Le 10 novembre 2026, et il se termine avec le Travel Tuesday, le 1er décembre."
+      },
+      {
+        "question": "Quelles sont les dates des offres Travel Tuesday d’eDreams ?",
+        "answer": "Dans l’appli à partir du 19 novembre, sur le site à partir du 20, jusqu’au 1er décembre 2026."
+      },
+      {
+        "question": "HiFlight vend-il ces offres ?",
+        "answer": "Non. Ce sont des offres de Voyage Privé et d’eDreams, que HiFlight relève et explique. Pour y accéder, il faut passer par leurs sites."
+      },
+      {
+        "question": "À quelle date est le Black Friday 2026 ?",
+        "answer": "Le vendredi 27 novembre 2026. Le Cyber Monday est le 30 novembre et le Travel Tuesday le 1er décembre."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-barcelone",
+      "paris-marrakech",
+      "paris-lisbonne",
+      "paris-rome",
+      "paris-athenes",
+      "paris-madrid"
+    ]
+  },
+  {
+    "slug": "flying-blue-promo-rewards-novembre-2026",
+    "metaTitle": "Flying Blue : -25 % de miles en novembre 2026",
+    "title": "Flying Blue : -25 % de miles en novembre, de Los Angeles à Osaka",
+    "description": "Promo Rewards Flying Blue de novembre 2026 : 25 % de miles en moins sur une sélection de billets primes, Los Angeles dès 18 750 miles. Conditions, taxes et comment savoir si c’est rentable.",
+    "heroImage": "https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?auto=format&fit=crop&w=1600&q=75",
+    "keyPoints": [
+      "À réserver du 1er au 30 novembre 2026, pour voyager jusqu’au 30 avril 2027.",
+      "-25 % de miles sur une sélection de billets primes Air France et KLM.",
+      "Exemples par personne, en aller simple : Los Angeles en économie dès 18 750 miles, New York en Business dès 45 000, Osaka en Premium Comfort dès 37 500.",
+      "Les taxes et frais se paient en euros, en plus des miles."
+    ],
+    "published": "2026-11-04",
+    "updated": "2026-11-04",
+    "readingMinutes": 4,
+    "intro": "Chaque début de mois, Air France et KLM ouvrent une promotion sur leurs billets en miles. Celle de novembre retire 25 % des miles demandés sur une sélection de destinations. Pour qui a des miles qui dorment, c’est le moment de regarder. Pour les autres, voici comment juger si ça vaut le coup.",
+    "sections": [
+      {
+        "heading": "Les conditions",
+        "paragraphs": [
+          "La Promo Rewards s’adresse aux membres du programme Flying Blue. Elle porte sur des billets payés en miles, avec une réduction de 25 % sur les miles demandés pour une sélection de vols."
+        ],
+        "table": {
+          "headers": [
+            "Point",
+            "Détail"
+          ],
+          "rows": [
+            [
+              "Réservation",
+              "Du 1er au 30 novembre 2026"
+            ],
+            [
+              "Voyage",
+              "Jusqu’au 30 avril 2027, fêtes et Pâques comprises"
+            ],
+            [
+              "Remise",
+              "25 % de miles en moins sur une sélection de billets"
+            ],
+            [
+              "Prix indiqués",
+              "Par personne, en aller simple, à partir de"
+            ],
+            [
+              "À payer en plus",
+              "Taxes et frais, en euros"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Quelques exemples",
+        "paragraphs": [
+          "Les prix ci-dessous sont des « à partir de », par personne et en aller simple. Les places à ce tarif sont limitées et ne couvrent pas toutes les dates."
+        ],
+        "table": {
+          "headers": [
+            "Destination",
+            "Cabine",
+            "Miles, dès"
+          ],
+          "rows": [
+            [
+              "Los Angeles",
+              "Économie",
+              "18 750"
+            ],
+            [
+              "Osaka",
+              "Premium Comfort",
+              "37 500"
+            ],
+            [
+              "New York",
+              "Business",
+              "45 000"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Attention aux fêtes",
+        "paragraphs": [
+          "Voyager jusqu’au 30 avril comprend Noël et Pâques. Cela ne veut pas dire que vous trouverez des places à prix réduit ces jours-là : les dates les plus demandées partent en premier, et les sièges disponibles au prix promo sont rares sur les périodes chargées."
+        ]
+      },
+      {
+        "heading": "Est-ce rentable ? Un calcul simple",
+        "paragraphs": [
+          "Pour savoir si vos miles sont bien utilisés, comparez avec le prix en euros du même billet. Prenez le prix du billet payé en argent, retirez les taxes que vous paierez de toute façon, puis divisez par le nombre de miles. Vous obtenez la valeur de chaque mile, en centimes.",
+          "Plus ce chiffre est élevé, mieux vous utilisez vos miles. En business, la valeur est souvent meilleure qu’en économie, parce que le billet payé en argent coûte beaucoup plus cher. En économie, un billet bon marché en euros peut rendre l’utilisation de miles moins intéressante."
+        ]
+      },
+      {
+        "heading": "Le prix en euros, pour comparer",
+        "paragraphs": [
+          "Voici le prix le plus bas relevé sur HiFlight pour quelques trajets long-courriers au départ de Paris. Gardez-le en tête : si le billet en euros est bas, mieux vaut peut-être le payer et garder vos miles."
+        ],
+        "routeTable": [
+          "paris-los-angeles",
+          "paris-new-york",
+          "paris-tokyo",
+          "paris-montreal"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Jusqu’à quand réserver avec la promo Flying Blue de novembre ?",
+        "answer": "Jusqu’au 30 novembre 2026, pour voyager jusqu’au 30 avril 2027."
+      },
+      {
+        "question": "Les taxes sont-elles comprises ?",
+        "answer": "Non. Les miles couvrent le billet ; les taxes et frais se paient en euros en plus."
+      },
+      {
+        "question": "HiFlight vend-il ces billets ?",
+        "answer": "Non. Il s’agit d’une offre du programme Flying Blue. HiFlight vous donne le prix en euros pour vous aider à décider."
+      },
+      {
+        "question": "Faut-il être membre Flying Blue ?",
+        "answer": "Oui, la réservation se fait avec un compte Flying Blue et des miles."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-los-angeles",
+      "paris-new-york",
+      "paris-tokyo",
+      "paris-montreal"
+    ]
   }
 ];
 
