@@ -1,5 +1,6 @@
 import type { RouteStats } from "./route-stats";
 import { extraPlaces, extraSeeds } from "./routes-extra";
+import { moreSeeds, morePlaces } from "./routes-more";
 import { provincePlaces, provinceSeeds } from "./routes-province";
 import { province2Places, province2Seeds } from "./routes-province2";
 
@@ -91,7 +92,7 @@ const basePlaces: Record<string, PlaceFacts> = {
   DXB: { airports: "Dubaï – International (DXB)" },
 };
 
-const places: Record<string, PlaceFacts> = { ...basePlaces, ...extraPlaces, ...provincePlaces, ...province2Places };
+const places: Record<string, PlaceFacts> = { ...basePlaces, ...extraPlaces, ...morePlaces, ...provincePlaces, ...province2Places };
 
 const routesUpdated = "2026-10-30";
 
@@ -404,7 +405,7 @@ function buildRoute(seed: RouteSeed, direction: "aller" | "retour"): FlightRoute
   };
 }
 
-export const flightRoutes: FlightRoute[] = [...routeSeeds, ...extraSeeds, ...provinceSeeds, ...province2Seeds].flatMap((seed) => (seed.back ? [buildRoute(seed, "aller"), buildRoute(seed, "retour")] : [buildRoute(seed, "aller")]));
+export const flightRoutes: FlightRoute[] = [...routeSeeds, ...extraSeeds, ...moreSeeds, ...provinceSeeds, ...province2Seeds].flatMap((seed) => (seed.back ? [buildRoute(seed, "aller"), buildRoute(seed, "retour")] : [buildRoute(seed, "aller")]));
 
 export const routeRegions: RouteRegion[] = ["Europe", "Amériques", "Algérie", "Maroc et Tunisie", "Asie et Moyen-Orient", "Outre-mer", "Afrique et Océan Indien"];
 
