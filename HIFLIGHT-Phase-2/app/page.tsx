@@ -5,7 +5,6 @@ import SearchForm from "@/components/SearchForm";
 import ServiceTabs from "@/components/ServiceTabs";
 import ServiceFaq from "@/components/ServiceFaq";
 import Deals from "@/components/Deals";
-import NewsletterSignup from "@/components/NewsletterSignup";
 import { defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
 import { departureCities } from "@/lib/cities";
 import { getRouteStats } from "@/lib/route-data";
@@ -127,7 +126,6 @@ export default async function Home() {
           {reasons.map(([t, d]) => <div key={t}><h3>{t}</h3><p>{d}</p></div>)}
         </div>
       </section>
-      <NewsletterSignup source="accueil" />
       <ServiceFaq service="flights" />
     </main>
   );

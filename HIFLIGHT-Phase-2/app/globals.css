@@ -1845,15 +1845,3 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
   .mag-strip { margin-top:20px; }
 }
 
-/* Inscription aux bons plans */
-.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
-.newsletter-card { max-width:720px; margin:0 auto; padding:28px; border-radius:20px; background:#f3f7ff; border:1px solid #dbe6fb; text-align:center; position:relative; }
-.newsletter-card h2 { margin:0 0 8px; }
-.newsletter-card p { margin:0 0 16px; }
-.newsletter-form { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-.newsletter-form input[type=email] { flex:1 1 240px; min-width:0; padding:13px 16px; border-radius:999px; border:1.5px solid #c5d3ee; font-size:1rem; }
-.newsletter-form button { padding:13px 24px; border-radius:999px; border:0; background:var(--coral); color:#fff; font-weight:700; cursor:pointer; }
-.newsletter-form button:disabled { opacity:.6; cursor:default; }
-.newsletter-ok { color:#0a6b3a; font-weight:600; }
-.newsletter-err { color:#b3261e; margin-top:10px; }
-.newsletter-card small { display:block; margin-top:12px; opacity:.75; }

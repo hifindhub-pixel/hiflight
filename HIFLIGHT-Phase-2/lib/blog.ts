@@ -2425,8 +2425,246 @@ export const blogPosts: BlogPost[] = [
       "paris-tokyo",
       "paris-montreal"
     ]
+  },
+  {
+    "slug": "vol-amsterdam-guide-conseils",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Amsterdam : aéroport, train et bons jours pour partir",
+    "title": "Aller à Amsterdam : avion ou train, et comment s’y prendre pour payer moins",
+    "description": "Vol court, aéroport à vingt minutes du centre, train concurrent : ce qu’il faut savoir pour choisir ses dates et son départ (Paris, Lyon, Marseille, Nice, Toulouse, Bordeaux).",
+    "published": "2026-11-06",
+    "updated": "2026-11-06",
+    "readingMinutes": 4,
+    "intro": "Amsterdam est l’un de ces week-ends où l’on perd plus de temps à choisir ses dates qu’à voyager : une heure et quart de vol depuis Paris, un train depuis l’aéroport qui dépose au centre en une vingtaine de minutes, et une ville qui se parcourt sans voiture. Reste à ne pas payer plus que nécessaire.",
+    "sections": [
+      {
+        "heading": "Avion ou train depuis Paris ?",
+        "paragraphs": [
+          "Le train relie Paris à Amsterdam en environ 3 h 20, de centre-ville à centre-ville. L’avion est plus court en vol, mais il faut ajouter le trajet vers l’aéroport, l’enregistrement et la sécurité : au total, l’écart se réduit beaucoup.",
+          "L’avion reprend l’avantage dès que vous partez de province (Lyon, Marseille, Nice, Toulouse, Bordeaux) ou quand le prix du train est élevé pour vos dates. Le plus simple est de comparer les deux avant de réserver, en comptant les bagages et les transferts."
+        ]
+      },
+      {
+        "heading": "Aéroport d’Amsterdam : ce qu’il faut savoir",
+        "paragraphs": [
+          "Schiphol est relié à la gare centrale d’Amsterdam par un train qui met une vingtaine de minutes. Pas besoin de taxi, et les trains sont fréquents, y compris tard le soir.",
+          "Si vous venez pour la journée ou pour deux nuits, un bagage cabine suffit largement : la ville se fait à pied ou à vélo, et c’est sur la valise en soute que se joue souvent l’écart de prix entre deux offres."
+        ],
+        "callout": {
+          "kind": "astuce",
+          "title": "Un détail qui change le budget",
+          "text": "Sur un vol court, regardez toujours le prix avec bagage. Une offre un peu plus chère mais qui inclut la valise peut revenir moins cher que le tarif de base à augmenter ensuite."
+        }
+      },
+      {
+        "heading": "Quand partir ?",
+        "paragraphs": [
+          "Le printemps, avec les champs de tulipes, et les week-ends d’été sont les plus demandés, donc les plus chers. En automne et en hiver, les billets sont souvent plus doux, et la ville reste agréable : musées, cafés, canaux illuminés.",
+          "En semaine, et en partant le jeudi plutôt que le vendredi, on trouve en général de meilleurs tarifs. Les pages de vol HiFlight affichent le calendrier des prix pour repérer les jours les moins chers."
+        ]
+      },
+      {
+        "heading": "Les prix en ce moment au départ de plusieurs villes",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-amsterdam",
+          "lyon-amsterdam",
+          "marseille-amsterdam",
+          "nice-amsterdam",
+          "toulouse-amsterdam",
+          "bordeaux-amsterdam"
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-amsterdam",
+      "lyon-amsterdam",
+      "marseille-amsterdam",
+      "nice-amsterdam",
+      "toulouse-amsterdam",
+      "bordeaux-amsterdam"
+    ],
+    "faq": [
+      {
+        "question": "Combien de temps dure le vol Paris–Amsterdam ?",
+        "answer": "Environ 1 h 15 en vol, sans compter le trajet jusqu’à l’aéroport et les formalités."
+      },
+      {
+        "question": "Comment aller de l’aéroport au centre d’Amsterdam ?",
+        "answer": "En train, depuis l’aéroport de Schiphol : il faut compter une vingtaine de minutes jusqu’à la gare centrale."
+      },
+      {
+        "question": "Le train est-il une bonne alternative à l’avion ?",
+        "answer": "Depuis Paris, le train met environ 3 h 20 de centre à centre. Comparez les deux, bagages et transferts compris."
+      }
+    ]
+  },
+  {
+    "slug": "soleil-hiver-vol-pas-cher",
+    "category": "Conseils",
+    "metaTitle": "Soleil en hiver : où partir depuis la France sans trop payer",
+    "title": "Du soleil en hiver sans aller au bout du monde : Canaries, Égypte, Maroc, Tunisie",
+    "description": "Tenerife, Lanzarote, Hurghada, Marrakech, Djerba : durées de vol, périodes les plus chères et astuces pour comparer avant de réserver votre escapade hivernale.",
+    "published": "2026-11-06",
+    "updated": "2026-11-06",
+    "readingMinutes": 5,
+    "intro": "Quand les journées raccourcissent, la question revient chaque année : où trouver de la lumière sans passer la moitié du voyage dans un avion ? Quelques destinations se rejoignent en quatre à cinq heures, ou moins, avec un climat bien plus doux qu’en France. Voici comment les comparer.",
+    "sections": [
+      {
+        "heading": "Les Canaries : Tenerife et Lanzarote",
+        "paragraphs": [
+          "Tenerife se rejoint en environ 4 h 15 depuis Paris, Lanzarote en environ 4 h. Ce sont des classiques de l’hiver : plages volcaniques, randonnées, températures douces quand le reste de l’Europe grelotte.",
+          "L’archipel a une heure de moins que la France : le décalage est léger, mais pensez-y pour vos horaires de transfert. Les vacances de Noël et de février sont les périodes les plus chères."
+        ]
+      },
+      {
+        "heading": "Égypte : Hurghada et Charm el-Cheikh",
+        "paragraphs": [
+          "Environ cinq heures de vol vers la mer Rouge, avec de la plongée, des récifs et des hôtels face à la mer. L’hiver est la haute saison ; l’été, il fait très chaud.",
+          "Les formalités d’entrée, dont le visa, dépendent de votre nationalité : vérifiez-les avant de réserver."
+        ]
+      },
+      {
+        "heading": "Maroc et Tunisie : plus court, plus souple",
+        "paragraphs": [
+          "Marrakech se rejoint en environ 3 h depuis Paris, et Djerba en environ 2 h 50. Les durées sont courtes, ce qui permet de partir pour quelques jours seulement.",
+          "Les vacances scolaires font monter les prix vers ces destinations : un départ hors vacances, en semaine, change souvent la facture."
+        ]
+      },
+      {
+        "heading": "Comment comparer sans se tromper",
+        "paragraphs": [
+          "Comparez au moins deux destinations pour les mêmes dates : l’écart de prix entre Tenerife et Lanzarote, ou entre Hurghada et Charm el-Cheikh, peut être sensible selon la semaine.",
+          "Regardez le prix avec bagage, et la durée totale du trajet (escale comprise). Un vol qui paraît bon marché mais arrive à 3 h du matin ajoute souvent une nuit d’hôtel."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Hors vacances, c’est mieux",
+          "text": "Un vol pris dans la semaine qui suit les vacances scolaires peut coûter nettement moins cher que le même vol la semaine d’avant. Décaler d’une semaine suffit parfois."
+        }
+      },
+      {
+        "heading": "Les prix en ce moment depuis Paris",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-tenerife",
+          "paris-lanzarote",
+          "paris-hurghada",
+          "paris-charm-el-cheikh",
+          "paris-marrakech",
+          "paris-djerba"
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-tenerife",
+      "paris-lanzarote",
+      "paris-hurghada",
+      "paris-charm-el-cheikh",
+      "paris-marrakech",
+      "paris-djerba"
+    ],
+    "faq": [
+      {
+        "question": "Où trouver du soleil en hiver à moins de cinq heures d’avion ?",
+        "answer": "Les Canaries, la mer Rouge, le Maroc et la Tunisie se rejoignent en environ 2 h 50 à 5 h depuis Paris, selon la destination."
+      },
+      {
+        "question": "Quelle est la période la plus chère ?",
+        "answer": "Les vacances de Noël et de février. Partir hors vacances, en semaine, fait souvent baisser le prix."
+      },
+      {
+        "question": "Faut-il un visa pour l’Égypte ?",
+        "answer": "Cela dépend de votre nationalité. Vérifiez les formalités avant de réserver."
+      }
+    ]
+  },
+  {
+    "slug": "vol-prague-budapest-vienne-comparer",
+    "category": "Destinations",
+    "metaTitle": "Prague, Budapest ou Vienne : quelle ville choisir pour un week-end",
+    "title": "Prague, Budapest ou Vienne : trois capitales à moins de deux heures, laquelle choisir ?",
+    "description": "Durée de vol, ambiance, monnaie, moments les moins chers : comparer Prague, Budapest et Vienne avant de réserver un week-end en Europe centrale.",
+    "published": "2026-11-06",
+    "updated": "2026-11-06",
+    "readingMinutes": 4,
+    "intro": "Trois capitales voisines, des vols de moins de deux heures et quelques minutes depuis Paris, et pourtant trois voyages très différents. Plutôt que de chercher la « meilleure » ville, mieux vaut savoir ce que chacune offre, et ce que chaque détail coûte.",
+    "sections": [
+      {
+        "heading": "Prague : la ville à parcourir à pied",
+        "paragraphs": [
+          "Environ 1 h 55 de vol depuis Paris. Prague se visite à pied : vieille ville, château, pont Charles, brasseries. C’est la plus « carte postale » des trois.",
+          "La République tchèque garde sa couronne : retirez de l’argent sur place plutôt que de changer à l’aéroport."
+        ]
+      },
+      {
+        "heading": "Budapest : bains, Danube et vie nocturne",
+        "paragraphs": [
+          "Environ 2 h 10 de vol. Budapest, c’est le Danube, les bains thermaux et une ville où l’on mange bien sans se ruiner. L’hiver est idéal pour les bains.",
+          "La Hongrie utilise le forint : comparez le taux de change avant de payer en euros dans un restaurant ou un taxi."
+        ]
+      },
+      {
+        "heading": "Vienne : opéra, cafés et palais",
+        "paragraphs": [
+          "Environ 1 h 55 de vol. Vienne est la plus simple à vivre : transports clairs, cafés historiques, musées. Elle utilise l’euro, ce qui simplifie le budget.",
+          "Les marchés de Noël remplissent la ville de fin novembre à décembre, et les billets suivent : si vous cherchez des tarifs plus doux, le printemps et le début de l’automne sont plus calmes."
+        ]
+      },
+      {
+        "heading": "Choisir selon ce que vous cherchez",
+        "paragraphs": [
+          "Envie de balades et d’architecture : Prague. De bains chauds et de sorties : Budapest. De culture et de confort : Vienne. Et si vos dates sont fixes, comparez les trois : l’écart de prix du billet peut décider à lui seul."
+        ],
+        "callout": {
+          "kind": "astuce",
+          "title": "Partir de province",
+          "text": "Prague se rejoint aussi depuis Lyon, Marseille, Nice, Toulouse et Bordeaux, Vienne depuis Nice. Comparez avec Paris en comptant le trajet pour y aller."
+        }
+      },
+      {
+        "heading": "Les prix en ce moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-prague",
+          "paris-budapest",
+          "paris-vienne",
+          "lyon-prague",
+          "nice-prague",
+          "nice-vienne"
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-prague",
+      "paris-budapest",
+      "paris-vienne",
+      "lyon-prague",
+      "nice-prague",
+      "nice-vienne"
+    ],
+    "faq": [
+      {
+        "question": "Quelle ville est la plus proche de Paris en avion ?",
+        "answer": "Prague et Vienne, à environ 1 h 55 ; Budapest est un peu plus loin, à environ 2 h 10."
+      },
+      {
+        "question": "Quelle monnaie utilise-t-on ?",
+        "answer": "L’euro à Vienne, la couronne tchèque à Prague et le forint à Budapest."
+      },
+      {
+        "question": "Quand les billets sont-ils les moins chers ?",
+        "answer": "De janvier à mars pour Prague, en hiver et au printemps pour Budapest, au printemps et début d’automne pour Vienne."
+      }
+    ]
   }
-];
+];;
 
 export function getPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
