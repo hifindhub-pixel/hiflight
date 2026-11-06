@@ -153,7 +153,7 @@ export default function HiflightFlatMap({ states, mode, onCountryPress, countrie
 
   return <div className={styles.panel}>
     <div className={styles.toolbar}>
-      <label>Choisir un pays<select value="" onChange={e => { if (e.target.value) onCountryPress(e.target.value); }}><option value="">Rechercher dans la liste…</option>{[...countries].sort((a,b) => a.name.localeCompare(b.name, "fr")).map(c => <option value={c.code} key={c.code}>{c.name}</option>)}</select></label>
+      <label>Choisir un pays<select value="" onChange={e => { if (e.target.value) onCountryPress(e.target.value); }}><option value="">Sélectionner un pays…</option>{[...countries].sort((a,b) => a.name.localeCompare(b.name, "fr")).map(c => <option value={c.code} key={c.code}>{c.name}</option>)}</select></label>
       <div className={styles.controls} aria-label="Zoom de la carte">
         <button type="button" aria-label="Dézoomer" disabled={zoom <= 1} onClick={() => controls.current(1/1.5)}><Minus size={18}/></button>
         <span>{Math.round(zoom * 100)} %</span>
@@ -168,13 +168,13 @@ export default function HiflightFlatMap({ states, mode, onCountryPress, countrie
         return flag ? <pattern id={`${prefix}-${c.code}`} key={c.code} width="1" height="1" patternContentUnits="objectBoundingBox"><image href={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(flag)}`} width="1" height="1" preserveAspectRatio="none"/></pattern> : null;
       })}</defs>
       <g ref={layerRef}>
-        <g aria-hidden="true" fill="none" stroke="#9bb9b8" strokeWidth=".55">{[...meridians,...parallels].map((d,i)=><path key={i} d={d}/>)}</g>
+        <g aria-hidden="true" fill="none" stroke="#355267" strokeWidth=".55">{[...meridians,...parallels].map((d,i)=><path key={i} d={d}/>)}</g>
         {shapes.map(c => {
           const active = c.code === focusCode || !!states[c.code]?.[mode], interactive = allowed.has(c.code);
           const key = c.code2?.toLowerCase() || "";
           const flag = VECTOR_FLAGS[key] || MISSING_VECTOR_FLAGS[key];
-          return <g key={c.code} className={interactive ? styles.country : styles.territory} role={interactive ? "button" : undefined} tabIndex={interactive ? 0 : undefined} aria-label={interactive ? `${c.name}${active ? focusCode ? ", sélectionné" : mode === "visited" ? ", visité" : ", à visiter" : ""}` : undefined} onClick={e => { if (interactive && (e.detail === 0 || !moved.current)) onCountryPress(c.code); }} onKeyDown={e => { if (interactive && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onCountryPress(c.code); } }} fill={active ? flag ? `url(#${prefix}-${c.code})` : "#ff7772" : "#f8f4e7"}>
-            <title>{c.name}</title>{c.paths.map((d,i) => <path key={i} d={d} stroke="#869588" strokeWidth=".65" vectorEffect="non-scaling-stroke"/>)}
+          return <g key={c.code} className={interactive ? styles.country : styles.territory} role={interactive ? "button" : undefined} tabIndex={interactive ? 0 : undefined} aria-label={interactive ? `${c.name}${active ? focusCode ? ", sélectionné" : mode === "visited" ? ", visité" : ", à visiter" : ""}` : undefined} onClick={e => { if (interactive && (e.detail === 0 || !moved.current)) onCountryPress(c.code); }} onKeyDown={e => { if (interactive && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onCountryPress(c.code); } }} fill={active ? flag ? `url(#${prefix}-${c.code})` : "#ff7772" : "#688397"}>
+            <title>{c.name}</title>{c.paths.map((d,i) => <path key={i} d={d} stroke="#173247" strokeWidth=".65" vectorEffect="non-scaling-stroke"/>)}
           </g>;
         })}
         <g aria-hidden="true" className={styles.oceans}>{oceanNames.map(([name,lon,lat])=>{const [x,y]=project(lon,lat);return <text key={name} x={x} y={y}>{name}</text>})}</g>
