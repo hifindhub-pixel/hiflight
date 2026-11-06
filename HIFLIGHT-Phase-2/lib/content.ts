@@ -3,6 +3,7 @@ import { extraPlaces, extraSeeds } from "./routes-extra";
 import { moreSeeds, morePlaces } from "./routes-more";
 import { provincePlaces, provinceSeeds } from "./routes-province";
 import { wave2Seeds } from "./routes-wave2";
+import { wave3Seeds, wave3Places } from "./routes-wave3";
 import { province2Places, province2Seeds } from "./routes-province2";
 
 export { countryPages } from "./countries";
@@ -93,7 +94,7 @@ const basePlaces: Record<string, PlaceFacts> = {
   DXB: { airports: "Dubaï – International (DXB)" },
 };
 
-const places: Record<string, PlaceFacts> = { ...basePlaces, ...extraPlaces, ...morePlaces, ...provincePlaces, ...province2Places };
+const places: Record<string, PlaceFacts> = { ...basePlaces, ...extraPlaces, ...morePlaces, ...provincePlaces, ...province2Places, ...wave3Places };
 
 const routesUpdated = "2026-10-30";
 
@@ -406,7 +407,7 @@ function buildRoute(seed: RouteSeed, direction: "aller" | "retour"): FlightRoute
   };
 }
 
-export const flightRoutes: FlightRoute[] = [...routeSeeds, ...extraSeeds, ...moreSeeds, ...provinceSeeds, ...province2Seeds, ...wave2Seeds].flatMap((seed) => (seed.back ? [buildRoute(seed, "aller"), buildRoute(seed, "retour")] : [buildRoute(seed, "aller")]));
+export const flightRoutes: FlightRoute[] = [...routeSeeds, ...extraSeeds, ...moreSeeds, ...provinceSeeds, ...province2Seeds, ...wave2Seeds, ...wave3Seeds].flatMap((seed) => (seed.back ? [buildRoute(seed, "aller"), buildRoute(seed, "retour")] : [buildRoute(seed, "aller")]));
 
 export const routeRegions: RouteRegion[] = ["Europe", "Amériques", "Algérie", "Maroc et Tunisie", "Asie et Moyen-Orient", "Outre-mer", "Afrique et Océan Indien"];
 
