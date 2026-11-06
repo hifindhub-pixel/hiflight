@@ -105,8 +105,12 @@ function PassportPage({ country, side, onPress, interactive = true }: { country?
   return <button className={pageClassName} onClick={() => onPress(country.code)}>{content}</button>;
 }
 
+function Compass() {
+  return <svg className={styles.compass} viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="52" r="34" fill="none" stroke="currentColor" strokeWidth=".7"/><circle cx="50" cy="52" r="30" fill="none" stroke="currentColor" strokeDasharray="1 5"/><path d="M50 14L56 46 86 52 56 58 50 90 44 58 14 52 44 46Z" fill="#e6e6d3" stroke="currentColor"/><path d="M50 14V52L44 46ZM86 52H50L56 46ZM50 90V52L56 58ZM14 52H50L44 58Z" fill="currentColor"/><text x="50" y="10" textAnchor="middle" fontSize="9" fill="currentColor">N</text></svg>;
+}
 export default function WorldMapExperience() {
   const { user, loading: authLoading } = useAuth();
+  const [exploreCode,setExploreCode] = useState("JPN");
   const [states, setStates] = useState<StateMap>({});
   const [primarySection, setPrimarySection] = useState<PrimarySection>("globe");
   const [mode, setMode] = useState<GlobeMode>("visited");
@@ -236,22 +240,20 @@ export default function WorldMapExperience() {
   }, [demoMode, saving, states]);
 
   if (authLoading || loading) return <main className={styles.loading}><div className={styles.loader} /><p>Préparation de votre carte…</p></main>;
-  if (!user && !demoMode) return <main className={styles.guest}><section><span>World Map HiFlight</span><h1>Votre monde vous attend.</h1><p>Connectez-vous pour colorer les pays avec leurs vrais drapeaux et remplir votre passeport personnel.</p><div><Link href="/connexion">Se connecter</Link><Link href="/connexion">Créer un compte</Link></div></section></main>;
-
+  const guest = !user && !demoMode;
+  const place = COUNTRY_BY_CODE.get(exploreCode);
+  const point = GLOBE_COUNTRIES.find(c=>c.code===exploreCode)?.center;
+  const coords = point ? [point[1].toFixed(1).replace("-","")+"° "+(point[1]>=0?"N":"S"),point[0].toFixed(1).replace("-","")+"° "+(point[0]>=0?"E":"O")].join("  /  ") : "";
+  const indexPanel = <aside className={styles.indexPanel}>
+    <div className={styles.indexTop}><span>{guest ? "FICHE PAYS" : "RÉPERTOIRE"}</span><Compass/></div>
+    {guest && place ? <><div className={styles.specimen}>{flagSource(place.code2) && <img alt="" src={flagSource(place.code2)!}/>}<small>{place.code}</small></div><h2>{place.name}</h2><small className={styles.coords}>{coords}</small><p>Sélectionnez un pays sur la carte pour afficher sa fiche.</p><Link className={styles.inkLink} href="/connexion">Créer mon passeport <span>↗</span></Link></> :
+    <><h2>{mode==="visited"?"Pays visités":"À visiter"}</h2>{activeCountries.length ? <ol>{activeCountries.slice(0,5).map(c=><li key={c.code}><button onClick={()=>setPendingCode(c.code)}>{flagSource(c.code2)&&<img alt="" src={flagSource(c.code2)!}/>}<span>{c.name}</span><small>{c.code}</small></button></li>)}</ol> : <p>{mode==="visited"?"Sélectionnez votre premier pays sur la carte pour ajouter son tampon au passeport.":"Sélectionnez les pays que vous aimeriez découvrir."}</p>}{activeCountries.length>5 && <button className={styles.inkLink} onClick={()=>setViewMode("list")}>Voir les {activeCountries.length} pays →</button>}</>}
+  </aside>;
   return (
     <main className={styles.page}>
-      <header className={styles.hero}>
-        <div className={styles.heroInner}>
-          <div className={styles.heroIntro}><h1>Mes voyages</h1></div>
-          <div className={styles.stats}><div><strong>{visitedCountries.length}</strong><span>visités</span></div><div><strong>{wishlistCountries.length}</strong><span>à visiter</span></div></div>
-        </div>
-      </header>
-
-      <nav className={styles.primaryTabs} aria-label="Carte et passeport">
-        <button className={primarySection === "globe" ? styles.activePrimary : ""} onClick={() => setPrimarySection("globe")}><WorldMapIcon size={19} />Carte du monde</button>
-        <button className={primarySection === "passport" ? styles.activePrimary : ""} onClick={() => setPrimarySection("passport")}><BookOpen size={19} />Passeport</button>
-      </nav>
-
+      <div className={styles.atlasMast}><div className={styles.mastText}><span className={styles.imprint}>HiFlight <i>/</i> Carnet de voyage</span><h1>{primarySection==="passport"?"Le passeport":guest?"Atlas du monde":"Mon atlas"}</h1></div>
+      <nav className={styles.folioNav} aria-label="Carte et passeport"><button aria-pressed={primarySection==="globe"} onClick={()=>setPrimarySection("globe")}><WorldMapIcon size={17}/>Atlas</button><button aria-pressed={primarySection==="passport"} onClick={()=>setPrimarySection("passport")}><BookOpen size={16}/>Passeport</button></nav></div>
+      {guest ? (primarySection === "passport" ? <section className={styles.guestBook}><img src="/world-map/hiflight-passport-cover.png" alt="Couverture du passeport HiFlight"/><div><h2>Votre passeport de voyage</h2><p>Retrouvez un tampon pour chaque pays visité.</p><Link className={styles.inkLink} href="/connexion">Se connecter ↗</Link></div></section> : <section className={styles.sheet}><div className={styles.plateTitle}><span>Planisphère</span><small>PROJECTION ROBINSON</small></div><div className={styles.atlasGrid}><HiflightFlatMap states={{}} mode="visited" countries={COUNTRIES} focusCode={exploreCode} onCountryPress={setExploreCode}/>{indexPanel}</div></section>) : <>
       {primarySection === "passport" ? (
         <section className={styles.passportHome}>
           {!visitedCountries.length ? (
@@ -294,11 +296,11 @@ export default function WorldMapExperience() {
         </section>
       ) : (
         <section className={`${styles.globeWorkspace} ${viewMode === "map" ? styles.flatWorkspace : ""}`}>
-          <div className={styles.controlRow}>
-            <div className={styles.segment}><button className={mode === "visited" ? styles.segmentActive : ""} onClick={() => setMode("visited")}><Check size={16} />Visités</button><button className={mode === "wishlist" ? styles.segmentActive : ""} onClick={() => setMode("wishlist")}><Star size={16} />À visiter</button></div>
+          <div className={styles.atlasTools}>
+            <div className={styles.segment}><button className={mode === "visited" ? styles.segmentActive : ""} onClick={() => setMode("visited")}><Check size={16} />Visités · {visitedCountries.length}</button><button className={mode === "wishlist" ? styles.segmentActive : ""} onClick={() => setMode("wishlist")}><Star size={16} />À visiter · {wishlistCountries.length}</button></div>
             <div className={styles.segment}><button aria-pressed={viewMode === "map"} className={viewMode === "map" ? styles.viewActive : ""} onClick={() => setViewMode("map")}><WorldMapIcon size={16} />Carte</button><button aria-pressed={viewMode === "globe"} className={viewMode === "globe" ? styles.viewActive : ""} onClick={() => setViewMode("globe")}><Globe2 size={16} />Globe 3D</button><button aria-pressed={viewMode === "list"} className={viewMode === "list" ? styles.viewActive : ""} onClick={() => setViewMode("list")}><List size={16} />Liste</button></div>
           </div>
-          {viewMode === "map" ? <HiflightFlatMap states={states} mode={mode} onCountryPress={setPendingCode} countries={COUNTRIES} /> : viewMode === "globe" ? <HiflightGlobe states={states} mode={mode} onCountryPress={setPendingCode} /> : (
+          {viewMode === "map" ? <div className={styles.atlasGrid}><HiflightFlatMap states={states} mode={mode} onCountryPress={setPendingCode} countries={COUNTRIES} />{indexPanel}</div> : viewMode === "globe" ? <HiflightGlobe states={states} mode={mode} onCountryPress={setPendingCode} /> : (
             <div className={styles.listPanel}>
               <label className={styles.listSearch}><Search size={19} /><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Rechercher un pays" /></label>
               <div className={styles.countryList}>{filteredCountries.length ? filteredCountries.map((country) => {
@@ -317,6 +319,7 @@ export default function WorldMapExperience() {
         </section>
       )}
 
+      </>}
       {error ? <p className={styles.error} role="alert">{error}</p> : null}
       {pendingCountry ? (
         <div className={styles.modalBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setPendingCode(null); }}>

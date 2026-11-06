@@ -9,6 +9,18 @@ import { VECTOR_FLAGS } from "@/lib/world-map/vectorFlags";
 import { MISSING_VECTOR_FLAGS } from "@/lib/world-map/missingVectorFlags";
 import styles from "./HiflightFlatMap.module.css";
 
+// Robinson tabular projection: equal latitude intervals, shorter parallels near the poles.
+const parallel = [1,.9986,.9954,.99,.9822,.973,.96,.9427,.9216,.8962,.8679,.835,.7986,.7597,.7186,.6732,.6213,.5722,.5322];
+const northing = [0,.062,.124,.186,.248,.31,.372,.434,.4958,.5571,.6176,.6769,.7346,.7903,.8435,.8936,.9394,.9761,1];
+function project(lon:number,lat:number) {
+  const pos=Math.min(18,Math.abs(lat)/5), i=Math.min(17,Math.floor(pos)), t=pos-i;
+  const mix=(v:number[])=>v[i]+(v[i+1]-v[i])*t;
+  return [500+lon/180*484*mix(parallel),250-Math.sign(lat)*238*mix(northing)];
+}
+const command=(p:number[],i:number)=>(i?"L":"M")+p.map(n=>n.toFixed(2)).join(",");
+const meridians=Array.from({length:13},(_,i)=>Array.from({length:37},(_,j)=>project(i*30-180,j*5-90)).map(command).join(" "));
+const parallels=Array.from({length:5},(_,i)=>[project(-180,i*30-60),project(180,i*30-60)].map(command).join(" "));
+const oceanNames:[string,number,number][]=[["Pacifique",-136,0],["Atlantique",-31,-16],["Océan Indien",78,-29]];
 // Unwrap each island before projecting: Fiji and Russia must not cross the whole map.
 // Some source features share an ISO code (islands and mainland).
 const groupedCountries = [...GLOBE_COUNTRIES.reduce((groups, country) => {
@@ -24,22 +36,33 @@ const shapes = groupedCountries.filter(c => c.code !== "ESH").map(country => ({
       while (lon - previous > 180) lon -= 360;
       while (lon - previous < -180) lon += 360;
       previous = lon;
-      return [(lon + 180) / 360 * 1000, (90 - lat) / 180 * 500];
+      return [lon,lat];
     });
     const xs = points.map(p => p[0]);
     const min = Math.min(...xs), max = Math.max(...xs);
-    const shifts = [0, ...(min < 0 ? [1000] : []), ...(max > 1000 ? [-1000] : [])];
-    return shifts.map(shift => points.map(([x,y], i) => `${i ? "L" : "M"}${(x + shift).toFixed(2)},${y.toFixed(2)}`).join(" ") + "Z");
+    const shifts = [0, ...(min < -180 ? [360] : []), ...(max > 180 ? [-360] : [])];
+    // Clip each copy in longitude before projection, where the date line is straight.
+    function clip(poly:number[][], edge:number, side:number) {
+      const out:number[][]=[];
+      for(let i=0;i<poly.length;i++){
+        const a=poly[(i+poly.length-1)%poly.length], b=poly[i];
+        const insideA=(a[0]-edge)*side>=0, insideB=(b[0]-edge)*side>=0;
+        if(insideA!==insideB) out.push([edge,a[1]+(b[1]-a[1])*(edge-a[0])/(b[0]-a[0])]);
+        if(insideB) out.push(b);
+      }
+      return out;
+    }
+    return shifts.map(shift=>clip(clip(points.map(([x,y])=>[x+shift,y]),-180,1),180,-1)).filter(poly=>poly.length>=3).map(poly=>poly.map(([x,y])=>project(x,y)).map(command).join(" ")+"Z");
   }).flat(),
 }));
 
 type Country = { code: string; name: string; code2: string | null };
-type Props = { states: GlobeStateMap; mode: GlobeMode; onCountryPress: (code: string) => void; countries: Country[] };
+type Props = { states: GlobeStateMap; mode: GlobeMode; onCountryPress: (code: string) => void; countries: Country[]; focusCode?:string };
 type Camera = { x: number; y: number; zoom: number };
 const initial: Camera = { x: 0, y: 0, zoom: 1 };
 const clamp = (v: number, low: number, high: number) => Math.max(low, Math.min(high, v));
 
-export default function HiflightFlatMap({ states, mode, onCountryPress, countries }: Props) {
+export default function HiflightFlatMap({ states, mode, onCountryPress, countries, focusCode }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const layerRef = useRef<SVGGElement>(null);
   const camera = useRef<Camera>({ ...initial });
@@ -139,23 +162,24 @@ export default function HiflightFlatMap({ states, mode, onCountryPress, countrie
       </div>
     </div>
     <svg ref={svgRef} className={styles.map} viewBox="0 0 1000 500" role="group" aria-label="Carte du monde interactive" aria-describedby={`${prefix}-help`}>
-      <defs>{shapes.filter(c => states[c.code]?.[mode]).map(c => {
+      <defs>{shapes.filter(c => c.code === focusCode || states[c.code]?.[mode]).map(c => {
         const key = c.code2?.toLowerCase() || "";
         const flag = VECTOR_FLAGS[key] || MISSING_VECTOR_FLAGS[key];
         return flag ? <pattern id={`${prefix}-${c.code}`} key={c.code} width="1" height="1" patternContentUnits="objectBoundingBox"><image href={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(flag)}`} width="1" height="1" preserveAspectRatio="none"/></pattern> : null;
       })}</defs>
       <g ref={layerRef}>
-        <path d="M0 250H1000 M500 0V500 M0 125H1000 M0 375H1000 M250 0V500 M750 0V500" stroke="#22435c" strokeWidth=".5" fill="none"/>
+        <g aria-hidden="true" fill="none" stroke="#9bb9b8" strokeWidth=".55">{[...meridians,...parallels].map((d,i)=><path key={i} d={d}/>)}</g>
         {shapes.map(c => {
-          const active = !!states[c.code]?.[mode], interactive = allowed.has(c.code);
+          const active = c.code === focusCode || !!states[c.code]?.[mode], interactive = allowed.has(c.code);
           const key = c.code2?.toLowerCase() || "";
           const flag = VECTOR_FLAGS[key] || MISSING_VECTOR_FLAGS[key];
-          return <g key={c.code} className={interactive ? styles.country : styles.territory} role={interactive ? "button" : undefined} tabIndex={interactive ? 0 : undefined} aria-label={interactive ? `${c.name}${active ? mode === "visited" ? ", visité" : ", à visiter" : ""}` : undefined} onClick={e => { if (interactive && (e.detail === 0 || !moved.current)) onCountryPress(c.code); }} onKeyDown={e => { if (interactive && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onCountryPress(c.code); } }} fill={active ? flag ? `url(#${prefix}-${c.code})` : "#ff7772" : "#667f91"}>
-            <title>{c.name}</title>{c.paths.map((d,i) => <path key={i} d={d} stroke="#10283b" strokeWidth=".65" vectorEffect="non-scaling-stroke"/>)}
+          return <g key={c.code} className={interactive ? styles.country : styles.territory} role={interactive ? "button" : undefined} tabIndex={interactive ? 0 : undefined} aria-label={interactive ? `${c.name}${active ? focusCode ? ", sélectionné" : mode === "visited" ? ", visité" : ", à visiter" : ""}` : undefined} onClick={e => { if (interactive && (e.detail === 0 || !moved.current)) onCountryPress(c.code); }} onKeyDown={e => { if (interactive && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onCountryPress(c.code); } }} fill={active ? flag ? `url(#${prefix}-${c.code})` : "#ff7772" : "#f8f4e7"}>
+            <title>{c.name}</title>{c.paths.map((d,i) => <path key={i} d={d} stroke="#869588" strokeWidth=".65" vectorEffect="non-scaling-stroke"/>)}
           </g>;
         })}
+        <g aria-hidden="true" className={styles.oceans}>{oceanNames.map(([name,lon,lat])=>{const [x,y]=project(lon,lat);return <text key={name} x={x} y={y}>{name}</text>})}</g>
       </g>
     </svg>
-    <div className={styles.caption} id={`${prefix}-help`}><span>Roulette pour zoomer · Glisser pour déplacer · Toucher un pays pour le modifier</span><span>Sur mobile : pincer pour zoomer</span></div>
+    <div className={styles.caption} id={`${prefix}-help`}><span>Glisser pour déplacer · Roulette ou pincement pour zoomer</span><span>Frontières : Natural Earth</span></div>
   </div>;
 }
