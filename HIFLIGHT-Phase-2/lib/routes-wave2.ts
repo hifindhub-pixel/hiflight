@@ -1,7 +1,7 @@
 import type { RouteSeed } from "./content";
 
 // Seconde vague de liaisons régionales : les destinations les plus recherchées depuis Lyon,
-// Marseille, Nice, Toulouse et Bordeaux qui manquaient encore. Les durées sont des ordres de
+// Marseille, Nice, Toulouse et Bordeaux qui manquaient encore. Les liaisons déjà présentes ailleurs ont été retirées ; les durées sont des ordres de
 // grandeur ; aucune compagnie n’est citée car les dessertes changent selon les saisons, et
 // aucun prix n’est écrit ici (les relevés viennent de l’API de prix).
 
@@ -13,14 +13,6 @@ const bordeaux = { origin: "Bordeaux", originCode: "BOD" } as const;
 
 export const wave2Seeds: RouteSeed[] = [
   // ——— Lyon
-  { ...lyon, destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", duration: "environ 2 h", carriers: [], formalities: true,
-    intro: "Lyon–Alger est l’une des liaisons les plus utilisées entre la région Auvergne-Rhône-Alpes et l’Algérie, avec des familles qui voyagent toute l’année.",
-    season: "L’été, les vacances scolaires et les fêtes concentrent la demande. Hors pointe, en semaine, les prix sont plus souples.",
-    tip: "Vérifiez la franchise de bagages incluse : elle change beaucoup d’une offre à l’autre, et c’est un poste qui pèse lourd sur ce trajet." },
-  { ...lyon, destination: "Marrakech", destinationCode: "RAK", region: "Maroc et Tunisie", country: "maroc", duration: "environ 2 h 50", carriers: [], formalities: true,
-    intro: "Depuis Lyon-Saint-Exupéry, Marrakech est une escapade de soleil sans passer par Paris : médina, jardins et désert à quelques heures de route.",
-    season: "Le printemps et l’automne sont les plus agréables. Les vacances scolaires font monter les prix, et l’été est très chaud.",
-    tip: "Comparez les jours de départ : un vol en milieu de semaine est souvent moins cher qu’un départ du vendredi." },
   { ...lyon, destination: "Amsterdam", destinationCode: "AMS", region: "Europe", duration: "environ 1 h 30", carriers: [],
     intro: "Lyon–Amsterdam est un week-end facile : canaux, musées et vélo, avec un vol d’une heure et demie environ.",
     season: "Le printemps, avec les champs de tulipes, et les week-ends d’été sont les plus demandés. En hiver, les prix sont en général plus doux.",
@@ -35,14 +27,6 @@ export const wave2Seeds: RouteSeed[] = [
     tip: "Beaucoup d’offres sont vendues avec l’hôtel : regardez aussi le vol seul, pour comparer." },
 
   // ——— Marseille
-  { ...marseille, destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", duration: "environ 1 h 35", carriers: [], formalities: true,
-    intro: "Marseille–Alger est l’une des traversées les plus courtes entre la France et l’Algérie : un peu plus d’une heure et demie de vol.",
-    season: "L’été, les congés scolaires et les fêtes concentrent la demande. Hors pointe, les prix sont plus souples.",
-    tip: "Réservez tôt pour l’été : les vols au départ de Marseille se remplissent vite." },
-  { ...marseille, destination: "Oran", destinationCode: "ORN", region: "Algérie", country: "algerie", duration: "environ 1 h 40", carriers: [], formalities: true,
-    intro: "Marseille–Oran se fait en moins de deux heures : une liaison très utilisée par les familles de la région.",
-    season: "Juillet, août et les fêtes font monter les prix. En dehors, on trouve des billets plus abordables.",
-    tip: "Comparez avec un départ depuis Alger si vous avez de la famille ailleurs : les écarts de prix peuvent être sensibles." },
   { ...marseille, destination: "Amsterdam", destinationCode: "AMS", region: "Europe", duration: "environ 1 h 55", carriers: [],
     intro: "Depuis Marseille, Amsterdam se rejoint en moins de deux heures : un week-end de musées, de canaux et de brunchs.",
     season: "Le printemps et l’été sont les plus demandés. En automne et en hiver, les billets sont souvent plus doux.",
@@ -79,10 +63,6 @@ export const wave2Seeds: RouteSeed[] = [
     tip: "Le Danemark est cher sur place : prévoyez un budget repas plus élevé que dans le sud de l’Europe." },
 
   // ——— Toulouse
-  { ...toulouse, destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", duration: "environ 1 h 50", carriers: [], formalities: true,
-    intro: "Toulouse–Alger est l’une des liaisons les plus utilisées entre le Sud-Ouest et l’Algérie, en moins de deux heures.",
-    season: "L’été, les congés scolaires et les fêtes concentrent la demande. Hors pointe, les prix sont plus souples.",
-    tip: "Réservez tôt pour juillet et août : les vols directs depuis Toulouse se remplissent vite." },
   { ...toulouse, destination: "Amsterdam", destinationCode: "AMS", region: "Europe", duration: "environ 1 h 50", carriers: [],
     intro: "Depuis Toulouse, Amsterdam se rejoint en moins de deux heures : canaux, musées et vélo pour un week-end.",
     season: "Le printemps et l’été sont les plus demandés. En hiver, les billets sont plus doux.",
