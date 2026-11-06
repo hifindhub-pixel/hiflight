@@ -2428,6 +2428,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-amsterdam-guide-conseils",
+    "heroImage": "https://images.unsplash.com/photo-1754835143820-bcf20e2e1a35?auto=format&fit=crop&w=1600&h=900&q=75",
     "category": "Destinations",
     "metaTitle": "Vol pour Amsterdam : aéroport, train et bons jours pour partir",
     "title": "Aller à Amsterdam : avion ou train, et comment s’y prendre pour payer moins",
@@ -2503,6 +2504,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "soleil-hiver-vol-pas-cher",
+    "heroImage": "https://images.unsplash.com/photo-1694631887845-ac4ae3eb2bb1?auto=format&fit=crop&w=1600&h=900&q=75",
     "category": "Conseils",
     "metaTitle": "Soleil en hiver : où partir depuis la France sans trop payer",
     "title": "Du soleil en hiver sans aller au bout du monde : Canaries, Égypte, Maroc, Tunisie",
@@ -2585,6 +2587,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vol-prague-budapest-vienne-comparer",
+    "heroImage": "https://images.unsplash.com/photo-1600623471616-8c1966c91ff6?auto=format&fit=crop&w=1600&q=75",
     "category": "Destinations",
     "metaTitle": "Prague, Budapest ou Vienne : quelle ville choisir pour un week-end",
     "title": "Prague, Budapest ou Vienne : trois capitales à moins de deux heures, laquelle choisir ?",
