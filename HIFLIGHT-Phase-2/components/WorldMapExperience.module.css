@@ -266,3 +266,6 @@
 .passportHome { width: min(820px, calc(100% - 32px)); }
 .emptyPassport > img { width: min(520px, 100%); }
 .closedPassport > button { width: min(600px, 100%); }
+
+.flatWorkspace{width:min(1180px,calc(100% - 32px))}
+@media(max-width:440px){.flatWorkspace{width:calc(100% - 20px)}}
