@@ -1395,7 +1395,7 @@ export const blogPosts: BlogPost[] = [
         "heading": "Bagages et formalités",
         "paragraphs": [
           "Vérifiez la franchise de bagages incluse avant de comparer deux billets : sur cette liaison, elle varie beaucoup d’une offre à l’autre.",
-          "Pour entrer en Tunisie, un passeport en cours de validité est obligatoire, une carte d’identité ne suffit pas, d’après les informations publiées par le ministère des Affaires étrangères. Aucun visa n’est exigé pour un séjour touristique de moins de trois mois. La Tunisie impose aussi des règles sur la déclaration des devises : renseignez-vous avant de partir."
+          "Depuis le 1er janvier 2025, le passeport est obligatoire pour entrer en Tunisie et doit être valable au moins trois mois après la date d’entrée, d’après le ministère des Affaires étrangères : la carte d’identité ne suffit plus, même en voyage organisé. Aucun visa n’est exigé pour un séjour touristique de moins de trois mois. La Tunisie impose aussi des règles sur la déclaration des devises : renseignez-vous avant de partir."
         ]
       }
     ],
@@ -1410,7 +1410,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "Faut-il un passeport pour aller en Tunisie ?",
-        "answer": "Oui, le passeport est obligatoire pour les Français, mais aucun visa n’est requis pour un séjour touristique de moins de trois mois."
+        "answer": "Oui, depuis le 1er janvier 2025 le passeport est obligatoire, valable au moins trois mois après l’entrée en Tunisie. Aucun visa n’est requis pour un séjour touristique de moins de trois mois."
       },
       {
         "question": "Quelles compagnies volent entre Paris et Tunis ?",
