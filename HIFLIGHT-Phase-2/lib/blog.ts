@@ -249,14 +249,14 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "quand-reserver-vol-pas-cher",
     "category": "Conseils",
-    "metaTitle": "Quand réserver un vol pas cher : ce qui marche",
-    "title": "Quand réserver un vol pas cher ? Oubliez le mardi à 3 h du matin",
-    "description": "Il n’existe pas de jour magique pour réserver un vol. Ce qui fait vraiment baisser le prix : vos dates, votre aéroport, la comparaison sur un mois entier.",
+    "metaTitle": "Quand réserver un vol pas cher ? Dates, dernière minute, vacances",
+    "title": "Quand réserver un vol pas cher ? Ce qui joue vraiment, et ce qui est légende",
+    "description": "Mardi à 3 h du matin, dernière minute, vacances scolaires : ce qui change réellement le prix d’un billet d’avion, et ce qui n’est que légende.",
     "heroImage": "https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 5,
-    "intro": "On vous l’a sûrement déjà dit : il faut réserver un mardi, tard le soir, en navigation privée. Une bonne partie de ces conseils tient de la légende. Ce qui change réellement le prix d’un billet est plus banal, et plus utile.",
+    "updated": "2026-11-07",
+    "readingMinutes": 7,
+    "intro": "On vous l’a sûrement déjà dit : il faut réserver un mardi, tard le soir, en navigation privée. Une bonne partie de ces conseils tient de la légende. Ce qui change réellement le prix d’un billet est plus banal, et plus utile : la date du voyage, la souplesse que vous avez, et le moment où vous comparez.",
     "sections": [
       {
         "heading": "Le jour du voyage compte plus que le jour de l’achat",
@@ -268,7 +268,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Regarder un mois, pas une date",
         "paragraphs": [
-          "Le prix d’un même trajet bouge beaucoup d’un mois à l’autre. Le calendrier des prix montre en quelques secondes où se trouvent les creux, et il suffit ensuite de viser cette fenêtre.",
+          "Le prix d’un même trajet bouge beaucoup d’un mois à l’autre. Le calendrier des prix, dans le formulaire de recherche, montre en quelques secondes où se trouvent les creux : il suffit ensuite de viser cette fenêtre.",
           "Si vos dates sont fixes, comparez au moins la veille et le lendemain. Parfois, un seul jour de décalage suffit à économiser."
         ]
       },
@@ -276,13 +276,43 @@ export const blogPosts: BlogPost[] = [
         "heading": "Réserver tôt ou attendre ?",
         "paragraphs": [
           "Même les grands comparateurs ne donnent pas la même fenêtre : certains guides parlent de 6 à 8 semaines à l’avance pour l’Europe, d’autres d’un idéal à 5 ou 6 mois selon le trajet. C’est bien la preuve qu’aucune règle ne vaut pour tous les vols.",
-          "Pour les périodes très demandées (été, fêtes, ponts), attendre réduit le choix et pousse les prix à la hausse. Pour une escapade hors vacances, les tarifs restent souvent stables plusieurs semaines. Le plus sûr : comparer dès que vous avez une idée de dates, repérer la fourchette habituelle, puis acheter quand une offre vous semble raisonnable."
+          "Pour les périodes très demandées (été, fêtes, ponts), attendre réduit le choix et pousse les prix à la hausse. Pour une escapade hors vacances, les tarifs restent souvent stables plusieurs semaines. Le plus sûr : comparer dès que vous avez une idée de dates, repérer la fourchette habituelle de votre trajet, puis acheter quand une offre vous semble raisonnable. Sans point de repère, impossible de savoir si un prix est bon."
         ]
       },
       {
-        "heading": "Le piège du billet pas cher",
+        "heading": "La dernière minute : bon plan ou fausse bonne idée ?",
         "paragraphs": [
-          "Un billet à 40 € sans bagage peut coûter plus cher qu’un billet à 70 € avec valise en soute. Avant de trancher, ajoutez le bagage, le siège si vous y tenez, et le transport jusqu’à l’aéroport. C’est ce total qui doit être bas."
+          "Sur les trajets très demandés (vacances, ponts, week-ends), les places à petit prix partent vite. À quelques jours du départ, il reste surtout les tarifs élevés. Si vous devez partir à une date précise, n’attendez pas.",
+          "Hors vacances, sur un trajet peu demandé, un vol resté peu rempli peut voir son prix baisser. Ce n’est jamais garanti. Plus vous êtes souple sur le jour, l’heure et la destination, plus vous avez de chances de tomber sur une bonne affaire ; si vous ne l’êtes pas, la dernière minute est un pari.",
+          "Pour un départ imminent, regardez le calendrier du mois, testez le milieu de semaine, comparez deux ou trois aéroports et ajoutez le bagage au prix. Vérifiez aussi l’horaire : un vol à 6 h du matin ou à minuit peut imposer un taxi qui efface l’économie."
+        ]
+      },
+      {
+        "heading": "Vacances scolaires 2026-2027 : les dates à connaître",
+        "paragraphs": [
+          "Quand tout le monde part en même temps, les places à petit prix disparaissent vite et les compagnies ouvrent ensuite des tarifs plus élevés. On ne peut pas changer le calendrier, mais on peut le connaître avant de réserver.",
+          "D’après le calendrier officiel, la Toussaint s’achève le lundi 2 novembre 2026. Noël court du samedi 19 décembre 2026 au lundi 4 janvier 2027, pour les trois zones. Les vacances d’hiver sont décalées : elles commencent le 6 février 2027 en zone C, le 13 février en zone A, et se terminent début mars en zone B. Celles de printemps vont du 3 au 19 avril (zone C), du 10 au 26 avril (zone A) et du 17 avril au 3 mai (zone B). Les vacances d’été débutent le samedi 3 juillet 2027, et le pont de l’Ascension tombe le vendredi 7 mai 2027.",
+          "Ce qui aide : comparer dès que vos dates sont connues, décaler d’un jour ou deux (partir un mercredi plutôt que le samedi), et regarder un départ direct depuis votre région, qui revient parfois moins cher que Paris, train compris. En famille, calculez le prix pour tous les voyageurs, bagages inclus, plutôt que le prix d’un billet, et vérifiez les règles pour les enfants auprès de la compagnie : elles ne sont pas les mêmes partout."
+        ]
+      },
+      {
+        "heading": "Quelques trajets, au prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-barcelone",
+          "paris-lisbonne",
+          "paris-marrakech",
+          "paris-londres"
+        ]
+      },
+      {
+        "heading": "Trois légendes à oublier",
+        "paragraphs": [
+          "Réserver le mardi à 3 h du matin : les sources se contredisent et rien ne prouve un effet fiable. Ce qui change le prix, c’est le trajet et la date du voyage.",
+          "Effacer ses cookies ou passer en navigation privée : l’effet n’est pas démontré. Comparer sur plusieurs sites est plus utile.",
+          "Toujours attendre la dernière minute : pour les périodes demandées, on réduit surtout son choix et on fait monter la note."
         ]
       }
     ],
@@ -290,6 +320,7 @@ export const blogPosts: BlogPost[] = [
       "paris-barcelone",
       "paris-lisbonne",
       "paris-marrakech",
+      "paris-londres",
       "lyon-barcelone"
     ],
     "faq": [
@@ -299,20 +330,32 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "Faut-il réserver plusieurs mois à l’avance ?",
-        "answer": "Pour l’été, les ponts et les fêtes, oui, mieux vaut comparer tôt. Hors vacances, les prix restent souvent stables."
+        "answer": "Pour l’été, les ponts et les fêtes, oui, mieux vaut comparer tôt. Hors vacances, les prix restent souvent stables plusieurs semaines."
+      },
+      {
+        "question": "Les vols de dernière minute sont-ils moins chers ?",
+        "answer": "Rarement sur les trajets demandés. Cela peut marcher hors vacances si vous êtes très flexible sur les dates et la destination."
+      },
+      {
+        "question": "Quelles sont les dates des vacances de Noël 2026 ?",
+        "answer": "Du samedi 19 décembre 2026 au lundi 4 janvier 2027, pour les trois zones scolaires."
+      },
+      {
+        "question": "Les prix affichés sont-ils garantis ?",
+        "answer": "Non, ce sont des prix indicatifs relevés récemment. Le prix final est confirmé chez le partenaire au moment de la réservation."
       }
     ]
   },
   {
     "slug": "vol-pas-cher-depuis-province",
     "category": "Conseils",
-    "metaTitle": "Vol pas cher depuis la province : Lyon, Marseille, Nice…",
-    "title": "Partir de Lyon, Marseille, Nice ou Toulouse : quand ça vaut mieux que Paris",
-    "description": "Prendre le train jusqu’à Paris par habitude ? Voyez quand un vol direct depuis Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes vous revient moins cher.",
+    "metaTitle": "Vol pas cher depuis la province : Lyon, Marseille, Toulouse",
+    "title": "Partir de Lyon, Marseille, Nice, Toulouse… ou de Paris ? Maroc, Tunisie et le reste",
+    "description": "Départ de province ou de Paris ? Les villes desservies vers le Maroc et la Tunisie, les périodes chères et comment comparer le prix réel.",
     "heroImage": "https://images.unsplash.com/photo-1602087594298-706ccc894bfd?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
+    "updated": "2026-11-07",
+    "readingMinutes": 7,
     "intro": "Beaucoup de gens prennent le train jusqu’à Paris par réflexe, parce que « c’est là que sont les vols ». Les grands aéroports régionaux proposent pourtant des liaisons directes vers le Maghreb, l’Espagne, le Portugal ou le Royaume-Uni. La vraie question est de savoir si l’addition finale est meilleure.",
     "sections": [
       {
@@ -324,8 +367,8 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Ce que la province dessert vraiment",
         "paragraphs": [
-          "Le Maroc est desservi depuis Bâle-Mulhouse, Bordeaux, Lille, Lyon, Marseille, Nantes, Nice, Strasbourg et Toulouse, d’après les offres que nous avons relevées. Pour l’Algérie, Transavia annonce huit villes françaises, dont Nantes, Lyon, Toulouse, Nice et Marseille. La Tunisie est reliée depuis plusieurs villes de province aussi.",
-          "Les lignes ne sont pas toutes quotidiennes, et l’offre bouge avec la saison. Sur HiFlight, chaque départ a sa page, avec la durée, les prix mois par mois et les jours les moins chers."
+          "Le Maroc est desservi depuis Paris, mais aussi depuis Bâle-Mulhouse, Bordeaux, Lille, Lyon, Marseille, Nantes, Nice, Strasbourg et Toulouse, d’après les offres que nous avons relevées. Pour l’Algérie, Transavia annonce huit villes françaises, dont Nantes, Lyon, Toulouse, Nice et Marseille. Vers la Tunisie, Tunis est reliée depuis Paris-Orly, Lyon, Marseille, Nice, Nantes, Toulouse et Montpellier.",
+          "Les lignes ne sont pas toutes quotidiennes, et l’offre bouge avec la saison : vérifiez les jours de desserte. Sur HiFlight, chaque départ a sa page, avec la durée, les prix mois par mois et les jours les moins chers."
         ]
       },
       {
@@ -343,6 +386,13 @@ export const blogPosts: BlogPost[] = [
         ]
       },
       {
+        "heading": "Maroc et Tunisie : les périodes qui coûtent le plus",
+        "paragraphs": [
+          "Les vacances scolaires, les ponts et les fêtes religieuses concentrent la demande. Comme les dates des fêtes bougent chaque année, regardez les prix autour de ces dates avant de vous décider. En dehors de ces pics, un départ en semaine est souvent nettement moins cher.",
+          "Beaucoup de voyageurs emportent plus qu’un petit sac sur ces trajets : comparez le prix avec le bagage en soute, car un tarif d’appel sans valise n’est pas toujours le moins cher au final. Côté formalités d’entrée, tout dépend de votre nationalité et de la durée du séjour : vérifiez sur le site officiel avant de réserver."
+        ]
+      },
+      {
         "heading": "Comparer deux aéroports en deux minutes",
         "paragraphs": [
           "Ouvrez la page de votre ville, puis celle de la ville voisine ou de Paris. Notez le prix de départ, la durée, et ce que coûte le trajet jusqu’à l’aéroport. Gardez le total le plus bas, avec une marge de sécurité pour le voyage vers l’aéroport."
@@ -355,7 +405,9 @@ export const blogPosts: BlogPost[] = [
       "nice-londres",
       "toulouse-casablanca",
       "bordeaux-marrakech",
-      "nantes-lisbonne"
+      "nantes-lisbonne",
+      "paris-marrakech",
+      "paris-tunis"
     ],
     "faq": [
       {
@@ -365,6 +417,14 @@ export const blogPosts: BlogPost[] = [
       {
         "question": "Les vols depuis la province sont-ils quotidiens ?",
         "answer": "Pas toujours. Certaines lignes ne volent que quelques fois par semaine, et l’offre change selon la saison."
+      },
+      {
+        "question": "Quand les vols pour le Maroc sont-ils les moins chers ?",
+        "answer": "Hors vacances scolaires et hors fêtes, surtout en semaine. Regardez le calendrier des prix par mois avant de fixer vos dates."
+      },
+      {
+        "question": "Y a-t-il des vols directs vers Tunis depuis la province ?",
+        "answer": "Oui, depuis plusieurs villes comme Lyon, Marseille, Nice, Toulouse ou Nantes, avec une offre qui varie selon la saison."
       }
     ]
   },
@@ -376,7 +436,7 @@ export const blogPosts: BlogPost[] = [
     "description": "Barcelone, Lisbonne, Rome, Madrid ou Londres : comment choisir une escapade courte au meilleur prix, quels jours partir et quels pièges éviter sur les bagages.",
     "heroImage": "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
+    "updated": "2026-11-07",
     "readingMinutes": 4,
     "intro": "Un week-end se décide en trois jours et c’est précisément là qu’on paie le plus cher quand on ne compare pas. L’astuce n’a rien de compliqué : renverser la question. Au lieu de « combien pour Barcelone ? », demandez-vous « où puis-je aller pour ce budget ? ».",
     "sections": [
@@ -408,7 +468,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Les pièges des vols courts",
         "paragraphs": [
-          "Sur un vol court, la valise en soute peut doubler le prix du billet. Avec un seul bagage à main, on reste souvent au tarif de base, à condition de respecter les dimensions autorisées : vérifiez-les avant de réserver.",
+          "Sur un vol court, la valise en soute peut doubler le prix du billet. Avec un seul bagage à main, on reste souvent au tarif de base, à condition de respecter les dimensions autorisées : vérifiez-les avant de réserver. Notre guide sur le vrai prix d’un billet détaille les options à surveiller.",
           "Pensez aussi au transfert entre l’aéroport et le centre, à l’heure d’arrivée (une demi-journée perdue, c’est une demi-journée payée pour rien) et à la possibilité de modifier le billet si vos dates ne sont pas sûres."
         ]
       }
@@ -432,268 +492,38 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    "slug": "vol-maroc-tunisie-quand-reserver",
-    "category": "Destinations",
-    "metaTitle": "Vols Maroc et Tunisie : quand réserver, d’où partir",
-    "title": "Maroc et Tunisie : quand réserver et d’où partir pour payer moins",
-    "description": "Marrakech, Casablanca, Agadir, Tunis : les périodes chères, les villes de départ à comparer et les bagages à ne pas oublier avant de réserver.",
-    "heroImage": "https://images.unsplash.com/photo-1653174638637-bffdc627376d?auto=format&fit=crop&w=1600&q=75",
-    "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
-    "intro": "Marrakech, Casablanca, Tunis : ces destinations sont parmi les plus demandées depuis la France, et les tarifs varient autant selon la ville de départ que selon la saison. Quelques repères pour y voir clair.",
-    "sections": [
-      {
-        "heading": "Les périodes qui coûtent le plus",
-        "paragraphs": [
-          "Les vacances scolaires, les ponts et les fêtes religieuses concentrent la demande. Comme les dates des fêtes bougent chaque année, regardez les prix autour de ces dates avant de vous décider. En dehors de ces pics, un départ en semaine est souvent nettement moins cher."
-        ]
-      },
-      {
-        "heading": "Paris, et tout le reste",
-        "paragraphs": [
-          "Vers le Maroc, des vols partent de Paris, mais aussi de Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille et Bâle-Mulhouse. Vers la Tunisie, Tunis est reliée depuis Paris-Orly, Lyon, Marseille, Nice, Nantes, Toulouse et Montpellier. L’offre change avec la saison, donc vérifiez les jours de desserte."
-        ]
-      },
-      {
-        "heading": "Les prix du moment",
-        "paragraphs": [
-          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
-        ],
-        "routeTable": [
-          "paris-marrakech",
-          "paris-casablanca",
-          "paris-tunis",
-          "lyon-casablanca",
-          "marseille-tunis",
-          "toulouse-marrakech"
-        ]
-      },
-      {
-        "heading": "La valise, grande oubliée des comparaisons",
-        "paragraphs": [
-          "Beaucoup de voyageurs emportent plus qu’un petit sac sur ces trajets. Comparez le prix avec le bagage en soute : un tarif d’appel sans valise n’est pas toujours le moins cher au final.",
-          "Et côté formalités d’entrée, tout dépend de votre nationalité et de la durée du séjour : vérifiez sur le site officiel avant de réserver."
-        ]
-      }
-    ],
-    "relatedRoutes": [
-      "paris-marrakech",
-      "paris-casablanca",
-      "paris-tunis",
-      "lyon-casablanca",
-      "marseille-tunis",
-      "toulouse-marrakech"
-    ],
-    "faq": [
-      {
-        "question": "Quand les vols pour le Maroc sont-ils les moins chers ?",
-        "answer": "Hors vacances scolaires et hors fêtes, surtout en semaine. Regardez le calendrier des prix par mois avant de fixer vos dates."
-      },
-      {
-        "question": "Y a-t-il des vols directs vers Tunis depuis la province ?",
-        "answer": "Oui, depuis plusieurs villes comme Lyon, Marseille, Nice, Toulouse ou Nantes, avec une offre qui varie selon la saison."
-      }
-    ]
-  },
-  {
-    "slug": "billet-avion-pas-cher-astuces",
+    "slug": "compagnies-low-cost-frais-caches",
     "category": "Conseils",
-    "metaTitle": "Billet d’avion pas cher : astuces qui marchent",
-    "title": "Billet d’avion pas cher : ce qui marche vraiment, et ce qui n’est que légende",
-    "description": "Dates flexibles, bons aéroports, bagages, escales, alertes de prix : les astuces qui font réellement baisser un billet d’avion, et celles à oublier.",
-    "heroImage": "https://images.unsplash.com/photo-1593182440709-4b7b56482c55?auto=format&fit=crop&w=1600&q=75",
+    "metaTitle": "Vrai prix d’un billet d’avion : bagages, low cost, escale",
+    "title": "Le vrai prix d’un billet d’avion : bagages, options, escale, aller simple",
+    "description": "Un billet à 20 € finit parfois à 90 €. Bagage cabine ou soute, options, escale, deux allers simples : comment comparer le prix réel de vos vols.",
+    "heroImage": "https://images.unsplash.com/photo-1529074963764-98f45c47344b?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 6,
-    "intro": "Il n’existe pas de formule secrète pour payer un billet moins cher. Il existe en revanche quelques leviers qui marchent, et pas mal de légendes qui font perdre du temps. On commence par ce qui compte.",
+    "updated": "2026-11-07",
+    "readingMinutes": 7,
+    "intro": "Un billet à 20 € peut très bien finir à 90 € une fois toutes les options ajoutées. Ce n’est pas une arnaque, c’est un modèle économique : le tarif d’appel attire, le reste se paie à part. Autant savoir où l’addition grimpe, pour comparer des billets qui comprennent la même chose.",
     "sections": [
       {
-        "heading": "D’abord, jouer avec les dates",
+        "heading": "Là où l’addition grimpe",
         "paragraphs": [
-          "C’est le levier le plus puissant, parce que les compagnies ajustent leurs prix selon le remplissage de chaque vol.",
-          "Cherchez sur un mois entier plutôt que sur une date. Le calendrier des prix montre en quelques secondes où se trouvent les creux, et chaque page de vol HiFlight affiche le prix de départ mois par mois. Choisissez ensuite le bon jour : un départ en milieu de semaine coûte souvent moins qu’un vendredi ou un dimanche, et la page du vol indique le jour le moins cher quand les données le permettent. Enfin, décalez d’un jour ou deux autour des vacances scolaires et des ponts, c’est là que les écarts sont les plus gros."
+          "Bagage en soute, grand bagage cabine, choix du siège, enregistrement à l’aéroport, embarquement prioritaire : chaque option ajoute quelques euros, et elles s’accumulent. Le détail dépend de la compagnie et change régulièrement, donc lisez le récapitulatif avant de payer.",
+          "Bonne nouvelle : le droit européen impose d’afficher le prix final, taxes et frais obligatoires compris, et les options facultatives ne doivent pas être précochées. Si une assurance ou un supplément est déjà coché, c’est à vous de le décocher."
         ]
       },
       {
-        "heading": "Ensuite, ouvrir le champ",
+        "heading": "Cabine ou soute : la valise change tout",
         "paragraphs": [
-          "Comparez les aéroports. À Paris, Orly, Roissy et Beauvais ne donnent pas les mêmes prix. En province, un vol direct depuis Lyon, Marseille, Nice, Toulouse, Bordeaux ou Nantes peut revenir moins cher qu’un billet parisien une fois le train ajouté.",
-          "Comparez aussi les destinations si votre but est surtout de partir : Barcelone, Lisbonne, Madrid, Rome et Londres aux mêmes dates, et c’est le prix qui décide.",
-          "Et testez avec et sans escale. L’escale fait souvent baisser la facture mais allonge le voyage. Regardez la durée totale et celle de la correspondance : trop courte, vous risquez de la rater, trop longue, vous perdez la journée."
+          "Le Centre européen des consommateurs le rappelle : si le bagage en cabine est souvent gratuit, les compagnies facturent de plus en plus la soute. Beaucoup de tarifs d’appel ne comprennent qu’un petit sac. Sur un vol court, la valise peut faire passer le billet du simple au double.",
+          "Si vous avez besoin d’une valise, ajoutez-la avant de comparer deux billets, sinon vous comparez des choses différentes. Pour un week-end, un bagage cabine suffit souvent : surveillez alors les dimensions, le poids et les liquides, qui varient selon la compagnie.",
+          "Évitez d’ajouter un bagage au comptoir ou à la porte d’embarquement : c’est en général plus cher qu’en ligne, parfois beaucoup plus. Pesez votre bagage chez vous, pas devant la file d’attente."
         ]
       },
       {
-        "heading": "Éviter les mauvaises surprises",
+        "heading": "Direct ou escale : de l’argent contre du temps",
         "paragraphs": [
-          "Un billet à 40 € sans bagage peut dépasser un billet à 70 € avec valise en soute. Ajoutez le bagage, le siège éventuel et le transport jusqu’à l’aéroport avant de comparer.",
-          "Vérifiez les conditions de modification et d’annulation. Un tarif très bas est souvent figé, et si vos dates ne sont pas sûres, un tarif un peu plus souple coûte parfois moins cher qu’un changement de billet.",
-          "Comparez plusieurs sites avant de payer, car le prix final et les frais diffèrent d’un partenaire à l’autre. Et si vous avez le temps, repérez le prix habituel de votre trajet : sans point de repère, impossible de savoir si une offre est bonne."
-        ]
-      },
-      {
-        "heading": "Trois légendes à oublier",
-        "paragraphs": [
-          "Réserver le mardi à 3 h du matin. Les sources se contredisent et rien ne prouve un effet fiable. Ce qui change le prix, c’est le trajet et la date du voyage.",
-          "Effacer ses cookies ou passer en navigation privée. L’effet n’est pas démontré. Comparer sur plusieurs sites est plus utile.",
-          "Toujours attendre la dernière minute. Pour les périodes demandées, on réduit surtout son choix et on fait monter la note. La dernière minute ne marche que si vous êtes très flexible."
-        ]
-      }
-    ],
-    "faq": [
-      {
-        "question": "Quel est le meilleur moment pour réserver un vol ?",
-        "answer": "Il n’y a pas de règle pour tous les vols. Hors vacances, les prix restent souvent stables plusieurs semaines ; pour l’été et les fêtes, mieux vaut comparer tôt."
-      },
-      {
-        "question": "Quel jour est le moins cher pour voler ?",
-        "answer": "Le plus souvent le milieu de semaine. La page de chaque vol HiFlight indique le jour le moins cher quand les données le permettent."
-      },
-      {
-        "question": "Un comparateur de vols est-il gratuit ?",
-        "answer": "Oui pour vous. HiFlight peut recevoir une commission du partenaire en cas de réservation, sans surcoût pour le voyageur."
-      },
-      {
-        "question": "Les prix affichés sont-ils garantis ?",
-        "answer": "Non, ce sont des prix indicatifs relevés récemment. Le prix final est confirmé chez le partenaire au moment de la réservation."
-      }
-    ],
-    "relatedRoutes": [
-      "paris-barcelone",
-      "paris-lisbonne",
-      "lyon-marrakech",
-      "marseille-tunis",
-      "paris-londres"
-    ]
-  },
-  {
-    "slug": "vol-derniere-minute-astuces",
-    "category": "Conseils",
-    "metaTitle": "Vol de dernière minute : bon plan ou piège ?",
-    "title": "Vol de dernière minute : bon plan ou fausse bonne idée ?",
-    "description": "Partir dans les jours qui viennent : quand la dernière minute fait économiser, quand elle coûte plus cher, et comment comparer vite pour ne pas surpayer.",
-    "heroImage": "https://images.unsplash.com/photo-1490430657723-4d607c1503fc?auto=format&fit=crop&w=1600&q=75",
-    "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
-    "intro": "« Les vols de dernière minute, c’est moins cher. » C’est vrai de temps en temps, et faux assez souvent pour que l’idée mérite d’être regardée de près.",
-    "sections": [
-      {
-        "heading": "Quand ça coûte plus cher",
-        "paragraphs": [
-          "Sur les trajets très demandés (vacances, ponts, week-ends), les places à petit prix partent vite. À quelques jours du départ, il reste surtout les tarifs élevés. Si vous devez partir à une date précise, n’attendez pas."
-        ]
-      },
-      {
-        "heading": "Quand ça peut marcher",
-        "paragraphs": [
-          "Hors vacances, sur un trajet peu demandé, un vol resté peu rempli peut voir son prix baisser. Ce n’est jamais garanti, donc comparez plutôt que d’attendre. Plus vous êtes souple sur le jour, l’heure et la destination, plus vous avez de chances de tomber sur une bonne affaire."
-        ]
-      },
-      {
-        "heading": "Où en sont les prix en ce moment",
-        "paragraphs": [
-          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
-        ],
-        "routeTable": [
-          "paris-barcelone",
-          "paris-lisbonne",
-          "paris-londres"
-        ]
-      },
-      {
-        "heading": "Comparer vite, sans se tromper",
-        "paragraphs": [
-          "Regardez le calendrier des prix du mois, puis les départs en milieu de semaine. Comparez deux ou trois aéroports de départ et ajoutez le bagage. Et vérifiez l’horaire : un vol à 6 h du matin ou à minuit peut vous imposer un taxi qui efface l’économie."
-        ]
-      }
-    ],
-    "relatedRoutes": [
-      "paris-barcelone",
-      "paris-lisbonne",
-      "paris-londres"
-    ],
-    "faq": [
-      {
-        "question": "Les vols de dernière minute sont-ils moins chers ?",
-        "answer": "Rarement sur les trajets demandés. Ça peut marcher hors vacances si vous êtes très flexible."
-      },
-      {
-        "question": "Comment comparer vite pour un départ imminent ?",
-        "answer": "Regardez le calendrier du mois, testez le milieu de semaine, comparez deux ou trois aéroports et ajoutez le bagage au prix."
-      }
-    ]
-  },
-  {
-    "slug": "bagage-cabine-ou-soute-que-choisir",
-    "category": "Conseils",
-    "metaTitle": "Bagage cabine ou soute : que choisir ?",
-    "title": "Cabine ou soute : le bagage qui change le prix de votre billet",
-    "description": "Cabine ou soute : comment choisir selon la durée du séjour, la compagnie et le prix total, et comment éviter les frais payés trop cher à l’aéroport.",
-    "heroImage": "https://images.unsplash.com/photo-1670888664952-efff442ec0d2?auto=format&fit=crop&w=1600&q=75",
-    "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
-    "intro": "Sur un vol court, la valise peut faire passer le billet du simple au double. C’est le détail qu’on regarde en dernier, alors qu’il devrait être le premier.",
-    "sections": [
-      {
-        "heading": "Le vrai prix, c’est celui avec la valise",
-        "paragraphs": [
-          "Le Centre européen des consommateurs le rappelle : si le bagage en cabine est souvent gratuit, les compagnies facturent de plus en plus la soute. Beaucoup de tarifs d’appel ne comprennent qu’un petit sac. Si vous avez besoin d’une valise, ajoutez-la avant de comparer deux billets, sinon vous comparez des choses différentes."
-        ]
-      },
-      {
-        "heading": "Voyager léger, c’est possible ?",
-        "paragraphs": [
-          "Pour un week-end, un bagage cabine suffit souvent. Surveillez les liquides, les dimensions et le poids, qui varient selon la compagnie. Notre guide du bagage cabine détaille les vérifications à faire avant de partir."
-        ]
-      },
-      {
-        "heading": "L’aéroport, le pire endroit pour ajouter un bagage",
-        "paragraphs": [
-          "Ajouter une valise au comptoir ou à la porte d’embarquement coûte en général plus cher qu’en ligne, parfois beaucoup plus. Lisez les règles de votre compagnie avant de partir, et pesez votre bagage chez vous, pas devant la file d’attente."
-        ]
-      }
-    ],
-    "relatedRoutes": [
-      "paris-marrakech",
-      "paris-barcelone",
-      "lyon-marrakech"
-    ],
-    "faq": [
-      {
-        "question": "Le bagage cabine est-il toujours gratuit ?",
-        "answer": "Souvent, mais les règles varient selon la compagnie et le tarif. Vérifiez les dimensions et le poids autorisés avant de réserver."
-      },
-      {
-        "question": "Où ajouter un bagage coûte le moins cher ?",
-        "answer": "En général lors de la réservation ou en ligne avant le vol, plutôt qu’à l’aéroport."
-      }
-    ]
-  },
-  {
-    "slug": "vol-direct-ou-escale-que-choisir",
-    "category": "Conseils",
-    "metaTitle": "Vol direct ou avec escale : comment choisir",
-    "title": "Vol direct ou escale : ce que l’économie coûte vraiment en temps",
-    "description": "Direct ou escale : ce que l’escale fait gagner et perdre, comment lire une correspondance et quand le vol direct reste le meilleur choix.",
-    "heroImage": "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?auto=format&fit=crop&w=1600&q=75",
-    "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
-    "intro": "Une escale, c’est de l’argent économisé contre du temps perdu. La bonne question n’est pas « combien ça me fait gagner ? » mais « combien d’heures je suis prêt à vendre pour ça ? ».",
-    "sections": [
-      {
-        "heading": "Ce que l’escale change",
-        "paragraphs": [
-          "Un vol avec escale est souvent moins cher, surtout sur le long-courrier. En échange, le voyage s’allonge de plusieurs heures. Sur un trajet court, l’écart de prix suffit rarement à justifier le détour."
-        ]
-      },
-      {
-        "heading": "Lire une correspondance",
-        "paragraphs": [
-          "Regardez le temps entre les deux vols. Trop court, et un retard suffit à vous faire rater le second. Trop long, et vous perdez une demi-journée dans un terminal.",
-          "Un détail qui compte : sur un billet unique, la compagnie doit en général vous réacheminer si le premier vol est en retard. Avec deux billets séparés, vous êtes seul."
+          "Un vol avec escale est souvent moins cher, surtout sur le long-courrier. En échange, le voyage s’allonge de plusieurs heures. Sur un trajet court, l’écart de prix suffit rarement à justifier le détour. La bonne question n’est pas « combien ça me fait gagner ? » mais « combien d’heures suis-je prêt à vendre pour ça ? ».",
+          "Regardez le temps entre les deux vols : trop court, un retard suffit à vous faire rater le second ; trop long, vous perdez une demi-journée dans un terminal.",
+          "Un détail qui compte : sur un billet unique, la compagnie doit en général vous réacheminer si le premier vol est en retard et que vous manquez la correspondance. Avec deux billets séparés, vous êtes seul. Pour un week-end, un voyage en famille ou un horaire serré, le direct s’impose le plus souvent."
         ]
       },
       {
@@ -708,107 +538,26 @@ export const blogPosts: BlogPost[] = [
         ]
       },
       {
-        "heading": "Quand le direct s’impose",
+        "heading": "Aller-retour ou deux allers simples ?",
         "paragraphs": [
-          "Pour un week-end, un voyage en famille ou un horaire serré, le direct est le plus simple et on ne se pose pas la question. Pour un long trajet avec un budget serré, comparez les deux, en comptant la durée totale."
-        ]
-      }
-    ],
-    "relatedRoutes": [
-      "paris-new-york",
-      "paris-dubai",
-      "paris-tokyo"
-    ],
-    "faq": [
-      {
-        "question": "Un vol avec escale est-il toujours moins cher ?",
-        "answer": "Souvent sur le long-courrier, rarement assez sur un trajet court pour justifier le détour."
-      },
-      {
-        "question": "Que se passe-t-il si je rate ma correspondance ?",
-        "answer": "Sur un billet unique, la compagnie doit en général vous réacheminer. Avec deux billets séparés, aucune protection de ce type."
-      }
-    ]
-  },
-  {
-    "slug": "aller-simple-ou-aller-retour",
-    "category": "Conseils",
-    "metaTitle": "Aller simple ou aller-retour : lequel est moins cher ?",
-    "title": "Aller-retour ou deux allers simples : le calcul que personne ne fait",
-    "description": "Aller-retour ou deux allers simples : quand combiner deux billets fait économiser, et les risques à connaître avant de réserver séparément.",
-    "heroImage": "https://images.unsplash.com/photo-1655722724447-2d2a3071e7f8?auto=format&fit=crop&w=1600&q=75",
-    "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 3,
-    "intro": "On croit tous qu’un aller-retour est plus avantageux. C’est vrai assez souvent pour que personne ne vérifie, et faux assez souvent pour que ça vaille quelques minutes.",
-    "sections": [
-      {
-        "heading": "Pourquoi les prix ne s’additionnent pas",
-        "paragraphs": [
-          "Les compagnies à bas prix vendent chaque trajet séparément, ce qui permet de mélanger deux compagnies ou deux aéroports. Les compagnies classiques, elles, proposent parfois des tarifs aller-retour très compétitifs. Résultat : selon le trajet, une formule ou l’autre gagne."
-        ]
-      },
-      {
-        "heading": "Comment comparer",
-        "paragraphs": [
-          "Cherchez l’aller-retour, puis chaque aller simple, et comparez le total, bagages compris. Regardez aussi les aéroports : arriver sur un aéroport et repartir d’un autre change le transfert."
-        ]
-      },
-      {
-        "heading": "Le risque des deux billets",
-        "paragraphs": [
-          "Si le premier vol est retardé, la compagnie du second n’a aucune obligation de vous réacheminer. Pour un voyage important, un billet unique est plus rassurant, même s’il coûte un peu plus."
-        ]
-      }
-    ],
-    "relatedRoutes": [
-      "paris-lisbonne",
-      "paris-rome",
-      "paris-madrid"
-    ],
-    "faq": [
-      {
-        "question": "Deux allers simples sont-ils parfois moins chers ?",
-        "answer": "Oui, sur certaines liaisons, surtout avec des compagnies low cost. Comparez le total, bagages compris."
-      }
-    ]
-  },
-  {
-    "slug": "compagnies-low-cost-frais-caches",
-    "category": "Conseils",
-    "metaTitle": "Low cost : les frais cachés à vérifier avant de payer",
-    "title": "Low cost : le billet à 20 € qui finit à 90 €",
-    "description": "Bagage, siège, enregistrement, assurance précochée : les options payantes des vols low cost et comment comparer le vrai prix avant de réserver.",
-    "heroImage": "https://images.unsplash.com/photo-1529074963764-98f45c47344b?auto=format&fit=crop&w=1600&q=75",
-    "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
-    "intro": "Un billet à 20 € peut très bien finir à 90 € une fois toutes les options ajoutées. Ce n’est pas une arnaque, c’est un modèle économique. Autant le connaître pour ne pas payer deux fois.",
-    "sections": [
-      {
-        "heading": "Là où l’addition grimpe",
-        "paragraphs": [
-          "Bagage en soute, grand bagage cabine, choix du siège, enregistrement à l’aéroport, embarquement prioritaire : chaque option ajoute quelques euros, et elles s’accumulent. Le détail dépend de la compagnie et change régulièrement, donc lisez le récapitulatif avant de payer.",
-          "Attention aussi aux cases précochées. Les associations de consommateurs rappellent de vérifier que l’assurance annulation n’est pas cochée par défaut si vous n’en voulez pas."
-        ]
-      },
-      {
-        "heading": "Comparer le vrai prix",
-        "paragraphs": [
-          "Ajoutez le bagage dont vous avez besoin avant de comparer. Un billet un peu plus cher qui inclut la valise coûte souvent moins cher au final qu’un tarif d’appel auquel on rajoute tout."
+          "On croit tous qu’un aller-retour est plus avantageux. C’est vrai assez souvent pour que personne ne vérifie, et faux assez souvent pour que ça vaille quelques minutes. Les compagnies à bas prix vendent chaque trajet séparément, ce qui permet de mélanger deux compagnies ou deux aéroports ; les compagnies classiques proposent parfois des aller-retour très compétitifs.",
+          "Pour comparer : cherchez l’aller-retour, puis chaque aller simple, et comparez le total, bagages compris. Gardez en tête le risque des deux billets : si le premier vol est retardé, la compagnie du second n’a aucune obligation de vous réacheminer. Pour un voyage important, un billet unique rassure, même s’il coûte un peu plus."
         ]
       },
       {
         "heading": "Les réflexes qui évitent les mauvaises surprises",
         "paragraphs": [
-          "Enregistrez-vous en ligne, mesurez votre bagage chez vous et gardez une copie de votre carte d’embarquement. Vérifiez enfin l’aéroport exact : certains vols « pour Paris » ou « pour Londres » partent d’un aéroport bien loin de la ville."
+          "Enregistrez-vous en ligne, mesurez votre bagage chez vous et gardez une copie de votre carte d’embarquement. Vérifiez l’aéroport exact : certains vols « pour Paris » ou « pour Londres » partent d’un aéroport éloigné de la ville, et le transfert pèse dans le prix réel.",
+          "Au final, comparez toujours le total : billet, bagage, siège si vous y tenez, transport jusqu’à l’aéroport."
         ]
       }
     ],
     "relatedRoutes": [
       "paris-barcelone",
       "paris-londres",
-      "paris-lisbonne"
+      "paris-lisbonne",
+      "paris-new-york",
+      "paris-dubai"
     ],
     "faq": [
       {
@@ -816,66 +565,20 @@ export const blogPosts: BlogPost[] = [
         "answer": "Parce que bagages, siège, enregistrement et assurances sont souvent facturés en plus du tarif d’appel."
       },
       {
-        "question": "Comment comparer deux billets low cost et classique ?",
-        "answer": "Ajoutez à chaque offre les bagages et options dont vous avez besoin, puis comparez le total."
-      }
-    ]
-  },
-  {
-    "slug": "vol-vacances-scolaires-prix",
-    "category": "Conseils",
-    "metaTitle": "Vol en vacances scolaires : limiter la facture",
-    "title": "Vacances scolaires : réserver un vol sans exploser le budget",
-    "description": "Les prix des vols montent pendant les vacances scolaires. Comment comparer tôt, décaler ses dates et tester les aéroports de province.",
-    "heroImage": "https://images.unsplash.com/photo-1760654339407-970cede10f46?auto=format&fit=crop&w=1600&q=75",
-    "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
-    "intro": "Quand tout le monde part en même temps, les prix suivent. On ne peut pas changer le calendrier scolaire, mais on peut limiter la casse avec quelques réflexes simples.",
-    "sections": [
-      {
-        "heading": "Pourquoi la facture monte",
-        "paragraphs": [
-          "Tout le monde veut les mêmes dates, les places à petit prix disparaissent vite, et les compagnies ouvrent ensuite des tarifs plus élevés. C’est mécanique."
-        ]
+        "question": "Le bagage cabine est-il toujours gratuit ?",
+        "answer": "Souvent, mais les règles varient selon la compagnie et le tarif. Vérifiez les dimensions et le poids autorisés avant de réserver."
       },
       {
-        "heading": "Ce qui aide vraiment",
-        "paragraphs": [
-          "Comparez dès que vos dates sont connues. Si vous le pouvez, décalez d’un jour ou deux, par exemple en partant en milieu de semaine plutôt que le samedi. Regardez aussi un vol direct depuis votre région : il revient parfois moins cher que Paris, train compris."
-        ]
+        "question": "Un vol avec escale est-il toujours moins cher ?",
+        "answer": "Souvent sur le long-courrier, rarement assez sur un trajet court pour justifier le détour."
       },
       {
-        "heading": "Les prix du moment",
-        "paragraphs": [
-          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
-        ],
-        "routeTable": [
-          "paris-marrakech",
-          "paris-alger",
-          "paris-tunis"
-        ]
+        "question": "Que se passe-t-il si je rate ma correspondance ?",
+        "answer": "Sur un billet unique, la compagnie doit en général vous réacheminer. Avec deux billets séparés, aucune protection de ce type."
       },
       {
-        "heading": "Voyager en famille",
-        "paragraphs": [
-          "Calculez le prix pour tous les voyageurs, bagages inclus, plutôt que le prix d’un billet. Et vérifiez les règles pour les enfants auprès de la compagnie : elles ne sont pas les mêmes partout."
-        ]
-      }
-    ],
-    "relatedRoutes": [
-      "paris-marrakech",
-      "paris-alger",
-      "paris-tunis"
-    ],
-    "faq": [
-      {
-        "question": "Quand réserver pour les vacances scolaires ?",
-        "answer": "Le plus tôt possible une fois vos dates connues : les tarifs les plus bas partent en premier."
-      },
-      {
-        "question": "Peut-on payer moins cher en décalant de quelques jours ?",
-        "answer": "Souvent oui. Partir en milieu de semaine ou revenir un jour plus tard peut changer le prix."
+        "question": "Deux allers simples sont-ils parfois moins chers qu’un aller-retour ?",
+        "answer": "Oui, sur certaines liaisons, surtout avec des compagnies low cost. Comparez le total, bagages compris."
       }
     ]
   },
