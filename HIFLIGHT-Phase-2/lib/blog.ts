@@ -115,19 +115,19 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-paris-marrakech-guide",
     "category": "Destinations",
-    "metaTitle": "Vol Paris – Marrakech : guide pour bien réserver",
+    "metaTitle": "Vol Paris Marrakech : durée, aéroports, transfert, quand partir",
     "title": "Vol Paris – Marrakech : ce qu’on aimerait savoir avant de réserver",
-    "description": "Paris – Marrakech en vol direct : durée, compagnies, Orly, Roissy ou Beauvais, meilleure saison et vrai prix une fois les bagages ajoutés.",
+    "description": "Vol Paris – Marrakech : durée, compagnies, Orly, Roissy ou Beauvais, transfert depuis l’aéroport Ménara, saisons et pièges à éviter.",
     "heroImage": "https://images.unsplash.com/photo-1596750320291-a082a23dcc19?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-10-30",
-    "updated": "2026-11-03",
-    "readingMinutes": 5,
-    "intro": "Marrakech est la destination préférée des Français depuis cinq ans, d’après un classement des recherches de vols publié pour 2025. Autant dire que la liaison avec Paris est l’une des mieux fournies d’Europe, ce qui est une bonne nouvelle pour les prix, à condition de savoir où regarder.",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "Marrakech est la destination préférée des Français depuis cinq ans, d’après un classement des recherches de vols publié pour 2025. La liaison avec Paris est l’une des mieux fournies d’Europe, ce qui est une bonne nouvelle pour les prix, à condition de savoir où regarder et de ne pas se faire piéger à l’arrivée.",
     "sections": [
       {
         "heading": "Trois heures et quart, et beaucoup de choix",
         "paragraphs": [
-          "Comptez environ 3 h 15 de vol direct. Les départs sont nombreux : Transavia, easyJet, Royal Air Maroc, Air France, Vueling ou Ryanair se partagent la ligne selon les aéroports et les saisons. L’hiver dernier, Transavia annonçait à lui seul jusqu’à 61 vols par semaine vers Marrakech depuis plusieurs aéroports français.",
+          "Comptez environ 3 h 15 de vol direct. Les départs sont nombreux : Transavia, easyJet, Royal Air Maroc, Air France, Vueling ou Ryanair se partagent la ligne selon les aéroports et les saisons.",
           "Les vols avec escale existent aussi. Ils ne valent le coup que si l’écart de prix compense vraiment les heures perdues, ce qui est rare sur une liaison aussi directe."
         ]
       },
@@ -151,6 +151,15 @@ export const blogPosts: BlogPost[] = [
         ]
       },
       {
+        "heading": "De l’aéroport Ménara à votre riad",
+        "paragraphs": [
+          "L’aéroport de Marrakech-Ménara est tout près de la ville : environ 6 km de la place Jemaa el-Fna. Le trajet en taxi prend une quinzaine de minutes hors embouteillages.",
+          "Le bus n° 19 relie l’aéroport à la place Jemaa el-Fna et à la gare, à raison d’un départ toutes les 30 minutes environ, pour 30 dirhams l’aller (environ 3 €) d’après les guides de voyage. Le petit taxi est l’autre option : la course vers le centre est censée rester autour de 70 dirhams (environ 7 €), un peu plus la nuit.",
+          "Deux réflexes évitent les mauvaises surprises : convenez du prix avant de monter, ou exigez le compteur, et si le chauffeur refuse, passez au suivant. Beaucoup de voyageurs prennent aussi un transfert réservé par leur riad, à prix fixe.",
+          "Autre détail : la médina est quasiment fermée aux voitures. Votre taxi vous dépose à une porte, et le dernier tronçon se fait à pied ou avec un porteur. Demandez à votre hébergement le point de rendez-vous exact."
+        ]
+      },
+      {
         "heading": "Quand partir",
         "paragraphs": [
           "Le printemps et l’automne sont les saisons les plus agréables, et les plus demandées. L’été est très chaud en journée, ce qui limite les visites. Les vacances scolaires françaises, les ponts et les fêtes font monter les prix. Si vous pouvez partir en semaine, faites-le."
@@ -159,7 +168,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Bagages et papiers",
         "paragraphs": [
-          "Les tarifs les plus bas n’incluent pas toujours de bagage en soute. Comparez avec la valise comprise, et gardez un œil sur notre guide du bagage cabine si vous voyagez léger.",
+          "Les tarifs les plus bas n’incluent pas toujours de bagage en soute. Comparez avec la valise comprise : notre guide sur le vrai prix d’un billet détaille les options à surveiller.",
           "Pour les formalités d’entrée au Maroc (validité du passeport, durée de séjour), tout dépend de votre nationalité : le plus sûr reste le site du ministère français des Affaires étrangères."
         ]
       },
@@ -184,6 +193,10 @@ export const blogPosts: BlogPost[] = [
       {
         "question": "Quelles compagnies volent entre Paris et Marrakech ?",
         "answer": "Transavia, easyJet, Royal Air Maroc, Air France, Vueling et Ryanair, selon l’aéroport et la saison."
+      },
+      {
+        "question": "Comment aller de l’aéroport de Marrakech au centre ?",
+        "answer": "En petit taxi (environ 70 dirhams pour le centre, à convenir avant de monter), en bus n° 19 (environ 30 dirhams) ou en transfert réservé. L’aéroport est à environ 6 km de Jemaa el-Fna."
       },
       {
         "question": "Beauvais, c’est vraiment moins cher ?",
@@ -585,26 +598,34 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-istanbul-guide-aeroports",
     "category": "Destinations",
-    "metaTitle": "Vol pour Istanbul : IST ou Sabiha Gökçen ?",
+    "metaTitle": "Vol pour Istanbul : IST ou Sabiha Gökçen, transfert, conseils",
     "title": "Vol pour Istanbul : deux aéroports, deux rives, et un choix à ne pas faire au hasard",
-    "description": "Istanbul compte deux grands aéroports. Comment choisir entre IST et Sabiha Gökçen (SAW), quand partir et comment comparer les vols depuis la France.",
+    "description": "Istanbul Airport ou Sabiha Gökçen ? Distances, métro M11 et M4, navettes Havaist, durée du transfert et compagnies depuis la France.",
     "heroImage": "https://images.unsplash.com/photo-1759173214279-61d177954a40?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
     "intro": "À Istanbul, l’aéroport d’arrivée peut vous coûter une heure de plus ou de moins pour rejoindre votre hôtel. Autant le choisir avec la carte sous les yeux plutôt qu’avec le seul prix du billet.",
     "sections": [
       {
         "heading": "IST ou Sabiha Gökçen ?",
         "paragraphs": [
-          "Les deux sont à plus de 30 km du centre historique, et le transfert peut dépasser une heure selon la circulation. IST est du côté européen : depuis Paris-CDG, Turkish Airlines et Air France y atterrissent. Sabiha Gökçen est côté asiatique, avec par exemple Pegasus depuis Orly.",
+          "Les deux sont loin du centre historique. Istanbul Airport (IST), côté européen, est à environ 40 à 45 km au nord-ouest : c’est là qu’atterrissent la plupart des vols internationaux, dont ceux de Turkish Airlines et d’Air France depuis Paris-CDG. Sabiha Gökçen (SAW), côté asiatique, est au sud-est ; Pegasus y vole par exemple depuis Orly.",
           "Repérez où se trouve votre hébergement, puis comparez le prix du billet plus le coût et la durée du transfert pour chaque aéroport. Le moins cher à l’aller ne l’est pas forcément une fois en ville."
         ]
       },
       {
-        "heading": "Quand partir",
+        "heading": "De l’aéroport IST au centre",
         "paragraphs": [
-          "Le printemps et l’automne sont les périodes les plus agréables. L’été est chaud et plus cher, et les vacances scolaires font monter les tarifs."
+          "Le métro M11, automatique, relie l’aéroport à Gayrettepe en une trentaine de minutes environ, d’où l’on prend la ligne M2 vers Taksim ou la vieille ville. C’est l’option la moins chère, avec une carte Istanbulkart, mais elle suppose une correspondance avec des bagages.",
+          "Les navettes Havaist desservent notamment Taksim, sans changement : comptez 60 à 90 minutes selon la circulation. Le taxi est le plus direct, mais aussi le plus cher, et aux heures de pointe il n’est pas plus rapide que le métro."
+        ]
+      },
+      {
+        "heading": "De Sabiha Gökçen au centre",
+        "paragraphs": [
+          "Le métro M4 mène à Kadıköy en environ 50 minutes, avec ensuite le Marmaray pour passer sous le Bosphore vers la rive européenne : comptez 90 à 100 minutes jusqu’à la vieille ville. Les navettes Havabus rejoignent Taksim et Kadıköy en 60 à 90 minutes.",
+          "Les tarifs de transport changent souvent à Istanbul : vérifiez les prix actuels avant de partir, et n’acceptez que les taxis des stations officielles."
         ]
       },
       {
@@ -617,6 +638,12 @@ export const blogPosts: BlogPost[] = [
           "lyon-istanbul",
           "marseille-istanbul",
           "toulouse-istanbul"
+        ]
+      },
+      {
+        "heading": "Quand partir",
+        "paragraphs": [
+          "Le printemps et l’automne sont les périodes les plus agréables. L’été est chaud et plus cher, et les vacances scolaires font monter les tarifs."
         ]
       },
       {
@@ -635,7 +662,11 @@ export const blogPosts: BlogPost[] = [
     "faq": [
       {
         "question": "Quel aéroport choisir pour Istanbul ?",
-        "answer": "Cela dépend de votre quartier. IST est côté européen, Sabiha Gökçen côté asiatique. Comparez le prix du billet et la durée du transfert."
+        "answer": "Cela dépend de votre quartier. IST est côté européen (environ 40 à 45 km du centre), Sabiha Gökçen côté asiatique. Comparez le prix du billet et la durée du transfert."
+      },
+      {
+        "question": "Comment aller de l’aéroport d’Istanbul (IST) au centre ?",
+        "answer": "En métro M11 jusqu’à Gayrettepe puis M2, en navette Havaist vers Taksim, ou en taxi. Comptez 45 à 90 minutes selon le mode et la circulation."
       },
       {
         "question": "Quelles compagnies volent vers Istanbul depuis Paris ?",
@@ -646,19 +677,21 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-lisbonne-guide-conseils",
     "category": "Destinations",
-    "metaTitle": "Vol pour Lisbonne : quand partir, d’où partir",
+    "metaTitle": "Vol pour Lisbonne : durée, métro depuis l’aéroport, quand partir",
     "title": "Vol pour Lisbonne : l’aéroport est tellement près du centre que ça change tout",
-    "description": "Lisbonne en week-end ou une semaine : meilleure période, villes de départ en France, aéroport proche du centre et conseils pour bien réserver.",
+    "description": "Vol pour Lisbonne : compagnies, villes de départ, métro ligne rouge, taxi et VTC depuis l’aéroport, et meilleures périodes pour partir.",
     "heroImage": "https://images.unsplash.com/photo-1616862890964-fd20e9dd106d?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
-    "intro": "À Lisbonne, on pose l’avion et on est en ville vingt minutes plus tard. C’est ce qui en fait l’une des destinations de week-end les plus faciles depuis la France, et l’une des plus demandées.",
+    "updated": "2026-11-07",
+    "readingMinutes": 5,
+    "intro": "À Lisbonne, on pose l’avion et on est en ville vingt à trente minutes plus tard. C’est ce qui en fait l’une des destinations de week-end les plus faciles depuis la France, et l’une des plus demandées.",
     "sections": [
       {
-        "heading": "Quand partir",
+        "heading": "De l’aéroport au centre, sans stress",
         "paragraphs": [
-          "Le printemps et le début de l’automne sont agréables et très demandés. L’été est chaud et plus cher, surtout en août."
+          "L’aéroport Humberto Delgado est à quelques kilomètres au nord du centre. Le métro, ligne rouge, démarre juste à la sortie de l’aérogare, à la station Aeroporto. Pour rejoindre la Baixa ou le Chiado, il faut changer à Alameda (ligne verte) : comptez une trentaine de minutes au total.",
+          "Le trajet coûte environ 1,90 € en 2026 (un peu moins avec la carte rechargeable), et le paiement sans contact par carte bancaire est désormais possible aux portiques. Le métro circule de 6 h 30 à 1 h environ. Après, ou si vous êtes chargé, le taxi se trouve toujours devant l’aérogare (comptez 15 à 25 €), et les VTC type Uber ou Bolt reviennent souvent moins cher, autour de 8 à 12 € jusqu’au Rossio selon l’heure.",
+          "Petit détail utile : la gare d’Oriente, d’où partent les trains pour le reste du pays, est à deux minutes de métro de l’aéroport."
         ]
       },
       {
@@ -680,9 +713,15 @@ export const blogPosts: BlogPost[] = [
         ]
       },
       {
-        "heading": "L’aéroport et le transfert",
+        "heading": "Quand partir",
         "paragraphs": [
-          "L’aéroport est à une dizaine de kilomètres du centre, et le métro le dessert. Le transfert est court, ce qui compte beaucoup pour un week-end où chaque heure se paie."
+          "Le printemps et le début de l’automne sont agréables et très demandés. L’été est chaud et plus cher, surtout en août. Hors vacances, un départ en milieu de semaine fait souvent baisser le billet."
+        ]
+      },
+      {
+        "heading": "Avant de réserver",
+        "paragraphs": [
+          "Pour un week-end, un bagage cabine suffit souvent : c’est ce qui fait la différence de prix avec les tarifs « valise ». Et pour les papiers, une carte d’identité en cours de validité suffit en général depuis la France ; vérifiez sur le site du ministère des Affaires étrangères."
         ]
       }
     ],
@@ -693,6 +732,10 @@ export const blogPosts: BlogPost[] = [
       "nantes-lisbonne"
     ],
     "faq": [
+      {
+        "question": "Comment aller de l’aéroport de Lisbonne au centre ?",
+        "answer": "Le plus simple est le métro, ligne rouge, depuis la station Aeroporto, avec un changement à Alameda pour la Baixa. Taxi et VTC sont aussi faciles et rapides."
+      },
       {
         "question": "Quelle est la meilleure période pour aller à Lisbonne ?",
         "answer": "Le printemps et le début de l’automne, mais ce sont aussi les plus demandées. L’été est chaud et plus cher."
@@ -706,25 +749,27 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-londres-quel-aeroport",
     "category": "Destinations",
-    "metaTitle": "Vol pour Londres : quel aéroport choisir ?",
+    "metaTitle": "Vol pour Londres : quel aéroport, transfert, ETA, conseils",
     "title": "Vol pour Londres : Heathrow, Gatwick, Stansted, Luton ou City ?",
-    "description": "Londres compte cinq grands aéroports. Comment choisir selon le prix, le trajet vers le centre et l’endroit où vous logez.",
+    "description": "Heathrow, Gatwick, Stansted, Luton ou London City : lequel choisir, comment rejoindre le centre, ETA obligatoire et pièges à éviter.",
     "heroImage": "https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
     "intro": "Londres a cinq grands aéroports, et ils ne sont pas du tout interchangeables. Le billet le moins cher à l’aller l’est rarement une fois qu’on a payé le train pour rejoindre la ville.",
     "sections": [
       {
         "heading": "Les cinq aéroports",
         "paragraphs": [
-          "Heathrow et Gatwick sont les plus grands. Stansted et Luton accueillent surtout des compagnies à bas prix, plus loin du centre. London City est le plus proche de la ville, mais avec des vols plus limités."
+          "Heathrow, à l’ouest, et Gatwick, au sud, sont les plus grands. Stansted et Luton, au nord, accueillent surtout des compagnies à bas prix : ils sont à environ 50 à 60 km du centre. London City, à l’est, est le plus proche de la ville, mais avec des vols plus limités."
         ]
       },
       {
         "heading": "Le transfert, qui change tout",
         "paragraphs": [
-          "Un billet moins cher vers un aéroport éloigné peut coûter plus cher une fois le train ou le car ajouté, sans parler du temps. Gardez le total, pas le billet seul."
+          "Depuis Heathrow, l’Elizabeth line traverse le centre en une trentaine de minutes, avec paiement sans contact. Le Heathrow Express est plus rapide (environ 15 minutes jusqu’à Paddington) mais plus cher, et la ligne Piccadilly, la plus lente, met 50 à 60 minutes.",
+          "Depuis Gatwick, un train rejoint le centre (Victoria, London Bridge) en une trentaine de minutes. Depuis Stansted, comptez environ 47 minutes en train jusqu’à Liverpool Street, ou 1 h 30 en car pour les billets les moins chers. Luton demande en général un train puis une navette.",
+          "Un billet moins cher vers un aéroport éloigné peut donc coûter plus cher une fois le train ou le car ajouté, sans parler du temps. Gardez le total, pas le billet seul. Les tarifs de transport changent : vérifiez-les avant de partir."
         ]
       },
       {
@@ -737,6 +782,12 @@ export const blogPosts: BlogPost[] = [
           "lyon-londres",
           "nice-londres",
           "bordeaux-londres"
+        ]
+      },
+      {
+        "heading": "Formalités : l’ETA est obligatoire",
+        "paragraphs": [
+          "Pour entrer au Royaume-Uni, les Français ont besoin d’une autorisation de voyage électronique (ETA), à demander en ligne avant le départ. Elle est payante, et son montant a évolué : vérifiez-le sur le site officiel du gouvernement britannique (gov.uk/eta), et méfiez-vous des sites qui la vendent plus cher. Comme le passeport est exigé à la frontière, prévoyez cette démarche avant de réserver."
         ]
       },
       {
@@ -757,6 +808,14 @@ export const blogPosts: BlogPost[] = [
       {
         "question": "Quel aéroport londonien choisir ?",
         "answer": "Cela dépend de l’endroit où vous logez. Comparez le prix du billet et le coût du transfert pour chaque aéroport."
+      },
+      {
+        "question": "Comment aller de Heathrow au centre de Londres ?",
+        "answer": "Par l’Elizabeth line (environ 30 à 35 minutes), le Heathrow Express (environ 15 minutes jusqu’à Paddington, plus cher) ou la ligne Piccadilly (50 à 60 minutes, la moins chère)."
+      },
+      {
+        "question": "Faut-il une ETA pour aller à Londres ?",
+        "answer": "Oui, une autorisation de voyage électronique est exigée pour les Français. Demandez-la uniquement sur le site officiel gov.uk et vérifiez le tarif en vigueur."
       },
       {
         "question": "Quelles compagnies volent entre Paris et Londres ?",
@@ -823,27 +882,25 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-barcelone-guide-conseils",
     "category": "Destinations",
-    "metaTitle": "Vol pour Barcelone : d’où partir et quand réserver",
+    "metaTitle": "Vol pour Barcelone : durée, aéroport El Prat, transfert, conseils",
     "title": "Vol pour Barcelone : l’escapade la plus facile (et la plus comparée) depuis la France",
-    "description": "Barcelone depuis Paris, Lyon, Marseille, Nice ou province : durée du vol, compagnies, meilleure période et pièges à éviter sur les bagages.",
+    "description": "Vol pour Barcelone : durée, villes de départ, transfert depuis l’aéroport El Prat (train R2 Nord, Aerobús, métro L9), bagages et bons moments pour partir.",
     "heroImage": "https://images.unsplash.com/photo-1630219694734-fe47ab76b15e?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
-    "intro": "Barcelone cumule tout ce qu’on cherche pour une escapade : vol court, départs nombreux et aéroport relié au centre. Et comme tout le monde regarde ce vol-là, les prix bougent vite. Quelques repères pour ne pas se faire piéger.",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "Barcelone cumule tout ce qu’on cherche pour une escapade : vol court, départs nombreux et aéroport relié au centre. Et comme tout le monde regarde ce vol-là, les prix bougent vite. Quelques repères pour ne pas se faire piéger, y compris à l’arrivée.",
     "sections": [
       {
         "heading": "Combien de temps ça dure ?",
         "paragraphs": [
-          "Depuis Marseille, Toulouse ou Bordeaux, le vol direct dure un peu plus d’une heure. Depuis Paris, Lyon ou Nice, comptez entre 1 h 20 et 2 h. Ce sont des ordres de grandeur, l’horaire exact figure sur votre billet.",
-          "L’aéroport de Barcelone – El Prat est à environ 14 km du centre, ce qui rend le transfert rapide."
+          "Depuis Marseille, Toulouse ou Bordeaux, le vol direct dure un peu plus d’une heure. Depuis Paris, Lyon ou Nice, comptez entre 1 h 20 et 2 h. Ce sont des ordres de grandeur : l’horaire exact figure sur votre billet."
         ]
       },
       {
         "heading": "D’où partir",
         "paragraphs": [
-          "Paris, Lyon, Marseille, Nice, Nantes, Bordeaux et Bâle-Mulhouse apparaissent dans nos relevés de prix pour Barcelone. Vueling, Air France, Transavia et Ryanair (depuis Beauvais) se partagent la liaison avec Paris. Regardez le prix de votre ville avec celui d’une ville voisine : sur certaines dates, l’écart couvre largement le trajet.",
-          "Pour avoir une idée : le 2 novembre 2026, le prix aller-retour le plus bas relevé depuis Paris était de 43 €. Notre baromètre détaille les autres villes."
+          "Paris, Lyon, Marseille, Nice, Nantes, Bordeaux et Bâle-Mulhouse apparaissent dans nos relevés de prix pour Barcelone. Vueling, Air France, Transavia et Ryanair (depuis Beauvais) se partagent la liaison avec Paris. Regardez le prix de votre ville avec celui d’une ville voisine : sur certaines dates, l’écart couvre largement le trajet."
         ]
       },
       {
@@ -858,6 +915,15 @@ export const blogPosts: BlogPost[] = [
           "nice-barcelone",
           "toulouse-barcelone",
           "bordeaux-barcelone"
+        ]
+      },
+      {
+        "heading": "De l’aéroport El Prat au centre",
+        "paragraphs": [
+          "L’aéroport est à une quinzaine de kilomètres du centre. Trois options se valent selon votre terminal et votre hébergement.",
+          "Le train Rodalies R2 Nord part du terminal 2 et rejoint Barcelone-Sants en une vingtaine de minutes et Passeig de Gràcia en environ 26 minutes. C’est le plus rapide et le moins cher, mais depuis le terminal 1 il faut d’abord prendre la navette gratuite jusqu’au T2.",
+          "L’Aerobús dessert Plaça Catalunya en environ 35 minutes depuis les deux terminaux, pour un peu plus de 7 € l’aller d’après les relevés de tarifs 2026, et circule toute la nuit. Le métro L9 Sud relie les deux terminaux mais ne va pas directement au centre, et il demande un billet spécial « aéroport » à 5,90 € : la carte T-casual n’y est pas valable.",
+          "Le taxi est au compteur, sans prix fixe : le minimum depuis l’aéroport est de 21 €, et la course vers le centre revient en général entre 30 et 45 €. Utilisez uniquement la file officielle."
         ]
       },
       {
@@ -877,6 +943,10 @@ export const blogPosts: BlogPost[] = [
       {
         "question": "Combien coûte un vol pour Barcelone ?",
         "answer": "Cela varie beaucoup selon la ville et la date. Les pages de vols HiFlight affichent le prix le plus bas relevé, mois par mois."
+      },
+      {
+        "question": "Comment aller de l’aéroport de Barcelone au centre ?",
+        "answer": "Le train R2 Nord (depuis le T2) est le plus rapide et le moins cher. L’Aerobús va à Plaça Catalunya depuis les deux terminaux, et le métro L9 Sud exige un billet aéroport spécial."
       },
       {
         "question": "Faut-il un passeport pour aller à Barcelone ?",
