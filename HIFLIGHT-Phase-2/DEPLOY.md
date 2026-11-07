@@ -9,3 +9,5 @@ sur la branche `cloudflare-opennext-migration`.
 - Un déclencheur quotidien (« redeploy-quotidien ») reconstruit aussi la branche chaque nuit.
 
 Note : la liaison GitHub ↔ Cloudflare a été reconnectée le 7 novembre 2026.
+
+Configuration Cloudflare vérifiée le 7 novembre 2026 : branche de production, dossier racine et variables de build rétablis.
