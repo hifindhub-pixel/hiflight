@@ -826,25 +826,27 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-new-york-conseils-formalites",
     "category": "Destinations",
-    "metaTitle": "Vol pour New York : prix, ESTA et conseils",
+    "metaTitle": "Vol pour New York : ESTA, passeport, aéroports JFK Newark, conseils",
     "title": "Vol pour New York depuis la France : l’ESTA d’abord, le billet ensuite",
-    "description": "New York depuis la France : quand partir, durée du vol, ESTA à prévoir, quel aéroport choisir (JFK, Newark ou LaGuardia) et comment payer moins.",
+    "description": "Vol pour New York depuis la France : ESTA obligatoire, passeport biométrique, JFK ou Newark, compagnies directes et bonnes périodes pour partir.",
     "heroImage": "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
     "intro": "New York est l’un des long-courriers les plus demandés depuis la France, et celui où l’on oublie le plus souvent un détail administratif avant de se concentrer sur le prix. Autant régler les deux en même temps.",
     "sections": [
       {
-        "heading": "Quand partir",
+        "heading": "Avant de réserver : l’ESTA",
         "paragraphs": [
-          "Les fêtes de fin d’année et l’été sont les périodes les plus chères. Le début du printemps et l’automne offrent souvent de meilleurs prix, avec une ville tout aussi agréable."
+          "Les voyageurs français doivent obtenir une autorisation de voyage électronique (ESTA) avant d’embarquer, pour un séjour de 90 jours maximum. Elle suppose un passeport biométrique valide pendant tout le séjour, et elle est payante : 40 $ depuis fin septembre 2025, d’après la presse spécialisée. Le montant et les informations demandées ont changé ces derniers mois : lisez la page du site officiel du gouvernement américain avant de remplir quoi que ce soit.",
+          "Faites la demande vous-même sur le site officiel (adresse en .gov) et non via un site intermédiaire qui ajoute des frais : c’est l’une des arnaques les plus courantes. Prévoyez de la faire bien avant le départ plutôt que la veille."
         ]
       },
       {
-        "heading": "Avant de réserver",
+        "heading": "Quel aéroport ?",
         "paragraphs": [
-          "Les voyageurs français doivent en général obtenir une autorisation de voyage électronique (ESTA) avant d’embarquer. Vérifiez la démarche, les délais et le prix sur le site officiel du gouvernement américain, et regardez aussi la validité de votre passeport. Ne passez pas par un site qui n’est pas le site officiel : c’est une des arnaques les plus courantes."
+          "New York en compte plusieurs. JFK est à environ 25 km de Manhattan ; Newark, dans le New Jersey, est relié à Penn Station par train, ce qui peut faire gagner du temps selon votre hôtel ; LaGuardia accueille surtout des vols intérieurs.",
+          "Depuis Paris, Air France, Delta, United, American Airlines et French bee proposent des vols directs, selon l’aéroport parisien. Comparez à la fois le prix et l’aéroport d’arrivée, parce que la distance jusqu’à votre hôtel varie."
         ]
       },
       {
@@ -858,9 +860,15 @@ export const blogPosts: BlogPost[] = [
         ]
       },
       {
-        "heading": "Quel aéroport ?",
+        "heading": "Quand partir",
         "paragraphs": [
-          "New York en compte plusieurs. JFK est à environ 25 km de Manhattan, Newark et LaGuardia sont les deux autres portes d’entrée. Depuis Paris, Air France, Delta, United, American Airlines et French bee proposent des vols directs, selon l’aéroport parisien. Comparez à la fois le prix et l’aéroport d’arrivée, parce que la distance jusqu’à votre hôtel varie."
+          "Les fêtes de fin d’année et l’été sont les périodes les plus chères. Le début du printemps et l’automne offrent souvent de meilleurs prix, avec une ville tout aussi agréable. Comptez un peu moins de 8 heures de vol à l’aller depuis Paris."
+        ]
+      },
+      {
+        "heading": "À l’arrivée",
+        "paragraphs": [
+          "Prévoyez du temps pour le contrôle aux frontières : les files peuvent être longues dans les grands aéroports américains. Gardez une marge si vous avez une correspondance, et n’emportez pas de bagage sans l’avoir ajouté au prix de votre billet."
         ]
       }
     ],
@@ -871,7 +879,11 @@ export const blogPosts: BlogPost[] = [
     "faq": [
       {
         "question": "Faut-il un visa pour New York ?",
-        "answer": "Les voyageurs français ont en général besoin d’une autorisation de voyage électronique (ESTA) plutôt que d’un visa. Vérifiez les conditions sur le site officiel."
+        "answer": "Non, les voyageurs français ont besoin d’une ESTA et d’un passeport biométrique, pour un séjour de 90 jours maximum. Faites la demande uniquement sur le site officiel."
+      },
+      {
+        "question": "Combien coûte l’ESTA ?",
+        "answer": "40 $ depuis fin septembre 2025 d’après la presse spécialisée. Vérifiez le montant sur le site officiel avant de payer."
       },
       {
         "question": "Quelles compagnies font Paris – New York en direct ?",
@@ -969,20 +981,34 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-rome-guide-aeroports",
     "category": "Destinations",
-    "metaTitle": "Vol pour Rome : Fiumicino ou Ciampino ?",
+    "metaTitle": "Vol pour Rome : Fiumicino ou Ciampino, Leonardo Express, transfert",
     "title": "Vol pour Rome : Fiumicino ou Ciampino, et le vrai coût du trajet vers le centre",
-    "description": "Rome depuis la France : choisir entre Fiumicino et Ciampino, durée du vol, compagnies, meilleure période et conseils pour trouver un billet moins cher.",
+    "description": "Vol pour Rome : Fiumicino ou Ciampino, Leonardo Express, bus et taxi à tarif fixe, compagnies depuis la France et bons moments pour partir.",
     "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
     "intro": "Rome se rejoint en deux heures depuis Paris, et en bien moins depuis Nice ou Marseille. Le piège, ce n’est pas le vol, c’est le trajet entre l’aéroport et le centre, et il dépend entièrement de celui que vous choisissez.",
     "sections": [
       {
         "heading": "Fiumicino ou Ciampino ?",
         "paragraphs": [
-          "Fiumicino est le grand aéroport, à environ 30 km du centre, avec la majorité des vols réguliers. Ciampino est plus petit et utilisé notamment par des compagnies à bas prix.",
+          "Fiumicino est le grand aéroport, à plus de vingt kilomètres du centre, avec la majorité des vols réguliers. Ciampino est plus petit, plus proche, et utilisé notamment par des compagnies à bas prix.",
           "Comparez le prix du billet et le coût du transfert vers votre hébergement. Un billet moins cher peut revenir plus cher une fois le transport ajouté."
+        ]
+      },
+      {
+        "heading": "De Fiumicino au centre",
+        "paragraphs": [
+          "Le Leonardo Express relie l’aéroport à la gare de Rome Termini sans arrêt, en 32 minutes, avec un départ toutes les 15 minutes environ. Le billet coûte 14 € en 2026, et le dernier train part vers 23 h 30.",
+          "Les navettes en bus vers Termini sont moins chères (5 à 7 € environ) mais plus lentes : comptez 50 à 60 minutes. Attention au train FL1, moins cher mais qui ne passe pas par Termini.",
+          "Le taxi bénéficie d’un tarif fixe de 55 € pour aller de Fiumicino à n’importe quelle adresse à l’intérieur des murs auréliens, ce qui évite le compteur. Il est intéressant à plusieurs ou très chargé."
+        ]
+      },
+      {
+        "heading": "De Ciampino au centre",
+        "paragraphs": [
+          "Depuis Ciampino, la formule « Airlink » combine un bus jusqu’à la gare puis un train vers Termini, pour environ 2,70 € et 40 à 50 minutes, aux horaires de service de la journée. C’est le transfert le moins cher de Rome, mais il ne dessert pas les vols de nuit."
         ]
       },
       {
@@ -1012,7 +1038,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Avant de réserver",
         "paragraphs": [
-          "Vérifiez les bagages inclus, l’aéroport d’arrivée et les horaires de retour. Un vol tardif peut compliquer le retour vers le centre."
+          "Vérifiez les bagages inclus, l’aéroport d’arrivée et les horaires de retour. Un vol tardif peut compliquer le retour vers le centre : vérifiez l’heure du dernier train ou bus."
         ]
       }
     ],
@@ -1020,6 +1046,10 @@ export const blogPosts: BlogPost[] = [
       {
         "question": "Quel aéroport choisir pour Rome ?",
         "answer": "Fiumicino est le plus pratique pour la plupart des voyageurs. Ciampino peut convenir selon la compagnie et votre hébergement : comparez le prix total avec le transfert."
+      },
+      {
+        "question": "Comment aller de l’aéroport de Fiumicino à Rome ?",
+        "answer": "Le Leonardo Express rejoint Termini en 32 minutes pour 14 €. Le bus est moins cher mais plus long, et le taxi a un tarif fixe de 55 € dans les murs auréliens."
       },
       {
         "question": "Combien de temps dure le vol vers Rome ?",
@@ -1036,19 +1066,27 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-madrid-guide-conseils",
     "category": "Destinations",
-    "metaTitle": "Vol pour Madrid : durée, aéroport, conseils",
+    "metaTitle": "Vol pour Madrid : durée, Barajas, métro, taxi à 33 €, conseils",
     "title": "Vol pour Madrid : durée, aéroport et bons réflexes avant de réserver",
-    "description": "Madrid depuis Paris ou la province : durée du vol, aéroport de Barajas, compagnies, meilleure période et conseils pour trouver un billet pas cher.",
+    "description": "Vol pour Madrid : durée, compagnies, comment rejoindre le centre depuis Barajas (métro, bus Exprés, taxi à tarif fixe) et quand partir.",
     "heroImage": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
     "intro": "Madrid est desservie en direct depuis de nombreuses villes françaises, et souvent par plusieurs compagnies. C’est ce qui rend la comparaison utile : l’écart entre deux offres peut dépasser le prix d’un déjeuner sur place.",
     "sections": [
       {
         "heading": "Durée du vol et aéroport",
         "paragraphs": [
-          "Comptez environ 2 h depuis Paris et à peine plus d’une heure depuis Toulouse. Madrid-Barajas est à environ 13 km du centre, avec des liaisons rapides vers la ville."
+          "Comptez environ 2 h depuis Paris et à peine plus d’une heure depuis Toulouse. Madrid-Barajas est à une douzaine de kilomètres du centre."
+        ]
+      },
+      {
+        "heading": "De Barajas au centre",
+        "paragraphs": [
+          "Le métro, ligne 8, relie tous les terminaux à Nuevos Ministerios en 15 à 20 minutes, d’où l’on change pour rejoindre le centre. Un supplément aéroport de 3 € s’ajoute au billet, soit environ 4,50 à 5 € au total. La ligne fonctionne jusqu’à 1 h 30 environ.",
+          "Le bus Exprés Aeropuerto (ligne 203) circule 24 h/24 pour 5 € vers Atocha et Cibeles, en 30 à 40 minutes : c’est la bonne option pour une arrivée tardive ou avec une valise.",
+          "Le taxi bénéficie d’un tarif fixe de 33 € vers tout point situé à l’intérieur du périphérique M-30, ce qui couvre l’essentiel du centre touristique, sans supplément pour la nuit, les bagages ou le week-end."
         ]
       },
       {
@@ -1087,6 +1125,10 @@ export const blogPosts: BlogPost[] = [
     ],
     "faq": [
       {
+        "question": "Comment aller de l’aéroport de Madrid au centre ?",
+        "answer": "En métro ligne 8 (environ 4,50 à 5 € avec le supplément aéroport), en bus Exprés 203 (5 €, 24 h/24) ou en taxi à tarif fixe de 33 € dans le périphérique M-30."
+      },
+      {
         "question": "Quel est le meilleur moment pour partir à Madrid ?",
         "answer": "Le printemps et l’automne sont agréables mais très demandés. L’été est chaud et souvent moins cher."
       },
@@ -1107,19 +1149,20 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-dubai-quand-partir-conseils",
     "category": "Destinations",
-    "metaTitle": "Vol pour Dubaï : quand partir, durée, conseils",
+    "metaTitle": "Vol pour Dubaï : quand partir, durée, formalités, aéroport DXB",
     "title": "Vol pour Dubaï depuis la France : la meilleure saison est aussi la plus chère",
-    "description": "Dubaï depuis Paris ou Lyon : durée du vol, vol direct Emirates depuis Lyon, meilleure période, formalités à vérifier et conseils pour payer moins.",
+    "description": "Vol pour Dubaï depuis la France : meilleure saison, chaleur d’été, durée du vol, formalités d’entrée et comment rejoindre le centre depuis DXB.",
     "heroImage": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
     "intro": "Dubaï a un problème de calendrier : quand il y fait agréable, tout le monde veut y aller, et quand les billets sont bon marché, il y fait très chaud. Le tout est de savoir quel compromis vous convient.",
     "sections": [
       {
         "heading": "Quand partir",
         "paragraphs": [
-          "L’hiver, d’octobre à avril, est la saison la plus agréable sur place, et la plus demandée. L’été est très chaud, avec des tarifs souvent plus bas. Les vacances scolaires et la fin d’année tirent les prix vers le haut, donc réservez tôt pour ces dates."
+          "La meilleure période court de novembre à avril d’après la plupart des guides (certains l’étendent dès octobre) : les journées sont douces et les activités en extérieur sont possibles. C’est aussi la plus demandée, avec des hébergements plus chers.",
+          "L’été, notamment juillet et août, est très chaud et les journées se passent surtout en intérieur, mais les tarifs sont souvent plus bas. Les vacances scolaires et la fin d’année tirent les prix vers le haut, donc réservez tôt pour ces dates."
         ]
       },
       {
@@ -1141,9 +1184,15 @@ export const blogPosts: BlogPost[] = [
         ]
       },
       {
+        "heading": "De l’aéroport au centre",
+        "paragraphs": [
+          "L’aéroport international de Dubaï (DXB) est relié à la ville par la ligne rouge du métro, depuis les terminaux 1 et 3. Les taxis officiels attendent à la sortie, avec un compteur ; la course vers le centre est un peu plus chère aux heures de pointe. Vérifiez à quel terminal votre compagnie arrive pour choisir le bon accès."
+        ]
+      },
+      {
         "heading": "Formalités",
         "paragraphs": [
-          "Les conditions d’entrée dépendent de votre nationalité et de la durée du séjour. Consultez le site officiel du ministère des Affaires étrangères et vérifiez la validité de votre passeport avant de réserver."
+          "Les ressortissants français n’ont pas besoin de visa pour un séjour touristique : un tampon d’entrée est apposé à l’arrivée. Le passeport doit rester valable au moins six mois après l’entrée sur le territoire d’après les guides de voyage. Vérifiez les conditions sur le site du ministère des Affaires étrangères avant de réserver."
         ]
       },
       {
@@ -1156,7 +1205,7 @@ export const blogPosts: BlogPost[] = [
     "faq": [
       {
         "question": "Quelle est la meilleure période pour aller à Dubaï ?",
-        "answer": "L’hiver, d’octobre à avril. L’été est très chaud, mais souvent moins cher."
+        "answer": "De novembre à avril, quand il fait agréable. L’été est très chaud, mais souvent moins cher."
       },
       {
         "question": "Y a-t-il un vol direct Lyon – Dubaï ?",
@@ -1164,7 +1213,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "Faut-il un visa pour Dubaï ?",
-        "answer": "Cela dépend de votre nationalité. Vérifiez les conditions sur le site officiel du ministère des Affaires étrangères avant de réserver."
+        "answer": "Non pour un séjour touristique avec un passeport français, mais le passeport doit être valable six mois. Vérifiez sur le site du ministère des Affaires étrangères avant de réserver."
       }
     ],
     "relatedRoutes": [
@@ -1294,19 +1343,26 @@ export const blogPosts: BlogPost[] = [
   {
     "slug": "vol-tunis-guide-conseils",
     "category": "Destinations",
-    "metaTitle": "Vol pour Tunis : quand réserver, d’où partir",
+    "metaTitle": "Vol pour Tunis : durée, aéroport Carthage, taxi, formalités",
     "title": "Vol pour Tunis depuis la France : été et fêtes, les deux périodes à anticiper",
-    "description": "Tunis depuis Paris, Lyon, Marseille, Nice ou Toulouse : durée du vol, compagnies, périodes chères, bagages et conseils pour réserver moins cher.",
+    "description": "Vol pour Tunis depuis la France : durée, compagnies, villes desservies, taxi et bus depuis l’aéroport de Tunis-Carthage, passeport obligatoire.",
     "heroImage": "https://images.unsplash.com/photo-1607869861980-da5f9b8b4969?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-02",
-    "updated": "2026-11-03",
-    "readingMinutes": 4,
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
     "intro": "La Tunisie fait partie des destinations les plus demandées depuis la France, surtout l’été et pendant les fêtes. Ce sont aussi les périodes où réserver au dernier moment se paie le plus cher.",
     "sections": [
       {
         "heading": "Durée et aéroport",
         "paragraphs": [
-          "Le vol dure environ deux heures depuis Marseille et un peu plus depuis les autres villes. L’aéroport de Tunis-Carthage est à environ 8 km du centre."
+          "Le vol dure environ deux heures depuis Marseille et un peu plus depuis les autres villes. L’aéroport de Tunis-Carthage est à 7 ou 8 km du centre."
+        ]
+      },
+      {
+        "heading": "De l’aéroport au centre",
+        "paragraphs": [
+          "Le taxi est le plus simple : la course vers le centre revient à une vingtaine de dinars en journée, avec un supplément pour les bagages et une majoration de 50 % environ entre 21 h et 5 h. Comptez 15 à 20 minutes. Exigez le compteur et regardez où se trouve la file officielle.",
+          "Le bus n° 635 de la compagnie Transtu rejoint la station Tunis Marine, où passe le TGM, en environ 25 minutes pour un ticket qui coûte l’équivalent d’un euro ou moins. C’est un service de jour : après un vol tardif, prenez un taxi. Le TGM, petit train côtier, mène ensuite à La Goulette, Carthage, Sidi Bou Saïd et La Marsa."
         ]
       },
       {
@@ -1338,7 +1394,8 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Bagages et formalités",
         "paragraphs": [
-          "Vérifiez la franchise de bagages incluse avant de comparer deux billets : sur cette liaison, elle varie beaucoup d’une offre à l’autre. Les formalités d’entrée dépendent de votre nationalité, le site du ministère des Affaires étrangères reste la référence."
+          "Vérifiez la franchise de bagages incluse avant de comparer deux billets : sur cette liaison, elle varie beaucoup d’une offre à l’autre.",
+          "Pour entrer en Tunisie, un passeport en cours de validité est obligatoire, une carte d’identité ne suffit pas, d’après les informations publiées par le ministère des Affaires étrangères. Aucun visa n’est exigé pour un séjour touristique de moins de trois mois. La Tunisie impose aussi des règles sur la déclaration des devises : renseignez-vous avant de partir."
         ]
       }
     ],
@@ -1348,12 +1405,16 @@ export const blogPosts: BlogPost[] = [
         "answer": "Pour l’été et les fêtes, comparez tôt car les vols se remplissent vite. Hors saison, les prix sont plus souples."
       },
       {
-        "question": "Quelles compagnies volent entre Paris et Tunis ?",
-        "answer": "Tunisair, Air France, Transavia et Nouvelair."
+        "question": "Comment aller de l’aéroport de Tunis-Carthage au centre ?",
+        "answer": "En taxi (environ 20 dinars en journée, majoration la nuit), ou en bus Transtu n° 635 jusqu’à Tunis Marine."
       },
       {
-        "question": "Combien de temps dure le vol France – Tunis ?",
-        "answer": "Environ deux heures depuis Marseille, un peu plus depuis les autres villes."
+        "question": "Faut-il un passeport pour aller en Tunisie ?",
+        "answer": "Oui, le passeport est obligatoire pour les Français, mais aucun visa n’est requis pour un séjour touristique de moins de trois mois."
+      },
+      {
+        "question": "Quelles compagnies volent entre Paris et Tunis ?",
+        "answer": "Tunisair, Air France, Transavia et Nouvelair."
       }
     ],
     "relatedRoutes": [
