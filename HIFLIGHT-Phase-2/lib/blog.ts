@@ -2430,39 +2430,52 @@ export const blogPosts: BlogPost[] = [
     "slug": "vol-amsterdam-guide-conseils",
     "heroImage": "https://images.unsplash.com/photo-1754835143820-bcf20e2e1a35?auto=format&fit=crop&w=1600&h=900&q=75",
     "category": "Destinations",
-    "metaTitle": "Vol pour Amsterdam : aéroport, train et bons jours pour partir",
+    "metaTitle": "Amsterdam : avion ou train, taxes, tulipes et prix des vols",
     "title": "Aller à Amsterdam : avion ou train, et comment s’y prendre pour payer moins",
-    "description": "Vol court, aéroport à vingt minutes du centre, train concurrent : ce qu’il faut savoir pour choisir ses dates et son départ (Paris, Lyon, Marseille, Nice, Toulouse, Bordeaux).",
+    "description": "Eurostar à 3 h 20, Schiphol à un quart d’heure du centre, TVA hôtelière à 21 % depuis janvier, Keukenhof du 18 mars au 9 mai 2027 : ce qui pèse vraiment sur un week-end à Amsterdam.",
     "published": "2026-11-06",
-    "updated": "2026-11-06",
-    "readingMinutes": 4,
-    "intro": "Amsterdam est l’un de ces week-ends où l’on perd plus de temps à choisir ses dates qu’à voyager : une heure et quart de vol depuis Paris, un train depuis l’aéroport qui dépose au centre en une vingtaine de minutes, et une ville qui se parcourt sans voiture. Reste à ne pas payer plus que nécessaire.",
+    "updated": "2026-11-07",
+    "readingMinutes": 5,
+    "intro": "Le billet d’avion n’est plus le plus gros poste d’un week-end à Amsterdam. Depuis le 1er janvier 2026, la TVA sur les hôtels néerlandais est passée de 9 % à 21 %, et la ville y ajoute sa propre taxe de séjour. Autant bien choisir son moyen de transport, sa date et son quartier avant de regarder les tarifs de vol.",
     "sections": [
       {
-        "heading": "Avion ou train depuis Paris ?",
+        "heading": "Depuis Paris, le train tient la comparaison",
         "paragraphs": [
-          "Le train relie Paris à Amsterdam en environ 3 h 20, de centre-ville à centre-ville. L’avion est plus court en vol, mais il faut ajouter le trajet vers l’aéroport, l’enregistrement et la sécurité : au total, l’écart se réduit beaucoup.",
-          "L’avion reprend l’avantage dès que vous partez de province (Lyon, Marseille, Nice, Toulouse, Bordeaux) ou quand le prix du train est élevé pour vos dates. Le plus simple est de comparer les deux avant de réserver, en comptant les bagages et les transferts."
+          "L’Eurostar relie Paris-Nord à Amsterdam Centraal en direct, en 3 h 20 environ, avec des billets annoncés à partir de 35 € l’aller. Il arrive en plein centre et la franchise comprend deux bagages et un bagage à main. Face à un vol d’un peu plus d’une heure qu’il faut compléter par le trajet vers l’aéroport, l’enregistrement et le train depuis Schiphol, l’avion ne gagne presque rien au départ de Paris.",
+          "Une autre liaison directe doit arriver : GoVolta annonce un Amsterdam–Paris dès le 14 décembre 2026, en environ sept heures, avec un prix d’appel de 19 € dont la presse précise qu’il est provisoire. À sept heures de trajet, ce sera un train pour ceux qui ne veulent pas prendre l’avion, pas pour un week-end court.",
+          "Au départ de Lyon, Marseille, Nice, Toulouse ou Bordeaux, il n’y a pas de débat : le vol direct reste la seule option raisonnable, et c’est là que comparer les dates paie."
         ]
       },
       {
-        "heading": "Aéroport d’Amsterdam : ce qu’il faut savoir",
+        "heading": "De Schiphol au centre, sans taxi",
         "paragraphs": [
-          "Schiphol est relié à la gare centrale d’Amsterdam par un train qui met une vingtaine de minutes. Pas besoin de taxi, et les trains sont fréquents, y compris tard le soir.",
-          "Si vous venez pour la journée ou pour deux nuits, un bagage cabine suffit largement : la ville se fait à pied ou à vélo, et c’est sur la valise en soute que se joue souvent l’écart de prix entre deux offres."
+          "L’aéroport a sa gare sous le hall d’arrivée. Les trains vers Amsterdam Centraal mettent 15 à 20 minutes et partent plusieurs fois par heure ; comptez autour de 6 € le trajet simple en 2026. Un taxi pour la même course se situe entre 55 et 70 € d’après les sites de transport locaux, soit environ dix fois plus.",
+          "Si vous restez deux ou trois jours, les titres de transport « Amsterdam Travel Ticket » regroupent l’aller-retour aéroport et les tram, bus et métro de la ville, pour une durée d’un à trois jours."
         ],
         "callout": {
-          "kind": "astuce",
-          "title": "Un détail qui change le budget",
-          "text": "Sur un vol court, regardez toujours le prix avec bagage. Une offre un peu plus chère mais qui inclut la valise peut revenir moins cher que le tarif de base à augmenter ensuite."
+          "kind": "info",
+          "title": "Un détail de tarif",
+          "text": "Le prix du train varie selon la source consultée (de 5 à 6,50 € environ). Vérifiez-le sur le site des chemins de fer néerlandais le jour du voyage."
         }
       },
       {
-        "heading": "Quand partir ?",
+        "heading": "Ce que le prix de l’hôtel ne montre pas toujours",
         "paragraphs": [
-          "Le printemps, avec les champs de tulipes, et les week-ends d’été sont les plus demandés, donc les plus chers. En automne et en hiver, les billets sont souvent plus doux, et la ville reste agréable : musées, cafés, canaux illuminés.",
-          "En semaine, et en partant le jeudi plutôt que le vendredi, on trouve en général de meilleurs tarifs. Les pages de vol HiFlight affichent le calendrier des prix pour repérer les jours les moins chers."
+          "La taxe de séjour d’Amsterdam est proportionnelle : 12,5 % du prix de la chambre hors TVA. Ajoutée à la TVA à 21 %, elle fait peser environ un tiers de prélèvements sur le prix de base. Sur une chambre à 150 € la nuit, cela représente de l’ordre de 18 € de taxe de séjour par nuit avant la TVA.",
+          "La municipalité envisage de relever encore ce taux dans les prochaines années, la coalition au pouvoir visant 20 % en 2031. Pour un week-end en 2027, regardez donc le prix final affiché à la réservation, taxes comprises, et pas le tarif de la première page."
         ]
+      },
+      {
+        "heading": "Les tulipes ont une fenêtre étroite",
+        "paragraphs": [
+          "Le parc de Keukenhof, à Lisse, ouvre du 18 mars au 9 mai 2027, de 8 h à 19 h. Les billets se prennent en ligne, pour une date et un créneau fixés à l’avance, et les week-ends partent vite.",
+          "En mars, les tulipes sont encore vertes : on y voit surtout des narcisses et des jacinthes. Les tulipes en pleine floraison se situent plutôt en avril, avec une marge liée à la météo : un hiver doux avance la saison, un mars froid la retarde. Les périodes les plus chargées sont les week-ends d’avril, les vacances de Pâques et la Fête du Roi, le 27 avril."
+        ],
+        "callout": {
+          "kind": "astuce",
+          "title": "Avant de bloquer vos dates",
+          "text": "Prenez d’abord le billet du parc pour le créneau qui vous convient, puis cherchez le vol autour. Dans l’autre sens, vous risquez de trouver un vol bon marché pour un jour complet."
+        }
       },
       {
         "heading": "Les prix en ce moment au départ de plusieurs villes",
@@ -2489,16 +2502,20 @@ export const blogPosts: BlogPost[] = [
     ],
     "faq": [
       {
-        "question": "Combien de temps dure le vol Paris–Amsterdam ?",
-        "answer": "Environ 1 h 15 en vol, sans compter le trajet jusqu’à l’aéroport et les formalités."
+        "question": "Combien de temps dure le train Paris–Amsterdam ?",
+        "answer": "L’Eurostar direct met environ 3 h 20 de Paris-Nord à Amsterdam Centraal, avec des billets à partir de 35 € l’aller selon la compagnie."
       },
       {
-        "question": "Comment aller de l’aéroport au centre d’Amsterdam ?",
-        "answer": "En train, depuis l’aéroport de Schiphol : il faut compter une vingtaine de minutes jusqu’à la gare centrale."
+        "question": "Comment aller de Schiphol au centre d’Amsterdam ?",
+        "answer": "En train, directement jusqu’à Amsterdam Centraal : 15 à 20 minutes, plusieurs départs par heure, environ 6 € le trajet simple en 2026."
       },
       {
-        "question": "Le train est-il une bonne alternative à l’avion ?",
-        "answer": "Depuis Paris, le train met environ 3 h 20 de centre à centre. Comparez les deux, bagages et transferts compris."
+        "question": "Quelles taxes s’ajoutent au prix de l’hôtel à Amsterdam ?",
+        "answer": "Une taxe de séjour de 12,5 % du prix de la chambre hors TVA, plus une TVA à 21 % depuis le 1er janvier 2026 (elle était de 9 % avant)."
+      },
+      {
+        "question": "Quand voir les tulipes de Keukenhof en 2027 ?",
+        "answer": "Le parc est ouvert du 18 mars au 9 mai 2027. La floraison dépend de la météo, mais les tulipes sont surtout visibles en avril ; en mars elles sont encore vertes."
       }
     ]
   },
@@ -2506,45 +2523,46 @@ export const blogPosts: BlogPost[] = [
     "slug": "soleil-hiver-vol-pas-cher",
     "heroImage": "https://images.unsplash.com/photo-1694631887845-ac4ae3eb2bb1?auto=format&fit=crop&w=1600&h=900&q=75",
     "category": "Conseils",
-    "metaTitle": "Soleil en hiver : où partir depuis la France sans trop payer",
+    "metaTitle": "Soleil en hiver : Canaries, Égypte, Djerba, Maroc, ce que l’on trouve",
     "title": "Du soleil en hiver sans aller au bout du monde : Canaries, Égypte, Maroc, Tunisie",
-    "description": "Tenerife, Lanzarote, Hurghada, Marrakech, Djerba : durées de vol, périodes les plus chères et astuces pour comparer avant de réserver votre escapade hivernale.",
+    "description": "Mer à 19-22 °C aux Canaries, visa à 30 dollars en Égypte, Djerba à 2 h 50 de Paris : durées de vol, formalités et périodes les plus chères pour partir au soleil cet hiver.",
     "published": "2026-11-06",
-    "updated": "2026-11-06",
+    "updated": "2026-11-07",
     "readingMinutes": 5,
-    "intro": "Quand les journées raccourcissent, la question revient chaque année : où trouver de la lumière sans passer la moitié du voyage dans un avion ? Quelques destinations se rejoignent en quatre à cinq heures, ou moins, avec un climat bien plus doux qu’en France. Voici comment les comparer.",
+    "intro": "« Du soleil en hiver » recouvre des voyages très différents. Aux Canaries, on marche en t-shirt mais la mer reste fraîche. En mer Rouge, il y a un visa à prévoir. À Djerba ou à Marrakech, le vol est le plus court. Voici ce que disent les chiffres de chaque destination, avant de regarder les prix.",
     "sections": [
       {
-        "heading": "Les Canaries : Tenerife et Lanzarote",
+        "heading": "Canaries : doux, pas tropical",
         "paragraphs": [
-          "Tenerife se rejoint en environ 4 h 15 depuis Paris, Lanzarote en environ 4 h. Ce sont des classiques de l’hiver : plages volcaniques, randonnées, températures douces quand le reste de l’Europe grelotte.",
-          "L’archipel a une heure de moins que la France : le décalage est léger, mais pensez-y pour vos horaires de transfert. Les vacances de Noël et de février sont les périodes les plus chères."
+          "Le vol direct depuis Paris pour Tenerife ou Lanzarote dure autour de quatre heures ; la plupart des vols affichés vont de 4 h à 4 h 30. Les îles ont une heure de moins que la France.",
+          "Sur le littoral, il fait en moyenne 20 à 22 °C l’après-midi de décembre à février, avec des nuits vers 15-16 °C. La mer est à 21 °C environ en décembre, puis descend à 19 °C en février. Baignade possible, mais fraîche : c’est un hiver de promenades, de randonnée et de terrasses, pas de plage à l’heure. Le sud de Tenerife est le coin le plus chaud de l’île.",
+          "La pluie est plus fréquente dans le nord des îles et en novembre ou en février-mars ; le sud est plus sec."
         ]
       },
       {
-        "heading": "Égypte : Hurghada et Charm el-Cheikh",
+        "heading": "Égypte : le visa et le passeport avant le billet",
         "paragraphs": [
-          "Environ cinq heures de vol vers la mer Rouge, avec de la plongée, des récifs et des hôtels face à la mer. L’hiver est la haute saison ; l’été, il fait très chaud.",
-          "Les formalités d’entrée, dont le visa, dépendent de votre nationalité : vérifiez-les avant de réserver."
+          "Paris–Hurghada se fait en environ 4 h 35 en direct. Le visa est obligatoire pour les Français : d’après les agences spécialisées, il coûte 30 dollars depuis mars 2026, à l’arrivée à l’aéroport comme en ligne. L’e-visa évite la file du guichet ; si vous payez sur place, prévoyez des dollars en espèces.",
+          "Le passeport doit être valable au moins six mois après le retour. Une carte d’identité plastifiée est en principe acceptée, mais pas celle dont la validité a été prolongée de cinq ans : le plus sûr est de voyager avec un passeport. Pour Charm el-Cheikh, un séjour limité au Sinaï (Charm el-Cheikh, Dahab, Taba, Nuweiba) bénéficie d’une exemption de visa payant. Vérifiez les conditions exactes sur le site France Diplomatie avant de partir."
         ]
       },
       {
-        "heading": "Maroc et Tunisie : plus court, plus souple",
+        "heading": "Djerba et le Maroc : les plus courts",
         "paragraphs": [
-          "Marrakech se rejoint en environ 3 h depuis Paris, et Djerba en environ 2 h 50. Les durées sont courtes, ce qui permet de partir pour quelques jours seulement.",
-          "Les vacances scolaires font monter les prix vers ces destinations : un départ hors vacances, en semaine, change souvent la facture."
+          "Paris–Djerba prend 2 h 50 en vol direct. Au départ de Lyon, comptez 2 h 15, et moins de 2 heures depuis Nice. C’est la solution la plus simple pour un long week-end, sans décalage horaire en hiver.",
+          "Marrakech est dans la même zone de durée que Djerba pour les Parisiens, un peu au-dessus de trois heures. Pour le détail de la ville et des aéroports parisiens, le guide Marrakech de HiFlight va plus loin."
         ]
       },
       {
-        "heading": "Comment comparer sans se tromper",
+        "heading": "Quand les prix montent",
         "paragraphs": [
-          "Comparez au moins deux destinations pour les mêmes dates : l’écart de prix entre Tenerife et Lanzarote, ou entre Hurghada et Charm el-Cheikh, peut être sensible selon la semaine.",
-          "Regardez le prix avec bagage, et la durée totale du trajet (escale comprise). Un vol qui paraît bon marché mais arrive à 3 h du matin ajoute souvent une nuit d’hôtel."
+          "Les hausses se concentrent sur les fêtes de fin d’année et février, quand les vacances scolaires et le carnaval tombent au même moment aux Canaries. À l’inverse, novembre et janvier hors vacances sont généralement les mois les moins chers.",
+          "Le plus utile est de regarder le calendrier de prix d’une destination, puis de décaler le départ d’une semaine ou deux : l’écart entre une date de vacances et la semaine d’après est souvent plus grand que celui entre deux compagnies."
         ],
         "callout": {
           "kind": "piege",
-          "title": "Hors vacances, c’est mieux",
-          "text": "Un vol pris dans la semaine qui suit les vacances scolaires peut coûter nettement moins cher que le même vol la semaine d’avant. Décaler d’une semaine suffit parfois."
+          "title": "Février cumule les hausses",
+          "text": "Aux Canaries, février réunit vacances scolaires et carnaval (Santa Cruz de Tenerife, Las Palmas). Si votre date est libre, janvier ou la fin de l’hiver coûtent en général moins cher."
         }
       },
       {
@@ -2572,16 +2590,20 @@ export const blogPosts: BlogPost[] = [
     ],
     "faq": [
       {
-        "question": "Où trouver du soleil en hiver à moins de cinq heures d’avion ?",
-        "answer": "Les Canaries, la mer Rouge, le Maroc et la Tunisie se rejoignent en environ 2 h 50 à 5 h depuis Paris, selon la destination."
+        "question": "Quelle température fait-il aux Canaries en hiver ?",
+        "answer": "Autour de 20 à 22 °C l’après-midi sur le littoral de décembre à février, avec une mer entre 19 et 21 °C : agréable pour marcher, fraîche pour se baigner."
       },
       {
-        "question": "Quelle est la période la plus chère ?",
-        "answer": "Les vacances de Noël et de février. Partir hors vacances, en semaine, fait souvent baisser le prix."
+        "question": "Combien de temps dure le vol Paris–Hurghada ?",
+        "answer": "Environ 4 h 35 en vol direct. Le visa égyptien est obligatoire pour les Français ; les agences l’indiquent à 30 dollars en 2026."
       },
       {
-        "question": "Faut-il un visa pour l’Égypte ?",
-        "answer": "Cela dépend de votre nationalité. Vérifiez les formalités avant de réserver."
+        "question": "Quelle destination ensoleillée est la plus proche de Paris en hiver ?",
+        "answer": "Djerba, à environ 2 h 50 de vol direct, suivie de Marrakech. Les Canaries et Hurghada demandent autour de quatre heures ou plus."
+      },
+      {
+        "question": "Quels sont les mois les plus chers pour partir au soleil ?",
+        "answer": "Les fêtes de fin d’année et février, à cause des vacances scolaires. Novembre et janvier hors vacances sont généralement moins chers."
       }
     ]
   },
@@ -2589,45 +2611,54 @@ export const blogPosts: BlogPost[] = [
     "slug": "vol-prague-budapest-vienne-comparer",
     "heroImage": "https://images.unsplash.com/photo-1600623471616-8c1966c91ff6?auto=format&fit=crop&w=1600&q=75",
     "category": "Destinations",
-    "metaTitle": "Prague, Budapest ou Vienne : quelle ville choisir pour un week-end",
+    "metaTitle": "Prague, Budapest ou Vienne : de l’aéroport au centre et marchés de Noël",
     "title": "Prague, Budapest ou Vienne : trois capitales à moins de deux heures, laquelle choisir ?",
-    "description": "Durée de vol, ambiance, monnaie, moments les moins chers : comparer Prague, Budapest et Vienne avant de réserver un week-end en Europe centrale.",
+    "description": "Trajet depuis l’aéroport, travaux ferroviaires à Vienne jusqu’en 2027, marchés de Noël de Budapest dès le 13 novembre : ce qui distingue vraiment les trois villes pour un week-end.",
     "published": "2026-11-06",
-    "updated": "2026-11-06",
-    "readingMinutes": 4,
-    "intro": "Trois capitales voisines, des vols de moins de deux heures et quelques minutes depuis Paris, et pourtant trois voyages très différents. Plutôt que de chercher la « meilleure » ville, mieux vaut savoir ce que chacune offre, et ce que chaque détail coûte.",
+    "updated": "2026-11-07",
+    "readingMinutes": 5,
+    "intro": "Les vols vers Prague, Budapest et Vienne durent à peu près autant depuis Paris. Ce qui change, c’est ce qui vient après l’atterrissage : le trajet vers le centre, les travaux en cours à Vienne et les dates d’ouverture des marchés de Noël. Voici ce qu’il faut savoir cet hiver.",
     "sections": [
       {
-        "heading": "Prague : la ville à parcourir à pied",
+        "heading": "Après l’atterrissage",
         "paragraphs": [
-          "Environ 1 h 55 de vol depuis Paris. Prague se visite à pied : vieille ville, château, pont Charles, brasseries. C’est la plus « carte postale » des trois.",
-          "La République tchèque garde sa couronne : retirez de l’argent sur place plutôt que de changer à l’aéroport."
-        ]
-      },
-      {
-        "heading": "Budapest : bains, Danube et vie nocturne",
-        "paragraphs": [
-          "Environ 2 h 10 de vol. Budapest, c’est le Danube, les bains thermaux et une ville où l’on mange bien sans se ruiner. L’hiver est idéal pour les bains.",
-          "La Hongrie utilise le forint : comparez le taux de change avant de payer en euros dans un restaurant ou un taxi."
-        ]
-      },
-      {
-        "heading": "Vienne : opéra, cafés et palais",
-        "paragraphs": [
-          "Environ 1 h 55 de vol. Vienne est la plus simple à vivre : transports clairs, cafés historiques, musées. Elle utilise l’euro, ce qui simplifie le budget.",
-          "Les marchés de Noël remplissent la ville de fin novembre à décembre, et les billets suivent : si vous cherchez des tarifs plus doux, le printemps et le début de l’automne sont plus calmes."
-        ]
-      },
-      {
-        "heading": "Choisir selon ce que vous cherchez",
-        "paragraphs": [
-          "Envie de balades et d’architecture : Prague. De bains chauds et de sorties : Budapest. De culture et de confort : Vienne. Et si vos dates sont fixes, comparez les trois : l’écart de prix du billet peut décider à lui seul."
+          "À Prague, l’aéroport est à 17 km du centre, soit environ 25 minutes sans circulation. Le trolleybus 59, qui a remplacé le bus 119, rejoint le terminus de Nádraží Veleslavín en 16 minutes, puis la ligne A du métro conduit à Můstek, en plein centre. Il n’y a ni métro ni tram à l’aéroport : le bus est la seule option publique.",
+          "À Budapest, l’aéroport est à une quinzaine de kilomètres. Le bus express 100E rejoint le centre (Deák Ferenc tér) en 30 à 40 minutes, avec des arrêts à Kálvin tér et Astoria.",
+          "À Vienne, l’aéroport est à 18 km. Le Railjet atteint la gare centrale en 15 minutes environ, pour 5,50 €."
         ],
         "callout": {
-          "kind": "astuce",
-          "title": "Partir de province",
-          "text": "Prague se rejoint aussi depuis Lyon, Marseille, Nice, Toulouse et Bordeaux, Vienne depuis Nice. Comparez avec Paris en comptant le trajet pour y aller."
+          "kind": "info",
+          "title": "Vienne : travaux jusqu’à fin octobre 2027",
+          "text": "Du 7 septembre 2026 au 31 octobre 2027, le S-Bahn S7 et le REX7 ne vont plus jusqu’au centre : ils s’arrêtent à la station St. Marx. Le train express CAT est remplacé par des bus premium jusqu’à Wien Mitte (jusqu’à cinq par heure), et trois lignes de bus aéroport desservent la gare centrale et d’autres quartiers. Vérifiez votre trajet avant de partir."
         }
+      },
+      {
+        "heading": "Prague : la ville du week-end à pied",
+        "paragraphs": [
+          "Prague se visite surtout à pied. Ses grands marchés de Noël (Vieille-Ville, place Venceslas) ouvrent à la fin novembre, vers le 28 d’après les comparatifs récents. Avant, seuls des marchés de quartier sont ouverts. Traditionnellement, ils durent jusqu’au début janvier.",
+          "La République tchèque utilise la couronne tchèque (CZK), pas l’euro. Comparez les taux avant de retirer des espèces."
+        ]
+      },
+      {
+        "heading": "Budapest : en avance sur le calendrier",
+        "paragraphs": [
+          "Les deux grands marchés de Noël de Budapest ouvrent le 13 novembre 2026, soit une quinzaine de jours avant ceux de Prague, et restent ouverts jusqu’au Nouvel An. Pour un déplacement entre le 13 et le 27 novembre, les marchés de Budapest sont déjà ouverts, ceux de Vienne le sont à peu près aussi, mais pas les grands marchés de Prague.",
+          "La Hongrie garde le forint (HUF). Les thermes et le Danube restent les raisons classiques d’y aller en hiver."
+        ]
+      },
+      {
+        "heading": "Vienne : la plus étendue côté marchés",
+        "paragraphs": [
+          "Vienne compte une vingtaine de marchés de l’Avent d’après les guides, qui ouvrent à partir de la mi-novembre. Le plus connu est celui de la Rathausplatz.",
+          "L’Autriche utilise l’euro, ce qui évite le change."
+        ]
+      },
+      {
+        "heading": "Deux villes en un voyage",
+        "paragraphs": [
+          "Prague et Vienne sont reliées en train en environ quatre heures de centre-ville à centre-ville, avec des billets à partir d’une douzaine d’euros en réservant tôt. Budapest–Prague demande près de sept heures de train : à réserver pour un voyage plus long, pas pour un week-end.",
+          "Si vous voulez voir deux villes, la méthode la plus simple est d’arriver dans l’une et de repartir de l’autre, en comparant les deux allers simples. Prague se rejoint aussi depuis Lyon, Nice, Marseille, Toulouse et Bordeaux, Vienne depuis Nice."
+        ]
       },
       {
         "heading": "Les prix en ce moment",
@@ -2654,16 +2685,20 @@ export const blogPosts: BlogPost[] = [
     ],
     "faq": [
       {
-        "question": "Quelle ville est la plus proche de Paris en avion ?",
-        "answer": "Prague et Vienne, à environ 1 h 55 ; Budapest est un peu plus loin, à environ 2 h 10."
+        "question": "Comment aller de l’aéroport de Prague au centre ?",
+        "answer": "Par le trolleybus 59 (qui a remplacé le bus 119) jusqu’à Nádraží Veleslavín, 16 minutes, puis la ligne A du métro jusqu’à Můstek."
       },
       {
-        "question": "Quelle monnaie utilise-t-on ?",
-        "answer": "L’euro à Vienne, la couronne tchèque à Prague et le forint à Budapest."
+        "question": "Comment aller de l’aéroport de Vienne au centre pendant les travaux ?",
+        "answer": "Le Railjet rejoint la gare centrale en 15 minutes environ pour 5,50 €. Le S7 s’arrête à St. Marx et le CAT est remplacé par des bus jusqu’à Wien Mitte, du 7 septembre 2026 au 31 octobre 2027."
       },
       {
-        "question": "Quand les billets sont-ils les moins chers ?",
-        "answer": "De janvier à mars pour Prague, en hiver et au printemps pour Budapest, au printemps et début d’automne pour Vienne."
+        "question": "Quand ouvrent les marchés de Noël de Budapest et de Prague ?",
+        "answer": "Ceux de Budapest ouvrent le 13 novembre 2026 ; les grands marchés de Prague, vers la fin novembre. Vérifiez les dates sur les sites officiels avant de réserver."
+      },
+      {
+        "question": "Faut-il des euros pour ces trois villes ?",
+        "answer": "Seulement à Vienne. Prague utilise la couronne tchèque et Budapest le forint."
       }
     ]
   }
