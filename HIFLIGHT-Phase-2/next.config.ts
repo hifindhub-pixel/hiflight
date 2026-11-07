@@ -14,7 +14,9 @@ const securityHeaders = [
       "object-src 'none'",
       "frame-ancestors 'self'",
       "form-action 'self' https:",
-      "script-src 'self' 'unsafe-inline' https:",
+      process.env.NODE_ENV === "development"
+        ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:"
+        : "script-src 'self' 'unsafe-inline' https:",
       "style-src 'self' 'unsafe-inline' https:",
       "img-src 'self' data: blob: https:",
       "font-src 'self' data: https:",
@@ -41,6 +43,7 @@ const nextConfig: NextConfig = {
       { source: "/politique-confidentialite", destination: "/politique-de-confidentialite", permanent: true },
       { source: "/legal", destination: "/mentions-legales", permanent: true },
       { source: "/support", destination: "/faq", permanent: true },
+      { source: "/blog/black-friday-voyage-2026-voyage-prive-edreams", destination: "/blog/black-friday-voyage-2026-dates-conseils", permanent: true },
     ];
   },
 };

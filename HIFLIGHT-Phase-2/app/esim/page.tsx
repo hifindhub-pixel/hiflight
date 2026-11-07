@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
+import { defaultOgImage, siteUrl } from "@/lib/content";
 import EsimExplorer from "@/components/EsimExplorer";
 import ServiceFaq from "@/components/ServiceFaq";
 import "./esim.css";
 
-export const metadata: Metadata = { title: "Comparer les eSIM de voyage", description: "Comparez les forfaits eSIM Airalo, Saily, Yesim et d'autres offres pour rester connecté à l'étranger.", alternates: { canonical: "/esim" } };
+export const metadata: Metadata = {
+  title: "Comparer les eSIM de voyage",
+  description: "Comparez les forfaits eSIM Airalo, Saily, Yesim et d’autres offres pour rester connecté à l’étranger : destinations, volumes de données et prix avant de partir.",
+  alternates: { canonical: "/esim" },
+  openGraph: { type: "website", url: `${siteUrl}/esim/`, images: [defaultOgImage], title: "Comparer les eSIM de voyage | HiFlight", description: "Comparez les forfaits eSIM Airalo, Saily, Yesim et d’autres offres pour rester connecté à l’étranger : destinations, volumes de données et prix avant de partir." },
+};
 
 export default function EsimPage() {
   return <main className="market-page esim-page"><EsimExplorer /><ServiceFaq service="esim" /></main>;

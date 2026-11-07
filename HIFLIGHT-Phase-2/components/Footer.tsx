@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { departureCities } from "@/lib/cities";
 
 export default function Footer() {
   return (
@@ -29,11 +30,16 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-grid">
-        <div><div className="brand"><span>Hi</span>Flight</div><p>Comparez gratuitement, puis réservez auprès du partenaire choisi.</p></div>
-        <div><strong>Comparer</strong><Link href="/#recherche">Vols</Link><Link href="/hotels">Hôtels</Link><Link href="/voitures">Voitures</Link><Link href="/trains-bus">Trains & bus</Link></div>
-        <div><strong>Informations</strong><Link href="/blog">Conseils voyage</Link><Link href="/guides/bagage-cabine">Bagage cabine</Link><Link href="/aeroports/paris-charles-de-gaulle">Aéroport CDG</Link><Link href="/aeroports/paris-orly">Aéroport ORY</Link><Link href="/faq">FAQ</Link><Link href="/conditions-utilisations">Conditions</Link><Link href="/mentions-legales">Mentions légales</Link><Link href="/politique-de-confidentialite">Confidentialité</Link><Link href="/politique-cookies">Cookies</Link><a href="mailto:contact@hiflight.fr">Contact</a></div>
+        <div className="footer-brand"><div className="brand"><span>Hi</span>Flight</div><p>Comparez gratuitement, puis réservez auprès du partenaire choisi.</p></div>
+        <nav aria-label="Voyager"><strong>Voyager</strong><Link href="/#recherche">Vols</Link><Link href="/hotels">Hôtels</Link><Link href="/voitures">Voitures</Link><Link href="/esim">eSIM</Link><Link href="/trains-bus">Trains &amp; bus</Link><Link href="/world-map">World Map</Link></nav>
+        <nav aria-label="Destinations"><strong>Destinations</strong><Link href="/destinations/maroc">Maroc</Link><Link href="/destinations/algerie">Algérie</Link><Link href="/destinations/espagne">Espagne</Link><Link href="/destinations/italie">Italie</Link><Link href="/destinations/royaume-uni">Royaume-Uni</Link><Link href="/destinations/etats-unis">États-Unis</Link><Link href="/destinations/asie">Asie</Link><Link href="/destinations/outre-mer">Outre-mer</Link><Link className="footer-more" href="/vols">Tous les itinéraires →</Link></nav>
+        <nav aria-label="Villes de départ"><strong>Départ de</strong>{departureCities.map((city) => <Link key={city.slug} href={`/vols/depuis/${city.slug}`}>{city.name}</Link>)}</nav>
+        <nav aria-label="Aide et informations"><strong>Aide</strong><Link href="/blog">Conseils voyage</Link><Link href="/guides/bagage-cabine">Bagage cabine</Link><Link href="/aeroports/paris-charles-de-gaulle">Aéroport CDG</Link><Link href="/aeroports/paris-orly">Aéroport Orly</Link><Link href="/faq">FAQ</Link><Link href="/a-propos">À propos</Link><a href="mailto:contact@hiflight.fr">Contact</a></nav>
       </div>
-      <div className="footer-bottom">© {new Date().getFullYear()} HIFLIGHT · Les prix et disponibilités peuvent évoluer.</div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} HIFLIGHT · Les prix et disponibilités peuvent évoluer.</span>
+        <span className="footer-legal"><Link href="/conditions-utilisations">Conditions</Link><Link href="/mentions-legales">Mentions légales</Link><Link href="/politique-de-confidentialite">Confidentialité</Link><Link href="/politique-cookies">Cookies</Link></span>
+      </div>
     </footer>
   );
 }

@@ -266,3 +266,24 @@
 .passportHome { width: min(820px, calc(100% - 32px)); }
 .emptyPassport > img { width: min(520px, 100%); }
 .closedPassport > button { width: min(600px, 100%); }
+
+.flatWorkspace{width:min(1180px,calc(100% - 32px))}
+@media(max-width:440px){.flatWorkspace{width:calc(100% - 20px)}}
+
+.tripHeader{background:#061226;color:white}
+.tripHeaderInner{width:min(1240px,calc(100% - 48px));padding:110px 0 25px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.tripHeader h1{font:800 clamp(32px,4vw,52px)/1.04 Outfit,system-ui,sans-serif;letter-spacing:-.048em;margin:0}
+.tripNav{display:flex;align-items:center;gap:6px}
+.tripNav button{display:flex;align-items:center;justify-content:center;gap:8px;color:#bccada;font-size:14px;line-height:1.2;font-family:inherit;font-weight:700;background:none;border:0;cursor:pointer;border-radius:10px;min-height:42px;padding:0 15px}
+.tripNav button[aria-pressed=true]{background:#ff7473;color:#151c30}
+.tripNav button:hover:not([aria-pressed=true]){background:#182b40;color:white}
+.page .flatWorkspace{width:min(1240px,calc(100% - 48px));margin:22px auto 0}
+.mapTools{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:18px 0 12px}
+.mapTools .segment{border-radius:12px}.mapTools .segment button{height:35px;padding:0 14px;border-radius:8px;white-space:nowrap}
+.mapTools .segment .segmentActive{color:#211a28;background:#ff8c85}
+.placeStrip,.placeStrip>div,.placeStrip a{display:flex;align-items:center;gap:10px}
+.placeStrip{padding:14px 3px;justify-content:space-between;color:#14243a;flex-wrap:wrap}
+.placeStrip img{width:28px;height:19px;object-fit:cover;border-radius:2px}.placeStrip small{color:#566b80;font-variant-numeric:tabular-nums}
+.placeStrip a,.passportCta{font-weight:700;font-size:14px;color:#253b51;text-decoration:underline;text-underline-offset:4px}
+.tripNav button:focus-visible,.placeStrip a:focus-visible{outline:2px solid #ff827d;outline-offset:3px}
+@media(max-width:680px){.tripHeaderInner{padding:86px 0 15px;flex-wrap:wrap;gap:10px;width:calc(100% - 32px)}.tripNav button{padding:0 11px;min-height:40px}.page .flatWorkspace{width:calc(100% - 20px);margin-top:12px}.mapTools{margin-top:10px;gap:5px}.mapTools .segment button{height:34px;padding:0 7px;font-size:12px;gap:3px}.placeStrip{padding-inline:5px}.placeStrip>div{flex-wrap:wrap}.placeStrip small{font-size:11px}}

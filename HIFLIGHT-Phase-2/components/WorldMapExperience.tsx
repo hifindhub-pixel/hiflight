@@ -1,10 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BookOpen, Check, ChevronLeft, ChevronRight, Globe2, List, Plane, Search, Star } from "lucide-react";
 import { useAuth } from "./AuthProvider";
-import HiflightGlobe, { GlobeMode } from "./HiflightGlobe";
+import type { GlobeMode } from "./HiflightGlobe";
+import HiflightFlatMap from "./HiflightFlatMap";
+
+const HiflightGlobe = dynamic(() => import("./HiflightGlobe"), {
+  ssr: false,
+  loading: () => <p role="status">Chargement du globe…</p>,
+});
 import { GLOBE_COUNTRIES } from "@/lib/world-map/globeCountries";
 import { VECTOR_FLAGS } from "@/lib/world-map/vectorFlags";
 import { MISSING_VECTOR_FLAGS } from "@/lib/world-map/missingVectorFlags";
@@ -22,7 +29,7 @@ type CountryState = {
 };
 type StateMap = Record<string, CountryState>;
 type PrimarySection = "globe" | "passport";
-type ViewMode = "map" | "list";
+type ViewMode = "map" | "globe" | "list";
 type Country = { code: string; code2: string | null; name: string };
 
 const NON_COUNTRY_TERRITORY_CODES = new Set(["ATF", "FLK", "GRL", "NCL", "PRI"]);
@@ -100,6 +107,7 @@ function PassportPage({ country, side, onPress, interactive = true }: { country?
 
 export default function WorldMapExperience() {
   const { user, loading: authLoading } = useAuth();
+  const [exploreCode,setExploreCode] = useState("JPN");
   const [states, setStates] = useState<StateMap>({});
   const [primarySection, setPrimarySection] = useState<PrimarySection>("globe");
   const [mode, setMode] = useState<GlobeMode>("visited");
@@ -228,27 +236,33 @@ export default function WorldMapExperience() {
     } finally { setSaving(false); }
   }, [demoMode, saving, states]);
 
-  if (authLoading || loading) return <main className={styles.loading}><div className={styles.loader} /><p>Préparation de votre globe…</p></main>;
-  if (!user && !demoMode) return <main className={styles.guest}><section><span>World Map HiFlight</span><h1>Votre monde vous attend.</h1><p>Connectez-vous pour colorer les pays avec leurs vrais drapeaux et remplir votre passeport personnel.</p><div><Link href="/connexion">Se connecter</Link><Link href="/connexion">Créer un compte</Link></div></section></main>;
-
+  if (authLoading || loading) return <main className={styles.loading}><div className={styles.loader} /><p>Préparation de votre carte…</p></main>;
+  const guest = !user && !demoMode;
+  const place = COUNTRY_BY_CODE.get(exploreCode);
+  const point = GLOBE_COUNTRIES.find(c=>c.code===exploreCode)?.center;
+  const coords = point ? [point[1].toFixed(1).replace("-","")+"° "+(point[1]>=0?"N":"S"),point[0].toFixed(1).replace("-","")+"° "+(point[0]>=0?"E":"O")].join("  /  ") : "";
   return (
     <main className={styles.page}>
-      <header className={styles.hero}>
-        <div className={styles.heroInner}>
-          <div className={styles.heroIntro}><h1>Mes voyages</h1></div>
-          <div className={styles.stats}><div><strong>{visitedCountries.length}</strong><span>visités</span></div><div><strong>{wishlistCountries.length}</strong><span>à visiter</span></div></div>
-        </div>
-      </header>
-
-      <nav className={styles.primaryTabs} aria-label="Globe et passeport">
-        <button className={primarySection === "globe" ? styles.activePrimary : ""} onClick={() => setPrimarySection("globe")}><WorldMapIcon size={19} />Globe</button>
-        <button className={primarySection === "passport" ? styles.activePrimary : ""} onClick={() => setPrimarySection("passport")}><BookOpen size={19} />Passeport</button>
-      </nav>
-
+      <header className={styles.tripHeader}><div className={styles.tripHeaderInner}>
+        <h1>{guest ? "Carte du monde" : "Mes voyages"}</h1>
+        <nav aria-label="Carte et passeport" className={styles.tripNav}>
+          <button aria-pressed={primarySection==="globe"} onClick={()=>setPrimarySection("globe")}><WorldMapIcon size={18}/>Carte du monde</button>
+          <button aria-pressed={primarySection==="passport"} onClick={()=>setPrimarySection("passport")}><BookOpen size={17}/>Passeport</button>
+        </nav>
+      </div></header>
+      {guest ? (primarySection === "passport" ?
+        <section className={styles.passportHome}><div className={styles.emptyPassport}>
+          <img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight"/>
+          <h2>Votre passeport de voyage</h2><p>Un tampon pour chacun de vos pays visités.</p><Link className={styles.passportCta} href="/connexion">Se connecter</Link>
+        </div></section> :
+        <section className={styles.flatWorkspace}>
+          <HiflightFlatMap states={{}} mode="visited" countries={COUNTRIES} focusCode={exploreCode} onCountryPress={setExploreCode}/>
+          {place && <div className={styles.placeStrip}><div aria-live="polite">{flagSource(place.code2) && <img alt="" src={flagSource(place.code2)!}/>}<strong>{place.name}</strong><small>{coords}</small></div><Link href="/connexion">Créer mon passeport <ChevronRight size={15}/></Link></div>}
+        </section>) : <>
       {primarySection === "passport" ? (
         <section className={styles.passportHome}>
           {!visitedCountries.length ? (
-            <div className={styles.emptyPassport}><img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" /><h2>Votre passeport vous attend</h2><p>Ajoutez un pays visité pour recevoir votre premier tampon.</p><button onClick={() => setPrimarySection("globe")}><WorldMapIcon size={20} />Ouvrir mon globe</button></div>
+            <div className={styles.emptyPassport}><img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" /><h2>Votre passeport vous attend</h2><p>Ajoutez un pays visité pour recevoir votre premier tampon.</p><button onClick={() => setPrimarySection("globe")}><WorldMapIcon size={20} />Ouvrir ma carte</button></div>
           ) : !passportOpen ? (
             <div className={styles.closedPassport}><button onClick={() => setPassportOpen(true)} aria-label="Ouvrir le passeport"><img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight" /><span><BookOpen size={18} />Ouvrir le passeport</span></button></div>
           ) : (
@@ -286,12 +300,12 @@ export default function WorldMapExperience() {
           )}
         </section>
       ) : (
-        <section className={styles.globeWorkspace}>
-          <div className={styles.controlRow}>
-            <div className={styles.segment}><button className={mode === "visited" ? styles.segmentActive : ""} onClick={() => setMode("visited")}><Check size={16} />Visités</button><button className={mode === "wishlist" ? styles.segmentActive : ""} onClick={() => setMode("wishlist")}><Star size={16} />À visiter</button></div>
-            <div className={styles.segment}><button className={viewMode === "map" ? styles.viewActive : ""} onClick={() => setViewMode("map")}><WorldMapIcon size={16} />Carte</button><button className={viewMode === "list" ? styles.viewActive : ""} onClick={() => setViewMode("list")}><List size={16} />Liste</button></div>
+        <section className={`${styles.globeWorkspace} ${viewMode === "map" ? styles.flatWorkspace : ""}`}>
+          <div className={styles.mapTools}>
+            <div className={styles.segment}><button className={mode === "visited" ? styles.segmentActive : ""} onClick={() => setMode("visited")}><Check size={16} />Visités · {visitedCountries.length}</button><button className={mode === "wishlist" ? styles.segmentActive : ""} onClick={() => setMode("wishlist")}><Star size={16} />À visiter · {wishlistCountries.length}</button></div>
+            <div className={styles.segment}><button aria-pressed={viewMode === "map"} className={viewMode === "map" ? styles.viewActive : ""} onClick={() => setViewMode("map")}><WorldMapIcon size={16} />Carte</button><button aria-pressed={viewMode === "globe"} className={viewMode === "globe" ? styles.viewActive : ""} onClick={() => setViewMode("globe")}><Globe2 size={16} />Globe 3D</button><button aria-pressed={viewMode === "list"} className={viewMode === "list" ? styles.viewActive : ""} onClick={() => setViewMode("list")}><List size={16} />Liste</button></div>
           </div>
-          {viewMode === "map" ? <HiflightGlobe states={states} mode={mode} onCountryPress={setPendingCode} /> : (
+          {viewMode === "map" ? <HiflightFlatMap states={states} mode={mode} onCountryPress={setPendingCode} countries={COUNTRIES} /> : viewMode === "globe" ? <HiflightGlobe states={states} mode={mode} onCountryPress={setPendingCode} /> : (
             <div className={styles.listPanel}>
               <label className={styles.listSearch}><Search size={19} /><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Rechercher un pays" /></label>
               <div className={styles.countryList}>{filteredCountries.length ? filteredCountries.map((country) => {
@@ -310,6 +324,7 @@ export default function WorldMapExperience() {
         </section>
       )}
 
+      </>}
       {error ? <p className={styles.error} role="alert">{error}</p> : null}
       {pendingCountry ? (
         <div className={styles.modalBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setPendingCode(null); }}>
