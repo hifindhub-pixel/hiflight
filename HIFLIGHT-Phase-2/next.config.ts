@@ -35,6 +35,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Une seule adresse canonique : hiflight.fr (sans www) redirige vers https://www.hiflight.fr en conservant le chemin.
+      { source: "/:path*", has: [{ type: "host", value: "hiflight.fr" }], destination: "https://www.hiflight.fr/:path*", permanent: true },
       { source: "/blog/billet-avion-pas-cher-astuces", destination: "/blog/quand-reserver-vol-pas-cher", permanent: true },
       { source: "/blog/vol-derniere-minute-astuces", destination: "/blog/quand-reserver-vol-pas-cher", permanent: true },
       { source: "/blog/vol-vacances-scolaires-prix", destination: "/blog/quand-reserver-vol-pas-cher", permanent: true },
