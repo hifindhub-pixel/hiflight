@@ -1607,7 +1607,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Comment lire ces chiffres",
         "paragraphs": [
-          "Ces tableaux reprennent les prix aller-retour les plus bas relevés le 2 novembre 2026 par le réseau de partenaires HiFlight (Travelpayouts), pour des départs dans les six prochains mois. Ce ne sont pas des moyennes : ce sont des minimums constatés, qui peuvent ne plus être disponibles quand vous lisez ces lignes.",
+          "Ces tableaux reprennent les prix aller-retour les plus bas relevés le 2 novembre 2026 par le réseau de partenaires HiFlight, pour des départs dans les six prochains mois. Ce ne sont pas des moyennes : ce sont des minimums constatés, qui peuvent ne plus être disponibles quand vous lisez ces lignes.",
           "La colonne « dates analysées » dit pour combien de dates de départ un prix a été relevé. Plus le chiffre est grand, plus le relevé est solide. En dessous de 6 dates, prenez-le comme une indication."
         ]
       },
@@ -1796,7 +1796,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "D’où viennent ces prix ?",
-        "answer": "Du réseau de partenaires de HiFlight (Travelpayouts), qui relève les prix aller-retour les plus bas pour les six prochains mois. Les pages de vols sont mises à jour chaque jour."
+        "answer": "Du réseau de partenaires de HiFlight, qui relève les prix aller-retour les plus bas pour les six prochains mois. Les pages de vols sont mises à jour chaque jour."
       }
     ],
     "relatedRoutes": [

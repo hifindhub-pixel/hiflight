@@ -53,7 +53,7 @@ export default function RoutePrices({ route, stats }: { route: FlightRoute; stat
       ) : null}
 
       <p className="price-note">
-        Méthode : prix aller-retour les plus bas relevés par le réseau de partenaires HiFlight (Travelpayouts) sur {stats.sample} dates de départ, actualisés chaque jour (dernier calcul le {frDate.format(new Date(stats.updatedAt))}).
+        Méthode : prix aller-retour les plus bas relevés par le réseau de partenaires HiFlight sur {stats.sample} dates de départ, actualisés chaque jour (dernier calcul le {frDate.format(new Date(stats.updatedAt))}).
         Prix indicatifs, susceptibles de ne plus être disponibles ; le montant définitif est celui affiché par le partenaire avant le paiement.
       </p>
     </section>
