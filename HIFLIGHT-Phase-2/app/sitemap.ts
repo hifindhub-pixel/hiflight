@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { airports, countryPages, flightRoutes, siteUrl } from "@/lib/content";
-import { blogPosts } from "@/lib/blog";
+import { blogPosts, isExpired } from "@/lib/blog";
 import { departureCities } from "@/lib/cities";
 
 export const dynamic = "force-static";
@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages.map((path) => ({ url: url(path) })),
     { url: url("/blog"), lastModified: latestPost },
-    ...blogPosts.map((post) => ({ url: url(`/blog/${post.slug}`), lastModified: post.updated })),
+    ...blogPosts.filter((post) => !isExpired(post)).map((post) => ({ url: url(`/blog/${post.slug}`), lastModified: post.updated })),
     ...departureCities.map((city) => ({ url: url(`/vols/depuis/${city.slug}`), lastModified: "2026-11-02" })),
     ...flightRoutes.map((route) => ({ url: url(`/vols/${route.slug}`), lastModified: route.updated })),
     ...countryPages.map(({ slug }) => ({ url: url(`/destinations/${slug}`), lastModified: "2026-10-30" })),

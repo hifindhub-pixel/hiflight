@@ -479,13 +479,11 @@ export function routeComparison(route: FlightRoute): string | null {
     .slice(0, 3);
   if (siblings.length < 2) return null;
   const label = (entry: { item: FlightRoute; minutes: number }) => `${back ? entry.item.origin : entry.item.destination} (${plain(entry.item.duration)})`;
-  const rank = flightRoutes.filter((item) => item.direct && item.direction === route.direction && (back ? item.destinationCode === route.destinationCode : item.originCode === route.originCode) && (minutesOf(item.duration) ?? 0) < own).length + 1;
-  const total = flightRoutes.filter((item) => item.direct && item.direction === route.direction && (back ? item.destinationCode === route.destinationCode : item.originCode === route.originCode)).length;
-  const lead = back
-    ? `Pour rentrer à ${route.destination}, ${route.origin} se rejoint en ${plain(route.duration)}`
-    : `Au départ de ${route.origin}, ${route.destination} se rejoint en ${plain(route.duration)}`;
   const near = siblings.map(label).join(", ");
-  return `${lead}, soit la ${rank}${rank === 1 ? "re" : "e"} liaison la plus courte sur les ${total} comparées par HiFlight. Les trajets de durée voisine : ${near}.`;
+  const own_ = `${route.origin}–${route.destination} dure ${plain(route.duration)} en vol direct.`;
+  return back
+    ? `${own_} Pour rentrer à ${route.destination}, d’autres départs affichent une durée voisine : ${near}.`
+    : `${own_} Au départ de ${route.origin}, des destinations de durée voisine : ${near}.`;
 }
 
 /** Délai de réservation conseillé, adapté à la distance du trajet. */

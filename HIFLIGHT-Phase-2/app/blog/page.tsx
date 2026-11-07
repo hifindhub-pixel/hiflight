@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { blogPosts } from "@/lib/blog";
+import { blogPosts, isExpired } from "@/lib/blog";
 import { defaultOgImage, siteUrl } from "@/lib/content";
 import BlogIndex from "@/components/BlogIndex";
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const dateFormat = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 
 export default function BlogPage() {
-  const posts = [...blogPosts].sort((a, b) => b.published.localeCompare(a.published));
+  const posts = blogPosts.filter((post) => !isExpired(post)).sort((a, b) => b.published.localeCompare(a.published));
   return (
     <main>
       <JsonLd data={{

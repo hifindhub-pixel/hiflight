@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { blogPosts, getPost } from "@/lib/blog";
+import { blogPosts, getPost, isExpired } from "@/lib/blog";
 import { flightRoutes, siteUrl } from "@/lib/content";
 import { getRouteStats } from "@/lib/route-data";
 import { Countdown } from "@/components/Countdown";
@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: post.metaTitle,
     description: post.description,
     alternates: { canonical: `/blog/${slug}` },
+    ...(isExpired(post) ? { robots: { index: false, follow: true } } : {}),
     openGraph: { type: "article", url: `${siteUrl}/blog/${slug}/`, images: [post.heroImage ? absUrl(post.heroImage) : `${siteUrl}/hiflight-hero.jpg`], title: `${post.metaTitle} | HiFlight`, description: post.description, publishedTime: post.published, modifiedTime: post.updated },
   };
 }
@@ -125,6 +126,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       <div className="mag-layout">
         <article className="mag-body" data-article-body>
+          {isExpired(post) ? <p className="mag-lede"><strong>Cette offre est terminée{post.expires ? ` depuis le ${dateFormat.format(new Date(`${post.expires}T12:00:00`))}` : ""}.</strong> L’article reste en ligne à titre d’information ; les prix et conditions décrits ne sont plus valables.</p> : null}
           <p className="mag-lede">{fr(post.intro)}</p>
 
           {sections.length >= 3 ? (

@@ -19,6 +19,8 @@ export type BlogPost = {
   heroImage?: string;
   /** Rubrique affichée en tête d’article et utilisée par les filtres de la page Conseils voyage. */
   category?: "Bons plans" | "Destinations" | "Conseils";
+  /** Date (AAAA-MM-JJ) après laquelle l’offre décrite est terminée : l’article reste en ligne avec un bandeau, sort du sitemap et de la liste, et passe en noindex (effet au prochain build, donc sous 24 h). */
+  expires?: string;
   /** Compte à rebours affiché en tête d’article. */
   countdown?: { to: string };
   /** FAQ affichée en fin d’article et balisée pour Google. */
@@ -1707,8 +1709,8 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Black Friday, Cyber Monday ou Travel Tuesday : lequel choisir ?",
         "paragraphs": [
-          "La réponse surprend. En 2025, un comparateur a analysé le prix moyen le plus bas par siège sur les cinq jours entre le Black Friday et le Travel Tuesday : c’est le Cyber Monday qui sortait comme le meilleur jour pour réserver un vol, même si des promotions subsistaient le lendemain.",
-          "De son côté, une autre analyse du secteur indiquait en 2023 qu’il y avait davantage d’offres le jour du Travel Tuesday que pendant le Cyber Monday ou le Black Friday. Mais davantage d’offres ne veut pas dire de meilleurs prix sur votre trajet. Tout dépend de la destination."
+          "La réponse surprend. En 2025, Skyscanner a analysé le prix moyen le plus bas par siège sur les cinq jours entre le Black Friday et le Travel Tuesday : c’est le Cyber Monday qui sortait comme le meilleur jour pour réserver un vol, même si des promotions subsistaient le lendemain.",
+          "De son côté, Hopper, à l’origine du Travel Tuesday en 2017, indique d’après ses propres données (surtout américaines) que ce mardi concentre plus d’offres de voyage que le Black Friday ou le Cyber Monday. Mais davantage d’offres ne veut pas dire de meilleurs prix sur votre trajet. Tout dépend de la destination."
         ],
         "table": {
           "headers": [
@@ -1722,11 +1724,11 @@ export const blogPosts: BlogPost[] = [
             ],
             [
               "Cyber Monday (30 nov.)",
-              "Jour le moins cher en moyenne sur les cinq jours, d’après une analyse du secteur de 2025"
+              "Jour le moins cher en moyenne sur les cinq jours, d’après une analyse Skyscanner de 2025"
             ],
             [
               "Travel Tuesday (1er déc.)",
-              "Le plus grand nombre d’offres, d’après une analyse du secteur (2023), avec des promotions encore possibles ce jour-là"
+              "Le plus grand nombre d’offres, d’après Hopper (données surtout américaines), avec des promotions encore possibles ce jour-là"
             ]
           ]
         }
@@ -1734,7 +1736,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Ce que montrent les chiffres de 2025",
         "paragraphs": [
-          "Une analyse du secteur a publié les plus fortes baisses de prix relevées pendant le Travel Tuesday 2025. Elles concernent surtout des destinations moyen-courrier où de nombreuses compagnies se font concurrence."
+          "Skyscanner a publié les plus fortes baisses de prix relevées pendant le Travel Tuesday 2025. Elles concernent surtout des destinations moyen-courrier où de nombreuses compagnies se font concurrence."
         ],
         "table": {
           "headers": [
@@ -1834,7 +1836,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "Quel est le meilleur jour pour réserver : Black Friday, Cyber Monday ou Travel Tuesday ?",
-        "answer": "Il n’y a pas de jour gagnant sur tous les trajets. En 2025, une analyse du secteur a trouvé que le Cyber Monday était le jour le moins cher en moyenne sur les cinq jours, avec encore des promotions le mardi. Comparez sur plusieurs jours."
+        "answer": "Il n’y a pas de jour gagnant sur tous les trajets. En 2025, une analyse de Skyscanner a trouvé que le Cyber Monday était le jour le moins cher en moyenne sur les cinq jours, avec encore des promotions le mardi. Comparez sur plusieurs jours."
       },
       {
         "question": "Le Travel Tuesday est-il vraiment moins cher que le reste de l’année ?",
@@ -1842,7 +1844,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "Sur quelles destinations les prix baissent-ils le plus ?",
-        "answer": "En 2025, une analyse du secteur a relevé les plus fortes baisses vers Alger (−16,5 %), Porto (−16,0 %), Lisbonne (−15,2 %), Barcelone (−10,8 %) et Marrakech (−7,2 %). Ce sont des moyennes, pas une garantie pour votre trajet."
+        "answer": "En 2025, Skyscanner a relevé les plus fortes baisses vers Alger (−16,5 %), Porto (−16,0 %), Lisbonne (−15,2 %), Barcelone (−10,8 %) et Marrakech (−7,2 %). Ce sont des moyennes, pas une garantie pour votre trajet."
       },
       {
         "question": "Faut-il attendre le Travel Tuesday pour réserver ?",
@@ -1874,6 +1876,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     "slug": "vente-flash-transavia-novembre-2026",
+    "expires": "2026-11-10",
     "category": "Bons plans",
     "metaTitle": "Vente flash Transavia : dès 39 € l’aller (novembre 2026)",
     "title": "Vente flash Transavia : jusqu’à -25 %, dès 39 € l’aller, jusqu’au 10 novembre",
@@ -2540,4 +2543,11 @@ export const blogPosts: BlogPost[] = [
 
 export function getPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
+}
+
+/** Vrai quand la date d’expiration (fin de journée, heure de Paris) est dépassée. */
+export function isExpired(post: BlogPost, now: Date = new Date()): boolean {
+  if (!post.expires) return false;
+  const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Paris" }).format(now);
+  return today > post.expires;
 }
