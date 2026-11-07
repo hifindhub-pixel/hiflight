@@ -35,6 +35,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      { source: "/blog/billet-avion-pas-cher-astuces", destination: "/blog/quand-reserver-vol-pas-cher", permanent: true },
+      { source: "/blog/vol-derniere-minute-astuces", destination: "/blog/quand-reserver-vol-pas-cher", permanent: true },
+      { source: "/blog/vol-vacances-scolaires-prix", destination: "/blog/quand-reserver-vol-pas-cher", permanent: true },
+      { source: "/blog/bagage-cabine-ou-soute-que-choisir", destination: "/blog/compagnies-low-cost-frais-caches", permanent: true },
+      { source: "/blog/vol-direct-ou-escale-que-choisir", destination: "/blog/compagnies-low-cost-frais-caches", permanent: true },
+      { source: "/blog/aller-simple-ou-aller-retour", destination: "/blog/compagnies-low-cost-frais-caches", permanent: true },
+      { source: "/blog/vol-maroc-tunisie-quand-reserver", destination: "/blog/vol-pas-cher-depuis-province", permanent: true },
       { source: "/conditions", destination: "/conditions-utilisations", permanent: true },
       { source: "/cgu", destination: "/conditions-utilisations", permanent: true },
       { source: "/terms", destination: "/conditions-utilisations", permanent: true },
