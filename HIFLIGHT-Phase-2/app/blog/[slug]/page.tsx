@@ -46,7 +46,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     const route = flightRoutes.find((r) => r.slug === slug);
     return [slug, route ? { route, stats: await getRouteStats(route) } : null] as const;
   })));
-  const tocItems = post.sections.map((section) => ({ id: anchor(section.heading), label: section.heading }));
+  // Une section de prix sans aucune donnée est masquée entièrement (jamais de titre vide ni de promesse sans tableau).
+  const sections = post.sections.filter((section) => !section.routeTable || section.routeTable.some((slug) => tableData.get(slug)?.stats));
+  const tocItems = sections.map((section) => ({ id: anchor(section.heading), label: section.heading }));
   const heroUrl = post.heroImage ? absUrl(post.heroImage) : `${siteUrl}/hiflight-hero.jpg`;
 
   const meta = (
@@ -125,14 +127,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <article className="mag-body" data-article-body>
           <p className="mag-lede">{fr(post.intro)}</p>
 
-          {post.sections.length >= 3 ? (
+          {sections.length >= 3 ? (
             <details className="mag-toc-m">
-              <summary>Dans cet article <span>{post.sections.length} parties</span></summary>
+              <summary>Dans cet article <span>{sections.length} parties</span></summary>
               <ol>{tocItems.map((item, index) => <li key={item.id}><a href={`#${item.id}`}><i>{String(index + 1).padStart(2, "0")}</i>{item.label}</a></li>)}</ol>
             </details>
           ) : null}
 
-          {post.sections.map((section, index) => (
+          {sections.map((section, index) => (
             <section key={section.heading} id={anchor(section.heading)} className="mag-section">
               <span className="mag-num">{String(index + 1).padStart(2, "0")}</span>
               <h2>{fr(section.heading)}</h2>
@@ -230,7 +232,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </article>
 
         <aside className="mag-side" aria-label="Informations sur l’article">
-          {post.sections.length >= 3 ? <ArticleToc items={tocItems} /> : null}
+          {sections.length >= 3 ? <ArticleToc items={tocItems} /> : null}
           <Link className="mag-cta" href="/#recherche" style={post.heroImage ? { backgroundImage: `linear-gradient(180deg,rgba(7,22,47,.55),rgba(7,22,47,.92)),url(${post.heroImage})` } : undefined}>
             <strong>Comparer les vols</strong>
             <span>Des centaines de compagnies, une seule recherche. Gratuit, sans inscription.</span>
