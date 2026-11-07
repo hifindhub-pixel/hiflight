@@ -21,7 +21,7 @@ export default function CookiePolicy() {
         <h2>Avis et affiliation</h2>
         <p>Après votre accord, Trustpilot peut afficher et mesurer le widget d’avis, tandis que les scripts automatiques Impact et CJ peuvent mesurer les performances d’affiliation. Lorsque vous choisissez volontairement un lien partenaire, le site externe peut aussi attribuer ce clic selon sa propre politique. HiFlight peut recevoir une commission lorsqu’une réservation éligible est finalisée, sans surcoût ajouté par HiFlight.</p>
         <h2>Services de comparaison intégrés</h2>
-        <p>Lorsque vous ouvrez ou utilisez une rubrique concernée, Airalo/Travelpayouts, Omio ou Stay22 peuvent recevoir les données techniques et critères nécessaires pour afficher le service demandé. La réservation et le paiement ont lieu auprès du partenaire, selon sa propre politique de confidentialité.</p>
+        <p>Lorsque vous ouvrez ou utilisez une rubrique concernée, nos partenaires (vols, Airalo, Omio ou Stay22) peuvent recevoir les données techniques et critères nécessaires pour afficher le service demandé. La réservation et le paiement ont lieu auprès du partenaire, selon sa propre politique de confidentialité.</p>
         <h2>Données Google</h2>
         <p>Google explique comment les données provenant de sites et d’applications utilisant ses services sont traitées sur sa page <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener noreferrer">Responsabilité des données d’entreprise</a>.</p>
         <h2>Nous contacter</h2>
