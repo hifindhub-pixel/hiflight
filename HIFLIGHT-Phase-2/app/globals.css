@@ -1222,6 +1222,44 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
   outline:3px solid rgba(255,107,107,.25);
   outline-offset:3px;
 }
+.faq-shell>p{
+  max-width:760px;
+  margin:-14px 0 30px;
+  color:#435066;
+  font-size:16px;
+  line-height:1.6;
+}
+.faq-item>h3{
+  margin:0;
+  padding:20px 2px 8px;
+  color:#0a172d;
+  font-size:15px;
+  font-weight:800;
+  line-height:1.35;
+}
+.faq-item>h3+p{
+  padding:0 34px 20px 2px;
+}
+.faq-shell>ul{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px 38px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.faq-shell>ul a{
+  color:#0a172d;
+  font-weight:700;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.faq-shell>ul a:hover{
+  color:var(--coral-text);
+}
+@media(max-width:760px){
+  .faq-shell>ul{grid-template-columns:1fr}
+}
 .faq-item>div{
   padding:0 34px 19px 2px;
 }
