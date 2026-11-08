@@ -10,7 +10,6 @@ import { cityPhotos } from "@/lib/city-photos";
 import type { RoutePriceEntry } from "@/app/api/route-prices/route";
 
 type Snapshot = { updatedAt: string | null; routes: Record<string, RoutePriceEntry> };
-type SortKey = "recent" | "price" | "name";
 
 /** Teinte stable par destination, pour les villes sans photo. */
 const hueOf = (code: string) => [...code].reduce((total, char) => (total * 31 + char.charCodeAt(0)) % 360, 7);
@@ -24,11 +23,10 @@ const suggestions: [string, string][] = [
 ];
 
 export default function FavoritesExperience() {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const { slugs, ready } = useFavorites();
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [failed, setFailed] = useState(false);
-  const [sort, setSort] = useState<SortKey>("recent");
 
   useEffect(() => {
     fetch("/api/route-prices/").then(async (response) => {
@@ -38,14 +36,11 @@ export default function FavoritesExperience() {
   }, []);
 
   const items = useMemo(() => {
-    const known = slugs.flatMap((slug, index) => {
+    return slugs.flatMap((slug, index) => {
       const entry = snapshot?.routes[slug];
-      return entry ? [{ slug, entry, index }] : [];
+      return entry ? [{ slug, entry }] : [];
     });
-    if (sort === "price") return [...known].sort((a, b) => (a.entry.price ?? Infinity) - (b.entry.price ?? Infinity) || a.index - b.index);
-    if (sort === "name") return [...known].sort((a, b) => a.entry.destination.localeCompare(b.entry.destination, "fr"));
-    return known;
-  }, [slugs, snapshot, sort]);
+  }, [slugs, snapshot]);
 
   const cheapest = useMemo(() => {
     const priced = items.filter((item) => item.entry.price !== null);
@@ -60,7 +55,6 @@ export default function FavoritesExperience() {
       <section className="fav-hero">
         <div className="fav-shell fav-hero-inner">
           <div>
-            <p className="breadcrumb"><Link href="/">Accueil</Link> / Favoris</p>
             <h1>Mes favoris</h1>
             <p>Les trajets qui vous font envie, avec leur prix du moment.</p>
           </div>
@@ -69,14 +63,6 @@ export default function FavoritesExperience() {
       </section>
 
       <div className="fav-shell">
-        {ready && !loading && !user ? (
-          <aside className="fav-guest">
-            <Heart aria-hidden="true" size={22} />
-            <div><strong>Vos favoris sont gardés sur cet appareil.</strong><span>Connectez-vous pour les retrouver partout. Ceux déjà ajoutés seront conservés.</span></div>
-            <Link href="/connexion">Se connecter</Link>
-          </aside>
-        ) : null}
-
         {waiting ? <div className="fav-loading" aria-busy="true"><span /><span /><span /></div> : null}
 
         {!waiting && slugs.length === 0 ? (
@@ -97,11 +83,6 @@ export default function FavoritesExperience() {
 
         {!waiting && items.length > 0 ? (
           <>
-            <div className="fav-toolbar" role="group" aria-label="Trier les favoris">
-              {([["recent", "Récents"], ["price", "Prix croissant"], ["name", "Destination A–Z"]] as [SortKey, string][]).map(([key, label]) => (
-                <button key={key} type="button" className={sort === key ? "is-on" : undefined} aria-pressed={sort === key} onClick={() => setSort(key)}>{label}</button>
-              ))}
-            </div>
             <ul className="fav-grid">
               {items.map(({ slug, entry }) => {
                 const photo = cityPhotos[entry.destinationCode];
