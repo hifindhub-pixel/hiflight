@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Heart, Plane } from "lucide-react";
+import { CSSProperties, useEffect, useMemo, useState } from "react";
+import { ArrowRight, Heart } from "lucide-react";
 import { useAuth } from "./AuthProvider";
 import { useFavorites } from "./FavoritesProvider";
 import FavoriteButton from "./FavoriteButton";
@@ -12,6 +12,8 @@ import type { RoutePriceEntry } from "@/app/api/route-prices/route";
 type Snapshot = { updatedAt: string | null; routes: Record<string, RoutePriceEntry> };
 type SortKey = "recent" | "price" | "name";
 
+/** Teinte stable par destination, pour les villes sans photo. */
+const hueOf = (code: string) => [...code].reduce((total, char) => (total * 31 + char.charCodeAt(0)) % 360, 7);
 const euro = (value: number) => `${value} €`;
 const frDate = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const suggestions: [string, string][] = [
@@ -56,17 +58,21 @@ export default function FavoritesExperience() {
   return (
     <main className="fav-page">
       <section className="fav-hero">
-        <div className="fav-shell">
-          <p className="breadcrumb"><Link href="/">Accueil</Link> / Favoris</p>
-          <h1>Mes favoris</h1>
-          <p>Gardez les trajets qui vous intéressent et retrouvez leur prix en un coup d’œil. Le tarif final est confirmé chez le partenaire au moment de réserver.</p>
+        <div className="fav-shell fav-hero-inner">
+          <div>
+            <p className="breadcrumb"><Link href="/">Accueil</Link> / Favoris</p>
+            <h1>Mes favoris</h1>
+            <p>Les trajets qui vous font envie, avec leur prix du moment.</p>
+          </div>
+          {items.length > 0 ? <p className="fav-count"><strong>{items.length}</strong><span>trajet{items.length > 1 ? "s" : ""}</span></p> : null}
         </div>
       </section>
 
       <div className="fav-shell">
         {ready && !loading && !user ? (
           <aside className="fav-guest">
-            <div><strong>Vos favoris sont gardés sur cet appareil.</strong><span>Connectez-vous pour les retrouver sur tous vos appareils. Ceux que vous avez déjà ajoutés seront conservés.</span></div>
+            <Heart aria-hidden="true" size={22} />
+            <div><strong>Vos favoris sont gardés sur cet appareil.</strong><span>Connectez-vous pour les retrouver partout. Ceux déjà ajoutés seront conservés.</span></div>
             <Link href="/connexion">Se connecter</Link>
           </aside>
         ) : null}
@@ -75,9 +81,9 @@ export default function FavoritesExperience() {
 
         {!waiting && slugs.length === 0 ? (
           <section className="fav-empty">
-            <Heart aria-hidden="true" size={34} strokeWidth={1.8} />
-            <h2>Aucun favori pour le moment</h2>
-            <p>Touchez le cœur d’un trajet pour l’enregistrer ici. Quelques idées pour commencer :</p>
+            <span className="fav-empty-icon"><Heart aria-hidden="true" size={30} strokeWidth={2} /></span>
+            <h2>Votre liste est vide pour l’instant</h2>
+            <p>Touchez le cœur d’un trajet pour le retrouver ici, avec son prix.</p>
             <ul>
               {suggestions.map(([slug, label]) => <li key={slug}><Link href={`/vols/${slug}`}>{label}</Link></li>)}
             </ul>
@@ -91,15 +97,10 @@ export default function FavoritesExperience() {
 
         {!waiting && items.length > 0 ? (
           <>
-            <div className="fav-toolbar">
-              <p><strong>{items.length}</strong> trajet{items.length > 1 ? "s" : ""} enregistré{items.length > 1 ? "s" : ""}</p>
-              <label>Trier par
-                <select value={sort} onChange={(event) => setSort(event.target.value as SortKey)}>
-                  <option value="recent">Ajoutés récemment</option>
-                  <option value="price">Prix croissant</option>
-                  <option value="name">Destination (A–Z)</option>
-                </select>
-              </label>
+            <div className="fav-toolbar" role="group" aria-label="Trier les favoris">
+              {([["recent", "Récents"], ["price", "Prix croissant"], ["name", "Destination A–Z"]] as [SortKey, string][]).map(([key, label]) => (
+                <button key={key} type="button" className={sort === key ? "is-on" : undefined} aria-pressed={sort === key} onClick={() => setSort(key)}>{label}</button>
+              ))}
             </div>
             <ul className="fav-grid">
               {items.map(({ slug, entry }) => {
@@ -108,17 +109,21 @@ export default function FavoritesExperience() {
                 return (
                   <li key={slug} className="fav-card">
                     <Link href={`/vols/${slug}`} className="fav-card-link" aria-label={`Comparer les vols ${pair}`}>
-                      <div className={`fav-photo${photo ? "" : " is-fallback"}`}>
-                        {photo ? <img src={photo} alt={`Vue de ${entry.destination}`} loading="lazy" width="720" height="480" /> : <span aria-hidden="true"><Plane size={22} />{entry.destinationCode}</span>}
-                        {cheapest === slug ? <em className="fav-badge">Le moins cher de vos favoris</em> : null}
+                      <div className={`fav-photo${photo ? "" : " is-fallback"}`} style={photo ? undefined : { "--fav-hue": hueOf(entry.destinationCode) } as CSSProperties}>
+                        {photo ? <img src={photo} alt={`Vue de ${entry.destination}`} loading="lazy" width="720" height="480" /> : <b aria-hidden="true">{entry.destinationCode}</b>}
+                        <span className="fav-shade" aria-hidden="true" />
+                        {cheapest === slug ? <em className="fav-badge">Le moins cher</em> : null}
+                        <div className="fav-photo-text"><small>Depuis {entry.origin}</small><h3>{entry.destination}</h3></div>
                       </div>
                       <div className="fav-body">
-                        <h3>{entry.origin} <ArrowRight aria-hidden="true" size={16} /> {entry.destination}</h3>
-                        <p className="fav-meta">{entry.duration} · {entry.direct ? "vol direct" : "avec escale"}</p>
                         {entry.price !== null ? (
-                          <p className="fav-price">dès <strong>{euro(entry.price)}</strong> <span>aller-retour{entry.month ? ` · ${entry.month}` : ""}</span></p>
+                          <p className="fav-price"><span>dès</span><strong>{euro(entry.price)}</strong><small>aller-retour{entry.month ? ` · ${entry.month}` : ""}</small></p>
                         ) : <p className="fav-price is-none">Prix indisponible pour le moment</p>}
-                        {entry.directPrice !== null && entry.directPrice !== entry.price ? <p className="fav-direct">Vol direct dès {euro(entry.directPrice)}</p> : null}
+                        <ul className="fav-chips">
+                          <li>{entry.duration.replace(/^environ /, "")}</li>
+                          <li className={entry.direct ? "is-direct" : undefined}>{entry.direct ? "Vol direct" : "Avec escale"}</li>
+                          {entry.directPrice !== null && entry.directPrice !== entry.price ? <li>Direct dès {euro(entry.directPrice)}</li> : null}
+                        </ul>
                         <span className="fav-cta">Comparer les prix <ArrowRight aria-hidden="true" size={16} /></span>
                       </div>
                     </Link>
