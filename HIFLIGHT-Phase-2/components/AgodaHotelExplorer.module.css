@@ -49,3 +49,55 @@
 .map :global(.hotel-price-pin.is-selected){outline:3px solid #ffffffb3;background:#0b1b33;border-color:#0b1b33}
 .notice{background:#f8fafc;border-color:#e2e8f0;color:#475569}.fallback{border-top:1px solid #e2e8f0;background:#f8fafc;border-radius:0 0 24px 24px}.fallback h2{font-size:16px}.fallback article{background:white}
 @media(max-width:800px){.shell{margin:16px 12px 32px}.content{padding:12px}.discovery{grid-template-columns:1fr;gap:12px}.discoveryCopy{padding:16px 8px}.discoveryCopy h2{font-size:27px;margin:10px 0}.discoveryCopy p{margin-bottom:14px}.discoveryCopy small{margin-top:12px}.discoveryMap :global(.agoda-leaflet-map){height:350px;min-height:0}.discoveryMap{grid-row:auto}.map :global(.agoda-map-caption){padding:10px;font-size:10px}}
+
+/* Refined interactive map: quiet geography, compact controls, photo-led previews. */
+.map{border:1px solid #e1e5e8;border-radius:22px;box-shadow:0 8px 32px #182c4010}
+.mapHeader{padding:16px 20px}.mapHeader strong{color:#12283d;letter-spacing:-.2px}
+.map :global(.agoda-map-stage){isolation:isolate;background:#f0f2ee}
+.map :global(.hotel-map-location){position:absolute;z-index:405;top:20px;left:20px;display:flex;align-items:center;gap:11px;padding:13px 16px;background:#fffffff2;backdrop-filter:blur(12px);border:1px solid #ffffff;border-radius:15px;box-shadow:0 4px 22px #142e4212;pointer-events:none;max-width:calc(100% - 104px)}
+.map :global(.hotel-map-location-icon){display:grid;place-items:center;width:34px;height:34px;flex-shrink:0;border-radius:11px;background:#fff0ec;color:#c75b50}
+.map :global(.hotel-map-location strong){display:block;font-size:13px;line-height:1.4;color:#12283d;font-weight:700;letter-spacing:-.15px}
+.map :global(.hotel-map-location span:not(.hotel-map-location-icon)){display:block;font-size:11px;color:#647482;margin-top:3px;line-height:1.4}
+.map :global(.hotel-map-controls){position:absolute;z-index:410;top:20px;right:18px;display:flex;flex-direction:column;gap:10px}
+.map :global(.hotel-map-controls button){display:grid;place-items:center;width:42px;height:42px;border:1px solid #e3e8e9;border-radius:12px;background:#fff;color:#243b4d;box-shadow:0 3px 12px #16304412;cursor:pointer;transition:background .15s,color .15s}
+.map :global(.hotel-map-controls button:hover){background:#12283d;color:white}
+.map :global(.hotel-map-controls button:focus-visible){outline:3px solid #cf665c;outline-offset:3px}
+.map :global(.hotel-map-zoom){border:1px solid #e3e8e9;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px #16304412}
+.map :global(.hotel-map-zoom button){border:0;border-radius:0;box-shadow:none;width:40px}
+.map :global(.hotel-map-zoom button+button){border-top:1px solid #edf0f2}
+.map :global(.hotel-map-hint){position:absolute;bottom:28px;left:20px;z-index:400;display:flex;align-items:center;gap:7px;font-size:10px;font-weight:500;background:#fffffff0;color:#536572;border:1px solid #ffffffbd;border-radius:30px;padding:9px 13px;pointer-events:none;box-shadow:0 2px 8px #16304408}
+.map :global(.hotel-price-pin){border:1px solid #fff;border-radius:20px;line-height:32px;font-size:11px;font-weight:750;color:#173044;background:white;box-shadow:0 2px 5px #132a3820,0 6px 16px #132a3818;transition:background .15s,color .15s;cursor:pointer}
+.map :global(.hotel-price-pin:hover){background:#fff3ef;border-color:#d98b7f;color:#833e35}
+.map :global(.hotel-price-pin.is-selected){background:#132d43;border-color:white;outline:3px solid #132d4328;color:white;box-shadow:0 4px 16px #132d4340}
+.map :global(.hotel-price-pin.is-compact){width:13px!important;height:13px!important;background:#66818d;border:2px solid white;box-shadow:0 1px 5px #19364330}
+.map :global(.hotel-price-pin.is-compact:hover){background:#c75b50}
+.map :global(.leaflet-popup-content-wrapper){border-radius:18px;box-shadow:0 10px 40px #132d4330;border:1px solid #ffffff}
+.map :global(.leaflet-popup-content){width:270px!important}
+.map :global(.hotel-map-preview){padding:0;display:block}
+.map :global(.hotel-map-preview>img){width:100%;height:154px;object-fit:cover;display:block;border-radius:0}
+.map :global(.hotel-map-preview-body){display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:16px}
+.map :global(.hotel-map-preview strong){font-size:15px;letter-spacing:-.2px;line-height:1.4;padding:0;color:#142d42}
+.map :global(.hotel-map-rating){font-size:10px;line-height:1;background:#edf4f1;color:#28604b;font-weight:700;padding:6px 8px;border-radius:6px}
+.map :global(.hotel-map-preview .hotel-map-price){font-size:11px;color:#697985;font-weight:400;margin:2px 0 0}
+.map :global(.hotel-map-price b){font-size:23px;color:#142d42;letter-spacing:-.6px;font-weight:750}
+.map :global(.hotel-map-preview small){font-size:10px;line-height:1.5;color:#697985}
+.map :global(.hotel-map-preview a){align-self:stretch;border-radius:10px;padding:11px;background:#142d42;font-size:11px;margin-top:3px}
+.map :global(.hotel-map-preview a:hover){background:#254961}
+.map :global(.leaflet-container a.leaflet-popup-close-button){top:9px;right:9px;width:28px;height:28px;line-height:26px;border-radius:50%;background:#fffffff0;color:#233a4a;box-shadow:0 2px 8px #132d4320;font-size:20px}
+.map :global(.hotel-map-loading),.map :global(.hotel-map-error){position:absolute;z-index:402;top:50%;left:50%;transform:translate(-50%,-50%);width:max-content;max-width:75%;padding:16px 20px;border:1px solid #e1e8e8;background:#fffffff2;border-radius:14px;font-size:12px;line-height:1.7;text-align:center;color:#536572;box-shadow:0 4px 20px #1630440a}
+.map :global(.agoda-map-caption){padding:13px 18px;border-top:1px solid #edf0f2}
+.map :global(.agoda-map-stage.is-expanded){position:fixed;inset:16px;z-index:10000;border-radius:22px;overflow:hidden;box-shadow:0 0 0 30px #12283dc9,0 20px 90px #0004}
+.map :global(.agoda-map-stage.is-expanded .agoda-leaflet-map){height:100%;min-height:0}
+.discoveryMap :global(.agoda-leaflet-map){height:500px}
+.discoveryCopy{padding:28px 20px}.discoveryCopy h2{font-size:clamp(27px,2.8vw,38px);line-height:1.17;letter-spacing:-1.2px}
+@media(max-width:800px){
+.map{border-radius:17px}.map :global(.hotel-map-location){top:14px;left:12px;padding:10px 11px;gap:8px;max-width:calc(100% - 78px);border-radius:12px}
+.map :global(.hotel-map-location-icon){display:none}.map :global(.hotel-map-location strong){font-size:12px}.map :global(.hotel-map-location span:not(.hotel-map-location-icon)){font-size:10px}
+.map :global(.hotel-map-controls){top:14px;right:12px;gap:8px}.map :global(.hotel-map-controls button){width:40px;height:40px}.map :global(.hotel-map-zoom button){width:38px}
+.map :global(.hotel-map-hint){left:12px;bottom:27px;font-size:9px}.map :global(.agoda-map-stage):has(.mobileHotelSheet) :global(.hotel-map-hint){display:none}
+.map :global(.agoda-map-stage.is-expanded){inset:8px;border-radius:16px}.discoveryMap :global(.agoda-leaflet-map){height:420px}
+.mobileHotelSheet{bottom:30px;border:0;box-shadow:0 8px 32px #132d4326;border-radius:16px}
+}
+@media(prefers-reduced-motion:reduce){.map :global(.hotel-map-controls button),.map :global(.hotel-price-pin){transition:none}}
+
+.map:has(:global(.agoda-map-stage.is-expanded)){z-index:10000;overflow:visible}
