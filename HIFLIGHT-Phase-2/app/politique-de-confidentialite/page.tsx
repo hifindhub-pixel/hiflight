@@ -24,6 +24,7 @@ export default function Privacy() {
         <h2>Transferts internationaux</h2>
         <p>Certains prestataires peuvent traiter des données hors de l’Espace économique européen. HIFLIGHT s’appuie alors sur les mécanismes prévus par le RGPD, notamment les décisions d’adéquation ou les clauses contractuelles types, lorsque ces garanties sont requises.</p>
         <h2>Durées de conservation</h2>
+        <p>Favoris : lorsque vous enregistrez un trajet en favori sans être connecté, la liste est conservée dans le stockage de votre navigateur, sur votre appareil, afin de fournir cette fonction que vous avez demandée. Si vous vous connectez, elle est rattachée à votre compte et supprimée avec lui.</p>
         <p>Les données liées au compte sont conservées pendant son utilisation, puis supprimées ou anonymisées après une demande de suppression, sous réserve des obligations légales. Les critères de recherche ne sont conservés que pendant la durée nécessaire au fonctionnement, à la sécurité et aux journaux techniques des prestataires. La preuve de votre choix concernant les cookies est renouvelée au plus tard tous les six mois.</p>
         <h2>Cookies et traceurs</h2>
         <p>Les traceurs non essentiels de mesure d’audience, d’avis, d’affiliation et de publicité sont chargés uniquement après votre accord. Vous pouvez refuser sans perdre l’accès au comparateur et rouvrir à tout moment le panneau depuis le bouton « Cookies ». Le détail des services, finalités et durées figure dans la <Link href="/politique-cookies">politique relative aux cookies</Link>.</p>
