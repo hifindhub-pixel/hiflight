@@ -2538,6 +2538,83 @@ export const blogPosts: BlogPost[] = [
         "answer": "Seulement à Vienne. Prague utilise la couronne tchèque et Budapest le forint."
       }
     ]
+  },
+  {
+    "slug": "choisir-son-hotel-points-a-verifier",
+    "category": "Conseils",
+    "metaTitle": "Choisir son hôtel : 6 points à vérifier avant de réserver",
+    "title": "Bien choisir son hôtel : 6 points à vérifier avant de réserver",
+    "description": "Prix total, annulation, quartier, horaires d’arrivée, avis récents : les six vérifications à faire avant de réserver un hôtel, pour éviter les mauvaises surprises.",
+    "published": "2026-11-08",
+    "updated": "2026-11-08",
+    "readingMinutes": 3,
+    "intro": "Le prix de la nuit ne dit pas tout. Entre les taxes, les conditions d’annulation et la distance réelle avec ce que vous allez visiter, deux chambres au même tarif peuvent coûter très différemment. Voici six vérifications à faire avant de réserver, dans l’ordre où elles comptent le plus.",
+    "sections": [
+      {
+        "heading": "Comparer le prix total, pas le prix de la nuit",
+        "paragraphs": [
+          "Selon la destination, une taxe de séjour peut s’ajouter au prix affiché, et certains établissements facturent des frais de service ou de ménage. Ces montants sont parfois réglés sur place, à part de la réservation.",
+          "Le montant à retenir est le total affiché au moment du paiement. Comparez deux offres sur ce total, pas sur le prix par nuit."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Le tarif le plus bas n’est pas toujours le moins cher",
+          "text": "Une offre moins chère à la nuit peut devenir plus chère une fois les taxes et les frais ajoutés. Regardez le détail avant de valider."
+        }
+      },
+      {
+        "heading": "Regarder la politique d’annulation",
+        "paragraphs": [
+          "Une chambre non remboursable coûte souvent moins cher, mais elle ne se modifie pas si votre vol change. Si vos dates ne sont pas certaines, une annulation gratuite jusqu’à une date limite protège mieux.",
+          "Notez la date et l’heure limite de l’annulation gratuite : passé ce délai, le montant est en général dû."
+        ]
+      },
+      {
+        "heading": "Choisir le quartier avant l’établissement",
+        "paragraphs": [
+          "Un hôtel moins cher mais loin du centre ou des transports coûte du temps et de l’argent en trajets. Avant de choisir, regardez sur la carte la distance avec la gare, l’aéroport et les lieux que vous visiterez.",
+          "Comparez le temps de trajet réel plutôt que la distance à vol d’oiseau. Nos guides par destination (Marrakech, Istanbul, Barcelone, Lisbonne, Londres, Rome, Madrid…) expliquent comment rejoindre le centre depuis l’aéroport."
+        ]
+      },
+      {
+        "heading": "Vérifier l’heure d’arrivée et de départ",
+        "paragraphs": [
+          "Si votre vol atterrit tard ou repart tôt, confirmez avec l’hôtel l’accueil de nuit et la possibilité de déposer les bagages avant ou après le séjour."
+        ]
+      },
+      {
+        "heading": "Lire les avis récents",
+        "paragraphs": [
+          "Les remarques sur la propreté, le bruit et l’accueil comptent plus que la note moyenne. Privilégiez les avis récents, qui reflètent l’état actuel de l’établissement."
+        ]
+      },
+      {
+        "heading": "Garder la réservation chez le partenaire",
+        "paragraphs": [
+          "HiFlight compare les hôtels par destination et par dates, avec la liste, la carte et les vendeurs partenaires. La réservation, le paiement et les modifications se font chez le partenaire choisi : conservez sa confirmation et son numéro de réservation."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-barcelone",
+      "paris-lisbonne",
+      "paris-rome",
+      "paris-londres"
+    ],
+    "faq": [
+      {
+        "question": "Le prix affiché pour un hôtel est-il définitif ?",
+        "answer": "Non. Les prix et disponibilités peuvent évoluer. Vérifiez le montant total, les taxes et les conditions sur la page du partenaire avant le paiement."
+      },
+      {
+        "question": "Vaut-il mieux choisir l’annulation gratuite ?",
+        "answer": "Si vos dates peuvent encore changer, oui : elle protège en cas de modification du vol. Si elles sont certaines, une chambre non remboursable coûte souvent moins cher."
+      },
+      {
+        "question": "Qui gère ma réservation d’hôtel ?",
+        "answer": "Le partenaire sélectionné gère la réservation, le paiement, la confirmation, les modifications et les annulations."
+      }
+    ]
   }
 ];;
 
