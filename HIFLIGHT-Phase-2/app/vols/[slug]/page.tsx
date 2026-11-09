@@ -1,3 +1,4 @@
+import FavoriteButton from "@/components/FavoriteButton";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -91,6 +92,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
           <p className="breadcrumb"><Link href="/">Accueil</Link> / <Link href="/vols">Vols</Link> / {departureCity ? <><Link href={`/vols/depuis/${departureCity.slug}`}>Vols {departureCity.from}</Link> / </> : null}{pair}</p>
           <h1>{route.title}</h1>
           <p>{route.intro}</p>
+          <FavoriteButton slug={route.slug} label={pair} variant="inline" />
           {stats ? <p className="hero-price">À partir de <strong>{stats.lowest.price} €</strong> aller-retour · relevé récent en {stats.lowest.monthLabel}</p> : null}
         </div>
       </section>

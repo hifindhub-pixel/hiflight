@@ -1,4 +1,5 @@
 // Accueil : photos Unsplash (licence libre), World Map et Passeport
+import FavoriteButton from "@/components/FavoriteButton";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
@@ -69,10 +70,13 @@ export default async function Home() {
         <div className="home-head"><h2>Où partir en ce moment ?</h2><Link className="text-link" href="/vols">Tous les itinéraires →</Link></div>
         <div className="dest-grid">
           {deals.map((d) => (
-            <Link key={d.slug} href={`/vols/${d.slug}`} className="dest-card">
-              <img src={d.img} alt={`Vol Paris ${d.city}`} loading="lazy" width="400" height="300" />
-              <div><strong>{d.city}</strong><span>{d.country}</span><em>{d.price ? <>dès <b>{d.price} €</b> A/R</> : "Voir les prix"}</em></div>
-            </Link>
+            <div key={d.slug} className="fav-host">
+              <Link href={`/vols/${d.slug}`} className="dest-card">
+                <img src={d.img} alt={`Vol Paris ${d.city}`} loading="lazy" width="400" height="300" />
+                <div><strong>{d.city}</strong><span>{d.country}</span><em>{d.price ? <>dès <b>{d.price} €</b> A/R</> : "Voir les prix"}</em></div>
+              </Link>
+              <FavoriteButton slug={d.slug} label={`Paris – ${d.city}`} />
+            </div>
           ))}
         </div>
       </section>
