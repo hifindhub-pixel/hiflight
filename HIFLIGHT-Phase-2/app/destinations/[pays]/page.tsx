@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import FavoriteButton from "@/components/FavoriteButton";
 import JsonLd from "@/components/JsonLd";
 import { blogPosts } from "@/lib/blog";
 import { countryPages, defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
@@ -66,10 +67,14 @@ export default async function CountryPage({ params }: { params: Promise<{ pays: 
         <h2>Vols de France {country.toward}</h2>
         <div className="route-list">
           {outbound.map((route) => (
-            <Link key={route.slug} href={`/vols/${route.slug}`}>
+            <div key={route.slug} className="route-row">
+              <Link href={`/vols/${route.slug}`}>
               <span>{route.originCode}</span><b>→</b><span>{route.destinationCode}</span>
               <strong>{route.origin} – {route.destination} <small>{route.duration}</small></strong>
-            </Link>
+
+              </Link>
+              <FavoriteButton slug={route.slug} label={`${route.origin} – ${route.destination}`} />
+            </div>
           ))}
         </div>
 
@@ -78,10 +83,14 @@ export default async function CountryPage({ params }: { params: Promise<{ pays: 
             <h2>Vols depuis {country.withArticle} vers la France</h2>
             <div className="route-list">
               {inbound.map((route) => (
-                <Link key={route.slug} href={`/vols/${route.slug}`}>
+                <div key={route.slug} className="route-row">
+                  <Link href={`/vols/${route.slug}`}>
                   <span>{route.originCode}</span><b>→</b><span>{route.destinationCode}</span>
                   <strong>{route.origin} – {route.destination} <small>{route.duration}</small></strong>
-                </Link>
+
+                  </Link>
+                  <FavoriteButton slug={route.slug} label={`${route.origin} – ${route.destination}`} />
+                </div>
               ))}
             </div>
           </>

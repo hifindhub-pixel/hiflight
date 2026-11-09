@@ -4,6 +4,8 @@ import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { airportCities, AirportCity, findAirportCity } from "@/lib/airports";
 import { searchUrl } from "@/lib/content";
 import { trackPartnerClick, trackSearch } from "./Analytics";
+import FavoriteButton from "./FavoriteButton";
+import { routeSlugByPair } from "@/lib/route-index";
 
 type Props = { origin?: string; destination?: string; originCode?: string; destinationCode?: string; compact?: boolean };
 type DateMode = "departure" | "return";
@@ -420,7 +422,10 @@ export default function SearchForm({ origin = "", destination = "", originCode =
         </div>
         <button className="search-button" type="submit"><span>Rechercher</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4" /></svg></b></button>
       </div>}
-      <label className="direct-toggle"><input type="checkbox" checked={direct} onChange={(event) => setDirect(event.target.checked)} /><span /> Vols directs uniquement</label>
+      <div className="search-extras">
+        <label className="direct-toggle"><input type="checkbox" checked={direct} onChange={(event) => setDirect(event.target.checked)} /><span /> Vols directs uniquement</label>
+        {tripType !== "multicity" ? <FavoriteButton variant="field" slug={routeSlugByPair[`${fromCode}-${toCode}`] ?? ""} label={`${from} – ${to}`.replace(/\s*\([A-Z]{3}\)/g, "")} /> : null}
+      </div>
       <p className={`form-note ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "HiFlight recherche et compare les offres disponibles selon vos critères."}</p>
     </form>
   );

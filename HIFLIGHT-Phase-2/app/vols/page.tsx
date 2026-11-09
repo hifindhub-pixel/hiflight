@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import FavoriteButton from "@/components/FavoriteButton";
 import JsonLd from "@/components/JsonLd";
 import { countryPages, defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
 import { departureCities } from "@/lib/cities";
@@ -66,10 +67,14 @@ export default function FlightsHubPage() {
           <h2>Itinéraires populaires</h2>
           <div className="route-list">
             {popular.map((route) => (
-              <Link key={route.slug} href={`/vols/${route.slug}`}>
+              <div key={route.slug} className="route-row">
+                <Link href={`/vols/${route.slug}`}>
                 <span>{route.originCode}</span><b>→</b><span>{route.destinationCode}</span>
                 <strong>{route.origin} – {route.destination} <small>{route.duration}</small></strong>
-              </Link>
+
+                </Link>
+                <FavoriteButton slug={route.slug} label={`${route.origin} – ${route.destination}`} />
+              </div>
             ))}
           </div>
         </div>
