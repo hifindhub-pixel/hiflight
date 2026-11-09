@@ -1,4 +1,4 @@
-// Bons plans relevés à la main le 4 novembre 2026 sur les sites des compagnies et partenaires.
+// Bons plans relevés à la main le 9 novembre 2026 sur les sites des compagnies et partenaires.
 // Chaque offre a une date de fin : la carte disparaît toute seule de l’accueil une fois passée.
 export type Deal = {
   title: string;
@@ -17,7 +17,7 @@ export type Deal = {
   alt: string;
 };
 
-export const dealsCheckedOn = "4 novembre 2026";
+export const dealsCheckedOn = "9 novembre 2026";
 
 const photo = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=640&q=70`;
 
@@ -63,5 +63,15 @@ export const deals: Deal[] = [
     href: "/blog/flying-blue-promo-rewards-novembre-2026/",
     external: false,
     alt: "Aile d’avion vue du hublot au coucher du soleil",
+  },
+  {
+    title: "Royal Air Maroc",
+    sub: "Billets en miles -30 %, jusqu’au 30 novembre",
+    cta: "Miles ou euros : les conditions →",
+    image: photo("photo-1596750320291-a082a23dcc19"),
+    end: "2026-11-30T23:59:00+01:00",
+    href: "/blog/royal-air-maroc-safar-flyer-novembre-2026/",
+    external: false,
+    alt: "Marrakech, Maroc",
   },
 ];
