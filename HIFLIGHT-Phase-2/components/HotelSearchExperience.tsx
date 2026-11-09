@@ -157,8 +157,8 @@ export default function HotelSearchExperience({ provider = "stay22" }: { provide
       <section className={`market-hero hotels ${provider === "agoda" ? "hotel-discovery-hero" : ""}`}>
         <div>
           <ServiceTabs active="hotels" />
-          <h1>Trouvez le bon hôtel,<br /><span>au bon endroit.</span></h1>
-          {provider === "agoda" && <p className="hotel-discovery-subtitle">Un quartier à explorer. Une adresse à retenir. Votre prochain séjour commence ici.</p>}
+          <h1>{provider === "agoda" ? <>Hôtels &amp;<br /><span>hébergements</span></> : <>Trouvez le bon hôtel,<br /><span>au bon endroit.</span></>}</h1>
+          {provider === "agoda" && <p className="hotel-discovery-subtitle">Comparez les hôtels par prix, avis et emplacement.</p>}
           <form className="market-search hotel-search hotel-search-premium" onSubmit={submit}>
             <div className="hotel-city-field" ref={cityRef}>
               <label htmlFor="hotel-destination">Destination</label>
@@ -184,7 +184,7 @@ export default function HotelSearchExperience({ provider = "stay22" }: { provide
             </div>
             <HotelDatePicker checkin={draft.checkin} checkout={draft.checkout} onChange={(checkin, checkout) => { setDraft((current) => ({ ...current, checkin, checkout })); setError(""); }} />
             <label className="hotel-guests-field">Voyageurs<select value={draft.guests} onChange={(event) => setDraft((current) => ({ ...current, guests: event.target.value }))}><option value="1">1 voyageur</option><option value="2">2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="5">5 voyageurs</option><option value="6">6 voyageurs</option></select></label>
-            <button className="hotel-search-submit" type="submit" disabled={submitting}><span>{submitting ? "Recherche…" : "Voir les séjours"}</span><b>→</b></button>
+            <button className="hotel-search-submit" type="submit" disabled={submitting}><span>{submitting ? "Recherche…" : "Rechercher"}</span><b>→</b></button>
           </form>
           <p className={`hero-disclaimer ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || (provider === "agoda" ? "Choisissez votre destination, vos dates et vos voyageurs, puis consultez les offres Agoda · 1 chambre · adultes uniquement." : "La destination, les dates et les voyageurs actualisent immédiatement les offres disponibles.")}</p>
         </div>

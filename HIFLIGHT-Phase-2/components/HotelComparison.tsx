@@ -25,7 +25,7 @@ export default function HotelComparison({hotels,nights,stay,onRemove,onClear}:{
       </div>
     </div>
     <dialog ref={dialog} className={styles.compareDialog} aria-labelledby="compare-hotels-title">
-      <header><div><h2 id="compare-hotels-title">Quel hôtel vous correspond ?</h2><p>{stay} · 1 chambre</p></div><button type="button" autoFocus onClick={()=>dialog.current?.close()} aria-label="Fermer la comparaison">✕</button></header>
+      <header><div><h2 id="compare-hotels-title">Comparer les hôtels</h2><p>{stay} · 1 chambre</p></div><button type="button" autoFocus onClick={()=>dialog.current?.close()} aria-label="Fermer la comparaison">✕</button></header>
       <p className={styles.compareNotice}>Prix hors taxes et frais. Disponibilités et montant final à confirmer sur Agoda.</p>
       <div className={styles.comparisonScroll} tabIndex={0} role="region" aria-label="Tableau comparatif, défilement horizontal sur mobile">
         <table className={styles.compareTable}>
@@ -38,7 +38,7 @@ export default function HotelComparison({hotels,nights,stay,onRemove,onClear}:{
             <tr><th scope="row">Étoiles</th>{hotels.map(h=><td key={h.hotelId}>{h.starRating>0?`${h.starRating} étoiles`:'Non renseigné'}</td>)}</tr>
             <tr><th scope="row">Petit-déjeuner inclus</th>{hotels.map(h=><td key={h.hotelId}>{h.includeBreakfast?'Oui':'Non indiqué dans cette offre'}</td>)}</tr>
             <tr><th scope="row">Wi-Fi gratuit</th>{hotels.map(h=><td key={h.hotelId}>{h.freeWifi?'Oui':'Non indiqué'}</td>)}</tr>
-            <tr><th scope="row">Réserver</th>{hotels.map(h=><td key={h.hotelId}><a href={h.landingURL} target="_blank" rel="noopener noreferrer sponsored">Vérifier sur Agoda ↗</a></td>)}</tr>
+            <tr><th scope="row">Réserver</th>{hotels.map(h=><td key={h.hotelId}><a href={h.landingURL} target="_blank" rel="noopener noreferrer sponsored">Voir sur Agoda ↗</a></td>)}</tr>
           </tbody>
         </table>
       </div>

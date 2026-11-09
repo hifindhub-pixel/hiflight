@@ -1,3 +1,4 @@
+import { buildHotelLink } from '@/lib/agoda/hotel-link';
 import { agodaEnabled, agodaBindings, allowAgodaSearch } from '@/lib/agoda/server-config';
 import { NextResponse } from 'next/server';
 import { isAgodaCity } from '@/lib/agoda/catalogue-search';
@@ -24,16 +25,7 @@ export async function POST(request: Request) {
     if (data.error && data.error.id !== 911) throw new Error('upstream');
     const results = (Array.isArray(data.results) ? data.results : []).filter((h: Record<string, unknown>) => {
       try { const u = new URL(String(h.landingURL)); return u.protocol === 'https:' && (u.hostname === 'agoda.com' || u.hostname.endsWith('.agoda.com')) && Number.isSafeInteger(h.hotelId) && Number(h.hotelId) > 0 && u.searchParams.get('hid') === String(h.hotelId) && u.searchParams.get('cid') === auth.split(':')[0] && u.searchParams.get('checkin') === checkin && u.searchParams.get('checkout') === checkout && u.searchParams.get('NumberofAdults') === String(adults) && typeof h.dailyRate === 'number' && Number.isFinite(h.dailyRate) && h.dailyRate > 0; } catch { return false; }
-    }).map((h: Record<string, unknown>) => ({ hotelId:h.hotelId,hotelName:h.hotelName,dailyRate:h.dailyRate,reviewScore:h.reviewScore,reviewCount:h.reviewCount,starRating:h.starRating,latitude:h.latitude,longitude:h.longitude,includeBreakfast:h.includeBreakfast,freeWifi:h.freeWifi,landingURL:'/hotels/verifier/?'+new URLSearchParams({hotelId:String(h.hotelId),cityId:String(cityId),checkin,checkout,adults:String(adults),price:String(h.dailyRate)}).toString(), propertyURL:buildHotelLink(Number(h.hotelId), auth.split(':')[0], checkin, checkout, adults), originalLandingURL:h.landingURL, priceBasis:'exclusive',imageURL:String(h.imageURL || '').replace(/^http:/,'https:') }));
+    }).map((h: Record<string, unknown>) => ({ hotelId:h.hotelId,hotelName:h.hotelName,dailyRate:h.dailyRate,reviewScore:h.reviewScore,reviewCount:h.reviewCount,starRating:h.starRating,latitude:h.latitude,longitude:h.longitude,includeBreakfast:h.includeBreakfast,freeWifi:h.freeWifi,landingURL:buildHotelLink(Number(h.hotelId), auth.split(':')[0], checkin, checkout, adults), propertyURL:buildHotelLink(Number(h.hotelId), auth.split(':')[0], checkin, checkout, adults), originalLandingURL:h.landingURL, priceBasis:'exclusive',imageURL:String(h.imageURL || '').replace(/^http:/,'https:') }));
     return NextResponse.json({ results, checkedAt: new Date().toISOString(), seconds: Math.round((Date.now()-start)/100)/10 }, { headers:{'Cache-Control':'no-store'} });
   } catch { return NextResponse.json({ error:'Agoda ne répond pas pour le moment. Réessayez ou consultez la recherche habituelle.' }, { status:502 }); }
-}
-
-// Direct-property format observed in the user's Agoda hotel page.
-// Do not carry session-specific ds/searchrequestid from a previous visit.
-function buildHotelLink(hotelId: number, cid: string, checkin: string, checkout: string, adults: number) {
-  const url = new URL('https://www.agoda.com/fr-fr/accom/property');
-  const params = { propertyId: String(hotelId), cid, adults: String(adults), children: '0', rooms: '1', checkIn: checkin, los: String((Date.parse(checkout) - Date.parse(checkin)) / 86400000), currencyCode: 'EUR' };
-  for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
-  return url.toString();
 }
