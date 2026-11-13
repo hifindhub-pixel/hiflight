@@ -28,7 +28,6 @@ export default function Header() {
             <img src="/hiflight-logo.png" alt="HiFlight" width="1027" height="328" />
           </a>
           <nav aria-label="Navigation principale">
-            <Link href="/esim">eSIM</Link>
             <Link className="nav-cta nav-worldmap" href="/world-map">World Map</Link>
             <Link className="nav-fav" href="/favoris" aria-label={ready && slugs.length ? `Mes favoris (${slugs.length})` : "Mes favoris"}>
               <Heart aria-hidden="true" size={20} strokeWidth={2} fill={ready && slugs.length ? "currentColor" : "none"} />

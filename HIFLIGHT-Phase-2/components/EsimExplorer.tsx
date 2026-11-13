@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import ServiceTabs from "./ServiceTabs";
 import { trackPartnerClick } from "./Analytics";
 
 const AIRALO_LINK = "https://airalo.tpk.lu/uQBzbNMH";
@@ -29,6 +30,7 @@ export default function EsimExplorer() {
   return (
     <>
       <section className="market-hero esim"><div>
+        <ServiceTabs active="esim" />
         <h1>Le monde dans votre poche,<br /><span>dès l’atterrissage.</span></h1>
         <p className="esim-hero-copy">Choisissez votre destination, consultez les forfaits disponibles et partez connecté sans changer de carte SIM physique.</p>
         <section className="esim-airalo-shell" aria-label="Recherche de forfaits eSIM Airalo">
