@@ -1,5 +1,7 @@
 "use client";
 
+import FlightSearchButton from "./FlightSearchButton";
+
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { airportCities, AirportCity, findAirportCity } from "@/lib/airports";
 import { searchUrl } from "@/lib/content";
@@ -240,6 +242,10 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   ]);
   const [multiDateIndex, setMultiDateIndex] = useState<number | null>(null);
   const [error, setError] = useState("");
+  const [launching, setLaunching] = useState(false);
+  const launchingRef = useRef(false);
+  const departureTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => { if (departureTimer.current) clearTimeout(departureTimer.current); }, []);
   const calendarRef = useRef<HTMLDivElement>(null);
   const activeMultiLeg = multiDateIndex === null ? undefined : multiLegs[multiDateIndex];
   const calendarFromCode = tripType === "multicity" ? activeMultiLeg?.fromCode || "" : fromCode;
@@ -323,6 +329,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   }
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (launchingRef.current) return;
     let route = "";
     let hotelDestination = to.replace(/\s*\([^)]*\)\s*$/, "").trim();
     let hotelCheckin = departure;
@@ -369,7 +376,14 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     }
     flightTab.opener = null;
     trackPartnerClick("flight", { ...analyticsParams, provider: "flight_partner" });
-    window.location.assign(hotelTarget.toString());
+    launchingRef.current = true;
+    setLaunching(true);
+    const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 680;
+    departureTimer.current = setTimeout(() => {
+      window.location.assign(hotelTarget.toString());
+      launchingRef.current = false;
+      setLaunching(false);
+    }, delay);
   }
 
   return (
@@ -397,7 +411,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
           </div>
           {multiLegs.length > 2 && <button type="button" className="remove-leg" aria-label={`Supprimer l’étape ${index + 1}`} onClick={() => setMultiLegs((current) => current.filter((_, legIndex) => legIndex !== index))}>×</button>}
         </div>)}
-        <div className="multicity-actions"><button type="button" disabled={multiLegs.length >= 4} onClick={() => setMultiLegs((current) => [...current, { from: current.at(-1)?.to || "", fromCode: current.at(-1)?.toCode || "", to: "", toCode: "", date: "" }])}>+ Ajouter une étape</button><button className="search-button" type="submit"><span>Rechercher</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4" /></svg></b></button></div>
+        <div className="multicity-actions"><button type="button" disabled={multiLegs.length >= 4} onClick={() => setMultiLegs((current) => [...current, { from: current.at(-1)?.to || "", fromCode: current.at(-1)?.toCode || "", to: "", toCode: "", date: "" }])}>+ Ajouter une étape</button><FlightSearchButton launching={launching} /></div>
       </div> : <div className="search-fields">
         <div className="route-fields">
           <CityField label="Départ" value={from} selectedCode={fromCode} onChange={(value) => updateCity("from", value)} onSelect={(item) => selectCity("from", item)} />
@@ -418,7 +432,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
             </div>
           )}
         </div>
-        <button className="search-button" type="submit"><span>Rechercher</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4" /></svg></b></button>
+        <FlightSearchButton launching={launching} />
       </div>}
       <label className="direct-toggle"><input type="checkbox" checked={direct} onChange={(event) => setDirect(event.target.checked)} /><span /> Vols directs uniquement</label>
       <p className={`form-note ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "HiFlight recherche et compare les offres disponibles selon vos critères."}</p>
