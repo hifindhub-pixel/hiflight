@@ -1,0 +1,12 @@
+.button.button{position:relative;isolation:isolate;overflow:hidden;flex-direction:column;justify-content:center;gap:2px;padding:7px 16px}
+.label{position:relative;z-index:1;line-height:20px}
+.scene{position:relative;display:block;flex:0 0 31px;width:90px;height:31px;border-radius:7px;background:#07152d;overflow:hidden;color:#ff6b6b}
+.runway{position:absolute;display:flex;align-items:center;justify-content:space-around;left:8px;right:8px;top:25px;height:4px;border-top:1px solid #71809755}
+.runway i{display:block;width:8px;height:1px;background:#c4cedb80}
+.button .scene .plane{position:absolute;left:12px;top:1px;width:62px;height:24px;fill:currentColor;stroke:none;filter:drop-shadow(0 2px 1px #0003);transform-origin:60% 70%}
+.button:disabled{cursor:progress;opacity:1}
+.launching .plane{animation:depart .85s cubic-bezier(.4,0,.2,1) both}
+.launching .runway{animation:runway .85s ease-in both}
+@keyframes depart{0%,12%{transform:translate(0,0) rotate(0);opacity:1}38%{transform:translate(6px,0) rotate(-3deg);opacity:1}70%{transform:translate(24px,-8px) rotate(-15deg);opacity:1}100%{transform:translate(80px,-35px) rotate(-22deg);opacity:0}}
+@keyframes runway{0%{opacity:1;transform:translateX(0)}100%{opacity:.2;transform:translateX(-18px)}}
+@media(prefers-reduced-motion:reduce){.launching .plane,.launching .runway{animation:none}}

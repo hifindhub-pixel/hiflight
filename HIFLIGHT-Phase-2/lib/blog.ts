@@ -1,0 +1,2630 @@
+/** Encadré mis en avant dans une section : un piège à éviter, une astuce ou une précision utile. */
+export type BlogCallout = { kind: "piege" | "astuce" | "info"; title?: string; text: string };
+
+export type BlogSection = { heading: string; paragraphs: string[]; list?: string[]; callout?: BlogCallout; table?: { headers: string[]; rows: string[][] }; /** Tableau de prix HiFlight en direct pour ces trajets (slugs). */ routeTable?: string[] };
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  /** Titre court pour la balise <title> (le gabarit ajoute « | HiFlight »). */
+  metaTitle: string;
+  description: string;
+  published: string;
+  updated: string;
+  readingMinutes: number;
+  intro: string;
+  sections: BlogSection[];
+  relatedRoutes: string[];
+  /** Image d’en-tête : chemin public (ex. /blog/mon-article.webp). Sans image, un visuel de repli est affiché. */
+  heroImage?: string;
+  /** Rubrique affichée en tête d’article et utilisée par les filtres de la page Conseils voyage. */
+  category?: "Bons plans" | "Destinations" | "Conseils";
+  /** Date (AAAA-MM-JJ) après laquelle l’offre décrite est terminée : l’article reste en ligne avec un bandeau, sort du sitemap et de la liste, et passe en noindex (effet au prochain build, donc sous 24 h). */
+  expires?: string;
+  /** Compte à rebours affiché en tête d’article. */
+  countdown?: { to: string };
+  /** FAQ affichée en fin d’article et balisée pour Google. */
+  faq?: { question: string; answer: string }[];
+};
+
+export const blogPosts: BlogPost[] = [
+  {
+    "slug": "vol-algerie-ete-quand-reserver",
+    "category": "Destinations",
+    "metaTitle": "Vol Algérie en été : quand réserver ?",
+    "title": "Vol pour l’Algérie en été : pourquoi c’est si cher, et comment limiter la casse",
+    "description": "Alger, Oran, Constantine en juillet-août : pourquoi les prix grimpent, quand commencer à comparer, quels aéroports tester et quels frais de bagages surveiller.",
+    "heroImage": "https://images.unsplash.com/photo-1706002027900-a1be40d0627e?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-10-30",
+    "updated": "2026-11-03",
+    "readingMinutes": 4,
+    "intro": "Tous ceux qui ont déjà cherché un vol pour Alger en juillet connaissent la scène : on ouvre la page, le prix a encore monté depuis la veille, et on se dit qu’on aurait dû s’y prendre plus tôt. Ce n’est pas un hasard, et on peut quand même s’en sortir mieux qu’en payant le premier tarif venu.",
+    "sections": [
+      {
+        "heading": "Pourquoi l’été fait grimper la note",
+        "paragraphs": [
+          "La demande se concentre sur quelques semaines : vacances scolaires, retours au pays, mariages, fêtes religieuses. Les places les moins chères partent les premières, puis la compagnie ouvre des tarifs plus hauts. Rien de mystérieux, c’est la mécanique classique de l’offre et de la demande.",
+          "Un détail qui piège beaucoup de monde : les fêtes religieuses se décalent d’une année sur l’autre. Si votre voyage tombe juste avant ou juste après, regardez les prix de la veille et du lendemain avant de figer vos dates."
+        ]
+      },
+      {
+        "heading": "Quand s’y prendre",
+        "paragraphs": [
+          "Il n’y a pas de jour miracle, on ne va pas vous mentir. Mais pour juillet-août, une règle de bon sens tient : chaque semaine d’attente réduit le choix de tarifs raisonnables. Autant commencer à regarder tôt, ne serait-ce que pour savoir à quoi ressemble un prix normal sur votre trajet.",
+          "Et si vous avez un peu de marge, jouez avec les jours. Un départ en milieu de semaine revient souvent moins cher qu’un vendredi ou un samedi."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-alger",
+          "alger-paris",
+          "paris-oran",
+          "oran-paris",
+          "marseille-alger",
+          "lyon-alger",
+          "toulouse-alger"
+        ]
+      },
+      {
+        "heading": "Paris n’est pas le seul départ possible",
+        "paragraphs": [
+          "Transavia annonce desservir l’Algérie depuis huit villes françaises, dont Marseille, Lyon, Toulouse, Nice et Nantes, en plus d’Orly. Air Algérie relie aussi plusieurs de ces villes. Si vous habitez dans le Sud ou dans la vallée du Rhône, les horaires sont parfois bien plus pratiques qu’au départ de Paris.",
+          "Avant de comparer deux prix, ajoutez le train ou la voiture jusqu’à l’aéroport. Un billet moins cher de vingt euros ne fait pas gagner d’argent si vous devez d’abord monter à Paris."
+        ]
+      },
+      {
+        "heading": "Ce qu’on vérifie avant de payer",
+        "paragraphs": [
+          "Le prix affiché au départ est rarement le prix final. Regardez le bagage en soute (poids inclus, nombre de valises, prix de la valise en plus), qui pèse lourd sur cette liaison. Regardez l’heure d’arrivée : atterrir à minuit complique le trajet jusqu’à votre ville. Lisez les conditions de modification, parce qu’un tarif bas est souvent figé.",
+          "Dernier réflexe, regardez qui vend le billet : la compagnie directement, ou une agence qui ajoute ses propres frais."
+        ]
+      },
+      {
+        "heading": "Direct ou escale ?",
+        "paragraphs": [
+          "Sur une liaison d’environ deux heures, l’escale vous coûte une demi-journée pour économiser peu. Si le vol direct est à un prix correct, prenez-le sans hésiter."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-alger",
+      "alger-paris",
+      "paris-oran",
+      "oran-paris",
+      "marseille-alger",
+      "lyon-alger",
+      "toulouse-alger"
+    ],
+    "faq": [
+      {
+        "question": "À quelle période les vols pour l’Algérie sont-ils les moins chers ?",
+        "answer": "Hors vacances scolaires et hors fêtes, surtout en semaine. L’été et les périodes de fêtes sont les plus chères."
+      },
+      {
+        "question": "Faut-il réserver très tôt pour juillet-août ?",
+        "answer": "Oui, mieux vaut comparer tôt. Chaque semaine d’attente réduit le choix de tarifs raisonnables."
+      },
+      {
+        "question": "Quelles villes ont des vols directs vers l’Algérie ?",
+        "answer": "Paris, Marseille, Lyon et Toulouse, entre autres. Les jours de desserte varient selon la saison, vérifiez-les avant de réserver."
+      }
+    ]
+  },
+  {
+    "slug": "vol-paris-marrakech-guide",
+    "category": "Destinations",
+    "metaTitle": "Vol Paris Marrakech : durée, aéroports, transfert, quand partir",
+    "title": "Vol Paris – Marrakech : ce qu’on aimerait savoir avant de réserver",
+    "description": "Vol Paris – Marrakech : durée, compagnies, Orly, Roissy ou Beauvais, transfert depuis l’aéroport Ménara, saisons et pièges à éviter.",
+    "heroImage": "https://images.unsplash.com/photo-1596750320291-a082a23dcc19?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-10-30",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "Marrakech est la destination préférée des Français depuis cinq ans, d’après un classement des recherches de vols publié pour 2025. La liaison avec Paris est l’une des mieux fournies d’Europe, ce qui est une bonne nouvelle pour les prix, à condition de savoir où regarder et de ne pas se faire piéger à l’arrivée.",
+    "sections": [
+      {
+        "heading": "Trois heures et quart, et beaucoup de choix",
+        "paragraphs": [
+          "Comptez environ 3 h 15 de vol direct. Les départs sont nombreux : Transavia, easyJet, Royal Air Maroc, Air France, Vueling ou Ryanair se partagent la ligne selon les aéroports et les saisons.",
+          "Les vols avec escale existent aussi. Ils ne valent le coup que si l’écart de prix compense vraiment les heures perdues, ce qui est rare sur une liaison aussi directe."
+        ]
+      },
+      {
+        "heading": "Orly, Roissy ou Beauvais ?",
+        "paragraphs": [
+          "Les trois proposent des vols vers Marrakech. Les prix les plus bas partent parfois de Beauvais, qui est à plus d’une heure de Paris en navette : l’économie sur le billet peut disparaître dans le transfert, sans parler de l’heure de réveil.",
+          "Faites le calcul complet avant de choisir : billet, bagage, transport jusqu’à l’aéroport. Notre comparatif Orly, Roissy et Beauvais détaille chaque cas."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-marrakech",
+          "lyon-marrakech",
+          "marseille-marrakech",
+          "paris-casablanca"
+        ]
+      },
+      {
+        "heading": "De l’aéroport Ménara à votre riad",
+        "paragraphs": [
+          "L’aéroport de Marrakech-Ménara est tout près de la ville : environ 6 km de la place Jemaa el-Fna. Le trajet en taxi prend une quinzaine de minutes hors embouteillages.",
+          "Le bus n° 19 relie l’aéroport à la place Jemaa el-Fna et à la gare, à raison d’un départ toutes les 30 minutes environ, pour 30 dirhams l’aller (environ 3 €) d’après les guides de voyage. Le petit taxi est l’autre option : la course vers le centre est censée rester autour de 70 dirhams (environ 7 €), un peu plus la nuit.",
+          "Deux réflexes évitent les mauvaises surprises : convenez du prix avant de monter, ou exigez le compteur, et si le chauffeur refuse, passez au suivant. Beaucoup de voyageurs prennent aussi un transfert réservé par leur riad, à prix fixe.",
+          "Autre détail : la médina est quasiment fermée aux voitures. Votre taxi vous dépose à une porte, et le dernier tronçon se fait à pied ou avec un porteur. Demandez à votre hébergement le point de rendez-vous exact."
+        ]
+      },
+      {
+        "heading": "Quand partir",
+        "paragraphs": [
+          "Le printemps et l’automne sont les saisons les plus agréables, et les plus demandées. L’été est très chaud en journée, ce qui limite les visites. Les vacances scolaires françaises, les ponts et les fêtes font monter les prix. Si vous pouvez partir en semaine, faites-le."
+        ]
+      },
+      {
+        "heading": "Bagages et papiers",
+        "paragraphs": [
+          "Les tarifs les plus bas n’incluent pas toujours de bagage en soute. Comparez avec la valise comprise : notre guide sur le vrai prix d’un billet détaille les options à surveiller.",
+          "Pour les formalités d’entrée au Maroc (validité du passeport, durée de séjour), tout dépend de votre nationalité : le plus sûr reste le site du ministère français des Affaires étrangères."
+        ]
+      },
+      {
+        "heading": "Le budget réel",
+        "paragraphs": [
+          "Ajoutez au billet le bagage, le trajet jusqu’à l’aéroport de départ et le transfert à l’arrivée. C’est ce total qui permet de comparer deux offres, pas le prix d’appel."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-marrakech",
+      "marrakech-paris",
+      "lyon-marrakech",
+      "paris-casablanca"
+    ],
+    "faq": [
+      {
+        "question": "Combien de temps dure le vol Paris – Marrakech ?",
+        "answer": "Environ 3 h 15 en vol direct."
+      },
+      {
+        "question": "Quelles compagnies volent entre Paris et Marrakech ?",
+        "answer": "Transavia, easyJet, Royal Air Maroc, Air France, Vueling et Ryanair, selon l’aéroport et la saison."
+      },
+      {
+        "question": "Comment aller de l’aéroport de Marrakech au centre ?",
+        "answer": "En petit taxi (environ 70 dirhams pour le centre, à convenir avant de monter), en bus n° 19 (environ 30 dirhams) ou en transfert réservé. L’aéroport est à environ 6 km de Jemaa el-Fna."
+      },
+      {
+        "question": "Beauvais, c’est vraiment moins cher ?",
+        "answer": "Le billet, parfois. Une fois le transfert en navette ajouté, l’écart fond souvent. Comparez le total."
+      }
+    ]
+  },
+  {
+    "slug": "orly-roissy-beauvais-quel-aeroport",
+    "category": "Conseils",
+    "metaTitle": "Orly, Roissy ou Beauvais : quel aéroport choisir ?",
+    "title": "Orly, Roissy ou Beauvais : le billet le moins cher n’est pas toujours le bon",
+    "description": "Orly, Roissy-Charles de Gaulle ou Beauvais : accès, temps de transfert et prix total pour choisir l’aéroport parisien qui vous convient vraiment.",
+    "heroImage": "https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-10-30",
+    "updated": "2026-11-03",
+    "readingMinutes": 4,
+    "intro": "On repère un vol à 29 €, on clique, et ce n’est qu’au moment de payer qu’on lit « Beauvais ». Choisir son aéroport, c’est choisir son trajet, son budget transfert et parfois sa compagnie. Mieux vaut le faire les yeux ouverts.",
+    "sections": [
+      {
+        "heading": "Roissy-Charles de Gaulle, le géant",
+        "paragraphs": [
+          "Au nord-est de Paris, c’est le plus grand aéroport de la région et celui qui propose le plus de vols long-courriers. Le RER B le relie au centre. Prévoyez de la marge, surtout en cas de perturbations, parce que le RER B a ses jours.",
+          "Pour un long-courrier ou un vol avec correspondance, CDG est souvent le choix évident."
+        ]
+      },
+      {
+        "heading": "Orly, le plus proche",
+        "paragraphs": [
+          "Au sud de Paris, Orly est plus près du centre et dessert beaucoup de destinations en Europe, au Maghreb et en outre-mer. Le tramway T7 et la ligne 14 du métro ont amélioré l’accès, selon l’endroit d’où vous partez. Si vous habitez au sud de la capitale, Orly peut vous faire gagner un temps précieux par rapport à Roissy."
+        ]
+      },
+      {
+        "heading": "Beauvais, le pari du bas prix",
+        "paragraphs": [
+          "Beauvais accueille surtout des compagnies low cost. Il est à plus d’une heure de Paris en navette : le billet peut être nettement moins cher, mais le transfert coûte du temps et de l’argent, et les navettes suivent les horaires des vols.",
+          "Ça vaut le coup quand l’écart de prix est net et que vos horaires collent. Sinon, c’est souvent un faux bon plan."
+        ]
+      },
+      {
+        "heading": "Faire le vrai calcul",
+        "paragraphs": [
+          "Pour chaque offre, additionnez le billet avec les bagages dont vous avez besoin, le coût du trajet jusqu’à l’aéroport (transports, taxi ou parking), et le temps perdu en route. Regardez aussi l’horaire de retour : atterrir tard le soir change la facture du taxi."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-marrakech",
+      "paris-barcelone",
+      "paris-lisbonne"
+    ],
+    "faq": [
+      {
+        "question": "Quel aéroport parisien est le plus proche du centre ?",
+        "answer": "Orly est généralement plus proche que Roissy, et bien plus proche que Beauvais."
+      },
+      {
+        "question": "Beauvais est-il vraiment moins cher ?",
+        "answer": "Le billet est souvent moins cher, mais la navette s’ajoute au prix et au temps de trajet. Faites le total avant de choisir."
+      }
+    ]
+  },
+  {
+    "slug": "quand-reserver-vol-pas-cher",
+    "category": "Conseils",
+    "metaTitle": "Quand réserver un vol pas cher ? Dates, dernière minute, vacances",
+    "title": "Quand réserver un vol pas cher ? Ce qui joue vraiment, et ce qui est légende",
+    "description": "Mardi à 3 h du matin, dernière minute, vacances scolaires : ce qui change réellement le prix d’un billet d’avion, et ce qui n’est que légende.",
+    "heroImage": "https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 7,
+    "intro": "On vous l’a sûrement déjà dit : il faut réserver un mardi, tard le soir, en navigation privée. Une bonne partie de ces conseils tient de la légende. Ce qui change réellement le prix d’un billet est plus banal, et plus utile : la date du voyage, la souplesse que vous avez, et le moment où vous comparez.",
+    "sections": [
+      {
+        "heading": "Le jour du voyage compte plus que le jour de l’achat",
+        "paragraphs": [
+          "Une compagnie fixe ses prix en fonction du remplissage de chaque vol. Ce qui pèse sur votre tarif, c’est donc la date de départ : un vol en milieu de semaine coûte souvent moins qu’un vendredi ou un dimanche, et les vacances scolaires tirent tout vers le haut.",
+          "Sur chaque page de vol HiFlight, un tableau indique le jour de la semaine le moins cher quand on a assez de relevés. Jetez-y un œil avant de choisir vos dates."
+        ]
+      },
+      {
+        "heading": "Regarder un mois, pas une date",
+        "paragraphs": [
+          "Le prix d’un même trajet bouge beaucoup d’un mois à l’autre. Le calendrier des prix, dans le formulaire de recherche, montre en quelques secondes où se trouvent les creux : il suffit ensuite de viser cette fenêtre.",
+          "Si vos dates sont fixes, comparez au moins la veille et le lendemain. Parfois, un seul jour de décalage suffit à économiser."
+        ]
+      },
+      {
+        "heading": "Réserver tôt ou attendre ?",
+        "paragraphs": [
+          "Même les grands comparateurs ne donnent pas la même fenêtre : certains guides parlent de 6 à 8 semaines à l’avance pour l’Europe, d’autres d’un idéal à 5 ou 6 mois selon le trajet. C’est bien la preuve qu’aucune règle ne vaut pour tous les vols.",
+          "Pour les périodes très demandées (été, fêtes, ponts), attendre réduit le choix et pousse les prix à la hausse. Pour une escapade hors vacances, les tarifs restent souvent stables plusieurs semaines. Le plus sûr : comparer dès que vous avez une idée de dates, repérer la fourchette habituelle de votre trajet, puis acheter quand une offre vous semble raisonnable. Sans point de repère, impossible de savoir si un prix est bon."
+        ]
+      },
+      {
+        "heading": "La dernière minute : bon plan ou fausse bonne idée ?",
+        "paragraphs": [
+          "Sur les trajets très demandés (vacances, ponts, week-ends), les places à petit prix partent vite. À quelques jours du départ, il reste surtout les tarifs élevés. Si vous devez partir à une date précise, n’attendez pas.",
+          "Hors vacances, sur un trajet peu demandé, un vol resté peu rempli peut voir son prix baisser. Ce n’est jamais garanti. Plus vous êtes souple sur le jour, l’heure et la destination, plus vous avez de chances de tomber sur une bonne affaire ; si vous ne l’êtes pas, la dernière minute est un pari.",
+          "Pour un départ imminent, regardez le calendrier du mois, testez le milieu de semaine, comparez deux ou trois aéroports et ajoutez le bagage au prix. Vérifiez aussi l’horaire : un vol à 6 h du matin ou à minuit peut imposer un taxi qui efface l’économie."
+        ]
+      },
+      {
+        "heading": "Vacances scolaires 2026-2027 : les dates à connaître",
+        "paragraphs": [
+          "Quand tout le monde part en même temps, les places à petit prix disparaissent vite et les compagnies ouvrent ensuite des tarifs plus élevés. On ne peut pas changer le calendrier, mais on peut le connaître avant de réserver.",
+          "D’après le calendrier officiel, la Toussaint s’achève le lundi 2 novembre 2026. Noël court du samedi 19 décembre 2026 au lundi 4 janvier 2027, pour les trois zones. Les vacances d’hiver sont décalées : elles commencent le 6 février 2027 en zone C, le 13 février en zone A, et se terminent début mars en zone B. Celles de printemps vont du 3 au 19 avril (zone C), du 10 au 26 avril (zone A) et du 17 avril au 3 mai (zone B). Les vacances d’été débutent le samedi 3 juillet 2027, et le pont de l’Ascension tombe le vendredi 7 mai 2027.",
+          "Ce qui aide : comparer dès que vos dates sont connues, décaler d’un jour ou deux (partir un mercredi plutôt que le samedi), et regarder un départ direct depuis votre région, qui revient parfois moins cher que Paris, train compris. En famille, calculez le prix pour tous les voyageurs, bagages inclus, plutôt que le prix d’un billet, et vérifiez les règles pour les enfants auprès de la compagnie : elles ne sont pas les mêmes partout."
+        ]
+      },
+      {
+        "heading": "Quelques trajets, au prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-barcelone",
+          "paris-lisbonne",
+          "paris-marrakech",
+          "paris-londres"
+        ]
+      },
+      {
+        "heading": "Trois légendes à oublier",
+        "paragraphs": [
+          "Réserver le mardi à 3 h du matin : les sources se contredisent et rien ne prouve un effet fiable. Ce qui change le prix, c’est le trajet et la date du voyage.",
+          "Effacer ses cookies ou passer en navigation privée : l’effet n’est pas démontré. Comparer sur plusieurs sites est plus utile.",
+          "Toujours attendre la dernière minute : pour les périodes demandées, on réduit surtout son choix et on fait monter la note."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-barcelone",
+      "paris-lisbonne",
+      "paris-marrakech",
+      "paris-londres",
+      "lyon-barcelone"
+    ],
+    "faq": [
+      {
+        "question": "Y a-t-il un jour de la semaine où réserver est moins cher ?",
+        "answer": "Rien ne prouve un effet fiable du jour de l’achat. Ce qui compte, c’est le jour du voyage : le milieu de semaine est souvent moins cher."
+      },
+      {
+        "question": "Faut-il réserver plusieurs mois à l’avance ?",
+        "answer": "Pour l’été, les ponts et les fêtes, oui, mieux vaut comparer tôt. Hors vacances, les prix restent souvent stables plusieurs semaines."
+      },
+      {
+        "question": "Les vols de dernière minute sont-ils moins chers ?",
+        "answer": "Rarement sur les trajets demandés. Cela peut marcher hors vacances si vous êtes très flexible sur les dates et la destination."
+      },
+      {
+        "question": "Quelles sont les dates des vacances de Noël 2026 ?",
+        "answer": "Du samedi 19 décembre 2026 au lundi 4 janvier 2027, pour les trois zones scolaires."
+      },
+      {
+        "question": "Les prix affichés sont-ils garantis ?",
+        "answer": "Non, ce sont des prix indicatifs relevés récemment. Le prix final est confirmé chez le partenaire au moment de la réservation."
+      }
+    ]
+  },
+  {
+    "slug": "vol-pas-cher-depuis-province",
+    "category": "Conseils",
+    "metaTitle": "Vol pas cher depuis la province : Lyon, Marseille, Toulouse",
+    "title": "Partir de Lyon, Marseille, Nice, Toulouse… ou de Paris ? Maroc, Tunisie et le reste",
+    "description": "Départ de province ou de Paris ? Les villes desservies vers le Maroc et la Tunisie, les périodes chères et comment comparer le prix réel.",
+    "heroImage": "https://images.unsplash.com/photo-1602087594298-706ccc894bfd?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 7,
+    "intro": "Beaucoup de gens prennent le train jusqu’à Paris par réflexe, parce que « c’est là que sont les vols ». Les grands aéroports régionaux proposent pourtant des liaisons directes vers le Maghreb, l’Espagne, le Portugal ou le Royaume-Uni. La vraie question est de savoir si l’addition finale est meilleure.",
+    "sections": [
+      {
+        "heading": "Le coût caché d’un départ de Paris",
+        "paragraphs": [
+          "Un billet moins cher depuis Paris peut redevenir plus cher une fois ajoutés le train, parfois la nuit d’hôtel et la journée de décalage. Pour comparer honnêtement, il faut compter le trajet de porte à porte."
+        ]
+      },
+      {
+        "heading": "Ce que la province dessert vraiment",
+        "paragraphs": [
+          "Le Maroc est desservi depuis Paris, mais aussi depuis Bâle-Mulhouse, Bordeaux, Lille, Lyon, Marseille, Nantes, Nice, Strasbourg et Toulouse, d’après les offres que nous avons relevées. Pour l’Algérie, Transavia annonce huit villes françaises, dont Nantes, Lyon, Toulouse, Nice et Marseille. Vers la Tunisie, Tunis est reliée depuis Paris-Orly, Lyon, Marseille, Nice, Nantes, Toulouse et Montpellier.",
+          "Les lignes ne sont pas toutes quotidiennes, et l’offre bouge avec la saison : vérifiez les jours de desserte. Sur HiFlight, chaque départ a sa page, avec la durée, les prix mois par mois et les jours les moins chers."
+        ]
+      },
+      {
+        "heading": "Les prix du moment, ville par ville",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "lyon-barcelone",
+          "marseille-marrakech",
+          "nice-londres",
+          "toulouse-casablanca",
+          "bordeaux-marrakech",
+          "nantes-lisbonne"
+        ]
+      },
+      {
+        "heading": "Maroc et Tunisie : les périodes qui coûtent le plus",
+        "paragraphs": [
+          "Les vacances scolaires, les ponts et les fêtes religieuses concentrent la demande. Comme les dates des fêtes bougent chaque année, regardez les prix autour de ces dates avant de vous décider. En dehors de ces pics, un départ en semaine est souvent nettement moins cher.",
+          "Beaucoup de voyageurs emportent plus qu’un petit sac sur ces trajets : comparez le prix avec le bagage en soute, car un tarif d’appel sans valise n’est pas toujours le moins cher au final. Côté formalités d’entrée, tout dépend de votre nationalité et de la durée du séjour : vérifiez sur le site officiel avant de réserver."
+        ]
+      },
+      {
+        "heading": "Comparer deux aéroports en deux minutes",
+        "paragraphs": [
+          "Ouvrez la page de votre ville, puis celle de la ville voisine ou de Paris. Notez le prix de départ, la durée, et ce que coûte le trajet jusqu’à l’aéroport. Gardez le total le plus bas, avec une marge de sécurité pour le voyage vers l’aéroport."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "lyon-barcelone",
+      "marseille-marrakech",
+      "nice-londres",
+      "toulouse-casablanca",
+      "bordeaux-marrakech",
+      "nantes-lisbonne",
+      "paris-marrakech",
+      "paris-tunis"
+    ],
+    "faq": [
+      {
+        "question": "Est-ce toujours moins cher de partir de sa ville ?",
+        "answer": "Non, pas toujours. Comparez le prix total avec le train ou la voiture jusqu’à l’aéroport de Paris."
+      },
+      {
+        "question": "Les vols depuis la province sont-ils quotidiens ?",
+        "answer": "Pas toujours. Certaines lignes ne volent que quelques fois par semaine, et l’offre change selon la saison."
+      },
+      {
+        "question": "Quand les vols pour le Maroc sont-ils les moins chers ?",
+        "answer": "Hors vacances scolaires et hors fêtes, surtout en semaine. Regardez le calendrier des prix par mois avant de fixer vos dates."
+      },
+      {
+        "question": "Y a-t-il des vols directs vers Tunis depuis la province ?",
+        "answer": "Oui, depuis plusieurs villes comme Lyon, Marseille, Nice, Toulouse ou Nantes, avec une offre qui varie selon la saison."
+      }
+    ]
+  },
+  {
+    "slug": "week-end-europe-vol-pas-cher",
+    "category": "Conseils",
+    "metaTitle": "Week-end pas cher en Europe : choisir destination et vol",
+    "title": "Un week-end en Europe sans se ruiner : partez du budget, pas de la ville",
+    "description": "Barcelone, Lisbonne, Rome, Madrid ou Londres : comment choisir une escapade courte au meilleur prix, quels jours partir et quels pièges éviter sur les bagages.",
+    "heroImage": "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 4,
+    "intro": "Un week-end se décide en trois jours et c’est précisément là qu’on paie le plus cher quand on ne compare pas. L’astuce n’a rien de compliqué : renverser la question. Au lieu de « combien pour Barcelone ? », demandez-vous « où puis-je aller pour ce budget ? ».",
+    "sections": [
+      {
+        "heading": "Comparer des villes, pas une seule",
+        "paragraphs": [
+          "Regardez les prix de plusieurs capitales pour les mêmes dates : Barcelone, Lisbonne, Madrid, Rome, Londres. Selon la période, l’écart entre deux villes suffit à changer tout le budget du week-end."
+        ]
+      },
+      {
+        "heading": "Les jours qui coûtent moins",
+        "paragraphs": [
+          "Le départ du jeudi soir ou du vendredi matin, retour dimanche soir, c’est le créneau que tout le monde veut. Décaler d’un jour, en partant le jeudi matin ou en revenant le lundi, fait souvent baisser le prix. Les pages de vol HiFlight indiquent le jour de la semaine le moins cher quand les données le permettent."
+        ]
+      },
+      {
+        "heading": "Quel week-end coûte le moins en ce moment ?",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-barcelone",
+          "paris-lisbonne",
+          "paris-londres",
+          "paris-rome",
+          "paris-madrid"
+        ]
+      },
+      {
+        "heading": "Les pièges des vols courts",
+        "paragraphs": [
+          "Sur un vol court, la valise en soute peut doubler le prix du billet. Avec un seul bagage à main, on reste souvent au tarif de base, à condition de respecter les dimensions autorisées : vérifiez-les avant de réserver. Notre guide sur le vrai prix d’un billet détaille les options à surveiller.",
+          "Pensez aussi au transfert entre l’aéroport et le centre, à l’heure d’arrivée (une demi-journée perdue, c’est une demi-journée payée pour rien) et à la possibilité de modifier le billet si vos dates ne sont pas sûres."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-barcelone",
+      "paris-lisbonne",
+      "paris-londres",
+      "paris-rome",
+      "paris-madrid"
+    ],
+    "faq": [
+      {
+        "question": "Quelle ville européenne est la moins chère pour un week-end ?",
+        "answer": "Cela change selon les dates. Comparez Barcelone, Lisbonne, Madrid, Rome et Londres pour les mêmes jours."
+      },
+      {
+        "question": "Vaut-il mieux partir le vendredi ou le jeudi ?",
+        "answer": "Le jeudi est souvent moins cher, car le vendredi est le jour le plus demandé."
+      }
+    ]
+  },
+  {
+    "slug": "compagnies-low-cost-frais-caches",
+    "category": "Conseils",
+    "metaTitle": "Vrai prix d’un billet d’avion : bagages, low cost, escale",
+    "title": "Le vrai prix d’un billet d’avion : bagages, options, escale, aller simple",
+    "description": "Un billet à 20 € finit parfois à 90 €. Bagage cabine ou soute, options, escale, deux allers simples : comment comparer le prix réel de vos vols.",
+    "heroImage": "https://images.unsplash.com/photo-1529074963764-98f45c47344b?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 7,
+    "intro": "Un billet à 20 € peut très bien finir à 90 € une fois toutes les options ajoutées. Ce n’est pas une arnaque, c’est un modèle économique : le tarif d’appel attire, le reste se paie à part. Autant savoir où l’addition grimpe, pour comparer des billets qui comprennent la même chose.",
+    "sections": [
+      {
+        "heading": "Là où l’addition grimpe",
+        "paragraphs": [
+          "Bagage en soute, grand bagage cabine, choix du siège, enregistrement à l’aéroport, embarquement prioritaire : chaque option ajoute quelques euros, et elles s’accumulent. Le détail dépend de la compagnie et change régulièrement, donc lisez le récapitulatif avant de payer.",
+          "Bonne nouvelle : le droit européen impose d’afficher le prix final, taxes et frais obligatoires compris, et les options facultatives ne doivent pas être précochées. Si une assurance ou un supplément est déjà coché, c’est à vous de le décocher."
+        ]
+      },
+      {
+        "heading": "Cabine ou soute : la valise change tout",
+        "paragraphs": [
+          "Le Centre européen des consommateurs le rappelle : si le bagage en cabine est souvent gratuit, les compagnies facturent de plus en plus la soute. Beaucoup de tarifs d’appel ne comprennent qu’un petit sac. Sur un vol court, la valise peut faire passer le billet du simple au double.",
+          "Si vous avez besoin d’une valise, ajoutez-la avant de comparer deux billets, sinon vous comparez des choses différentes. Pour un week-end, un bagage cabine suffit souvent : surveillez alors les dimensions, le poids et les liquides, qui varient selon la compagnie.",
+          "Évitez d’ajouter un bagage au comptoir ou à la porte d’embarquement : c’est en général plus cher qu’en ligne, parfois beaucoup plus. Pesez votre bagage chez vous, pas devant la file d’attente."
+        ]
+      },
+      {
+        "heading": "Direct ou escale : de l’argent contre du temps",
+        "paragraphs": [
+          "Un vol avec escale est souvent moins cher, surtout sur le long-courrier. En échange, le voyage s’allonge de plusieurs heures. Sur un trajet court, l’écart de prix suffit rarement à justifier le détour. La bonne question n’est pas « combien ça me fait gagner ? » mais « combien d’heures suis-je prêt à vendre pour ça ? ».",
+          "Regardez le temps entre les deux vols : trop court, un retard suffit à vous faire rater le second ; trop long, vous perdez une demi-journée dans un terminal.",
+          "Un détail qui compte : sur un billet unique, la compagnie doit en général vous réacheminer si le premier vol est en retard et que vous manquez la correspondance. Avec deux billets séparés, vous êtes seul. Pour un week-end, un voyage en famille ou un horaire serré, le direct s’impose le plus souvent."
+        ]
+      },
+      {
+        "heading": "Quelques long-courriers à comparer",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-new-york",
+          "paris-dubai",
+          "paris-tokyo"
+        ]
+      },
+      {
+        "heading": "Aller-retour ou deux allers simples ?",
+        "paragraphs": [
+          "On croit tous qu’un aller-retour est plus avantageux. C’est vrai assez souvent pour que personne ne vérifie, et faux assez souvent pour que ça vaille quelques minutes. Les compagnies à bas prix vendent chaque trajet séparément, ce qui permet de mélanger deux compagnies ou deux aéroports ; les compagnies classiques proposent parfois des aller-retour très compétitifs.",
+          "Pour comparer : cherchez l’aller-retour, puis chaque aller simple, et comparez le total, bagages compris. Gardez en tête le risque des deux billets : si le premier vol est retardé, la compagnie du second n’a aucune obligation de vous réacheminer. Pour un voyage important, un billet unique rassure, même s’il coûte un peu plus."
+        ]
+      },
+      {
+        "heading": "Les réflexes qui évitent les mauvaises surprises",
+        "paragraphs": [
+          "Enregistrez-vous en ligne, mesurez votre bagage chez vous et gardez une copie de votre carte d’embarquement. Vérifiez l’aéroport exact : certains vols « pour Paris » ou « pour Londres » partent d’un aéroport éloigné de la ville, et le transfert pèse dans le prix réel.",
+          "Au final, comparez toujours le total : billet, bagage, siège si vous y tenez, transport jusqu’à l’aéroport."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-barcelone",
+      "paris-londres",
+      "paris-lisbonne",
+      "paris-new-york",
+      "paris-dubai"
+    ],
+    "faq": [
+      {
+        "question": "Pourquoi un billet low cost finit-il plus cher que prévu ?",
+        "answer": "Parce que bagages, siège, enregistrement et assurances sont souvent facturés en plus du tarif d’appel."
+      },
+      {
+        "question": "Le bagage cabine est-il toujours gratuit ?",
+        "answer": "Souvent, mais les règles varient selon la compagnie et le tarif. Vérifiez les dimensions et le poids autorisés avant de réserver."
+      },
+      {
+        "question": "Un vol avec escale est-il toujours moins cher ?",
+        "answer": "Souvent sur le long-courrier, rarement assez sur un trajet court pour justifier le détour."
+      },
+      {
+        "question": "Que se passe-t-il si je rate ma correspondance ?",
+        "answer": "Sur un billet unique, la compagnie doit en général vous réacheminer. Avec deux billets séparés, aucune protection de ce type."
+      },
+      {
+        "question": "Deux allers simples sont-ils parfois moins chers qu’un aller-retour ?",
+        "answer": "Oui, sur certaines liaisons, surtout avec des compagnies low cost. Comparez le total, bagages compris."
+      }
+    ]
+  },
+  {
+    "slug": "vol-istanbul-guide-aeroports",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Istanbul : IST ou Sabiha Gökçen, transfert, conseils",
+    "title": "Vol pour Istanbul : deux aéroports, deux rives, et un choix à ne pas faire au hasard",
+    "description": "Istanbul Airport ou Sabiha Gökçen ? Distances, métro M11 et M4, navettes Havaist, durée du transfert et compagnies depuis la France.",
+    "heroImage": "https://images.unsplash.com/photo-1759173214279-61d177954a40?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "À Istanbul, l’aéroport d’arrivée peut vous coûter une heure de plus ou de moins pour rejoindre votre hôtel. Autant le choisir avec la carte sous les yeux plutôt qu’avec le seul prix du billet.",
+    "sections": [
+      {
+        "heading": "IST ou Sabiha Gökçen ?",
+        "paragraphs": [
+          "Les deux sont loin du centre historique. Istanbul Airport (IST), côté européen, est à environ 40 à 45 km au nord-ouest : c’est là qu’atterrissent la plupart des vols internationaux, dont ceux de Turkish Airlines et d’Air France depuis Paris-CDG. Sabiha Gökçen (SAW), côté asiatique, est au sud-est ; Pegasus y vole par exemple depuis Orly.",
+          "Repérez où se trouve votre hébergement, puis comparez le prix du billet plus le coût et la durée du transfert pour chaque aéroport. Le moins cher à l’aller ne l’est pas forcément une fois en ville."
+        ]
+      },
+      {
+        "heading": "De l’aéroport IST au centre",
+        "paragraphs": [
+          "Le métro M11, automatique, relie l’aéroport à Gayrettepe en une trentaine de minutes environ, d’où l’on prend la ligne M2 vers Taksim ou la vieille ville. C’est l’option la moins chère, avec une carte Istanbulkart, mais elle suppose une correspondance avec des bagages.",
+          "Les navettes Havaist desservent notamment Taksim, sans changement : comptez 60 à 90 minutes selon la circulation. Le taxi est le plus direct, mais aussi le plus cher, et aux heures de pointe il n’est pas plus rapide que le métro."
+        ]
+      },
+      {
+        "heading": "De Sabiha Gökçen au centre",
+        "paragraphs": [
+          "Le métro M4 mène à Kadıköy en environ 50 minutes, avec ensuite le Marmaray pour passer sous le Bosphore vers la rive européenne : comptez 90 à 100 minutes jusqu’à la vieille ville. Les navettes Havabus rejoignent Taksim et Kadıköy en 60 à 90 minutes.",
+          "Les tarifs de transport changent souvent à Istanbul : vérifiez les prix actuels avant de partir, et n’acceptez que les taxis des stations officielles."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-istanbul",
+          "lyon-istanbul",
+          "marseille-istanbul",
+          "toulouse-istanbul"
+        ]
+      },
+      {
+        "heading": "Quand partir",
+        "paragraphs": [
+          "Le printemps et l’automne sont les périodes les plus agréables. L’été est chaud et plus cher, et les vacances scolaires font monter les tarifs."
+        ]
+      },
+      {
+        "heading": "Au départ de la France",
+        "paragraphs": [
+          "Des vols directs partent de Paris, mais aussi de Lyon et de Marseille. Comparez selon vos dates, la différence peut valoir un trajet."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-istanbul",
+      "lyon-istanbul",
+      "marseille-istanbul",
+      "toulouse-istanbul"
+    ],
+    "faq": [
+      {
+        "question": "Quel aéroport choisir pour Istanbul ?",
+        "answer": "Cela dépend de votre quartier. IST est côté européen (environ 40 à 45 km du centre), Sabiha Gökçen côté asiatique. Comparez le prix du billet et la durée du transfert."
+      },
+      {
+        "question": "Comment aller de l’aéroport d’Istanbul (IST) au centre ?",
+        "answer": "En métro M11 jusqu’à Gayrettepe puis M2, en navette Havaist vers Taksim, ou en taxi. Comptez 45 à 90 minutes selon le mode et la circulation."
+      },
+      {
+        "question": "Quelles compagnies volent vers Istanbul depuis Paris ?",
+        "answer": "Turkish Airlines, Air France, Pegasus, AJet et Transavia, selon l’aéroport."
+      }
+    ]
+  },
+  {
+    "slug": "vol-lisbonne-guide-conseils",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Lisbonne : durée, métro depuis l’aéroport, quand partir",
+    "title": "Vol pour Lisbonne : l’aéroport est tellement près du centre que ça change tout",
+    "description": "Vol pour Lisbonne : compagnies, villes de départ, métro ligne rouge, taxi et VTC depuis l’aéroport, et meilleures périodes pour partir.",
+    "heroImage": "https://images.unsplash.com/photo-1616862890964-fd20e9dd106d?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 5,
+    "intro": "À Lisbonne, on pose l’avion et on est en ville vingt à trente minutes plus tard. C’est ce qui en fait l’une des destinations de week-end les plus faciles depuis la France, et l’une des plus demandées.",
+    "sections": [
+      {
+        "heading": "De l’aéroport au centre, sans stress",
+        "paragraphs": [
+          "L’aéroport Humberto Delgado est à quelques kilomètres au nord du centre. Le métro, ligne rouge, démarre juste à la sortie de l’aérogare, à la station Aeroporto. Pour rejoindre la Baixa ou le Chiado, il faut changer à Alameda (ligne verte) : comptez une trentaine de minutes au total.",
+          "Le trajet coûte environ 1,90 € en 2026 (un peu moins avec la carte rechargeable), et le paiement sans contact par carte bancaire est désormais possible aux portiques. Le métro circule de 6 h 30 à 1 h environ. Après, ou si vous êtes chargé, le taxi se trouve toujours devant l’aérogare (comptez 15 à 25 €), et les VTC type Uber ou Bolt reviennent souvent moins cher, autour de 8 à 12 € jusqu’au Rossio selon l’heure.",
+          "Petit détail utile : la gare d’Oriente, d’où partent les trains pour le reste du pays, est à deux minutes de métro de l’aéroport."
+        ]
+      },
+      {
+        "heading": "D’où partir",
+        "paragraphs": [
+          "Plusieurs compagnies se partagent la liaison Paris – Lisbonne : TAP Air Portugal, Transavia, Air France, easyJet, Vueling ou Ryanair selon l’aéroport. Des vols directs relient aussi la capitale portugaise à Lyon, Toulouse, Bordeaux ou Nantes. Comparez selon vos dates."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-lisbonne",
+          "lyon-lisbonne",
+          "bordeaux-lisbonne",
+          "nantes-lisbonne"
+        ]
+      },
+      {
+        "heading": "Quand partir",
+        "paragraphs": [
+          "Le printemps et le début de l’automne sont agréables et très demandés. L’été est chaud et plus cher, surtout en août. Hors vacances, un départ en milieu de semaine fait souvent baisser le billet."
+        ]
+      },
+      {
+        "heading": "Avant de réserver",
+        "paragraphs": [
+          "Pour un week-end, un bagage cabine suffit souvent : c’est ce qui fait la différence de prix avec les tarifs « valise ». Et pour les papiers, une carte d’identité en cours de validité suffit en général depuis la France ; vérifiez sur le site du ministère des Affaires étrangères."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-lisbonne",
+      "lyon-lisbonne",
+      "bordeaux-lisbonne",
+      "nantes-lisbonne"
+    ],
+    "faq": [
+      {
+        "question": "Comment aller de l’aéroport de Lisbonne au centre ?",
+        "answer": "Le plus simple est le métro, ligne rouge, depuis la station Aeroporto, avec un changement à Alameda pour la Baixa. Taxi et VTC sont aussi faciles et rapides."
+      },
+      {
+        "question": "Quelle est la meilleure période pour aller à Lisbonne ?",
+        "answer": "Le printemps et le début de l’automne, mais ce sont aussi les plus demandées. L’été est chaud et plus cher."
+      },
+      {
+        "question": "Quelles compagnies relient Paris à Lisbonne ?",
+        "answer": "TAP Air Portugal, Transavia, Air France, easyJet, Vueling et Ryanair, selon l’aéroport."
+      }
+    ]
+  },
+  {
+    "slug": "vol-londres-quel-aeroport",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Londres : quel aéroport, transfert, ETA, conseils",
+    "title": "Vol pour Londres : Heathrow, Gatwick, Stansted, Luton ou City ?",
+    "description": "Heathrow, Gatwick, Stansted, Luton ou London City : lequel choisir, comment rejoindre le centre, ETA obligatoire et pièges à éviter.",
+    "heroImage": "https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "Londres a cinq grands aéroports, et ils ne sont pas du tout interchangeables. Le billet le moins cher à l’aller l’est rarement une fois qu’on a payé le train pour rejoindre la ville.",
+    "sections": [
+      {
+        "heading": "Les cinq aéroports",
+        "paragraphs": [
+          "Heathrow, à l’ouest, et Gatwick, au sud, sont les plus grands. Stansted et Luton, au nord, accueillent surtout des compagnies à bas prix : ils sont à environ 50 à 60 km du centre. London City, à l’est, est le plus proche de la ville, mais avec des vols plus limités."
+        ]
+      },
+      {
+        "heading": "Le transfert, qui change tout",
+        "paragraphs": [
+          "Depuis Heathrow, l’Elizabeth line traverse le centre en une trentaine de minutes, avec paiement sans contact. Le Heathrow Express est plus rapide (environ 15 minutes jusqu’à Paddington) mais plus cher, et la ligne Piccadilly, la plus lente, met 50 à 60 minutes.",
+          "Depuis Gatwick, un train rejoint le centre (Victoria, London Bridge) en une trentaine de minutes. Depuis Stansted, comptez environ 47 minutes en train jusqu’à Liverpool Street, ou 1 h 30 en car pour les billets les moins chers. Luton demande en général un train puis une navette.",
+          "Un billet moins cher vers un aéroport éloigné peut donc coûter plus cher une fois le train ou le car ajouté, sans parler du temps. Gardez le total, pas le billet seul. Les tarifs de transport changent : vérifiez-les avant de partir."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-londres",
+          "lyon-londres",
+          "nice-londres",
+          "bordeaux-londres"
+        ]
+      },
+      {
+        "heading": "Formalités : l’ETA est obligatoire",
+        "paragraphs": [
+          "Pour entrer au Royaume-Uni, les Français ont besoin d’une autorisation de voyage électronique (ETA), à demander en ligne avant le départ. Elle est payante, et son montant a évolué : vérifiez-le sur le site officiel du gouvernement britannique (gov.uk/eta), et méfiez-vous des sites qui la vendent plus cher. Comme le passeport est exigé à la frontière, prévoyez cette démarche avant de réserver."
+        ]
+      },
+      {
+        "heading": "Au départ de la France",
+        "paragraphs": [
+          "Air France, British Airways et easyJet se partagent la liaison depuis Paris, et d’autres compagnies s’y ajoutent. Pour les départs de province, comparez les aéroports d’arrivée et les horaires.",
+          "Et n’oubliez pas le train : de centre à centre, comptez environ 2 h 20 entre Paris et Londres, un vrai concurrent à l’avion quand on tient compte des transferts."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-londres",
+      "lyon-londres",
+      "nice-londres",
+      "bordeaux-londres"
+    ],
+    "faq": [
+      {
+        "question": "Quel aéroport londonien choisir ?",
+        "answer": "Cela dépend de l’endroit où vous logez. Comparez le prix du billet et le coût du transfert pour chaque aéroport."
+      },
+      {
+        "question": "Comment aller de Heathrow au centre de Londres ?",
+        "answer": "Par l’Elizabeth line (environ 30 à 35 minutes), le Heathrow Express (environ 15 minutes jusqu’à Paddington, plus cher) ou la ligne Piccadilly (50 à 60 minutes, la moins chère)."
+      },
+      {
+        "question": "Faut-il une ETA pour aller à Londres ?",
+        "answer": "Oui, une autorisation de voyage électronique est exigée pour les Français. Demandez-la uniquement sur le site officiel gov.uk et vérifiez le tarif en vigueur."
+      },
+      {
+        "question": "Quelles compagnies volent entre Paris et Londres ?",
+        "answer": "Air France, British Airways, easyJet et d’autres, selon l’aéroport."
+      }
+    ]
+  },
+  {
+    "slug": "vol-new-york-conseils-formalites",
+    "category": "Destinations",
+    "metaTitle": "Vol pour New York : ESTA, passeport, aéroports JFK Newark, conseils",
+    "title": "Vol pour New York depuis la France : l’ESTA d’abord, le billet ensuite",
+    "description": "Vol pour New York depuis la France : ESTA obligatoire, passeport biométrique, JFK ou Newark, compagnies directes et bonnes périodes pour partir.",
+    "heroImage": "https://images.unsplash.com/photo-1496588152823-86ff7695e68f?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "New York est l’un des long-courriers les plus demandés depuis la France, et celui où l’on oublie le plus souvent un détail administratif avant de se concentrer sur le prix. Autant régler les deux en même temps.",
+    "sections": [
+      {
+        "heading": "Avant de réserver : l’ESTA",
+        "paragraphs": [
+          "Les voyageurs français doivent obtenir une autorisation de voyage électronique (ESTA) avant d’embarquer, pour un séjour de 90 jours maximum. Elle suppose un passeport biométrique valide pendant tout le séjour, et elle est payante : 40 $ depuis fin septembre 2025, d’après la presse spécialisée. Le montant et les informations demandées ont changé ces derniers mois : lisez la page du site officiel du gouvernement américain avant de remplir quoi que ce soit.",
+          "Faites la demande vous-même sur le site officiel (adresse en .gov) et non via un site intermédiaire qui ajoute des frais : c’est l’une des arnaques les plus courantes. Prévoyez de la faire bien avant le départ plutôt que la veille."
+        ]
+      },
+      {
+        "heading": "Quel aéroport ?",
+        "paragraphs": [
+          "New York en compte plusieurs. JFK est à environ 25 km de Manhattan ; Newark, dans le New Jersey, est relié à Penn Station par train, ce qui peut faire gagner du temps selon votre hôtel ; LaGuardia accueille surtout des vols intérieurs.",
+          "Depuis Paris, Air France, Delta, United, American Airlines et French bee proposent des vols directs, selon l’aéroport parisien. Comparez à la fois le prix et l’aéroport d’arrivée, parce que la distance jusqu’à votre hôtel varie."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-new-york",
+          "nice-new-york"
+        ]
+      },
+      {
+        "heading": "Quand partir",
+        "paragraphs": [
+          "Les fêtes de fin d’année et l’été sont les périodes les plus chères. Le début du printemps et l’automne offrent souvent de meilleurs prix, avec une ville tout aussi agréable. Comptez un peu moins de 8 heures de vol à l’aller depuis Paris."
+        ]
+      },
+      {
+        "heading": "À l’arrivée",
+        "paragraphs": [
+          "Prévoyez du temps pour le contrôle aux frontières : les files peuvent être longues dans les grands aéroports américains. Gardez une marge si vous avez une correspondance, et n’emportez pas de bagage sans l’avoir ajouté au prix de votre billet."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-new-york",
+      "nice-new-york"
+    ],
+    "faq": [
+      {
+        "question": "Faut-il un visa pour New York ?",
+        "answer": "Non, les voyageurs français ont besoin d’une ESTA et d’un passeport biométrique, pour un séjour de 90 jours maximum. Faites la demande uniquement sur le site officiel."
+      },
+      {
+        "question": "Combien coûte l’ESTA ?",
+        "answer": "40 $ depuis fin septembre 2025 d’après la presse spécialisée. Vérifiez le montant sur le site officiel avant de payer."
+      },
+      {
+        "question": "Quelles compagnies font Paris – New York en direct ?",
+        "answer": "Air France, Delta, United, American Airlines et French bee, selon l’aéroport."
+      }
+    ]
+  },
+  {
+    "slug": "vol-barcelone-guide-conseils",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Barcelone : durée, aéroport El Prat, transfert, conseils",
+    "title": "Vol pour Barcelone : l’escapade la plus facile (et la plus comparée) depuis la France",
+    "description": "Vol pour Barcelone : durée, villes de départ, transfert depuis l’aéroport El Prat (train R2 Nord, Aerobús, métro L9), bagages et bons moments pour partir.",
+    "heroImage": "https://images.unsplash.com/photo-1630219694734-fe47ab76b15e?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "Barcelone cumule tout ce qu’on cherche pour une escapade : vol court, départs nombreux et aéroport relié au centre. Et comme tout le monde regarde ce vol-là, les prix bougent vite. Quelques repères pour ne pas se faire piéger, y compris à l’arrivée.",
+    "sections": [
+      {
+        "heading": "Combien de temps ça dure ?",
+        "paragraphs": [
+          "Depuis Marseille, Toulouse ou Bordeaux, le vol direct dure un peu plus d’une heure. Depuis Paris, Lyon ou Nice, comptez entre 1 h 20 et 2 h. Ce sont des ordres de grandeur : l’horaire exact figure sur votre billet."
+        ]
+      },
+      {
+        "heading": "D’où partir",
+        "paragraphs": [
+          "Paris, Lyon, Marseille, Nice, Nantes, Bordeaux et Bâle-Mulhouse apparaissent dans nos relevés de prix pour Barcelone. Vueling, Air France, Transavia et Ryanair (depuis Beauvais) se partagent la liaison avec Paris. Regardez le prix de votre ville avec celui d’une ville voisine : sur certaines dates, l’écart couvre largement le trajet."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-barcelone",
+          "lyon-barcelone",
+          "marseille-barcelone",
+          "nice-barcelone",
+          "toulouse-barcelone",
+          "bordeaux-barcelone"
+        ]
+      },
+      {
+        "heading": "De l’aéroport El Prat au centre",
+        "paragraphs": [
+          "L’aéroport est à une quinzaine de kilomètres du centre. Trois options se valent selon votre terminal et votre hébergement.",
+          "Le train Rodalies R2 Nord part du terminal 2 et rejoint Barcelone-Sants en une vingtaine de minutes et Passeig de Gràcia en environ 26 minutes. C’est le plus rapide et le moins cher, mais depuis le terminal 1 il faut d’abord prendre la navette gratuite jusqu’au T2.",
+          "L’Aerobús dessert Plaça Catalunya en environ 35 minutes depuis les deux terminaux, pour un peu plus de 7 € l’aller d’après les relevés de tarifs 2026, et circule toute la nuit. Le métro L9 Sud relie les deux terminaux mais ne va pas directement au centre, et il demande un billet spécial « aéroport » à 5,90 € : la carte T-casual n’y est pas valable.",
+          "Le taxi est au compteur, sans prix fixe : le minimum depuis l’aéroport est de 21 €, et la course vers le centre revient en général entre 30 et 45 €. Utilisez uniquement la file officielle."
+        ]
+      },
+      {
+        "heading": "Quand réserver, quand partir",
+        "paragraphs": [
+          "Les week-ends de printemps, les ponts de mai et l’été sont les plus chers. En semaine et hors vacances, les billets baissent nettement. Pour un week-end, partir le jeudi ou revenir le lundi fait souvent baisser le prix."
+        ]
+      },
+      {
+        "heading": "Les frais qui s’invitent",
+        "paragraphs": [
+          "Sur un vol court, un tarif sans bagage peut doubler une fois la valise ajoutée. Comptez-la avant de comparer deux billets, et vérifiez les dimensions autorisées pour le bagage à main."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Combien coûte un vol pour Barcelone ?",
+        "answer": "Cela varie beaucoup selon la ville et la date. Les pages de vols HiFlight affichent le prix le plus bas relevé, mois par mois."
+      },
+      {
+        "question": "Comment aller de l’aéroport de Barcelone au centre ?",
+        "answer": "Le train R2 Nord (depuis le T2) est le plus rapide et le moins cher. L’Aerobús va à Plaça Catalunya depuis les deux terminaux, et le métro L9 Sud exige un billet aéroport spécial."
+      },
+      {
+        "question": "Faut-il un passeport pour aller à Barcelone ?",
+        "answer": "Depuis la France, une carte d’identité en cours de validité suffit en général. Vérifiez les règles sur le site officiel du ministère des Affaires étrangères."
+      },
+      {
+        "question": "Quel est le meilleur moment pour réserver ?",
+        "answer": "Dès que vos dates sont connues pour les ponts et l’été. Hors vacances, les prix restent souvent stables plusieurs semaines à l’avance."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-barcelone",
+      "lyon-barcelone",
+      "marseille-barcelone",
+      "nice-barcelone",
+      "toulouse-barcelone",
+      "bordeaux-barcelone"
+    ]
+  },
+  {
+    "slug": "vol-rome-guide-aeroports",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Rome : Fiumicino ou Ciampino, Leonardo Express, transfert",
+    "title": "Vol pour Rome : Fiumicino ou Ciampino, et le vrai coût du trajet vers le centre",
+    "description": "Vol pour Rome : Fiumicino ou Ciampino, Leonardo Express, bus et taxi à tarif fixe, compagnies depuis la France et bons moments pour partir.",
+    "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "Rome se rejoint en deux heures depuis Paris, et en bien moins depuis Nice ou Marseille. Le piège, ce n’est pas le vol, c’est le trajet entre l’aéroport et le centre, et il dépend entièrement de celui que vous choisissez.",
+    "sections": [
+      {
+        "heading": "Fiumicino ou Ciampino ?",
+        "paragraphs": [
+          "Fiumicino est le grand aéroport, à plus de vingt kilomètres du centre, avec la majorité des vols réguliers. Ciampino est plus petit, plus proche, et utilisé notamment par des compagnies à bas prix.",
+          "Comparez le prix du billet et le coût du transfert vers votre hébergement. Un billet moins cher peut revenir plus cher une fois le transport ajouté."
+        ]
+      },
+      {
+        "heading": "De Fiumicino au centre",
+        "paragraphs": [
+          "Le Leonardo Express relie l’aéroport à la gare de Rome Termini sans arrêt, en 32 minutes, avec un départ toutes les 15 minutes environ. Le billet coûte 14 € en 2026, et le dernier train part vers 23 h 30.",
+          "Les navettes en bus vers Termini sont moins chères (5 à 7 € environ) mais plus lentes : comptez 50 à 60 minutes. Attention au train FL1, moins cher mais qui ne passe pas par Termini.",
+          "Le taxi bénéficie d’un tarif fixe de 55 € pour aller de Fiumicino à n’importe quelle adresse à l’intérieur des murs auréliens, ce qui évite le compteur. Il est intéressant à plusieurs ou très chargé."
+        ]
+      },
+      {
+        "heading": "De Ciampino au centre",
+        "paragraphs": [
+          "Depuis Ciampino, la formule « Airlink » combine un bus jusqu’à la gare puis un train vers Termini, pour environ 2,70 € et 40 à 50 minutes, aux horaires de service de la journée. C’est le transfert le moins cher de Rome, mais il ne dessert pas les vols de nuit."
+        ]
+      },
+      {
+        "heading": "D’où partir",
+        "paragraphs": [
+          "Depuis Paris, ITA Airways, Air France, Transavia, easyJet et Vueling se partagent la liaison. Lyon, Marseille et Nice proposent aussi des vols pour Rome. Comparez ces départs selon vos dates : l’écart de prix peut être important."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-rome",
+          "lyon-rome",
+          "marseille-rome",
+          "nice-rome"
+        ]
+      },
+      {
+        "heading": "Quand partir",
+        "paragraphs": [
+          "Pâques, les ponts de mai et l’été sont les plus demandés. L’hiver offre souvent les prix les plus bas, avec des journées plus courtes. Pour un week-end, partez en milieu de semaine quand c’est possible."
+        ]
+      },
+      {
+        "heading": "Avant de réserver",
+        "paragraphs": [
+          "Vérifiez les bagages inclus, l’aéroport d’arrivée et les horaires de retour. Un vol tardif peut compliquer le retour vers le centre : vérifiez l’heure du dernier train ou bus."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quel aéroport choisir pour Rome ?",
+        "answer": "Fiumicino est le plus pratique pour la plupart des voyageurs. Ciampino peut convenir selon la compagnie et votre hébergement : comparez le prix total avec le transfert."
+      },
+      {
+        "question": "Comment aller de l’aéroport de Fiumicino à Rome ?",
+        "answer": "Le Leonardo Express rejoint Termini en 32 minutes pour 14 €. Le bus est moins cher mais plus long, et le taxi a un tarif fixe de 55 € dans les murs auréliens."
+      },
+      {
+        "question": "Combien de temps dure le vol vers Rome ?",
+        "answer": "Environ 2 h depuis Paris, et entre 1 h 15 et 1 h 30 depuis Nice, Lyon ou Marseille."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-rome",
+      "lyon-rome",
+      "marseille-rome",
+      "nice-rome"
+    ]
+  },
+  {
+    "slug": "vol-madrid-guide-conseils",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Madrid : durée, Barajas, métro, taxi à 33 €, conseils",
+    "title": "Vol pour Madrid : durée, aéroport et bons réflexes avant de réserver",
+    "description": "Vol pour Madrid : durée, compagnies, comment rejoindre le centre depuis Barajas (métro, bus Exprés, taxi à tarif fixe) et quand partir.",
+    "heroImage": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "Madrid est desservie en direct depuis de nombreuses villes françaises, et souvent par plusieurs compagnies. C’est ce qui rend la comparaison utile : l’écart entre deux offres peut dépasser le prix d’un déjeuner sur place.",
+    "sections": [
+      {
+        "heading": "Durée du vol et aéroport",
+        "paragraphs": [
+          "Comptez environ 2 h depuis Paris et à peine plus d’une heure depuis Toulouse. Madrid-Barajas est à une douzaine de kilomètres du centre."
+        ]
+      },
+      {
+        "heading": "De Barajas au centre",
+        "paragraphs": [
+          "Le métro, ligne 8, relie tous les terminaux à Nuevos Ministerios en 15 à 20 minutes, d’où l’on change pour rejoindre le centre. Un supplément aéroport de 3 € s’ajoute au billet, soit environ 4,50 à 5 € au total. La ligne fonctionne jusqu’à 1 h 30 environ.",
+          "Le bus Exprés Aeropuerto (ligne 203) circule 24 h/24 pour 5 € vers Atocha et Cibeles, en 30 à 40 minutes : c’est la bonne option pour une arrivée tardive ou avec une valise.",
+          "Le taxi bénéficie d’un tarif fixe de 33 € vers tout point situé à l’intérieur du périphérique M-30, ce qui couvre l’essentiel du centre touristique, sans supplément pour la nuit, les bagages ou le week-end."
+        ]
+      },
+      {
+        "heading": "D’où partir",
+        "paragraphs": [
+          "Iberia, Air France, Transavia et Air Europa relient Paris à Madrid. Plusieurs villes de province proposent aussi des vols, en direct ou avec correspondance selon la période. Comparez : l’écart de prix compense parfois un déplacement.",
+          "Si Madrid n’est qu’une étape vers l’Amérique latine, comparez le billet complet avec deux billets séparés, en gardant en tête que deux billets séparés n’offrent pas la même protection en cas de retard."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-madrid",
+          "lyon-madrid",
+          "marseille-madrid",
+          "nice-madrid",
+          "toulouse-madrid",
+          "bordeaux-madrid"
+        ]
+      },
+      {
+        "heading": "Quand partir",
+        "paragraphs": [
+          "Le printemps et l’automne sont agréables et très demandés. L’été est chaud, avec des prix souvent plus bas. Pour un week-end, les vols du vendredi soir sont les plus chers : testez un départ le jeudi."
+        ]
+      },
+      {
+        "heading": "Réserver sans mauvaise surprise",
+        "paragraphs": [
+          "Ajoutez le bagage avant de comparer, vérifiez l’heure d’arrivée et gardez une marge pour le retour."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Comment aller de l’aéroport de Madrid au centre ?",
+        "answer": "En métro ligne 8 (environ 4,50 à 5 € avec le supplément aéroport), en bus Exprés 203 (5 €, 24 h/24) ou en taxi à tarif fixe de 33 € dans le périphérique M-30."
+      },
+      {
+        "question": "Quel est le meilleur moment pour partir à Madrid ?",
+        "answer": "Le printemps et l’automne sont agréables mais très demandés. L’été est chaud et souvent moins cher."
+      },
+      {
+        "question": "Combien de temps dure le vol vers Madrid ?",
+        "answer": "Environ 2 h depuis Paris, un peu plus d’une heure depuis Toulouse."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-madrid",
+      "lyon-madrid",
+      "marseille-madrid",
+      "nice-madrid",
+      "toulouse-madrid",
+      "bordeaux-madrid"
+    ]
+  },
+  {
+    "slug": "vol-dubai-quand-partir-conseils",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Dubaï : quand partir, durée, formalités, aéroport DXB",
+    "title": "Vol pour Dubaï depuis la France : la meilleure saison est aussi la plus chère",
+    "description": "Vol pour Dubaï depuis la France : meilleure saison, chaleur d’été, durée du vol, formalités d’entrée et comment rejoindre le centre depuis DXB.",
+    "heroImage": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "Dubaï a un problème de calendrier : quand il y fait agréable, tout le monde veut y aller, et quand les billets sont bon marché, il y fait très chaud. Le tout est de savoir quel compromis vous convient.",
+    "sections": [
+      {
+        "heading": "Quand partir",
+        "paragraphs": [
+          "La meilleure période court de novembre à avril d’après la plupart des guides (certains l’étendent dès octobre) : les journées sont douces et les activités en extérieur sont possibles. C’est aussi la plus demandée, avec des hébergements plus chers.",
+          "L’été, notamment juillet et août, est très chaud et les journées se passent surtout en intérieur, mais les tarifs sont souvent plus bas. Les vacances scolaires et la fin d’année tirent les prix vers le haut, donc réservez tôt pour ces dates."
+        ]
+      },
+      {
+        "heading": "Durée et départs",
+        "paragraphs": [
+          "Le vol direct dure environ six à sept heures : un peu plus de 6 h depuis Lyon, autour de 6 h 50 depuis Paris. Emirates assure Lyon – Dubaï chaque jour, d’après Lyon Aéroports. Depuis Paris, plusieurs compagnies proposent des vols directs.",
+          "Comparez la durée totale, pas seulement le prix, si vous regardez des vols avec escale."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-dubai",
+          "nice-dubai",
+          "lyon-dubai"
+        ]
+      },
+      {
+        "heading": "De l’aéroport au centre",
+        "paragraphs": [
+          "L’aéroport international de Dubaï (DXB) est relié à la ville par la ligne rouge du métro, depuis les terminaux 1 et 3. Les taxis officiels attendent à la sortie, avec un compteur ; la course vers le centre est un peu plus chère aux heures de pointe. Vérifiez à quel terminal votre compagnie arrive pour choisir le bon accès."
+        ]
+      },
+      {
+        "heading": "Formalités",
+        "paragraphs": [
+          "Les ressortissants français n’ont pas besoin de visa pour un séjour touristique : un tampon d’entrée est apposé à l’arrivée. Le passeport doit rester valable au moins six mois après l’entrée sur le territoire d’après les guides de voyage. Vérifiez les conditions sur le site du ministère des Affaires étrangères avant de réserver."
+        ]
+      },
+      {
+        "heading": "Payer moins cher",
+        "paragraphs": [
+          "Comparez le mois entier plutôt qu’une seule date, testez un départ en milieu de semaine, et regardez avec et sans escale."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quelle est la meilleure période pour aller à Dubaï ?",
+        "answer": "De novembre à avril, quand il fait agréable. L’été est très chaud, mais souvent moins cher."
+      },
+      {
+        "question": "Y a-t-il un vol direct Lyon – Dubaï ?",
+        "answer": "Oui, Emirates assure la liaison chaque jour d’après Lyon Aéroports."
+      },
+      {
+        "question": "Faut-il un visa pour Dubaï ?",
+        "answer": "Non pour un séjour touristique avec un passeport français, mais le passeport doit être valable six mois. Vérifiez sur le site du ministère des Affaires étrangères avant de réserver."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-dubai",
+      "nice-dubai",
+      "lyon-dubai"
+    ]
+  },
+  {
+    "slug": "vol-marrakech-depuis-la-province",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Marrakech depuis la province",
+    "title": "Marrakech sans passer par Paris : qui vole depuis chez vous",
+    "description": "Marrakech depuis Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille ou Bâle-Mulhouse : compagnies, durées et conseils pour comparer.",
+    "heroImage": "https://images.unsplash.com/photo-1570135460237-510ca82c6781?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-03",
+    "readingMinutes": 4,
+    "intro": "Marrakech n’est pas réservée aux Parisiens. De Bordeaux à Lille, de nombreuses villes de province ont des vols, et partir de chez soi évite un train, parfois une nuit d’hôtel, et toujours du stress.",
+    "sections": [
+      {
+        "heading": "Qui vole depuis où",
+        "paragraphs": [
+          "Le tableau ci-dessous reprend les compagnies relevées au départ des principales villes, d’après des relevés publics d’offres. L’offre varie selon la saison, donc vérifiez toujours les jours de desserte."
+        ],
+        "table": {
+          "headers": [
+            "Départ",
+            "Compagnies relevées vers le Maroc"
+          ],
+          "rows": [
+            [
+              "Lyon",
+              "Air Arabia Maroc, easyJet, Transavia, Royal Air Maroc, Volotea"
+            ],
+            [
+              "Marseille",
+              "Ryanair, Air Arabia Maroc, Royal Air Maroc, Transavia"
+            ],
+            [
+              "Toulouse",
+              "Ryanair, Air Arabia Maroc, Royal Air Maroc, easyJet"
+            ],
+            [
+              "Bordeaux",
+              "Air Arabia Maroc, easyJet, Royal Air Maroc, Volotea"
+            ],
+            [
+              "Nantes",
+              "easyJet, Ryanair, Royal Air Maroc, Transavia, Volotea"
+            ],
+            [
+              "Nice",
+              "easyJet, Royal Air Maroc"
+            ],
+            [
+              "Lille",
+              "TUI fly, Ryanair, Transavia, easyJet, Royal Air Maroc, Volotea"
+            ],
+            [
+              "Bâle-Mulhouse",
+              "Air Arabia Maroc, easyJet"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Le calcul complet",
+        "paragraphs": [
+          "Un billet depuis Paris peut sembler moins cher, mais le train, l’éventuelle nuit d’hôtel et les heures de trajet s’ajoutent. Comparez de porte à porte, pas seulement le prix affiché."
+        ]
+      },
+      {
+        "heading": "Les prix du moment, ville par ville",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "lyon-marrakech",
+          "marseille-marrakech",
+          "nice-marrakech",
+          "toulouse-marrakech",
+          "bordeaux-marrakech",
+          "nantes-marrakech",
+          "lille-marrakech",
+          "bale-mulhouse-marrakech"
+        ]
+      },
+      {
+        "heading": "Quand partir",
+        "paragraphs": [
+          "Le printemps et l’automne sont les saisons les plus agréables. L’été est très chaud, avec des prix souvent plus bas. Les vacances scolaires font monter les tarifs."
+        ]
+      },
+      {
+        "heading": "Avant de réserver",
+        "paragraphs": [
+          "Certaines liaisons ne sont pas quotidiennes : vérifiez les jours de vol. Regardez aussi les bagages inclus, et les formalités d’entrée selon votre nationalité."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quelles villes de province ont des vols vers Marrakech ?",
+        "answer": "Lyon, Marseille, Nice, Toulouse, Bordeaux, Nantes, Lille et Bâle-Mulhouse, entre autres. L’offre varie selon la saison."
+      },
+      {
+        "question": "Combien de temps dure le vol ?",
+        "answer": "Environ 2 h 30 à 3 h 20 selon la ville de départ."
+      },
+      {
+        "question": "Est-ce moins cher de partir de Paris ?",
+        "answer": "Pas toujours. Comparez le prix total, transport jusqu’à l’aéroport compris, avec un vol direct depuis votre région."
+      }
+    ],
+    "relatedRoutes": [
+      "lyon-marrakech",
+      "marseille-marrakech",
+      "nice-marrakech",
+      "toulouse-marrakech",
+      "bordeaux-marrakech",
+      "nantes-marrakech",
+      "lille-marrakech",
+      "bale-mulhouse-marrakech"
+    ]
+  },
+  {
+    "slug": "vol-tunis-guide-conseils",
+    "category": "Destinations",
+    "metaTitle": "Vol pour Tunis : durée, aéroport Carthage, taxi, formalités",
+    "title": "Vol pour Tunis depuis la France : été et fêtes, les deux périodes à anticiper",
+    "description": "Vol pour Tunis depuis la France : durée, compagnies, villes desservies, taxi et bus depuis l’aéroport de Tunis-Carthage, passeport obligatoire.",
+    "heroImage": "https://images.unsplash.com/photo-1607869861980-da5f9b8b4969?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-07",
+    "readingMinutes": 6,
+    "intro": "La Tunisie fait partie des destinations les plus demandées depuis la France, surtout l’été et pendant les fêtes. Ce sont aussi les périodes où réserver au dernier moment se paie le plus cher.",
+    "sections": [
+      {
+        "heading": "Durée et aéroport",
+        "paragraphs": [
+          "Le vol dure environ deux heures depuis Marseille et un peu plus depuis les autres villes. L’aéroport de Tunis-Carthage est à 7 ou 8 km du centre."
+        ]
+      },
+      {
+        "heading": "De l’aéroport au centre",
+        "paragraphs": [
+          "Le taxi est le plus simple : la course vers le centre revient à une vingtaine de dinars en journée, avec un supplément pour les bagages et une majoration de 50 % environ entre 21 h et 5 h. Comptez 15 à 20 minutes. Exigez le compteur et regardez où se trouve la file officielle.",
+          "Le bus n° 635 de la compagnie Transtu rejoint la station Tunis Marine, où passe le TGM, en environ 25 minutes pour un ticket qui coûte l’équivalent d’un euro ou moins. C’est un service de jour : après un vol tardif, prenez un taxi. Le TGM, petit train côtier, mène ensuite à La Goulette, Carthage, Sidi Bou Saïd et La Marsa."
+        ]
+      },
+      {
+        "heading": "D’où partir, avec qui",
+        "paragraphs": [
+          "Depuis Paris, Tunisair, Air France, Transavia et Nouvelair se partagent la ligne. En province, Tunis est reliée depuis Lyon, Marseille, Nice, Nantes, Toulouse et Montpellier. L’offre change avec la saison, et les écarts de prix peuvent justifier un déplacement."
+        ]
+      },
+      {
+        "heading": "Les prix du moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour pour des départs dans les six prochains mois, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-tunis",
+          "lyon-tunis",
+          "marseille-tunis",
+          "toulouse-tunis",
+          "bordeaux-tunis",
+          "nantes-tunis"
+        ]
+      },
+      {
+        "heading": "Quand réserver",
+        "paragraphs": [
+          "Juillet, août et les fêtes de fin d’année sont les périodes les plus chères et se remplissent vite. Hors saison, un départ en milieu de semaine est le plus économique."
+        ]
+      },
+      {
+        "heading": "Bagages et formalités",
+        "paragraphs": [
+          "Vérifiez la franchise de bagages incluse avant de comparer deux billets : sur cette liaison, elle varie beaucoup d’une offre à l’autre.",
+          "Depuis le 1er janvier 2025, le passeport est obligatoire pour entrer en Tunisie et doit être valable au moins trois mois après la date d’entrée, d’après le ministère des Affaires étrangères : la carte d’identité ne suffit plus, même en voyage organisé. Aucun visa n’est exigé pour un séjour touristique de moins de trois mois. La Tunisie impose aussi des règles sur la déclaration des devises : renseignez-vous avant de partir."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quand réserver un vol pour Tunis ?",
+        "answer": "Pour l’été et les fêtes, comparez tôt car les vols se remplissent vite. Hors saison, les prix sont plus souples."
+      },
+      {
+        "question": "Comment aller de l’aéroport de Tunis-Carthage au centre ?",
+        "answer": "En taxi (environ 20 dinars en journée, majoration la nuit), ou en bus Transtu n° 635 jusqu’à Tunis Marine."
+      },
+      {
+        "question": "Faut-il un passeport pour aller en Tunisie ?",
+        "answer": "Oui, depuis le 1er janvier 2025 le passeport est obligatoire, valable au moins trois mois après l’entrée en Tunisie. Aucun visa n’est requis pour un séjour touristique de moins de trois mois."
+      },
+      {
+        "question": "Quelles compagnies volent entre Paris et Tunis ?",
+        "answer": "Tunisair, Air France, Transavia et Nouvelair."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-tunis",
+      "lyon-tunis",
+      "marseille-tunis",
+      "toulouse-tunis",
+      "bordeaux-tunis",
+      "nantes-tunis"
+    ]
+  },
+  {
+    "slug": "barometre-prix-vols-marrakech-barcelone",
+    "category": "Destinations",
+    "metaTitle": "Prix vols Marrakech et Barcelone depuis 9 villes",
+    "title": "Marrakech et Barcelone depuis 9 villes : combien coûte vraiment le vol, relevé du 2 novembre 2026",
+    "description": "Prix aller-retour les plus bas relevés vers Marrakech et Barcelone depuis Paris, Lyon, Marseille, Nice, Bordeaux et d’autres villes, avec méthode et limites.",
+    "heroImage": "https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-02",
+    "updated": "2026-11-03",
+    "readingMinutes": 4,
+    "intro": "Combien coûte vraiment un vol pour Marrakech ou Barcelone selon la ville d’où l’on part ? On a regardé les prix aller-retour les plus bas relevés le 2 novembre 2026 pour neuf villes françaises. Les chiffres sont là, avec le nombre de dates analysées pour que vous jugiez de leur solidité.",
+    "sections": [
+      {
+        "heading": "Comment lire ces chiffres",
+        "paragraphs": [
+          "Ces tableaux reprennent les prix aller-retour les plus bas relevés le 2 novembre 2026 par le réseau de partenaires HiFlight, pour des départs dans les six prochains mois. Ce ne sont pas des moyennes : ce sont des minimums constatés, qui peuvent ne plus être disponibles quand vous lisez ces lignes.",
+          "La colonne « dates analysées » dit pour combien de dates de départ un prix a été relevé. Plus le chiffre est grand, plus le relevé est solide. En dessous de 6 dates, prenez-le comme une indication."
+        ]
+      },
+      {
+        "heading": "Marrakech depuis 9 villes",
+        "paragraphs": [
+          "Paris est le relevé le plus solide, avec 37 dates analysées et un prix plancher à 43 €. Parmi les villes de province qui ont au moins 8 dates, les prix les plus bas vont de 55 € (Lyon) à 89 € (Bordeaux)."
+        ],
+        "table": {
+          "headers": [
+            "Départ",
+            "Prix le plus bas relevé (aller-retour)",
+            "Mois du prix le plus bas",
+            "Offres en vol direct",
+            "Dates analysées"
+          ],
+          "rows": [
+            [
+              "Paris",
+              "43 €",
+              "décembre 2026",
+              "84 %",
+              "37"
+            ],
+            [
+              "Lyon",
+              "55 €",
+              "janvier 2027",
+              "27 %",
+              "10"
+            ],
+            [
+              "Marseille",
+              "61 €",
+              "décembre 2026",
+              "63 %",
+              "8"
+            ],
+            [
+              "Nice",
+              "67 €",
+              "décembre 2026",
+              "33 %",
+              "6"
+            ],
+            [
+              "Toulouse",
+              "60 €",
+              "décembre 2026",
+              "85 %",
+              "8"
+            ],
+            [
+              "Bordeaux",
+              "89 €",
+              "février 2027",
+              "36 %",
+              "11"
+            ],
+            [
+              "Nantes",
+              "65 €",
+              "janvier 2027",
+              "38 %",
+              "10"
+            ],
+            [
+              "Lille",
+              "156 €",
+              "décembre 2026",
+              "0 %",
+              "3 (peu de relevés)"
+            ],
+            [
+              "Bâle-Mulhouse",
+              "pas de relevé récent",
+              "–",
+              "–",
+              "0"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Barcelone depuis 9 villes",
+        "paragraphs": [
+          "Vers Barcelone, les prix les plus bas vont de 43 € (Paris, 43 dates analysées) à 58 € (Nice et Marseille). Toulouse et Lille n’avaient pas de relevé récent le jour de la mesure."
+        ],
+        "table": {
+          "headers": [
+            "Départ",
+            "Prix le plus bas relevé (aller-retour)",
+            "Mois du prix le plus bas",
+            "Offres en vol direct",
+            "Dates analysées"
+          ],
+          "rows": [
+            [
+              "Paris",
+              "43 €",
+              "novembre 2026",
+              "95 %",
+              "43"
+            ],
+            [
+              "Lyon",
+              "53 €",
+              "janvier 2027",
+              "67 %",
+              "12"
+            ],
+            [
+              "Marseille",
+              "58 €",
+              "décembre 2026",
+              "67 %",
+              "3 (peu de relevés)"
+            ],
+            [
+              "Nice",
+              "58 €",
+              "décembre 2026",
+              "91 %",
+              "29"
+            ],
+            [
+              "Bordeaux",
+              "49 €",
+              "mars 2027",
+              "40 %",
+              "10"
+            ],
+            [
+              "Nantes",
+              "57 €",
+              "novembre 2026",
+              "78 %",
+              "8"
+            ],
+            [
+              "Bâle-Mulhouse",
+              "47 €",
+              "janvier 2027",
+              "70 %",
+              "21"
+            ],
+            [
+              "Toulouse",
+              "pas de relevé récent",
+              "–",
+              "–",
+              "0"
+            ],
+            [
+              "Lille",
+              "pas de relevé récent",
+              "–",
+              "–",
+              "0"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Ce qu’on en retient",
+        "paragraphs": [
+          "Les prix les plus bas tombent surtout pour des départs en décembre et en janvier, hors vacances de fin d’année. Pour Marrakech, les écarts entre Lyon, Toulouse, Marseille et Nantes sont de quelques euros seulement : le trajet jusqu’à l’aéroport peut peser plus lourd que la différence de prix.",
+          "À l’inverse, Bordeaux – Marrakech sort du lot avec un plancher à 89 €, nettement plus haut que les autres villes comparables."
+        ]
+      },
+      {
+        "heading": "Les limites de ce relevé",
+        "paragraphs": [
+          "Un seul relevé daté du 2 novembre ne permet pas de dégager une tendance. Les pages de vols de HiFlight sont recalculées chaque jour : pour votre trajet, ouvrez la page correspondante et lisez le relevé à jour."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quel est le vol le moins cher vers Marrakech depuis la France ?",
+        "answer": "Au relevé du 2 novembre 2026, le prix aller-retour le plus bas était de 43 € depuis Paris, pour un départ en décembre 2026. Ce prix change chaque jour et n’est pas garanti."
+      },
+      {
+        "question": "Peut-on partir de province pour moins cher ?",
+        "answer": "Parfois : depuis Lyon, le plancher était de 55 € vers Marrakech et de 53 € vers Barcelone. Comparez le coût total, trajet jusqu’à l’aéroport compris."
+      },
+      {
+        "question": "D’où viennent ces prix ?",
+        "answer": "Du réseau de partenaires de HiFlight, qui relève les prix aller-retour les plus bas pour les six prochains mois. Les pages de vols sont mises à jour chaque jour."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-marrakech",
+      "lyon-marrakech",
+      "marseille-marrakech",
+      "toulouse-marrakech",
+      "paris-barcelone",
+      "lyon-barcelone",
+      "nice-barcelone",
+      "bale-mulhouse-barcelone"
+    ]
+  },
+  {
+    "slug": "travel-tuesday-2026-bons-plans-vols",
+    "category": "Bons plans",
+    "metaTitle": "Travel Tuesday 2026 : date, offres vols, bons plans",
+    "title": "Travel Tuesday 2026 (1er décembre) : dates, offres et comment ne pas se faire avoir",
+    "description": "Travel Tuesday 2026 le mardi 1er décembre : calendrier des offres, quel jour réserver, chiffres 2025, prix de référence HiFlight et pièges à éviter avant d’acheter un vol.",
+    "heroImage": "https://images.unsplash.com/photo-1631080801009-5b4741cf3f12?auto=format&fit=crop&w=1600&q=75",
+    "countdown": {
+      "to": "2026-12-01T00:00:00+01:00"
+    },
+    "published": "2026-11-03",
+    "updated": "2026-11-03",
+    "readingMinutes": 7,
+    "intro": "Le Travel Tuesday, c’est le Black Friday des voyageurs : le jour où compagnies, hôtels et plateformes sortent leurs promotions de fin d’année. En 2026, c’est le mardi 1er décembre. La question utile n’est pas « y aura-t-il des promos ? », il y en aura, mais « comment savoir si une promo est vraiment une bonne affaire ? ».",
+    "sections": [
+      {
+        "heading": "C’est quoi, au juste ?",
+        "paragraphs": [
+          "Une journée de promotions entièrement consacrée au voyage : vols, hôtels, locations de voiture, séjours. Elle tombe le mardi qui suit Thanksgiving, donc juste après le Black Friday et le Cyber Monday.",
+          "Le terme est apparu en 2017, après une observation du site d’analyse de prix, et il a pris de l’ampleur depuis. McKinsey relève que les recherches sur le sujet ont progressé de plus de 500 % entre 2021 et 2023, et rappelle que novembre et décembre sont des mois creux pour les réservations : les promotions servent à remplir les départs des mois suivants. Longtemps cantonné à l’Amérique du Nord, le phénomène gagne l’Europe, comme le Black Friday avant lui."
+        ]
+      },
+      {
+        "heading": "Le calendrier 2026, date par date",
+        "paragraphs": [
+          "Les offres ne tiennent pas dans une seule journée. Certaines démarrent bien avant le mardi, d’autres le prolongent."
+        ],
+        "table": {
+          "headers": [
+            "Date",
+            "Ce qui se passe"
+          ],
+          "rows": [
+            [
+              "Jusqu’au 17 novembre",
+              "Prix promotionnels « L’Instant » sur de nombreuses destinations long-courriers (New York, Montréal, Tokyo, Dubaï…)"
+            ],
+            [
+              "Jeudi 19 novembre",
+              "Lancement anticipé des offres Travel Tuesday dans les applications de certaines plateformes"
+            ],
+            [
+              "Vendredi 20 novembre",
+              "Ouverture de ces offres sur les sites et le mobile"
+            ],
+            [
+              "Vendredi 27 novembre",
+              "Black Friday"
+            ],
+            [
+              "Lundi 30 novembre",
+              "Cyber Monday"
+            ],
+            [
+              "Mardi 1er décembre",
+              "Travel Tuesday 2026"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Black Friday, Cyber Monday ou Travel Tuesday : lequel choisir ?",
+        "paragraphs": [
+          "La réponse surprend. En 2025, Skyscanner a analysé le prix moyen le plus bas par siège sur les cinq jours entre le Black Friday et le Travel Tuesday : c’est le Cyber Monday qui sortait comme le meilleur jour pour réserver un vol, même si des promotions subsistaient le lendemain.",
+          "De son côté, Hopper, à l’origine du Travel Tuesday en 2017, indique d’après ses propres données (surtout américaines) que ce mardi concentre plus d’offres de voyage que le Black Friday ou le Cyber Monday. Mais davantage d’offres ne veut pas dire de meilleurs prix sur votre trajet. Tout dépend de la destination."
+        ],
+        "table": {
+          "headers": [
+            "Jour",
+            "Ce que disent les données"
+          ],
+          "rows": [
+            [
+              "Black Friday (27 nov.)",
+              "Début des promotions pour de nombreuses compagnies et plateformes, parfois avec des avant-premières"
+            ],
+            [
+              "Cyber Monday (30 nov.)",
+              "Jour le moins cher en moyenne sur les cinq jours, d’après une analyse Skyscanner de 2025"
+            ],
+            [
+              "Travel Tuesday (1er déc.)",
+              "Le plus grand nombre d’offres, d’après Hopper (données surtout américaines), avec des promotions encore possibles ce jour-là"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Ce que montrent les chiffres de 2025",
+        "paragraphs": [
+          "Skyscanner a publié les plus fortes baisses de prix relevées pendant le Travel Tuesday 2025. Elles concernent surtout des destinations moyen-courrier où de nombreuses compagnies se font concurrence."
+        ],
+        "table": {
+          "headers": [
+            "Destination",
+            "Baisse de prix constatée en 2025"
+          ],
+          "rows": [
+            [
+              "Alger",
+              "−16,5 %"
+            ],
+            [
+              "Porto",
+              "−16,0 %"
+            ],
+            [
+              "Lisbonne",
+              "−15,2 %"
+            ],
+            [
+              "Barcelone",
+              "−10,8 %"
+            ],
+            [
+              "Marrakech",
+              "−7,2 %"
+            ]
+          ]
+        },
+        "list": [
+          "Par pays, la même analyse cite la Turquie (−18,1 %), l’Algérie (−16,9 %), le Portugal (−14,5 %), l’Allemagne (−13,9 %) et l’Espagne (−9,7 %).",
+          "Ces baisses sont des moyennes : un trajet précis, à une date précise, peut évoluer autrement. Prenez-les comme un repère, pas comme une promesse."
+        ]
+      },
+      {
+        "heading": "Les prix de référence HiFlight, à noter avant le 1er décembre",
+        "paragraphs": [
+          "Pour savoir si une offre est vraiment intéressante, il faut un point de comparaison. Pour 12 trajets très demandés depuis Paris, le tableau ci-dessous donne le prix aller-retour le plus bas relevé récemment, le mois le moins cher et le jour de départ le moins cher. Gardez ces chiffres sous la main : si une offre du Travel Tuesday ne passe pas sous ce plancher, ce n’est pas forcément une bonne affaire."
+        ],
+        "routeTable": [
+          "paris-marrakech",
+          "paris-barcelone",
+          "paris-lisbonne",
+          "paris-istanbul",
+          "paris-alger",
+          "paris-londres",
+          "paris-rome",
+          "paris-new-york",
+          "paris-bangkok",
+          "paris-pointe-a-pitre",
+          "paris-montreal",
+          "paris-dubai"
+        ]
+      },
+      {
+        "heading": "Qui participe en France",
+        "paragraphs": [
+          "Plusieurs compagnies et plateformes préparent déjà leurs campagnes : des prix promotionnels sont visibles jusqu’au 17 novembre sur le long-courrier, et des plateformes annoncent leur calendrier dès le 19 novembre.",
+          "Pour les compagnies low cost, on n’a pas trouvé de calendrier officiel à ce jour : leurs ventes sont souvent annoncées au dernier moment. Côté hôtels, plusieurs grands groupes avaient lancé des promotions au Black Friday l’an dernier, parfois avec une remise plus forte pour les membres de leur programme de fidélité."
+        ]
+      },
+      {
+        "heading": "Les pièges, ceux dont on ne vous parle pas assez",
+        "paragraphs": [
+          "Le premier, c’est le tarif non remboursable ou non modifiable, qui se cache derrière un joli prix. Des experts rappellent que certaines promotions ne se cumulent pas non plus avec d’autres avantages. Le second, c’est le bagage : un billet « promo » sans valise peut revenir plus cher qu’un billet normal avec. Le troisième, c’est la pression : le nombre de places à prix cassé est limité, mais une offre qui disparaît en dix minutes n’est pas pour autant la meilleure du marché.",
+          "Notre conseil : notez le prix de votre trajet une à deux semaines avant, comparez l’aller-retour avec deux allers simples, testez les aéroports voisins (Orly, Roissy et Beauvais ne donnent pas le même total), et regardez le jour de départ le moins cher sur la page du vol."
+        ]
+      },
+      {
+        "heading": "Un plan simple, de maintenant au 1er décembre",
+        "paragraphs": [
+          "Dès maintenant, choisissez votre destination et vos dates (ou une période flexible) et notez le prix de référence de votre trajet. Les 19 et 20 novembre, repérez les premières offres et comparez-les à ce prix. Du 27 au 30 novembre, surveillez le Black Friday et le Cyber Monday, qui peuvent déjà offrir les meilleures affaires de la période. Le mardi 1er décembre, comparez une dernière fois sur HiFlight, puis décidez.",
+          "Et avant de payer, relisez trois choses : les bagages inclus, les conditions de modification et le prix total."
+        ]
+      },
+      {
+        "heading": "Au-delà des vols",
+        "paragraphs": [
+          "Le Travel Tuesday ne concerne pas que les billets. Pour un voyage complet, comparez aussi les hôtels, la location de voiture et une eSIM pour rester connecté sans frais de roaming. Tout se trouve au même endroit sur HiFlight."
+        ]
+      },
+      {
+        "heading": "Comment HiFlight peut servir ce jour-là",
+        "paragraphs": [
+          "Le jour J, comparez en une seule recherche : HiFlight met côte à côte les offres de centaines de compagnies et d’agences, puis vous redirige vers le partenaire de votre choix. C’est gratuit et sans inscription. Pour préparer votre trajet dès maintenant, les cartes de prix en bas de l’article montrent des relevés récents, mis à jour chaque jour."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quand a lieu le Travel Tuesday 2026 ?",
+        "answer": "Le mardi 1er décembre 2026, après le Black Friday (27 novembre) et le Cyber Monday (30 novembre). Certaines plateformes lancent leurs offres plus tôt, dès le 19 ou le 20 novembre."
+      },
+      {
+        "question": "C’est quoi le Travel Tuesday ?",
+        "answer": "Une journée de promotions consacrée au voyage (vols, hôtels, voitures, séjours), qui suit le Black Friday et le Cyber Monday. Né aux États-Unis en 2017, il s’étend peu à peu en Europe."
+      },
+      {
+        "question": "Quel est le meilleur jour pour réserver : Black Friday, Cyber Monday ou Travel Tuesday ?",
+        "answer": "Il n’y a pas de jour gagnant sur tous les trajets. En 2025, une analyse de Skyscanner a trouvé que le Cyber Monday était le jour le moins cher en moyenne sur les cinq jours, avec encore des promotions le mardi. Comparez sur plusieurs jours."
+      },
+      {
+        "question": "Le Travel Tuesday est-il vraiment moins cher que le reste de l’année ?",
+        "answer": "Pas toujours. Les promotions existent, mais elles ne concernent pas toutes les routes ni toutes les dates. Notez le prix de votre trajet avant le jour J et comparez le prix total, bagages compris."
+      },
+      {
+        "question": "Sur quelles destinations les prix baissent-ils le plus ?",
+        "answer": "En 2025, Skyscanner a relevé les plus fortes baisses vers Alger (−16,5 %), Porto (−16,0 %), Lisbonne (−15,2 %), Barcelone (−10,8 %) et Marrakech (−7,2 %). Ce sont des moyennes, pas une garantie pour votre trajet."
+      },
+      {
+        "question": "Faut-il attendre le Travel Tuesday pour réserver ?",
+        "answer": "Si votre date est fixe et proche, attendre est risqué : les prix peuvent monter. Si vous êtes flexible et que vous partez de janvier à mai, c’est un bon moment pour comparer."
+      },
+      {
+        "question": "Pour quelles dates de voyage sont valables les offres ?",
+        "answer": "Elles visent le plus souvent des départs de janvier à mai de l’année suivante. Vérifiez toujours les dates exactes de chaque offre."
+      },
+      {
+        "question": "Les billets en promo sont-ils remboursables ?",
+        "answer": "Cela dépend de l’offre. Certains tarifs promotionnels sont non remboursables ou non modifiables. Lisez les conditions avant de payer."
+      },
+      {
+        "question": "HiFlight vend-il les billets ?",
+        "answer": "Non. HiFlight compare les offres, puis vous redirige vers le partenaire choisi, qui assure la réservation, le paiement et le service après-vente."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-marrakech",
+      "paris-barcelone",
+      "paris-lisbonne",
+      "paris-bangkok",
+      "paris-pointe-a-pitre",
+      "paris-rome",
+      "paris-londres",
+      "paris-istanbul"
+    ]
+  },
+  {
+    "slug": "vente-flash-transavia-novembre-2026",
+    "expires": "2026-11-10",
+    "category": "Bons plans",
+    "metaTitle": "Vente flash Transavia : dès 39 € l’aller (novembre 2026)",
+    "title": "Vente flash Transavia : jusqu’à -25 %, dès 39 € l’aller, jusqu’au 10 novembre",
+    "description": "Vente flash Transavia du 3 au 10 novembre 2026 : jusqu’à -25 % sur une sélection de vols, Athènes et Malaga dès 39 € l’aller. Destinations, bagages, pièges et prix de référence HiFlight.",
+    "heroImage": "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-04",
+    "updated": "2026-11-04",
+    "readingMinutes": 4,
+    "intro": "Transavia a lancé le 3 novembre une vente flash qui se termine le mardi 10 novembre à 23 h 59. Jusqu’à -25 % sur une sélection de vols au départ de France, avec des allers simples annoncés à 39 €. Ça ressemble à une bonne affaire, et ça peut en être une, à condition de savoir ce qu’on achète. Voici ce qu’on sait de l’offre, ce qu’on ne sait pas encore, et comment la vérifier en trois minutes.",
+    "sections": [
+      {
+        "heading": "L’offre, en clair",
+        "paragraphs": [
+          "Transavia propose jusqu’à 25 % de réduction sur une sélection de vols. La remise ne s’applique pas à tout le catalogue : seuls certains vols, certaines dates, et un nombre limité de sièges sont concernés. L’offre part de France métropolitaine, sous réserve de disponibilité."
+        ],
+        "table": {
+          "headers": [
+            "Question",
+            "Réponse"
+          ],
+          "rows": [
+            [
+              "Quand réserver ?",
+              "Du mardi 3 au mardi 10 novembre 2026, jusqu’à 23 h 59"
+            ],
+            [
+              "Pour voyager quand ?",
+              "À partir du 24 novembre 2026"
+            ],
+            [
+              "Quelle remise ?",
+              "Jusqu’à -25 % sur une sélection de vols"
+            ],
+            [
+              "Au départ d’où ?",
+              "De France métropolitaine"
+            ],
+            [
+              "Comment comparer ?",
+              "Lancez la recherche de votre trajet et de vos dates sur HiFlight, puis regardez le prix total"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Les prix annoncés",
+        "paragraphs": [
+          "Parmi les prix mis en avant dans l’offre, Athènes et Malaga sortent dès 39 € l’aller, et Héraklion dès 40 €. Ce sont des allers simples : il faut compter le retour, qui n’est pas forcément au même tarif.",
+          "Avec des dates souples, c’est là que la vente flash devient intéressante."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Le « dès » est un prix plancher",
+          "text": "Il correspond à quelques sièges, sur des dates précises, et il part en premier. Si vos dates sont fixes, ne vous attendez pas à le trouver."
+        }
+      },
+      {
+        "heading": "Où l’on peut partir",
+        "paragraphs": [
+          "La sélection couvre plusieurs familles de destinations :"
+        ],
+        "list": [
+          "En Europe : Vienne, Prague, Berlin, Stockholm, Madrid, Barcelone, Rome, Dublin, Séville, Naples, Athènes et Palerme, entre autres.",
+          "Au Maroc, huit destinations dont Marrakech, Fès, Essaouira, Tanger, Dakhla, Casablanca, Rabat et Oujda.",
+          "Pour le soleil : Hurghada, Djerba, Dakar, Boa Vista et Praia au Cap-Vert."
+        ]
+      },
+      {
+        "heading": "Ce que ça vaut vraiment : le total, pas le « dès »",
+        "paragraphs": [
+          "Avant de cliquer sur payer, additionnez. Le prix de l’aller, celui du retour, le bagage, le siège si vous y tenez.",
+          "Transavia propose aussi une option Flex, payante, qui permet de changer la date ou l’heure du vol sans frais jusqu’à deux heures avant le départ (seule la différence de prix s’ajoute si le nouveau vol coûte plus cher). Pour une promo achetée en avance, ça peut valoir le coup. Ça se décide au cas par cas, selon le prix de l’option."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Le bagage compte",
+          "text": "L’offre elle-même mentionne une réduction de 10 € sur le bagage cabine, par aller simple, sur certains trajets : cela montre que ce bagage est une option payante, pas un acquis. Si vous partez trois jours avec un sac plus gros qu’un sac à dos, il compte."
+        }
+      },
+      {
+        "heading": "Un point à vérifier vous-même",
+        "paragraphs": [
+          "Les sources ne sont pas d’accord sur la fin de la période de voyage : le 31 janvier 2027 selon des mentions légales relayées, le 28 février 2027 selon un autre site. Dans les deux cas, ça démarre le 24 novembre. Vérifiez que votre date de retour entre bien dans la période avant de vous décider."
+        ]
+      },
+      {
+        "heading": "Les prix de référence HiFlight",
+        "paragraphs": [
+          "Pour savoir si un prix est bon, il faut un repère. Voici le prix le plus bas relevé sur HiFlight pour quelques trajets de la vente, au départ de Paris. Ils servent de comparaison, pas de promesse : les prix bougent tous les jours."
+        ],
+        "routeTable": [
+          "paris-marrakech",
+          "paris-casablanca",
+          "paris-athenes",
+          "paris-malaga",
+          "paris-barcelone",
+          "paris-rome",
+          "paris-madrid",
+          "paris-seville"
+        ]
+      },
+      {
+        "heading": "Comment s’y prendre en trois minutes",
+        "paragraphs": [],
+        "list": [
+          "Choisissez vos dates avant de lancer la recherche : la vente flash récompense ceux qui savent ce qu’ils veulent.",
+          "Lancez la recherche de votre trajet sur HiFlight et regardez le prix total pour vos dates, à comparer avec les prix de référence ci-dessus.",
+          "Ajoutez bagage et option éventuelle, puis comparez une dernière fois avec un autre départ ou une autre date.",
+          "Décidez avant mardi 23 h 59. Passé ce délai, l’offre s’éteint."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Jusqu’à quand dure la vente flash Transavia ?",
+        "answer": "Jusqu’au mardi 10 novembre 2026 à 23 h 59, pour des vols entre le 24 novembre 2026 et début 2027."
+      },
+      {
+        "question": "Quelle est la réduction maximale ?",
+        "answer": "Jusqu’à 25 % sur une sélection de vols. La remise varie selon le trajet, la date et les places restantes."
+      },
+      {
+        "question": "Les prix de la vente flash apparaissent-ils sur HiFlight ?",
+        "answer": "La vente flash est une offre de Transavia. HiFlight compare les prix de ses partenaires au moment de votre recherche : lancez-la pour voir les tarifs du jour sur votre trajet, ils peuvent différer des prix de la vente."
+      },
+      {
+        "question": "Le bagage est-il compris dans les 39 € ?",
+        "answer": "Pas forcément. Les prix « dès » correspondent aux tarifs de base : vérifiez le bagage cabine et le bagage en soute avant de payer."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-marrakech",
+      "paris-casablanca",
+      "paris-athenes",
+      "paris-malaga",
+      "paris-barcelone",
+      "paris-rome"
+    ]
+  },
+  {
+    "slug": "black-friday-voyage-2026-dates-conseils",
+    "category": "Bons plans",
+    "metaTitle": "Black Friday voyages 2026 : dates et conseils",
+    "title": "Black Friday voyages 2026 : les dates à noter et comment ne pas se faire avoir",
+    "description": "Black Friday, Cyber Monday et Travel Tuesday 2026 : le calendrier des ventes voyage, les réflexes pour juger une offre et les prix de référence des vols au départ de Paris.",
+    "heroImage": "https://images.unsplash.com/photo-1561501900-3701fa6a0864?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-04",
+    "updated": "2026-11-04",
+    "readingMinutes": 4,
+    "intro": "Cette année, le Black Friday des voyageurs ne tient pas en une journée : les premières ventes démarrent le 10 novembre et tout converge vers le Travel Tuesday du 1er décembre. Voici les dates à retenir, et les deux ou trois réflexes qui évitent de payer cher une « bonne affaire ».",
+    "sections": [
+      {
+        "heading": "Les dates à noter",
+        "paragraphs": [
+          "Tout s’étale sur trois semaines. Le plus utile, c’est de savoir quand regarder."
+        ],
+        "table": {
+          "headers": [
+            "Date",
+            "Ce qui se passe"
+          ],
+          "rows": [
+            [
+              "10 novembre",
+              "Premières ventes Black Friday voyages, chez certains spécialistes des ventes privées"
+            ],
+            [
+              "19 novembre",
+              "Premières offres Travel Tuesday dans les applications de certaines plateformes"
+            ],
+            [
+              "20 novembre",
+              "Ouverture de ces offres sur les sites"
+            ],
+            [
+              "27 novembre",
+              "Black Friday"
+            ],
+            [
+              "30 novembre",
+              "Cyber Monday"
+            ],
+            [
+              "1er décembre",
+              "Travel Tuesday : dernier jour des offres annoncées jusqu’à cette date"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Ce que les ventes annoncent",
+        "paragraphs": [
+          "Les ventes privées proposent des séjours, week-ends et croisières négociés à l’avance, vendus pendant une durée limitée. Au 3 novembre, certaines affichaient des séjours à partir de 49 € par personne, pour une nuit dans un hôtel en Andorre, avec des remises annoncées jusqu’à -70 %. Chaque vente affiche un prix sans vol et, quand c’est possible, un prix avec vol.",
+          "Du côté des plateformes de voyage, des remises allant jusqu’à -40 % sur les hôtels et jusqu’à -20 % sur les locations de voiture ont été annoncées. Les offres sur les vols existent aussi, mais les prix n’étaient pas détaillés à ce stade : à vérifier le jour J."
+        ]
+      },
+      {
+        "heading": "Comment ne pas se faire avoir",
+        "paragraphs": [
+          "Ces offres sont réelles, mais le prix affiché n’est pas toujours le prix payé."
+        ],
+        "list": [
+          "Comparez ce qui est comparable : un prix « par personne et par nuit » n’est pas un prix de séjour.",
+          "Ajoutez le vol. Une nuit à 49 € ne dit rien de ce que coûte l’avion pour y aller.",
+          "Regardez les conditions d’annulation : une vente privée est parfois peu ou pas remboursable."
+        ],
+        "callout": {
+          "kind": "astuce",
+          "title": "Le réflexe à prendre",
+          "text": "Notez un prix de référence avant le 1er décembre. Sans repère, impossible de juger une remise."
+        }
+      },
+      {
+        "heading": "Le vol, côté HiFlight",
+        "paragraphs": [
+          "Si une vente vous tente, regardez d’abord ce que coûte le vol. Voici le prix le plus bas relevé aujourd’hui sur HiFlight pour quelques destinations populaires au départ de Paris : de quoi juger le prix total d’un séjour avec vol."
+        ],
+        "routeTable": [
+          "paris-barcelone",
+          "paris-marrakech",
+          "paris-lisbonne",
+          "paris-rome",
+          "paris-athenes",
+          "paris-madrid"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quand commence le Black Friday des voyages en 2026 ?",
+        "answer": "Les premières ventes démarrent le 10 novembre. Le Black Friday est le 27 novembre, le Cyber Monday le 30 et le Travel Tuesday le 1er décembre 2026."
+      },
+      {
+        "question": "Un prix de séjour comprend-il le vol ?",
+        "answer": "Pas toujours. Vérifiez si le prix affiché est avec ou sans vol, et s’il est « par personne » ou « par nuit » : ce n’est pas un prix de séjour."
+      },
+      {
+        "question": "Comment savoir si une remise est réelle ?",
+        "answer": "Notez le prix de votre trajet avant le 1er décembre : sans repère, impossible de juger. HiFlight affiche chaque jour les prix les plus bas relevés pour vous servir de point de comparaison."
+      },
+      {
+        "question": "Les ventes privées sont-elles remboursables ?",
+        "answer": "Pas toujours : une vente privée est parfois peu ou pas remboursable. Regardez les conditions d’annulation avant de payer."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-barcelone",
+      "paris-marrakech",
+      "paris-lisbonne",
+      "paris-rome",
+      "paris-athenes",
+      "paris-madrid"
+    ]
+  },
+  {
+    "slug": "flying-blue-promo-rewards-novembre-2026",
+    "category": "Bons plans",
+    "metaTitle": "Promo Flying Blue novembre 2026 : miles ou euros ?",
+    "title": "Promo Flying Blue de novembre : vos miles valent-ils mieux que les euros ?",
+    "description": "Promo Rewards Flying Blue de novembre 2026 : 25 % de miles en moins sur une sélection de billets, Los Angeles dès 18 750 miles. Conditions, taxes et comment comparer avec le prix en euros.",
+    "heroImage": "https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-04",
+    "updated": "2026-11-04",
+    "readingMinutes": 4,
+    "intro": "Chaque début de mois, Air France et KLM ouvrent une promotion sur leurs billets en miles. Celle de novembre retire 25 % des miles demandés sur une sélection de destinations. Avant de dépenser vos miles, une question simple : le même billet en euros ne coûte-t-il pas moins cher ? Voici comment le calculer.",
+    "sections": [
+      {
+        "heading": "Les conditions",
+        "paragraphs": [
+          "La Promo Rewards s’adresse aux membres du programme Flying Blue. Elle porte sur des billets payés en miles, avec une réduction de 25 % sur les miles demandés pour une sélection de vols."
+        ],
+        "table": {
+          "headers": [
+            "Point",
+            "Détail"
+          ],
+          "rows": [
+            [
+              "Réservation",
+              "Du 1er au 30 novembre 2026"
+            ],
+            [
+              "Voyage",
+              "Jusqu’au 30 avril 2027, fêtes et Pâques comprises"
+            ],
+            [
+              "Remise",
+              "25 % de miles en moins sur une sélection de billets"
+            ],
+            [
+              "Prix indiqués",
+              "Par personne, en aller simple, à partir de"
+            ],
+            [
+              "À payer en plus",
+              "Taxes et frais, en euros"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Quelques exemples",
+        "paragraphs": [
+          "Les prix ci-dessous sont des « à partir de », par personne et en aller simple. Les places à ce tarif sont limitées et ne couvrent pas toutes les dates."
+        ],
+        "table": {
+          "headers": [
+            "Destination",
+            "Cabine",
+            "Miles, dès"
+          ],
+          "rows": [
+            [
+              "Los Angeles",
+              "Économie",
+              "18 750"
+            ],
+            [
+              "Osaka",
+              "Premium Comfort",
+              "37 500"
+            ],
+            [
+              "New York",
+              "Business",
+              "45 000"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Attention aux fêtes",
+        "paragraphs": [
+          "Voyager jusqu’au 30 avril comprend Noël et Pâques."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Les fêtes, mais pas forcément à prix promo",
+          "text": "Cela ne veut pas dire que vous trouverez des places à prix réduit ces jours-là : les dates les plus demandées partent en premier, et les sièges disponibles au prix promo sont rares sur les périodes chargées."
+        }
+      },
+      {
+        "heading": "Est-ce rentable ? Un calcul simple",
+        "paragraphs": [
+          "Pour savoir si vos miles sont bien utilisés, comparez avec le prix en euros du même billet. Prenez le prix du billet payé en argent, retirez les taxes que vous paierez de toute façon, puis divisez par le nombre de miles. Vous obtenez la valeur de chaque mile, en centimes.",
+          "Plus ce chiffre est élevé, mieux vous utilisez vos miles. En business, la valeur est souvent meilleure qu’en économie, parce que le billet payé en argent coûte beaucoup plus cher. En économie, un billet bon marché en euros peut rendre l’utilisation de miles moins intéressante."
+        ]
+      },
+      {
+        "heading": "Le prix en euros, pour comparer",
+        "paragraphs": [
+          "Voici le prix le plus bas relevé sur HiFlight pour quelques trajets long-courriers au départ de Paris. Gardez-le en tête : si le billet en euros est bas, mieux vaut peut-être le payer et garder vos miles. Pour voir le prix du jour sur votre trajet et vos dates, lancez une recherche sur HiFlight."
+        ],
+        "routeTable": [
+          "paris-los-angeles",
+          "paris-new-york",
+          "paris-tokyo",
+          "paris-montreal"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Jusqu’à quand réserver avec la promo Flying Blue de novembre ?",
+        "answer": "Jusqu’au 30 novembre 2026, pour voyager jusqu’au 30 avril 2027."
+      },
+      {
+        "question": "Les taxes sont-elles comprises ?",
+        "answer": "Non. Les miles couvrent le billet ; les taxes et frais se paient en euros en plus."
+      },
+      {
+        "question": "HiFlight propose-t-il les billets en miles ?",
+        "answer": "Non, les billets en miles relèvent du programme Flying Blue. HiFlight vous donne le prix en euros pour comparer : parfois, payer en euros et garder ses miles est plus malin."
+      },
+      {
+        "question": "Faut-il être membre Flying Blue ?",
+        "answer": "Oui, la réservation se fait avec un compte Flying Blue et des miles."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-los-angeles",
+      "paris-new-york",
+      "paris-tokyo",
+      "paris-montreal"
+    ]
+  },
+  {
+    "slug": "vol-amsterdam-guide-conseils",
+    "heroImage": "https://images.unsplash.com/photo-1754835143820-bcf20e2e1a35?auto=format&fit=crop&w=1600&h=900&q=75",
+    "category": "Destinations",
+    "metaTitle": "Amsterdam : avion ou train, taxes, tulipes et prix des vols",
+    "title": "Aller à Amsterdam : avion ou train, et comment s’y prendre pour payer moins",
+    "description": "Eurostar à 3 h 20, Schiphol à un quart d’heure du centre, TVA hôtelière à 21 % depuis janvier, Keukenhof du 18 mars au 9 mai 2027 : ce qui pèse vraiment sur un week-end à Amsterdam.",
+    "published": "2026-11-06",
+    "updated": "2026-11-07",
+    "readingMinutes": 5,
+    "intro": "Le billet d’avion n’est plus le plus gros poste d’un week-end à Amsterdam. Depuis le 1er janvier 2026, la TVA sur les hôtels néerlandais est passée de 9 % à 21 %, et la ville y ajoute sa propre taxe de séjour. Autant bien choisir son moyen de transport, sa date et son quartier avant de regarder les tarifs de vol.",
+    "sections": [
+      {
+        "heading": "Depuis Paris, le train tient la comparaison",
+        "paragraphs": [
+          "L’Eurostar relie Paris-Nord à Amsterdam Centraal en direct, en 3 h 20 environ, avec des billets annoncés à partir de 35 € l’aller. Il arrive en plein centre et la franchise comprend deux bagages et un bagage à main. Face à un vol d’un peu plus d’une heure qu’il faut compléter par le trajet vers l’aéroport, l’enregistrement et le train depuis Schiphol, l’avion ne gagne presque rien au départ de Paris.",
+          "Une autre liaison directe doit arriver : GoVolta annonce un Amsterdam–Paris dès le 14 décembre 2026, en environ sept heures, avec un prix d’appel de 19 € dont la presse précise qu’il est provisoire. À sept heures de trajet, ce sera un train pour ceux qui ne veulent pas prendre l’avion, pas pour un week-end court.",
+          "Au départ de Lyon, Marseille, Nice, Toulouse ou Bordeaux, il n’y a pas de débat : le vol direct reste la seule option raisonnable, et c’est là que comparer les dates paie."
+        ]
+      },
+      {
+        "heading": "De Schiphol au centre, sans taxi",
+        "paragraphs": [
+          "L’aéroport a sa gare sous le hall d’arrivée. Les trains vers Amsterdam Centraal mettent 15 à 20 minutes et partent plusieurs fois par heure ; comptez autour de 6 € le trajet simple en 2026. Un taxi pour la même course se situe entre 55 et 70 € d’après les sites de transport locaux, soit environ dix fois plus.",
+          "Si vous restez deux ou trois jours, les titres de transport « Amsterdam Travel Ticket » regroupent l’aller-retour aéroport et les tram, bus et métro de la ville, pour une durée d’un à trois jours."
+        ],
+        "callout": {
+          "kind": "info",
+          "title": "Un détail de tarif",
+          "text": "Le prix du train varie selon la source consultée (de 5 à 6,50 € environ). Vérifiez-le sur le site des chemins de fer néerlandais le jour du voyage."
+        }
+      },
+      {
+        "heading": "Ce que le prix de l’hôtel ne montre pas toujours",
+        "paragraphs": [
+          "La taxe de séjour d’Amsterdam est proportionnelle : 12,5 % du prix de la chambre hors TVA. Ajoutée à la TVA à 21 %, elle fait peser environ un tiers de prélèvements sur le prix de base. Sur une chambre à 150 € la nuit, cela représente de l’ordre de 18 € de taxe de séjour par nuit avant la TVA.",
+          "La municipalité envisage de relever encore ce taux dans les prochaines années, la coalition au pouvoir visant 20 % en 2031. Pour un week-end en 2027, regardez donc le prix final affiché à la réservation, taxes comprises, et pas le tarif de la première page."
+        ]
+      },
+      {
+        "heading": "Les tulipes ont une fenêtre étroite",
+        "paragraphs": [
+          "Le parc de Keukenhof, à Lisse, ouvre du 18 mars au 9 mai 2027, de 8 h à 19 h. Les billets se prennent en ligne, pour une date et un créneau fixés à l’avance, et les week-ends partent vite.",
+          "En mars, les tulipes sont encore vertes : on y voit surtout des narcisses et des jacinthes. Les tulipes en pleine floraison se situent plutôt en avril, avec une marge liée à la météo : un hiver doux avance la saison, un mars froid la retarde. Les périodes les plus chargées sont les week-ends d’avril, les vacances de Pâques et la Fête du Roi, le 27 avril."
+        ],
+        "callout": {
+          "kind": "astuce",
+          "title": "Avant de bloquer vos dates",
+          "text": "Prenez d’abord le billet du parc pour le créneau qui vous convient, puis cherchez le vol autour. Dans l’autre sens, vous risquez de trouver un vol bon marché pour un jour complet."
+        }
+      },
+      {
+        "heading": "Les prix en ce moment au départ de plusieurs villes",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-amsterdam",
+          "lyon-amsterdam",
+          "marseille-amsterdam",
+          "nice-amsterdam",
+          "toulouse-amsterdam",
+          "bordeaux-amsterdam"
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-amsterdam",
+      "lyon-amsterdam",
+      "marseille-amsterdam",
+      "nice-amsterdam",
+      "toulouse-amsterdam",
+      "bordeaux-amsterdam"
+    ],
+    "faq": [
+      {
+        "question": "Combien de temps dure le train Paris–Amsterdam ?",
+        "answer": "L’Eurostar direct met environ 3 h 20 de Paris-Nord à Amsterdam Centraal, avec des billets à partir de 35 € l’aller selon la compagnie."
+      },
+      {
+        "question": "Comment aller de Schiphol au centre d’Amsterdam ?",
+        "answer": "En train, directement jusqu’à Amsterdam Centraal : 15 à 20 minutes, plusieurs départs par heure, environ 6 € le trajet simple en 2026."
+      },
+      {
+        "question": "Quelles taxes s’ajoutent au prix de l’hôtel à Amsterdam ?",
+        "answer": "Une taxe de séjour de 12,5 % du prix de la chambre hors TVA, plus une TVA à 21 % depuis le 1er janvier 2026 (elle était de 9 % avant)."
+      },
+      {
+        "question": "Quand voir les tulipes de Keukenhof en 2027 ?",
+        "answer": "Le parc est ouvert du 18 mars au 9 mai 2027. La floraison dépend de la météo, mais les tulipes sont surtout visibles en avril ; en mars elles sont encore vertes."
+      }
+    ]
+  },
+  {
+    "slug": "soleil-hiver-vol-pas-cher",
+    "heroImage": "https://images.unsplash.com/photo-1694631887845-ac4ae3eb2bb1?auto=format&fit=crop&w=1600&h=900&q=75",
+    "category": "Conseils",
+    "metaTitle": "Soleil en hiver : Canaries, Égypte, Djerba, Maroc, ce que l’on trouve",
+    "title": "Du soleil en hiver sans aller au bout du monde : Canaries, Égypte, Maroc, Tunisie",
+    "description": "Mer à 19-22 °C aux Canaries, visa à 30 dollars en Égypte, Djerba à 2 h 50 de Paris : durées de vol, formalités et périodes les plus chères pour partir au soleil cet hiver.",
+    "published": "2026-11-06",
+    "updated": "2026-11-07",
+    "readingMinutes": 5,
+    "intro": "« Du soleil en hiver » recouvre des voyages très différents. Aux Canaries, on marche en t-shirt mais la mer reste fraîche. En mer Rouge, il y a un visa à prévoir. À Djerba ou à Marrakech, le vol est le plus court. Voici ce que disent les chiffres de chaque destination, avant de regarder les prix.",
+    "sections": [
+      {
+        "heading": "Canaries : doux, pas tropical",
+        "paragraphs": [
+          "Le vol direct depuis Paris pour Tenerife ou Lanzarote dure autour de quatre heures ; la plupart des vols affichés vont de 4 h à 4 h 30. Les îles ont une heure de moins que la France.",
+          "Sur le littoral, il fait en moyenne 20 à 22 °C l’après-midi de décembre à février, avec des nuits vers 15-16 °C. La mer est à 21 °C environ en décembre, puis descend à 19 °C en février. Baignade possible, mais fraîche : c’est un hiver de promenades, de randonnée et de terrasses, pas de plage à l’heure. Le sud de Tenerife est le coin le plus chaud de l’île.",
+          "La pluie est plus fréquente dans le nord des îles et en novembre ou en février-mars ; le sud est plus sec."
+        ]
+      },
+      {
+        "heading": "Égypte : le visa et le passeport avant le billet",
+        "paragraphs": [
+          "Paris–Hurghada se fait en environ 4 h 35 en direct. Le visa est obligatoire pour les Français : d’après les agences spécialisées, il coûte 30 dollars depuis mars 2026, à l’arrivée à l’aéroport comme en ligne. L’e-visa évite la file du guichet ; si vous payez sur place, prévoyez des dollars en espèces.",
+          "Le passeport doit être valable au moins six mois après le retour. Une carte d’identité plastifiée est en principe acceptée, mais pas celle dont la validité a été prolongée de cinq ans : le plus sûr est de voyager avec un passeport. Pour Charm el-Cheikh, un séjour limité au Sinaï (Charm el-Cheikh, Dahab, Taba, Nuweiba) bénéficie d’une exemption de visa payant. Vérifiez les conditions exactes sur le site France Diplomatie avant de partir."
+        ]
+      },
+      {
+        "heading": "Djerba et le Maroc : les plus courts",
+        "paragraphs": [
+          "Paris–Djerba prend 2 h 50 en vol direct. Au départ de Lyon, comptez 2 h 15, et moins de 2 heures depuis Nice. C’est la solution la plus simple pour un long week-end, sans décalage horaire en hiver.",
+          "Marrakech est dans la même zone de durée que Djerba pour les Parisiens, un peu au-dessus de trois heures. Pour le détail de la ville et des aéroports parisiens, le guide Marrakech de HiFlight va plus loin."
+        ]
+      },
+      {
+        "heading": "Quand les prix montent",
+        "paragraphs": [
+          "Les hausses se concentrent sur les fêtes de fin d’année et février, quand les vacances scolaires et le carnaval tombent au même moment aux Canaries. À l’inverse, novembre et janvier hors vacances sont généralement les mois les moins chers.",
+          "Le plus utile est de regarder le calendrier de prix d’une destination, puis de décaler le départ d’une semaine ou deux : l’écart entre une date de vacances et la semaine d’après est souvent plus grand que celui entre deux compagnies."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Février cumule les hausses",
+          "text": "Aux Canaries, février réunit vacances scolaires et carnaval (Santa Cruz de Tenerife, Las Palmas). Si votre date est libre, janvier ou la fin de l’hiver coûtent en général moins cher."
+        }
+      },
+      {
+        "heading": "Les prix en ce moment depuis Paris",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-tenerife",
+          "paris-lanzarote",
+          "paris-hurghada",
+          "paris-charm-el-cheikh",
+          "paris-marrakech",
+          "paris-djerba"
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-tenerife",
+      "paris-lanzarote",
+      "paris-hurghada",
+      "paris-charm-el-cheikh",
+      "paris-marrakech",
+      "paris-djerba"
+    ],
+    "faq": [
+      {
+        "question": "Quelle température fait-il aux Canaries en hiver ?",
+        "answer": "Autour de 20 à 22 °C l’après-midi sur le littoral de décembre à février, avec une mer entre 19 et 21 °C : agréable pour marcher, fraîche pour se baigner."
+      },
+      {
+        "question": "Combien de temps dure le vol Paris–Hurghada ?",
+        "answer": "Environ 4 h 35 en vol direct. Le visa égyptien est obligatoire pour les Français ; les agences l’indiquent à 30 dollars en 2026."
+      },
+      {
+        "question": "Quelle destination ensoleillée est la plus proche de Paris en hiver ?",
+        "answer": "Djerba, à environ 2 h 50 de vol direct, suivie de Marrakech. Les Canaries et Hurghada demandent autour de quatre heures ou plus."
+      },
+      {
+        "question": "Quels sont les mois les plus chers pour partir au soleil ?",
+        "answer": "Les fêtes de fin d’année et février, à cause des vacances scolaires. Novembre et janvier hors vacances sont généralement moins chers."
+      }
+    ]
+  },
+  {
+    "slug": "vol-prague-budapest-vienne-comparer",
+    "heroImage": "https://images.unsplash.com/photo-1600623471616-8c1966c91ff6?auto=format&fit=crop&w=1600&q=75",
+    "category": "Destinations",
+    "metaTitle": "Prague, Budapest ou Vienne : de l’aéroport au centre et marchés de Noël",
+    "title": "Prague, Budapest ou Vienne : trois capitales à moins de deux heures, laquelle choisir ?",
+    "description": "Trajet depuis l’aéroport, travaux ferroviaires à Vienne jusqu’en 2027, marchés de Noël de Budapest dès le 13 novembre : ce qui distingue vraiment les trois villes pour un week-end.",
+    "published": "2026-11-06",
+    "updated": "2026-11-07",
+    "readingMinutes": 5,
+    "intro": "Les vols vers Prague, Budapest et Vienne durent à peu près autant depuis Paris. Ce qui change, c’est ce qui vient après l’atterrissage : le trajet vers le centre, les travaux en cours à Vienne et les dates d’ouverture des marchés de Noël. Voici ce qu’il faut savoir cet hiver.",
+    "sections": [
+      {
+        "heading": "Après l’atterrissage",
+        "paragraphs": [
+          "À Prague, l’aéroport est à 17 km du centre, soit environ 25 minutes sans circulation. Le trolleybus 59, qui a remplacé le bus 119, rejoint le terminus de Nádraží Veleslavín en 16 minutes, puis la ligne A du métro conduit à Můstek, en plein centre. Il n’y a ni métro ni tram à l’aéroport : le bus est la seule option publique.",
+          "À Budapest, l’aéroport est à une quinzaine de kilomètres. Le bus express 100E rejoint le centre (Deák Ferenc tér) en 30 à 40 minutes, avec des arrêts à Kálvin tér et Astoria.",
+          "À Vienne, l’aéroport est à 18 km. Le Railjet atteint la gare centrale en 15 minutes environ, pour 5,50 €."
+        ],
+        "callout": {
+          "kind": "info",
+          "title": "Vienne : travaux jusqu’à fin octobre 2027",
+          "text": "Du 7 septembre 2026 au 31 octobre 2027, le S-Bahn S7 et le REX7 ne vont plus jusqu’au centre : ils s’arrêtent à la station St. Marx. Le train express CAT est remplacé par des bus premium jusqu’à Wien Mitte (jusqu’à cinq par heure), et trois lignes de bus aéroport desservent la gare centrale et d’autres quartiers. Vérifiez votre trajet avant de partir."
+        }
+      },
+      {
+        "heading": "Prague : la ville du week-end à pied",
+        "paragraphs": [
+          "Prague se visite surtout à pied. Ses grands marchés de Noël (Vieille-Ville, place Venceslas) ouvrent à la fin novembre, vers le 28 d’après les comparatifs récents. Avant, seuls des marchés de quartier sont ouverts. Traditionnellement, ils durent jusqu’au début janvier.",
+          "La République tchèque utilise la couronne tchèque (CZK), pas l’euro. Comparez les taux avant de retirer des espèces."
+        ]
+      },
+      {
+        "heading": "Budapest : en avance sur le calendrier",
+        "paragraphs": [
+          "Les deux grands marchés de Noël de Budapest ouvrent le 13 novembre 2026, soit une quinzaine de jours avant ceux de Prague, et restent ouverts jusqu’au Nouvel An. Pour un déplacement entre le 13 et le 27 novembre, les marchés de Budapest sont déjà ouverts, ceux de Vienne le sont à peu près aussi, mais pas les grands marchés de Prague.",
+          "La Hongrie garde le forint (HUF). Les thermes et le Danube restent les raisons classiques d’y aller en hiver."
+        ]
+      },
+      {
+        "heading": "Vienne : la plus étendue côté marchés",
+        "paragraphs": [
+          "Vienne compte une vingtaine de marchés de l’Avent d’après les guides, qui ouvrent à partir de la mi-novembre. Le plus connu est celui de la Rathausplatz.",
+          "L’Autriche utilise l’euro, ce qui évite le change."
+        ]
+      },
+      {
+        "heading": "Deux villes en un voyage",
+        "paragraphs": [
+          "Prague et Vienne sont reliées en train en environ quatre heures de centre-ville à centre-ville, avec des billets à partir d’une douzaine d’euros en réservant tôt. Budapest–Prague demande près de sept heures de train : à réserver pour un voyage plus long, pas pour un week-end.",
+          "Si vous voulez voir deux villes, la méthode la plus simple est d’arriver dans l’une et de repartir de l’autre, en comparant les deux allers simples. Prague se rejoint aussi depuis Lyon, Nice, Marseille, Toulouse et Bordeaux, Vienne depuis Nice."
+        ]
+      },
+      {
+        "heading": "Les prix en ce moment",
+        "paragraphs": [
+          "Relevés récents du réseau de partenaires HiFlight, recalculés chaque jour : ce sont des planchers aller-retour, pas des prix garantis. Le tarif final se confirme chez le partenaire."
+        ],
+        "routeTable": [
+          "paris-prague",
+          "paris-budapest",
+          "paris-vienne",
+          "lyon-prague",
+          "nice-prague",
+          "nice-vienne"
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-prague",
+      "paris-budapest",
+      "paris-vienne",
+      "lyon-prague",
+      "nice-prague",
+      "nice-vienne"
+    ],
+    "faq": [
+      {
+        "question": "Comment aller de l’aéroport de Prague au centre ?",
+        "answer": "Par le trolleybus 59 (qui a remplacé le bus 119) jusqu’à Nádraží Veleslavín, 16 minutes, puis la ligne A du métro jusqu’à Můstek."
+      },
+      {
+        "question": "Comment aller de l’aéroport de Vienne au centre pendant les travaux ?",
+        "answer": "Le Railjet rejoint la gare centrale en 15 minutes environ pour 5,50 €. Le S7 s’arrête à St. Marx et le CAT est remplacé par des bus jusqu’à Wien Mitte, du 7 septembre 2026 au 31 octobre 2027."
+      },
+      {
+        "question": "Quand ouvrent les marchés de Noël de Budapest et de Prague ?",
+        "answer": "Ceux de Budapest ouvrent le 13 novembre 2026 ; les grands marchés de Prague, vers la fin novembre. Vérifiez les dates sur les sites officiels avant de réserver."
+      },
+      {
+        "question": "Faut-il des euros pour ces trois villes ?",
+        "answer": "Seulement à Vienne. Prague utilise la couronne tchèque et Budapest le forint."
+      }
+    ]
+  },
+  {
+    "slug": "choisir-son-hotel-points-a-verifier",
+    "category": "Conseils",
+    "metaTitle": "Choisir son hôtel : 6 points à vérifier avant de réserver",
+    "title": "Bien choisir son hôtel : 6 points à vérifier avant de réserver",
+    "description": "Prix total, annulation, quartier, horaires d’arrivée, avis récents : les six vérifications à faire avant de réserver un hôtel, pour éviter les mauvaises surprises.",
+    "published": "2026-11-08",
+    "updated": "2026-11-08",
+    "readingMinutes": 3,
+    "intro": "Le prix de la nuit ne dit pas tout. Entre les taxes, les conditions d’annulation et la distance réelle avec ce que vous allez visiter, deux chambres au même tarif peuvent coûter très différemment. Voici six vérifications à faire avant de réserver, dans l’ordre où elles comptent le plus.",
+    "sections": [
+      {
+        "heading": "Comparer le prix total, pas le prix de la nuit",
+        "paragraphs": [
+          "Selon la destination, une taxe de séjour peut s’ajouter au prix affiché, et certains établissements facturent des frais de service ou de ménage. Ces montants sont parfois réglés sur place, à part de la réservation.",
+          "Le montant à retenir est le total affiché au moment du paiement. Comparez deux offres sur ce total, pas sur le prix par nuit."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Le tarif le plus bas n’est pas toujours le moins cher",
+          "text": "Une offre moins chère à la nuit peut devenir plus chère une fois les taxes et les frais ajoutés. Regardez le détail avant de valider."
+        }
+      },
+      {
+        "heading": "Regarder la politique d’annulation",
+        "paragraphs": [
+          "Une chambre non remboursable coûte souvent moins cher, mais elle ne se modifie pas si votre vol change. Si vos dates ne sont pas certaines, une annulation gratuite jusqu’à une date limite protège mieux.",
+          "Notez la date et l’heure limite de l’annulation gratuite : passé ce délai, le montant est en général dû."
+        ]
+      },
+      {
+        "heading": "Choisir le quartier avant l’établissement",
+        "paragraphs": [
+          "Un hôtel moins cher mais loin du centre ou des transports coûte du temps et de l’argent en trajets. Avant de choisir, regardez sur la carte la distance avec la gare, l’aéroport et les lieux que vous visiterez.",
+          "Comparez le temps de trajet réel plutôt que la distance à vol d’oiseau. Nos guides par destination (Marrakech, Istanbul, Barcelone, Lisbonne, Londres, Rome, Madrid…) expliquent comment rejoindre le centre depuis l’aéroport."
+        ]
+      },
+      {
+        "heading": "Vérifier l’heure d’arrivée et de départ",
+        "paragraphs": [
+          "Si votre vol atterrit tard ou repart tôt, confirmez avec l’hôtel l’accueil de nuit et la possibilité de déposer les bagages avant ou après le séjour."
+        ]
+      },
+      {
+        "heading": "Lire les avis récents",
+        "paragraphs": [
+          "Les remarques sur la propreté, le bruit et l’accueil comptent plus que la note moyenne. Privilégiez les avis récents, qui reflètent l’état actuel de l’établissement."
+        ]
+      },
+      {
+        "heading": "Garder la réservation chez le partenaire",
+        "paragraphs": [
+          "HiFlight compare les hôtels par destination et par dates, avec la liste, la carte et les vendeurs partenaires. La réservation, le paiement et les modifications se font chez le partenaire choisi : conservez sa confirmation et son numéro de réservation."
+        ]
+      }
+    ],
+    "relatedRoutes": [
+      "paris-barcelone",
+      "paris-lisbonne",
+      "paris-rome",
+      "paris-londres"
+    ],
+    "faq": [
+      {
+        "question": "Le prix affiché pour un hôtel est-il définitif ?",
+        "answer": "Non. Les prix et disponibilités peuvent évoluer. Vérifiez le montant total, les taxes et les conditions sur la page du partenaire avant le paiement."
+      },
+      {
+        "question": "Vaut-il mieux choisir l’annulation gratuite ?",
+        "answer": "Si vos dates peuvent encore changer, oui : elle protège en cas de modification du vol. Si elles sont certaines, une chambre non remboursable coûte souvent moins cher."
+      },
+      {
+        "question": "Qui gère ma réservation d’hôtel ?",
+        "answer": "Le partenaire sélectionné gère la réservation, le paiement, la confirmation, les modifications et les annulations."
+      }
+    ]
+  }
+];;
+
+export function getPost(slug: string) {
+  return blogPosts.find((post) => post.slug === slug);
+}
+
+/** Vrai quand la date d’expiration (fin de journée, heure de Paris) est dépassée. */
+export function isExpired(post: BlogPost, now: Date = new Date()): boolean {
+  if (!post.expires) return false;
+  const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Paris" }).format(now);
+  return today > post.expires;
+}

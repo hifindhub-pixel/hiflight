@@ -6,3 +6,6 @@ out/
 .env.local
 .env.*.local
 !.env.example
+.open-next
+.wrangler
+.dev.vars
