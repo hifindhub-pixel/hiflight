@@ -2615,6 +2615,139 @@ export const blogPosts: BlogPost[] = [
         "answer": "Le partenaire sélectionné gère la réservation, le paiement, la confirmation, les modifications et les annulations."
       }
     ]
+  },
+  {
+    "slug": "royal-air-maroc-safar-flyer-novembre-2026",
+    "category": "Bons plans",
+    "metaTitle": "Royal Air Maroc : billets en miles à -30 % en novembre",
+    "title": "Royal Air Maroc : billets en miles à -30 % jusqu’au 30 novembre, ce qu’il faut savoir",
+    "description": "Royal Air Maroc retire 30 % de miles sur une sélection de billets primes Safar Flyer, achat jusqu’au 30 novembre 2026. Dates, exclusions de Noël, taxes à payer en plus et comment comparer avec le prix en euros.",
+    "heroImage": "https://images.unsplash.com/photo-1596750320291-a082a23dcc19?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-09",
+    "updated": "2026-11-09",
+    "readingMinutes": 4,
+    "expires": "2026-11-30",
+    "intro": "En novembre, le programme Safar Flyer de Royal Air Maroc brade ses billets payés en miles : 30 % de miles en moins sur une sélection de destinations. L’offre se termine le 30 novembre, et les vacances de Noël sont justement exclues. Avant de dépenser un seul mile, voici ce que la promotion couvre vraiment.",
+    "sections": [
+      {
+        "heading": "L’offre en clair",
+        "paragraphs": [
+          "La remise porte sur les billets primes, ceux qu’on paie avec des miles Safar Flyer. Elle s’applique au barème en miles, pas au reste de la facture."
+        ],
+        "table": {
+          "headers": [
+            "Point",
+            "Détail"
+          ],
+          "rows": [
+            [
+              "Achat",
+              "Du 1er au 30 novembre 2026"
+            ],
+            [
+              "Voyage",
+              "Du 1er novembre 2026 au 31 mars 2027, sauf du 11 décembre 2026 au 17 janvier 2027"
+            ],
+            [
+              "Remise",
+              "30 % de miles en moins sur une sélection de destinations"
+            ],
+            [
+              "Cabines",
+              "Économie et affaires"
+            ],
+            [
+              "Exclus",
+              "Vols domestiques marocains"
+            ],
+            [
+              "À payer en plus",
+              "Taxes, frais d’aéroport et suppléments du transporteur, en euros"
+            ],
+            [
+              "Places",
+              "Quotas limités, selon disponibilité"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Ce qu’on ne sait pas",
+        "paragraphs": [
+          "La liste des destinations concernées n’est pas publiée avec l’offre. Impossible de dire d’ici si votre trajet entre Paris et le Maroc en fait partie : il faut le vérifier au moment de réserver avec vos miles.",
+          "Les places à ce prix sont comptées. Sur une date très demandée, il peut n’y en avoir aucune."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Noël et les vacances d’hiver sont exclus",
+          "text": "Du 11 décembre au 17 janvier, la remise ne s’applique pas. Si vous comptiez partir pour les fêtes avec cette promotion, c’est raté : visez novembre, début décembre, ou la fin janvier à mars."
+        }
+      },
+      {
+        "heading": "Les autres avantages du mois",
+        "paragraphs": [
+          "Deux bonus accompagnent la promotion. À l’adhésion à Safar Flyer entre le 1er et le 30 novembre, 3 000 miles sont crédités, puis 4 000 de plus après deux allers-retours sur Royal Air Maroc. Les voyages effectués jusqu’au 31 décembre rapportent aussi 50 % de miles statut en plus.",
+          "Les voyageurs fidèles à la compagnie y gagnent surtout. Pour un trajet ponctuel, l’intérêt du bonus d’adhésion dépend de ce que vous volerez ensuite."
+        ],
+        "callout": {
+          "kind": "info",
+          "title": "Les sources ne s’accordent pas sur un détail",
+          "text": "Selon la présentation, le bonus de miles statut commence le 1er novembre ou le 1er décembre. La page officielle de la compagnie indique des voyages du 1er novembre au 31 décembre 2026 : c’est ce que nous retenons."
+        }
+      },
+      {
+        "heading": "Miles ou euros : le calcul",
+        "paragraphs": [
+          "Un billet à -30 % en miles n’est pas forcément une bonne affaire. Prenez le prix du même vol en euros, retirez les taxes que vous paierez de toute façon, puis divisez par le nombre de miles demandés : vous obtenez la valeur de chaque mile.",
+          "Si le billet en euros est déjà bas, vos miles valent peu sur ce trajet. Mieux vaut alors payer en euros et les garder pour un vol plus cher."
+        ],
+        "callout": {
+          "kind": "astuce",
+          "title": "Le réflexe à avoir",
+          "text": "Comparez toujours avec le prix en euros du jour. Si le prix en euros est bas, vos miles sont mal employés : gardez-les pour un vol plus cher."
+        }
+      },
+      {
+        "heading": "Les prix en euros, pour comparer",
+        "paragraphs": [
+          "Voici le prix le plus bas relevé sur HiFlight pour quelques trajets au départ de Paris. Pour voir le prix du jour sur votre trajet et vos dates, lancez une recherche sur HiFlight : nous comparons les prix de nos partenaires au moment de la recherche."
+        ],
+        "routeTable": [
+          "paris-marrakech",
+          "paris-casablanca",
+          "paris-tanger",
+          "paris-agadir"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Jusqu’à quand acheter un billet prime à -30 % ?",
+        "answer": "Jusqu’au 30 novembre 2026, pour voyager entre le 1er novembre 2026 et le 31 mars 2027, hors du 11 décembre au 17 janvier."
+      },
+      {
+        "question": "Les taxes sont-elles comprises dans les miles ?",
+        "answer": "Non. La remise porte sur le barème en miles ; taxes, frais d’aéroport et suppléments se paient en euros en plus."
+      },
+      {
+        "question": "HiFlight propose-t-il les billets payés en miles ?",
+        "answer": "Non, ces billets relèvent du programme Safar Flyer. HiFlight vous donne le prix en euros pour comparer : parfois, payer en euros et garder ses miles est plus malin."
+      },
+      {
+        "question": "Peut-on voyager à Noël avec cette promotion ?",
+        "answer": "Non, la période du 11 décembre 2026 au 17 janvier 2027 est exclue."
+      },
+      {
+        "question": "Faut-il un compte Safar Flyer ?",
+        "answer": "Oui, un billet prime se réserve avec des miles du programme."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-marrakech",
+      "paris-casablanca",
+      "paris-tanger",
+      "paris-agadir"
+    ]
   }
 ];;
 

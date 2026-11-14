@@ -8,7 +8,7 @@ import { deals, dealsCheckedOn } from "@/lib/deals";
 export default function Deals() {
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => { setNow(Date.now()); }, []);
-  const live = deals.filter((d) => now === null || now < new Date(d.end).getTime());
+  const live = deals.filter((d) => now === null || now < new Date(d.end).getTime()).slice(0, 4);
   if (!live.length) return null;
 
   return (
