@@ -12,7 +12,6 @@ import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  icons: { icon: [{ url: "/hiflight-favicon.png", type: "image/png", sizes: "96x96" }], apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }] },
   title: { default: "HiFlight — Le hub de tous vos voyages", template: "%s | HiFlight" },
   description: "Comparez vols, hôtels, voitures, trains et bus, puis retrouvez vos voyages sur votre globe et votre passeport HiFlight.",
   // Smart App Banner Safari iOS : propose l’app HiFlight (App Store id6766213610).
