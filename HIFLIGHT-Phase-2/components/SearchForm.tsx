@@ -369,18 +369,20 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     hotelTarget.searchParams.set("guests", String(adults + children));
     hotelTarget.hash = "hotel-results";
 
-    const flightTab = window.open(target.toString(), "_blank");
-    if (!flightTab) {
-      setError("Autorisez l’ouverture des nouveaux onglets pour afficher simultanément les vols et les hébergements.");
-      return;
-    }
-    flightTab.opener = null;
-    trackPartnerClick("flight", { ...analyticsParams, provider: "flight_partner" });
+    setError("");
     launchingRef.current = true;
     setLaunching(true);
-    const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 680;
+    const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 850;
     departureTimer.current = setTimeout(() => {
-      window.location.assign(hotelTarget.toString());
+      // Open only after takeoff; browsers that block delayed tabs still reach results.
+      const flightTab = window.open(target.toString(), "_blank");
+      trackPartnerClick("flight", { ...analyticsParams, provider: "flight_partner" });
+      if (flightTab) {
+        flightTab.opener = null;
+        window.location.assign(hotelTarget.toString());
+      } else {
+        window.location.assign(target.toString());
+      }
       launchingRef.current = false;
       setLaunching(false);
     }, delay);

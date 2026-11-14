@@ -5,7 +5,12 @@ export default function FlightSearchButton({launching}:{launching:boolean}) {
   <span className={styles.label}>{launching?'Recherche…':'Rechercher'}</span>
   <span className={styles.scene} aria-hidden="true">
    <span className={styles.runway}><i/><i/><i/><i/></span>
-   <svg className={styles.plane} viewBox="0 0 32 32" fill="currentColor"><path d="M28 14.5c1.7 0 2.5.7 2.5 1.5s-.8 1.5-2.5 1.5h-8l-8 11H9l4-11H6l-3 4H1l2-5.5L1 10.5h2l3 4h7l-4-11h3l8 11Z"/></svg>
+   <svg className={styles.plane} viewBox="0 0 64 32" aria-hidden="true">
+    <path d="M5 20 2 8h4l10 11h32c6 0 11 3 13 5 1 1 0 2-2 2H15c-5 0-9-2-12-5Z" fill="currentColor"/>
+    <path d="m29 22-9-15h5l17 15M25 25l-8 5h6l15-5" fill="currentColor"/>
+    <path d="m50 21 4 2h-6v-2Z" fill="#07152d"/>
+    <path d="M20 22h2m4 0h2m4 0h2m4 0h2" stroke="#07152d" strokeWidth="1.2" strokeLinecap="round"/>
+   </svg>
   </span>
  </button>;
 }
