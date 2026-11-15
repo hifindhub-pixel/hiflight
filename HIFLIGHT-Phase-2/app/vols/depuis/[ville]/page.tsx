@@ -1,4 +1,3 @@
-import FavoriteButton from "@/components/FavoriteButton";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -77,15 +76,12 @@ export default async function DepartureCityPage({ params }: { params: Promise<{ 
               <h2>{region}</h2>
               <div className="deal-cards">
                 {group.map(({ route, stats }) => (
-                  <div key={route.slug} className="fav-host">
-                    <Link className="deal-card" href={`/vols/${route.slug}`}>
+                  <Link key={route.slug} className="deal-card" href={`/vols/${route.slug}`}>
                       <span className="deal-route">{route.origin} – {route.destination}</span>
                       <span className="deal-meta">{route.duration}</span>
                       {stats ? <span className="deal-price">dès <strong>{stats.lowest.price} €</strong> A/R</span> : <span className="deal-price">Voir les prix</span>}
                       <span className="deal-cta">Comparer ce vol →</span>
                     </Link>
-                    <FavoriteButton slug={route.slug} label={`${route.origin} – ${route.destination}`} />
-                  </div>
                 ))}
               </div>
             </section>

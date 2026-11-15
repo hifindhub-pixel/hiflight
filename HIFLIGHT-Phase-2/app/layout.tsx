@@ -7,7 +7,6 @@ import Analytics from "@/components/Analytics";
 import AffiliateScripts from "@/components/AffiliateScripts";
 import { siteUrl } from "@/lib/content";
 import AuthProvider from "@/components/AuthProvider";
-import FavoritesProvider from "@/components/FavoritesProvider";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -91,11 +90,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <AuthProvider>
           <Analytics />
           <AffiliateScripts />
-          <FavoritesProvider>
             <Header />
             {children}
             <Footer />
-          </FavoritesProvider>
           <CookieBanner />
         </AuthProvider>
       </body>
