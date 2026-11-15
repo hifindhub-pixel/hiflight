@@ -322,6 +322,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
         const countryPath = new Path2D();
         const flagPath = new Path2D();
         const flagBounds: [number, number, number, number] = [Infinity, Infinity, -Infinity, -Infinity];
+        const territoryFlags: Array<{ path: Path2D; bounds: [number, number, number, number] }> = [];
         let hasFlagPath = false;
         let hasVisiblePath = false;
         let largestSpan = 0;
@@ -346,6 +347,12 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
           // Subpixel islands keep their country colour; rasterizing a full
           // flag into each tiny island was the dominant draw-call overhead.
           if (image && width >= 3 && height >= 3) {
+            // France includes French Guiana. A shared screen-space flag
+            // stretches across the Atlantic and turns mainland France red.
+            if (country.code === "FRA") {
+              territoryFlags.push({ path, bounds });
+              continue;
+            }
             flagPath.addPath(path);
             updateBounds(flagBounds, bounds[0], bounds[1]);
             updateBounds(flagBounds, bounds[2], bounds[3]);
@@ -359,6 +366,13 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
             context.save();
             context.clip(flagPath, "evenodd");
             context.drawImage(image, flagBounds[0], flagBounds[1], flagBounds[2] - flagBounds[0], flagBounds[3] - flagBounds[1]);
+            context.restore();
+          }
+          if (image) for (const territory of territoryFlags) {
+            const [left, top, right, bottom] = territory.bounds;
+            context.save();
+            context.clip(territory.path, "evenodd");
+            context.drawImage(image, left, top, right - left, bottom - top);
             context.restore();
           }
           context.strokeStyle = "rgba(15,35,54,0.96)";
