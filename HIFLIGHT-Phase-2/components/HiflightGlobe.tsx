@@ -169,7 +169,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
   const modeRef = useRef(mode);
   const pressRef = useRef(onCountryPress);
   const cameraRef = useRef({ longitude: 8, latitude: 16, zoom: 1 });
-  const imagesRef = useRef(new Map<string, HTMLImageElement>());
+  const imagesRef = useRef(new Map<string, HTMLCanvasElement>());
   const hitsRef = useRef<CountryHit[]>([]);
   const drawRef = useRef<() => void>(() => undefined);
 
@@ -201,14 +201,19 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
     let cssHeight = 1;
     let frame = 0;
     let fullDrawPending = false;
+    let wheelActiveUntil = 0;
+    let disposed = false;
+    const loadingFlags = new Map<string, HTMLImageElement>();
+    const failedFlags = new Set<string>();
     let settleTimer: ReturnType<typeof setTimeout> | null = null;
 
     function scheduleDraw(fullQuality = true) {
+      if (disposed) return;
       fullDrawPending = fullDrawPending || fullQuality;
       if (frame) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
-        const useFullQuality = fullDrawPending;
+        const useFullQuality = fullDrawPending && pointerPositions.size === 0 && performance.now() >= wheelActiveUntil;
         fullDrawPending = false;
         draw(useFullQuality);
       });
@@ -291,19 +296,34 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       for (const country of PREPARED_COUNTRIES) {
         const state = statesRef.current[country.userCode];
         const active = modeRef.current === "visited" ? state?.visited : state?.wishlist;
-        let image = active ? imagesRef.current.get(country.code) : undefined;
+        const image = active ? imagesRef.current.get(country.code) : undefined;
         const code2 = country.code2?.toLowerCase();
-        if (active && !image && code2 && flagIsVisible(country.code2)) {
+        if (active && !image && code2 && flagIsVisible(country.code2)
+          && !loadingFlags.has(country.code) && !failedFlags.has(country.code)) {
           const vector = VECTOR_FLAGS[code2] || MISSING_VECTOR_FLAGS[code2];
           if (vector) {
-            image = new Image();
-            image.onload = () => {
-              scheduleDraw(false);
-              if (settleTimer) clearTimeout(settleTimer);
-              settleTimer = setTimeout(() => scheduleDraw(true), 60);
+            const source = new Image();
+            loadingFlags.set(country.code, source);
+            source.onload = () => {
+              if (disposed) return;
+              // Rasterize once. Drawing SVG sources for every island on every
+              // frame repeatedly rasterizes complex flags during rotation.
+              const texture = document.createElement("canvas");
+              texture.width = 256;
+              texture.height = Math.max(1, Math.min(256, Math.round(256 * source.naturalHeight / Math.max(1, source.naturalWidth))));
+              const textureContext = texture.getContext("2d");
+              if (textureContext) {
+                textureContext.drawImage(source, 0, 0, texture.width, texture.height);
+                imagesRef.current.set(country.code, texture);
+              } else failedFlags.add(country.code);
+              loadingFlags.delete(country.code);
+              scheduleDraw(true);
             };
-            image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(vector)}`;
-            imagesRef.current.set(country.code, image);
+            source.onerror = () => {
+              failedFlags.add(country.code);
+              loadingFlags.delete(country.code);
+            };
+            source.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(vector)}`;
           }
         }
         const paths: Path2D[] = [];
@@ -329,7 +349,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
           const width = bounds[2] - bounds[0];
           const height = bounds[3] - bounds[1];
           largestSpan = Math.max(largestSpan, width, height);
-          if (image?.complete && image.naturalWidth && width > 0 && height > 0) {
+          if (image && width > 0 && height > 0) {
             context.save();
             context.clip(path, "evenodd");
             context.drawImage(image, bounds[0], bounds[1], width, height);
@@ -499,24 +519,31 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
     }
 
     function finishPointer(event: PointerEvent) {
-      const wasTap = pointerPositions.size === 1 && gesture.kind === "pan" && !gesture.moved && Date.now() - gesture.startedAt < 350;
+      if (!pointerPositions.has(event.pointerId)) return;
+      const wasTap = event.type === "pointerup" && pointerPositions.size === 1 && gesture.kind === "pan" && !gesture.moved && Date.now() - gesture.startedAt < 350;
       const tapPoint = { x: gesture.startX, y: gesture.startY };
       pointerPositions.delete(event.pointerId);
       if (pointerPositions.size === 1) beginPan(points()[0], true);
       else if (!pointerPositions.size) {
         gesture.kind = "none";
         cameraRef.current.longitude = ((cameraRef.current.longitude + 180) % 360 + 360) % 360 - 180;
-        if (wasTap) selectCountryAt(tapPoint.x, tapPoint.y);
+        if (wasTap) {
+          // Refresh hit paths at the current camera position, even if a wheel
+          // or pointer frame was still pending when this tap arrived.
+          draw(true);
+          selectCountryAt(tapPoint.x, tapPoint.y);
+        }
         scheduleDraw(true);
       }
     }
 
     function onWheel(event: WheelEvent) {
       event.preventDefault();
+      wheelActiveUntil = performance.now() + 90;
       cameraRef.current.zoom = clamp(cameraRef.current.zoom * Math.exp(-event.deltaY * 0.0013), 1, 2.8);
       scheduleDraw(false);
       if (settleTimer) clearTimeout(settleTimer);
-      settleTimer = setTimeout(() => scheduleDraw(true), 90);
+      settleTimer = setTimeout(() => { wheelActiveUntil = 0; scheduleDraw(true); }, 100);
     }
 
     const resizeObserver = new ResizeObserver(resize);
@@ -525,10 +552,15 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
     canvas.addEventListener("pointermove", onPointerMove);
     canvas.addEventListener("pointerup", finishPointer);
     canvas.addEventListener("pointercancel", finishPointer);
+    canvas.addEventListener("lostpointercapture", finishPointer);
     canvas.addEventListener("wheel", onWheel, { passive: false });
     resize();
 
     return () => {
+      disposed = true;
+      loadingFlags.forEach((source) => { source.onload = null; source.onerror = null; });
+      loadingFlags.clear();
+      drawRef.current = () => undefined;
       cancelAnimationFrame(frame);
       if (settleTimer) clearTimeout(settleTimer);
       resizeObserver.disconnect();
@@ -536,6 +568,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerup", finishPointer);
       canvas.removeEventListener("pointercancel", finishPointer);
+      canvas.removeEventListener("lostpointercapture", finishPointer);
       canvas.removeEventListener("wheel", onWheel);
     };
   }, []);
