@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { deals, dealsCheckedOn } from "@/lib/deals";
+import { deals } from "@/lib/deals";
 
 /** « Bons plans du moment » : mêmes carrés que « Où partir en ce moment », une carte par offre, qui s’éteint à sa date de fin. */
 export default function Deals() {
@@ -13,7 +13,7 @@ export default function Deals() {
 
   return (
     <section className="section home-block" id="bons-plans">
-      <div className="home-head"><h2>Bons plans du moment</h2><span className="deals-checked">Relevés le {dealsCheckedOn}</span></div>
+      <div className="home-head"><h2>Bons plans du moment</h2></div>
       <div className="dest-grid">
         {live.map((d) => {
           const body = (
