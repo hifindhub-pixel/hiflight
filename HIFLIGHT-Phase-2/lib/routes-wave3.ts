@@ -1,8 +1,8 @@
 import type { PlaceFacts, RouteSeed } from "./content";
 
 // Troisième vague : Nantes, Lille, Bordeaux, Toulouse, plus Montpellier comme nouveau départ.
-// Les durées sont des ordres de grandeur ; aucune compagnie n’est citée car les dessertes
-// changent selon les saisons, et aucun prix n’est écrit ici (les relevés viennent de l’API de prix).
+// Les durées sont des ordres de grandeur ; une compagnie n’est citée que lorsque la desserte
+// a été vérifiée (ex. Montpellier–Alger : Air Algérie, Transavia), et aucun prix n’est écrit ici (les relevés viennent de l’API de prix).
 
 export const wave3Places: Record<string, PlaceFacts> = {
   MPL: { airports: "Montpellier-Méditerranée (MPL)", center: "à une dizaine de kilomètres du centre de Montpellier" },
@@ -72,10 +72,10 @@ export const wave3Seeds: RouteSeed[] = [
     tip: "Les dessertes sont souvent saisonnières : vérifiez les jours de vol avant de fixer vos dates." },
 
   // ——— Montpellier
-  { ...montpellier, destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", duration: "environ 1 h 40", carriers: [], formalities: true,
-    intro: "Montpellier–Alger est une liaison très utilisée en Occitanie, avec un peu moins de deux heures de vol pour rejoindre l’Algérie.",
-    season: "L’été, les vacances scolaires et les fêtes concentrent la demande. Hors pointe, les prix sont plus souples.",
-    tip: "Vérifiez la franchise de bagages incluse : elle change beaucoup d’une offre à l’autre." },
+  { ...montpellier, destination: "Alger", destinationCode: "ALG", region: "Algérie", country: "algerie", duration: "environ 1 h 30 à 1 h 40", carriers: ["Air Algérie", "Transavia"], formalities: true,
+    intro: "Montpellier–Alger est l’une des rares liaisons directes entre l’Occitanie et l’Algérie : Air Algérie et Transavia l’assurent en moins de deux heures de vol, sans passer par Paris, avec une arrivée à l’aéroport Houari-Boumédiène. Il n’y a que quelques vols par semaine, contre plusieurs par jour depuis Paris : les jours et les horaires changent selon la compagnie et la saison, alors choisissez d’abord votre jour de départ, puis la compagnie.",
+    season: "Les vacances scolaires, l’été et les fêtes concentrent la demande, et avec si peu de vols les places partent vite. Hors pointe, vous avez plus de choix de dates.",
+    tip: "Comparez la franchise de bagages : elle diffère d’une compagnie à l’autre. Si aucun vol direct ne tombe à la bonne date, il existe des options avec escale, bien plus longues (comptez environ 5 h 35 sur un relevé)." },
   { ...montpellier, destination: "Marrakech", destinationCode: "RAK", region: "Maroc et Tunisie", duration: "environ 2 h 50", carriers: [], formalities: true,
     intro: "Depuis Montpellier, Marrakech est une escapade soleil sans passer par Paris : médina, jardins et Atlas à portée de main.",
     season: "Le printemps et l’automne sont les plus agréables. L’été est très chaud et les vacances scolaires font monter les prix.",
