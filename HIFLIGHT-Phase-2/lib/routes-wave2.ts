@@ -27,10 +27,10 @@ export const wave2Seeds: RouteSeed[] = [
     tip: "Beaucoup d’offres sont vendues avec l’hôtel : regardez aussi le vol seul, pour comparer." },
 
   // ——— Marseille
-  { ...marseille, destination: "Amsterdam", destinationCode: "AMS", region: "Europe", duration: "environ 1 h 55", carriers: [],
-    intro: "Depuis Marseille, Amsterdam se rejoint en moins de deux heures : un week-end de musées, de canaux et de brunchs.",
+  { ...marseille, destination: "Amsterdam", destinationCode: "AMS", region: "Europe", duration: "environ 1 h 55 à 2 h", carriers: ["KLM", "Air France"],
+    intro: "Depuis Marseille, Amsterdam se rejoint en vol direct en environ deux heures, avec KLM et Air France, et plusieurs vols par jour : un week-end de musées, de canaux et de brunchs.",
     season: "Le printemps et l’été sont les plus demandés. En automne et en hiver, les billets sont souvent plus doux.",
-    tip: "Le train rejoint le centre depuis l’aéroport en une vingtaine de minutes." },
+    tip: "Le train rejoint le centre depuis l’aéroport en une vingtaine de minutes. Comparez les horaires et le bagage inclus entre les deux compagnies." },
   { ...marseille, destination: "Djerba", destinationCode: "DJE", region: "Maroc et Tunisie", duration: "environ 2 h 10", carriers: [], formalities: true,
     intro: "Marseille–Djerba est un vol court vers les plages tunisiennes, pratique pour un séjour de quelques jours.",
     season: "L’été et les vacances scolaires concentrent la demande. Mai-juin et septembre-octobre sont plus calmes.",
