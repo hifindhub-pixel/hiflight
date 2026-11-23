@@ -8,6 +8,12 @@ import { BookOpenCheck, MapPinned, ShieldCheck, X } from "lucide-react";
 import { useAuth } from "./AuthProvider";
 import styles from "./AuthExperience.module.css";
 
+function destinationAfterLogin() {
+  const next = new URLSearchParams(window.location.search).get("next");
+  // Only allow the protected destination, never an arbitrary redirect URL.
+  return next === "/world-map" || next === "/world-map?view=passport" ? next : "/";
+}
+
 type Mode = "signin" | "signup" | "forgot" | "reset";
 
 type AuthExperienceProps = {
@@ -89,13 +95,13 @@ export default function AuthExperience({ onClose }: AuthExperienceProps) {
         await refresh();
       } else {
         await refresh();
-        router.replace("/");
+        router.replace(destinationAfterLogin());
       }
     }).catch((reason) => setError(reason.message)).finally(() => setLoading(false));
   }, [refresh, router]);
 
   useEffect(() => {
-    if (user && !authLoading && mode !== "reset") router.replace("/");
+    if (user && !authLoading && mode !== "reset") router.replace(destinationAfterLogin());
   }, [user, authLoading, mode, router]);
 
   function switchMode(nextMode: Mode) {
@@ -139,7 +145,7 @@ export default function AuthExperience({ onClose }: AuthExperienceProps) {
       }
       if (mode === "reset") setMessage("Votre mot de passe a été modifié.");
       await refresh();
-      router.push("/");
+      router.push(destinationAfterLogin());
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "Une erreur est survenue.");
     } finally {

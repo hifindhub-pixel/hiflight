@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BookOpen, Check, ChevronLeft, ChevronRight, Globe2, List, Plane, Search, Star } from "lucide-react";
@@ -106,7 +106,10 @@ function PassportPage({ country, side, onPress, interactive = true }: { country?
 
 export default function WorldMapExperience() {
   const { user, loading: authLoading } = useAuth();
-  const [exploreCode,setExploreCode] = useState("JPN");
+  const router = useRouter();
+  useEffect(() => {
+    if (!authLoading && !user) router.replace("/connexion?next=%2Fworld-map");
+  }, [authLoading, user, router]);
   const [states, setStates] = useState<StateMap>({});
   const [primarySection, setPrimarySection] = useState<PrimarySection>("globe");
   const [mode, setMode] = useState<GlobeMode>("visited");
@@ -235,29 +238,16 @@ export default function WorldMapExperience() {
     } finally { setSaving(false); }
   }, [demoMode, saving, states]);
 
-  if (authLoading || loading) return <main className={styles.loading}><div className={styles.loader} /><p>Préparation de votre carte…</p></main>;
-  const guest = !user && !demoMode;
-  const place = COUNTRY_BY_CODE.get(exploreCode);
-  const point = GLOBE_COUNTRIES.find(c=>c.code===exploreCode)?.center;
-  const coords = point ? [point[1].toFixed(1).replace("-","")+"° "+(point[1]>=0?"N":"S"),point[0].toFixed(1).replace("-","")+"° "+(point[0]>=0?"E":"O")].join("  /  ") : "";
+  if (authLoading || loading || !user) return <main className={styles.loading}><div className={styles.loader} /><p>Préparation de votre carte…</p></main>;
   return (
     <main className={styles.page}>
       <header className={styles.tripHeader}><div className={styles.tripHeaderInner}>
-        <h1>{guest ? "Globe du monde" : "Mes voyages"}</h1>
+        <h1>Mes voyages</h1>
         <nav aria-label="Carte et passeport" className={styles.tripNav}>
           <button aria-pressed={primarySection==="globe"} onClick={()=>setPrimarySection("globe")}><WorldMapIcon size={18}/>Globe</button>
           <button aria-pressed={primarySection==="passport"} onClick={()=>setPrimarySection("passport")}><BookOpen size={17}/>Passeport</button>
         </nav>
       </div></header>
-      {guest ? (primarySection === "passport" ?
-        <section className={styles.passportHome}><div className={styles.emptyPassport}>
-          <img src="/world-map/hiflight-passport-cover.png" alt="Passeport HiFlight"/>
-          <h2>Votre passeport de voyage</h2><p>Un tampon pour chacun de vos pays visités.</p><Link className={styles.passportCta} href="/connexion">Se connecter</Link>
-        </div></section> :
-        <section className={styles.globeWorkspace}>
-          <HiflightGlobe states={{}} mode="visited" onCountryPress={setExploreCode}/>
-          {place && <div className={styles.placeStrip}><div aria-live="polite">{flagSource(place.code2) && <img alt="" src={flagSource(place.code2)!}/>}<strong>{place.name}</strong><small>{coords}</small></div><Link href="/connexion">Créer mon passeport <ChevronRight size={15}/></Link></div>}
-        </section>) : <>
       {primarySection === "passport" ? (
         <section className={styles.passportHome}>
           {!visitedCountries.length ? (
@@ -323,7 +313,6 @@ export default function WorldMapExperience() {
         </section>
       )}
 
-      </>}
       {error ? <p className={styles.error} role="alert">{error}</p> : null}
       {pendingCountry ? (
         <div className={styles.modalBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setPendingCode(null); }}>

@@ -1844,3 +1844,23 @@ linear-gradient(135deg,#06152f,#0d2c53);box-shadow:0 30px 80px rgba(7,22,47,.16)
   .idx-lead-text { padding:26px 22px; }
   .mag-strip { margin-top:20px; }
 }
+
+/* Mobile search controls: avoid iOS focus zoom and transformed fixed panels. */
+@media (max-width: 900px) {
+  .search-form input, .market-search input,
+  .car-direct-form .hotel-city-input input { font-size:16px; }
+  .city-input-wrap input { width:100%; min-width:0; }
+}
+@media (max-width: 650px) {
+  .city-field:focus-within { transform:none; }
+  .city-field .city-suggestions {
+    position:absolute; top:calc(100% + 8px); bottom:auto;
+    left:0; right:0; width:100%; min-width:0; max-width:100%;
+    max-height:min(320px, 45dvh); overscroll-behavior:contain;
+  }
+  .city-suggestions>button { grid-template-columns:minmax(0,1fr) auto; gap:8px; }
+  .city-suggestions .suggestion-copy { min-width:0; overflow-wrap:anywhere; }
+  .search-form .search-fields { grid-template-columns:minmax(0,1fr); }
+  .search-form .route-fields { grid-template-columns:minmax(0,1fr); }
+  .search-form .city-field, .search-form .date-field-wrap { min-width:0; }
+}
