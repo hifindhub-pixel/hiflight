@@ -1657,7 +1657,7 @@ export const blogPosts: BlogPost[] = [
       "to": "2026-12-01T00:00:00+01:00"
     },
     "published": "2026-11-03",
-    "updated": "2026-11-03",
+    "updated": "2026-11-24",
     "readingMinutes": 7,
     "intro": "Le Travel Tuesday, c’est le Black Friday des voyageurs : le jour où compagnies, hôtels et plateformes sortent leurs promotions de fin d’année. En 2026, c’est le mardi 1er décembre. La question utile n’est pas « y aura-t-il des promos ? », il y en aura, mais « comment savoir si une promo est vraiment une bonne affaire ? ».",
     "sections": [
@@ -1676,32 +1676,28 @@ export const blogPosts: BlogPost[] = [
         "table": {
           "headers": [
             "Date",
-            "Ce qui se passe"
+            "Ce qui est confirmé"
           ],
           "rows": [
             [
-              "Jusqu’au 17 novembre",
-              "Prix promotionnels « L’Instant » sur de nombreuses destinations long-courriers (New York, Montréal, Tokyo, Dubaï…)"
+              "17 novembre 2026",
+              "Fin annoncée de la campagne L’Instant Air France citée précédemment ; cette campagne est terminée."
             ],
             [
-              "Jeudi 19 novembre",
-              "Lancement anticipé des offres Travel Tuesday dans les applications de certaines plateformes"
+              "27 novembre 2026",
+              "Black Friday."
             ],
             [
-              "Vendredi 20 novembre",
-              "Ouverture de ces offres sur les sites et le mobile"
+              "30 novembre 2026",
+              "Cyber Monday."
             ],
             [
-              "Vendredi 27 novembre",
-              "Black Friday"
+              "1er décembre 2026",
+              "Travel Tuesday ; chaque vendeur conserve ses propres échéances."
             ],
             [
-              "Lundi 30 novembre",
-              "Cyber Monday"
-            ],
-            [
-              "Mardi 1er décembre",
-              "Travel Tuesday 2026"
+              "3 décembre 2026",
+              "Échéance annoncée par Expedia pour une sélection d’hébergements, à 23 h 59 heure locale de l’hébergement."
             ]
           ]
         }
@@ -1794,7 +1790,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Qui participe en France",
         "paragraphs": [
-          "Plusieurs compagnies et plateformes préparent déjà leurs campagnes : des prix promotionnels sont visibles jusqu’au 17 novembre sur le long-courrier, et des plateformes annoncent leur calendrier dès le 19 novembre.",
+          "La campagne L’Instant Air France citée dans la première version annonçait une fin le 17 novembre 2026. Elle ne constitue donc plus une offre active dans ce guide. Au 24 novembre, Expedia affiche une campagne sur une sélection d’hébergements à réserver jusqu’au 3 décembre, pour des séjours du 17 novembre 2026 au 30 décembre 2027. Les prix membres sont soumis aux conditions d’accès, aux disponibilités et aux restrictions de dates. Cette fenêtre concerne les hébergements éligibles : elle ne garantit aucune promotion sur votre vol. Comparez le coût total du voyage avant de réserver.",
           "Pour les compagnies low cost, on n’a pas trouvé de calendrier officiel à ce jour : leurs ventes sont souvent annoncées au dernier moment. Côté hôtels, plusieurs grands groupes avaient lancé des promotions au Black Friday l’an dernier, parfois avec une remise plus forte pour les membres de leur programme de fidélité."
         ]
       },
@@ -1808,7 +1804,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Un plan simple, de maintenant au 1er décembre",
         "paragraphs": [
-          "Dès maintenant, choisissez votre destination et vos dates (ou une période flexible) et notez le prix de référence de votre trajet. Les 19 et 20 novembre, repérez les premières offres et comparez-les à ce prix. Du 27 au 30 novembre, surveillez le Black Friday et le Cyber Monday, qui peuvent déjà offrir les meilleures affaires de la période. Le mardi 1er décembre, comparez une dernière fois sur HiFlight, puis décidez.",
+          "Dès maintenant, choisissez votre destination et vos dates (ou une période flexible) et notez le prix de référence de votre trajet. Consultez le tableau ci-dessus pour les échéances propres à chaque vendeur, puis comparez les offres au prix de votre voyage. Du 27 au 30 novembre, surveillez le Black Friday et le Cyber Monday, qui peuvent déjà offrir les meilleures affaires de la période. Le mardi 1er décembre, comparez une dernière fois sur HiFlight, puis décidez.",
           "Et avant de payer, relisez trois choses : les bagages inclus, les conditions de modification et le prix total."
         ]
       },
@@ -1828,7 +1824,7 @@ export const blogPosts: BlogPost[] = [
     "faq": [
       {
         "question": "Quand a lieu le Travel Tuesday 2026 ?",
-        "answer": "Le mardi 1er décembre 2026, après le Black Friday (27 novembre) et le Cyber Monday (30 novembre). Certaines plateformes lancent leurs offres plus tôt, dès le 19 ou le 20 novembre."
+        "answer": "Le mardi 1er décembre 2026, après le Black Friday (27 novembre) et le Cyber Monday (30 novembre). Chaque vendeur fixe ses propres dates : consultez le calendrier ci-dessus et les conditions de l’offre."
       },
       {
         "question": "C’est quoi le Travel Tuesday ?",
@@ -2139,7 +2135,7 @@ export const blogPosts: BlogPost[] = [
     "description": "Promo Rewards Flying Blue de novembre 2026 : 25 % de miles en moins sur une sélection de billets, Los Angeles dès 18 750 miles. Conditions, taxes et comment comparer avec le prix en euros.",
     "heroImage": "https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-04",
-    "updated": "2026-11-04",
+    "updated": "2026-11-24",
     "readingMinutes": 4,
     "intro": "Chaque début de mois, Air France et KLM ouvrent une promotion sur leurs billets en miles. Celle de novembre retire 25 % des miles demandés sur une sélection de destinations. Avant de dépenser vos miles, une question simple : le même billet en euros ne coûte-t-il pas moins cher ? Voici comment le calculer.",
     "sections": [
@@ -2221,13 +2217,15 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Est-ce rentable ? Un calcul simple",
         "paragraphs": [
-          "Pour savoir si vos miles sont bien utilisés, comparez avec le prix en euros du même billet. Prenez le prix du billet payé en argent, retirez les taxes que vous paierez de toute façon, puis divisez par le nombre de miles. Vous obtenez la valeur de chaque mile, en centimes.",
-          "Plus ce chiffre est élevé, mieux vous utilisez vos miles. En business, la valeur est souvent meilleure qu’en économie, parce que le billet payé en argent coûte beaucoup plus cher. En économie, un billet bon marché en euros peut rendre l’utilisation de miles moins intéressante."
+          "Comparez le même trajet, aux mêmes dates, dans la même cabine et avec les prestations dont vous avez besoin. Si les montants sont en euros, la valeur en centimes par mile se calcule ainsi : 100 × (prix total du billet en euros − montant restant à payer pour le billet prime) ÷ nombre de miles utilisés. Incluez dans le montant restant à payer les taxes, suppléments et options nécessaires. Comparez un aller simple à un aller simple, ou deux allers-retours complets.",
+          "Exemple fictif : pour un billet à 500 €, une alternative à 20 000 miles avec 100 € restant à payer donne 2 centimes par mile : 100 × (500 − 100) ÷ 20 000. Il ne s’agit pas d’une offre disponible.",
+          "Vérifiez également les conditions du tarif : bagages inclus, possibilités de modification et de remboursement, ainsi que les avantages liés à votre statut Flying Blue. Contrôlez les prestations applicables à votre réservation avant de choisir."
         ]
       },
       {
         "heading": "Le prix en euros, pour comparer",
         "paragraphs": [
+          "Les planchers aller-retour ci-dessous ne sont pas directement comparables aux exemples aller simple en miles. Lancez une recherche pour le même voyage et les mêmes prestations avant d’utiliser la formule.",
           "Voici le prix le plus bas relevé sur HiFlight pour quelques trajets long-courriers au départ de Paris. Gardez-le en tête : si le billet en euros est bas, mieux vaut peut-être le payer et garder vos miles. Pour voir le prix du jour sur votre trajet et vos dates, lancez une recherche sur HiFlight."
         ],
         "routeTable": [
@@ -2364,7 +2362,7 @@ export const blogPosts: BlogPost[] = [
     "title": "Du soleil en hiver sans aller au bout du monde : Canaries, Égypte, Maroc, Tunisie",
     "description": "Mer à 19-22 °C aux Canaries, visa à 30 dollars en Égypte, Djerba à 2 h 50 de Paris : durées de vol, formalités et périodes les plus chères pour partir au soleil cet hiver.",
     "published": "2026-11-06",
-    "updated": "2026-11-07",
+    "updated": "2026-11-24",
     "readingMinutes": 5,
     "intro": "« Du soleil en hiver » recouvre des voyages très différents. Aux Canaries, on marche en t-shirt mais la mer reste fraîche. En mer Rouge, il y a un visa à prévoir. À Djerba ou à Marrakech, le vol est le plus court. Voici ce que disent les chiffres de chaque destination, avant de regarder les prix.",
     "sections": [
@@ -2379,8 +2377,9 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Égypte : le visa et le passeport avant le billet",
         "paragraphs": [
-          "Paris–Hurghada se fait en environ 4 h 35 en direct. Le visa est obligatoire pour les Français : d’après les agences spécialisées, il coûte 30 dollars depuis mars 2026, à l’arrivée à l’aéroport comme en ligne. L’e-visa évite la file du guichet ; si vous payez sur place, prévoyez des dollars en espèces.",
-          "Le passeport doit être valable au moins six mois après le retour. Une carte d’identité plastifiée est en principe acceptée, mais pas celle dont la validité a été prolongée de cinq ans : le plus sûr est de voyager avec un passeport. Pour Charm el-Cheikh, un séjour limité au Sinaï (Charm el-Cheikh, Dahab, Taba, Nuweiba) bénéficie d’une exemption de visa payant. Vérifiez les conditions exactes sur le site France Diplomatie avant de partir."
+          "Paris–Hurghada se fait en environ 4 h 35 en direct.",
+          "Pour les ressortissants français en voyage touristique, France Diplomatie indique qu’un passeport ou une carte nationale d’identité doit rester valable au moins six mois après le retour en France. Avec une carte d’identité, emportez impérativement deux photos d’identité pour le visa. Un visa touristique à entrée simple coûte 30 USD, ou l’équivalent en euros ; à l’arrivée, le paiement s’effectue en espèces. Vérifiez séparément les conditions et le tarif de la procédure en ligne avant de payer.",
+          "Pour une arrivée directe à Charm el-Cheikh et un séjour limité au gouvernorat, un visa spécial Sinaï peut être demandé. Sortir de cette zone nécessite un visa Égypte ; le visa spécial ne peut pas être modifié une fois entré dans le Sinaï. Consultez les formalités officielles adaptées à votre situation avant le départ."
         ]
       },
       {
@@ -2432,7 +2431,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "Combien de temps dure le vol Paris–Hurghada ?",
-        "answer": "Environ 4 h 35 en vol direct. Le visa égyptien est obligatoire pour les Français ; les agences l’indiquent à 30 dollars en 2026."
+        "answer": "Environ 4 h 35 en vol direct, selon le vol choisi. Pour les formalités des ressortissants français, reportez-vous à la section Égypte ci-dessus et à France Diplomatie."
       },
       {
         "question": "Quelle destination ensoleillée est la plus proche de Paris en hiver ?",
