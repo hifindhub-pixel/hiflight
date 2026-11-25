@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const questions = [
-  { question: "Comment fonctionne HiFlight ?", answer: "HiFlight vous aide à rechercher et comparer les principales étapes d’un voyage : vols, hôtels, voitures, trains, bus et eSIM. Vous finalisez ensuite la réservation auprès du partenaire sélectionné." },
+  { question: "Comment fonctionne HiFlight ?", answer: "HiFlight vous aide à rechercher et comparer les principales étapes d’un voyage : vols, hôtels, voitures et eSIM. Vous finalisez ensuite la réservation auprès du partenaire sélectionné." },
   { question: "Est-ce que HiFlight vend directement les billets ?", answer: "Non. HiFlight prépare ou compare votre recherche, puis vous redirige vers le partenaire qui assure la réservation, le paiement et le service après-vente." },
   { question: "Pourquoi le prix peut-il changer ?", answer: "Les tarifs et disponibilités sont dynamiques. Le montant définitif est toujours celui affiché par le partenaire avant le paiement." },
   { question: "La recherche est-elle gratuite ?", answer: "Oui. HiFlight ne facture aucun frais pour utiliser ses outils de recherche." },
