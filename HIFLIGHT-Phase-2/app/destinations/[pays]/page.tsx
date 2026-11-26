@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { blogPosts } from "@/lib/blog";
+import { blogPosts, isExpired } from "@/lib/blog";
 import { countryPages, defaultOgImage, flightRoutes, siteUrl } from "@/lib/content";
 
 export function generateStaticParams() { return countryPages.map(({ slug }) => ({ pays: slug })); }
@@ -27,7 +27,7 @@ export default async function CountryPage({ params }: { params: Promise<{ pays: 
   const routes = flightRoutes.filter((route) => route.country === country.slug);
   const outbound = routes.filter((route) => route.direction === "aller");
   const inbound = routes.filter((route) => route.direction === "retour");
-  const posts = blogPosts.filter((post) => post.relatedRoutes.some((slug) => routes.some((route) => route.slug === slug)));
+  const posts = blogPosts.filter((post) => !isExpired(post) && post.relatedRoutes.some((slug) => routes.some((route) => route.slug === slug)));
 
   return (
     <main>
