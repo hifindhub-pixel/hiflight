@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { airports, countryPages, flightRoutes, siteUrl } from "@/lib/content";
 import { blogPosts, isExpired } from "@/lib/blog";
 import { departureCities } from "@/lib/cities";
+import { routeGuides, routeGuidesCheckedOn } from "@/lib/route-guides";
 
 export const dynamic = "force-static";
 
@@ -12,7 +13,7 @@ export const dynamic = "force-static";
 const url = (path: string) => `${siteUrl}${path}/`;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/vols", "/hotels", "/voitures", "/esim", "/world-map", "/faq", "/a-propos", "/guides/bagage-cabine"];
+  const staticPages = ["", "/vols", "/hotels", "/voitures", "/esim", "/faq", "/a-propos", "/guides/bagage-cabine"];
   const latestPost = blogPosts.map((post) => post.updated).sort().at(-1);
 
   return [
@@ -20,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url("/blog"), lastModified: latestPost },
     ...blogPosts.filter((post) => !isExpired(post)).map((post) => ({ url: url(`/blog/${post.slug}`), lastModified: post.updated })),
     ...departureCities.map((city) => ({ url: url(`/vols/depuis/${city.slug}`), lastModified: "2026-11-02" })),
-    ...flightRoutes.map((route) => ({ url: url(`/vols/${route.slug}`), lastModified: route.updated })),
+    ...flightRoutes.map((route) => ({ url: url(`/vols/${route.slug}`), lastModified: routeGuides[route.slug] && routeGuidesCheckedOn > route.updated ? routeGuidesCheckedOn : route.updated })),
     ...countryPages.map(({ slug }) => ({ url: url(`/destinations/${slug}`), lastModified: "2026-10-30" })),
     ...airports.map(({ slug }) => ({ url: url(`/aeroports/${slug}`) })),
   ];

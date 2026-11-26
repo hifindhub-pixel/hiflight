@@ -37,7 +37,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = getPost(slug);
   if (!post) notFound();
   const related = post.relatedRoutes.map((s) => flightRoutes.find((r) => r.slug === s)).filter((r) => r !== undefined);
-  const candidates = blogPosts.filter((p) => p.slug !== post.slug && p.heroImage);
+  const candidates = blogPosts.filter((p) => p.slug !== post.slug && p.heroImage && !isExpired(p));
   const otherPosts = [...candidates.filter((p) => p.category === post.category), ...candidates.filter((p) => p.category !== post.category)]
     .sort((a, b) => Number(b.category === post.category) - Number(a.category === post.category) || b.published.localeCompare(a.published))
     .slice(0, 3);

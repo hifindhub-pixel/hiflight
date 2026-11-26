@@ -7,8 +7,9 @@ import RoutePrices from "@/components/RoutePrices";
 import StickyCta from "@/components/StickyCta";
 import { airports, bookingAdvice, buildRouteDescription, countryPages, flightRoutes, getRoute, relatedRoutes, routeComparison, routeFaq, siteUrl } from "@/lib/content";
 import { getRouteStats } from "@/lib/route-data";
-import { blogPosts } from "@/lib/blog";
+import { blogPosts, isExpired } from "@/lib/blog";
 import { departureCities } from "@/lib/cities";
+import { routeGuides, routeGuidesCheckedOn } from "@/lib/route-guides";
 
 // Page entièrement préfabriquée au build : les relevés de prix sont figés jusqu’au prochain déploiement.
 
@@ -42,12 +43,14 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
   const faq = routeFaq(route, stats);
   const departureCity = departureCities.find((city) => city.code === route.originCode);
   const comparison = routeComparison(route);
+  const guide = routeGuides[route.slug];
+  const revisedOn = guide && routeGuidesCheckedOn > route.updated ? routeGuidesCheckedOn : route.updated;
   const related = relatedRoutes(route);
   const reverse = route.reverseSlug ? getRoute(route.reverseSlug) : undefined;
   const country = countryPages.find((item) => item.slug === route.country);
   const fromParis = route.originCode === "PAR";
   const toParis = route.destinationCode === "PAR";
-  const posts = blogPosts.filter((post) => post.relatedRoutes.includes(route.slug) || (reverse && post.relatedRoutes.includes(reverse.slug)));
+  const posts = blogPosts.filter((post) => !isExpired(post) && (post.relatedRoutes.includes(route.slug) || (reverse && post.relatedRoutes.includes(reverse.slug))));
   const pair = `${route.origin} – ${route.destination}`;
   const practical = [
     { label: "Aéroport d’arrivée", value: `${route.arrivalAirports}${route.arrivalCenter ? ` (${route.arrivalCenter})` : ""}.` },
@@ -66,7 +69,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
             name: `${route.title} | HiFlight`,
             description: route.description,
             inLanguage: "fr-FR",
-            dateModified: stats?.updatedAt ?? route.updated,
+            dateModified: stats?.updatedAt ?? revisedOn,
             isPartOf: { "@type": "WebSite", url: `${siteUrl}/`, name: "HiFlight" },
             breadcrumb: { "@id": `${siteUrl}/vols/${route.slug}/#breadcrumb` },
           },
@@ -136,6 +139,15 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
         )}
         {stats?.directLowest ? <p>Un vol direct a été relevé à partir de {stats.directLowest} € aller-retour, contre {stats.lowest.price} € pour l’offre la moins chère toutes options confondues.</p> : null}
 
+        {guide ? (
+          <>
+            <h2>{guide.arrivalHeading}</h2>
+            {guide.arrival.map((text) => <p key={text}>{text}</p>)}
+            {guide.documents ? <><h2>{guide.documentsHeading}</h2>{guide.documents.map((text) => <p key={text}>{text}</p>)}</> : null}
+            <p className="price-note">Repères vérifiés le {frDate.format(new Date(routeGuidesCheckedOn))}. Tarifs, horaires et règles d’entrée peuvent changer : contrôlez-les avant de partir{guide.documents ? ", selon votre nationalité" : ""}.</p>
+          </>
+        ) : null}
+
         <h2>Informations pratiques</h2>
         <ul>
           {practical.map((item) => <li key={item.label}><strong>{item.label} :</strong> {item.value}</li>)}
@@ -187,7 +199,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
           </>
         ) : null}
 
-        <p className="price-note method-note">Avant de payer, vérifiez les bagages inclus, l’aéroport exact et les conditions de modification : la réservation est conclue avec le partenaire. Page révisée le {frDate.format(new Date(route.updated))} ; durées et compagnies sont des repères variables selon la saison.</p>
+        <p className="price-note method-note">Avant de payer, vérifiez les bagages inclus, l’aéroport exact et les conditions de modification : la réservation est conclue avec le partenaire. Page révisée le {frDate.format(new Date(revisedOn))} ; durées et compagnies sont des repères variables selon la saison.</p>
         <Link className="text-link" href="#comparer">Lancer la comparaison {pair} ↑</Link>
       </article>
       <StickyCta label={pair} price={stats?.lowest.price} route={route.slug} />

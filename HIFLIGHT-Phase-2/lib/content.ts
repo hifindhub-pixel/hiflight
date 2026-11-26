@@ -440,8 +440,15 @@ export const airports = [
 
 /** Routes proches : sens inverse en tête, puis même destination, même départ, même région. */
 export function relatedRoutes(route: FlightRoute, limit = 8): FlightRoute[] {
-  return flightRoutes
-    .filter((item) => item.slug !== route.slug)
+  // Maillage garanti : chaque trajet reçoit un lien des trajets qui le précèdent au départ de la même ville.
+  const sameOrigin = flightRoutes.filter((item) => item.originCode === route.originCode);
+  const position = sameOrigin.findIndex((item) => item.slug === route.slug);
+  const ring = [...new Set([1, 2, 3]
+      .map((step) => sameOrigin[(position + step) % sameOrigin.length])
+      .filter((item) => item && item.slug !== route.slug))];
+
+  const closest = flightRoutes
+    .filter((item) => item.slug !== route.slug && !ring.includes(item))
     .map((item) => ({
       item,
       score:
@@ -453,8 +460,10 @@ export function relatedRoutes(route: FlightRoute, limit = 8): FlightRoute[] {
     }))
     .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
+    .slice(0, limit - ring.length)
     .map(({ item }) => item);
+
+  return [...new Set([...closest, ...ring])];
 }
 
 const formatEuro = (value: number) => `${value} €`;

@@ -1,5 +1,5 @@
 import { airports, countryPages, flightRoutes, siteUrl } from "@/lib/content";
-import { blogPosts } from "@/lib/blog";
+import { blogPosts, isExpired } from "@/lib/blog";
 import { departureCities } from "@/lib/cities";
 
 export const dynamic = "force-static";
@@ -33,7 +33,7 @@ export function GET() {
     ...countryPages.map((country) => `- [Vols ${country.toward}](${siteUrl}/destinations/${country.slug}/)`),
     "",
     "## Articles",
-    ...blogPosts.map((post) => `- [${post.title}](${siteUrl}/blog/${post.slug}/)`),
+    ...blogPosts.filter((post) => !isExpired(post)).map((post) => `- [${post.title}](${siteUrl}/blog/${post.slug}/)`),
     "",
     "## Guides d’aéroports",
     ...airports.map((airport) => `- [${airport.name}](${siteUrl}/aeroports/${airport.slug}/)`),
