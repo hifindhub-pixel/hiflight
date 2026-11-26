@@ -1798,13 +1798,13 @@ export const blogPosts: BlogPost[] = [
         "heading": "Les pièges, ceux dont on ne vous parle pas assez",
         "paragraphs": [
           "Le premier, c’est le tarif non remboursable ou non modifiable, qui se cache derrière un joli prix. Des experts rappellent que certaines promotions ne se cumulent pas non plus avec d’autres avantages. Le second, c’est le bagage : un billet « promo » sans valise peut revenir plus cher qu’un billet normal avec. Le troisième, c’est la pression : le nombre de places à prix cassé est limité, mais une offre qui disparaît en dix minutes n’est pas pour autant la meilleure du marché.",
-          "Notre conseil : notez le prix de votre trajet une à deux semaines avant, comparez l’aller-retour avec deux allers simples, testez les aéroports voisins (Orly, Roissy et Beauvais ne donnent pas le même total), et regardez le jour de départ le moins cher sur la page du vol."
+          "Notre conseil : notez le prix de votre trajet une à deux semaines avant, comparez l’aller-retour avec deux allers simples, testez les aéroports voisins (Orly, Roissy et Beauvais ne donnent pas le même total), et essayez plusieurs jours de départ."
         ]
       },
       {
         "heading": "Un plan simple, de maintenant au 1er décembre",
         "paragraphs": [
-          "Dès maintenant, choisissez votre destination et vos dates (ou une période flexible) et notez le prix de référence de votre trajet. Consultez le tableau ci-dessus pour les échéances propres à chaque vendeur, puis comparez les offres au prix de votre voyage. Du 27 au 30 novembre, surveillez le Black Friday et le Cyber Monday, qui peuvent déjà offrir les meilleures affaires de la période. Le mardi 1er décembre, comparez une dernière fois sur HiFlight, puis décidez.",
+          "Dès maintenant, choisissez votre destination et vos dates (ou une période flexible), lancez une recherche sur HiFlight et notez le prix de votre trajet. Consultez le tableau ci-dessus pour les échéances propres à chaque vendeur, puis comparez les offres au prix de votre voyage. Du 27 au 30 novembre, surveillez le Black Friday et le Cyber Monday, qui peuvent déjà offrir les meilleures affaires de la période. Le mardi 1er décembre, comparez une dernière fois sur HiFlight, puis décidez.",
           "Et avant de payer, relisez trois choses : les bagages inclus, les conditions de modification et le prix total."
         ]
       },
@@ -1817,7 +1817,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Comment HiFlight peut servir ce jour-là",
         "paragraphs": [
-          "Le jour J, comparez en une seule recherche : HiFlight met côte à côte les offres de centaines de compagnies et d’agences, puis vous redirige vers le partenaire de votre choix. C’est gratuit et sans inscription. Pour préparer votre trajet dès maintenant, les cartes de prix en bas de l’article montrent des relevés récents, mis à jour chaque jour."
+          "Le jour J, comparez en une seule recherche : HiFlight met côte à côte les offres de centaines de compagnies et d’agences, puis vous redirige vers le partenaire de votre choix. C’est gratuit et sans inscription. Pour préparer votre trajet, lancez dès maintenant une recherche sur HiFlight et notez le prix du jour."
         ]
       }
     ],
@@ -2155,7 +2155,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         "question": "Comment savoir si une remise est réelle ?",
-        "answer": "Notez le prix de votre trajet avant le 1er décembre : sans repère, impossible de juger. HiFlight affiche chaque jour les prix les plus bas relevés pour vous servir de point de comparaison."
+        "answer": "Notez le prix de votre trajet avant le 1er décembre : sans repère, impossible de juger. Une recherche sur HiFlight vous donne ce point de comparaison pour vos dates."
       },
       {
         "question": "Les ventes privées sont-elles remboursables ?",
@@ -2780,7 +2780,7 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Les prix de référence HiFlight",
         "paragraphs": [
-          "Voici des relevés récents du réseau de partenaires HiFlight : des planchers aller-retour pour des départs dans les six prochains mois, toutes compagnies confondues et sans garantie sur vos dates. HiFlight compare les prix de ses partenaires au moment de la recherche, et ils peuvent différer de ceux de la promotion. Avant de décider, lancez une recherche sur HiFlight pour voir le prix du jour sur votre trajet."
+          "Voici des relevés récents du réseau de partenaires HiFlight : des planchers aller-retour pour des départs dans les six prochains mois, toutes compagnies confondues et sans garantie sur vos dates."
         ],
         "routeTable": [
           "paris-montreal",
@@ -2790,7 +2790,8 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Avant de payer",
         "paragraphs": [
-          "Le prix n’est garanti qu’une fois le paiement effectué et accepté. Vérifiez donc le montant final à la dernière étape."
+          "Le prix n’est garanti qu’une fois le paiement effectué et accepté. Vérifiez donc le montant final à la dernière étape.",
+          "HiFlight compare les prix de ses partenaires au moment de la recherche, et ils peuvent différer de ceux de la promotion. Avant de décider, lancez une recherche sur HiFlight pour voir le prix du jour sur votre trajet."
         ],
         "list": [
           "Vos deux dates, aller et retour, doivent être éligibles au tarif promotionnel.",
@@ -2932,13 +2933,14 @@ export const blogPosts: BlogPost[] = [
         "heading": "L’été 2027, à regarder de près",
         "paragraphs": [
           "La période de voyage couvre le printemps et tout l’été 2027. La liste des dates exclues et la répartition de la remise selon les mois ne figurent pas dans les informations que nous avons recueillies. Ne partez donc pas du principe qu’un samedi d’août sera à -30 %.",
-          "Si vous êtes souple, testez plusieurs jours de départ et de retour. Si vos congés sont figés, seul le prix total sur vos dates compte."
+          "Si vous êtes souple, testez plusieurs jours de départ et de retour. Si vos congés sont figés, seul le prix total sur vos dates compte.",
+          "HiFlight compare les prix de ses partenaires au moment de la recherche, et ils peuvent différer de ceux de la promotion. Pour vos dates, lancez une recherche sur HiFlight et regardez le prix du jour sur votre trajet."
         ]
       },
       {
         "heading": "Les prix de référence HiFlight",
         "paragraphs": [
-          "Ces relevés récents sont des planchers aller-retour pour des départs dans les six prochains mois, toutes compagnies confondues : ils ne couvrent donc pas l’été 2027. HiFlight compare les prix de ses partenaires au moment de la recherche, et ils peuvent différer de ceux de la promotion. Pour vos dates, lancez une recherche sur HiFlight et regardez le prix du jour sur votre trajet."
+          "Ces relevés récents sont des planchers aller-retour pour des départs dans les six prochains mois, toutes compagnies confondues : ils ne couvrent donc pas l’été 2027."
         ],
         "routeTable": [
           "paris-barcelone",
