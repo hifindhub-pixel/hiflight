@@ -97,6 +97,18 @@ export const routeGuides: Record<string, RouteGuide> = {
       "Faites la demande sur le site officiel uniquement, et avant d’acheter un billet non remboursable : une autorisation ne garantit pas à elle seule l’admission sur le territoire."
     ]
   },
+  "paris-dubai": {
+    arrivalHeading: "De l’aéroport DXB au centre de Dubaï, en métro",
+    arrival: [
+      "La ligne rouge du métro dessert les terminaux 1 et 3 de Dubai International (DXB). Vous pouvez acheter un titre aux guichets et aux distributeurs, ou prendre une carte Nol rechargeable.",
+      "Le métro ne circule pas toute la nuit et son premier départ est plus tardif le dimanche : vérifiez les horaires du jour de votre arrivée. Les bus de l’aéroport exigent une carte Nol, sans paiement en espèces. Si votre billet indique Al Maktoum (DWC), le trajet n’est pas le même."
+    ],
+    documentsHeading: "Passeport pour Dubaï : six mois de validité",
+    documents: [
+      "Un Français est dispensé de visa pour un séjour de 90 jours au plus sur une période de 180 jours. Le passeport doit être en bon état et valable au moins 6 mois à la date d’entrée, sous peine de refoulement.",
+      "Un passeport d’urgence n’offre aucune garantie d’entrée. Les autorités émiriennes restent libres d’accepter ou de refuser un voyageur."
+    ]
+  },
   "paris-montreal": {
     arrivalHeading: "De Montréal-Trudeau au centre-ville",
     arrival: [
