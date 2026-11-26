@@ -16,7 +16,7 @@ export default function Legal() {
         <h2>Directeur de la publication</h2>
         <p>Le directeur de la publication est le représentant légal de l’éditeur de HIFLIGHT.</p>
         <h2>Hébergement</h2>
-        <p>Le site est hébergé par Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis — <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">vercel.com</a>.</p>
+        <p>Le site est hébergé par Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, États-Unis — <a href="https://www.cloudflare.com" target="_blank" rel="noopener noreferrer">cloudflare.com</a>.</p>
         <h2>Nature du service</h2>
         <p>HIFLIGHT est un service de recherche et de comparaison de voyages exploité avec des technologies et contenus fournis par plusieurs partenaires. Les réservations, paiements et services après-vente sont assurés par le partenaire sélectionné par l’utilisateur.</p>
         <h2>Liens affiliés</h2>

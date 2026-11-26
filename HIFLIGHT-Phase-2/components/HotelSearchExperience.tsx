@@ -21,7 +21,7 @@ const weekDays = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
 
 const initialSearch: HotelSearch = { destination: "Paris, France", checkin: "", checkout: "", guests: "2" };
 
-export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string }) {
+export default function HotelSearchExperience() {
   const [draft, setDraft] = useState<HotelSearch>(initialSearch);
   const [search, setSearch] = useState<HotelSearch>(initialSearch);
   const [suggestions, setSuggestions] = useState<CitySuggestion[]>([]);
@@ -164,7 +164,7 @@ export default function HotelSearchExperience({ stay22Aid }: { stay22Aid: string
           <p className={`hero-disclaimer ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "La destination, les dates et les voyageurs actualisent immédiatement les offres disponibles."}</p>
         </div>
       </section>
-      <div id="hotel-results"><HotelExplorer stay22Aid={stay22Aid} search={search} /></div>
+      <div id="hotel-results"><HotelExplorer search={search} /></div>
     </>
   );
 }

@@ -14,7 +14,9 @@ const securityHeaders = [
       "object-src 'none'",
       "frame-ancestors 'self'",
       "form-action 'self' https:",
-      "script-src 'self' 'unsafe-inline' https:",
+      process.env.NODE_ENV === "development"
+        ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:"
+        : "script-src 'self' 'unsafe-inline' https:",
       "style-src 'self' 'unsafe-inline' https:",
       "img-src 'self' data: blob: https:",
       "font-src 'self' data: https:",
@@ -33,6 +35,15 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Une seule adresse canonique : hiflight.fr (sans www) redirige vers https://www.hiflight.fr en conservant le chemin.
+      { source: "/:path*", has: [{ type: "host", value: "hiflight.fr" }], destination: "https://www.hiflight.fr/:path*", permanent: true },
+      { source: "/blog/billet-avion-pas-cher-astuces", destination: "/blog/quand-reserver-vol-pas-cher", permanent: true },
+      { source: "/blog/vol-derniere-minute-astuces", destination: "/blog/quand-reserver-vol-pas-cher", permanent: true },
+      { source: "/blog/vol-vacances-scolaires-prix", destination: "/blog/quand-reserver-vol-pas-cher", permanent: true },
+      { source: "/blog/bagage-cabine-ou-soute-que-choisir", destination: "/blog/compagnies-low-cost-frais-caches", permanent: true },
+      { source: "/blog/vol-direct-ou-escale-que-choisir", destination: "/blog/compagnies-low-cost-frais-caches", permanent: true },
+      { source: "/blog/aller-simple-ou-aller-retour", destination: "/blog/compagnies-low-cost-frais-caches", permanent: true },
+      { source: "/blog/vol-maroc-tunisie-quand-reserver", destination: "/blog/vol-pas-cher-depuis-province", permanent: true },
       { source: "/conditions", destination: "/conditions-utilisations", permanent: true },
       { source: "/cgu", destination: "/conditions-utilisations", permanent: true },
       { source: "/terms", destination: "/conditions-utilisations", permanent: true },
@@ -41,6 +52,7 @@ const nextConfig: NextConfig = {
       { source: "/politique-confidentialite", destination: "/politique-de-confidentialite", permanent: true },
       { source: "/legal", destination: "/mentions-legales", permanent: true },
       { source: "/support", destination: "/faq", permanent: true },
+      { source: "/blog/black-friday-voyage-2026-voyage-prive-edreams", destination: "/blog/black-friday-voyage-2026-dates-conseils", permanent: true },
     ];
   },
 };

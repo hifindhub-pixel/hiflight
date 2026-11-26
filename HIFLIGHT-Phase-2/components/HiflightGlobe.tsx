@@ -5,6 +5,7 @@ import { GLOBE_COUNTRIES } from "@/lib/world-map/globeCountries";
 import { VECTOR_FLAGS } from "@/lib/world-map/vectorFlags";
 import { MISSING_VECTOR_FLAGS } from "@/lib/world-map/missingVectorFlags";
 import { FLAG_COLORS } from "@/lib/world-map/flagColors";
+import { MOROCCO_UNIFIED_GLOBE_RING, thinRing } from "@/lib/world-map/geometry";
 import styles from "./WorldMapExperience.module.css";
 
 export type GlobeMode = "visited" | "wishlist";
@@ -28,7 +29,6 @@ type PreparedCountry = {
   code2: string | null;
   centerPoint: [number, number, number, number];
   drawRings: PreparedRing[];
-  interactionRings: PreparedRing[];
   hitX: number;
   hitY: number;
   hitDepth: number;
@@ -46,78 +46,6 @@ type CountryHit = {
 };
 
 const RAD = Math.PI / 180;
-const MOROCCO_UNIFIED_GLOBE_RING: Array<[number, number]> = [
-  [-17.092, 20.878], [-16.964, 21.33], [-13.016, 21.333], [-13.153, 22.821],
-  [-12.616, 23.275], [-12.023, 23.469], [-12.016, 25.994], [-8.683, 25.995],
-  [-8.684, 27.655], [-8.746, 27.656], [-8.748, 27.679], [-8.654, 28.723],
-  [-7.16, 29.612], [-6.636, 29.57], [-6.473, 29.822], [-5.45, 29.957],
-  [-4.965, 30.469], [-3.672, 30.96], [-3.625, 31.065], [-3.83, 31.197],
-  [-3.761, 31.693], [-3.025, 31.831], [-2.858, 32.077], [-1.229, 32.109],
-  [-1.238, 32.338], [-1.065, 32.47], [-1.451, 32.786], [-1.681, 33.32],
-  [-1.794, 34.749], [-2.217, 35.103], [-2.426, 35.125], [-2.837, 35.128],
-  [-2.971, 35.406], [-3.389, 35.214], [-4.628, 35.206], [-5.253, 35.614],
-  [-5.28, 35.903], [-5.924, 35.786], [-6.355, 34.771], [-6.898, 33.969],
-  [-8.509, 33.254], [-9.247, 32.573], [-9.346, 32.086], [-9.81, 31.417],
-  [-9.878, 30.717], [-9.655, 30.45], [-9.669, 30.108], [-10.193, 29.39],
-  [-11.547, 28.314], [-12.946, 27.916], [-13.178, 27.655], [-13.574, 26.741],
-  [-14.413, 26.253], [-14.796, 25.403], [-14.905, 24.721], [-15.9, 23.846],
-  [-15.98, 23.673], [-15.787, 23.792], [-16.212, 23.092], [-16.361, 22.594],
-  [-16.927, 21.904], [-17.092, 20.878],
-];
-
-function pointDistanceSquared(
-  point: [number, number],
-  start: [number, number],
-  end: [number, number],
-) {
-  let x = start[0];
-  let y = start[1];
-  let dx = end[0] - x;
-  let dy = end[1] - y;
-  if (dx || dy) {
-    const amount = Math.max(0, Math.min(1, ((point[0] - x) * dx + (point[1] - y) * dy) / (dx * dx + dy * dy)));
-    x += dx * amount;
-    y += dy * amount;
-  }
-  dx = point[0] - x;
-  dy = point[1] - y;
-  return dx * dx + dy * dy;
-}
-
-function thinRing(ring: Array<[number, number]>, toleranceScale = 3) {
-  if (ring.length <= 10) return ring;
-  const source = ring.slice(0, -1);
-  const xs = source.map((point) => point[0]);
-  const ys = source.map((point) => point[1]);
-  const span = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
-  const tolerance = (span < 2 ? 0.004 : span < 7 ? 0.025 : span < 18 ? 0.075 : 0.16) * toleranceScale;
-  const threshold = tolerance * tolerance;
-  const keep = new Uint8Array(source.length);
-  keep[0] = 1;
-  keep[source.length - 1] = 1;
-  const stack: Array<[number, number]> = [[0, source.length - 1]];
-  while (stack.length) {
-    const [first, last] = stack.pop()!;
-    let maximum = threshold;
-    let selected = -1;
-    for (let index = first + 1; index < last; index += 1) {
-      const distance = pointDistanceSquared(source[index], source[first], source[last]);
-      if (distance > maximum) {
-        maximum = distance;
-        selected = index;
-      }
-    }
-    if (selected > 0) {
-      keep[selected] = 1;
-      stack.push([first, selected], [selected, last]);
-    }
-  }
-  const simplified = source.filter((_, index) => keep[index]);
-  if (simplified.length < 3) return ring;
-  simplified.push(simplified[0]);
-  return simplified;
-}
-
 function makePoint(point: [number, number]): [number, number, number, number] {
   const longitude = point[0] * RAD;
   const latitude = point[1] * RAD;
@@ -138,7 +66,6 @@ const PREPARED_COUNTRIES: PreparedCountry[] = GLOBE_COUNTRIES
       code2: country.code2,
       centerPoint: makePoint(country.center),
       drawRings: prepareRings(3),
-      interactionRings: prepareRings(8),
       hitX: -1000,
       hitY: -1000,
       hitDepth: -1,
@@ -240,7 +167,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
   const modeRef = useRef(mode);
   const pressRef = useRef(onCountryPress);
   const cameraRef = useRef({ longitude: 8, latitude: 16, zoom: 1 });
-  const imagesRef = useRef(new Map<string, HTMLImageElement>());
+  const imagesRef = useRef(new Map<string, HTMLCanvasElement>());
   const hitsRef = useRef<CountryHit[]>([]);
   const drawRef = useRef<() => void>(() => undefined);
 
@@ -264,24 +191,23 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
   useEffect(() => {
     const canvasElement = canvasRef.current;
     if (!canvasElement) return;
-    const renderingContext = canvasElement.getContext("2d", { alpha: true, desynchronized: true });
+    const renderingContext = canvasElement.getContext("2d", { alpha: true });
     if (!renderingContext) return;
     const canvas: HTMLCanvasElement = canvasElement;
     const context: CanvasRenderingContext2D = renderingContext;
     let cssWidth = 1;
     let cssHeight = 1;
     let frame = 0;
-    let fullDrawPending = false;
-    let settleTimer: ReturnType<typeof setTimeout> | null = null;
+    let disposed = false;
+    const loadingFlags = new Map<string, HTMLImageElement>();
+    const failedFlags = new Set<string>();
 
-    function scheduleDraw(fullQuality = true) {
-      fullDrawPending = fullDrawPending || fullQuality;
+    function scheduleDraw() {
+      if (disposed) return;
       if (frame) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
-        const useFullQuality = fullDrawPending;
-        fullDrawPending = false;
-        draw(useFullQuality);
+        draw();
       });
     }
 
@@ -330,7 +256,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       country.hitDepth = sinCenterLat * point[0] + cosCenterLat * point[1] * cosDelta;
     }
 
-    function draw(fullQuality: boolean) {
+    function draw() {
       if (cssWidth <= 1 || cssHeight <= 1) return;
       const { longitude, latitude, zoom } = cameraRef.current;
       const centerLongitude = longitude * RAD;
@@ -362,54 +288,97 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       for (const country of PREPARED_COUNTRIES) {
         const state = statesRef.current[country.userCode];
         const active = modeRef.current === "visited" ? state?.visited : state?.wishlist;
-        let image = active ? imagesRef.current.get(country.code) : undefined;
+        const image = active ? imagesRef.current.get(country.code) : undefined;
         const code2 = country.code2?.toLowerCase();
-        if (active && !image && code2 && flagIsVisible(country.code2)) {
+        if (active && !image && code2 && flagIsVisible(country.code2)
+          && !loadingFlags.has(country.code) && !failedFlags.has(country.code)) {
           const vector = VECTOR_FLAGS[code2] || MISSING_VECTOR_FLAGS[code2];
           if (vector) {
-            image = new Image();
-            image.onload = () => {
-              scheduleDraw(false);
-              if (settleTimer) clearTimeout(settleTimer);
-              settleTimer = setTimeout(() => scheduleDraw(true), 60);
+            const source = new Image();
+            loadingFlags.set(country.code, source);
+            source.onload = () => {
+              if (disposed) return;
+              // Rasterize once. Drawing SVG sources for every island on every
+              // frame repeatedly rasterizes complex flags during rotation.
+              const texture = document.createElement("canvas");
+              texture.width = 256;
+              texture.height = Math.max(1, Math.min(256, Math.round(256 * source.naturalHeight / Math.max(1, source.naturalWidth))));
+              const textureContext = texture.getContext("2d");
+              if (textureContext) {
+                textureContext.drawImage(source, 0, 0, texture.width, texture.height);
+                imagesRef.current.set(country.code, texture);
+              } else failedFlags.add(country.code);
+              loadingFlags.delete(country.code);
+              scheduleDraw();
             };
-            image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(vector)}`;
-            imagesRef.current.set(country.code, image);
+            source.onerror = () => {
+              failedFlags.add(country.code);
+              loadingFlags.delete(country.code);
+            };
+            source.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(vector)}`;
           }
         }
         const paths: Path2D[] = [];
+        const countryPath = new Path2D();
+        const flagPath = new Path2D();
+        const flagBounds: [number, number, number, number] = [Infinity, Infinity, -Infinity, -Infinity];
+        const territoryFlags: Array<{ path: Path2D; bounds: [number, number, number, number] }> = [];
+        let hasFlagPath = false;
         let hasVisiblePath = false;
         let largestSpan = 0;
         let depth = -1;
         country.touchRadius = 0;
         projectCenter(country, sinCenterLat, cosCenterLat, sinCenterLon, cosCenterLon, centerX, centerY, radius);
 
-        // During a gesture, use a lighter version of the same coastline data.
-        // Flags stay clipped to the countries; the precise paths and hit areas
-        // are restored immediately on the final frame.
-        const rings = fullQuality ? country.drawRings : country.interactionRings;
+        // Keep identical borders at rest and during a gesture: switching
+        // coastlines also changed the flag bounds and made countries flash.
+        const rings = country.drawRings;
         for (const ring of rings) {
           depth = Math.max(depth, projectRing(ring, sinCenterLat, cosCenterLat, sinCenterLon, cosCenterLon, centerX, centerY, radius));
           const visible = appendVisibleRing(ring);
           if (!visible) continue;
           const { path, bounds } = visible;
           hasVisiblePath = true;
-          if (fullQuality) paths.push(path);
-          context.fillStyle = active ? FLAG_COLORS[country.userCode] || "#FF6B6B" : "#5C6876";
-          context.fill(path, "evenodd");
+          paths.push(path);
+          countryPath.addPath(path);
           const width = bounds[2] - bounds[0];
           const height = bounds[3] - bounds[1];
           largestSpan = Math.max(largestSpan, width, height);
-          if (image?.complete && image.naturalWidth && width > 0 && height > 0) {
+          // Subpixel islands keep their country colour; rasterizing a full
+          // flag into each tiny island was the dominant draw-call overhead.
+          if (image && width >= 3 && height >= 3) {
+            // France includes French Guiana. A shared screen-space flag
+            // stretches across the Atlantic and turns mainland France red.
+            if (country.code === "FRA") {
+              territoryFlags.push({ path, bounds });
+              continue;
+            }
+            flagPath.addPath(path);
+            updateBounds(flagBounds, bounds[0], bounds[1]);
+            updateBounds(flagBounds, bounds[2], bounds[3]);
+            hasFlagPath = true;
+          }
+        }
+        if (hasVisiblePath) {
+          context.fillStyle = active ? FLAG_COLORS[country.userCode] || "#FF6B6B" : "#5C6876";
+          context.fill(countryPath, "evenodd");
+          if (image && hasFlagPath) {
             context.save();
-            context.clip(path, "evenodd");
-            context.drawImage(image, bounds[0], bounds[1], width, height);
+            context.clip(flagPath, "evenodd");
+            context.drawImage(image, flagBounds[0], flagBounds[1], flagBounds[2] - flagBounds[0], flagBounds[3] - flagBounds[1]);
+            context.restore();
+          }
+          if (image) for (const territory of territoryFlags) {
+            const [left, top, right, bottom] = territory.bounds;
+            context.save();
+            context.clip(territory.path, "evenodd");
+            context.drawImage(image, left, top, right - left, bottom - top);
             context.restore();
           }
           context.strokeStyle = "rgba(15,35,54,0.96)";
           context.lineWidth = 0.62;
           context.lineJoin = "round";
-          context.stroke(path);
+          context.stroke(countryPath);
         }
 
         if (hasVisiblePath && largestSpan < 2.6 && country.hitDepth > 0.02) {
@@ -419,7 +388,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
           context.fill();
           country.touchRadius = active ? 11 : 9;
         }
-        if (fullQuality && hasVisiblePath) {
+        if (hasVisiblePath) {
           nextHits.push({
             code: country.userCode,
             depth,
@@ -445,7 +414,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       context.strokeStyle = "rgba(112,201,239,0.76)";
       context.lineWidth = 1.35;
       context.stroke();
-      if (fullQuality) hitsRef.current = nextHits.sort((a, b) => a.depth - b.depth);
+      hitsRef.current = nextHits.sort((a, b) => a.depth - b.depth);
     }
 
     drawRef.current = scheduleDraw;
@@ -459,7 +428,7 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
       canvas.width = Math.max(1, Math.round(cssWidth * pixelRatio));
       canvas.height = Math.max(1, Math.round(cssHeight * pixelRatio));
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-      scheduleDraw(true);
+      scheduleDraw();
     }
 
     const pointerPositions = new Map<number, { x: number; y: number }>();
@@ -562,32 +531,41 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
         if (gesture.kind !== "pan") beginPan(activePoints[0], true);
         const dx = activePoints[0].x - gesture.startX;
         const dy = activePoints[0].y - gesture.startY;
-        if (Math.hypot(dx, dy) > 3) gesture.moved = true;
+        if (!gesture.moved && Math.hypot(dx, dy) <= 3) return;
+        gesture.moved = true;
         cameraRef.current.longitude = gesture.startLongitude - (dx * 0.5) / Math.max(Math.sqrt(cameraRef.current.zoom), 1);
         cameraRef.current.latitude = clamp(gesture.startLatitude + (dy * 0.44) / Math.max(Math.sqrt(cameraRef.current.zoom), 1), -82, 82);
       }
-      scheduleDraw(false);
+      scheduleDraw();
     }
 
     function finishPointer(event: PointerEvent) {
-      const wasTap = pointerPositions.size === 1 && gesture.kind === "pan" && !gesture.moved && Date.now() - gesture.startedAt < 350;
+      if (!pointerPositions.has(event.pointerId)) return;
+      const wasTap = event.type === "pointerup" && pointerPositions.size === 1 && gesture.kind === "pan" && !gesture.moved && Date.now() - gesture.startedAt < 350;
       const tapPoint = { x: gesture.startX, y: gesture.startY };
       pointerPositions.delete(event.pointerId);
       if (pointerPositions.size === 1) beginPan(points()[0], true);
       else if (!pointerPositions.size) {
         gesture.kind = "none";
         cameraRef.current.longitude = ((cameraRef.current.longitude + 180) % 360 + 360) % 360 - 180;
-        if (wasTap) selectCountryAt(tapPoint.x, tapPoint.y);
-        scheduleDraw(true);
+        if (wasTap) {
+          // Refresh hit paths at the current camera position, even if a wheel
+          // or pointer frame was still pending when this tap arrived.
+          if (frame) {
+            cancelAnimationFrame(frame);
+            frame = 0;
+            draw();
+          }
+          selectCountryAt(tapPoint.x, tapPoint.y);
+        }
+        if (!wasTap) scheduleDraw();
       }
     }
 
     function onWheel(event: WheelEvent) {
       event.preventDefault();
       cameraRef.current.zoom = clamp(cameraRef.current.zoom * Math.exp(-event.deltaY * 0.0013), 1, 2.8);
-      scheduleDraw(false);
-      if (settleTimer) clearTimeout(settleTimer);
-      settleTimer = setTimeout(() => scheduleDraw(true), 90);
+      scheduleDraw();
     }
 
     const resizeObserver = new ResizeObserver(resize);
@@ -596,17 +574,22 @@ export default function HiflightGlobe({ states, mode, onCountryPress }: Props) {
     canvas.addEventListener("pointermove", onPointerMove);
     canvas.addEventListener("pointerup", finishPointer);
     canvas.addEventListener("pointercancel", finishPointer);
+    canvas.addEventListener("lostpointercapture", finishPointer);
     canvas.addEventListener("wheel", onWheel, { passive: false });
     resize();
 
     return () => {
+      disposed = true;
+      loadingFlags.forEach((source) => { source.onload = null; source.onerror = null; });
+      loadingFlags.clear();
+      drawRef.current = () => undefined;
       cancelAnimationFrame(frame);
-      if (settleTimer) clearTimeout(settleTimer);
       resizeObserver.disconnect();
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerup", finishPointer);
       canvas.removeEventListener("pointercancel", finishPointer);
+      canvas.removeEventListener("lostpointercapture", finishPointer);
       canvas.removeEventListener("wheel", onWheel);
     };
   }, []);

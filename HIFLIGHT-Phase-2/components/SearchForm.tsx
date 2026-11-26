@@ -1,5 +1,7 @@
 "use client";
 
+import FlightSearchButton from "./FlightSearchButton";
+
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { airportCities, AirportCity, findAirportCity } from "@/lib/airports";
 import { searchUrl } from "@/lib/content";
@@ -25,7 +27,7 @@ function localIso(date: Date) {
 
 function monthKey(date: Date) { return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`; }
 function addMonths(date: Date, amount: number) { return new Date(date.getFullYear(), date.getMonth() + amount, 1); }
-function formatTravelpayoutsDate(value: string) { const [, month = "", day = ""] = value.split("-"); return `${day}${month}`; }
+function formatRouteDate(value: string) { const [, month = "", day = ""] = value.split("-"); return `${day}${month}`; }
 function formatShortDate(value: string, placeholder: string) {
   if (!value) return placeholder;
   return new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short" }).format(new Date(`${value}T12:00:00`));
@@ -240,6 +242,10 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   ]);
   const [multiDateIndex, setMultiDateIndex] = useState<number | null>(null);
   const [error, setError] = useState("");
+  const [launching, setLaunching] = useState(false);
+  const launchingRef = useRef(false);
+  const departureTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => { if (departureTimer.current) clearTimeout(departureTimer.current); }, []);
   const calendarRef = useRef<HTMLDivElement>(null);
   const activeMultiLeg = multiDateIndex === null ? undefined : multiLegs[multiDateIndex];
   const calendarFromCode = tripType === "multicity" ? activeMultiLeg?.fromCode || "" : fromCode;
@@ -323,6 +329,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
   }
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (launchingRef.current) return;
     let route = "";
     let hotelDestination = to.replace(/\s*\([^)]*\)\s*$/, "").trim();
     let hotelCheckin = departure;
@@ -331,7 +338,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
       if (multiLegs.some((leg) => !leg.fromCode || !leg.toCode || !leg.date)) { setError("Complétez chaque étape avec une ville et une date."); return; }
       if (multiLegs.some((leg) => leg.fromCode === leg.toCode)) { setError("Le départ et la destination d’une étape doivent être différents."); return; }
       if (multiLegs.some((leg, index) => index > 0 && leg.date < multiLegs[index - 1].date)) { setError("Les dates des étapes doivent être dans l’ordre."); return; }
-      route = multiLegs.map((leg, index) => `${index === 0 ? leg.fromCode : ""}${formatTravelpayoutsDate(leg.date)}${leg.toCode}`).join("");
+      route = multiLegs.map((leg, index) => `${index === 0 ? leg.fromCode : ""}${formatRouteDate(leg.date)}${leg.toCode}`).join("");
       const lastLeg = multiLegs[multiLegs.length - 1];
       hotelDestination = lastLeg.to.replace(/\s*\([^)]*\)\s*$/, "").trim();
       hotelCheckin = lastLeg.date;
@@ -341,7 +348,7 @@ export default function SearchForm({ origin = "", destination = "", originCode =
       if (fromCode === toCode) { setError("Le départ et la destination doivent être différents."); return; }
       if (!departure) { setError("Sélectionnez une date de départ."); return; }
       if (tripType === "roundtrip" && !returnDate) { setError("Sélectionnez une date de retour, ou choisissez Aller simple."); return; }
-      route = `${fromCode}${formatTravelpayoutsDate(departure)}${toCode}${tripType === "roundtrip" ? formatTravelpayoutsDate(returnDate) : ""}`;
+      route = `${fromCode}${formatRouteDate(departure)}${toCode}${tripType === "roundtrip" ? formatRouteDate(returnDate) : ""}`;
     }
     route += passengerSuffix(travelClass, adults, children, infants);
     const analyticsParams = {
@@ -362,14 +369,23 @@ export default function SearchForm({ origin = "", destination = "", originCode =
     hotelTarget.searchParams.set("guests", String(adults + children));
     hotelTarget.hash = "hotel-results";
 
-    const flightTab = window.open(target.toString(), "_blank");
-    if (!flightTab) {
-      setError("Autorisez l’ouverture des nouveaux onglets pour afficher simultanément les vols et les hébergements.");
-      return;
-    }
-    flightTab.opener = null;
-    trackPartnerClick("flight", { ...analyticsParams, provider: "travelpayouts" });
-    window.location.assign(hotelTarget.toString());
+    setError("");
+    launchingRef.current = true;
+    setLaunching(true);
+    const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 850;
+    departureTimer.current = setTimeout(() => {
+      // Open only after takeoff; browsers that block delayed tabs still reach results.
+      const flightTab = window.open(target.toString(), "_blank");
+      trackPartnerClick("flight", { ...analyticsParams, provider: "flight_partner" });
+      if (flightTab) {
+        flightTab.opener = null;
+        window.location.assign(hotelTarget.toString());
+      } else {
+        window.location.assign(target.toString());
+      }
+      launchingRef.current = false;
+      setLaunching(false);
+    }, delay);
   }
 
   return (
@@ -392,12 +408,12 @@ export default function SearchForm({ origin = "", destination = "", originCode =
               <div className="calendar-top"><div><strong>Choisissez la date</strong><span>La date doit suivre l’étape précédente.</span></div><button type="button" aria-label="Fermer" onClick={() => { setCalendarOpen(false); setMultiDateIndex(null); }}>×</button></div>
               <div className="calendar-nav"><button type="button" aria-label="Mois précédent" onClick={() => setCalendarMonth((month) => addMonths(month, -1))} disabled={monthKey(calendarMonth) <= monthKey(new Date())}>‹</button><button type="button" aria-label="Mois suivant" onClick={() => setCalendarMonth((month) => addMonths(month, 1))}>›</button></div>
               <div className="calendar-grid"><MonthView month={calendarMonth} prices={prices} mode="departure" departure={leg.date} returnDate="" minimumDate={index ? multiLegs[index - 1].date : ""} onChoose={chooseDate} /><MonthView month={addMonths(calendarMonth, 1)} prices={prices} mode="departure" departure={leg.date} returnDate="" minimumDate={index ? multiLegs[index - 1].date : ""} onChoose={chooseDate} /></div>
-              <div className="calendar-status">{!leg.fromCode || !leg.toCode ? "Sélectionnez les villes de cette étape pour voir les prix." : priceStatus === "loading" ? "Chargement des meilleurs prix…" : priceStatus === "unavailable" ? "Dates disponibles — les prix seront confirmés lors de la recherche." : priceStatus === "ready" && !Object.keys(prices).length ? "Aucun tarif en cache pour ces dates." : priceStatus === "ready" ? "Prix indicatifs issus du cache Travelpayouts." : ""}</div>
+              <div className="calendar-status">{!leg.fromCode || !leg.toCode ? "Sélectionnez les villes de cette étape pour voir les prix." : priceStatus === "loading" ? "Chargement des meilleurs prix…" : priceStatus === "unavailable" ? "Dates disponibles — les prix seront confirmés lors de la recherche." : priceStatus === "ready" && !Object.keys(prices).length ? "Aucun prix disponible pour ces dates." : ""}</div>
             </div>}
           </div>
           {multiLegs.length > 2 && <button type="button" className="remove-leg" aria-label={`Supprimer l’étape ${index + 1}`} onClick={() => setMultiLegs((current) => current.filter((_, legIndex) => legIndex !== index))}>×</button>}
         </div>)}
-        <div className="multicity-actions"><button type="button" disabled={multiLegs.length >= 4} onClick={() => setMultiLegs((current) => [...current, { from: current.at(-1)?.to || "", fromCode: current.at(-1)?.toCode || "", to: "", toCode: "", date: "" }])}>+ Ajouter une étape</button><button className="search-button" type="submit"><span>Rechercher</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4" /></svg></b></button></div>
+        <div className="multicity-actions"><button type="button" disabled={multiLegs.length >= 4} onClick={() => setMultiLegs((current) => [...current, { from: current.at(-1)?.to || "", fromCode: current.at(-1)?.toCode || "", to: "", toCode: "", date: "" }])}>+ Ajouter une étape</button><FlightSearchButton launching={launching} /></div>
       </div> : <div className="search-fields">
         <div className="route-fields">
           <CityField label="Départ" value={from} selectedCode={fromCode} onChange={(value) => updateCity("from", value)} onSelect={(item) => selectCity("from", item)} />
@@ -414,11 +430,11 @@ export default function SearchForm({ origin = "", destination = "", originCode =
               <div className="calendar-top"><div><strong>{dateMode === "departure" ? "Choisissez votre aller" : "Choisissez votre retour"}</strong><span>Les prix affichés sont indicatifs et peuvent évoluer.</span></div><button type="button" aria-label="Fermer" onClick={() => setCalendarOpen(false)}>×</button></div>
               <div className="calendar-nav"><button type="button" aria-label="Mois précédent" onClick={() => setCalendarMonth((month) => addMonths(month, -1))} disabled={monthKey(calendarMonth) <= monthKey(new Date())}>‹</button><button type="button" aria-label="Mois suivant" onClick={() => setCalendarMonth((month) => addMonths(month, 1))}>›</button></div>
               <div className="calendar-grid"><MonthView month={calendarMonth} prices={prices} mode={dateMode} departure={departure} returnDate={returnDate} onChoose={chooseDate} /><MonthView month={addMonths(calendarMonth, 1)} prices={prices} mode={dateMode} departure={departure} returnDate={returnDate} onChoose={chooseDate} /></div>
-              <div className="calendar-status">{!fromCode || !toCode ? "Sélectionnez d’abord le départ et la destination pour voir les prix." : priceStatus === "loading" ? "Chargement des meilleurs prix…" : priceStatus === "unavailable" ? "Dates disponibles — activez l’API Travelpayouts pour afficher les prix." : priceStatus === "ready" && !Object.keys(prices).length ? "Aucun tarif en cache pour ces dates." : priceStatus === "ready" ? "Prix indicatifs issus du cache Travelpayouts." : ""}</div>
+              <div className="calendar-status">{!fromCode || !toCode ? "Sélectionnez d’abord le départ et la destination pour voir les prix." : priceStatus === "loading" ? "Chargement des meilleurs prix…" : priceStatus === "unavailable" ? "Dates disponibles — les prix seront confirmés lors de la recherche." : priceStatus === "ready" && !Object.keys(prices).length ? "Aucun prix disponible pour ces dates." : ""}</div>
             </div>
           )}
         </div>
-        <button className="search-button" type="submit"><span>Rechercher</span><b><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4" /></svg></b></button>
+        <FlightSearchButton launching={launching} />
       </div>}
       <label className="direct-toggle"><input type="checkbox" checked={direct} onChange={(event) => setDirect(event.target.checked)} /><span /> Vols directs uniquement</label>
       <p className={`form-note ${error ? "error" : ""}`} role={error ? "alert" : undefined}>{error || "HiFlight recherche et compare les offres disponibles selon vos critères."}</p>

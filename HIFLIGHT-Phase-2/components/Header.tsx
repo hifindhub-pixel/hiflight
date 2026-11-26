@@ -25,7 +25,6 @@ export default function Header() {
             <img src="/hiflight-logo.png" alt="HiFlight" width="1027" height="328" />
           </a>
           <nav aria-label="Navigation principale">
-            <Link href="/esim">eSIM</Link>
             <Link className="nav-cta nav-worldmap" href="/world-map">World Map</Link>
             <Link className="nav-cta nav-login" href={user ? "/compte" : "/connexion"} onClick={openAuth}>{loading ? "Compte" : user ? "Mon compte" : "Se connecter"}</Link>
           </nav>

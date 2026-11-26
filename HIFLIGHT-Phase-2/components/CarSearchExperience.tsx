@@ -109,8 +109,8 @@ export default function CarSearchExperience() {
       dropoffCode: differentDropoff ? draft.dropoffCode : draft.pickupCode,
       dropoffType: differentDropoff ? draft.dropoffType : draft.pickupType,
     });
-    const resultsUrl = "/go/voitures?" + params.toString();
-    const partnerTab = window.open("/go/voitures?tracking=1", "_blank");
+    const resultsUrl = "/go/voitures/?" + params.toString();
+    const partnerTab = window.open("/go/voitures/?tracking=1", "_blank");
 
     if (!partnerTab) {
       setError("Autorisez l’ouverture des nouveaux onglets pour afficher les résultats Expedia.");
@@ -230,7 +230,7 @@ export default function CarSearchExperience() {
             <span>Location de voitures</span>
             <div><h3>Prenez la route<br />en toute sérénité.</h3><p>Choisissez votre voiture, vos dates et votre destination. HiFlight prépare votre départ en quelques instants.</p><strong>Trouver ma voiture</strong></div>
           </a>
-          <a className="car-bike-card car-bike-card-new" href="/go/voitures?offre=bike" target="_blank" rel="sponsored noreferrer" onClick={() => trackPartnerClick("car", { provider: "bikesbooking", offer_type: "bike" })}>
+          <a className="car-bike-card car-bike-card-new" href="/go/voitures/?offre=bike" target="_blank" rel="sponsored noreferrer" onClick={() => trackPartnerClick("car", { provider: "bikesbooking", offer_type: "bike" })}>
             <span>Location de motos et scooters</span>
             <div><h3>Prenez la route autrement.</h3><p>Explorez les motos et scooters proposés par BikesBooking.</p><strong>Découvrir BikesBooking</strong></div>
           </a>

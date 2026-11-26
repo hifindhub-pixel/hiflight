@@ -20,7 +20,7 @@ export default function Privacy() {
         <h2>Finalités et bases légales</h2>
         <p>Les données du compte sont traitées pour fournir les fonctionnalités demandées et exécuter le service. La sécurité, la prévention des abus et la maintenance reposent sur l’intérêt légitime de HIFLIGHT. Les traceurs de mesure, d’avis et d’affiliation non essentiels reposent sur votre consentement. Certaines informations peuvent être conservées pour respecter une obligation légale.</p>
         <h2>Destinataires et partenaires</h2>
-        <p>Supabase héberge les comptes et données personnelles de l’espace HiFlight. Vercel héberge le site. Les moteurs de recherche, réseaux d’affiliation et partenaires de réservation reçoivent les critères nécessaires lorsque vous utilisez leurs services ou ouvrez leurs liens.</p>
+        <p>Supabase héberge les comptes et données personnelles de l’espace HiFlight. Cloudflare héberge le site. Les moteurs de recherche, réseaux d’affiliation et partenaires de réservation reçoivent les critères nécessaires lorsque vous utilisez leurs services ou ouvrez leurs liens.</p>
         <h2>Transferts internationaux</h2>
         <p>Certains prestataires peuvent traiter des données hors de l’Espace économique européen. HIFLIGHT s’appuie alors sur les mécanismes prévus par le RGPD, notamment les décisions d’adéquation ou les clauses contractuelles types, lorsque ces garanties sont requises.</p>
         <h2>Durées de conservation</h2>

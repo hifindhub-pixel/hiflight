@@ -1,26 +1,40 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { blogPosts, isExpired } from "@/lib/blog";
+import { defaultOgImage, siteUrl } from "@/lib/content";
+import BlogIndex from "@/components/BlogIndex";
 
 export const metadata: Metadata = {
-  title: "Conseils voyage",
-  description: "Guides et conseils HiFlight pour préparer vos vols et vos séjours.",
+  title: "Conseils voyage : vols, aéroports, bagages",
+  description: "Guides HiFlight pour réserver un vol au meilleur prix : quand réserver, quel aéroport choisir, bagages et pièges à éviter.",
   alternates: { canonical: "/blog" },
+  openGraph: { type: "website", url: `${siteUrl}/blog/`, images: [defaultOgImage], title: "Conseils voyage | HiFlight", description: "Guides HiFlight pour réserver un vol au meilleur prix." },
 };
 
+const dateFormat = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+
 export default function BlogPage() {
+  const posts = blogPosts.filter((post) => !isExpired(post)).sort((a, b) => b.published.localeCompare(a.published));
   return (
     <main>
-      <section className="page-hero small"><div><h1>Conseils voyage</h1></div></section>
-      <article className="article legal">
-        <h2>Bien préparer son prochain départ</h2>
-        <p>Retrouvez les conseils HiFlight pour comparer le prix total d’un voyage, choisir le bon aéroport et éviter les frais imprévus.</p>
-        <p><Link href="/guides/bagage-cabine"><strong>Guide du bagage cabine</strong></Link><br />Dimensions, poids et points à vérifier avant le départ.</p>
-        <h2>Itinéraires populaires</h2>
-        <p><Link href="/vols/paris-barcelone">Paris – Barcelone</Link></p>
-        <p><Link href="/vols/paris-marrakech">Paris – Marrakech</Link></p>
-        <p><Link href="/vols/paris-new-york">Paris – New York</Link></p>
-        <p><Link href="/">Lancer une nouvelle recherche</Link></p>
-      </article>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: `${siteUrl}/` },
+          { "@type": "ListItem", position: 2, name: "Conseils voyage", item: `${siteUrl}/blog/` },
+        ],
+      }} />
+      <header className="idx-head">
+        <p className="breadcrumb"><Link href="/">Accueil</Link> / Conseils voyage</p>
+        <h1>Conseils voyage</h1>
+        <p>Réserver au bon moment, choisir le bon aéroport, éviter les frais imprévus. Des guides écrits à la main, et les bons plans du moment vérifiés avant d’être publiés.</p>
+      </header>
+      <section className="idx-wrap">
+        <BlogIndex posts={posts.map((post) => ({ slug: post.slug, title: post.title, description: post.description, heroImage: post.heroImage, category: post.category ?? "Conseils", date: dateFormat.format(new Date(post.published)), minutes: post.readingMinutes }))} />
+        <p className="idx-more"><Link className="text-link" href="/guides/bagage-cabine">Guide : bagage cabine, les vérifications avant le vol →</Link><Link className="text-link" href="/vols">Voir tous les itinéraires →</Link></p>
+      </section>
     </main>
   );
 }

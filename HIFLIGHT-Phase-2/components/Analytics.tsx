@@ -16,7 +16,12 @@ declare global {
 
 export function track(name: string, params: Record<string, string | number> = {}) {
   if (typeof window === "undefined" || readConsent() !== "accepted") return;
-  window.gtag?.("event", name, params);
+  // Avec Google Tag Manager, l’événement est publié dans le dataLayer : un déclencheur
+  // « événement personnalisé » du conteneur le transmet ensuite à Google Analytics.
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: name, ...params });
+  // Sans conteneur GTM valide, on garde l’envoi direct par gtag.
+  if (!/^GTM-[A-Z0-9]+$/i.test(process.env.NEXT_PUBLIC_GTM_ID || "GTM-NN5ZTFT2")) window.gtag?.("event", name, params);
   window.fbq?.("trackCustom", name, params);
 }
 

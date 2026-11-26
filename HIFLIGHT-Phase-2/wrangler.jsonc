@@ -1,0 +1,31 @@
+{
+  "name": "hiflight",
+  "main": "worker.ts",
+  "compatibility_date": "2026-10-16",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  // Conserve les variables et secrets saisis dans le tableau de bord Cloudflare lors d’un déploiement.
+  "keep_vars": true,
+  // Redéploiement nocturne (04:17 UTC) pour rafraîchir les prix : voir worker.ts.
+  "triggers": { "crons": ["17 4 * * *"] },
+  "previews": {},
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "hiflight.fr",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.hiflight.fr",
+      "custom_domain": true
+    }
+  ]
+}

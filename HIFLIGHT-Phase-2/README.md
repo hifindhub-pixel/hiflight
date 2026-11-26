@@ -9,7 +9,7 @@ Ce projet transforme `www.hiflight.fr` en site éditorial et SEO contrôlé par 
 - Les boutons de recherche redirigent vers Travelpayouts.
 - `/hotels` : comparateur d'hôtels avec liste, vendeurs et carte Stay22.
 - `/voitures` : comparateur de locations avec liste, loueurs et carte des points de retrait.
-- `/trains-bus` : base de la future comparaison Omio / 12Go.
+- `/trains-bus` : ancienne rubrique retirée, redirigée vers l’accueil.
 
 Cette séparation évite de casser le moteur actuel et permet à Google d’indexer les pages HIFLIGHT.
 
