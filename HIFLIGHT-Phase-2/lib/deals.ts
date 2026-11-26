@@ -1,4 +1,4 @@
-// Bons plans relevés à la main le 4 novembre 2026 sur les sites des compagnies et partenaires.
+// Bons plans relevés à la main le 26 novembre 2026.
 // Chaque offre a une date de fin : la carte disparaît toute seule de l’accueil une fois passée.
 export type Deal = {
   title: string;
@@ -17,11 +17,45 @@ export type Deal = {
   alt: string;
 };
 
-export const dealsCheckedOn = "4 novembre 2026";
+export const dealsCheckedOn = "26 novembre 2026";
 
 const photo = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=640&q=70`;
 
 export const deals: Deal[] = [
+  {
+    title: "Vueling",
+    sub: "Black Friday, d’ici le 29 novembre",
+    before: "jusqu’à",
+    figure: "-30 %",
+    after: "sur une sélection",
+    image: photo("photo-1617093888347-f73de2649f94"),
+    end: "2026-11-29T23:59:00+01:00",
+    href: "/blog/vueling-black-friday-2026-vols-2027/",
+    external: false,
+    alt: "Palma de Majorque",
+  },
+  {
+    title: "Air Transat, Canada",
+    sub: "Black Friday, jusqu’au 1er décembre",
+    before: "Montréal dès",
+    figure: "369 €",
+    after: "A/R",
+    image: photo("photo-1767290453327-14def235f9b4"),
+    end: "2026-12-01T23:59:00+01:00",
+    href: "/blog/air-transat-black-friday-canada-2026/",
+    external: false,
+    alt: "Montréal",
+  },
+  {
+    title: "Black Friday voyages",
+    sub: "Jusqu’au 1er décembre",
+    cta: "Les ventes et les bons réflexes →",
+    image: photo("photo-1561501900-3701fa6a0864"),
+    end: "2026-12-02T00:00:00+01:00",
+    href: "/blog/black-friday-voyage-2026-dates-conseils/",
+    external: false,
+    alt: "Hôtel face à la mer au coucher du soleil",
+  },
   {
     title: "Travel Tuesday",
     sub: "Mardi 1er décembre",
@@ -31,37 +65,5 @@ export const deals: Deal[] = [
     href: "/blog/travel-tuesday-2026-bons-plans-vols/",
     external: false,
     alt: "Valise couverte d’autocollants de voyage",
-  },
-  {
-    title: "Transavia",
-    sub: "Vente flash, jusqu’au 10 novembre",
-    before: "dès",
-    figure: "39 €",
-    after: "l’aller",
-    image: photo("photo-1569629743817-70d8db6c323b"),
-    end: "2026-11-10T23:59:00+01:00",
-    href: "/blog/vente-flash-transavia-novembre-2026/",
-    external: false,
-    alt: "Avion de ligne en vol",
-  },
-  {
-    title: "Black Friday voyages",
-    sub: "Du 10 novembre au 1er décembre",
-    cta: "Les dates et les bons réflexes →",
-    image: photo("photo-1561501900-3701fa6a0864"),
-    end: "2026-12-02T00:00:00+01:00",
-    href: "/blog/black-friday-voyage-2026-dates-conseils/",
-    external: false,
-    alt: "Hôtel face à la mer au coucher du soleil",
-  },
-  {
-    title: "Vos miles Flying Blue",
-    sub: "Promo -25 %, jusqu’au 30 novembre",
-    cta: "Miles ou euros : faire le calcul →",
-    image: photo("photo-1594386245199-289c2fe0bd0a"),
-    end: "2026-11-30T23:59:00+01:00",
-    href: "/blog/flying-blue-promo-rewards-novembre-2026/",
-    external: false,
-    alt: "Aile d’avion vue du hublot au coucher du soleil",
   },
 ];

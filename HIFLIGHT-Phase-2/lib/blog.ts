@@ -1657,7 +1657,7 @@ export const blogPosts: BlogPost[] = [
       "to": "2026-12-01T00:00:00+01:00"
     },
     "published": "2026-11-03",
-    "updated": "2026-11-24",
+    "updated": "2026-11-26",
     "readingMinutes": 7,
     "intro": "Le Travel Tuesday, c’est le Black Friday des voyageurs : le jour où compagnies, hôtels et plateformes sortent leurs promotions de fin d’année. En 2026, c’est le mardi 1er décembre. La question utile n’est pas « y aura-t-il des promos ? », il y en aura, mais « comment savoir si une promo est vraiment une bonne affaire ? ».",
     "sections": [
@@ -1697,7 +1697,7 @@ export const blogPosts: BlogPost[] = [
             ],
             [
               "3 décembre 2026",
-              "Échéance annoncée par Expedia pour une sélection d’hébergements, à 23 h 59 heure locale de l’hébergement."
+              "Échéance annoncée par une plateforme de réservation pour une sélection d’hébergements, à 23 h 59 heure locale de l’hébergement."
             ]
           ]
         }
@@ -1720,11 +1720,11 @@ export const blogPosts: BlogPost[] = [
             ],
             [
               "Cyber Monday (30 nov.)",
-              "Jour le moins cher en moyenne sur les cinq jours, d’après une analyse Skyscanner de 2025"
+              "Jour le moins cher en moyenne sur les cinq jours, d’après une analyse portant sur 2025"
             ],
             [
               "Travel Tuesday (1er déc.)",
-              "Le plus grand nombre d’offres, d’après Hopper (données surtout américaines), avec des promotions encore possibles ce jour-là"
+              "Le plus grand nombre d’offres, d’après des données surtout américaines, avec des promotions encore possibles ce jour-là"
             ]
           ]
         }
@@ -1790,8 +1790,8 @@ export const blogPosts: BlogPost[] = [
       {
         "heading": "Qui participe en France",
         "paragraphs": [
-          "La campagne L’Instant Air France citée dans la première version annonçait une fin le 17 novembre 2026. Elle ne constitue donc plus une offre active dans ce guide. Au 24 novembre, Expedia affiche une campagne sur une sélection d’hébergements à réserver jusqu’au 3 décembre, pour des séjours du 17 novembre 2026 au 30 décembre 2027. Les prix membres sont soumis aux conditions d’accès, aux disponibilités et aux restrictions de dates. Cette fenêtre concerne les hébergements éligibles : elle ne garantit aucune promotion sur votre vol. Comparez le coût total du voyage avant de réserver.",
-          "Pour les compagnies low cost, on n’a pas trouvé de calendrier officiel à ce jour : leurs ventes sont souvent annoncées au dernier moment. Côté hôtels, plusieurs grands groupes avaient lancé des promotions au Black Friday l’an dernier, parfois avec une remise plus forte pour les membres de leur programme de fidélité."
+          "La campagne L’Instant Air France citée dans la première version annonçait une fin le 17 novembre 2026. Elle ne constitue donc plus une offre active dans ce guide. Au 24 novembre, une plateforme de réservation affichait une campagne sur une sélection d’hébergements à réserver jusqu’au 3 décembre, pour des séjours du 17 novembre 2026 au 30 décembre 2027. Les prix membres sont soumis aux conditions d’accès, aux disponibilités et aux restrictions de dates. Cette fenêtre concerne les hébergements éligibles : elle ne garantit aucune promotion sur votre vol. Comparez le coût total du voyage avant de réserver.",
+          "Côté compagnies, le calendrier s’est précisé : au 26 novembre, des ventes sont ouvertes chez Air Transat vers le Canada, Vueling, French bee et easyJet, chacune avec sa propre échéance. Côté hôtels, plusieurs grands groupes avaient lancé des promotions au Black Friday l’an dernier, parfois avec une remise plus forte pour les membres de leur programme de fidélité."
         ]
       },
       {
@@ -1874,19 +1874,19 @@ export const blogPosts: BlogPost[] = [
     "slug": "vente-flash-transavia-novembre-2026",
     "expires": "2026-11-10",
     "category": "Bons plans",
-    "metaTitle": "Vente flash Transavia : dès 39 € l’aller (novembre 2026)",
-    "title": "Vente flash Transavia : jusqu’à -25 %, dès 39 € l’aller, jusqu’au 10 novembre",
-    "description": "Vente flash Transavia du 3 au 10 novembre 2026 : jusqu’à -25 % sur une sélection de vols, Athènes et Malaga dès 39 € l’aller. Destinations, bagages, pièges et prix de référence HiFlight.",
+    "metaTitle": "Vente flash Transavia de novembre 2026 (terminée)",
+    "title": "Vente flash Transavia de novembre : jusqu’à -25 % et des allers dès 39 € (offre terminée)",
+    "description": "La vente flash Transavia du 3 au 10 novembre 2026 est terminée : ce qu’elle proposait, les pièges à retenir pour la prochaine et les prix de référence HiFlight.",
     "heroImage": "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-04",
-    "updated": "2026-11-04",
+    "updated": "2026-11-26",
     "readingMinutes": 4,
-    "intro": "Transavia a lancé le 3 novembre une vente flash qui se termine le mardi 10 novembre à 23 h 59. Jusqu’à -25 % sur une sélection de vols au départ de France, avec des allers simples annoncés à 39 €. Ça ressemble à une bonne affaire, et ça peut en être une, à condition de savoir ce qu’on achète. Voici ce qu’on sait de l’offre, ce qu’on ne sait pas encore, et comment la vérifier en trois minutes.",
+    "intro": "Du 3 au 10 novembre 2026, Transavia a mené une vente flash : jusqu’à -25 % sur une sélection de vols au départ de France, avec des allers simples annoncés à 39 €. Elle est terminée. Ses conditions restent un bon repère pour juger la prochaine.",
     "sections": [
       {
         "heading": "L’offre, en clair",
         "paragraphs": [
-          "Transavia propose jusqu’à 25 % de réduction sur une sélection de vols. La remise ne s’applique pas à tout le catalogue : seuls certains vols, certaines dates, et un nombre limité de sièges sont concernés. L’offre part de France métropolitaine, sous réserve de disponibilité."
+          "Offre terminée le 10 novembre 2026. Transavia proposait jusqu’à 25 % de réduction sur une sélection de vols. La remise ne s’appliquait pas à tout le catalogue : seuls certains vols, certaines dates et un nombre limité de sièges étaient concernés. L’offre partait de France métropolitaine, sous réserve de disponibilité."
         ],
         "table": {
           "headers": [
@@ -1975,20 +1975,20 @@ export const blogPosts: BlogPost[] = [
         ]
       },
       {
-        "heading": "Comment s’y prendre en trois minutes",
+        "heading": "La prochaine fois, en trois minutes",
         "paragraphs": [],
         "list": [
-          "Choisissez vos dates avant de lancer la recherche : la vente flash récompense ceux qui savent ce qu’ils veulent.",
+          "Choisissez vos dates avant de lancer la recherche : une vente flash récompense ceux qui savent ce qu’ils veulent.",
           "Lancez la recherche de votre trajet sur HiFlight et regardez le prix total pour vos dates, à comparer avec les prix de référence ci-dessus.",
           "Ajoutez bagage et option éventuelle, puis comparez une dernière fois avec un autre départ ou une autre date.",
-          "Décidez avant mardi 23 h 59. Passé ce délai, l’offre s’éteint."
+          "Notez l’heure de fin de la vente avant de vous décider."
         ]
       }
     ],
     "faq": [
       {
-        "question": "Jusqu’à quand dure la vente flash Transavia ?",
-        "answer": "Jusqu’au mardi 10 novembre 2026 à 23 h 59, pour des vols entre le 24 novembre 2026 et début 2027."
+        "question": "La vente flash Transavia est-elle encore en cours ?",
+        "answer": "Non. Elle s’est terminée le mardi 10 novembre 2026 à 23 h 59."
       },
       {
         "question": "Quelle est la réduction maximale ?",
@@ -2020,8 +2020,8 @@ export const blogPosts: BlogPost[] = [
     "description": "Black Friday, Cyber Monday et Travel Tuesday 2026 : le calendrier des ventes voyage, les réflexes pour juger une offre et les prix de référence des vols au départ de Paris.",
     "heroImage": "https://images.unsplash.com/photo-1561501900-3701fa6a0864?auto=format&fit=crop&w=1600&q=75",
     "published": "2026-11-04",
-    "updated": "2026-11-04",
-    "readingMinutes": 4,
+    "updated": "2026-11-26",
+    "readingMinutes": 5,
     "intro": "Cette année, le Black Friday des voyageurs ne tient pas en une journée : les premières ventes démarrent le 10 novembre et tout converge vers le Travel Tuesday du 1er décembre. Voici les dates à retenir, et les deux ou trois réflexes qui évitent de payer cher une « bonne affaire ».",
     "sections": [
       {
@@ -2060,6 +2060,46 @@ export const blogPosts: BlogPost[] = [
               "Travel Tuesday : dernier jour des offres annoncées jusqu’à cette date"
             ]
           ]
+        }
+      },
+      {
+        "heading": "Côté vols : les ventes relevées le 26 novembre",
+        "paragraphs": [
+          "Cette fois, des compagnies ont donné des dates. Les remises portent sur des sélections de vols et chaque vente a sa propre échéance. HiFlight compare les prix de ses partenaires au moment de la recherche, qui peuvent différer de ces promotions : lancez une recherche sur HiFlight pour voir le prix du jour sur votre trajet."
+        ],
+        "table": {
+          "headers": [
+            "Vente",
+            "Réservation",
+            "Voyage"
+          ],
+          "rows": [
+            [
+              "Air Transat, Canada : Paris-Montréal dès 369 € l’aller-retour",
+              "Jusqu’au 1er décembre",
+              "Jusqu’au 9 juin 2027, certaines dates"
+            ],
+            [
+              "Vueling : jusqu’à -30 % sur une sélection",
+              "Jusqu’au 29 novembre ou au 1er décembre selon les sources",
+              "14 décembre 2026 au 30 septembre 2027"
+            ],
+            [
+              "French bee, Paris-Orly : allers simples affichés dès 256 €",
+              "Du 23 novembre à 16 h au 29 novembre",
+              "Période non précisée"
+            ],
+            [
+              "easyJet : jusqu’à -20 % sur une sélection",
+              "30 novembre ou 1er décembre au matin selon les sources",
+              "Les périodes publiées divergent"
+            ]
+          ]
+        },
+        "callout": {
+          "kind": "info",
+          "title": "Ce qu’il reste à vérifier",
+          "text": "Pour French bee, nous n’avons pas pu rattacher avec certitude le prix de 256 € à une destination. Il s’agit d’un tarif non remboursable et non modifiable, sans bagage en soute ni repas. Pour easyJet, le communiqué que nous avons lu est destiné au marché britannique et ne détaille aucun départ de France."
         }
       },
       {
@@ -2104,6 +2144,10 @@ export const blogPosts: BlogPost[] = [
       {
         "question": "Quand commence le Black Friday des voyages en 2026 ?",
         "answer": "Les premières ventes démarrent le 10 novembre. Le Black Friday est le 27 novembre, le Cyber Monday le 30 et le Travel Tuesday le 1er décembre 2026."
+      },
+      {
+        "question": "Quelles compagnies ont une vente Black Friday en cours ?",
+        "answer": "Au 26 novembre 2026, nous avons relevé des ventes chez Air Transat vers le Canada, Vueling, French bee et easyJet. Les conditions et les échéances diffèrent, et les départs de France ne sont pas détaillés pour easyJet."
       },
       {
         "question": "Un prix de séjour comprend-il le vol ?",
@@ -2613,6 +2657,328 @@ export const blogPosts: BlogPost[] = [
         "question": "Qui gère ma réservation d’hôtel ?",
         "answer": "Le partenaire sélectionné gère la réservation, le paiement, la confirmation, les modifications et les annulations."
       }
+    ]
+  },
+  {
+    "slug": "air-transat-black-friday-canada-2026",
+    "category": "Bons plans",
+    "metaTitle": "Air Transat Black Friday : Montréal dès 369 € A/R",
+    "title": "Black Friday Air Transat : Paris-Montréal dès 369 € aller-retour, jusqu’au 1er décembre",
+    "description": "Vente Black Friday d’Air Transat vers le Canada : réservation jusqu’au 1er décembre 2026, voyage jusqu’au 9 juin 2027. Prix publiés depuis Paris, Nantes, Lyon, Bordeaux et Marseille, bagages et pièges.",
+    "heroImage": "https://images.unsplash.com/photo-1767290453327-14def235f9b4?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-26",
+    "updated": "2026-11-26",
+    "expires": "2026-12-01",
+    "readingMinutes": 4,
+    "intro": "Montréal à 369 € aller-retour depuis Paris : voilà le prix d’appel de la vente Black Friday d’Air Transat, ouverte jusqu’au mardi 1er décembre. Le détail qui intéressera les lecteurs hors Île-de-France : la compagnie part en direct de sept villes françaises. Reste à vérifier que le tarif tient sur vos dates, et avec vos valises.",
+    "sections": [
+      {
+        "heading": "L’offre, en clair",
+        "paragraphs": [
+          "La vente porte sur des allers-retours directs entre la France et le Canada, ainsi que sur certains vols avec correspondance vers Vancouver, Calgary et Toronto. Elle vaut pour les nouvelles réservations individuelles."
+        ],
+        "table": {
+          "headers": [
+            "Point",
+            "Détail"
+          ],
+          "rows": [
+            [
+              "Réservation",
+              "Du 23 novembre au 1er décembre 2026 inclus"
+            ],
+            [
+              "Voyage",
+              "Du 23 novembre 2026 au 9 juin 2027, à certaines dates seulement"
+            ],
+            [
+              "Départs en direct",
+              "Paris, Bordeaux, Lyon, Marseille, Nantes, Nice et Toulouse"
+            ],
+            [
+              "Type de billet",
+              "Aller-retour"
+            ],
+            [
+              "Disponibilité",
+              "Selon les places encore ouvertes au tarif promotionnel"
+            ]
+          ]
+        },
+        "callout": {
+          "kind": "info",
+          "title": "Les dates concernées ne sont pas listées",
+          "text": "L’offre précise « à certaines dates uniquement » sans en publier le calendrier. Impossible de savoir à l’avance si vos jours de départ et de retour y figurent."
+        }
+      },
+      {
+        "heading": "Les prix publiés",
+        "paragraphs": [
+          "Ces montants « dès », toutes taxes comprises, ont été publiés le 24 novembre par la presse professionnelle du tourisme. Ils ne figuraient pas dans le texte de la page officielle de l’offre que nous avons consultée le 26 novembre. Prenez-les comme des planchers, qui ont pu bouger depuis."
+        ],
+        "table": {
+          "headers": [
+            "Trajet",
+            "Aller-retour, dès"
+          ],
+          "rows": [
+            [
+              "Paris – Montréal",
+              "369 €"
+            ],
+            [
+              "Nantes – Montréal",
+              "378 €"
+            ],
+            [
+              "Lyon – Montréal",
+              "389 €"
+            ],
+            [
+              "Bordeaux – Montréal",
+              "399 €"
+            ],
+            [
+              "Paris – Toronto",
+              "459 €"
+            ],
+            [
+              "Paris – Québec",
+              "499 €"
+            ],
+            [
+              "Lyon – Québec",
+              "589 €"
+            ],
+            [
+              "Marseille – Québec",
+              "619 €"
+            ],
+            [
+              "Nantes – Québec",
+              "639 €"
+            ]
+          ]
+        },
+        "callout": {
+          "kind": "info",
+          "title": "Nice, Toulouse, Marseille",
+          "text": "Nous n’avons trouvé aucun prix publié au départ de Nice ou de Toulouse, ni pour Marseille-Montréal. Ces villes font pourtant partie des départs en direct de l’offre."
+        }
+      },
+      {
+        "heading": "Les valises, avant de vous réjouir",
+        "paragraphs": [
+          "La page de l’offre annonce un bagage cabine inclus, ainsi qu’un repas chaud servi avec un verre de vin. C’est appréciable sur un vol transatlantique."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "La soute peut coûter en plus",
+          "text": "Les conditions de l’offre précisent que des frais supplémentaires peuvent s’appliquer pour les bagages. Avec une grosse valise, comparez le total aller-retour bagage compris, pas le prix d’appel."
+        }
+      },
+      {
+        "heading": "Les prix de référence HiFlight",
+        "paragraphs": [
+          "Voici des relevés récents du réseau de partenaires HiFlight : des planchers aller-retour pour des départs dans les six prochains mois, toutes compagnies confondues et sans garantie sur vos dates. HiFlight compare les prix de ses partenaires au moment de la recherche, et ils peuvent différer de ceux de la promotion. Avant de décider, lancez une recherche sur HiFlight pour voir le prix du jour sur votre trajet."
+        ],
+        "routeTable": [
+          "paris-montreal",
+          "paris-toronto"
+        ]
+      },
+      {
+        "heading": "Avant de payer",
+        "paragraphs": [
+          "Le prix n’est garanti qu’une fois le paiement effectué et accepté. Vérifiez donc le montant final à la dernière étape."
+        ],
+        "list": [
+          "Vos deux dates, aller et retour, doivent être éligibles au tarif promotionnel.",
+          "Comptez les bagages en soute pour chaque voyageur.",
+          "Relisez les conditions de modification et de remboursement de votre tarif.",
+          "Pour entrer au Canada par avion, les voyageurs français ont en principe besoin d’une autorisation de voyage électronique (AVE). Vérifiez les formalités auprès du ministère des Affaires étrangères avant de réserver."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Jusqu’à quand dure la vente Black Friday d’Air Transat ?",
+        "answer": "Jusqu’au mardi 1er décembre 2026 inclus, pour les nouvelles réservations individuelles."
+      },
+      {
+        "question": "Pour quelles dates de voyage ?",
+        "answer": "Entre le 23 novembre 2026 et le 9 juin 2027, à certaines dates seulement et selon les places au tarif promotionnel."
+      },
+      {
+        "question": "Peut-on partir d’une autre ville que Paris ?",
+        "answer": "Oui. L’offre cite des vols directs au départ de Paris, Bordeaux, Lyon, Marseille, Nantes, Nice et Toulouse. Toutes ces villes n’ont pas de prix publié."
+      },
+      {
+        "question": "La valise en soute est-elle comprise ?",
+        "answer": "Ne comptez pas dessus. L’offre annonce un bagage cabine inclus et précise que des frais supplémentaires peuvent s’appliquer pour les bagages."
+      },
+      {
+        "question": "Ces prix apparaissent-ils sur HiFlight ?",
+        "answer": "Rien ne le garantit. La vente est une offre d’Air Transat. HiFlight compare les prix de ses partenaires au moment de votre recherche, et les tarifs peuvent différer de ceux de la promotion."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-montreal",
+      "paris-toronto"
+    ]
+  },
+  {
+    "slug": "vueling-black-friday-2026-vols-2027",
+    "category": "Bons plans",
+    "metaTitle": "Black Friday Vueling 2026 : -30 % sur des vols 2027",
+    "title": "Black Friday Vueling : jusqu’à -30 % pour voyager jusqu’en septembre 2027",
+    "description": "Black Friday Vueling 2026 : jusqu’à -30 % sur une sélection de vols du 14 décembre 2026 au 30 septembre 2027. Trajets au départ de France, date limite à surveiller et bagages.",
+    "heroImage": "https://images.unsplash.com/photo-1617093888347-f73de2649f94?auto=format&fit=crop&w=1600&q=75",
+    "published": "2026-11-26",
+    "updated": "2026-11-26",
+    "expires": "2026-12-01",
+    "readingMinutes": 4,
+    "intro": "Vous pensez déjà à Majorque ou à Séville pour 2027 ? Vueling affiche jusqu’à -30 % sur une sélection de vols, avec des départs jusqu’au 30 septembre. Mais la date limite de réservation varie selon les sources : visez ce dimanche 29 novembre et vous serez tranquille.",
+    "sections": [
+      {
+        "heading": "L’offre, en clair",
+        "paragraphs": [
+          "La remise concerne certaines liaisons et certaines dates, pas tout le programme de la compagnie. Le mot qui compte est « jusqu’à » : tous les vols retenus ne baissent pas de 30 %."
+        ],
+        "table": {
+          "headers": [
+            "Point",
+            "Détail"
+          ],
+          "rows": [
+            [
+              "Ouverture",
+              "23 novembre 2026"
+            ],
+            [
+              "Fin de réservation",
+              "29 novembre ou 1er décembre selon les sources"
+            ],
+            [
+              "Voyage",
+              "Du 14 décembre 2026 au 30 septembre 2027"
+            ],
+            [
+              "Remise",
+              "Jusqu’à -30 % sur une sélection de vols"
+            ],
+            [
+              "Prix « dès » depuis la France",
+              "Nous n’en avons relevé aucun"
+            ]
+          ]
+        },
+        "callout": {
+          "kind": "info",
+          "title": "29 novembre ou 1er décembre ?",
+          "text": "Les informations publiées entre le 23 et le 25 novembre se contredisent : certaines arrêtent la vente le dimanche 29, d’autres le mardi 1er décembre. Par prudence, tenez le 29 pour votre dernier jour."
+        }
+      },
+      {
+        "heading": "Les trajets cités depuis la France",
+        "paragraphs": [
+          "La presse professionnelle du tourisme a publié le 24 novembre une liste de liaisons concernées, présentée comme non exhaustive. Elle ne signifie pas que toutes les dates de ces lignes sont remisées."
+        ],
+        "table": {
+          "headers": [
+            "Destination",
+            "Au départ de"
+          ],
+          "rows": [
+            [
+              "Barcelone",
+              "Paris-Orly, Paris-CDG, Bordeaux, Nantes, Lyon, Nice, Marseille, Strasbourg"
+            ],
+            [
+              "Séville",
+              "Paris-Orly"
+            ],
+            [
+              "Palma de Majorque",
+              "Paris-Orly"
+            ],
+            [
+              "Valence",
+              "Paris-Orly"
+            ],
+            [
+              "Minorque",
+              "Paris-Orly"
+            ],
+            [
+              "Ibiza",
+              "Paris-Orly"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Le piège du petit sac",
+        "paragraphs": [
+          "Une remise sur le billet ne dit rien de ce que coûtera votre valise. Pour un week-end à Barcelone avec un sac à dos, pas de souci. Pour deux semaines à Minorque en famille, le calcul change."
+        ],
+        "callout": {
+          "kind": "piege",
+          "title": "Le tarif le moins cher voyage léger",
+          "text": "Il peut ne comprendre qu’un petit sac à glisser sous le siège. Valise cabine et bagage en soute risquent d’être payants : ajoutez-les à l’aller et au retour avant de juger l’offre."
+        }
+      },
+      {
+        "heading": "L’été 2027, à regarder de près",
+        "paragraphs": [
+          "La période de voyage couvre le printemps et tout l’été 2027. La liste des dates exclues et la répartition de la remise selon les mois ne figurent pas dans les informations que nous avons recueillies. Ne partez donc pas du principe qu’un samedi d’août sera à -30 %.",
+          "Si vous êtes souple, testez plusieurs jours de départ et de retour. Si vos congés sont figés, seul le prix total sur vos dates compte."
+        ]
+      },
+      {
+        "heading": "Les prix de référence HiFlight",
+        "paragraphs": [
+          "Ces relevés récents sont des planchers aller-retour pour des départs dans les six prochains mois, toutes compagnies confondues : ils ne couvrent donc pas l’été 2027. HiFlight compare les prix de ses partenaires au moment de la recherche, et ils peuvent différer de ceux de la promotion. Pour vos dates, lancez une recherche sur HiFlight et regardez le prix du jour sur votre trajet."
+        ],
+        "routeTable": [
+          "paris-barcelone",
+          "lyon-barcelone",
+          "marseille-barcelone",
+          "nice-barcelone",
+          "bordeaux-barcelone",
+          "nantes-barcelone",
+          "paris-seville",
+          "paris-palma-de-majorque",
+          "paris-valence",
+          "paris-ibiza"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Jusqu’à quand réserver pendant le Black Friday Vueling 2026 ?",
+        "answer": "Les sources divergent entre le 29 novembre et le 1er décembre 2026. Visez le 29 pour ne pas risquer d’arriver trop tard."
+      },
+      {
+        "question": "Pour quelles dates de voyage ?",
+        "answer": "Du 14 décembre 2026 au 30 septembre 2027, sur une sélection de liaisons et de dates."
+      },
+      {
+        "question": "Tous les vols sont-ils à -30 % ?",
+        "answer": "Non. Il s’agit d’une remise pouvant aller jusqu’à 30 %, sur une sélection de vols et selon les places disponibles."
+      },
+      {
+        "question": "Ces prix apparaissent-ils sur HiFlight ?",
+        "answer": "Rien ne le garantit. La vente est une offre de Vueling. HiFlight compare les prix de ses partenaires au moment de votre recherche, et les tarifs peuvent différer de ceux de la promotion."
+      }
+    ],
+    "relatedRoutes": [
+      "paris-barcelone",
+      "lyon-barcelone",
+      "marseille-barcelone",
+      "nice-barcelone",
+      "paris-seville",
+      "paris-palma-de-majorque"
     ]
   }
 ];;
